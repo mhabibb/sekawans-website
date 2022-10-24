@@ -12,8 +12,8 @@
 <body>
   <x-navbar />
 
-  <main class="bg-dark" style="min-height: 50vh">
-
+  <main style="min-height: 100vh">
+    @yield('content')
   </main>
 </body>
 

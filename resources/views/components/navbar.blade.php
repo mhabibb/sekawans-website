@@ -1,6 +1,10 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm sticky-top" aria-label="Offcanvas navbar large">
-    <div class="container">
-        <a class="navbar-brand" href="#">Sekawan'S</a>
+    <div class="container-xl">
+        <a class="navbar-brand" href="#">
+            <img src="/img/logo-sekawans.png" alt="logo-sekawans.png" width="30" height="30"
+                class="d-inline-block align-text-top">
+            Sekawan'S
+        </a>
         <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar2"
             aria-controls="offcanvasNavbar2">
             <span class="navbar-toggler-icon"></span>

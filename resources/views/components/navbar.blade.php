@@ -1,6 +1,6 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm sticky-top" aria-label="Offcanvas navbar large">
     <div class="container-xl">
-        <a class="navbar-brand" href="#">
+        <a class="navbar-brand" href="/">
             <img src="/img/logo-sekawans.png" alt="logo-sekawans.png" width="32" height="32"
                 class="d-inline-block align-text-bottom"> <span class="ms-2">Sekawan'S</span>
         </a>
@@ -17,22 +17,22 @@
             <div class="offcanvas-body">
                 <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Beranda</a>
+                        <a class="nav-link" href="{{route('beranda')}}">Beranda</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Tentang</a>
+                        <a class="nav-link" href="{{route('tentang')}}">Tentang</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Info TB</a>
+                        <a class="nav-link" href="{{route('infotbc')}}">Info TB</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Kasus TB</a>
+                        <a class="nav-link" href="{{route('kasustbc')}}">Kasus TB</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Artikel</a>
+                        <a class="nav-link" href="{{route('artikel')}}">Artikel</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Kegiatan</a>
+                        <a class="nav-link" href="{{route('kegiatan')}}">Kegiatan</a>
                     </li>
                 </ul>
                 <form class="d-flex mt-3 mt-lg-0" role="search">

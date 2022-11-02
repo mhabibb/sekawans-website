@@ -13,9 +13,18 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('index');
-});
+Route::view('/', 'index')->name('beranda');
+
+Route::view('/tentang', 'tentang')->name('tentang');
+
+Route::view('/info-tbc', 'infotbc.infotbc')->name('infotbc');
+// Route::view('/info-tbc/{info-tbc}', 'infotbc.infotbc_single');
+
+Route::view('/kasus-tbc', 'kasustbc.kasustbc')->name('kasustbc');
+
+Route::view('/artikel', 'artikel.artikel')->name('artikel');
+
+Route::view('/kegiatan', 'kegiatan.kegiatan')->name('kegiatan');
 
 // Auth::routes();
 

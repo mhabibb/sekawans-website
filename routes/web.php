@@ -19,7 +19,7 @@ Route::view('/tentang', 'tentang.tentang')->name('tentang');
 Route::view('/struktur', 'tentang.struktur')->name('struktur');
 
 
-Route::view('/info-tbc', 'infotbc.infotbc')->name('infotbc');
+Route::view('/info-tbc', 'info_tbc.info_tbc')->name('infotbc');
 // Route::view('/info-tbc/{info-tbc}', 'infotbc.infotbc_single');
 
 Route::view('/kasus-tbc', 'kasustbc.kasustbc')->name('kasustbc');

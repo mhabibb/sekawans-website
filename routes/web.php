@@ -15,7 +15,9 @@ use Illuminate\Support\Facades\Route;
 
 Route::view('/', 'index')->name('beranda');
 
-Route::view('/tentang', 'tentang')->name('tentang');
+Route::view('/tentang', 'tentang.tentang')->name('tentang');
+Route::view('/struktur', 'tentang.struktur')->name('struktur');
+
 
 Route::view('/info-tbc', 'infotbc.infotbc')->name('infotbc');
 // Route::view('/info-tbc/{info-tbc}', 'infotbc.infotbc_single');

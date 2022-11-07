@@ -41,7 +41,7 @@
           
         </figure>
         <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
-          <a href="{{route('tentang')}}" class="btn btn-secondary btn-lg px-4 ">Selengkapnya</a>
+          <a href="{{route('struktur')}}" class="btn btn-secondary btn-lg px-4 ">Selengkapnya</a>
         </div>
       </article>
     </section>

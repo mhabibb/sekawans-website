@@ -2,48 +2,50 @@
 
 @section('content')
 {{-- HERO --}}
-<section id="hero" class="container col-xxl-8 py-5">
-  <div class="row flex-lg-row-reverse align-items-center gap-5">
-    <div class="mx-auto col-lg-7" style="max-width: 600px; max-height: 400px;">
-      <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="true">
-        <div class="carousel-indicators">
-          <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active"
-            aria-current="true" aria-label="Slide 1"></button>
-          <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1"
-            aria-label="Slide 2"></button>
-          <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2"
-            aria-label="Slide 3"></button>
+<section id="hero">
+  <div class="container col-xxl-8 py-5">
+    <div class="row flex-lg-row-reverse align-items-center g-5 py-5">
+      <div class="col col-lg-6 mx-auto">
+        <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="true">
+          <div class="carousel-indicators">
+            <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active"
+              aria-current="true" aria-label="Slide 1"></button>
+            <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1"
+              aria-label="Slide 2"></button>
+            <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2"
+              aria-label="Slide 3"></button>
+          </div>
+          <div class="carousel-inner">
+            <div class="carousel-item active">
+              <img src="https://picsum.photos/600/400" class="d-block mx-lg-auto img-fluid" alt="pic">
+            </div>
+            <div class="carousel-item">
+              <img src="https://picsum.photos/600/400" class="d-block mx-lg-auto img-fluid" alt="pic">
+            </div>
+            <div class="carousel-item">
+              <img src="https://picsum.photos/600/400" class="d-block mx-lg-auto img-fluid" alt="pic">
+            </div>
+          </div>
+          <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators"
+            data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+          </button>
+          <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators"
+            data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+          </button>
         </div>
-        <div class="carousel-inner">
-          <div class="carousel-item active">
-            <img src="https://picsum.photos/600/400" class="img-fluid" alt="pic">
-          </div>
-          <div class="carousel-item">
-            <img src="https://picsum.photos/600/400" class="img-fluid" alt="pic">
-          </div>
-          <div class="carousel-item">
-            <img src="https://picsum.photos/600/400" class="img-fluid" alt="pic">
-          </div>
+      </div>
+      <div class="col-lg-6">
+        <h1 class="display-5 fw-bold lh-1 mb-3">Responsive left-aligned hero with image</h1>
+        <p class="lead">Quickly design and customize responsive mobile-first sites with Bootstrap, the world’s most popular front-end open source toolkit, featuring Sass variables and mixins, responsive grid system, extensive prebuilt components, and powerful JavaScript plugins.</p>
         </div>
-        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators"
-          data-bs-slide="prev">
-          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-          <span class="visually-hidden">Previous</span>
-        </button>
-        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators"
-          data-bs-slide="next">
-          <span class="carousel-control-next-icon" aria-hidden="true"></span>
-          <span class="visually-hidden">Next</span>
-        </button>
       </div>
     </div>
-    <div class="col-lg-5">
-      <h1 class="display-5 fw-bold mb-3">Responsive hero with image</h1>
-      <p class="lead">Quickly design and customize responsive mobile-first sites with Bootstrap, the world’s most
-        popular front-end open source toolkit.</p>
-    </div>
   </div>
-  <div class="row text-center my-5 pt-4 border-top">
+  <div class="container mx-auto row text-center pt-4 mb-5 border-top">
     <div class="col p-3">
       <img
         src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/3a/Logo_of_the_Ministry_of_Health_of_the_Republic_of_Indonesia.svg/1280px-Logo_of_the_Ministry_of_Health_of_the_Republic_of_Indonesia.svg.png"

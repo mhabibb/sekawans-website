@@ -34,4 +34,7 @@ Route::view('/kegiatan', 'kegiatan.kegiatan')->name('kegiatan');
 // Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 Route::view('/admin', 'admin.dashboard')->name('dashboard');
-Route::view('/admin/artikel', 'admin.artikel_list');
+
+Route::view('/admin/artikel', 'admin.admin_artikel.index');
+Route::view('/admin/artikel/1', 'admin.admin_artikel.show');
+Route::view('/admin/artikel/create', 'admin.admin_artikel.create');

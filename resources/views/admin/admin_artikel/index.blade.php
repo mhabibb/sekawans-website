@@ -10,7 +10,7 @@
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
-              <li class="breadcrumb-item"><a href="#">Admin</a></li>
+              <li class="breadcrumb-item"><a href="/admin">Admin</a></li>
               <li class="breadcrumb-item active">Artikel</li>
             </ol>
           </div>
@@ -26,7 +26,7 @@
           <div class="col-12">
             <div class="card">
               <div class="card-header">
-                <h3 class="card-title">List Artikel</h3>
+                <a href="/admin/artikel/create" class="card-title">Buat Artikel Baru</a>
 
                 <div class="card-tools">
                   <div class="input-group input-group-sm" style="width: 200px;">
@@ -57,7 +57,7 @@
                       <td>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Possimus, consequatur?</td>
                       <td>11-7-2014</td>
                       <td>
-                        <a href="#" class="badge badge-success">Lihat</a>
+                        <a href="/admin/artikel/1" class="badge badge-success">Lihat</a>
                         <form action="" class="d-inline-block" class="d-inline-block">
                           <button type="submit" class="badge badge-danger border-0">Hapus</button>
                         </form>

@@ -23,6 +23,7 @@ Route::view('/info-tbc', 'infotbc.infotbc')->name('infotbc');
 Route::view('/kasus-tbc', 'kasustbc.kasustbc')->name('kasustbc');
 
 Route::view('/artikel', 'artikel.artikel')->name('artikel');
+Route::view('/artikel/1', 'artikel.single_artikel');
 
 Route::view('/kegiatan', 'kegiatan.kegiatan')->name('kegiatan');
 
@@ -31,3 +32,4 @@ Route::view('/kegiatan', 'kegiatan.kegiatan')->name('kegiatan');
 // Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 Route::view('/admin', 'admin.dashboard')->name('dashboard');
+Route::view('/admin/artikel', 'admin.artikel_list');

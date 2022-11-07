@@ -7,14 +7,14 @@ Website dikembangkan dengan menggunakan framework Laravel 9 dan Bootstrap v5.2
 - Pastikan composer dan node sudah terinstal
 - Clone repository ini
 - Masuk ke folder repository local
+- Instal composer
+```bash
+composer install
+```
+
 - Instal package laravel/ui dengan composer
 ```bash
 composer require laravel/ui
-```
-
-- Instal bootstrap dengan artisan ui
-```bash
-php artisan ui bootstrap --auth
 ```
 
 - Instal dependensi frontend

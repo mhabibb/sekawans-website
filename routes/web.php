@@ -28,6 +28,7 @@ Route::view('/artikel', 'artikel.artikel')->name('artikel');
 Route::view('/artikel/1', 'artikel.single_artikel');
 
 Route::view('/kegiatan', 'kegiatan.kegiatan')->name('kegiatan');
+Route::view('/single_kegiatan', 'kegiatan.single_kegiatan');
 
 // Auth::routes();
 

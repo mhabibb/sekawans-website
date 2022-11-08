@@ -22,7 +22,7 @@ Route::view('/struktur', 'tentang.struktur')->name('struktur');
 Route::view('/info-tbc', 'info_tbc.info_tbc')->name('infotbc');
 Route::view('/single_infotbc', 'info_tbc.single_infotbc')->name('single_infotbc');
 
-Route::view('/kasus-tbc', 'kasustbc.kasustbc')->name('kasustbc');
+Route::view('/kasus_tbc', 'kasus_tbc.kasustbc')->name('kasustbc');
 
 Route::view('/artikel', 'artikel.artikel')->name('artikel');
 Route::view('/artikel/1', 'artikel.single_artikel');

@@ -50,3 +50,8 @@ Route::view('/admin/kegiatan', 'admin.admin_kegiatan.index');
 Route::view('/admin/kegiatan/create', 'admin.admin_kegiatan.create');
 Route::view('/admin/kegiatan/single_kegiatan', 'admin.admin_kegiatan.show');
 Route::view('/admin/kegiatan/single_kegiatan/edit', 'admin.admin_kegiatan.edit');
+
+Route::view('/admin/info-tbc', 'admin.admin_infotbc.index');
+Route::view('/admin/info-tbc/create', 'admin.admin_infotbc.create');
+Route::view('/admin/info-tbc/1', 'admin.admin_infotbc.show');
+Route::view('/admin/info-tbc/1/edit', 'admin.admin_infotbc.edit');

@@ -37,5 +37,6 @@ Route::view('/single_kegiatan', 'kegiatan.single_kegiatan');
 Route::view('/admin', 'admin.dashboard')->name('dashboard');
 
 Route::view('/admin/artikel', 'admin.admin_artikel.index');
-Route::view('/admin/artikel/1', 'admin.admin_artikel.show');
 Route::view('/admin/artikel/create', 'admin.admin_artikel.create');
+Route::view('/admin/artikel/1', 'admin.admin_artikel.show');
+Route::view('/admin/artikel/1/edit', 'admin.admin_artikel.edit');

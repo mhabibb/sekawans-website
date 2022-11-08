@@ -4,7 +4,7 @@
 {{-- HERO --}}
 <section id="hero">
   <div class="container col-xxl-8 py-5">
-    <div class="row flex-lg-row-reverse align-items-center g-5 py-5">
+    <div class="row flex-lg-row-reverse align-items-center g-5 pb-5">
       <div class="col col-lg-6 mx-auto">
         <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="true">
           <div class="carousel-indicators">
@@ -17,13 +17,16 @@
           </div>
           <div class="carousel-inner">
             <div class="carousel-item active">
-              <img src="https://picsum.photos/600/400" class="d-block mx-lg-auto img-fluid" alt="pic">
+              <img src="https://picsum.photos/600/400" style="height: 400px; object-fit: cover;" class="d-block mx-auto"
+                alt="pic">
             </div>
             <div class="carousel-item">
-              <img src="https://picsum.photos/600/400" class="d-block mx-lg-auto img-fluid" alt="pic">
+              <img src="https://picsum.photos/500/500" style="height: 400px; object-fit: cover;" class="d-block mx-auto"
+                alt="pic">
             </div>
             <div class="carousel-item">
-              <img src="https://picsum.photos/600/400" class="d-block mx-lg-auto img-fluid" alt="pic">
+              <img src="https://picsum.photos/400/600" style="height: 400px; object-fit: cover;" class="d-block mx-auto"
+                alt="pic">
             </div>
           </div>
           <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators"
@@ -40,10 +43,12 @@
       </div>
       <div class="col-lg-6">
         <h1 class="display-5 fw-bold lh-1 mb-3">Responsive left-aligned hero with image</h1>
-        <p class="lead">Quickly design and customize responsive mobile-first sites with Bootstrap, the world’s most popular front-end open source toolkit, featuring Sass variables and mixins, responsive grid system, extensive prebuilt components, and powerful JavaScript plugins.</p>
-        </div>
+        <p class="lead">Quickly design and customize responsive mobile-first sites with Bootstrap, the world’s most
+          popular front-end open source toolkit, featuring Sass variables and mixins, responsive grid system, extensive
+          prebuilt components, and powerful JavaScript plugins.</p>
       </div>
     </div>
+  </div>
   </div>
   <div class="container mx-auto row text-center pt-4 mb-5 border-top">
     <div class="col p-3">

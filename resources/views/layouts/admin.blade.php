@@ -110,7 +110,7 @@
               </a>
             </li>
             <li class="nav-item">
-              <a href="#" class="nav-link">
+              <a href="/admin/profil-organisasi" class="nav-link">
                 <i class="nav-icon fas fa-users"></i>
                 <p>
                   Profil Organisasi

@@ -6,13 +6,13 @@
   <div class="container-fluid">
     <div class="row mb-2">
       <div class="col-sm-6">
-        <h1>Buat Artikel Baru</h1>
+        <h1>Tambah Informasi Baru</h1>
       </div>
       <div class="col-sm-6">
         <ol class="breadcrumb float-sm-right">
           <li class="breadcrumb-item"><a href="/admin">Admin</a></li>
-          <li class="breadcrumb-item"><a href="/admin/artikel">Artikel</a></li>
-          <li class="breadcrumb-item active">Buat Artikel Baru</li>
+          <li class="breadcrumb-item"><a href="/admin/artikel">Info TBC</a></li>
+          <li class="breadcrumb-item active">Tambah Info</li>
         </ol>
       </div>
     </div>
@@ -24,13 +24,13 @@
   <div class="container-fluid">
     <form class="col col-md-6">
       <div class="form-group mb-3">
-        <label for="title" class="form-label">Judul artikel</label>
+        <label for="title" class="form-label">Judul</label>
         <input type="text" class="form-control" id="title" placeholder="Tulis judul...">
       </div>
       <div class="form-group mb-3">
         <label for="category" class="form-label">Kategori</label>
         <select class="form-control" disabled>
-          <option>Artikel</option>
+          <option>Info TBC</option>
         </select>
       </div>
       <div class="form-group mb-3">

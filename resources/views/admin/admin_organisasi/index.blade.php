@@ -21,8 +21,9 @@
 <!-- Main content -->
 <div class="p-3">
   <section class="container"> {{-- profil organisasi --}}
-    <div class="article-header  mb-3">
-      <h3 class="fw-bold text-center">Profil Sekawan'S TB Jember</h3>
+    <div class="article-header d-flex flex-column align-items-center mb-2">
+      <a href="/admin/profil-organisasi/1/edit" class="btn btn-warning btn-sm mb-3">Edit Profil</a>
+      <h3 class="fw-bold">Profil Sekawan'S TB Jember</h3>
     </div>
     <article class="d-flex flex-column align-items-center justify-content-center border-top pt-4">
       <figure class="figure">

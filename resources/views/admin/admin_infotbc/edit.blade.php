@@ -6,13 +6,13 @@
   <div class="container-fluid">
     <div class="row mb-2">
       <div class="col-sm-6">
-        <h1>Edit Artikel</h1>
+        <h1>Edit Informasi</h1>
       </div>
       <div class="col-sm-6">
         <ol class="breadcrumb float-sm-right">
           <li class="breadcrumb-item"><a href="/admin">Admin</a></li>
-          <li class="breadcrumb-item"><a href="/admin/artikel">Artikel</a></li>
-          <li class="breadcrumb-item active">Edit Artikel</li>
+          <li class="breadcrumb-item"><a href="/admin/artikel">Info TBC</a></li>
+          <li class="breadcrumb-item active">Edit Info</li>
         </ol>
       </div>
     </div>
@@ -26,12 +26,12 @@
       <div class="form-group mb-3 col-md-6">
         <label for="title" class="form-label">Judul artikel</label>
         <input type="text" class="form-control" id="title" placeholder="Tulis judul..."
-          value="This card has supporting text below as a natural lead-in to additional content.">
+          value="Sejarah Tubercolosis (TBC)">
       </div>
       <div class="form-group mb-3 col-md-6">
         <label for="category" class="form-label">Kategori</label>
         <select class="form-control" disabled>
-          <option>Artikel</option>
+          <option>Info TBC</option>
         </select>
       </div>
       <div class="form-group mb-3 col-md-6">

@@ -40,3 +40,8 @@ Route::view('/admin/artikel', 'admin.admin_artikel.index');
 Route::view('/admin/artikel/create', 'admin.admin_artikel.create');
 Route::view('/admin/artikel/1', 'admin.admin_artikel.show');
 Route::view('/admin/artikel/1/edit', 'admin.admin_artikel.edit');
+
+Route::view('/admin/profil-organisasi', 'admin.admin_organisasi.index');
+Route::view('/admin/profil-organisasi/create', 'admin.admin_organisasi.create');
+Route::view('/admin/profil-organisasi/1', 'admin.admin_organisasi.show');
+Route::view('/admin/profil-organisasi/1/edit', 'admin.admin_organisasi.edit');

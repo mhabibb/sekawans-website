@@ -1,0 +1,17 @@
+{
+    "name": "Sekawan's",
+    "short_name": "4s",
+    "start_url": "./dashboard",
+    "background_color": "#6777ef",
+    "description": "Halaman Admin Sekawan's",
+    "display": "fullscreen",
+    "theme_color": "#6777ef",
+    "icons": [
+        {
+            "src": "img/logo-sekawans.png",
+            "sizes": "512x512",
+            "type": "image/png",
+            "purpose": "any maskable"
+        }
+    ]
+}

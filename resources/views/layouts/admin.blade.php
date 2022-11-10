@@ -19,6 +19,11 @@
   <link rel="stylesheet" href="{{asset('adminlte/plugins/overlayScrollbars/css/OverlayScrollbars.min.css')}}">
 
   {{-- @vite(['resources/sass/app.scss', 'resources/js/app.js']) --}}
+  
+    <!-- PWA  -->
+    <meta name="theme-color" content="#6777ef"/>
+    <link rel="apple-touch-icon" href="{{ asset('img/logo-sekawans.png') }}">
+    <link rel="manifest" href="{{ asset('/manifest.json') }}">
 </head>
 
 <body class="hold-transition sidebar-mini layout-fixed layout-navbar-fixed">
@@ -94,10 +99,12 @@
                   </a>
                 </li>
                 <li class="nav-item">
-                  <a href="#" class="nav-link text-danger">
+                  <a href="#" class="nav-link text-danger" id="btn_logout">
                     <i class="far fa-circle nav-icon"></i>
                     <p>Logout</p>
                   </a>
+                  <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                  @csrf
                 </li>
               </ul>
             </li>
@@ -199,6 +206,23 @@
   <script src="{{asset('adminlte/dist/js/demo.js')}}"></script>
   <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
   <script src="{{asset('adminlte/dist/js/pages/dashboard.js')}}"></script>
+
+  <script src="{{ asset('/sw.js') }}"></script>
+  <script>
+    if (!navigator.serviceWorker.controller) {
+      navigator.serviceWorker.register("/sw.js").then(function (reg) {
+        console.log("Service worker has been registered for scope: " + reg.scope);
+      });
+    }
+  </script>
+
+  <script type="text/javascript">
+      $('#btn_logout').click(function (e){
+        e.preventDefault();
+        $('#logout-form').trigger('submit');
+      })
+      </script>
+    @yield('js')
 </body>
 
 </html>

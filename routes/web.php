@@ -29,7 +29,7 @@ Route::view('/artikel/1', 'artikel.single_artikel');
 
 Route::view('/kegiatan', 'kegiatan.kegiatan')->name('kegiatan');
 
-// Auth::routes();
+Auth::routes(['register' => false]);
 
 // Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 

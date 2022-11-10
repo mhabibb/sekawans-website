@@ -14,11 +14,28 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        // \App\Models\User::factory(10)->create();
+        \App\Models\User::factory()->create([
+            'name' => 'Compek',
+            'email' => 'compek@dr.com',
+            'password' => bcrypt('compek'),
+            'role' => true,
+        ]);
 
-        // \App\Models\User::factory()->create([
-        //     'name' => 'Test User',
-        //     'email' => 'test@example.com',
-        // ]);
+        \App\Models\User::factory(24)->create();
+
+        $this->call([
+            ReligionSeeder::class,
+            CategorySeeder::class,
+            EducationSeeder::class,
+            RegencySeeder::class,
+            PatientStatusSeeder::class,
+            DistrictSeeder::class,
+        ]);
+
+        \App\Models\Article::factory(100)->create();
+        \App\Models\Worker::factory(150)->create();
+        \App\Models\EmergencyContact::factory(20)->create();
+        \App\Models\Patient::factory(20)->create();
+        \App\Models\PatientDetail::factory(20)->create();
     }
 }

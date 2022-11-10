@@ -5,9 +5,9 @@
   <div class="article-header d-flex flex-column align-items-center mb-2">
     <button class="btn mb-3" onclick="history.back()"><i class="fa-solid fa-arrow-left"></i>
       Kembali</button>
-    <a href="/admin/artikel/1/edit" class="btn btn-warning btn-sm mb-3">Edit Artikel</a>
+    <a href="/admin/info-tbc/1/edit" class="btn btn-warning btn-sm mb-3">Edit Informasi</a>
     <div class="article-title">
-      <h3 class="fw-bold text-center">This card has supporting text below as a natural lead-in to additional content.
+      <h3 class="fw-bold text-center">Sejarah Tubercolosis (TBC)
       </h3>
     </div>
   </div>

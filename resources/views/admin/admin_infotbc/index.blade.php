@@ -6,12 +6,12 @@
   <div class="container-fluid">
     <div class="row mb-2">
       <div class="col-sm-6">
-        <h1>Artikel</h1>
+        <h1>Info TBC</h1>
       </div>
       <div class="col-sm-6">
         <ol class="breadcrumb float-sm-right">
           <li class="breadcrumb-item"><a href="/admin">Admin</a></li>
-          <li class="breadcrumb-item active">Artikel</li>
+          <li class="breadcrumb-item active">Info TBC</li>
         </ol>
       </div>
     </div>
@@ -26,7 +26,7 @@
       <div class="col-12">
         <div class="card">
           <div class="card-header">
-            <a href="/admin/artikel/create" class="card-title">Buat Artikel Baru</a>
+            <a href="/admin/info-tbc/create" class="card-title">Tambah Informasi Baru</a>
 
             <div class="card-tools">
               <div class="input-group input-group-sm" style="width: 200px;">
@@ -46,7 +46,7 @@
               <thead>
                 <tr>
                   <th>ID</th>
-                  <th>Judul Artikel</th>
+                  <th>Judul</th>
                   <th>Tanggal Upload</th>
                   <th></th>
                 </tr>
@@ -54,10 +54,10 @@
               <tbody>
                 <tr>
                   <td>183</td>
-                  <td>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Possimus, consequatur?</td>
+                  <td>Sejarah Tubercolosis (TBC)</td>
                   <td>11-7-2014</td>
                   <td>
-                    <a href="/admin/artikel/1" class="badge badge-success">Lihat</a>
+                    <a href="/admin/info-tbc/1" class="badge badge-success">Lihat</a>
                     <form action="" class="d-inline-block" class="d-inline-block">
                       <button type="submit" class="badge badge-danger border-0">Hapus</button>
                     </form>

@@ -14,9 +14,9 @@
     integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A=="
     crossorigin="anonymous" referrerpolicy="no-referrer" />
   <!-- Theme style -->
-  <link rel="stylesheet" href="{{asset('adminlte/dist/css/adminlte.min.css')}}">
+  <link rel="stylesheet" href="{{ asset('adminlte/dist/css/adminlte.min.css') }}">
   <!-- overlayScrollbars -->
-  <link rel="stylesheet" href="{{asset('adminlte/plugins/overlayScrollbars/css/OverlayScrollbars.min.css')}}">
+  <link rel="stylesheet" href="{{ asset('adminlte/plugins/overlayScrollbars/css/OverlayScrollbars.min.css') }}">
 
   {{-- @vite(['resources/sass/app.scss', 'resources/js/app.js']) --}}
   
@@ -62,7 +62,7 @@
           </div>
         </li>
         <li class="nav-item d-sm-inline-block">
-          <a href="{{route('beranda')}}" class="nav-link">Beranda</a>
+          <a href="{{ route('beranda') }}" class="nav-link">Beranda</a>
         </li>
       </ul>
     </nav>
@@ -72,7 +72,7 @@
     <aside class="main-sidebar sidebar-dark-primary elevation-4">
       <!-- Brand Logo -->
       <a href="#" class="brand-link">
-        <img src="{{asset('img/logo-sekawans.png')}}" alt="AdminLTE Logo" class="brand-image img-circle elevation-3"
+        <img src="{{ asset('img/logo-sekawans.png') }}" alt="AdminLTE Logo" class="brand-image img-circle elevation-3"
           style="opacity: .8">
         <span class="brand-text font-weight-light">Admin Sekawan'S</span>
       </a>
@@ -117,7 +117,7 @@
               </a>
             </li>
             <li class="nav-item">
-              <a href="#" class="nav-link">
+              <a href="/admin/profil-organisasi" class="nav-link">
                 <i class="nav-icon fas fa-users"></i>
                 <p>
                   Profil Organisasi
@@ -125,7 +125,7 @@
               </a>
             </li>
             <li class="nav-item">
-              <a href="#" class="nav-link">
+              <a href="/admin/info-tbc" class="nav-link">
                 <i class="nav-icon fas fa-circle-info"></i>
                 <p>
                   Informasi TBC
@@ -149,7 +149,7 @@
               </a>
             </li>
             <li class="nav-item">
-              <a href="#" class="nav-link">
+              <a href="/admin/kegiatan" class="nav-link">
                 <i class="nav-icon fas fa-square-person-confined"></i>
                 <p>
                   Kegiatan
@@ -195,15 +195,15 @@
 
   <!-- REQUIRED SCRIPTS -->
   <!-- jQuery -->
-  <script src="{{asset('adminlte/plugins/jquery/jquery.min.js')}}"></script>
+  <script src="{{ asset('adminlte/plugins/jquery/jquery.min.js') }}"></script>
   <!-- Bootstrap 4 -->
-  <script src="{{asset('adminlte/plugins/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
+  <script src="{{ asset('adminlte/plugins/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
   <!-- overlayScrollbars -->
-  <script src="{{asset('adminlte/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js')}}"></script>
+  <script src="{{ asset('adminlte/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js') }}"></script>
   <!-- AdminLTE App -->
-  <script src="{{asset('adminlte/dist/js/adminlte.js')}}"></script>
+  <script src="{{ asset('adminlte/dist/js/adminlte.js') }}"></script>
   <!-- AdminLTE for demo purposes -->
-  <script src="{{asset('adminlte/dist/js/demo.js')}}"></script>
+  <script src="{{ asset('adminlte/dist/js/demo.js') }}"></script>
   <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
   <script src="{{asset('adminlte/dist/js/pages/dashboard.js')}}"></script>
 
@@ -223,6 +223,7 @@
       })
       </script>
     @yield('js')
+  <script src="{{ asset('adminlte/dist/js/pages/dashboard.js') }}"></script>
 </body>
 
 </html>

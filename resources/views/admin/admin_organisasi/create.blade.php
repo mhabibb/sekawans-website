@@ -29,8 +29,10 @@
       </div>
       <div class="form-group mb-3">
         <label for="category" class="form-label">Kategori</label>
-        <select class="form-control" disabled>
-          <option>Artikel</option>
+        <select class="form-control">
+          <option>Pilih kategori</option>
+          <option>Berita</option>
+          <option>Pasien</option>
         </select>
       </div>
       <div class="form-group mb-3">

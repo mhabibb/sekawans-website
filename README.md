@@ -62,6 +62,17 @@ $secondary: #E71C36;
 }
 ```
 
+- Rename file .env.examples menjadi .env dan sesuaikan dengan device anda
+
+- Migrasi database dengan jalankan PHP Artisan
+```bash
+php artisan migrate:fresh
+```
+  Atau bisa juga migrasi dengan dummy data dengan menjalankan PHP Artisan
+```bash
+php artisan migrate:fresh --seed
+```
+
 - Compile assets dan jalankan webpack
 ```bash
 npm run dev

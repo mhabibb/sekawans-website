@@ -19,8 +19,7 @@
                                 TB</a></li>
                         <li class="nav-item mb-2"><a href="{{route('kasustbc')}}" class="nav-link p-0 link-light">Kasus
                                 TB</a></li>
-                        <li class="nav-item mb-2"><a href="{{route('artikel')}}"
-                                class="nav-link p-0 link-light">Artikel</a></li>
+                        <li class="nav-item mb-2"><a href="/artikel" class="nav-link p-0 link-light">Artikel</a></li>
                         <li class="nav-item mb-2"><a href="{{route('kegiatan')}}"
                                 class="nav-link p-0 link-light">Kegiatan</a></li>
                     </ul>

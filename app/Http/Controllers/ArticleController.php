@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Article;
 use App\Http\Requests\StoreArticleRequest;
 use App\Http\Requests\UpdateArticleRequest;
+use App\Models\Category;
 
 class ArticleController extends Controller
 {
@@ -15,7 +16,10 @@ class ArticleController extends Controller
      */
     public function index()
     {
-        //
+        $articleCollection = collect(Article::all())->where('category_id', 2);
+        return view('admin.admin_artikel.index', [
+            'articles' => $articleCollection->sortByDesc('created_at')->paginate(10)
+        ]);
     }
 
     /**
@@ -25,7 +29,7 @@ class ArticleController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.admin_artikel.create');
     }
 
     /**
@@ -47,7 +51,9 @@ class ArticleController extends Controller
      */
     public function show(Article $article)
     {
-        //
+        return view('admin.admin_artikel.show', [
+            'article' => $article
+        ]);
     }
 
     /**
@@ -58,7 +64,9 @@ class ArticleController extends Controller
      */
     public function edit(Article $article)
     {
-        //
+        return view('admin.admin_artikel.edit', [
+            'article' => $article
+        ]);
     }
 
     /**

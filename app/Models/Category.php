@@ -12,4 +12,9 @@ class Category extends Model
     protected $guarded = ['id'];
 
     public $timestamps = false;
+
+    public function article()
+    {
+        return $this->hasMany(Article::class);
+    }
 }

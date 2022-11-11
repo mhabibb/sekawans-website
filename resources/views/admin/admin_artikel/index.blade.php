@@ -45,101 +45,27 @@
             <table class="table table-head-fixed text-nowrap table-striped">
               <thead>
                 <tr>
-                  <th>ID</th>
                   <th>Judul Artikel</th>
-                  <th>Tanggal Upload</th>
+                  <th>Waktu Upload</th>
                   <th></th>
                 </tr>
               </thead>
               <tbody>
+                @foreach ($articles as $article)
                 <tr>
-                  <td>183</td>
-                  <td>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Possimus, consequatur?</td>
-                  <td>11-7-2014</td>
+                  <td>{{$article->title}}</td>
+                  <td>{{ date('d M Y, H:i', strtotime($article->updated_at)) }}</td>
                   <td>
-                    <a href="/admin/artikel/1" class="badge badge-success">Lihat</a>
-                    <form action="" class="d-inline-block" class="d-inline-block">
-                      <button type="submit" class="badge badge-danger border-0">Hapus</button>
+                    <a href="/admin/artikel/{{$article->id}}" class="badge badge-success">Lihat</a>
+                    <form action="/admin/artikel/{{$article->id}}" method="POST" class="d-inline-block">
+                      @csrf
+                      @method('DELETE')
+                      <button type="submit" class="badge badge-danger border-0"
+                        onclick="return confirm('Yakin untuk menghapus {{ $article->title }} ?')">Hapus</button>
                     </form>
                   </td>
                 </tr>
-                <tr>
-                  <td>219</td>
-                  <td>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Possimus, consequatur?</td>
-                  <td>11-7-2014</td>
-                  <td>
-                    <a href="#" class="badge badge-success">Lihat</a>
-                    <form action="" class="d-inline-block">
-                      <button type="submit" class="badge badge-danger border-0">Hapus</button>
-                    </form>
-                  </td>
-                </tr>
-                <tr>
-                  <td>657</td>
-                  <td>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Possimus, consequatur?</td>
-                  <td>11-7-2014</td>
-                  <td>
-                    <a href="#" class="badge badge-success">Lihat</a>
-                    <form action="" class="d-inline-block">
-                      <button type="submit" class="badge badge-danger border-0">Hapus</button>
-                    </form>
-                  </td>
-                </tr>
-                <tr>
-                  <td>175</td>
-                  <td>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Possimus, consequatur?</td>
-                  <td>11-7-2014</td>
-                  <td>
-                    <a href="#" class="badge badge-success">Lihat</a>
-                    <form action="" class="d-inline-block">
-                      <button type="submit" class="badge badge-danger border-0">Hapus</button>
-                    </form>
-                  </td>
-                </tr>
-                <tr>
-                  <td>134</td>
-                  <td>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Possimus, consequatur?</td>
-                  <td>11-7-2014</td>
-                  <td>
-                    <a href="#" class="badge badge-success">Lihat</a>
-                    <form action="" class="d-inline-block">
-                      <button type="submit" class="badge badge-danger border-0">Hapus</button>
-                    </form>
-                  </td>
-                </tr>
-                <tr>
-                  <td>494</td>
-                  <td>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Possimus, consequatur?</td>
-                  <td>11-7-2014</td>
-                  <td>
-                    <a href="#" class="badge badge-success">Lihat</a>
-                    <form action="" class="d-inline-block">
-                      <button type="submit" class="badge badge-danger border-0">Hapus</button>
-                    </form>
-                  </td>
-                </tr>
-                <tr>
-                  <td>832</td>
-                  <td>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Possimus, consequatur?</td>
-                  <td>11-7-2014</td>
-                  <td>
-                    <a href="#" class="badge badge-success">Lihat</a>
-                    <form action="" class="d-inline-block">
-                      <button type="submit" class="badge badge-danger border-0">Hapus</button>
-                    </form>
-                  </td>
-                </tr>
-                <tr>
-                  <td>982</td>
-                  <td>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Possimus, consequatur?</td>
-                  <td>11-7-2014</td>
-                  <td>
-                    <a href="#" class="badge badge-success">Lihat</a>
-                    <form action="" class="d-inline-block">
-                      <button type="submit" class="badge badge-danger border-0">Hapus</button>
-                    </form>
-                  </td>
-                </tr>
+                @endforeach
               </tbody>
             </table>
           </div>

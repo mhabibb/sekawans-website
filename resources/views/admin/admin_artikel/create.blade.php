@@ -21,28 +21,34 @@
 
 <!-- Main content -->
 <section class="content">
-  <div class="container-fluid">
-    <form class="col col-md-6">
-      <div class="form-group mb-3">
+  <div class="container-fluid pb-5">
+    <form action="/admin/artikel/store" method="POST" enctype="multipart/form-data">
+      @csrf
+      <div class="form-group mb-3 col-md-6">
         <label for="title" class="form-label">Judul artikel</label>
-        <input type="text" class="form-control" id="title" placeholder="Tulis judul...">
+        <input type="text" name="title" class="form-control" id="title" placeholder="Tulis judul...">
       </div>
-      <div class="form-group mb-3">
+      <div class="form-group mb-3 col-md-6">
         <label for="category" class="form-label">Kategori</label>
-        <select class="form-control" disabled>
-          <option>Artikel</option>
+        <select name="category_id" class="form-control" disabled>
+          <option value="2">Artikel</option>
         </select>
       </div>
-      <div class="form-group mb-3">
+      <div class="form-group mb-3 col-md-6">
         <label for="articleImg">Gambar</label>
         <div class="custom-file">
-          <input type="file" class="custom-file-input" id="articleImg" aria-describedby="inputGroupFileAddon01">
+          <input type="file" name="img" class="custom-file-input" id="articleImg"
+            aria-describedby="inputGroupFileAddon01">
           <label class="custom-file-label" for="articleImg">Choose file</label>
         </div>
       </div>
-      <div class="mb-3">
+      <div class="form-group mb-3 col-12">
         <label for="content">Isi konten</label>
-        <textarea class="form-control" name="content" id="content" style="height: 240px"></textarea>
+        <textarea class="form-control" name="contents" id="contents" style="height: 240px"></textarea>
+      </div>
+      <div class="col-12">
+        <button type="reset" onclick="history.back()" class="btn btn-secondary">Batalkan</button>
+        <button type="submit" class="btn btn-primary">Perbarui</button>
       </div>
     </form>
   </div><!-- /.container -->

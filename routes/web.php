@@ -1,6 +1,9 @@
 <?php
 
+use App\Http\Controllers\ArticleController;
+use App\Models\Article;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Auth;
 
 /*
 |--------------------------------------------------------------------------
@@ -24,22 +27,32 @@ Route::view('/single_infotbc', 'info_tbc.single_infotbc')->name('single_infotbc'
 
 Route::view('/kasus_tbc', 'kasus_tbc.kasustbc')->name('kasustbc');
 
-Route::view('/artikel', 'artikel.artikel')->name('artikel');
-Route::view('/artikel/1', 'artikel.single_artikel');
+Route::get('/artikel', function () {
+  $articles = Article::all()->where('category_id', 3);
+  return view('artikel.artikel', [
+    'articles' => $articles->sortByDesc('created_at')->paginate(9)->withQueryString()
+  ]);
+});
+
+Route::view('/artikel/{article}', 'artikel.single_artikel');
 
 Route::view('/kegiatan', 'kegiatan.kegiatan')->name('kegiatan');
 Route::view('/single_kegiatan', 'kegiatan.single_kegiatan');
 
-Auth::routes(['register' => false]);
 
-// Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Auth::routes(['register' => false]);
 
 Route::view('/admin', 'admin.dashboard')->name('dashboard');
 
-Route::view('/admin/artikel', 'admin.admin_artikel.index');
-Route::view('/admin/artikel/create', 'admin.admin_artikel.create');
-Route::view('/admin/artikel/1', 'admin.admin_artikel.show');
-Route::view('/admin/artikel/1/edit', 'admin.admin_artikel.edit');
+Route::controller(ArticleController::class)->group(function () {
+  Route::get('/admin/artikel', 'index');
+  Route::get('/admin/artikel/create', 'create');
+  Route::post('/admin/artikel/store', 'store');
+  Route::get('/admin/artikel/{article}', 'show');
+  Route::get('/admin/artikel/{article}/edit', 'edit');
+  Route::put('/admin/artikel/{article}', 'update');
+  Route::delete('/admin/artikel/{article}', 'destroy');
+});
 
 Route::view('/admin/profil-organisasi', 'admin.admin_organisasi.index');
 Route::view('/admin/profil-organisasi/create', 'admin.admin_organisasi.create');

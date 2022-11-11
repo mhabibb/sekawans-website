@@ -19,11 +19,11 @@
   <link rel="stylesheet" href="{{ asset('adminlte/plugins/overlayScrollbars/css/OverlayScrollbars.min.css') }}">
 
   {{-- @vite(['resources/sass/app.scss', 'resources/js/app.js']) --}}
-  
-    <!-- PWA  -->
-    <meta name="theme-color" content="#6777ef"/>
-    <link rel="apple-touch-icon" href="{{ asset('img/logo-sekawans.png') }}">
-    <link rel="manifest" href="{{ asset('/manifest.json') }}">
+
+  <!-- PWA  -->
+  <meta name="theme-color" content="#6777ef" />
+  <link rel="apple-touch-icon" href="{{ asset('img/logo-sekawans.png') }}">
+  <link rel="manifest" href="{{ asset('/manifest.json') }}">
 </head>
 
 <body class="hold-transition sidebar-mini layout-fixed layout-navbar-fixed">
@@ -104,7 +104,7 @@
                     <p>Logout</p>
                   </a>
                   <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                  @csrf
+                    @csrf
                 </li>
               </ul>
             </li>
@@ -203,9 +203,9 @@
   <!-- AdminLTE App -->
   <script src="{{ asset('adminlte/dist/js/adminlte.js') }}"></script>
   <!-- AdminLTE for demo purposes -->
-  <script src="{{ asset('adminlte/dist/js/demo.js') }}"></script>
+  {{-- <script src="{{ asset('adminlte/dist/js/demo.js') }}"></script> --}}
   <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
-  <script src="{{asset('adminlte/dist/js/pages/dashboard.js')}}"></script>
+  {{-- <script src="{{asset('adminlte/dist/js/pages/dashboard.js')}}"></script> --}}
 
   <script src="{{ asset('/sw.js') }}"></script>
   <script>
@@ -217,12 +217,12 @@
   </script>
 
   <script type="text/javascript">
-      $('#btn_logout').click(function (e){
+    $('#btn_logout').click(function (e){
         e.preventDefault();
         $('#logout-form').trigger('submit');
       })
-      </script>
-    @yield('js')
+  </script>
+  @yield('js')
   <script src="{{ asset('adminlte/dist/js/pages/dashboard.js') }}"></script>
 </body>
 

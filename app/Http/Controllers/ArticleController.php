@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Article;
 use App\Http\Requests\StoreArticleRequest;
 use App\Http\Requests\UpdateArticleRequest;
+use App\Models\Category;
 use GuzzleHttp\Psr7\Request;
 
 class ArticleController extends Controller
@@ -16,7 +17,10 @@ class ArticleController extends Controller
      */
     public function index()
     {
-        dd(request('category'));
+        last(request()->segments()) == "info" ? $article = Article::latest()->category(1)->get()
+            : (last(request()->segments()) == "article" ? $article = Article::latest()->category(2)->get()
+                : (last(request()->segments()) == "action" ? $article = Article::latest()->category(3)->get() : abort(404)));
+        return view('admin.admin_artikel.index', $article);
     }
 
     /**
@@ -26,7 +30,7 @@ class ArticleController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.admin_artikel.create', $category = Category::without('article'));
     }
 
     /**

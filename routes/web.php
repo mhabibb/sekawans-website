@@ -67,21 +67,26 @@ Route::get('/admin', [App\Http\Controllers\HomeController::class, 'index'])->nam
 Route::group(['middleware' => 'auth'], function () {
   Route::resource('/admin/profile', UserController::class);
   Route::resource('/admin/patient', PatientController::class);
-  Route::resource('/admin/article', ArticleController::class);
   Route::resource('/admin/sekawans', StaticElementController::class)->except(['create', 'destroy', 'store']);
   Route::resource('/admin/worker', WorkerController::class);
+  Route::resource('/admin/article', ArticleController::class);
+  Route::controller(ArticleController::class)->group(function () {
+    Route::get('/admin/info', 'index');
+    // Route::get('/admin/case', 'index');
+    Route::get('/admin/action', 'index');
+  });
 });
 
 Route::controller(WebController::class)->group(function () {
   Route::get('/', 'index')->name('beranda');
-  Route::get('/tentang', 'about')->name('tentang');
-  Route::get('/struktur', 'structur')->name('struktur');
-  Route::get('/info-tb', 'info')->name('infotbc');
-  Route::get('/info-tb/{id}', 'showInfo')->name('single_infotbc');
-  Route::get('/kasus-tb', 'case')->name('kasustbc');
-  Route::get('/kasus-tb/{id}', 'showCase')->name('single_kasustbc');
-  Route::get('/kegiatan', 'activity')->name('kegiatan');
-  Route::get('/kegiatan/{id}', 'showActivity')->name('single_kegiatan');
-  Route::get('/artikel', 'article')->name('artikel');
-  Route::get('/artikel{id}', 'showArticle')->name('single_artikel');
+  Route::get('/about', 'about')->name('tentang');
+  Route::get('/structur', 'structur')->name('struktur');
+  Route::get('/info', 'info')->name('infotbc');
+  Route::get('/info/{id}', 'showInfo')->name('single_infotbc');
+  Route::get('/case', 'case')->name('kasustbc');
+  Route::get('/case/{id}', 'showCase')->name('single_kasustbc');
+  Route::get('/article', 'article')->name('artikel');
+  Route::get('/article/{id}', 'showArticle')->name('single_artikel');
+  Route::get('/action', 'action')->name('kegiatan');
+  Route::get('/action/{id}', 'showAction')->name('single_kegiatan');
 });

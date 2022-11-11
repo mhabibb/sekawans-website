@@ -13,7 +13,9 @@ class Category extends Model
 
     public $timestamps = false;
 
-    public function Articles()
+    public $with = ['articles'];
+
+    public function articles()
     {
         return $this->hasMany(Article::class);
     }

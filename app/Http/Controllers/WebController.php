@@ -41,12 +41,12 @@ class WebController extends Controller
         return view('kasus_tbc.kasustbc');
     }
 
-    public function activity()
+    public function action()
     {
         return view('kegiatan.kegiatan');
     }
 
-    public function showActivity()
+    public function showAction()
     {
         return view('kegiatan.single_kegiatan');
     }

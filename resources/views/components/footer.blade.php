@@ -11,16 +11,18 @@
                 <div class="col-12 col-sm-6 col-lg-4 mb-3">
                     <h5 class="mb-3">Informasi</h5>
                     <ul class="nav flex-column d-inline-flex">
-                        <li class="nav-item mb-2"><a href="/" class="nav-link p-0 link-light">Beranda</a></li>
-                        <li class="nav-item mb-2"><a href="{{route('tentang')}}"
-                                class="nav-link p-0 link-light">Tentang</a></li>
-                        <li class="nav-item mb-2"><a href="{{route('infotbc')}}" class="nav-link p-0 link-light">Info
-                                TB</a></li>
-                        <li class="nav-item mb-2"><a href="{{route('kasustbc')}}" class="nav-link p-0 link-light">Kasus
-                                TB</a></li>
-                        <li class="nav-item mb-2"><a href="/artikel" class="nav-link p-0 link-light">Artikel</a></li>
-                        <li class="nav-item mb-2"><a href="{{route('kegiatan')}}"
-                                class="nav-link p-0 link-light">Kegiatan</a></li>
+                        <li class="nav-item mb-2"><a href="{{route('beranda')}}" class="nav-link p-0 link-light">
+                                Beranda</a></li>
+                        <li class="nav-item mb-2"><a href="{{route('tentang')}}" class="nav-link p-0 link-light">
+                                Tentang</a></li>
+                        <li class="nav-item mb-2"><a href="{{route('infotbc')}}" class="nav-link p-0 link-light">
+                                Info TB</a></li>
+                        <li class="nav-item mb-2"><a href="{{route('kasustbc')}}" class="nav-link p-0 link-light">
+                                Kasus TB</a></li>
+                        <li class="nav-item mb-2"><a href="{{route('artikel')}}" class="nav-link p-0 link-light">
+                                Artikel</a></li>
+                        <li class="nav-item mb-2"><a href="{{route('kegiatan')}}" class="nav-link p-0 link-light">
+                                Kegiatan</a></li>
                     </ul>
                 </div>
 

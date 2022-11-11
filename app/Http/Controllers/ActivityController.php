@@ -5,9 +5,9 @@ namespace App\Http\Controllers;
 use App\Models\Article;
 use App\Http\Requests\StoreArticleRequest;
 use App\Http\Requests\UpdateArticleRequest;
-use App\Models\Category;
+use Illuminate\Http\Request;
 
-class ArticleController extends Controller
+class ActivityController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,9 +16,9 @@ class ArticleController extends Controller
      */
     public function index()
     {
-        $articleCollection = collect(Article::all())->where('category_id', 2);
-        return view('admin.admin_artikel.index', [
-            'articles' => $articleCollection->sortByDesc('created_at')
+        $articleCollection = collect(Article::all())->where('category_id', 3);
+        return view('admin.admin_kegiatan.index', [
+            'activities' => $articleCollection->sortByDesc('created_at')
         ]);
     }
 
@@ -29,18 +29,18 @@ class ArticleController extends Controller
      */
     public function create()
     {
-        return view('admin.admin_artikel.create', [
-            'category' => 2
+        return view('admin.admin_kegiatan.create', [
+            'category' => 3
         ]);
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \App\Http\Requests\StoreArticleRequest  $request
+     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreArticleRequest $request)
+    public function store(Request $request)
     {
         //
     }
@@ -48,38 +48,38 @@ class ArticleController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Article  $article
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Article $article)
+    public function show(Article $activity)
     {
-        return view('admin.admin_artikel.show', [
-            'article' => $article
+        return view('admin.admin_kegiatan.show', [
+            'activity' => $activity
         ]);
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Article  $article
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Article $article)
+    public function edit(Article $activity)
     {
-        return view('admin.admin_artikel.edit', [
-            'article' => $article,
-            'category' => 2
+        return view('admin.admin_kegiatan.edit', [
+            'activity' => $activity,
+            'category' => 3
         ]);
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \App\Http\Requests\UpdateArticleRequest  $request
-     * @param  \App\Models\Article  $article
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateArticleRequest $request, Article $article)
+    public function update(Request $request, $id)
     {
         //
     }
@@ -87,10 +87,10 @@ class ArticleController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Article  $article
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Article $article)
+    public function destroy($id)
     {
         //
     }

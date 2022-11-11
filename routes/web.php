@@ -1,7 +1,9 @@
 <?php
 
+use App\Http\Controllers\ActivityController;
 use App\Http\Controllers\ArticleController;
 use App\Models\Article;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 
@@ -21,7 +23,7 @@ Route::get('/', function () {
   return view('index', [
     'articles' => $articles->sortByDesc('created_at')->take(3)
   ]);
-});
+})->name('beranda');
 
 Route::view('/tentang', 'tentang.tentang')->name('tentang');
 Route::view('/struktur', 'tentang.struktur')->name('struktur');
@@ -32,36 +34,49 @@ Route::view('/single_infotbc', 'info_tbc.single_infotbc')->name('single_infotbc'
 
 Route::view('/kasus_tbc', 'kasus_tbc.kasustbc')->name('kasustbc');
 
-Route::get('/artikel', function () {
-  $articles = Article::all()->where('category_id', 2);
-  return view('artikel.artikel', [
-    'articles' => $articles->sortByDesc('created_at')->paginate(12)->withQueryString()
-  ]);
+Route::middleware(['guest'])->group(function () {
+  Route::get('/artikel', function () {
+    $articles = Article::all()->where('category_id', 2);
+    return view('artikel.artikel', [
+      'articles' => $articles->sortByDesc('created_at')->paginate(12)->withQueryString()
+    ]);
+  })->name('artikel');
+
+  Route::get('/artikel/{article}', function (Article $article) {
+    return view('artikel.single_artikel', [
+      'article' => $article
+    ]);
+  })->name('artikel.single');
 });
 
-Route::get('/artikel/{article}', function (Article $article) {
-  return view('artikel.single_artikel', [
-    'article' => $article
-  ]);
+Route::middleware(['guest'])->group(function () {
+  Route::get('/kegiatan', function () {
+    $activities = Article::all()->where('category_id', 3);
+    return view('kegiatan.kegiatan', [
+      'activities' => $activities->sortByDesc('created_at')->paginate(12)->withQueryString()
+    ]);
+  })->name('kegiatan');
+
+  Route::get('/kegiatan/{activity}', function (Article $activity) {
+    return view('kegiatan.single_kegiatan', [
+      'activity' => $activity
+    ]);
+  })->name('kegiatan.single');
 });
-
-Route::view('/kegiatan', 'kegiatan.kegiatan')->name('kegiatan');
-Route::view('/single_kegiatan', 'kegiatan.single_kegiatan');
-
 
 Auth::routes(['register' => false]);
 
 Route::view('/admin', 'admin.dashboard')->name('dashboard');
 
-Route::controller(ArticleController::class)->group(function () {
-  Route::get('/admin/artikel', 'index');
-  Route::get('/admin/artikel/create', 'create');
-  Route::post('/admin/artikel/store', 'store');
-  Route::get('/admin/artikel/{article}', 'show');
-  Route::get('/admin/artikel/{article}/edit', 'edit');
-  Route::put('/admin/artikel/{article}', 'update');
-  Route::delete('/admin/artikel/{article}', 'destroy');
-});
+Route::resource('/admin/articles', ArticleController::class)
+  ->missing(function (Request $request) {
+    return redirect(route('articles.index'));
+  });
+
+Route::resource('/admin/activities', ActivityController::class)
+  ->missing(function (Request $request) {
+    return redirect(route('activities.index'));
+  });
 
 Route::view('/admin/profil-organisasi', 'admin.admin_organisasi.index');
 Route::view('/admin/profil-organisasi/create', 'admin.admin_organisasi.create');

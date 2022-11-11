@@ -4,25 +4,14 @@
 <!-- Content Header (Page header) -->
 <section class="content-header">
   <div class="container-fluid">
-    <div class="row mb-2">
-      <div class="col-sm-6">
-        <h1>Buat Artikel Baru</h1>
-      </div>
-      <div class="col-sm-6">
-        <ol class="breadcrumb float-sm-right">
-          <li class="breadcrumb-item"><a href="/admin">Admin</a></li>
-          <li class="breadcrumb-item"><a href="/admin/artikel">Artikel</a></li>
-          <li class="breadcrumb-item active">Buat Artikel Baru</li>
-        </ol>
-      </div>
-    </div>
-  </div><!-- /.container-fluid -->
+    <h1>Buat Artikel Baru</h1>
+  </div>
 </section>
 
 <!-- Main content -->
 <section class="content">
   <div class="container-fluid pb-5">
-    <form action="/admin/artikel/store" method="POST" enctype="multipart/form-data">
+    <form action="{{ route('articles.store') }}" method="POST" enctype="multipart/form-data">
       @csrf
       <div class="form-group mb-3 col-md-6">
         <label for="title" class="form-label">Judul artikel</label>
@@ -31,7 +20,7 @@
       <div class="form-group mb-3 col-md-6">
         <label for="category" class="form-label">Kategori</label>
         <select name="category_id" class="form-control" disabled>
-          <option value="2">Artikel</option>
+          <option value="{{ $category }}">Artikel</option>
         </select>
       </div>
       <div class="form-group mb-3 col-md-6">
@@ -48,7 +37,7 @@
       </div>
       <div class="col-12">
         <button type="reset" onclick="history.back()" class="btn btn-secondary">Batalkan</button>
-        <button type="submit" class="btn btn-primary">Perbarui</button>
+        <button type="submit" class="btn btn-primary">Submit</button>
       </div>
     </form>
   </div><!-- /.container -->

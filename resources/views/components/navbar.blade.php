@@ -17,7 +17,7 @@
             <div class="offcanvas-body">
                 <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
                     <li class="nav-item">
-                        <a class="nav-link" href="/">Beranda</a>
+                        <a class="nav-link" href="{{route('beranda')}}">Beranda</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="{{route('tentang')}}">Tentang</a>
@@ -29,7 +29,7 @@
                         <a class="nav-link" href="{{route('kasustbc')}}">Kasus TB</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/artikel">Artikel</a>
+                        <a class="nav-link" href="{{route('artikel')}}">Artikel</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="{{route('kegiatan')}}">Kegiatan</a>

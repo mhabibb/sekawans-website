@@ -141,7 +141,7 @@
               </a>
             </li>
             <li class="nav-item">
-              <a href="/admin/artikel" class="nav-link">
+              <a href="{{route('articles.index')}}" class="nav-link">
                 <i class="nav-icon fas fa-newspaper"></i>
                 <p>
                   Artikel
@@ -149,7 +149,7 @@
               </a>
             </li>
             <li class="nav-item">
-              <a href="/admin/kegiatan" class="nav-link">
+              <a href="{{route('activities.index')}}" class="nav-link">
                 <i class="nav-icon fas fa-square-person-confined"></i>
                 <p>
                   Kegiatan

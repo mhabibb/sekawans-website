@@ -4,25 +4,14 @@
 <!-- Content Header (Page header) -->
 <section class="content-header">
   <div class="container-fluid">
-    <div class="row mb-2">
-      <div class="col-sm-6">
-        <h1>Edit Artikel</h1>
-      </div>
-      <div class="col-sm-6">
-        <ol class="breadcrumb float-sm-right">
-          <li class="breadcrumb-item"><a href="/admin">Admin</a></li>
-          <li class="breadcrumb-item"><a href="/admin/artikel">Artikel</a></li>
-          <li class="breadcrumb-item active">Edit Artikel</li>
-        </ol>
-      </div>
-    </div>
-  </div><!-- /.container-fluid -->
+    <h1>Edit Artikel</h1>
+  </div>
 </section>
 
 <!-- Main content -->
 <section class="content">
   <div class="container-fluid pb-5">
-    <form action="" method="POST" enctype="multipart/form-data">
+    <form action="{{ route('articles.update', $article) }}" method="POST" enctype="multipart/form-data">
       @csrf
       @method('PUT')
       <div class="form-group mb-3 col-md-6">
@@ -33,7 +22,7 @@
       <div class="form-group mb-3 col-md-6">
         <label for="category" class="form-label">Kategori</label>
         <select name="category_id" class="form-control" disabled>
-          <option value="2">{{ $article->category->name }}</option>
+          <option value="{{$category}}">Artikel</option>
         </select>
       </div>
       <div class="form-group mb-3 col-md-6">

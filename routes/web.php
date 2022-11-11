@@ -5,6 +5,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\PatientController;
 use App\Http\Controllers\StaticElementController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\WebController;
 use App\Http\Controllers\WorkerController;
 use Illuminate\Support\Facades\Route;
 
@@ -36,9 +37,9 @@ use Illuminate\Support\Facades\Route;
 // Route::view('/kegiatan', 'kegiatan.kegiatan')->name('kegiatan');
 // Route::view('/single_kegiatan', 'kegiatan.single_kegiatan');
 
-// Auth::routes(['register' => false]);
+Auth::routes(['register' => false]);
 
-// Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/admin', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 // Route::view('/admin', 'admin.dashboard')->name('dashboard');
 
@@ -69,4 +70,18 @@ Route::group(['middleware' => 'auth'], function () {
   Route::resource('/admin/article', ArticleController::class);
   Route::resource('/admin/sekawans', StaticElementController::class)->except(['create', 'destroy', 'store']);
   Route::resource('/admin/worker', WorkerController::class);
+});
+
+Route::controller(WebController::class)->group(function () {
+  Route::get('/', 'index')->name('beranda');
+  Route::get('/tentang', 'about')->name('tentang');
+  Route::get('/struktur', 'structur')->name('struktur');
+  Route::get('/info-tb', 'info')->name('infotbc');
+  Route::get('/info-tb/{id}', 'showInfo')->name('single_infotbc');
+  Route::get('/kasus-tb', 'case')->name('kasustbc');
+  Route::get('/kasus-tb/{id}', 'showCase')->name('single_kasustbc');
+  Route::get('/kegiatan', 'activity')->name('kegiatan');
+  Route::get('/kegiatan/{id}', 'showActivity')->name('single_kegiatan');
+  Route::get('/artikel', 'article')->name('artikel');
+  Route::get('/artikel{id}', 'showArticle')->name('single_artikel');
 });

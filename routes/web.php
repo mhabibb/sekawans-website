@@ -16,7 +16,12 @@ use Illuminate\Support\Facades\Auth;
 |
 */
 
-Route::view('/', 'index')->name('beranda');
+Route::get('/', function () {
+  $articles = Article::all()->where('category_id', 2);
+  return view('index', [
+    'articles' => $articles->sortByDesc('created_at')->take(3)
+  ]);
+});
 
 Route::view('/tentang', 'tentang.tentang')->name('tentang');
 Route::view('/struktur', 'tentang.struktur')->name('struktur');
@@ -28,13 +33,17 @@ Route::view('/single_infotbc', 'info_tbc.single_infotbc')->name('single_infotbc'
 Route::view('/kasus_tbc', 'kasus_tbc.kasustbc')->name('kasustbc');
 
 Route::get('/artikel', function () {
-  $articles = Article::all()->where('category_id', 3);
+  $articles = Article::all()->where('category_id', 2);
   return view('artikel.artikel', [
-    'articles' => $articles->sortByDesc('created_at')->paginate(9)->withQueryString()
+    'articles' => $articles->sortByDesc('created_at')->paginate(12)->withQueryString()
   ]);
 });
 
-Route::view('/artikel/{article}', 'artikel.single_artikel');
+Route::get('/artikel/{article}', function (Article $article) {
+  return view('artikel.single_artikel', [
+    'article' => $article
+  ]);
+});
 
 Route::view('/kegiatan', 'kegiatan.kegiatan')->name('kegiatan');
 Route::view('/single_kegiatan', 'kegiatan.single_kegiatan');

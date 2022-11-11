@@ -22,7 +22,7 @@
           <div class="module line-clamp">
             <h5>{{ $article->title }}</h5>
           </div>
-          <a href="/admin/artikel/{{$article->id}}" class="link-primary text-underline">Baca selengkapnya</a>
+          <a href="/artikel/{{$article->id}}" class="link-primary text-underline">Baca selengkapnya</a>
         </div>
       </div>
     </div>

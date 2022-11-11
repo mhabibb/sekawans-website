@@ -62,7 +62,7 @@
           </div>
         </li>
         <li class="nav-item d-sm-inline-block">
-          <a href="{{ route('beranda') }}" class="nav-link">Beranda</a>
+          <a href="/" class="nav-link">Beranda</a>
         </li>
       </ul>
     </nav>

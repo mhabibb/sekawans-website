@@ -18,7 +18,7 @@ class ArticleController extends Controller
     {
         $articleCollection = collect(Article::all())->where('category_id', 2);
         return view('admin.admin_artikel.index', [
-            'articles' => $articleCollection->sortByDesc('created_at')->paginate(10)
+            'articles' => $articleCollection->sortByDesc('created_at')
         ]);
     }
 

@@ -107,68 +107,30 @@
 {{-- ARTIKEL --}}
 <section id="artikel" class="container py-5">
     <h1 class="fw-bold mb-5 text-center text-primary">Artikel Terbaru</h1>
-    <div class="card-group gap-3">
-        <div class="card border">
-            <img src="https://picsum.photos/600/400" class="card-img-top" alt="card-image">
-            <div class="card-body">
-                <div class="mb-1 d-flex gap-3">
-                    <div>
-                        <i class="fa-solid fa-user"></i>
-                        <small class="px-1">Author</small>
+    <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 justify-content-center g-4">
+        @foreach ($articles as $article)
+        <div class="col">
+            <div class="card border h-100">
+                <img src="{{ $article->img }}" class="card-img-top thumbnail" alt="card-image">
+                <div class="card-body">
+                    <div class="mb-1 d-flex gap-3">
+                        <div class="col-4 text-truncate" style="font-size: 14px;">
+                            <i class="fa-solid fa-user"></i>
+                            {{ $article->user->name }}
+                        </div>
+                        <div class="px-2" style="font-size: 14px;">
+                            <i class="fa-solid fa-calendar-days"></i>
+                            {{ date('d M Y', strtotime($article->updated_at)) }}
+                        </div>
                     </div>
-                    <div>
-                        <i class="fa-solid fa-calendar-days"></i>
-                        <small class="px-1">02-11-2022</small>
+                    <div class="module line-clamp">
+                        <h5>{{ $article->title }}</h5>
                     </div>
+                    <a href="/artikel/{{$article->id}}" class="link-primary text-underline">Baca selengkapnya</a>
                 </div>
-                <div class="module line-clamp">
-                    <h5>This is a wider card with supporting text below as a natural lead-in to additional content.
-                        This content is a little bit longer.</h5>
-                </div>
-                <a href="#" class="link-primary text-underline">Baca selengkapnya</a>
             </div>
         </div>
-        <div class="card border">
-            <img src="https://picsum.photos/600/400" class="card-img-top" alt="card-image">
-            <div class="card-body">
-                <div class="mb-1 d-flex gap-3">
-                    <div>
-                        <i class="fa-solid fa-user"></i>
-                        <small class="px-1">Author</small>
-                    </div>
-                    <div>
-                        <i class="fa-solid fa-calendar-days"></i>
-                        <small class="px-1">02-11-2022</small>
-                    </div>
-                </div>
-                <div class="module line-clamp">
-                    <h5>This card has supporting text below as a natural lead-in to additional content.</h5>
-                </div>
-                <a href="#" class="link-primary text-underline">Baca selengkapnya</a>
-            </div>
-        </div>
-        <div class="card border">
-            <img src="https://picsum.photos/600/400" class="card-img-top" alt="card-image">
-            <div class="card-body">
-                <div class="mb-1 d-flex gap-3">
-                    <div>
-                        <i class="fa-solid fa-user"></i>
-                        <small class="px-1">Author</small>
-                    </div>
-                    <div>
-                        <i class="fa-solid fa-calendar-days"></i>
-                        <small class="px-1">02-11-2022</small>
-                    </div>
-                </div>
-                <div class="module line-clamp">
-                    <h5>This is a wider card with supporting text below as a natural lead-in to additional content.
-                        This
-                        card has
-                        even longer content than the first to show that equal height action.</h5>
-                </div>
-                <a href="#" class="link-primary text-underline">Baca selengkapnya</a>
-            </div>
-        </div>
+        @endforeach
     </div>
 </section>
 @endsection

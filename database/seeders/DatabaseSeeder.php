@@ -30,6 +30,7 @@ class DatabaseSeeder extends Seeder
             RegencySeeder::class,
             PatientStatusSeeder::class,
             DistrictSeeder::class,
+            StaticElementSeeder::class,
         ]);
 
         \App\Models\Article::factory(100)->create();

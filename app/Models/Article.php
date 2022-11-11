@@ -10,4 +10,26 @@ class Article extends Model
     use HasFactory;
 
     protected $guarded = ['id', 'created_at', 'updated_at'];
+
+    protected $with = ['category', 'user'];
+
+    public function scopeCategory($query, $category)
+    {
+        return $query->where('category_id', $category);
+    }
+
+    public function scopeUser($query, $user)
+    {
+        return $query->where('user_id', $user);
+    }
+
+    public function category()
+    {
+        return $this->belongsTo(Category::class);
+    }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }

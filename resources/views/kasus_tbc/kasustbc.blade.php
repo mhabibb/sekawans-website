@@ -27,7 +27,11 @@
                 </div>
                 <div class="p-2 text-center col-md-6 col-lg">
                     <h1>20</h1>
-                    <p class="lead fw-bold">Lose to Follow Up</p>
+                    <p class="lead fw-bold">Dalam Pengobatan</p>
+                </div>
+                <div class="p-2 text-center col-md-6 col-lg">
+                    <h1>20</h1>
+                    <p class="lead fw-bold">Loss to Follow Up</p>
                 </div>
                 <div class="p-2 text-center col-md-6 col-lg">
                     <h1>20</h1>
@@ -49,7 +53,11 @@
                 </div>
                 <div class="p-2 text-center col-md-6 col-lg">
                     <h1>20</h1>
-                    <p class="lead fw-bold">Lose to Follow Up</p>
+                    <p class="lead fw-bold">Dalam Pengobatan</p>
+                </div>
+                <div class="p-2 text-center col-md-6 col-lg">
+                    <h1>20</h1>
+                    <p class="lead fw-bold">Loss to Follow Up</p>
                 </div>
                 <div class="p-2 text-center col-md-6 col-lg">
                     <h1>20</h1>
@@ -71,7 +79,11 @@
                 </div>
                 <div class="p-2 text-center col-md-6 col-lg">
                     <h1>20</h1>
-                    <p class="lead fw-bold">Lose to Follow Up</p>
+                    <p class="lead fw-bold">Dalam Pengobatan</p>
+                </div>
+                <div class="p-2 text-center col-md-6 col-lg">
+                    <h1>20</h1>
+                    <p class="lead fw-bold">Loss to Follow Up</p>
                 </div>
                 <div class="p-2 text-center col-md-6 col-lg">
                     <h1>20</h1>
@@ -93,7 +105,11 @@
                 </div>
                 <div class="p-2 text-center col-md-6 col-lg">
                     <h1>20</h1>
-                    <p class="lead fw-bold">Lose to Follow Up</p>
+                    <p class="lead fw-bold">Dalam Pengobatan</p>
+                </div>
+                <div class="p-2 text-center col-md-6 col-lg">
+                    <h1>20</h1>
+                    <p class="lead fw-bold">Loss to Follow Up</p>
                 </div>
                 <div class="p-2 text-center col-md-6 col-lg">
                     <h1>20</h1>

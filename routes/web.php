@@ -32,7 +32,7 @@ Route::view('/single_kegiatan', 'kegiatan.single_kegiatan');
 
 Auth::routes(['register' => false]);
 
-// Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 Route::view('/admin', 'admin.dashboard')->name('dashboard');
 
@@ -55,3 +55,5 @@ Route::view('/admin/info-tbc', 'admin.admin_infotbc.index');
 Route::view('/admin/info-tbc/create', 'admin.admin_infotbc.create');
 Route::view('/admin/info-tbc/1', 'admin.admin_infotbc.show');
 Route::view('/admin/info-tbc/1/edit', 'admin.admin_infotbc.edit');
+
+// Route::resources()

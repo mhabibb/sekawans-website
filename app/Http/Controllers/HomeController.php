@@ -24,10 +24,11 @@ class HomeController extends Controller
      */
     public function index()
     {
+        // dd(Article::latest()->category(1)->get()->take(5));
         $info = Article::latest()->category(1)->get()->take(5);
-        $kasus = Article::latest()->category(2)->get()->take(5);
+        $artikel = Article::latest()->category(2)->get()->take(5);
         $kegiatan = Article::latest()->category(3)->get()->take(5);
 
-        return view('admin.dashboard', [$info, $kasus, $kegiatan]);
+        return view('admin.dashboard', [$info, $artikel, $kegiatan]);
     }
 }

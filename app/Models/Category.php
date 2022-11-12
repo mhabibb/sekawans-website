@@ -13,7 +13,7 @@ class Category extends Model
 
     public $timestamps = false;
 
-    public $with = ['articles'];
+    // public $with = ['articles'];
 
     public function articles()
     {

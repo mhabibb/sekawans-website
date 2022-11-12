@@ -2,12 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\StaticElement;
 use Illuminate\Http\Request;
 
 class WebController extends Controller
 {
     public function index()
     {
+        $about = StaticElement::firstWhere('id', '=', 1);
+        dd($about);
         return view('index');
     }
 

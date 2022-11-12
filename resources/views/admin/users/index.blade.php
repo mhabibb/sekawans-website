@@ -40,8 +40,9 @@
                 </tr>
               </thead>
               <tbody>
+                @foreach ($users as $user)
                 <tr>
-                  <td>John Depp</td>
+                  <td>{{ $user->name }}</td>
                   <td>
                     <form action="#" method="POST" class="d-inline-block">
                       @csrf
@@ -51,17 +52,7 @@
                     </form>
                   </td>
                 </tr>
-                <tr>
-                  <td>Lorem ipsum dolor sit amet</td>
-                  <td>
-                    <form action="#" method="POST" class="d-inline-block">
-                      @csrf
-                      @method('DELETE')
-                      <button type="submit" class="badge badge-danger border-0"
-                        onclick="return confirm('Yakin untuk menghapus akun ini?')">Hapus</button>
-                    </form>
-                  </td>
-                </tr>
+                @endforeach
               </tbody>
             </table>
           </div>

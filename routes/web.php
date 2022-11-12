@@ -1,11 +1,9 @@
 <?php
 
-use App\Http\Controllers\ActivityController;
 use App\Http\Controllers\ArticleController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\WebController;
-use App\Models\Article;
-use Illuminate\Http\Request;
+use App\Models\User;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 
@@ -34,7 +32,7 @@ Route::controller(WebController::class)->group(function () {
 
 Auth::routes(['register' => false]);
 
-Route::middleware('web')->group(function () { // middleware bisa ganti
+Route::middleware('web')->group(function () {
   Route::get('/admin', [DashboardController::class, 'index'])->name('dashboard');
 
   Route::resource('/admin/articles', ArticleController::class);
@@ -51,8 +49,10 @@ Route::middleware('web')->group(function () { // middleware bisa ganti
   });
 
   Route::get('/admin/users', function () {
+    $users = User::all();
     return view('admin.users.index', [
-      'title' => 'Kelola Akun'
+      'title' => 'Kelola Akun',
+      'users' => $users
     ]);
   })->name('admin.users');
 });

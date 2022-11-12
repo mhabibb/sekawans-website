@@ -3,7 +3,7 @@
 @section('content')
 {{-- HERO --}}
 <section id="hero">
-    <div class="container col-xxl-8 py-5">
+    <div class="container py-5">
         <div class="row flex-lg-row-reverse align-items-center g-5 pb-5">
             <div class="col col-lg-6 mx-auto">
                 <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="true">
@@ -42,7 +42,7 @@
                 </div>
             </div>
             <div class="col-lg-6">
-                <h1 class="display-5 fw-bold lh-1 mb-3">Yuk, Lawan TBC
+                <h1 class="fw-bold mb-3">Yuk, Lawan TBC
                     Dengan Hidup Bersih dan Sehat </h1>
                 <p class="lead">Quickly design and customize responsive mobile-first sites with Bootstrap, the world’s
                     most

@@ -34,31 +34,6 @@ Route::controller(WebController::class)->group(function () {
 
 Auth::routes(['register' => false]);
 
-// Route::resource('/admin/articles', ArticleController::class)
-//   ->missing(function (Request $request) {
-//     return redirect(route('articles.index'));
-//   });
-
-// Route::resource('/admin/activities', ActivityController::class)
-//   ->missing(function (Request $request) {
-//     return redirect(route('activities.index'));
-//   });
-
-// Route::view('/admin/profil-organisasi', 'admin.admin_organisasi.index');
-// Route::view('/admin/profil-organisasi/create', 'admin.admin_organisasi.create');
-// Route::view('/admin/profil-organisasi/1', 'admin.admin_organisasi.show');
-// Route::view('/admin/profil-organisasi/1/edit', 'admin.admin_organisasi.edit');
-
-// Route::view('/admin/kegiatan', 'admin.admin_kegiatan.index');
-// Route::view('/admin/kegiatan/create', 'admin.admin_kegiatan.create');
-// Route::view('/admin/kegiatan/single_kegiatan', 'admin.admin_kegiatan.show');
-// Route::view('/admin/kegiatan/single_kegiatan/edit', 'admin.admin_kegiatan.edit');
-
-// Route::view('/admin/info-tbc', 'admin.admin_infotbc.index');
-// Route::view('/admin/info-tbc/create', 'admin.admin_infotbc.create');
-// Route::view('/admin/info-tbc/1', 'admin.admin_infotbc.show');
-// Route::view('/admin/info-tbc/1/edit', 'admin.admin_infotbc.edit');
-
 Route::middleware('web')->group(function () { // middleware bisa ganti
   Route::get('/admin', [DashboardController::class, 'index'])->name('dashboard');
 
@@ -74,4 +49,10 @@ Route::middleware('web')->group(function () { // middleware bisa ganti
     Route::get('/admin/actions/{article}', 'show')->name('admin.kegiatan.show');
     Route::get('/admin/actions/{article}/edit', 'edit')->name('admin.kegiatan.edit');
   });
+
+  Route::get('/admin/users', function () {
+    return view('admin.users.index', [
+      'title' => 'Kelola Akun'
+    ]);
+  })->name('admin.users');
 });

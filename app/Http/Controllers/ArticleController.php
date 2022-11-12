@@ -35,7 +35,7 @@ class ArticleController extends Controller
             abort(404);
         };
 
-        return view('admin.admin_artikel.index', [
+        return view('admin.article.index', [
             'title' => $title,
             'articles' => $articles,
             'createRoute' => $createRoute,
@@ -63,7 +63,7 @@ class ArticleController extends Controller
             abort(404);
         }
 
-        return view('admin.admin_artikel.create', [
+        return view('admin.article.create', [
             'category' => $category,
             'title' => $title
         ]);
@@ -88,7 +88,7 @@ class ArticleController extends Controller
      */
     public function show(Article $article)
     {
-        return view('admin.admin_artikel.show', [
+        return view('admin.article.show', [
             'article' => $article
         ]);
     }
@@ -101,7 +101,7 @@ class ArticleController extends Controller
      */
     public function edit(Article $article)
     {
-        return view('admin.admin_artikel.edit', [
+        return view('admin.article.edit', [
             'article' => $article,
             'category' => 2
         ]);

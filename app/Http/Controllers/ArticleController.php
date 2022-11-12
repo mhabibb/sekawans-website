@@ -16,9 +16,30 @@ class ArticleController extends Controller
      */
     public function index()
     {
-        $articleCollection = collect(Article::all())->where('category_id', 2);
+        if (last(request()->segments()) == "infos") {
+            $articles = Article::latest()->where('category_id', '1')->get();
+            $title = 'Info TBC';
+            $createRoute = 'admin.infotbc.create';
+            $showRoute = 'admin.infotbc.show';
+        } else if (last(request()->segments()) == "articles") {
+            $articles = Article::latest()->where('category_id', '2')->get();
+            $title = 'Artikel';
+            $createRoute = 'articles.create';
+            $showRoute = 'articles.show';
+        } else if (last(request()->segments()) == "actions") {
+            $articles = Article::latest()->where('category_id', '3')->get();
+            $title = 'Kegiatan';
+            $createRoute = 'admin.kegiatan.create';
+            $showRoute = 'admin.kegiatan.show';
+        } else {
+            abort(404);
+        };
+
         return view('admin.admin_artikel.index', [
-            'articles' => $articleCollection->sortByDesc('created_at')
+            'title' => $title,
+            'articles' => $articles,
+            'createRoute' => $createRoute,
+            'showRoute' => $showRoute
         ]);
     }
 
@@ -29,8 +50,22 @@ class ArticleController extends Controller
      */
     public function create()
     {
+        if (request()->routeIs('admin.infotbc.create')) {
+            $category = 1;
+            $title = 'Info TBC';
+        } else if (request()->routeIs('articles.create')) {
+            $category = 2;
+            $title = 'Artikel';
+        } else if (request()->routeIs('admin.kegiatan.create')) {
+            $category = 3;
+            $title = 'Kegiatan';
+        } else {
+            abort(404);
+        }
+
         return view('admin.admin_artikel.create', [
-            'category' => 2
+            'category' => $category,
+            'title' => $title
         ]);
     }
 

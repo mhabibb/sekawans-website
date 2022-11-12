@@ -4,7 +4,7 @@
 <!-- Content Header (Page header) -->
 <section class="content-header">
   <div class="container-fluid">
-    <h1>Artikel</h1>
+    <h1>{{ $title }}</h1>
   </div>
 </section>
 
@@ -16,7 +16,7 @@
       <div class="col-12">
         <div class="card">
           <div class="card-header">
-            <a href="{{route('articles.create')}}" class="card-title">Buat Artikel Baru</a>
+            <a href="{{ route($createRoute) }}" class="card-title">Buat Artikel Baru</a>
 
             <div class="card-tools">
               <div class="input-group input-group-sm" style="width: 200px;">
@@ -46,7 +46,7 @@
                   <td>{{$article->title}}</td>
                   <td>{{ date('d M Y, H:i', strtotime($article->updated_at)) }}</td>
                   <td>
-                    <a href="{{route('articles.show', $article)}}" class="badge badge-success">Lihat</a>
+                    <a href="{{ route($showRoute, $article) }}" class="badge badge-success">Lihat</a>
                     <form action="{{route('articles.destroy', $article)}}" method="POST" class="d-inline-block">
                       @csrf
                       @method('DELETE')

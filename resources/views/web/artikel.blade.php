@@ -7,7 +7,7 @@
     @foreach ($articles as $article)
     <div class="col">
       <div class="card border h-100">
-        <img src="{{ $article->img }}" class="card-img-top thumbnail" alt="card-image">
+        <img src="{{ $article->img }}" class="card-img-top thumbnail" alt="..." loading="lazy">
         <div class="card-body">
           <div class="mb-1 d-flex gap-3">
             <div class="col-4 text-truncate" style="font-size: 14px;">
@@ -22,7 +22,7 @@
           <div class="module line-clamp">
             <h5>{{ $article->title }}</h5>
           </div>
-          <a href="{{ route('artikel.single', $article) }}" class="link-primary text-underline">Baca selengkapnya</a>
+          <a href="{{ route('single_artikel', $article) }}" class="link-primary text-underline">Baca selengkapnya</a>
         </div>
       </div>
     </div>

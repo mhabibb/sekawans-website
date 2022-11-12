@@ -14,13 +14,13 @@
     <form action="{{ route('articles.store') }}" method="POST" enctype="multipart/form-data">
       @csrf
       <div class="form-group mb-3 col-md-6">
-        <label for="title" class="form-label">Judul artikel</label>
+        <label for="title" class="form-label">Judul</label>
         <input type="text" name="title" class="form-control" id="title" placeholder="Tulis judul...">
       </div>
       <div class="form-group mb-3 col-md-6">
         <label for="category" class="form-label">Kategori</label>
         <select name="category_id" class="form-control" disabled>
-          <option value="{{ $category }}">Artikel</option>
+          <option value="{{ $category }}">{{ $title }}</option>
         </select>
       </div>
       <div class="form-group mb-3 col-md-6">

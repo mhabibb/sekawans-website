@@ -29,7 +29,7 @@ Route::group(['middleware' => 'auth'], function () {
   Route::resource('/admin/patient', PatientController::class);
   Route::resource('/admin/sekawans', StaticElementController::class)->except(['create', 'destroy', 'store']);
   Route::resource('/admin/worker', WorkerController::class);
-  Route::resource('/admin/article', ArticleController::class);
+  Route::resource('/admin/articles', ArticleController::class);
   Route::controller(ArticleController::class)->group(function () {
     Route::get('/admin/infos', 'index')->name('admin.infotbc');
     Route::get('/admin/infos/create', 'create')->name('admin.infotbc.create');

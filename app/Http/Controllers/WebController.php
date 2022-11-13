@@ -51,8 +51,8 @@ class WebController extends Controller
 
     public function article()
     {
-        $articles = Article::latest()->where('category_id', 2)->get();
-        return view('web.artikel', ['articles' => $articles->paginate(12)->withQueryString()]);
+        $articles = Article::latest()->category(2)->paginate(12);
+        return view('web.artikel', ['articles' => $articles]);
     }
 
     public function showArticle(Article $article)
@@ -64,8 +64,8 @@ class WebController extends Controller
 
     public function action()
     {
-        $actions = Article::latest()->where('category_id',)->get();
-        return view('web.kegiatan', ['actions' => $actions->sortByDesc('created_at')->paginate(12)->withQueryString()]);
+        $actions = Article::latest()->category(3)->paginate(12);
+        return view('web.kegiatan', ['actions' => $actions]);
     }
 
     public function showAction(Article $article)

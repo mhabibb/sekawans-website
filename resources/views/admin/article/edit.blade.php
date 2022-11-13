@@ -11,7 +11,7 @@
 <!-- Main content -->
 <section class="content">
   <div class="container-fluid pb-5">
-    <form action="{{ route('articles.update', $article) }}" method="POST" enctype="multipart/form-data">
+    <form action="{{ route('admin.articles.update', $article) }}" method="POST" enctype="multipart/form-data">
       @csrf
       @method('PUT')
       <div class="form-group mb-3 col-md-6">

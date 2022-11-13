@@ -51,15 +51,15 @@ class WebController extends Controller
     }
     public function action()
     {
-        $activities = Article::latest()->where('category_id',)->get();
+        $actions = Article::latest()->where('category_id', 3)->get();
         return view('web.kegiatan', [
-            'activities' => $activities->sortByDesc('created_at')->paginate(12)->withQueryString()
+            'actions' => $actions->paginate(12)->withQueryString()
         ]);
     }
     public function showAction(Article $article)
     {
         return view('web.single_kegiatan', [
-            'activity' => $article
+            'action' => $article
         ]);
     }
 }

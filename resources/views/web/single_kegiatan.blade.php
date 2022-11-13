@@ -5,25 +5,25 @@
     <div class="article-header d-flex flex-column align-items-center gap-3 mb-2">
         <button class="link-secondary btn" onclick="history.back()"><i class="fa-solid fa-arrow-left"></i>
             Kembali</button>
-        <h3 class="fw-bold text-center">{{ $activity->title }}</h3>
+        <h3 class="fw-bold text-center">{{ $action->title }}</h3>
     </div>
     <div class="d-flex justify-content-center gap-5 mb-3 text-muted">
         <div>
             <i class="fa-solid fa-user"></i>
-            <span class="ms-1">{{ $activity->user->name }}</span>
+            <span class="ms-1">{{ $action->user->name }}</span>
         </div>
         <div>
             <i class="fa-solid fa-calendar-days"></i>
-            <span class="ms-1">{{ date('d M Y', strtotime($activity->updated_at)) }}</span>
+            <span class="ms-1">{{ date('d M Y', strtotime($action->updated_at)) }}</span>
         </div>
     </div>
     <article class="d-flex flex-column align-items-center justify-content-center border-top pt-4">
         <figure class="figure">
-            <img src="{{ $activity->img }}" class="figure-img img-fluid rounded" style="max-height: 600px" alt="...">
+            <img src="{{ $action->img }}" class="figure-img img-fluid rounded" style="max-height: 600px" alt="...">
             <figcaption class="figure-caption text-center">Sumber : A caption for the above image.</figcaption>
         </figure>
         <div class="body">
-            <p>{{ $activity->contents }}</p>
+            <p>{{ $action->contents }}</p>
         </div>
     </article>
 </section>

@@ -11,7 +11,7 @@
 <!-- Main content -->
 <section class="content">
   <div class="container-fluid pb-5">
-    <form action="{{ route('articles.store') }}" method="POST" enctype="multipart/form-data">
+    <form action="{{ route('admin.articles.store') }}" method="POST" enctype="multipart/form-data">
       @csrf
       <div class="form-group mb-3 col-md-6">
         <label for="title" class="form-label">Judul {{ $title }}</label>

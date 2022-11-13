@@ -47,7 +47,7 @@
                   <td>{{ date('d M Y, H:i', strtotime($article->updated_at)) }}</td>
                   <td>
                     <a href="{{ route($showRoute, $article) }}" class="badge badge-success">Lihat</a>
-                    <form action="{{route('articles.destroy', $article)}}" method="POST" class="d-inline-block">
+                    <form action="{{route('admin.articles.destroy', $article)}}" method="POST" class="d-inline-block">
                       @csrf
                       @method('DELETE')
                       <button type="submit" class="badge badge-danger border-0"

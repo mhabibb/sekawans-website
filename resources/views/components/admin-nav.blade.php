@@ -57,7 +57,7 @@
                     <a href="#" class="nav-link">
                         <i class="nav-icon fas fa-user"></i>
                         <p>
-                            Andri Bachtiar
+                            {{ Auth::user()->name }}
                             <i class="right fas fa-angle-left"></i>
                         </p>
                     </a>

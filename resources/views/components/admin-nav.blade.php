@@ -111,7 +111,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="{{route('articles.index')}}" class="nav-link">
+                    <a href="{{route('admin.articles.index')}}" class="nav-link">
                         <i class="nav-icon fas fa-newspaper"></i>
                         <p>
                             Artikel
@@ -128,7 +128,7 @@
                 </li>
                 <li class="nav-header">SUPER ADMIN</li>
                 <li class="nav-item">
-                    <a href="{{route('admin.users')}}" class="nav-link">
+                    <a href="{{route('admin.users.index')}}" class="nav-link">
                         <i class="nav-icon fas fa-lock"></i>
                         <p>
                             Kelola Akun

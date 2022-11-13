@@ -24,21 +24,22 @@ use Illuminate\Support\Facades\Auth;
 Auth::routes(['register' => false]);
 Route::get('/admin', [DashboardController::class, 'index'])->name('dashboard');
 
-Route::group(['middleware' => 'auth'], function () {
-  Route::resource('/admin/profile', UserController::class);
+Route::middleware(['auth'])->prefix('admin')->name('admin.')->group(function () {
+  // Route::group(['middleware' => 'auth'], function () {
+  Route::resource('/admin/users', UserController::class);
   Route::resource('/admin/patient', PatientController::class);
   Route::resource('/admin/sekawans', StaticElementController::class)->except(['create', 'destroy', 'store']);
   Route::resource('/admin/worker', WorkerController::class);
   Route::resource('/admin/articles', ArticleController::class);
   Route::controller(ArticleController::class)->group(function () {
-    Route::get('/admin/infos', 'index')->name('admin.infotbc');
-    Route::get('/admin/infos/create', 'create')->name('admin.infotbc.create');
-    Route::get('/admin/infos/{article}', 'show')->name('admin.infotbc.show');
-    Route::get('/admin/infos/{article}/edit', 'edit')->name('admin.infotbc.edit');
-    Route::get('/admin/actions', 'index')->name('admin.kegiatan');
-    Route::get('/admin/actions/create', 'create')->name('admin.kegiatan.create');
-    Route::get('/admin/actions/{article}', 'show')->name('admin.kegiatan.show');
-    Route::get('/admin/actions/{article}/edit', 'edit')->name('admin.kegiatan.edit');
+    Route::get('/admin/infos', 'index')->name('infotbc');
+    Route::get('/admin/infos/create', 'create')->name('infotbc.create');
+    Route::get('/admin/infos/{article}', 'show')->name('infotbc.show');
+    Route::get('/admin/infos/{article}/edit', 'edit')->name('infotbc.edit');
+    Route::get('/admin/actions', 'index')->name('kegiatan');
+    Route::get('/admin/actions/create', 'create')->name('kegiatan.create');
+    Route::get('/admin/actions/{article}', 'show')->name('kegiatan.show');
+    Route::get('/admin/actions/{article}/edit', 'edit')->name('kegiatan.edit');
   });
 });
 

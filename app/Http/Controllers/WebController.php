@@ -13,7 +13,6 @@ class WebController extends Controller
         $about = StaticElement::find(1);
         preg_match('/^([^.!?]*[.!?]+){0,2}/', strip_tags($about->contents), $about);
         $patient = Patient::latest()->get()->take(10);
-        dd($patient);
         return view('index');
     }
 

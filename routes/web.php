@@ -7,6 +7,7 @@ use App\Http\Controllers\StaticElementController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\WebController;
 use App\Http\Controllers\WorkerController;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -20,49 +21,8 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-// Route::view('/', 'index')->name('beranda');
-
-// Route::view('/tentang', 'tentang.tentang')->name('tentang');
-// Route::view('/struktur', 'tentang.struktur')->name('struktur');
-
-
-// Route::view('/info-tbc', 'info_tbc.info_tbc')->name('infotbc');
-// Route::view('/single_infotbc', 'info_tbc.single_infotbc')->name('single_infotbc');
-
-// Route::view('/kasus_tbc', 'kasus_tbc.kasustbc')->name('kasustbc');
-
-// Route::view('/artikel', 'artikel.artikel')->name('artikel');
-// Route::view('/artikel/1', 'artikel.single_artikel');
-
-// Route::view('/kegiatan', 'kegiatan.kegiatan')->name('kegiatan');
-// Route::view('/single_kegiatan', 'kegiatan.single_kegiatan');
-
 Auth::routes(['register' => false]);
-
 Route::get('/admin', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-
-// Route::view('/admin', 'admin.dashboard')->name('dashboard');
-
-// Route::view('/admin/artikel', 'admin.admin_artikel.index');
-// Route::view('/admin/artikel/create', 'admin.admin_artikel.create');
-// Route::view('/admin/artikel/1', 'admin.admin_artikel.show');
-// Route::view('/admin/artikel/1/edit', 'admin.admin_artikel.edit');
-
-// Route::view('/admin/profil-organisasi', 'admin.admin_organisasi.index');
-// Route::view('/admin/profil-organisasi/create', 'admin.admin_organisasi.create');
-// Route::view('/admin/profil-organisasi/1', 'admin.admin_organisasi.show');
-// Route::view('/admin/profil-organisasi/1/edit', 'admin.admin_organisasi.edit');
-
-// Route::view('/admin/kegiatan', 'admin.admin_kegiatan.index');
-// Route::view('/admin/kegiatan/create', 'admin.admin_kegiatan.create');
-// Route::view('/admin/kegiatan/single_kegiatan', 'admin.admin_kegiatan.show');
-// Route::view('/admin/kegiatan/single_kegiatan/edit', 'admin.admin_kegiatan.edit');
-
-// Route::view('/admin/info-tbc', 'admin.admin_infotbc.index');
-// Route::view('/admin/info-tbc/create', 'admin.admin_infotbc.create');
-// Route::view('/admin/info-tbc/1', 'admin.admin_infotbc.show');
-// Route::view('/admin/info-tbc/1/edit', 'admin.admin_infotbc.edit');
-
 
 Route::group(['middleware' => 'auth'], function () {
   Route::resource('/admin/profile', UserController::class);
@@ -71,22 +31,27 @@ Route::group(['middleware' => 'auth'], function () {
   Route::resource('/admin/worker', WorkerController::class);
   Route::resource('/admin/article', ArticleController::class);
   Route::controller(ArticleController::class)->group(function () {
-    Route::get('/admin/info', 'index');
-    // Route::get('/admin/case', 'index');
-    Route::get('/admin/action', 'index');
+    Route::get('/admin/infos', 'index')->name('admin.infotbc');
+    Route::get('/admin/infos/create', 'create')->name('admin.infotbc.create');
+    Route::get('/admin/infos/{article}', 'show')->name('admin.infotbc.show');
+    Route::get('/admin/infos/{article}/edit', 'edit')->name('admin.infotbc.edit');
+    Route::get('/admin/actions', 'index')->name('admin.kegiatan');
+    Route::get('/admin/actions/create', 'create')->name('admin.kegiatan.create');
+    Route::get('/admin/actions/{article}', 'show')->name('admin.kegiatan.show');
+    Route::get('/admin/actions/{article}/edit', 'edit')->name('admin.kegiatan.edit');
   });
 });
 
 Route::controller(WebController::class)->group(function () {
   Route::get('/', 'index')->name('beranda');
-  Route::get('/about', 'about')->name('tentang');
-  Route::get('/structur', 'structur')->name('struktur');
+  Route::get('/tentang', 'about')->name('tentang');
+  Route::get('/struktur', 'structur')->name('struktur');
   Route::get('/info', 'info')->name('infotbc');
-  Route::get('/info/{id}', 'showInfo')->name('single_infotbc');
-  Route::get('/case', 'case')->name('kasustbc');
-  Route::get('/case/{id}', 'showCase')->name('single_kasustbc');
+  Route::get('/info/{compek}', 'showInfo')->name('single_infotbc');
+  Route::get('/kasus', 'case')->name('kasustbc');
+  Route::get('/kasus/{compek}', 'showCase')->name('single_kasustbc');
   Route::get('/article', 'article')->name('artikel');
-  Route::get('/article/{id}', 'showArticle')->name('single_artikel');
+  Route::get('/article/{compek}', 'showArticle')->name('single_artikel');
   Route::get('/action', 'action')->name('kegiatan');
-  Route::get('/action/{id}', 'showAction')->name('single_kegiatan');
+  Route::get('/action/{compek}', 'showAction')->name('single_kegiatan');
 });

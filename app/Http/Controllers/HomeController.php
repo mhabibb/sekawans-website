@@ -25,10 +25,10 @@ class HomeController extends Controller
     public function index()
     {
         // dd(Article::latest()->category(1)->get()->take(5));
-        $info = Article::latest()->category(1)->get()->take(5);
-        $artikel = Article::latest()->category(2)->get()->take(5);
-        $kegiatan = Article::latest()->category(3)->get()->take(5);
+        $info = Article::latest()->category(1)->get()->count();
+        $article = Article::latest()->category(2)->get()->count();
+        $action = Article::latest()->category(3)->get()->count();
 
-        return view('admin.dashboard', [$info, $artikel, $kegiatan]);
+        return view('admin.dashboard', ['total' => collect([$info, $article, $action]),]);
     }
 }

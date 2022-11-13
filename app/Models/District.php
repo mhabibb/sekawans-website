@@ -13,7 +13,7 @@ class District extends Model
 
     public $timestamps = false;
 
-    protected $with = ['regency', 'patients'];
+    protected $with = ['regency'];
 
     public function regency()
     {

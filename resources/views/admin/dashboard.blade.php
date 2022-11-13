@@ -147,4 +147,3 @@
       </div><!-- /.container-fluid -->
     </div>
     <!-- /.content -->
-@endsection

@@ -13,8 +13,6 @@ class Regency extends Model
 
     public $timestamps = false;
 
-    protected $with = ['districts'];
-
     public function districts()
     {
         return $this->hasMany(District::class);

@@ -19,27 +19,6 @@ class StaticElementController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \App\Http\Requests\StoreStaticElementRequest  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(StoreStaticElementRequest $request)
-    {
-        //
-    }
-
-    /**
      * Display the specified resource.
      *
      * @param  \App\Models\StaticElement  $staticElement
@@ -69,17 +48,6 @@ class StaticElementController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function update(UpdateStaticElementRequest $request, StaticElement $staticElement)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\StaticElement  $staticElement
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(StaticElement $staticElement)
     {
         //
     }

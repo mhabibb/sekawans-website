@@ -22,10 +22,7 @@ return new class extends Migration
                 ->onUpdate('cascade')
                 ->onDelete('cascade');
             $table->string('id_card_address');
-            $table->foreignId('id_card_district')
-                ->constrained('districts')
-                ->onUpdate('cascade')
-                ->onDelete('cascade');
+            $table->string('id_card_district');
             $table->string('id_number', 16)->unique();
             $table->foreignId('religion_id')
                 ->constrained()
@@ -46,10 +43,7 @@ return new class extends Migration
             $table->string('father\'s_name', 50);
             $table->string('guardian_phone', 20);
             $table->string('guardian_address');
-            $table->foreignId('guardian_district')
-                ->constrained('districts')
-                ->onUpdate('cascade')
-                ->onDelete('cascade');
+            $table->string('guardian_district');
             $table->foreignId('emergency_contact_id')
                 ->constrained()
                 ->onUpdate('cascade')

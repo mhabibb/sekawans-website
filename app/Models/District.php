@@ -12,4 +12,16 @@ class District extends Model
     protected $guarded = ['id'];
 
     public $timestamps = false;
+
+    protected $with = ['regency'];
+
+    public function regency()
+    {
+        return $this->belongsTo(Regency::class);
+    }
+
+    public function patients()
+    {
+        return $this->hasMany(Patient::class);
+    }
 }

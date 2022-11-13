@@ -16,10 +16,10 @@ class ArticleController extends Controller
      */
     public function index()
     {
-        $articleCollection = collect(Article::all())->where('category_id', 2);
-        return view('admin.admin_artikel.index', [
-            'articles' => $articleCollection->sortByDesc('created_at')
-        ]);
+        last(request()->segments()) == "info" ? $article = Article::latest()->category(1)->get()
+            : (last(request()->segments()) == "article" ? $article = Article::latest()->category(2)->get()
+                : (last(request()->segments()) == "action" ? $article = Article::latest()->category(3)->get() : abort(404)));
+        return view('admin.admin_artikel.index', $article);
     }
 
     /**
@@ -29,9 +29,7 @@ class ArticleController extends Controller
      */
     public function create()
     {
-        return view('admin.admin_artikel.create', [
-            'category' => 2
-        ]);
+        return view('admin.admin_artikel.create', $category = Category::without('article'));
     }
 
     /**

@@ -28,7 +28,7 @@
                     <h3 class=" fw-bold mb-3">Sejarah Tubercolosis (TBC)</h3>
                     <p class="lead">Lorem ipsum dolor sit amet, consectetur adipiscing elit.
                         Eu, sed luctus viverra nibh suspendisse est. Nisl diam eu aliquet gravida et felis aenean.</p>
-                    <a href="{{ route('single_infotbc') }}" class="btn btn-secondary btn-lg px-4 ">Selengkapnya</a>
+                    <a href="{{ route('single_infotbc',1) }}" class="btn btn-secondary btn-lg px-4 ">Selengkapnya</a>
                 </div>
             </div>
         </div>

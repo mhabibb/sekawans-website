@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Article;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -23,6 +24,11 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        // dd(Article::latest()->category(1)->get()->take(5));
+        $info = Article::latest()->category(1)->get()->count();
+        $article = Article::latest()->category(2)->get()->count();
+        $action = Article::latest()->category(3)->get()->count();
+
+        return view('admin.dashboard', ['total' => collect([$info, $article, $action]),]);
     }
 }

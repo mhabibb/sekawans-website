@@ -12,4 +12,9 @@ class Regency extends Model
     protected $guarded = ['id'];
 
     public $timestamps = false;
+
+    public function districts()
+    {
+        return $this->hasMany(District::class);
+    }
 }

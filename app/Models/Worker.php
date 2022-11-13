@@ -12,4 +12,9 @@ class Worker extends Model
     protected $guarded = ['id'];
 
     public $timestamps = false;
+
+    public function patients()
+    {
+        return $this->hasMany(Patient::class);
+    }
 }

@@ -14,7 +14,7 @@ class WebController extends Controller
         $about = StaticElement::find(1);
         preg_match('/^([^.!?]*[.!?]+){0,2}/', strip_tags($about->contents), $about);
         // $patient = Patient::latest()->get()->take(10);
-        $articles = Article::all();
+        $articles = Article::latest()->category(2)->get()->take(3);
         return view('index', ['articles' => $articles]);
     }
 

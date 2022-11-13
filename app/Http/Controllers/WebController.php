@@ -13,8 +13,9 @@ class WebController extends Controller
     {
         $about = StaticElement::find(1);
         preg_match('/^([^.!?]*[.!?]+){0,2}/', strip_tags($about->contents), $about);
-        $patient = Patient::latest()->get()->take(10);
-        return view('index');
+        // $patient = Patient::latest()->get()->take(10);
+        $articles = Article::all();
+        return view('index', ['articles' => $articles]);
     }
 
     public function structur()
@@ -63,12 +64,12 @@ class WebController extends Controller
 
     public function action()
     {
-        $activities = Article::latest()->where('category_id',)->get();
-        return view('web.kegiatan', ['activities' => $activities->sortByDesc('created_at')->paginate(12)->withQueryString()]);
+        $actions = Article::latest()->where('category_id',)->get();
+        return view('web.kegiatan', ['actions' => $actions->sortByDesc('created_at')->paginate(12)->withQueryString()]);
     }
 
     public function showAction(Article $article)
     {
-        return view('web.single_kegiatan', ['activity' => $article]);
+        return view('web.single_kegiatan', ['action' => $article]);
     }
 }

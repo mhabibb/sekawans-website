@@ -1,14 +1,14 @@
 <?php
 
 use App\Http\Controllers\ArticleController;
-use App\Http\Controllers\HomeController;
 use App\Http\Controllers\PatientController;
 use App\Http\Controllers\StaticElementController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\WebController;
 use App\Http\Controllers\WorkerController;
-use Illuminate\Support\Facades\Auth;
+use App\Http\Controllers\DashboardController;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Auth;
 
 /*
 |--------------------------------------------------------------------------
@@ -22,7 +22,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Auth::routes(['register' => false]);
-Route::get('/admin', [HomeController::class, 'index'])->name('home');
+Route::get('/admin', [DashboardController::class, 'index'])->name('dashboard');
 
 Route::group(['middleware' => 'auth'], function () {
   Route::resource('/admin/profile', UserController::class);

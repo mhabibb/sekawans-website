@@ -20,6 +20,32 @@ class ArticleController extends Controller
             : (last(request()->segments()) == "article" ? $article = Article::latest()->category(2)->get()
                 : (last(request()->segments()) == "action" ? $article = Article::latest()->category(3)->get() : abort(404)));
         return view('admin.admin_artikel.index', $article);
+
+        if (last(request()->segments()) == "infos") {
+            $articles = Article::latest()->where('category_id', '1')->get();
+            $title = 'Info TBC';
+            $createRoute = 'admin.infotbc.create';
+            $showRoute = 'admin.infotbc.show';
+        } else if (last(request()->segments()) == "articles") {
+            $articles = Article::latest()->where('category_id', '2')->get();
+            $title = 'Artikel';
+            $createRoute = 'articles.create';
+            $showRoute = 'articles.show';
+        } else if (last(request()->segments()) == "actions") {
+            $articles = Article::latest()->where('category_id', '3')->get();
+            $title = 'Kegiatan';
+            $createRoute = 'admin.kegiatan.create';
+            $showRoute = 'admin.kegiatan.show';
+        } else {
+            abort(404);
+        };
+
+        return view('admin.article.index', [
+            'title' => $title,
+            'articles' => $articles,
+            'createRoute' => $createRoute,
+            'showRoute' => $showRoute
+        ]);
     }
 
     /**
@@ -29,7 +55,23 @@ class ArticleController extends Controller
      */
     public function create()
     {
-        return view('admin.admin_artikel.create', $category = Category::without('article'));
+        if (request()->routeIs('admin.infotbc.create')) {
+            $category = 1;
+            $title = 'Info TBC';
+        } else if (request()->routeIs('articles.create')) {
+            $category = 2;
+            $title = 'Artikel';
+        } else if (request()->routeIs('admin.kegiatan.create')) {
+            $category = 3;
+            $title = 'Kegiatan';
+        } else {
+            abort(404);
+        }
+
+        return view('admin.article.create', [
+            'category' => $category,
+            'title' => $title
+        ]);
     }
 
     /**
@@ -51,7 +93,7 @@ class ArticleController extends Controller
      */
     public function show(Article $article)
     {
-        return view('admin.admin_artikel.show', [
+        return view('admin.article.show', [
             'article' => $article
         ]);
     }
@@ -64,7 +106,7 @@ class ArticleController extends Controller
      */
     public function edit(Article $article)
     {
-        return view('admin.admin_artikel.edit', [
+        return view('admin.article.edit', [
             'article' => $article,
             'category' => 2
         ]);

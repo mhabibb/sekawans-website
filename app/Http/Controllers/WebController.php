@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Patient;
 use App\Models\StaticElement;
+use App\Models\Article;
 use Illuminate\Http\Request;
 
 class WebController extends Controller
@@ -16,29 +17,9 @@ class WebController extends Controller
         return view('index');
     }
 
-    public function about()
-    {
-        return view('tentang.tentang');
-    }
-
     public function structur()
     {
         return view('tentang.struktur');
-    }
-
-    public function info()
-    {
-        return view('info_tbc.info_tbc');
-    }
-
-    public function showInfo($id)
-    {
-        return view('info_tbc.single_infotbc');
-    }
-
-    public function case()
-    {
-        return view('kasus_tbc.kasustbc');
     }
 
     public function showCase()
@@ -46,23 +27,48 @@ class WebController extends Controller
         return view('kasus_tbc.kasustbc');
     }
 
-    public function action()
+    public function about()
     {
-        return view('kegiatan.kegiatan');
+        return view('web.tentang');
     }
 
-    public function showAction()
+    public function info()
     {
-        return view('kegiatan.single_kegiatan');
+        $infos = Article::all()->where('category_id', 1);
+        return view('web.infotbc', ['infos' => $infos]);
+    }
+
+    public function showInfo(Article $article)
+    {
+        return view('web.single_infotbc', ['info' => $article]);
+    }
+
+    public function case()
+    {
+        return view('web.kasustbc');
     }
 
     public function article()
     {
-        return view('artikel.artikel');
+        $articles = Article::latest()->where('category_id', 2)->get();
+        return view('web.artikel', ['articles' => $articles->paginate(12)->withQueryString()]);
     }
 
-    public function showArticle()
+    public function showArticle(Article $article)
     {
-        return view('artikel.single_artikel');
+        return view('web.single_artikel', [
+            'article' => $article
+        ]);
+    }
+
+    public function action()
+    {
+        $activities = Article::latest()->where('category_id',)->get();
+        return view('web.kegiatan', ['activities' => $activities->sortByDesc('created_at')->paginate(12)->withQueryString()]);
+    }
+
+    public function showAction(Article $article)
+    {
+        return view('web.single_kegiatan', ['activity' => $article]);
     }
 }

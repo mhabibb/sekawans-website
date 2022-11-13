@@ -4,7 +4,7 @@
 <!-- Content Header (Page header) -->
 <section class="content-header">
   <div class="container-fluid">
-    <h1>Buat Artikel Baru</h1>
+    <h1>Buat {{ $title }} Baru</h1>
   </div>
 </section>
 
@@ -14,14 +14,8 @@
     <form action="{{ route('articles.store') }}" method="POST" enctype="multipart/form-data">
       @csrf
       <div class="form-group mb-3 col-md-6">
-        <label for="title" class="form-label">Judul</label>
+        <label for="title" class="form-label">Judul {{ $title }}</label>
         <input type="text" name="title" class="form-control" id="title" placeholder="Tulis judul...">
-      </div>
-      <div class="form-group mb-3 col-md-6">
-        <label for="category" class="form-label">Kategori</label>
-        <select name="category_id" class="form-control" disabled>
-          <option value="{{ $category }}">{{ $title }}</option>
-        </select>
       </div>
       <div class="form-group mb-3 col-md-6">
         <label for="articleImg">Gambar</label>
@@ -33,7 +27,7 @@
       </div>
       <div class="form-group mb-3 col-12">
         <label for="content">Isi konten</label>
-        <textarea class="form-control" name="contents" id="contents" style="height: 240px"></textarea>
+        <div id="summernote"></div>
       </div>
       <div class="col-12">
         <button type="reset" onclick="history.back()" class="btn btn-secondary">Batalkan</button>
@@ -43,4 +37,14 @@
   </div><!-- /.container -->
 </section>
 <!-- /.content -->
+@endsection
+
+@section('js')
+<script>
+  $('#summernote').summernote({
+    
+    tabsize: 2,
+    height: 300
+  });
+</script>
 @endsection

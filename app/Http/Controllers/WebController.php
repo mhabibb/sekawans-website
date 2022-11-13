@@ -9,9 +9,9 @@ class WebController extends Controller
 {
     public function index()
     {
-        $articles = Article::all()->where('category_id', 2);
+        $articles = Article::latest()->where('category_id', 2)->get()->take(3);
         return view('web.index', [
-            'articles' => $articles->sortByDesc('created_at')->take(3)
+            'articles' => $articles
         ]);
     }
     public function about()
@@ -33,13 +33,14 @@ class WebController extends Controller
     }
     public function case()
     {
+
         return view('web.kasustbc');
     }
     public function article()
     {
-        $articles = Article::all()->where('category_id', 2);
+        $articles = Article::latest()->where('category_id', 2)->get();
         return view('web.artikel', [
-            'articles' => $articles->sortByDesc('created_at')->paginate(12)->withQueryString()
+            'articles' => $articles->paginate(12)->withQueryString()
         ]);
     }
     public function showArticle(Article $article)
@@ -50,7 +51,7 @@ class WebController extends Controller
     }
     public function action()
     {
-        $activities = Article::all()->where('category_id', 3);
+        $activities = Article::latest()->where('category_id',)->get();
         return view('web.kegiatan', [
             'activities' => $activities->sortByDesc('created_at')->paginate(12)->withQueryString()
         ]);

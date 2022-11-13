@@ -17,6 +17,8 @@
   <link rel="stylesheet" href="{{ asset('adminlte/dist/css/adminlte.min.css') }}">
   <!-- overlayScrollbars -->
   <link rel="stylesheet" href="{{ asset('adminlte/plugins/overlayScrollbars/css/OverlayScrollbars.min.css') }}">
+  <!-- summernote -->
+  <link rel="stylesheet" href="{{ asset('adminlte/plugins/summernote/summernote-bs4.min.css') }}">
 
   {{-- @vite(['resources/sass/app.scss', 'resources/js/app.js']) --}}
 
@@ -50,12 +52,15 @@
   <script src="{{ asset('adminlte/plugins/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
   <!-- overlayScrollbars -->
   <script src="{{ asset('adminlte/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js') }}"></script>
+  <script src="{{ asset('adminlte/plugins/summernote/summernote-bs4.min.js') }}"></script>
+
   <!-- AdminLTE App -->
   <script src="{{ asset('adminlte/dist/js/adminlte.js') }}"></script>
   <!-- AdminLTE for demo purposes -->
   {{-- <script src="{{ asset('adminlte/dist/js/demo.js') }}"></script> --}}
   <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
   {{-- <script src="{{asset('adminlte/dist/js/pages/dashboard.js')}}"></script> --}}
+  {{-- <script src="{{ asset('adminlte/dist/js/pages/dashboard.js') }}"></script> --}}
 
   <script src="{{ asset('/sw.js') }}"></script>
   <script>
@@ -73,7 +78,6 @@
       })
   </script>
   @yield('js')
-  <script src="{{ asset('adminlte/dist/js/pages/dashboard.js') }}"></script>
 </body>
 
 </html>

@@ -13,8 +13,9 @@ class WebController extends Controller
     {
         $about = StaticElement::find(1);
         preg_match('/^([^.!?]*[.!?]+){0,2}/', strip_tags($about->contents), $about);
-        $patient = Patient::latest()->get()->take(10);
-        return view('index');
+        // $patient = Patient::latest()->get()->take(10);
+        $articles = Article::latest()->category(2)->get()->take(3);
+        return view('web.index', ['articles' => $articles]);
     }
 
     public function structur()
@@ -50,8 +51,8 @@ class WebController extends Controller
 
     public function article()
     {
-        $articles = Article::latest()->where('category_id', 2)->get();
-        return view('web.artikel', ['articles' => $articles->paginate(12)->withQueryString()]);
+        $articles = Article::latest()->category(2)->paginate(12);
+        return view('web.artikel', ['articles' => $articles]);
     }
 
     public function showArticle(Article $article)
@@ -63,12 +64,12 @@ class WebController extends Controller
 
     public function action()
     {
-        $activities = Article::latest()->where('category_id',)->get();
-        return view('web.kegiatan', ['activities' => $activities->sortByDesc('created_at')->paginate(12)->withQueryString()]);
+        $actions = Article::latest()->category(3)->paginate(12);
+        return view('web.kegiatan', ['actions' => $actions]);
     }
 
     public function showAction(Article $article)
     {
-        return view('web.single_kegiatan', ['activity' => $article]);
+        return view('web.single_kegiatan', ['action' => $article]);
     }
 }

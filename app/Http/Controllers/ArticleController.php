@@ -10,16 +10,25 @@ use App\Models\Category;
 class ArticleController extends Controller
 {
     /**
+     * Instantiate a new controller instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        // $this->middleware('auth');
+    }
+    /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
     public function index()
     {
-        last(request()->segments()) == "info" ? $article = Article::latest()->category(1)->get()
-            : (last(request()->segments()) == "article" ? $article = Article::latest()->category(2)->get()
-                : (last(request()->segments()) == "action" ? $article = Article::latest()->category(3)->get() : abort(404)));
-        return view('admin.admin_artikel.index', $article);
+        // last(request()->segments()) == "info" ? $article = Article::latest()->category(1)->get()
+        //     : (last(request()->segments()) == "article" ? $article = Article::latest()->category(2)->get()
+        //         : (last(request()->segments()) == "action" ? $article = Article::latest()->category(3)->get() : abort(404)));
+        // return view('admin.artikel.index', $article);
 
         if (last(request()->segments()) == "infos") {
             $articles = Article::latest()->where('category_id', '1')->get();
@@ -39,7 +48,6 @@ class ArticleController extends Controller
         } else {
             abort(404);
         };
-
         return view('admin.article.index', [
             'title' => $title,
             'articles' => $articles,

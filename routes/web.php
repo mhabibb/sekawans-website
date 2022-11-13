@@ -22,10 +22,9 @@ use Illuminate\Support\Facades\Auth;
 */
 
 Auth::routes(['register' => false]);
-Route::get('/admin', [DashboardController::class, 'index'])->name('dashboard');
 
-Route::middleware(['auth'])->prefix('admin')->name('admin.')->group(function () {
-  // Route::group(['middleware' => 'auth'], function () {
+Route::middleware('auth')->prefix('admin')->name('admin.')->group(function () {
+  Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
   Route::resource('/users', UserController::class);
   Route::resource('/patient', PatientController::class);
   Route::resource('/sekawans', StaticElementController::class)->except(['create', 'destroy', 'store']);

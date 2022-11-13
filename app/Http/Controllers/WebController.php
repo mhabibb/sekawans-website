@@ -15,7 +15,7 @@ class WebController extends Controller
         preg_match('/^([^.!?]*[.!?]+){0,2}/', strip_tags($about->contents), $about);
         // $patient = Patient::latest()->get()->take(10);
         $articles = Article::latest()->category(2)->get()->take(3);
-        return view('index', ['articles' => $articles]);
+        return view('web.index', ['articles' => $articles]);
     }
 
     public function structur()

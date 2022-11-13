@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Patient;
 use App\Models\StaticElement;
 use Illuminate\Http\Request;
 
@@ -9,8 +10,10 @@ class WebController extends Controller
 {
     public function index()
     {
-        $about = StaticElement::firstWhere('id', '=', 1);
-        dd($about);
+        $about = StaticElement::find(1);
+        preg_match('/^([^.!?]*[.!?]+){0,2}/', strip_tags($about->contents), $about);
+        $patient = Patient::latest()->get()->take(10);
+        dd($patient);
         return view('index');
     }
 

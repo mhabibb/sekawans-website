@@ -18,7 +18,7 @@
         <!-- small box -->
         <div class="small-box bg-info">
           <div class="inner">
-            <h3>{{$info->count()}}</h3>
+            <h3>{{$info}}</h3>
             <p>Informasi TBC</p>
           </div>
           <div class="icon">
@@ -31,7 +31,7 @@
         <!-- small box -->
         <div class="small-box bg-success">
           <div class="inner">
-            <h3>{{$artikel->count()}}</h3>
+            <h3>{{$artikel}}</h3>
             <p>Artikel</p>
           </div>
           <div class="icon">
@@ -44,7 +44,7 @@
         <!-- small box -->
         <div class="small-box bg-danger">
           <div class="inner">
-            <h3>{{$kegiatan->count()}}</h3>
+            <h3>{{$kegiatan}}</h3>
             <p>Kegiatan</p>
           </div>
           <div class="icon">

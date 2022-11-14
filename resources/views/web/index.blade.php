@@ -72,9 +72,7 @@
 <section id="tentang" class="container-fluid py-5 text-center bg-primary">
     <div class="container text-white">
         <h1 class="fw-bold mb-3">Tentang Sekawan'S</h1>
-        <p class="lead mb-3">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quia, voluptates dolorum nemo
-            et
-            veritatis officia reiciendis rem iusto nisi earum?</p>
+        <p class="lead mb-3">{{ $about[0] }}</p>
         <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
             <a href="{{route('tentang')}}" class="btn btn-secondary btn-lg px-4">Selengkapnya</a>
         </div>

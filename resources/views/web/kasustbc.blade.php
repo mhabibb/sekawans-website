@@ -19,109 +19,34 @@
     </div>
 
     <div class="container py-5">
-        <div class="py-5 text-center border-bottom">
-            <h2 class="fw-bold mb-5">Status Pasien TBC Kabupaten Jember</h2>
+        @foreach ($regencies as $regency)
+        <div class="py-5 text-center border-bottom mb-5">
+            <h3 class="fw-bold mb-5">JUMLAH PASIEN TB DI {{ $regency->name }}</h3>
             <div class="row">
-                <div class="p-2 text-center col-md-6 col-lg">
+                <div class="px-2 text-center col-md-6 col-lg">
                     <h1>20</h1>
                     <p class="lead fw-bold">Sembuh</p>
                 </div>
-                <div class="p-2 text-center col-md-6 col-lg">
+                <div class="px-2 text-center col-md-6 col-lg">
                     <h1>20</h1>
                     <p class="lead fw-bold">Dalam Pengobatan</p>
                 </div>
-                <div class="p-2 text-center col-md-6 col-lg">
+                <div class="px-2 text-center col-md-6 col-lg">
                     <h1>20</h1>
                     <p class="lead fw-bold">Loss to Follow Up</p>
                 </div>
-                <div class="p-2 text-center col-md-6 col-lg">
+                <div class="px-2 text-center col-md-6 col-lg">
                     <h1>20</h1>
                     <p class="lead fw-bold">Mangkir</p>
                 </div>
-                <div class="p-2 text-center col-md-6 col-lg">
+                <div class="px-2 text-center col-md-6 col-lg">
                     <h1>20</h1>
                     <p class="lead fw-bold">Meninggal</p>
                 </div>
             </div>
+            <a href="{{ route('showKasustbc', $regency) }}" class="btn btn-secondary">Lihat per Kecamatan</a>
         </div>
-
-        <div class="container py-5 text-center border-bottom">
-            <h2 class="fw-bold mb-5">Status Pasien TBC Kabupaten Bondowoso</h2>
-            <div class="row">
-                <div class="p-2 text-center col-md-6 col-lg">
-                    <h1>20</h1>
-                    <p class="lead fw-bold">Sembuh</p>
-                </div>
-                <div class="p-2 text-center col-md-6 col-lg">
-                    <h1>20</h1>
-                    <p class="lead fw-bold">Dalam Pengobatan</p>
-                </div>
-                <div class="p-2 text-center col-md-6 col-lg">
-                    <h1>20</h1>
-                    <p class="lead fw-bold">Loss to Follow Up</p>
-                </div>
-                <div class="p-2 text-center col-md-6 col-lg">
-                    <h1>20</h1>
-                    <p class="lead fw-bold">Mangkir</p>
-                </div>
-                <div class="p-2 text-center col-md-6 col-lg">
-                    <h1>20</h1>
-                    <p class="lead fw-bold">Meninggal</p>
-                </div>
-            </div>
-        </div>
-
-        <div class="container py-5 text-center border-bottom">
-            <h2 class="fw-bold mb-5">Status Pasien TBC Kabupaten Lumajang</h2>
-            <div class="row">
-                <div class="p-2 text-center col-md-6 col-lg">
-                    <h1>20</h1>
-                    <p class="lead fw-bold">Sembuh</p>
-                </div>
-                <div class="p-2 text-center col-md-6 col-lg">
-                    <h1>20</h1>
-                    <p class="lead fw-bold">Dalam Pengobatan</p>
-                </div>
-                <div class="p-2 text-center col-md-6 col-lg">
-                    <h1>20</h1>
-                    <p class="lead fw-bold">Loss to Follow Up</p>
-                </div>
-                <div class="p-2 text-center col-md-6 col-lg">
-                    <h1>20</h1>
-                    <p class="lead fw-bold">Mangkir</p>
-                </div>
-                <div class="p-2 text-center col-md-6 col-lg">
-                    <h1>20</h1>
-                    <p class="lead fw-bold">Meninggal</p>
-                </div>
-            </div>
-        </div>
-
-        <div class="container py-5 text-center border-bottom">
-            <h2 class="fw-bold mb-5">Status Pasien TBC Kabupaten Situbondo</h2>
-            <div class="row">
-                <div class="p-2 text-center col-md-6 col-lg">
-                    <h1>20</h1>
-                    <p class="lead fw-bold">Sembuh</p>
-                </div>
-                <div class="p-2 text-center col-md-6 col-lg">
-                    <h1>20</h1>
-                    <p class="lead fw-bold">Dalam Pengobatan</p>
-                </div>
-                <div class="p-2 text-center col-md-6 col-lg">
-                    <h1>20</h1>
-                    <p class="lead fw-bold">Loss to Follow Up</p>
-                </div>
-                <div class="p-2 text-center col-md-6 col-lg">
-                    <h1>20</h1>
-                    <p class="lead fw-bold">Mangkir</p>
-                </div>
-                <div class="p-2 text-center col-md-6 col-lg">
-                    <h1>20</h1>
-                    <p class="lead fw-bold">Meninggal</p>
-                </div>
-            </div>
-        </div>
+        @endforeach
     </div>
 </section>
 @endsection

@@ -27,7 +27,7 @@
       </div>
       <div class="form-group mb-3 col-12">
         <label for="content">Isi konten</label>
-        <div id="summernote"></div>
+        <textarea id="summernote"></textarea>
       </div>
       <div class="col-12">
         <button type="reset" onclick="history.back()" class="btn btn-secondary">Batalkan</button>

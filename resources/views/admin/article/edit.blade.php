@@ -4,7 +4,7 @@
 <!-- Content Header (Page header) -->
 <section class="content-header">
   <div class="container-fluid">
-    <h1>Edit Artikel</h1>
+    <h1>Edit {{ $title }}</h1>
   </div>
 </section>
 
@@ -15,15 +15,9 @@
       @csrf
       @method('PUT')
       <div class="form-group mb-3 col-md-6">
-        <label for="title" class="form-label">Judul artikel</label>
+        <label for="title" class="form-label">Judul {{ $title }}</label>
         <input type="text" name="title" class="form-control" id="title" placeholder="Tulis judul..."
           value="{{$article->title}}">
-      </div>
-      <div class="form-group mb-3 col-md-6">
-        <label for="category" class="form-label">Kategori</label>
-        <select name="category_id" class="form-control" disabled>
-          <option value="{{$category}}">Artikel</option>
-        </select>
       </div>
       <div class="form-group mb-3 col-md-6">
         <label for="articleImg">Gambar</label>
@@ -35,8 +29,7 @@
       </div>
       <div class="form-group mb-3 col-12">
         <label for="content">Isi konten</label>
-        <textarea class="form-control" name="contents" id="contents"
-          style="height: 240px">{{ $article->contents }}</textarea>
+        <textarea id="summernote">{{ $article->contents }}</textarea>
       </div>
       <div class="col-12">
         <button type="reset" onclick="history.back()" class="btn btn-secondary">Batalkan</button>
@@ -46,4 +39,14 @@
   </div>
 </section>
 <!-- /.content -->
+@endsection
+
+@section('js')
+<script>
+  $('#summernote').summernote({
+    
+    tabsize: 2,
+    height: 300
+  });
+</script>
 @endsection

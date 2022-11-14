@@ -101,8 +101,18 @@ class ArticleController extends Controller
      */
     public function show(Article $article)
     {
+        if (request()->routeIs('admin.infotbc.show')) {
+            $editRoute = 'admin.infotbc.edit';
+        } else if (request()->routeIs('admin.articles.show')) {
+            $editRoute = 'admin.articles.edit';
+        } else if (request()->routeIs('admin.kegiatan.show')) {
+            $editRoute = 'admin.kegiatan.edit';
+        } else {
+            abort(404);
+        }
         return view('admin.article.show', [
-            'article' => $article
+            'article' => $article,
+            'editRoute' => $editRoute
         ]);
     }
 
@@ -114,9 +124,23 @@ class ArticleController extends Controller
      */
     public function edit(Article $article)
     {
+        if (request()->routeIs('admin.infotbc.edit')) {
+            $category = 1;
+            $title = 'Info TBC';
+        } else if (request()->routeIs('admin.articles.edit')) {
+            $category = 2;
+            $title = 'Artikel';
+        } else if (request()->routeIs('admin.kegiatan.edit')) {
+            $category = 3;
+            $title = 'Kegiatan';
+        } else {
+            abort(404);
+        }
+
         return view('admin.article.edit', [
             'article' => $article,
-            'category' => 2
+            'category' => $category,
+            'title' => $title
         ]);
     }
 

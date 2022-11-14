@@ -17,17 +17,16 @@ class WebController extends Controller
         preg_match('/^([^.!?]*[.!?]+){0,2}/', strip_tags($about->contents), $about);
         $regencies = Regency::whereHas('patients')->withCount('patients')->get();
         $articles = Article::latest()->category(2)->get()->take(3);
-        return view('web.index', ['about' => $about, 'articles' => $articles, 'regencies' => $regencies]);
+        return view('web.index', [
+            'about' => $about,
+            'articles' => $articles,
+            'regencies' => $regencies
+        ]);
     }
 
     public function structur()
     {
         return view('tentang.struktur');
-    }
-
-    public function showCase()
-    {
-        return view('kasus_tbc.kasustbc');
     }
 
     public function about()
@@ -48,7 +47,16 @@ class WebController extends Controller
 
     public function case()
     {
+        $regencies = Regency::whereHas('patients')->withCount('patients')->get();
+        dd($regencies);
         return view('web.kasustbc');
+    }
+
+    public function showCase()
+    {
+        $districts = District::whereHas('patients')->withCount('patients')->get();
+        dd($districts);
+        return view('web.showKasustbc', []);
     }
 
     public function article()

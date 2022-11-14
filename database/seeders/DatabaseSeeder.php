@@ -36,7 +36,7 @@ class DatabaseSeeder extends Seeder
         \App\Models\Article::factory(100)->create();
         \App\Models\Worker::factory(150)->create();
         \App\Models\EmergencyContact::factory(20)->create();
-        \App\Models\Patient::factory(20)->create();
-        \App\Models\PatientDetail::factory(20)->create();
+        \App\Models\Patient::factory(100)->create();
+        \App\Models\PatientDetail::factory(100)->create();
     }
 }

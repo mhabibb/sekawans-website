@@ -48,15 +48,14 @@ class WebController extends Controller
     public function case()
     {
         $regencies = Regency::whereHas('patients')->withCount('patients')->get();
-        dd($regencies);
-        return view('web.kasustbc');
+        // dd($regencies);
+        return view('web.kasustbc', ['regencies' => $regencies]);
     }
 
-    public function showCase()
+    public function showCase(Regency $regency)
     {
-        $districts = District::whereHas('patients')->withCount('patients')->get();
-        dd($districts);
-        return view('web.showKasustbc', []);
+        $districts = District::whereHas('patients')->where('regency_id', '=', $regency->id)->withCount('patients')->get();
+        return view('web.showKasustbc', ['districts' => $districts]);
     }
 
     public function article()

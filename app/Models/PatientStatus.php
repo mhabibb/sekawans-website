@@ -12,4 +12,9 @@ class PatientStatus extends Model
     protected $guarded = ['id'];
 
     public $timestamps = false;
+
+    public function patient()
+    {
+        return $this->hasMany(Patient::class);
+    }
 }

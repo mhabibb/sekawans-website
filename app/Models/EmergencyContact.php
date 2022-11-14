@@ -11,5 +11,17 @@ class EmergencyContact extends Model
 
     protected $guarded = ['id'];
 
+    protected $with = ['district'];
+
     public $timestamps = false;
+
+    public function patient()
+    {
+        return $this->hasMany(Patient::class);
+    }
+
+    public function district()
+    {
+        return $this->belongsTo(District::class);
+    }
 }

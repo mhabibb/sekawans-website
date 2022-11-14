@@ -62,7 +62,7 @@
   {{-- <script src="{{asset('adminlte/dist/js/pages/dashboard.js')}}"></script> --}}
   {{-- <script src="{{ asset('adminlte/dist/js/pages/dashboard.js') }}"></script> --}}
 
-  <script src="{{ asset('/sw.js') }}"></script>
+  <script src="{{ asset('sw.js') }}"></script>
   <script>
     if (!navigator.serviceWorker.controller) {
       navigator.serviceWorker.register("/sw.js").then(function (reg) {

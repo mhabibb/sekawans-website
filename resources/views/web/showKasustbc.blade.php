@@ -4,12 +4,12 @@
 <section>
   <div class="bg-primary text-light py-5">
     <div class="container">
-      <div class="row flex-lg-row-reverse align-items-center g-5 py-5">
-        <div class="col col-lg-6 mx-auto">
-          <img src="https://picsum.photos/600/400" class="d-block mx-auto img-fluid" alt="..." width="600" height="400"
-            loading="lazy">
+      <div class="row align-items-center justify-content-center text-center py-5 gap-3">
+        <div>
+          <button class="btn link-secondary" onclick="history.back()"><i class="fa-solid fa-arrow-left"></i>
+            Kembali</button>
         </div>
-        <div class="col-lg-6">
+        <div>
           <h2 class="fw-bold mb-3"> KASUS TBC DI {{ $regency->name }} </h2>
         </div>
       </div>
@@ -17,30 +17,32 @@
   </div>
 
   <div class="container py-5">
-    <table class="table table-striped">
-      <thead>
-        <tr>
-          <th scope="col">#</th>
-          <th scope="col">Sembuh</th>
-          <th scope="col">Dalam Pengobatan</th>
-          <th scope="col">Loss to Follow Up</th>
-          <th scope="col">Mangkir</th>
-          <th scope="col">Meninggal</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-
-          <th scope="row">Jember</th>
-          <td>20</td>
-          <td>20</td>
-          <td>20</td>
-          <td>20</td>
-          <td>20</td>
-
-        </tr>
-      </tbody>
-    </table>
+    <div class="table-responsive">
+      <table class="table table-striped">
+        <thead>
+          <tr class="align-middle text-center">
+            <th scope="col" class="col-2 text-start">Kecamatan</th>
+            <th scope="col" class="col-2">Sembuh</th>
+            <th scope="col" class="col-2">Dalam <br> Pengobatan</th>
+            <th scope="col" class="col-2">LTFU</th>
+            <th scope="col" class="col-2">Mangkir</th>
+            <th scope="col" class="col-2">Meninggal</th>
+          </tr>
+        </thead>
+        <tbody>
+          @foreach ($districts as $district)
+          <tr class="text-center">
+            <th scope="row" class="text-start">{{$district->name}}</th>
+            <td>20</td>
+            <td>20</td>
+            <td>20</td>
+            <td>20</td>
+            <td>20</td>
+          </tr>
+          @endforeach
+        </tbody>
+      </table>
+    </div>
   </div>
 </section>
 @endsection

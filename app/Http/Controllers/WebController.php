@@ -55,7 +55,10 @@ class WebController extends Controller
     public function showCase(Regency $regency)
     {
         $districts = District::whereHas('patients')->where('regency_id', '=', $regency->id)->withCount('patients')->get();
-        return view('web.showKasustbc', ['districts' => $districts]);
+        return view('web.showKasustbc', [
+            'districts' => $districts,
+            'regency' => $regency
+        ]);
     }
 
     public function article()

@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Article;
 use App\Models\User;
 use Illuminate\Http\Request;
 
@@ -15,8 +14,8 @@ class UserController extends Controller
      */
     public function index()
     {
-        $article = Article::all();
-        return view('default.app_default', ["njajal" => collect($article)]);
+        $user = User::select('id', 'name', 'email')->get();
+        return view('');
     }
 
     /**

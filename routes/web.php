@@ -47,11 +47,11 @@ Route::controller(WebController::class)->group(function () {
   Route::get('/tentang', 'about')->name('tentang');
   Route::get('/struktur', 'structur')->name('struktur');
   Route::get('/info', 'info')->name('infotbc');
-  Route::get('/info/{article}', 'showInfo')->name('single_infotbc');
+  Route::get('/info/{article}', 'showInfo')->name('showInfotbc');
   Route::get('/kasus', 'case')->name('kasustbc');
   Route::get('/kasus/{regency}', 'showCase')->name('showKasustbc');
   Route::get('/artikel', 'article')->name('artikel');
-  Route::get('/artikel/{article}', 'showArticle')->name('single_artikel');
+  Route::get('/artikel/{article}', 'showArticle')->name('showArtikel');
   Route::get('/kegiatan', 'action')->name('kegiatan');
-  Route::get('/kegiatan/{article}', 'showAction')->name('single_kegiatan');
+  Route::get('/kegiatan/{article}', 'showAction')->name('showKegiatan');
 });

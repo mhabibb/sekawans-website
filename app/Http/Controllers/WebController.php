@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Patient;
 use App\Models\StaticElement;
 use App\Models\Article;
+use App\Models\Regency;
+use App\Models\District;
 use Illuminate\Http\Request;
 
 class WebController extends Controller
@@ -13,9 +15,9 @@ class WebController extends Controller
     {
         $about = StaticElement::find(1);
         preg_match('/^([^.!?]*[.!?]+){0,2}/', strip_tags($about->contents), $about);
-        // $patient = Patient::latest()->get()->take(10);
+        $regencies = Regency::whereHas('patients')->withCount('patients')->get();
         $articles = Article::latest()->category(2)->get()->take(3);
-        return view('web.index', ['articles' => $articles]);
+        return view('web.index', ['about' => $about, 'articles' => $articles, 'regencies' => $regencies]);
     }
 
     public function structur()

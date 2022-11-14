@@ -17,4 +17,9 @@ class Regency extends Model
     {
         return $this->hasMany(District::class);
     }
+
+    public function patients()
+    {
+        return $this->hasManyThrough(Patient::class, District::class);
+    }
 }

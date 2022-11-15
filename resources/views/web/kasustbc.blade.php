@@ -31,7 +31,7 @@
                 </div>
                 @endforeach
             </div>
-            <a href="{{ route('showKasustbc', $regency) }}" class="btn btn-secondary">Lihat per Kecamatan</a>
+            <a href="{{ route('kasustbc.show', $regency) }}" class="btn btn-secondary">Lihat per Kecamatan</a>
         </div>
         @endforeach
     </div>

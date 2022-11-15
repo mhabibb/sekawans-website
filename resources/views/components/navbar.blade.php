@@ -18,7 +18,7 @@
                 <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
                     @foreach ($navLinks as $route => $name)
                     <li class="nav-item">
-                        <a class="nav-link {{ request()->routeIs($route) ? ' active' : '' }}"
+                        <a class="nav-link {{ request()->routeIs($route.'*') ? ' active' : '' }}"
                             href="{{route($route)}}">{{$name}}</a>
                     </li>
                     @endforeach

@@ -35,16 +35,19 @@ class ArticleController extends Controller
             $title = 'Info TBC';
             $createRoute = 'admin.infotbc.create';
             $showRoute = 'admin.infotbc.show';
+            $editRoute = 'admin.infotbc.edit';
         } else if (last(request()->segments()) == "articles") {
             $articles = Article::latest()->where('category_id', '2')->get();
             $title = 'Artikel';
             $createRoute = 'admin.articles.create';
             $showRoute = 'admin.articles.show';
+            $editRoute = 'admin.articles.edit';
         } else if (last(request()->segments()) == "actions") {
             $articles = Article::latest()->where('category_id', '3')->get();
             $title = 'Kegiatan';
             $createRoute = 'admin.kegiatan.create';
             $showRoute = 'admin.kegiatan.show';
+            $editRoute = 'admin.kegiatan.edit';
         } else {
             abort(404);
         };
@@ -52,7 +55,8 @@ class ArticleController extends Controller
             'title' => $title,
             'articles' => $articles,
             'createRoute' => $createRoute,
-            'showRoute' => $showRoute
+            'showRoute' => $showRoute,
+            'editRoute' => $editRoute
         ]);
     }
 
@@ -164,6 +168,6 @@ class ArticleController extends Controller
      */
     public function destroy(Article $article)
     {
-        //
+        dd($article);
     }
 }

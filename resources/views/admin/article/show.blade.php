@@ -3,9 +3,19 @@
 @section('admin-content')
 <section class="container p-3">
   <div class="article-header d-flex flex-column align-items-center mb-2">
-    <button class="btn mb-3" onclick="history.back()"><i class="fa-solid fa-arrow-left"></i>
-      Kembali</button>
-    <a href="{{route($editRoute , $article)}}" class="btn btn-warning btn-sm mb-3">Edit</a>
+    <button class="btn text-muted mb-3" onclick="history.back()">
+      <i class="fa-solid fa-arrow-left"></i> Kembali</button>
+    <div class="d-flex mb-3">
+      <a href="{{route($editRoute , $article)}}" class="btn btn-warning btn-sm mx-2">
+        <i class="fa-solid fa-pen-to-square"></i> Edit</a>
+      <form action="{{route('admin.articles.destroy', $article)}}" method="POST">
+        @csrf
+        @method('DELETE')
+        <button type="submit" class="btn btn-danger btn-sm mx-2"
+          onclick="return confirm('Yakin untuk menghapus {{ $article->title }} ?')">
+          <i class="fa-solid fa-trash-can"></i> Hapus</button>
+      </form>
+    </div>
     <div class="article-title">
       <h3 class="fw-bold text-center"> {{ $article->title }} </h3>
     </div>

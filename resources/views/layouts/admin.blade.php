@@ -23,7 +23,7 @@
   {{-- @vite(['resources/sass/app.scss', 'resources/js/app.js']) --}}
 
   <!-- PWA  -->
-  <meta name="theme-color" content="#6777ef" />
+  <meta name="theme-color" content="#343a40" />
   <link rel="apple-touch-icon" href="{{ asset('img/logo-sekawans.png') }}">
   <link rel="manifest" href="{{ asset('/manifest.json') }}">
 </head>

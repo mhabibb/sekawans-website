@@ -32,7 +32,7 @@
             </div>
         </li>
         <li class="nav-item d-sm-inline-block">
-            <a href="/" class="nav-link">Beranda</a>
+            <a href="/" target="blank" class="nav-link">Beranda</a>
         </li>
     </ul>
 </nav>
@@ -91,7 +91,7 @@
                     <a href="/admin/profil-organisasi" class="nav-link">
                         <i class="nav-icon fas fa-users"></i>
                         <p>
-                            Profil Organisasi
+                            Tentang
                         </p>
                     </a>
                 </li>

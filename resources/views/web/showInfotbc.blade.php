@@ -6,7 +6,7 @@
         <button class="link-secondary btn" onclick="history.back()"><i class="fa-solid fa-arrow-left"></i>
             Kembali</button>
         <h3 class="fw-bold text-center">{{ $info->title }}</h3>
-        <p class="text-muted">Sumber : A caption information source</p>
+        {{-- <p class="text-muted">Sumber : A caption information source</p> --}}
     </div>
     <article class="d-flex flex-column align-items-center justify-content-center border-top pt-4">
         <figure class="figure">

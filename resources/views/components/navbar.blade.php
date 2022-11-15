@@ -16,24 +16,12 @@
             </div>
             <div class="offcanvas-body">
                 <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
+                    @foreach ($navLinks as $route => $name)
                     <li class="nav-item">
-                        <a class="nav-link" href="{{route('beranda')}}">Beranda</a>
+                        <a class="nav-link {{ request()->routeIs($route) ? ' active' : '' }}"
+                            href="{{route($route)}}">{{$name}}</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{route('tentang')}}">Tentang</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{route('infotbc')}}">Info TB</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{route('kasustbc')}}">Kasus TB</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{route('artikel')}}">Artikel</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{route('kegiatan')}}">Kegiatan</a>
-                    </li>
+                    @endforeach
                 </ul>
                 <form class="d-flex mt-3 mt-lg-0" role="search">
                     <input class="form-control rounded-0 me-1" type="search" placeholder="Search" aria-label="Search">

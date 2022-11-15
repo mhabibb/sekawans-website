@@ -7,6 +7,8 @@ use App\Models\StaticElement;
 use App\Models\Article;
 use App\Models\Regency;
 use App\Models\District;
+use App\Models\PatientDetail;
+use App\Models\PatientStatus;
 use Illuminate\Http\Request;
 
 class WebController extends Controller
@@ -16,22 +18,29 @@ class WebController extends Controller
         $about = StaticElement::find(1);
         preg_match('/^([^.!?]*[.!?]+){0,2}/', strip_tags($about->contents), $about);
         $regencies = Regency::whereHas('patients')->withCount('patients')->get();
-        $articles = Article::latest()->category(2)->get()->take(3);
+        $articles = Article::latest()->category(2)->take(3)->get();
         return view('web.index', [
             'about' => $about,
             'articles' => $articles,
-            'regencies' => $regencies
+            'regencies' => $regencies,
+        ]);
+    }
+
+    public function about()
+    {
+        $profile = StaticElement::find(1);
+        $visimisi = StaticElement::find(2);
+        $structure = StaticElement::find(3);
+        return view('web.tentang', [
+            'profile' => $profile->contents,
+            'visimisi' => $visimisi->contents,
+            'structure' => $structure->contents
         ]);
     }
 
     public function structur()
     {
         return view('tentang.struktur');
-    }
-
-    public function about()
-    {
-        return view('web.tentang');
     }
 
     public function info()
@@ -42,19 +51,24 @@ class WebController extends Controller
 
     public function showInfo(Article $article)
     {
-        return view('web.single_infotbc', ['info' => $article]);
+        return view('web.showInfotbc', ['info' => $article]);
     }
 
     public function case()
     {
+        // jumlah patient tiap status di tiap regency
         $regencies = Regency::whereHas('patients')->withCount('patients')->get();
-        // dd($regencies);
-        return view('web.kasustbc', ['regencies' => $regencies]);
+        $status = PatientStatus::all();
+        return view('web.kasustbc', [
+            'regencies' => $regencies,
+            'status' => $status
+        ]);
     }
 
     public function showCase(Regency $regency)
     {
-        $districts = District::whereHas('patients')->where('regency_id', '=', $regency->id)->withCount('patients')->get();
+        // jumlah patient tiap status di tiap distict
+        $districts = District::whereHas('patients')->where('regency_id', '=', $regency->id)->withCount('patients')->get(); //
         return view('web.showKasustbc', [
             'districts' => $districts,
             'regency' => $regency
@@ -63,13 +77,13 @@ class WebController extends Controller
 
     public function article()
     {
-        $articles = Article::latest()->category(2)->paginate(12);
+        $articles = Article::latest()->category(2)->get()->paginate(12);
         return view('web.artikel', ['articles' => $articles]);
     }
 
     public function showArticle(Article $article)
     {
-        return view('web.single_artikel', [
+        return view('web.showArtikel', [
             'article' => $article
         ]);
     }
@@ -82,6 +96,6 @@ class WebController extends Controller
 
     public function showAction(Article $article)
     {
-        return view('web.single_kegiatan', ['action' => $article]);
+        return view('web.showKegiatan', ['action' => $article]);
     }
 }

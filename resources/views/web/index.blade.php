@@ -82,23 +82,13 @@
 {{-- RIWAYAT --}}
 <section id="riwayat" class="container py-5 text-center">
     <h1 class="fw-bold mb-5">Riwayat Jumlah Pasien TBC</h1>
-    <div class="row">
-        <div class="p-2 text-center col-md-6 col-lg">
-            <h1>20</h1>
-            <p class="lead fw-bold">Jember</p>
+    <div class="row gap-4">
+        @foreach ($regencies as $regency)
+        <div class="p-2 text-center col-md mx-auto" style="max-width: 200px;">
+            <h1>{{ $regency->patients_count }}</h1>
+            <p class="lead fw-bold">{{ $regency->name }}</p>
         </div>
-        <div class="p-2 text-center col-md-6 col-lg">
-            <h1>20</h1>
-            <p class="lead fw-bold">Lumajang</p>
-        </div>
-        <div class="p-2 text-center col-md-6 col-lg">
-            <h1>20</h1>
-            <p class="lead fw-bold">Situbondo</p>
-        </div>
-        <div class="p-2 text-center col-md-6 col-lg">
-            <h1>20</h1>
-            <p class="lead fw-bold">Bondowoso</p>
-        </div>
+        @endforeach
     </div>
 </section>
 
@@ -124,7 +114,8 @@
                     <div class="module line-clamp">
                         <h5>{{ $article->title }}</h5>
                     </div>
-                    <a href="/artikel/{{$article->id}}" class="link-primary text-underline">Baca selengkapnya</a>
+                    <a href="{{ route('showArtikel', $article)}}" class="link-primary">Baca
+                        selengkapnya</i></a>
                 </div>
             </div>
         </div>

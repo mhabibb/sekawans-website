@@ -46,10 +46,10 @@ Route::controller(WebController::class)->group(function () {
   Route::get('/', 'index')->name('beranda');
   Route::get('/tentang', 'about')->name('tentang');
   Route::get('/struktur', 'structur')->name('struktur');
-  Route::get('/info', 'info')->name('infotbc');
-  Route::get('/info/{article}', 'showInfo')->name('showInfotbc');
-  Route::get('/kasus', 'case')->name('kasustbc');
-  Route::get('/kasus/{regency}', 'showCase')->name('showKasustbc');
+  Route::get('/info-tbc', 'info')->name('infotbc');
+  Route::get('/info-tbc/{article}', 'showInfo')->name('showInfotbc');
+  Route::get('/kasus-tbc', 'case')->name('kasustbc');
+  Route::get('/kasus-tbc/{regency}', 'showCase')->name('showKasustbc');
   Route::get('/artikel', 'article')->name('artikel');
   Route::get('/artikel/{article}', 'showArticle')->name('showArtikel');
   Route::get('/kegiatan', 'action')->name('kegiatan');

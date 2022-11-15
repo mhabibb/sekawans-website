@@ -23,7 +23,7 @@
           <tr class="align-middle text-center">
             <th scope="col" class="col-2 text-start">Kecamatan</th>
             <th scope="col" class="col-2">Sembuh</th>
-            <th scope="col" class="col-2">Dalam <br> Pengobatan</th>
+            <th scope="col" class="col-2">Berobat</th>
             <th scope="col" class="col-2">LTFU</th>
             <th scope="col" class="col-2">Mangkir</th>
             <th scope="col" class="col-2">Meninggal</th>

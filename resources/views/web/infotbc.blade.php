@@ -30,7 +30,7 @@
                 <h3 class=" fw-bold mb-3">{{$info->title}}</h3>
                 {{-- <p class="lead">Lorem ipsum dolor sit amet, consectetur adipiscing elit.
                     Eu, sed luctus viverra nibh suspendisse est. Nisl diam eu aliquet gravida et felis aenean.</p> --}}
-                <a href="{{ route('single_infotbc', $info) }}" class="btn btn-secondary px-4">Selengkapnya</a>
+                <a href="{{ route('showInfotbc', $info) }}" class="btn btn-secondary px-4">Selengkapnya</a>
             </div>
         </div>
         @endforeach

@@ -13,7 +13,7 @@
         <figcaption class="figure-caption text-center">Sumber : A caption for the above image.</figcaption>
       </figure>
       <div class="body">
-        <p> {{ $profil }} </p>
+        <p> {{ $profile }} </p>
       </div>
     </article>
   </section>
@@ -35,7 +35,7 @@
     </div>
     <div class="d-flex flex-column align-items-center justify-content-center border-top pt-4">
       <figure class="figure">
-        <img src="{{ $struktur }}" class="figure-img img-fluid rounded" style="max-height: 600px" alt="...">
+        <img src="{{ $structure }}" class="figure-img img-fluid rounded" style="max-height: 600px" alt="...">
         <figcaption class="figure-caption text-center">Gambar Struktur Organisasi Sekawans TB</figcaption>
       </figure>
       {{-- <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">

@@ -3,10 +3,10 @@
 @section('content')
 <section class="container py-5 d-flex flex-column gap-4 align-items-center">
   <h1 class="fw-bold text-primary">Artikel</h1>
-  <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+  <div class="row justify-content-center row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
     @foreach ($articles as $article)
-    <div class="col">
-      <div class="card border h-100">
+    <div class="col" style="max-width: 400px;">
+      <div class="card shadow-sm h-100 mx-auto">
         <img src="{{ $article->img }}" class="card-img-top thumbnail" alt="..." loading="lazy">
         <div class="card-body">
           <div class="mb-1 d-flex gap-3">
@@ -22,12 +22,12 @@
           <div class="module line-clamp">
             <h5>{{ $article->title }}</h5>
           </div>
-          <a href="{{ route('single_artikel', $article) }}" class="link-primary text-underline">Baca selengkapnya</a>
+          <a href="{{ route('showArtikel', $article) }}" class="link-primary text-underline">Baca selengkapnya</a>
         </div>
       </div>
     </div>
     @endforeach
   </div>
-  {{ $articles->links() }}
+  {{ $articles->onEachSide(1)->links() }}
 </section>
 @endsection

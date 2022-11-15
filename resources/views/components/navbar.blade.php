@@ -1,7 +1,7 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm sticky-top" aria-label="Offcanvas navbar large">
     <div class="container-xl">
         <a class="navbar-brand" href="/">
-            <img src="/img/logo-sekawans.png" alt="logo-sekawans.png" width="32" height="32"
+            <img src="{{ asset('logos/ms-icon-144x144.png') }}" alt="logo-sekawans.png" width="32" height="32"
                 class="d-inline-block align-text-bottom"> <span class="ms-2">Sekawan'S</span>
         </a>
         <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar2"

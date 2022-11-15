@@ -75,6 +75,7 @@
                             </a>
                             <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                                 @csrf
+                            </form>
                         </li>
                     </ul>
                 </li>
@@ -95,7 +96,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="{{ route('admin.infotbc') }}" class="nav-link">
+                    <a href="{{ route('admin.infotbc.index') }}" class="nav-link">
                         <i class="nav-icon fas fa-circle-info"></i>
                         <p>
                             Informasi TBC
@@ -103,7 +104,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="#" class="nav-link">
+                    <a href="{{ route('admin.patient.index') }}" class="nav-link">
                         <i class="nav-icon fas fa-database"></i>
                         <p>
                             Data Pasien TBC
@@ -119,7 +120,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="{{route('admin.kegiatan')}}" class="nav-link">
+                    <a href="{{route('admin.kegiatan.index')}}" class="nav-link">
                         <i class="nav-icon fas fa-square-person-confined"></i>
                         <p>
                             Kegiatan

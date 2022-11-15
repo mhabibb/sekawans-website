@@ -15,7 +15,12 @@ class PatientController extends Controller
      */
     public function index()
     {
-        //
+        $patients = Patient::all();
+        // dd($patients);
+        return view('admin.patient.index', [
+            'title' => 'Data Pasien',
+            'patients' => $patients->paginate(10)
+        ]);
     }
 
     /**

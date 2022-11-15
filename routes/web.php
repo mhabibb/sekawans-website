@@ -31,11 +31,11 @@ Route::middleware('auth')->prefix('admin')->name('admin.')->group(function () {
   Route::resource('/worker', WorkerController::class);
   Route::resource('/articles', ArticleController::class);
   Route::controller(ArticleController::class)->group(function () {
-    Route::get('/infos', 'index')->name('infotbc');
+    Route::get('/infos', 'index')->name('infotbc.index');
     Route::get('/infos/create', 'create')->name('infotbc.create');
     Route::get('/infos/{article}', 'show')->name('infotbc.show');
     Route::get('/infos/{article}/edit', 'edit')->name('infotbc.edit');
-    Route::get('/actions', 'index')->name('kegiatan');
+    Route::get('/actions', 'index')->name('kegiatan.index');
     Route::get('/actions/create', 'create')->name('kegiatan.create');
     Route::get('/actions/{article}', 'show')->name('kegiatan.show');
     Route::get('/actions/{article}/edit', 'edit')->name('kegiatan.edit');

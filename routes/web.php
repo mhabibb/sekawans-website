@@ -26,7 +26,7 @@ Auth::routes(['register' => false]);
 Route::middleware('auth')->prefix('admin')->name('admin.')->group(function () {
   Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
   Route::resource('/users', UserController::class);
-  Route::resource('/patient', PatientController::class);
+  Route::resource('/patients', PatientController::class);
   Route::resource('/sekawans', StaticElementController::class)->except(['create', 'destroy', 'store']);
   Route::resource('/worker', WorkerController::class);
   Route::resource('/articles', ArticleController::class);

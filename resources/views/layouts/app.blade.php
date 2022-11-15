@@ -19,7 +19,7 @@
 <body>
   <x-navbar />
 
-  <main>
+  <main style="min-height: 50vh;">
     @yield('content')
   </main>
 

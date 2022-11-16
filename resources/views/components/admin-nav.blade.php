@@ -87,7 +87,7 @@
           </a>
         </li>
         <li class="nav-item">
-          <a href="/admin/profil-organisasi" class="nav-link">
+          <a href="{{ route('admin.sekawans.index') }}" class="nav-link">
             <i class="nav-icon fas fa-users"></i>
             <p>
               Tentang

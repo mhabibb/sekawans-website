@@ -169,6 +169,13 @@
               {{ $kabupaten->ltfu }}, 
               {{ $kabupaten->matek }}
             ],
+            backgroundColor: [
+              '#5dff4d',
+              '#f7ff1a',
+              '#ff7200',
+              '#ff0000',
+              '#474347',
+            ],
             borderWidth: 1
           }]
         },

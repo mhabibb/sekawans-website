@@ -27,6 +27,7 @@
             <th scope="col" class="col-2">Mangkir</th>
             <th scope="col" class="col-2">LTFU</th>
             <th scope="col" class="col-2">Meninggal</th>
+            <th scope="col" class="col-2">Total</th>
           </tr>
         </thead>
         <tbody>
@@ -38,6 +39,7 @@
             <td>{{ $district->mangkir }}</td>
             <td>{{ $district->ltfu }}</td>
             <td>{{ $district->matek }}</td>
+            <td>{{ $district->total }}</td>
           </tr>
           @endforeach
         </tbody>

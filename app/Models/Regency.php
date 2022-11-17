@@ -91,7 +91,7 @@ class Regency extends Model
                         $query->withOnly('patientStatus');
                     });
                 })->withCount([
-                    'patients',
+                    'patients as total',
                     'patients as sembuh' => function (Builder $query) {
                         $query->withOnly('patientDetail')->withWhereHas('patientDetail', function ($query) {
                             $query->withOnly('patientStatus')->where('patient_status_id', 1);

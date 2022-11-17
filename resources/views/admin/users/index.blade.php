@@ -4,7 +4,7 @@
 <!-- Content Header (Page header) -->
 <section class="content-header">
   <div class="container-fluid">
-    <h1>{{ $title }}</h1>
+    <h1>Data User</h1>
   </div>
 </section>
 
@@ -35,7 +35,8 @@
             <table class="table table-head-fixed text-nowrap table-striped">
               <thead>
                 <tr>
-                  <th class="col-8">Nama</th>
+                  <th class="col-5">Nama</th>
+                  <th class="col-5">Email</th>
                   <th></th>
                 </tr>
               </thead>
@@ -43,6 +44,7 @@
                 @foreach ($users as $user)
                 <tr>
                   <td>{{ $user->name }}</td>
+                  <td>{{ $user->email }}</td>
                   <td>
                     <form action="#" method="POST" class="d-inline-block">
                       @csrf

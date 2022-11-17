@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Models\StaticElement;
-use App\Http\Requests\StoreStaticElementRequest;
 use App\Http\Requests\UpdateStaticElementRequest;
 
 class StaticElementController extends Controller
@@ -15,7 +14,8 @@ class StaticElementController extends Controller
      */
     public function index()
     {
-        //
+        $elements = StaticElement::all();
+        // return view()
     }
 
     /**

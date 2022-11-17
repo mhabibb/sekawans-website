@@ -15,7 +15,7 @@ class UserController extends Controller
     public function index()
     {
         $user = User::select('id', 'name', 'email')->get();
-        return view('');
+        return view('admin.users.index', ['users' => $user]);
     }
 
     /**

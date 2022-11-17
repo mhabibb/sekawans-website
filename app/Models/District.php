@@ -30,8 +30,8 @@ class District extends Model
         return $this->hasMany(Patient::class);
     }
 
-    public function patientStatus()
+    public function patientDetails()
     {
-        return $this->hasmanyThrough(PatientStatus::class, PatientDetail::class, Patient::class);
+        return $this->hasmanyThrough(PatientDetail::class, Patient::class);
     }
 }

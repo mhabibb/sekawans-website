@@ -74,7 +74,7 @@ class WebController extends Controller
 
     public function showCase(Regency $regency)
     {
-        $compek = Regency::count('status')->find($regency->id);
+        $compek = Regency::count('detailStatus')->find($regency->id);
         return view('web.showKasustbc', ['regency' => $compek]);
     }
 

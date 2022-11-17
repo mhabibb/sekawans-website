@@ -161,7 +161,7 @@
         data: {
           labels: ['Sembuh', 'Berobat', 'Mangkir', 'LTFU', 'Meninggal'],
           datasets: [{
-            label: '# of Votes',
+            label: ' ~ Pasien',
             data: [
               {{ $kabupaten->sembuh }}, 
               {{ $kabupaten->berobat }}, 
@@ -176,7 +176,8 @@
               '#ff0000',
               '#474347',
             ],
-            borderWidth: 1
+            borderWidth: 1,
+            hoverOffset: 30
           }]
         },
         options: {

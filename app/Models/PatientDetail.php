@@ -11,7 +11,7 @@ class PatientDetail extends Model
 
     protected $guarded = ['id'];
 
-    protected $with = ['patientStatus', 'patient'];
+    protected $with = ['patientStatus', 'patient', 'sateliteHealthFacility'];
 
     public function patientStatus()
     {

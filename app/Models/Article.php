@@ -11,11 +11,10 @@ class Article extends Model
 
     protected $guarded = ['id', 'created_at', 'updated_at'];
 
-    // protected $with = ['category', 'user'];
+    protected $with = ['category', 'user'];
 
     public function scopeCategory($query, $category)
     {
-        // dd($query->where('category_id', $category)->get());
         return $query->where('category_id', $category);
     }
 

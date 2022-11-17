@@ -53,7 +53,18 @@ class WebController extends Controller
     public function case()
     {
         // jumlah patient tiap status di tiap regency
-        $regencies = Regency::whereHas('patients')->withCount('patients')->get();
+        $regencies = Regency::count('status')->get();
+        // foreach ($regencies as $regency) {
+        //     foreach ($regency->districts as $district) {
+        //         $keys = collect($district->first())->keys();
+        //         dd($district, $keys);
+        //         $sum_array = [];
+        //         foreach ($keys as $key) {
+        //             $sum_array[$key] = $regencies->sum($key);
+        //         }
+        //     }
+        // }
+        // dd($regencies);
         $status = PatientStatus::all();
         return view('web.kasustbc', [
             'regencies' => $regencies,

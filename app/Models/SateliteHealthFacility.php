@@ -5,16 +5,16 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class PatientStatus extends Model
+class SateliteHealthFacility extends Model
 {
     use HasFactory;
 
     protected $guarded = ['id'];
 
-    public $timestamps = false;
+    protected $timestamp = false;
 
     public function patientDetails()
     {
-        return $this->hasMany(PatientDetail::class);
+        $this->hasMany(PatientDetail::class);
     }
 }

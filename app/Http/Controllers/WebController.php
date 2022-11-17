@@ -2,14 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Patient;
 use App\Models\StaticElement;
 use App\Models\Article;
 use App\Models\Regency;
-use App\Models\District;
-use App\Models\PatientDetail;
 use App\Models\PatientStatus;
-use Illuminate\Http\Request;
 
 class WebController extends Controller
 {
@@ -67,12 +63,8 @@ class WebController extends Controller
 
     public function showCase(Regency $regency)
     {
-        // jumlah patient tiap status di tiap distict
-        $districts = District::whereHas('patients')->where('regency_id', '=', $regency->id)->withCount('patients')->get(); //
-        return view('web.showKasustbc', [
-            'districts' => $districts,
-            'regency' => $regency
-        ]);
+        $compek = Regency::count('status')->find($regency->id);
+        return view('web.showKasustbc', ['regency' => $compek]);
     }
 
     public function article()

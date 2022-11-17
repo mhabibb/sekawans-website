@@ -19,6 +19,10 @@ return new class extends Migration
                 ->constrained()
                 ->onUpdate('cascade')
                 ->onDelete('cascade');
+            $table->foreignId('satelite_health_facility_id')
+                ->constrained()
+                ->onUpdate('cascade')
+                ->onDelete('cascade');
             $table->foreignId('worker_id')
                 ->constrained()
                 ->onUpdate('cascade')

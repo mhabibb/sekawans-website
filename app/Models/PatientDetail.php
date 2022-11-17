@@ -11,12 +11,7 @@ class PatientDetail extends Model
 
     protected $guarded = ['id'];
 
-    protected $with = ['worker', 'patientStatus', 'patient'];
-
-    public function worker()
-    {
-        return $this->belongsTo(Worker::class);
-    }
+    protected $with = ['patientStatus', 'patient'];
 
     public function patientStatus()
     {
@@ -26,5 +21,10 @@ class PatientDetail extends Model
     public function patient()
     {
         return $this->belongsTo(Patient::class);
+    }
+
+    public function sateliteHealthFacility()
+    {
+        return $this->belongsTo(SateliteHealthFacility::class);
     }
 }

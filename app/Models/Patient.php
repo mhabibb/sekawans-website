@@ -13,6 +13,11 @@ class Patient extends Model
 
     protected $with = ['district', 'education', 'religion', 'emergency_contact'];
 
+    // public function patientStatus()
+    // {
+    //     return $this->hasOneThrough(PatientStatus::class, PatientDetail::class);
+    // }
+
     public function district()
     {
         return $this->belongsTo(District::class);

@@ -15,6 +15,11 @@ class District extends Model
 
     protected $with = ['regency'];
 
+    public static function scopeStatusDetails(Regency $district)
+    {
+        dd($district);
+    }
+
     public function regency()
     {
         return $this->belongsTo(Regency::class);
@@ -23,5 +28,10 @@ class District extends Model
     public function patients()
     {
         return $this->hasMany(Patient::class);
+    }
+
+    public function patientStatus()
+    {
+        return $this->hasmanyThrough(PatientStatus::class, PatientDetail::class, Patient::class);
     }
 }

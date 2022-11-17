@@ -2,6 +2,10 @@
 
 namespace Database\Factories;
 
+use App\Models\Patient;
+use App\Models\PatientStatus;
+use App\Models\SateliteHealthFacilities;
+use App\Models\Worker;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -16,11 +20,16 @@ class PatientDetailFactory extends Factory
      */
     public function definition()
     {
+        $patient = Patient::count();
+        $satelite = SateliteHealthFacilities::count();
+        $worker = Worker::count();
+        $status = PatientStatus::count();
         return [
-            'patient_id' => fake()->numberBetween(1, 20),
-            'worker_id' => fake()->numberBetween(1, 150),
+            'patient_id' => fake()->unique()->numberBetween(1, $patient),
+            'satelite_health_facility_id' => fake()->numberBetween(1, $satelite),
+            'worker_id' => fake()->numberBetween(1, $worker),
             'no_regis' => fake()->unique()->numerify('##########'),
-            'patient_status_id' => fake()->numberBetween(1, 5),
+            'patient_status_id' => fake()->numberBetween(1, $status),
             'age' => fake()->numberBetween(3, 80),
             'weight' => fake()->numberBetween(10, 80),
             'height' => fake()->numberBetween(40, 200),

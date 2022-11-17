@@ -71,7 +71,7 @@
         <div class="small-box bg-warning">
           <div class="inner">
             <h3>{{$fesyankes}}</h3>
-            <p>PS</p>
+            <p>Fesyankes Satelit</p>
           </div>
           <div class="icon">
             <i class="ion ion-bag"></i>

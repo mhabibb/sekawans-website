@@ -81,13 +81,13 @@
       </div>
     </div>
     <!-- /.row -->
-
+    @foreach ($besuki as $kabupaten)
     <!-- Main row -->
     <div class="row">
       <div class="col-lg-6">
         <div class="card card-danger">
           <div class="card-header">
-            <h3 class="card-title">Pie Chart</h3>
+            <h3 class="card-title">{{ $kabupaten->name }}</h3>
             <div class="card-tools">
               <button type="button" class="btn btn-tool" data-card-widget="collapse">
                 <i class="fas fa-minus"></i>
@@ -98,21 +98,20 @@
             </div>
           </div>
           <div class="card-body">
-            <canvas id="pieChart"
+            <canvas id="pieChart{{ $kabupaten->id }}"
               style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%;"></canvas>
           </div>
 
 
           <div class="card card-primary card-outline">
             <div class="card-body">
-              <h5 class="card-title">Card title</h5>
+              <h5 class="card-title">DATA {{ $kabupaten->name }}</h5>
 
               <p class="card-text">
                 Some quick example text to build on the card title and make up the bulk of the card's
                 content.
               </p>
-              <a href="#" class="card-link">Card link</a>
-              <a href="#" class="card-link">Another link</a>
+              <a href="{{ route('admin.patient.index') }}" class="card-link">Selengkapnya</a>
             </div>
           </div><!-- /.card -->
         </div>
@@ -146,6 +145,7 @@
       </div>
       <!-- /.row -->
     </div><!-- /.container-fluid -->
+    @endforeach
   </div>
   <!-- /.content -->
   @endsection
@@ -154,15 +154,21 @@
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <script>
     $(function () {
-
-      const chart = $('#pieChart')
-      new Chart(chart, {
+      @foreach ($besuki as $kabupaten) 
+      const chart{{ $kabupaten->id }} = $('#pieChart{{ $kabupaten->id }}')
+      new Chart(chart{{ $kabupaten->id }}, {
         type: 'pie',
         data: {
           labels: ['Sembuh', 'Berobat', 'Mangkir', 'LTFU', 'Meninggal'],
           datasets: [{
             label: '# of Votes',
-            data: [12, 19, 3, 5, 2],
+            data: [
+              {{ $kabupaten->sembuh }}, 
+              {{ $kabupaten->berobat }}, 
+              {{ $kabupaten->mangkir }}, 
+              {{ $kabupaten->ltfu }}, 
+              {{ $kabupaten->matek }}
+            ],
             borderWidth: 1
           }]
         },
@@ -174,6 +180,7 @@
           }
         }
       });
+      @endforeach
     })
   </script>
   @endsection

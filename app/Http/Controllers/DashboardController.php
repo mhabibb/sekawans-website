@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Article;
 use App\Models\PatientStatus;
+use App\Models\Regency;
 use App\Models\SateliteHealthFacility;
 use App\Models\Worker;
 use Illuminate\Http\Request;
@@ -18,15 +19,7 @@ class DashboardController extends Controller
         $workers = Worker::all()->count();
         $facilities = SateliteHealthFacility::all()->count();
 
-        $status = PatientStatus::select('status')->get();
-        $status = $status->toArray();
-        $stat = [];
-        foreach ($status as $sta) {
-            array_push($stat, $sta['status']);
-        }
-
-        $compek = ['Sembuh', 'Berobat', 'Mangkir', 'LTFU', 'Meninggal'];
-        // dd($compek);
+        $regency = Regency::count('status')->get();
 
         return view('admin.dashboard', [
             'info' => $info,
@@ -34,7 +27,7 @@ class DashboardController extends Controller
             'kegiatan' => $action,
             'ps' => $workers,
             'fesyankes' => $facilities,
-            'status' => json_encode($stat),
+            'besuki' => $regency,
         ]);
     }
 }

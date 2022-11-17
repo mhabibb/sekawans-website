@@ -11,7 +11,7 @@ class SateliteHealthFacility extends Model
 
     protected $guarded = ['id'];
 
-    protected $timestamp = false;
+    public $timestamps = false;
 
     public function patientDetails()
     {

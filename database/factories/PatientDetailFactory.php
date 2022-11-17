@@ -4,7 +4,7 @@ namespace Database\Factories;
 
 use App\Models\Patient;
 use App\Models\PatientStatus;
-use App\Models\SateliteHealthFacilities;
+use App\Models\SateliteHealthFacility;
 use App\Models\Worker;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
@@ -21,7 +21,7 @@ class PatientDetailFactory extends Factory
     public function definition()
     {
         $patient = Patient::count();
-        $satelite = SateliteHealthFacilities::count();
+        $satelite = SateliteHealthFacility::count();
         $worker = Worker::count();
         $status = PatientStatus::count();
         return [

@@ -24,20 +24,20 @@
             <th scope="col" class="col-2 text-start">Kecamatan</th>
             <th scope="col" class="col-2">Sembuh</th>
             <th scope="col" class="col-2">Berobat</th>
-            <th scope="col" class="col-2">LTFU</th>
             <th scope="col" class="col-2">Mangkir</th>
+            <th scope="col" class="col-2">LTFU</th>
             <th scope="col" class="col-2">Meninggal</th>
           </tr>
         </thead>
         <tbody>
-          @foreach ($districts as $district)
+          @foreach ($regency->districts as $district)
           <tr class="text-center">
             <th scope="row" class="text-start">{{$district->name}}</th>
-            <td>20</td>
-            <td>20</td>
-            <td>20</td>
-            <td>20</td>
-            <td>20</td>
+            <td>{{ $district->sembuh }}</td>
+            <td>{{ $district->berobat }}</td>
+            <td>{{ $district->mangkir }}</td>
+            <td>{{ $district->ltfu }}</td>
+            <td>{{ $district->matek }}</td>
           </tr>
           @endforeach
         </tbody>

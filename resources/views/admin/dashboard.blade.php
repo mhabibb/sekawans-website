@@ -81,9 +81,9 @@
       </div>
     </div>
     <!-- /.row -->
-    @foreach ($besuki as $kabupaten)
     <!-- Main row -->
     <div class="row">
+      @foreach ($besuki as $kabupaten)
       <div class="col-lg-6">
         <div class="card card-danger">
           <div class="card-header">
@@ -144,8 +144,8 @@
         <!-- /.col-md-6 -->
       </div>
       <!-- /.row -->
+      @endforeach
     </div><!-- /.container-fluid -->
-    @endforeach
   </div>
   <!-- /.content -->
   @endsection

@@ -7,48 +7,48 @@ use App\Http\Requests\UpdateStaticElementRequest;
 
 class StaticElementController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        $elements = StaticElement::all();
-        // return view()
-    }
+  /**
+   * Display a listing of the resource.
+   *
+   * @return \Illuminate\Http\Response
+   */
+  public function index()
+  {
+    $elements = StaticElement::all();
+    // return view()
+  }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\StaticElement  $staticElement
-     * @return \Illuminate\Http\Response
-     */
-    public function show(StaticElement $staticElement)
-    {
-        //
-    }
+  /**
+   * Display the specified resource.
+   *
+   * @param  \App\Models\StaticElement  $staticElement
+   * @return \Illuminate\Http\Response
+   */
+  public function show(StaticElement $staticElement)
+  {
+    //
+  }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\StaticElement  $staticElement
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(StaticElement $staticElement)
-    {
-        //
-    }
+  /**
+   * Show the form for editing the specified resource.
+   *
+   * @param  \App\Models\StaticElement  $staticElement
+   * @return \Illuminate\Http\Response
+   */
+  public function edit(StaticElement $staticElement)
+  {
+    //
+  }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \App\Http\Requests\UpdateStaticElementRequest  $request
-     * @param  \App\Models\StaticElement  $staticElement
-     * @return \Illuminate\Http\Response
-     */
-    public function update(UpdateStaticElementRequest $request, StaticElement $staticElement)
-    {
-        //
-    }
+  /**
+   * Update the specified resource in storage.
+   *
+   * @param  \App\Http\Requests\UpdateStaticElementRequest  $request
+   * @param  \App\Models\StaticElement  $staticElement
+   * @return \Illuminate\Http\Response
+   */
+  public function update(UpdateStaticElementRequest $request, StaticElement $staticElement)
+  {
+    //
+  }
 }

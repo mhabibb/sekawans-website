@@ -26,7 +26,7 @@ Auth::routes(['register' => false]);
 Route::middleware('auth')->prefix('admin')->name('admin.')->group(function () {
   Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
   Route::resource('/users', UserController::class);
-  Route::resource('/patient', PatientController::class);
+  Route::resource('/patients', PatientController::class);
   Route::resource('/sekawans', StaticElementController::class)->except(['create', 'destroy', 'store']);
   Route::resource('/worker', WorkerController::class);
   Route::resource('/articles', ArticleController::class);
@@ -47,11 +47,11 @@ Route::controller(WebController::class)->group(function () {
   Route::get('/tentang', 'about')->name('tentang');
   Route::get('/struktur', 'structur')->name('struktur');
   Route::get('/info-tbc', 'info')->name('infotbc');
-  Route::get('/info-tbc/{article}', 'showInfo')->name('showInfotbc');
+  Route::get('/info-tbc/{article}', 'showInfo')->name('infotbc.show');
   Route::get('/kasus-tbc', 'case')->name('kasustbc');
-  Route::get('/kasus-tbc/{regency}', 'showCase')->name('showKasustbc');
+  Route::get('/kasus-tbc/{regency}', 'showCase')->name('kasustbc.show');
   Route::get('/artikel', 'article')->name('artikel');
-  Route::get('/artikel/{article}', 'showArticle')->name('showArtikel');
+  Route::get('/artikel/{article}', 'showArticle')->name('artikel.show');
   Route::get('/kegiatan', 'action')->name('kegiatan');
-  Route::get('/kegiatan/{article}', 'showAction')->name('showKegiatan');
+  Route::get('/kegiatan/{article}', 'showAction')->name('kegiatan.show');
 });

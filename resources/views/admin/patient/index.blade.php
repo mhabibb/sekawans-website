@@ -13,9 +13,21 @@
     <div class="row">
       <div class="col-12">
         <div class="card">
-          {{-- <div class="card-header">
-            <h3 class="card-title">DataTable with default features</h3>
-          </div> --}}
+          <div class="card-header">
+            <a href="{{ route('admin.patients.create') }}" class="card-title">Input Data</a>
+
+            <div class="card-tools">
+              <div class="input-group input-group-sm" style="width: 200px;">
+                <input type="text" name="table_search" class="form-control float-right" placeholder="Search">
+
+                <div class="input-group-append">
+                  <button type="submit" class="btn btn-default">
+                    <i class="fas fa-search"></i>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
 
           <div class="card-body ">
             <div class="table-responsive">
@@ -42,7 +54,7 @@
                 </tbody>
               </table>
             </div>
-            <div class="d-flex justify-content-center">
+            <div class="d-flex justify-content-center justify-content-md-end">
               {{ $patients->onEachSide(1)->links() }}
             </div>
           </div>

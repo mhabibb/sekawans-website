@@ -43,10 +43,10 @@
                 @foreach ($patients as $patient)
                 <tr>
                   <td>{{ $patient->id_number }}</td>
-                  <td>{{ $patient->name }}</td>
-                  <td>RS Paru</td>
+                  <td><a href="{{ route('admin.patients.show', $patient) }}">{{ $patient->name }}</a></td>
+                  <td>{{ $patient->patientDetail->sateliteHealthFacility->name }}</td>
                   <td>01-01-2022</td>
-                  <td>Sehat</td>
+                  <td>{{ $patient->patientDetail->patientStatus->status }}</td>
                 </tr>
                 @endforeach
               </tbody>

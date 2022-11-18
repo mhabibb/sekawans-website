@@ -207,13 +207,3 @@
 </section>
 <!-- /.content -->
 @endsection
-
-@section('js')
-<script>
-  $('#summernote').summernote({
-    
-    tabsize: 2,
-    height: 300
-  });
-</script>
-@endsection

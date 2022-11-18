@@ -11,28 +11,16 @@
 <!-- Main content -->
 <section class="content">
   <div class="container-fluid">
-    <!-- /.row -->
+
     <div class="row">
       <div class="col-12">
         <div class="card">
           <div class="card-header">
-            <a href="{{ route($createRoute) }}" class="card-title">Buat Artikel Baru</a>
-
-            <div class="card-tools">
-              <div class="input-group input-group-sm" style="width: 200px;">
-                <input type="text" name="table_search" class="form-control float-right" placeholder="Search">
-
-                <div class="input-group-append">
-                  <button type="submit" class="btn btn-default">
-                    <i class="fas fa-search"></i>
-                  </button>
-                </div>
-              </div>
-            </div>
+            <a href="{{ route($createRoute) }}" class="btn btn-primary card-title">Buat Artikel Baru</a>
           </div>
-          <!-- /.card-header -->
-          <div class="card-body table-responsive p-0" style="height: 360px;">
-            <table class="table table-head-fixed text-nowrap table-striped">
+
+          <div class="card-body">
+            <table id="articlesData" class="table table-bordered table-striped">
               <thead>
                 <tr>
                   <th>Judul Artikel</th>
@@ -61,13 +49,25 @@
               </tbody>
             </table>
           </div>
-          <!-- /.card-body -->
+
         </div>
-        <!-- /.card -->
+
       </div>
     </div>
-    <!-- /.row -->
-  </div><!-- /.container-fluid -->
+
+  </div>
 </section>
-<!-- /.content -->
+@endsection
+
+@section('js')
+
+<script>
+  $(function () {
+    $("#articlesData").DataTable({
+      "responsive": false, 
+      "lengthChange": false,
+    });
+  });
+</script>
+
 @endsection

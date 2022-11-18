@@ -18,10 +18,10 @@ class PatientController extends Controller
    */
   public function index()
   {
-    $patients = Patient::latest()->get();
+    $patients = Patient::all();
     return view('admin.patient.index', [
       'title' => 'Data Pasien',
-      'patients' => $patients->paginate(10)
+      'patients' => $patients
     ]);
   }
 

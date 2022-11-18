@@ -15,7 +15,7 @@ class StaticElementController extends Controller
   public function index()
   {
     $elements = StaticElement::all();
-    // return view()
+    return view('admin.sekawans.index', compact('elements'));
   }
 
   /**

@@ -1,7 +1,6 @@
 @extends('layouts.admin')
 
 @section('admin-content')
-<!-- Content Header (Page header) -->
 <section class="content-header">
   <div class="container-fluid">
     <h1>Data Profil Sekawan'S</h1>
@@ -14,10 +13,10 @@
       <div class="col-12">
         <div class="card">
 
-          <div class="card-body ">
+          <div class="card-body p-0">
             <div class="table-responsive">
               <table class="table">
-                <tbody class="border-bottom">
+                <tbody>
 
                   <tr data-widget="expandable-table" class="expand-row" aria-expanded="false">
                     <th>Profil</th>
@@ -29,7 +28,7 @@
                   </tr>
                   <tr class="expandable-body">
                     <td colspan="3">
-                      <p>{{ $profile }}</p>
+                      <p>{{ $elements->find(1)->contents }}</p>
                     </td>
                   </tr>
 
@@ -43,7 +42,7 @@
                   </tr>
                   <tr class="expandable-body">
                     <td colspan="3">
-                      <p>{{ $visimisi }}</p>
+                      <p>{{ $elements->find(2)->contents }}</p>
                     </td>
                   </tr>
 
@@ -57,7 +56,7 @@
                   </tr>
                   <tr class="expandable-body">
                     <td colspan="3">
-                      <img src="{{ $struktur }}" alt="" class="img-fluid py-3 px-md-5">
+                      <img src="{{ $elements->find(3)->contents }}" alt="" class="img-fluid py-3 px-md-5">
                     </td>
                   </tr>
 

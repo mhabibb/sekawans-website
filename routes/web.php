@@ -28,7 +28,7 @@ Route::middleware('auth')->prefix('admin')->name('admin.')->group(function () {
   Route::resource('/users', UserController::class);
   Route::resource('/patients', PatientController::class);
   Route::resource('/sekawans', StaticElementController::class)->except(['create', 'destroy', 'store']);
-  Route::resource('/worker', WorkerController::class);
+  Route::resource('/fasyankes', WorkerController::class);
   Route::resource('/articles', ArticleController::class);
   Route::controller(ArticleController::class)->group(function () {
     Route::get('/infos', 'index')->name('infotbc.index');

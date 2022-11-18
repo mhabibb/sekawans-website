@@ -111,6 +111,14 @@
           </a>
         </li>
         <li class="nav-item">
+          <a href="{{ route('admin.fasyankes.index') }}" class="nav-link">
+            <i class="nav-icon fas fa-notes-medical"></i>
+            <p>
+              Fasyankes
+            </p>
+          </a>
+        </li>
+        <li class="nav-item">
           <a href="{{route('admin.articles.index')}}" class="nav-link">
             <i class="nav-icon fas fa-newspaper"></i>
             <p>

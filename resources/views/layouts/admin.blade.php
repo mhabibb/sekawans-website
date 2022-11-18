@@ -20,7 +20,7 @@
   <!-- summernote -->
   <link rel="stylesheet" href="{{ asset('adminlte/plugins/summernote/summernote-bs4.min.css') }}">
 
-  {{-- @vite(['resources/sass/app.scss', 'resources/js/app.js']) --}}
+  @yield('css')
 
   <!-- PWA  -->
   <meta name="theme-color" content="#343a40" />
@@ -52,15 +52,11 @@
   <script src="{{ asset('adminlte/plugins/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
   <!-- overlayScrollbars -->
   <script src="{{ asset('adminlte/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js') }}"></script>
+  <!-- summernote -->
   <script src="{{ asset('adminlte/plugins/summernote/summernote-bs4.min.js') }}"></script>
 
   <!-- AdminLTE App -->
   <script src="{{ asset('adminlte/dist/js/adminlte.js') }}"></script>
-  <!-- AdminLTE for demo purposes -->
-  {{-- <script src="{{ asset('adminlte/dist/js/demo.js') }}"></script> --}}
-  <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
-  {{-- <script src="{{asset('adminlte/dist/js/pages/dashboard.js')}}"></script> --}}
-  {{-- <script src="{{ asset('adminlte/dist/js/pages/dashboard.js') }}"></script> --}}
 
   <script src="{{ asset('sw.js') }}"></script>
   <script>

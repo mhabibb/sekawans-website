@@ -4,7 +4,7 @@ Website dikembangkan dengan menggunakan framework Laravel 9 dan Bootstrap v5.2
 
 ## Instalasi Frontend
 
--   Pastikan composer dan node sudah terinstal
+-   Pastikan composer dan node sudah terinstal di komputer
 -   Clone repository ini
 -   Masuk ke folder repository local
 -   Instal composer
@@ -13,17 +13,17 @@ Website dikembangkan dengan menggunakan framework Laravel 9 dan Bootstrap v5.2
 composer install
 ```
 
--   Instal package 'laravel/ui' dan 'spatie/laravel-collection-macros'
+-   Instal package 'laravel/ui' dan 'ladumor/laravel-pwa'
 
 ```bash
 composer require laravel/ui
 ```
 
 ```bash
-composer require spatie/laravel-collection-macros
+composer require ladumor/laravel-pwa
 ```
 
--   Instal dependensi frontend
+-   Instal node ke project
 
 ```bash
 npm install
@@ -71,7 +71,7 @@ $secondary: #e71c36;
 }
 ```
 
--   Rename file .env.examples menjadi .env dan sesuaikan dengan device anda
+-   Rename file .env.examples menjadi .env dan sesuaikan
 
 -   Migrasi database dengan jalankan PHP Artisan
 
@@ -85,7 +85,7 @@ Atau bisa juga migrasi dengan dummy data dengan menjalankan PHP Artisan
 php artisan migrate:fresh --seed
 ```
 
--   Compile assets dan jalankan webpack
+-   Compile assets dan jalankan
 
 ```bash
 npm run dev

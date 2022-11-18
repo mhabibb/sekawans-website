@@ -54,17 +54,7 @@ class WebController extends Controller
     {
         // jumlah patient tiap status di tiap regency
         $regencies = Regency::count('status')->get();
-        // foreach ($regencies as $regency) {
-        //     foreach ($regency->districts as $district) {
-        //         $keys = collect($district->first())->keys();
-        //         dd($district, $keys);
-        //         $sum_array = [];
-        //         foreach ($keys as $key) {
-        //             $sum_array[$key] = $regencies->sum($key);
-        //         }
-        //     }
-        // }
-        // dd($regencies);
+
         $status = PatientStatus::all();
         return view('web.kasustbc', [
             'regencies' => $regencies,
@@ -74,8 +64,8 @@ class WebController extends Controller
 
     public function showCase(Regency $regency)
     {
-        $compek = Regency::count('detailStatus')->find($regency->id);
-        return view('web.showKasustbc', ['regency' => $compek]);
+        $regency = Regency::count('detailStatus')->find($regency->id);
+        return view('web.showKasustbc', compact('regency'));
     }
 
     public function article()

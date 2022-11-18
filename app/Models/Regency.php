@@ -76,7 +76,7 @@ class Regency extends Model
                         $query->withOnly('patientStatus')->where('patient_status_id', 4);
                     });
                 },
-                'patients as matek' => function (Builder $query) {
+                'patients as meninggal' => function (Builder $query) {
                     $query->withOnly('patientDetail')->withWhereHas('patientDetail', function ($query) {
                         $query->withOnly('patientStatus')->where('patient_status_id', 5);
                     });
@@ -112,7 +112,7 @@ class Regency extends Model
                             $query->withOnly('patientStatus')->where('patient_status_id', 4);
                         });
                     },
-                    'patients as matek' => function (Builder $query) {
+                    'patients as meninggal' => function (Builder $query) {
                         $query->withOnly('patientDetail')->withWhereHas('patientDetail', function ($query) {
                             $query->withOnly('patientStatus')->where('patient_status_id', 5);
                         });

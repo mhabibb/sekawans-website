@@ -16,10 +16,10 @@
             </div>
             <div class="offcanvas-body">
                 <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
-                    @foreach ($navLinks as $route => $name)
+                    @foreach ($navLinks as $route => $linkName)
                     <li class="nav-item">
                         <a class="nav-link {{ request()->routeIs($route.'*') ? ' active' : '' }}"
-                            href="{{route($route)}}">{{$name}}</a>
+                            href="{{route($route)}}">{{$linkName}}</a>
                     </li>
                     @endforeach
                 </ul>

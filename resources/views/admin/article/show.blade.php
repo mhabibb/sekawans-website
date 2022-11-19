@@ -35,8 +35,8 @@
       <img src="{{ $article->img }}" class="figure-img img-fluid rounded" style="max-height: 600px" alt="...">
       <figcaption class="figure-caption text-center">Sumber : A caption for the above image.</figcaption>
     </figure>
-    <div class="body">
-      <p> {{ $article->contents }} </p>
+    <div class="body text-justify">
+      {{ $article->contents }}
     </div>
   </article>
 </section>

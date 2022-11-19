@@ -42,12 +42,12 @@ class StaticElementSeeder extends Seeder
 
         StaticElement::create([
             'element' => 'instagram',
-            'contents' => '@' . fake()->userName(),
+            'contents' => 'https://www.instagram.com/sekawanstbc_jember/',
         ]);
 
         StaticElement::create([
             'element' => 'tiktok',
-            'contents' => '@' . fake()->userName(),
+            'contents' => 'https://www.tiktok.com/@sekawanstbc_jember',
         ]);
     }
 }

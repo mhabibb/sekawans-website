@@ -2,6 +2,7 @@
 
 namespace App\View\Components;
 
+use App\Models\StaticElement;
 use Illuminate\View\Component;
 
 class Footer extends Component
@@ -23,6 +24,21 @@ class Footer extends Component
      */
     public function render()
     {
-        return view('components.footer');
+        $navLinks = array(
+            'beranda' => 'Beranda',
+            'tentang' => 'Tentang',
+            'infotbc' => 'Info TBC',
+            'kasustbc' => 'Kasus TBC',
+            'artikel' => 'Artikel',
+            'kegiatan' => 'Kegiatan',
+        );
+
+        $socials = StaticElement::get();
+        return view('components.footer', [
+            'navLinks' => $navLinks,
+            'wa' => $socials->find(5),
+            'ig' => $socials->find(6),
+            'tiktok' => $socials->find(7)
+        ]);
     }
 }

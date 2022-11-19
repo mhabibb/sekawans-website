@@ -16,8 +16,9 @@ class WorkerController extends Controller
    */
   public function index()
   {
-    $facilities = SateliteHealthFacility::all();
-    return view('admin.fasyankes.index', compact('facilities'));
+    $facilities = SateliteHealthFacility::get();
+    $workers = Worker::get();
+    return view('admin.fasyankes.index', compact('facilities', 'workers'));
   }
 
   /**

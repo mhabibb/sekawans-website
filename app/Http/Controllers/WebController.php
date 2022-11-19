@@ -24,13 +24,12 @@ class WebController extends Controller
 
     public function about()
     {
-        $profile = StaticElement::find(1);
-        $visimisi = StaticElement::find(2);
-        $structure = StaticElement::find(3);
+        $abouts = StaticElement::get();
+        // dd($abouts);
         return view('web.tentang', [
-            'profile' => $profile->contents,
-            'visimisi' => $visimisi->contents,
-            'structure' => $structure->contents
+            'profile' => $abouts->find(1),
+            'visimisi' => $abouts->find(2),
+            'structure' => $abouts->find(3)
         ]);
     }
 
@@ -41,7 +40,7 @@ class WebController extends Controller
 
     public function info()
     {
-        $infos = Article::all()->where('category_id', 1);
+        $infos = Article::oldest()->category(1)->get();
         return view('web.infotbc', ['infos' => $infos]);
     }
 

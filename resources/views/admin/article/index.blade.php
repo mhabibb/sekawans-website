@@ -65,7 +65,7 @@
   $(function () {
     $("#articlesData").DataTable({
       "responsive": false, 
-      "lengthChange": false,
+      "lengthChange": true,
     });
   });
 </script>

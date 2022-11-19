@@ -34,6 +34,7 @@
                 <tr>
                   <th>No. Registrasi</th>
                   <th>Nama Lengkap</th>
+                  <th>Kecamatan</th>
                   <th>Fasyankes</th>
                   <th>Mulai Berobat</th>
                   <th>Status</th>
@@ -44,6 +45,7 @@
                 <tr>
                   <td>{{ $patient->id_number }}</td>
                   <td><a href="{{ route('admin.patients.show', $patient) }}">{{ $patient->name }}</a></td>
+                  <td>{{ $patient->district->name }}</td>
                   <td>{{ $patient->patientDetail->sateliteHealthFacility->name }}</td>
                   <td>01-01-2022</td>
                   <td>{{ $patient->patientDetail->patientStatus->status }}</td>

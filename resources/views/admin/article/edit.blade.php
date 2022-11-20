@@ -21,15 +21,16 @@
       </div>
       <div class="form-group mb-3 col-md-6">
         <label for="articleImg">Gambar</label>
-        <div class="custom-file">
-          <input type="file" name="img" class="custom-file-input" id="articleImg"
-            aria-describedby="inputGroupFileAddon01">
-          <label class="custom-file-label" for="articleImg">Choose file</label>
-        </div>
+        @if ($article->img)
+        <img src="{{ $article->img }}" alt="..." class="img-preview img-fluid d-block mb-2">
+        @else
+        <img class="img-preview img-fluid d-block mb-2">
+        @endif
+        <input type="file" class="form-control-file" name="articleImg" id="articleImg" onchange="previewImg()">
       </div>
       <div class="form-group mb-3 col-12">
-        <label for="content">Isi konten</label>
-        <textarea id="summernote">{{ $article->contents }}</textarea>
+        <label for="contents">Isi konten</label>
+        <textarea id="summernote" name="contents">{{ $article->contents }}</textarea>
       </div>
       <div class="col-12">
         <button type="reset" onclick="history.back()" class="btn btn-secondary">Batalkan</button>
@@ -44,9 +45,22 @@
 @section('js')
 <script>
   $('#summernote').summernote({
-    
     tabsize: 2,
     height: 300
   });
+</script>
+
+<script>
+  function previewImg() {
+    const image = document.querySelector('#articleImg');
+    const imgPreview = document.querySelector('.img-preview');
+
+    const oFReader = new FileReader();
+    oFReader.readAsDataURL(image.files[0]);
+
+    oFReader.onload = function(oFREvent) {
+      imgPreview.src = oFREvent.target.result;
+    }
+  }
 </script>
 @endsection

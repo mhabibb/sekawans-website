@@ -92,7 +92,19 @@ class WebController extends Controller
     public function liveSearch(Request $request)
     {
         if ($request->ajax()) {
-            $results = Article::latest()->where('title', 'like', '%' . $request->search . '%')->get();
+            switch ($request->target) {
+                case 'info-tbc':
+                    $results = Article::latest()->where('category_id', 1)->where('title', 'like', '%' . $request->search . '%')->get();
+                    break;
+                case 'artikel':
+                    $results = Article::latest()->where('category_id', 2)->where('title', 'like', '%' . $request->search . '%')->get();
+                    break;
+                case 'kegiatan':
+                    $results = Article::latest()->where('category_id', 3)->where('title', 'like', '%' . $request->search . '%')->get();
+                    break;
+                default:
+                    $result = '';
+            }
             $output = '';
 
             if (count($results) > 0) {

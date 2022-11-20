@@ -29,6 +29,9 @@
   <script>
     let keyword = document.getElementById("keyword");
     let result = document.getElementById("searchResult");
+    target = window.location.href.split('/');
+    target = target[target.length-1];
+    console.log(target);
 
     $(document).ready(function () {
         $(keyword).keyup(function () {
@@ -38,7 +41,7 @@
                 $.ajax({
                     type: "get",
                     url: "{{ route('search') }}",
-                    data: 'search=' + $(keyword).val(),
+                    data: 'search=' + $(keyword).val() + '&&target=' + (target),
                     success: function (data) {
                       $(result).html(data);
                     },

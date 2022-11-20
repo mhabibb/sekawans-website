@@ -6,6 +6,7 @@ use App\Models\Patient;
 use App\Http\Requests\StorePatientRequest;
 use App\Http\Requests\UpdatePatientRequest;
 use App\Models\Education;
+use App\Models\PatientDetail;
 use App\Models\PatientStatus;
 use App\Models\Religion;
 
@@ -18,7 +19,11 @@ class PatientController extends Controller
    */
   public function index()
   {
-    $patients = Patient::all();
+    // $patients = Patient::withOnly(['patientDetail'], function($query){
+    //   $query->withOnly('patientStatus')->get();
+    // })->get();
+    $patients = PatientDetail::all();
+    // dd($patients->first());
     return view('admin.patient.index', [
       'title' => 'Data Pasien',
       'patients' => $patients

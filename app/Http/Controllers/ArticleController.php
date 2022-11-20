@@ -94,7 +94,7 @@ class ArticleController extends Controller
      */
     public function store(StoreArticleRequest $request)
     {
-        //
+        dd($request);
     }
 
     /**
@@ -157,7 +157,7 @@ class ArticleController extends Controller
      */
     public function update(UpdateArticleRequest $request, Article $article)
     {
-        //
+        dd($request, $article);
     }
 
     /**

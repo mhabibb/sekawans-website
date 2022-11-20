@@ -16,17 +16,20 @@
             </div>
             <div class="offcanvas-body">
                 <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
-                    @foreach ($navLinks as $route => $name)
+                    @foreach ($navLinks as $route => $linkName)
                     <li class="nav-item">
                         <a class="nav-link {{ request()->routeIs($route.'*') ? ' active' : '' }}"
-                            href="{{route($route)}}">{{$name}}</a>
+                            href="{{route($route)}}">{{$linkName}}</a>
                     </li>
                     @endforeach
                 </ul>
-                <form class="d-flex mt-3 mt-lg-0" role="search">
-                    <input class="form-control rounded-0 me-1" type="search" placeholder="Search" aria-label="Search">
-                    <button class="btn btn-outline-primary rounded-0" type="submit">Search</button>
-                </form>
+                <div class="search-bar d-flex mt-3 mt-lg-0" role="search">
+                    <input id="keyword" class="form-control rounded-0 me-1" name="keyword" type="search"
+                        placeholder="Search" autocomplete="off">
+                    <div>
+                        <div id="searchResult" class="search-result d-none"></div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

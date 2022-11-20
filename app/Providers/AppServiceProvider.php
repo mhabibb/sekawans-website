@@ -41,16 +41,5 @@ class AppServiceProvider extends ServiceProvider
                 ]
             );
         });
-
-        $navLinks = array(
-            'beranda' => 'Beranda',
-            'tentang' => 'Tentang',
-            'infotbc' => 'Info TBC',
-            'kasustbc' => 'Kasus TBC',
-            'kasustbc' => 'Kasus TBC',
-            'artikel' => 'Artikel',
-            'kegiatan' => 'Kegiatan',
-        );
-        view()->share('navLinks', $navLinks);
     }
 }

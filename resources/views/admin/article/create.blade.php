@@ -19,15 +19,12 @@
       </div>
       <div class="form-group mb-3 col-md-6">
         <label for="articleImg">Gambar</label>
-        <div class="custom-file">
-          <input type="file" name="img" class="custom-file-input" id="articleImg"
-            aria-describedby="inputGroupFileAddon01">
-          <label class="custom-file-label" for="articleImg">Choose file</label>
-        </div>
+        <img class="img-preview img-fluid d-block mb-2">
+        <input type="file" class="form-control-file" name="articleImg" id="articleImg" onchange="previewImg()">
       </div>
       <div class="form-group mb-3 col-12">
-        <label for="content">Isi konten</label>
-        <textarea id="summernote"></textarea>
+        <label for="contents">Isi konten</label>
+        <textarea name="contents" id="summernote"></textarea>
       </div>
       <div class="col-12">
         <button type="reset" onclick="history.back()" class="btn btn-secondary">Batalkan</button>
@@ -42,9 +39,22 @@
 @section('js')
 <script>
   $('#summernote').summernote({
-    
     tabsize: 2,
     height: 300
   });
+</script>
+
+<script>
+  function previewImg() {
+    const image = document.querySelector('#articleImg');
+    const imgPreview = document.querySelector('.img-preview');
+
+    const oFReader = new FileReader();
+    oFReader.readAsDataURL(image.files[0]);
+
+    oFReader.onload = function(oFREvent) {
+      imgPreview.src = oFREvent.target.result;
+    }
+  }
 </script>
 @endsection

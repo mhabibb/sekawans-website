@@ -25,25 +25,23 @@
                             <a href="#" class="nav-link p-0 link-light">
                                 <i class="fa-brands fa-whatsapp fa-lg"></i>
                                 <span class="ms-1">
-                                    081234567890
+                                    Whatsapp
                                 </span>
                             </a>
                         </li>
                         <li class="nav-item mb-3">
-                            <a href="https://www.instagram.com/sekawanstbc_jember/" target="blank"
-                                class="nav-link p-0 link-light">
+                            <a href="{{ $ig->contents }}" target="blank" class="nav-link p-0 link-light">
                                 <i class="fa-brands fa-instagram fa-lg"></i>
                                 <span class="ms-1">
-                                    @sekawanstbc_jember
+                                    {{ ucfirst($ig->element) }}
                                 </span>
                             </a>
                         </li>
                         <li class="nav-item mb-3">
-                            <a href="https://www.tiktok.com/@sekawanstbc_jember" target="blank"
-                                class="nav-link p-0 link-light">
+                            <a href="{{ $tiktok->contents }}" target="blank" class="nav-link p-0 link-light">
                                 <i class="fa-brands fa-tiktok fa-lg"></i>
                                 <span class="ms-1">
-                                    @sekawanstbc_jember
+                                    {{ ucfirst($tiktok->element) }}
                                 </span>
                             </a>
                         </li>

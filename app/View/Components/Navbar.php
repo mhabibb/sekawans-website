@@ -2,6 +2,7 @@
 
 namespace App\View\Components;
 
+use Illuminate\Support\Facades\View;
 use Illuminate\View\Component;
 
 class Navbar extends Component
@@ -23,6 +24,14 @@ class Navbar extends Component
      */
     public function render()
     {
-        return view('components.navbar');
+        $navLinks = array(
+            'beranda' => 'Beranda',
+            'tentang' => 'Tentang',
+            'infotbc' => 'Info TBC',
+            'kasustbc' => 'Kasus TBC',
+            'artikel' => 'Artikel',
+            'kegiatan' => 'Kegiatan',
+        );
+        return view('components.navbar', compact('navLinks'));
     }
 }

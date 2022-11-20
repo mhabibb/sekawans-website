@@ -30,3 +30,15 @@ body {
   width: auto;
   height: 200px;
 }
+
+.search-bar {
+  position: relative;
+}
+
+.search-result {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 48px;
+  display: block;
+}

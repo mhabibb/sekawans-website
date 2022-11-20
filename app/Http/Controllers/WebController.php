@@ -101,7 +101,7 @@ class WebController extends Controller
                 foreach ($results as $result) {
                     $output .= '
                 <div class="border-bottom py-3">
-                    <a href="" class="text-decoration-none link-dark">' . $result->title . '</a>
+                    <a href="' . route('artikel.show', $result) . '" class="text-decoration-none link-dark">' . $result->title . '</a>
                 </div>';
                 }
                 $output .= '</div>';

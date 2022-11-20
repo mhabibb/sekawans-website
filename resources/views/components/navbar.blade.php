@@ -23,10 +23,13 @@
                     </li>
                     @endforeach
                 </ul>
-                <form class="d-flex mt-3 mt-lg-0" role="search">
-                    <input class="form-control rounded-0 me-1" type="search" placeholder="Search" aria-label="Search">
-                    <button class="btn btn-outline-primary rounded-0" type="submit">Search</button>
-                </form>
+                <div class="search-bar d-flex mt-3 mt-lg-0" role="search">
+                    <input id="keyword" class="form-control rounded-0 me-1" name="keyword" type="search"
+                        placeholder="Search" autocomplete="off">
+                    <div>
+                        <div id="searchResult" class="search-result d-none"></div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

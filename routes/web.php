@@ -54,4 +54,5 @@ Route::controller(WebController::class)->group(function () {
     Route::get('/artikel/{article}', 'showArticle')->name('artikel.show');
     Route::get('/kegiatan', 'action')->name('kegiatan');
     Route::get('/kegiatan/{article}', 'showAction')->name('kegiatan.show');
+    Route::get('search', 'liveSearch')->name('search');
 });

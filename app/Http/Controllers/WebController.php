@@ -6,6 +6,7 @@ use App\Models\StaticElement;
 use App\Models\Article;
 use App\Models\Regency;
 use App\Models\PatientStatus;
+use Illuminate\Http\Request;
 
 class WebController extends Controller
 {
@@ -24,13 +25,12 @@ class WebController extends Controller
 
     public function about()
     {
-        $profile = StaticElement::find(1);
-        $visimisi = StaticElement::find(2);
-        $structure = StaticElement::find(3);
+        $abouts = StaticElement::get();
+        // dd($abouts);
         return view('web.tentang', [
-            'profile' => $profile->contents,
-            'visimisi' => $visimisi->contents,
-            'structure' => $structure->contents
+            'profile' => $abouts->find(1),
+            'visimisi' => $abouts->find(2),
+            'structure' => $abouts->find(3)
         ]);
     }
 
@@ -41,7 +41,7 @@ class WebController extends Controller
 
     public function info()
     {
-        $infos = Article::all()->where('category_id', 1);
+        $infos = Article::oldest()->category(1)->get();
         return view('web.infotbc', ['infos' => $infos]);
     }
 
@@ -61,8 +61,8 @@ class WebController extends Controller
 
     public function showCase(Regency $regency)
     {
-        $compek = Regency::count('detailStatus')->find($regency->id);
-        return view('web.showKasustbc', ['regency' => $compek]);
+        $regency = Regency::count('detailStatus')->find($regency->id);
+        return view('web.showKasustbc', compact('regency'));
     }
 
     public function article()
@@ -87,5 +87,32 @@ class WebController extends Controller
     public function showAction(Article $article)
     {
         return view('web.showKegiatan', ['action' => $article]);
+    }
+
+    public function liveSearch(Request $request)
+    {
+        if ($request->ajax()) {
+            $results = Article::latest()->where('title', 'like', '%' . $request->search . '%')->get();
+            $output = '';
+
+            if (count($results) > 0) {
+                $output = '
+                <div class="search-list bg-light border px-2">';
+                foreach ($results as $result) {
+                    $output .= '
+                <div class="border-bottom py-3">
+                    <a href="" class="text-decoration-none link-dark">' . $result->title . '</a>
+                </div>';
+                }
+                $output .= '</div>';
+            } else {
+                $output .= '
+                <div class="search-list bg-light px-2 border"> 
+                    <div class="py-3 text-muted">Data tidak ditemukan</div> 
+                </div>';
+            }
+        }
+
+        return $output;
     }
 }

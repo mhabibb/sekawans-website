@@ -1,7 +1,18 @@
 @extends('layouts.admin')
 
+@section('css')
+
+<style>
+  div.dataTables_paginate ul.pagination {
+    display: flex;
+    flex-wrap: wrap;
+  }
+</style>
+
+@endsection
+
 @section('admin-content')
-<!-- Content Header (Page header) -->
+
 <section class="content-header">
   <div class="container-fluid">
     <h1>{{ $title }}</h1>
@@ -13,46 +24,54 @@
     <div class="row">
       <div class="col-12">
         <div class="card">
-          {{-- <div class="card-header">
-            <h3 class="card-title">DataTable with default features</h3>
-          </div> --}}
-
-          <div class="card-body ">
-            <div class="table-responsive">
-              <table class="table table-bordered table-striped">
-                <thead>
-                  <tr>
-                    <th>No. Registrasi</th>
-                    <th>Nama Lengkap</th>
-                    <th>Nama Fasyankes</th>
-                    <th>Mulai Berobat</th>
-                    <th>Status</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  @foreach ($patients as $patient)
-                  <tr>
-                    <td>{{ $patient->id_number }}</td>
-                    <td>{{ $patient->name }}</td>
-                    <td>Win 95+</td>
-                    <td> 4</td>
-                    <td>Sehat</td>
-                  </tr>
-                  @endforeach
-                </tbody>
-              </table>
-            </div>
-            <div class="d-flex justify-content-center">
-              {{ $patients->onEachSide(1)->links() }}
-            </div>
+          <div class="card-header">
+            <a href="{{ route('admin.patients.create') }}" class="btn btn-primary card-title">Input Data</a>
           </div>
+
+          <div class="card-body">
+            <table id="patientsData" class="table table-bordered table-striped">
+              <thead>
+                <tr>
+                  <th>No. Registrasi</th>
+                  <th>Nama Lengkap</th>
+                  <th>Kecamatan</th>
+                  <th>Fasyankes</th>
+                  <th>Mulai Berobat</th>
+                  <th>Status</th>
+                </tr>
+              </thead>
+              <tbody>
+                @foreach ($patients as $patient)
+                <tr>
+                  <td>{{ $patient->no_regis }}</td>
+                  <td><a href="{{ route('admin.patients.show', $patient->patient) }}">{{ $patient->patient->name }}</a></td>
+                  <td>{{ $patient->patient->district->name }}</td>
+                  <td>{{ $patient->sateliteHealthFacility->name }}</td>
+                  <td>01-01-2022</td>
+                  <td>{{ $patient->patientStatus->status }}</td>
+                </tr>
+                @endforeach
+              </tbody>
+            </table>
+          </div>
+
         </div>
-
       </div>
-
     </div>
-
   </div>
 
 </section>
+@endsection
+
+@section('js')
+
+<script>
+  $(function () {
+    $("#patientsData").DataTable({
+      "responsive": true, "lengthChange": false, "autoWidth": false,
+      "buttons": ["csv", "excel", "pdf", "print"]
+    }).buttons().container().appendTo('#patientsData_wrapper .col-md-6:eq(0)');
+  });
+</script>
+
 @endsection

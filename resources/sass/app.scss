@@ -7,6 +7,11 @@
 // Bootstrap
 @import 'bootstrap/scss/bootstrap';
 
+body {
+  padding: 0;
+  margin: 0;
+}
+
 .module {
   margin: 0 0 1em 0;
   overflow: hidden;
@@ -24,4 +29,16 @@
 .thumbnail {
   width: auto;
   height: 200px;
+}
+
+.search-bar {
+  position: relative;
+}
+
+.search-result {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 48px;
+  display: block;
 }

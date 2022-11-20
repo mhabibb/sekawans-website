@@ -45,11 +45,11 @@
                 </div>
                 <div class="col-12 col-sm-4 col-md-2 px-2 text-center" style="max-width: 200px;">
                     {{-- count where patient with status = 'sembuh' --}}
-                    <h1>{{ $regency->matek }}</h1>
+                    <h1>{{ $regency->meninggal }}</h1>
                     <p class="lead fw-bold">Meninggal</p>
                 </div>
             </div>
-            <a href="{{ route('showKasustbc', $regency) }}" class="btn btn-secondary">Lihat per Kecamatan</a>
+            <a href="{{ route('kasustbc.show', $regency) }}" class="btn btn-secondary">Lihat per Kecamatan</a>
         </div>
         @endforeach
     </div>

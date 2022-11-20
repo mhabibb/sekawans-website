@@ -22,7 +22,7 @@
           <div class="module line-clamp">
             <h5>{{ $article->title }}</h5>
           </div>
-          <a href="{{ route('showArtikel', $article) }}" class="link-primary text-underline">Baca selengkapnya</a>
+          <a href="{{ route('artikel.show', $article) }}" class="link-primary text-underline">Baca selengkapnya</a>
         </div>
       </div>
     </div>

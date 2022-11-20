@@ -5,87 +5,97 @@ namespace App\Http\Controllers;
 use App\Models\Patient;
 use App\Http\Requests\StorePatientRequest;
 use App\Http\Requests\UpdatePatientRequest;
+use App\Models\Education;
+use App\Models\PatientDetail;
+use App\Models\PatientStatus;
+use App\Models\Religion;
 
 class PatientController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        $patients = Patient::all();
-        // dd($patients);
-        return view('admin.patient.index', [
-            'title' => 'Data Pasien',
-            'patients' => $patients->paginate(10)
-        ]);
-    }
+  /**
+   * Display a listing of the resource.
+   *
+   * @return \Illuminate\Http\Response
+   */
+  public function index()
+  {
+    // $patients = Patient::withOnly(['patientDetail'], function($query){
+    //   $query->withOnly('patientStatus')->get();
+    // })->get();
+    $patients = PatientDetail::all();
+    // dd($patients->first());
+    return view('admin.patient.index', [
+      'title' => 'Data Pasien',
+      'patients' => $patients
+    ]);
+  }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
+  /**
+   * Show the form for creating a new resource.
+   *
+   * @return \Illuminate\Http\Response
+   */
+  public function create()
+  {
+    $religions = Religion::all();
+    $educations = Education::all();
+    $statuses = PatientStatus::all();
+    return view('admin.patient.create', compact('religions', 'educations', 'statuses'));
+  }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \App\Http\Requests\StorePatientRequest  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(StorePatientRequest $request)
-    {
-        //
-    }
+  /**
+   * Store a newly created resource in storage.
+   *
+   * @param  \App\Http\Requests\StorePatientRequest  $request
+   * @return \Illuminate\Http\Response
+   */
+  public function store(StorePatientRequest $request)
+  {
+    dd($request);
+  }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Patient  $patient
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Patient $patient)
-    {
-        //
-    }
+  /**
+   * Display the specified resource.
+   *
+   * @param  \App\Models\Patient  $patient
+   * @return \Illuminate\Http\Response
+   */
+  public function show(Patient $patient)
+  {
+    return view('admin.patient.show', compact('patient'));
+  }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Patient  $patient
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Patient $patient)
-    {
-        //
-    }
+  /**
+   * Show the form for editing the specified resource.
+   *
+   * @param  \App\Models\Patient  $patient
+   * @return \Illuminate\Http\Response
+   */
+  public function edit(Patient $patient)
+  {
+    //
+  }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \App\Http\Requests\UpdatePatientRequest  $request
-     * @param  \App\Models\Patient  $patient
-     * @return \Illuminate\Http\Response
-     */
-    public function update(UpdatePatientRequest $request, Patient $patient)
-    {
-        //
-    }
+  /**
+   * Update the specified resource in storage.
+   *
+   * @param  \App\Http\Requests\UpdatePatientRequest  $request
+   * @param  \App\Models\Patient  $patient
+   * @return \Illuminate\Http\Response
+   */
+  public function update(UpdatePatientRequest $request, Patient $patient)
+  {
+    //
+  }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Patient  $patient
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Patient $patient)
-    {
-        //
-    }
+  /**
+   * Remove the specified resource from storage.
+   *
+   * @param  \App\Models\Patient  $patient
+   * @return \Illuminate\Http\Response
+   */
+  public function destroy(Patient $patient)
+  {
+    //
+  }
 }

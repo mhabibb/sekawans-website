@@ -5,6 +5,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="shortcut icon" href="{{ asset('logos/favicon.ico') }}" type="image/x-icon">
   <title>Sekawans TB Jember</title>
 
   {{-- Font Awesome CDN --}}
@@ -18,11 +19,39 @@
 <body>
   <x-navbar />
 
-  <main>
+  <main style="min-height: 50vh;">
     @yield('content')
   </main>
 
   <x-footer />
+
+  <script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
+  <script>
+    let keyword = document.getElementById("keyword");
+    let result = document.getElementById("searchResult");
+
+    $(document).ready(function () {
+        $(keyword).keyup(function () {
+            $(result).addClass("d-none");
+            if ($(keyword).val() != "") {
+                $(result).removeClass("d-none");
+                $.ajax({
+                    type: "get",
+                    url: "{{ route('search') }}",
+                    data: 'search=' + $(keyword).val(),
+                    success: function (data) {
+                      $(result).html(data);
+                    },
+                });
+            } else {
+              $.get("{{ route('search') }}", {}, function(data, status) {
+                $(result).html(data);
+              })
+            }
+        });
+    });
+
+  </script>
 </body>
 
 </html>

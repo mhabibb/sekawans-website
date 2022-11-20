@@ -32,7 +32,7 @@
             </div>
         </li>
         <li class="nav-item d-sm-inline-block">
-            <a href="/" target="blank" class="nav-link">Beranda</a>
+            <a href="{{ route('beranda') }}" target="blank" class="nav-link">Beranda</a>
         </li>
     </ul>
 </nav>
@@ -42,8 +42,8 @@
 <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
     <a href="#" class="brand-link">
-        <img src="{{ asset('img/logo-sekawans.png') }}" alt="AdminLTE Logo" class="brand-image img-circle elevation-3"
-            style="opacity: .8">
+        <img src="{{ asset('logos/ms-icon-144x144.png') }}" alt="AdminLTE Logo"
+            class="brand-image img-circle elevation-3" style="opacity: .8">
         <span class="brand-text font-weight-light">Admin Sekawan'S</span>
     </a>
 
@@ -79,57 +79,19 @@
                         </li>
                     </ul>
                 </li>
+                @foreach ($navLinks as $route => [$name, $icon])
                 <li class="nav-item">
-                    <a href="{{ route('admin.dashboard') }}" class="nav-link">
-                        <i class="nav-icon fas fa-tachometer-alt"></i>
+                    <a href="{{ route($route.'.index') }}" class="nav-link {{ request()->routeIs($route.'*') ? ' active' : '' }}">
+                        <i class="nav-icon {{ $icon }}"></i>
                         <p>
-                            Dashboard
+                            {{ $name }}
                         </p>
                     </a>
                 </li>
-                <li class="nav-item">
-                    <a href="/admin/profil-organisasi" class="nav-link">
-                        <i class="nav-icon fas fa-users"></i>
-                        <p>
-                            Tentang
-                        </p>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a href="{{ route('admin.infotbc.index') }}" class="nav-link">
-                        <i class="nav-icon fas fa-circle-info"></i>
-                        <p>
-                            Informasi TBC
-                        </p>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a href="{{ route('admin.patient.index') }}" class="nav-link">
-                        <i class="nav-icon fas fa-database"></i>
-                        <p>
-                            Data Pasien TBC
-                        </p>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a href="{{route('admin.articles.index')}}" class="nav-link">
-                        <i class="nav-icon fas fa-newspaper"></i>
-                        <p>
-                            Artikel
-                        </p>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a href="{{route('admin.kegiatan.index')}}" class="nav-link">
-                        <i class="nav-icon fas fa-square-person-confined"></i>
-                        <p>
-                            Kegiatan
-                        </p>
-                    </a>
-                </li>
+                @endforeach
                 <li class="nav-header">SUPER ADMIN</li>
                 <li class="nav-item">
-                    <a href="{{route('admin.users.index')}}" class="nav-link">
+                    <a href="{{route('admin.users.index')}}" class="nav-link {{ request()->routeIs('admin.users.index*') ? ' active' : '' }}">
                         <i class="nav-icon fas fa-lock"></i>
                         <p>
                             Kelola Akun

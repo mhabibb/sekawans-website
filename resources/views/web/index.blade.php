@@ -101,7 +101,7 @@
     <h1 class="fw-bold mb-5 text-center text-primary">Artikel Terbaru</h1>
     <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 justify-content-center g-4">
         @foreach ($articles as $article)
-        <div class="col">
+        <div class="col" style="max-width: 400px;">
             <div class="card border h-100">
                 <img src="{{ $article->img }}" class="card-img-top thumbnail" alt="card-image">
                 <div class="card-body">

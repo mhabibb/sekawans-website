@@ -14,8 +14,13 @@
                 <h5 class="offcanvas-title" id="offcanvasNavbar2Label"></h5>
                 <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
             </div>
-            <div class="offcanvas-body">
-                <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
+            <div class="offcanvas-body flex-lg-row-reverse">
+                <div class="search-bar mb-3 mb-lg-0" role="search">
+                    <input id="keyword" class="form-control rounded-0 me-1" name="keyword" type="text"
+                        placeholder="Cari..." autocomplete="off">
+                    <div id="searchResult" class="search-result border bg-light d-none"></div>
+                </div>
+                <ul class="navbar-nav navbar-nav-scroll justify-content-end flex-grow-1 pe-3">
                     @foreach ($navLinks as $route => $linkName)
                     <li class="nav-item">
                         <a class="nav-link {{ request()->routeIs($route.'*') ? ' active' : '' }}"
@@ -23,13 +28,6 @@
                     </li>
                     @endforeach
                 </ul>
-                <div class="search-bar d-flex mt-3 mt-lg-0" role="search">
-                    <input id="keyword" class="form-control rounded-0 me-1" name="keyword" type="search"
-                        placeholder="Search" autocomplete="off">
-                    <div>
-                        <div id="searchResult" class="search-result d-none"></div>
-                    </div>
-                </div>
             </div>
         </div>
     </div>

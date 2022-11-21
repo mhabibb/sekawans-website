@@ -1,5 +1,11 @@
 @extends('layouts.admin')
 
+@section('css')
+<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+<link rel="stylesheet"
+  href="https://cdn.jsdelivr.net/npm/@ttskch/select2-bootstrap4-theme@x.x.x/dist/select2-bootstrap4.min.css">
+@endsection
+
 @section('admin-content')
 <!-- Content Header (Page header) -->
 <section class="content-header">
@@ -18,48 +24,56 @@
           <div class="col-12 card-title">
             <h5>Data Dasar Pasien</h5>
           </div>
-          <div class="col-sm-6 form-group">
-            <label for="fasyankes">Nama Fasyankes TB RO</label>
-            <input type="text" name="fasyankes" id="fasyankes" class="form-control">
+          <div class="col-sm-6">
+            <div class="form-group">
+              <label>Fasyankes TB RO</label>
+              <select class="form-control select2" name="fasyankes" style="width: 100%;">
+                <option>Pilih Fasyankes</option>
+                @foreach ($facilities as $fasyankes)
+                <option value="{{ $fasyankes->id }}">{{ $fasyankes->name }}</option>
+                @endforeach
+              </select>
+            </div>
           </div>
           <div class="col-sm-6 form-group">
-            <label for="satelite">Nama Fasyankes Satelit</label>
-            <input type="text" name="satelite" id="satelite" class="form-control">
+            <label>Nama Fasyankes Satelit</label>
+            <input type="text" name="satelite" class="form-control">
           </div>
           <div class="col-sm-6 form-group">
-            <label for="dateStart">Tanggal Mulai Berobat</label>
-            <input type="date" name="dateStart" id="dateStart" class="form-control">
+            <label>Tanggal Mulai Berobat</label>
+            <input type="date" name="dateStart" class="form-control">
           </div>
           <div class="col-sm-6 form-group">
-            <label for="regNum">No. Registrasi Pasien</label>
-            <input type="number" name="regNum" id="regNum" class="form-control">
+            <label>No. Registrasi Pasien</label>
+            <input type="number" name="registrationNumber" class="form-control">
           </div>
         </div>
+
         <div class="row mb-4">
           <div class="col-12 card-title">
             <h5>Identitas Pasien</h5>
           </div>
 
           <div class="col-sm-6 form-group">
-            <label for="name">Nama Lengkap</label>
-            <input type="text" name="name" id="name" class="form-control">
+            <label>Nama Lengkap</label>
+            <input type="text" name="fullName" class="form-control">
           </div>
 
           <div class="col-sm-6 form-group">
-            <label for="nik">NIK KTP</label>
-            <input type="number" name="nik" id="nik" class="form-control">
+            <label>NIK KTP</label>
+            <input type="number" name="nik" class="form-control">
           </div>
 
           <div class="col-sm-6 form-group">
-            <label class="d-block">Jenis Kelamin</label>
+            <label>Jenis Kelamin</label>
             <div class="form-check">
-              <input class="form-check-input" type="radio" name="sexs" id="lakilaki" value="laki-laki">
+              <input class="form-check-input" type="radio" name="sex" id="lakilaki" value="laki-laki">
               <label class="form-check-label" for="lakilaki">
                 Laki-laki
               </label>
             </div>
             <div class="form-check">
-              <input class="form-check-input" type="radio" name="sexs" id="perempuan" value="perempuan">
+              <input class="form-check-input" type="radio" name="sex" id="perempuan" value="perempuan">
               <label class="form-check-label" for="perempuan">
                 Perempuan
               </label>
@@ -67,11 +81,11 @@
           </div>
 
           <div class="col-sm-6 form-group">
-            <label class="d-block">Agama</label>
+            <label>Agama</label>
             <div class="row row-cols-2 mx-1">
               @foreach ($religions as $religion)
               <div class="form-check">
-                <input class="form-check-input" type="radio" name="religions" id="{{'religion' . $religion->id}}"
+                <input class="form-check-input" type="radio" name="religion" id="{{'religion' . $religion->id}}"
                   value="{{ $religion->id }}">
                 <label class="form-check-label" for="{{'religion' . $religion->id}}">
                   {{ $religion->name }}
@@ -82,31 +96,52 @@
           </div>
 
           <div class="col-sm-6 form-group">
-            <label for="address">Alamat KTP</label>
-            <input type="text" name="address" id="address" class="form-control">
+            <label>Alamat KTP</label>
+            <input type="text" name="addressKtp" class="form-control">
           </div>
 
           <div class="col-sm-6 form-group">
-            <label for="addressNow">Alamat Domisili</label>
-            <input type="text" name="addressNow" id="addressNow" class="form-control">
+            <label>Kecamatan KTP</label>
+            <input type="text" name="districtKtp" class="form-control">
           </div>
 
           <div class="col-sm-6 form-group">
-            <label for="age">Umur (Tahun)</label>
-            <input type="number" name="age" id="age" class="form-control">
+            <label>Alamat Domisili</label>
+            <input type="text" name="addressNow" class="form-control">
+          </div>
+
+          <div class="col-sm-6">
+            <div class="form-group">
+              <label>Kecamatan</label>
+              <select class="form-control select2" name="district" style="width: 100%;">
+                <option>Pilih Kecamatan</option>
+                @foreach ($regencies as $regency)
+                <optgroup label="{{ $regency->name }}">
+                  @foreach ($regency->districts as $district)
+                  <option value="{{ $district->id }}">{{ $district->name }}</option>
+                  @endforeach
+                </optgroup>
+                @endforeach
+              </select>
+            </div>
           </div>
 
           <div class="col-sm-6 form-group">
-            <label for="phone">No. Telepon / HP</label>
-            <input type="number" name="phone" id="phone" class="form-control">
+            <label>Umur (Tahun)</label>
+            <input type="number" name="age" class="form-control">
           </div>
 
           <div class="col-sm-6 form-group">
-            <label class="d-block">Status Pendidikan</label>
+            <label>No. Telepon / HP</label>
+            <input type="text" name="phoneNumber" class="form-control">
+          </div>
+
+          <div class="col-sm-6 form-group">
+            <label>Status Pendidikan</label>
             <div class="row row-cols-2 mx-1">
               @foreach ($educations as $edu)
               <div class="form-check">
-                <input class="form-check-input" type="radio" name="educations" id="{{'edu' . $edu->id}}"
+                <input class="form-check-input" type="radio" name="education" id="{{'edu' . $edu->id}}"
                   value="{{ $edu->id }}">
                 <label class="form-check-label" for="{{'edu' . $edu->id}}">
                   {{ $edu->education }}
@@ -120,19 +155,20 @@
             <label class="d-block">Status Pernikahan</label>
             <div class="row row-cols-2 mx-1">
               <div class="form-check">
-                <input class="form-check-input" type="radio" name="maritals" id="menikah" value="menikah">
+                <input class="form-check-input" type="radio" name="maritalStatus" id="menikah" value="menikah">
                 <label class="form-check-label" for="menikah">
                   Menikah
                 </label>
               </div>
               <div class="form-check">
-                <input class="form-check-input" type="radio" name="maritals" id="belum-menikah" value="belum menikah">
+                <input class="form-check-input" type="radio" name="maritalStatus" id="belum-menikah"
+                  value="belum menikah">
                 <label class="form-check-label" for="belum-menikah">
                   Belum Menikah
                 </label>
               </div>
               <div class="form-check">
-                <input class="form-check-input" type="radio" name="maritals" id="janda-duda" value="Janda/Duda">
+                <input class="form-check-input" type="radio" name="maritalStatus" id="janda-duda" value="janda/duda">
                 <label class="form-check-label" for="janda-duda">
                   Janda/Duda
                 </label>
@@ -141,15 +177,15 @@
           </div>
 
           <div class="col-sm-6 form-group">
-            <label class="d-block">Status Pekerjaan</label>
+            <label>Status Pekerjaan</label>
             <div class="form-check">
-              <input class="form-check-input" type="radio" name="jobstat" id="bekerja" value="1">
+              <input class="form-check-input" type="radio" name="hasJob" id="bekerja" value="1">
               <label class="form-check-label" for="bekerja">
                 Bekerja
               </label>
             </div>
             <div class="form-check">
-              <input class="form-check-input" type="radio" name="jobstat" id="tidak-kerja" value="2">
+              <input class="form-check-input" type="radio" name="hasJob" id="tidak-kerja" value="0">
               <label class="form-check-label" for="tidak-kerja">
                 Tidak Bekerja
               </label>
@@ -157,36 +193,36 @@
           </div>
 
           <div class="col-sm-6 form-group">
-            <label for="workplace">Tempat Bekerja</label>
-            <input type="text" name="workplace" id="workplace" class="form-control">
+            <label>Tempat Bekerja</label>
+            <input type="text" name="workplace" class="form-control">
           </div>
 
           <div class="col-sm-6 form-group">
-            <label for="workAddr">Alamat Tempat Bekerja</label>
-            <input type="text" name="workAddr" id="workAddr" class="form-control">
+            <label>Alamat Tempat Bekerja</label>
+            <input type="text" name="workAddress" class="form-control">
           </div>
 
           <div class="col-sm-6 form-group">
-            <label for="depend">Jumlah Tanggungan</label>
-            <input type="number" name="depend" id="depend" class="form-control">
+            <label>Jumlah Tanggungan</label>
+            <input type="number" name="dependent" class="form-control">
           </div>
 
           <div class="col-sm-6 form-group">
-            <label for="height">Tinggi Badan (cm)</label>
-            <input type="number" name="height" id="height" class="form-control">
+            <label>Tinggi Badan (cm)</label>
+            <input type="number" name="height" class="form-control">
           </div>
 
           <div class="col-sm-6 form-group">
-            <label for="weight">Berat Badan (kg)</label>
-            <input type="number" name="weight" id="weight" class="form-control">
+            <label>Berat Badan (kg)</label>
+            <input type="number" name="weight" class="form-control">
           </div>
 
           <div class="col-sm-6 form-group">
-            <label for="d-block">Status Pasien</label>
+            <label>Status Pasien</label>
             <div class="row row-cols-2 mx-1">
               @foreach ($statuses as $status)
               <div class="form-check">
-                <input class="form-check-input" type="radio" name="statuses" id="{{'status' . $status->id}}"
+                <input class="form-check-input" type="radio" name="patientStatus" id="{{'status' . $status->id}}"
                   value="{{ $status->id }}">
                 <label class="form-check-label" for="{{'status' . $status->id}}">
                   {{ $status->status }}
@@ -195,8 +231,96 @@
               @endforeach
             </div>
           </div>
-
         </div>
+
+        <div class="row mb-4">
+          <div class="col-12 card-title">
+            <h5>Identitas Orang Tua/Wali</h5>
+          </div>
+          <div class="col-sm-6 form-group">
+            <label>Nama Ibu</label>
+            <input type="text" name="motherName" class="form-control">
+          </div>
+
+          <div class="col-sm-6 form-group">
+            <label>Nama Bapak</label>
+            <input type="text" name="fatherName" class="form-control">
+          </div>
+
+          <div class="col-sm-6 form-group">
+            <label>Alamat</label>
+            <input type="text" name="parentAddress" class="form-control">
+          </div>
+
+          <div class="col-sm-6 form-group">
+            <label>Kecamatan</label>
+            <input type="text" name="parentDistrict" class="form-control">
+          </div>
+
+          <div class="col-sm-6 form-group">
+            <label>No. Telepon/Hp</label>
+            <input type="text" name="parentPhone" class="form-control">
+          </div>
+        </div>
+
+        <div class="row mb-4 pb-2 border-bottom">
+          <div class="col-12 card-title">
+            <h5>Kontak Darurat</h5>
+          </div>
+
+          <div class="col-sm-6 form-group">
+            <label>Nama</label>
+            <input type="text" name="emergencyContactName" class="form-control">
+          </div>
+
+          <div class="col-sm-6 form-group">
+            <label>Hubungan</label>
+            <input type="text" name="emergencyContactRelations" class="form-control">
+          </div>
+
+          <div class="col-sm-6 form-group">
+            <label>Alamat</label>
+            <input type="text" name="emergencyContactAddress" class="form-control">
+          </div>
+
+          <div class="col-sm-6">
+            <div class="form-group">
+              <label>Kecamatan</label>
+              <select class="select2" name="emergencyContactDistrict" style="width: 100%;">
+                <option>Pilih Kecamatan</option>
+                @foreach ($regencies as $regency)
+                <optgroup label="{{ $regency->name }}">
+                  @foreach ($regency->districts as $district)
+                  <option value="{{ $district->id }}">{{ $district->name }}</option>
+                  @endforeach
+                </optgroup>
+                @endforeach
+              </select>
+            </div>
+          </div>
+
+          <div class="col-sm-6 form-group">
+            <label>No. Telepon/Hp</label>
+            <input type="text" name="emergencyContactPhone" class="form-control">
+          </div>
+
+          <div class="col-sm-6 form-group">
+            <label>Tahu Penyakit Pasien</label>
+            <div class="form-check">
+              <input class="form-check-input" type="radio" name="isKnow" id="ya-tahu" value="1">
+              <label class="form-check-label" for="ya-tahu">
+                Ya
+              </label>
+            </div>
+            <div class="form-check">
+              <input class="form-check-input" type="radio" name="isKnow" id="tidak-tahu" value="0">
+              <label class="form-check-label" for="tidak-tahu">
+                Tidak
+              </label>
+            </div>
+          </div>
+        </div>
+
         <div class="col-12">
           <button type="reset" onclick="history.back()" class="btn btn-secondary">Batalkan</button>
           <button type="submit" class="btn btn-primary">Submit</button>
@@ -206,4 +330,16 @@
   </div><!-- /.container -->
 </section>
 <!-- /.content -->
+@endsection
+
+@section('js')
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+
+<script>
+  $(document).ready(function() {
+    $('.select2').select2({
+      theme: 'bootstrap4'
+    });
+});
+</script>
 @endsection

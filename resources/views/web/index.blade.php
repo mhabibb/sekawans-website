@@ -62,6 +62,10 @@
             <img src="https://tbindonesia.or.id/wp-content/uploads/2019/10/logo-tosstb.png" alt="" height="80px">
         </div>
         <div class="col p-3">
+            <img src="https://poptbindonesia.org/wp-content/uploads/2020/10/Samping-trans-300x162.png" alt=""
+                height="80px">
+        </div>
+        <div class="col p-3">
             <img src="https://promkes.kemkes.go.id/__asset/__images/content_wysiwyg//LOGO_GERMAS_NORMAL.png" alt=""
                 height="80px">
         </div>

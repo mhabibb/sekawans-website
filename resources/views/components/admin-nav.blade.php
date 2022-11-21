@@ -9,28 +9,6 @@
 
     <!-- Right navbar links -->
     <ul class="navbar-nav ml-auto">
-        <!-- Navbar Search -->
-        <li class="nav-item">
-            <a class="nav-link" data-widget="navbar-search" href="#" role="button">
-                <i class="fas fa-search"></i>
-            </a>
-            <div class="navbar-search-block">
-                <form class="form-inline">
-                    <div class="input-group input-group-sm">
-                        <input class="form-control form-control-navbar" type="search" placeholder="Search"
-                            aria-label="Search">
-                        <div class="input-group-append">
-                            <button class="btn btn-navbar" type="submit">
-                                <i class="fas fa-search"></i>
-                            </button>
-                            <button class="btn btn-navbar" type="button" data-widget="navbar-search">
-                                <i class="fas fa-times"></i>
-                            </button>
-                        </div>
-                    </div>
-                </form>
-            </div>
-        </li>
         <li class="nav-item d-sm-inline-block">
             <a href="{{ route('beranda') }}" target="blank" class="nav-link">Beranda</a>
         </li>
@@ -81,7 +59,8 @@
                 </li>
                 @foreach ($navLinks as $route => [$name, $icon])
                 <li class="nav-item">
-                    <a href="{{ route($route.'.index') }}" class="nav-link {{ request()->routeIs($route.'*') ? ' active' : '' }}">
+                    <a href="{{ route($route.'.index') }}"
+                        class="nav-link {{ request()->routeIs($route.'*') ? ' active' : '' }}">
                         <i class="nav-icon {{ $icon }}"></i>
                         <p>
                             {{ $name }}
@@ -91,7 +70,8 @@
                 @endforeach
                 <li class="nav-header">SUPER ADMIN</li>
                 <li class="nav-item">
-                    <a href="{{route('admin.users.index')}}" class="nav-link {{ request()->routeIs('admin.users.index*') ? ' active' : '' }}">
+                    <a href="{{route('admin.users.index')}}"
+                        class="nav-link {{ request()->routeIs('admin.users.index*') ? ' active' : '' }}">
                         <i class="nav-icon fas fa-lock"></i>
                         <p>
                             Kelola Akun

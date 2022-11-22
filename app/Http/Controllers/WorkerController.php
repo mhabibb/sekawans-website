@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Models\Worker;
 use App\Http\Requests\StoreWorkerRequest;
 use App\Http\Requests\UpdateWorkerRequest;
-use App\Models\SateliteHealthFacility;
 
 class WorkerController extends Controller
 {
@@ -16,9 +15,7 @@ class WorkerController extends Controller
    */
   public function index()
   {
-    $facilities = SateliteHealthFacility::get();
-    $workers = Worker::get();
-    return view('admin.fasyankes.index', compact('facilities', 'workers'));
+    //
   }
 
   /**

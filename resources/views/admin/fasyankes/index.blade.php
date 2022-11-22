@@ -7,22 +7,22 @@
   </div>
 </section>
 
-<section class="conten">
+<section class="content">
   <div class="container-fluid">
     <div class="row">
-      <div class="col col-lg-6">
+      <div class="col-12 col-md-6">
         <div class="card">
-          <div class="card-body table-responsive p-0" style="height: 480px;">
-            <table class="table table-head-fixed text-nowrap">
+          <div class="card-body table-responsive">
+            <table class="table">
               <thead>
                 <tr>
-                  <th>Daftar Fasyankes</th>
+                  <th>Fasyankes TB RO</th>
                 </tr>
               </thead>
               <tbody>
-                @foreach ($facilities as $facility)
+                @foreach ($fasyankes as $rs)
                 <tr>
-                  <td> {{ $facility->name }} </td>
+                  <td>{{ $rs }}</td>
                 </tr>
                 @endforeach
               </tbody>
@@ -30,19 +30,19 @@
           </div>
         </div>
       </div>
-      <div class="col col-lg-6">
+      <div class="col-12 col-md-6">
         <div class="card">
-          <div class="card-body table-responsive p-0" style="height: 480px;">
-            <table class="table table-head-fixed text-nowrap">
+          <div class="card-body table-responsive" style="height: 480px;">
+            <table class="table">
               <thead>
                 <tr>
-                  <th>Daftar PS</th>
+                  <th>Fasyankes Satelit</th>
                 </tr>
               </thead>
               <tbody>
-                @foreach ($workers as $worker)
+                @foreach ($satelites as $satelite)
                 <tr>
-                  <td> {{ $worker->name }} </td>
+                  <td> {{ $satelite->name }} </td>
                 </tr>
                 @endforeach
               </tbody>

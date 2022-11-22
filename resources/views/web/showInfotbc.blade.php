@@ -13,7 +13,7 @@
             <img src="{{ $info->img }}" class="figure-img img-fluid rounded" style="max-height: 600px" alt="..."
                 loading="lazy">
         </figure>
-        <div class="body">
+        <div class="body" style="text-align: justify;">
             <p>{{ $info->contents }}</p>
         </div>
     </article>

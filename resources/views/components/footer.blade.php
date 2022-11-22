@@ -31,7 +31,7 @@
                                 </span>
                             </a>
                             @else
-                            <a href="{{ $social->contents }}" class="nav-link p-0 link-light">
+                            <a href="{{ $social->contents }}" target="blank" class="nav-link p-0 link-light">
                                 <i class="fa-brands fa-{{ $social->element }} fa-lg"></i>
                                 <span class="ms-1">
                                     {{ ucfirst($social->element) }} <i

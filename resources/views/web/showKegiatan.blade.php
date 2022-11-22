@@ -22,7 +22,7 @@
             <img src="{{ $action->img }}" class="figure-img img-fluid rounded" style="max-height: 600px" alt="...">
             <figcaption class="figure-caption text-center">Sumber : A caption for the above image.</figcaption>
         </figure>
-        <div class="body">
+        <div class="body" style="text-align: justify;">
             <p>{{ $action->contents }}</p>
         </div>
     </article>

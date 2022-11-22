@@ -29,19 +29,18 @@
                     <div class="col-sm-6">
                         <div class="form-group">
                             <label>Fasyankes TB RO</label>
-                            <select class="form-control select2" name="fasyankes" style="width: 100%;">
-                                <option>Pilih Fasyankes</option>
-                                @foreach ($facilities as $fasyankes)
-                                <option value="{{ $fasyankes->id }}" {{ $detail->sateliteHealthFacility->id ==
-                                    $fasyankes->id ? "selected" : "" }}
-                                    >{{ $fasyankes->name }}</option>
+                            <select class="custom-select" name="fasyankes">
+                                <option disabled selected>Pilih Fasyankes</option>
+                                @foreach ($fasyankes as $rs)
+                                <option value="{{ $rs }}">{{ $rs }}</option>
                                 @endforeach
                             </select>
                         </div>
                     </div>
                     <div class="col-sm-6 form-group">
-                        <label>Nama Fasyankes Satelit</label>
-                        <input type="text" name="satelite" class="form-control" value="{{ $detail->worker_id }}">
+                        <label>Fasyankes Satelit</label>
+                        <input type="text" name="satelite" class="form-control"
+                            value="{{ $detail->sateliteHealthFacility->name }}">
                     </div>
                     <div class="col-sm-6 form-group">
                         <label>Tanggal Mulai Berobat</label>
@@ -51,6 +50,10 @@
                         <label>No. Registrasi Pasien</label>
                         <input type="number" name="registrationNumber" class="form-control"
                             value="{{ $detail->no_regis }}">
+                    </div>
+                    <div class="col-sm-6 form-group">
+                        <label>Pendamping/Patient Supporter (PS)</label>
+                        <input type="text" name="supporter" class="form-control" value="Faisol">
                     </div>
                 </div>
                 <div class="row mb-4">
@@ -143,7 +146,7 @@
                     </div>
 
                     <div class="col-sm-6 form-group">
-                        <label>No. Telepon / HP</label>
+                        <label>No. Telepon/Hp</label>
                         <input type="text" name="phoneNumber" class="form-control" value="{{ $patient->phone }}">
                     </div>
 

@@ -27,16 +27,16 @@
           <div class="col-sm-6">
             <div class="form-group">
               <label>Fasyankes TB RO</label>
-              <select class="form-control select2" name="fasyankes" style="width: 100%;">
-                <option>Pilih Fasyankes</option>
-                @foreach ($facilities as $fasyankes)
-                <option value="{{ $fasyankes->id }}">{{ $fasyankes->name }}</option>
+              <select class="custom-select" name="fasyankes" required>
+                <option disabled selected>Pilih Fasyankes</option>
+                @foreach ($fasyankes as $rs)
+                <option value="{{ $rs }}">{{ $rs }}</option>
                 @endforeach
               </select>
             </div>
           </div>
           <div class="col-sm-6 form-group">
-            <label>Nama Fasyankes Satelit</label>
+            <label>Fasyankes Satelit</label>
             <input type="text" name="satelite" class="form-control">
           </div>
           <div class="col-sm-6 form-group">
@@ -46,6 +46,10 @@
           <div class="col-sm-6 form-group">
             <label>No. Registrasi Pasien</label>
             <input type="number" name="registrationNumber" class="form-control">
+          </div>
+          <div class="col-sm-6 form-group">
+            <label>Pendamping/Patient Supporter (PS)</label>
+            <input type="text" name="supporter" class="form-control">
           </div>
         </div>
 
@@ -114,7 +118,7 @@
             <div class="form-group">
               <label>Kecamatan</label>
               <select class="form-control select2" name="district" style="width: 100%;">
-                <option>Pilih Kecamatan</option>
+                <option disabled selected>Pilih Kecamatan</option>
                 @foreach ($regencies as $regency)
                 <optgroup label="{{ $regency->name }}">
                   @foreach ($regency->districts as $district)
@@ -132,7 +136,7 @@
           </div>
 
           <div class="col-sm-6 form-group">
-            <label>No. Telepon / HP</label>
+            <label>No. Telepon/Hp</label>
             <input type="text" name="phoneNumber" class="form-control">
           </div>
 
@@ -287,7 +291,7 @@
             <div class="form-group">
               <label>Kecamatan</label>
               <select class="select2" name="emergencyContactDistrict" style="width: 100%;">
-                <option>Pilih Kecamatan</option>
+                <option disabled selected>Pilih Kecamatan</option>
                 @foreach ($regencies as $regency)
                 <optgroup label="{{ $regency->name }}">
                   @foreach ($regency->districts as $district)

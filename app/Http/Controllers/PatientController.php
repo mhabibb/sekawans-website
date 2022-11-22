@@ -39,12 +39,12 @@ class PatientController extends Controller
    */
   public function create()
   {
-    $facilities = SateliteHealthFacility::all();
+    $fasyankes = collect(["RS PARU JEMBER", "RSD DR. SOEBANDI JEMBER"]);
     $religions = Religion::all();
     $educations = Education::all();
     $statuses = PatientStatus::all();
     $regencies = Regency::all();
-    return view('admin.patient.create', compact('facilities', 'religions', 'regencies', 'educations', 'statuses'));
+    return view('admin.patient.create', compact('fasyankes', 'religions', 'regencies', 'educations', 'statuses'));
   }
 
   /**
@@ -77,13 +77,13 @@ class PatientController extends Controller
    */
   public function edit(Patient $patient)
   {
-    $facilities = SateliteHealthFacility::all();
+    $fasyankes = collect(["RS PARU JEMBER", "RSD DR. SOEBANDI JEMBER"]);
     $religions = Religion::all();
     $educations = Education::all();
     $statuses = PatientStatus::all();
     $regencies = Regency::all();
     $detail = $patient->patientDetail;
-    return view('admin.patient.edit', compact('patient', 'detail', 'facilities', 'religions', 'regencies', 'educations', 'statuses'));
+    return view('admin.patient.edit', compact('patient', 'detail', 'fasyankes', 'religions', 'regencies', 'educations', 'statuses'));
   }
 
   /**

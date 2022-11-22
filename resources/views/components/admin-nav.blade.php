@@ -68,6 +68,8 @@
                     </a>
                 </li>
                 @endforeach
+
+                @if (Auth::user()->role == 1)
                 <li class="nav-header">SUPER ADMIN</li>
                 <li class="nav-item">
                     <a href="{{route('admin.users.index')}}"
@@ -86,6 +88,7 @@
                         </p>
                     </a>
                 </li>
+                @endif
             </ul>
         </nav>
         <!-- /.sidebar-menu -->

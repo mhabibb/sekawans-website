@@ -12,10 +12,10 @@ class StaticElementController extends Controller
    *
    * @return \Illuminate\Http\Response
    */
-  public function index()
+  public function index(StaticElement $sekawans)
   {
-    $elements = StaticElement::all();
-    return view('admin.sekawans.index', compact('elements'));
+    $sekawans = $sekawans->get();
+    return view('admin.sekawans.index', compact('sekawans'));
   }
 
   /**
@@ -49,6 +49,6 @@ class StaticElementController extends Controller
    */
   public function update(UpdateStaticElementRequest $request, StaticElement $staticElement)
   {
-    //
+    return $request;
   }
 }

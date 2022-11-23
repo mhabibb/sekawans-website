@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Article;
 use App\Models\User;
 use Illuminate\Http\Request;
 
@@ -15,7 +16,7 @@ class UserController extends Controller
     public function index()
     {
         $user = User::select('id', 'name', 'email')->get();
-        return view('admin.users.index', ['users' => $user]);
+        return view('admin.user.index', ['users' => $user]);
     }
 
     /**
@@ -47,7 +48,12 @@ class UserController extends Controller
      */
     public function show(User $user)
     {
-        //
+        if ($user != auth()->user()) {
+            return abort(403);
+        }
+        $articles = Article::latest()->user($user->id)->get();
+
+        return view('admin.user.show', compact('user', 'articles'));
     }
 
     /**
@@ -70,7 +76,12 @@ class UserController extends Controller
      */
     public function update(Request $request, User $user)
     {
-        //
+        return $request;
+    }
+
+    public function updatePassword(Request $request, User $user)
+    {
+        return $request;
     }
 
     /**

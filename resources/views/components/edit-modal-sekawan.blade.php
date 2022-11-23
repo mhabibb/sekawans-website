@@ -3,7 +3,7 @@
 <form action="{{ route('admin.sekawans.update', $sekawan ) }}" method="POST" enctype="multipart/form-data">
     @csrf
     @method('PUT')
-    <div class="modal fade" id="staticBackdrop{{ $sekawan->id }}" data-backdrop="static" data-keyboard="false"
+    <div class="modal fade" id="sekawanEdit{{ $sekawan->id }}" data-backdrop="static" data-keyboard="false"
         tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered modal-lg">
             <div class="modal-content">
@@ -27,8 +27,7 @@
                     @endif
                 </div>
                 <div class="modal-footer">
-                    <button type="reset" class="btn btn-secondary" data-dismiss="modal"
-                        onclick="resetImg()">Batalkan</button>
+                    <button type="reset" class="btn btn-secondary" onclick="resetImg()">Batalkan</button>
                     <button type="submit" class="btn btn-primary">Perbarui</button>
                 </div>
             </div>

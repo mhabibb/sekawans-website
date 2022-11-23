@@ -22,7 +22,7 @@
                   </th>
                   <td class="col-1">
                     <a href="#" class="badge badge-warning" data-toggle="modal"
-                      data-target="#staticBackdrop{{ $sekawans->find(1)->id }}">Edit</a>
+                      data-target="#sekawanEdit{{ $sekawans->find(1)->id }}">Edit</a>
                   </td>
                 </tr>
                 <tr class="expandable-body">
@@ -37,7 +37,7 @@
                   </th>
                   <td class="col-1">
                     <a href="#" class="badge badge-warning" data-toggle="modal"
-                      data-target="#staticBackdrop{{ $sekawans->find(2)->id }}">Edit</a>
+                      data-target="#sekawanEdit{{ $sekawans->find(2)->id }}">Edit</a>
                   </td>
                 </tr>
                 <tr class="expandable-body">
@@ -52,7 +52,7 @@
                   </th>
                   <td class="col-1">
                     <a href="#" class="badge badge-warning" data-toggle="modal"
-                      data-target="#staticBackdrop{{ $sekawans->find(3)->id }}">Edit</a>
+                      data-target="#sekawanEdit{{ $sekawans->find(3)->id }}">Edit</a>
                   </td>
                 </tr>
                 <tr class="expandable-body">
@@ -78,7 +78,7 @@
                     </td>
                     <td>
                       <a href="#" class="badge badge-warning" data-toggle="modal"
-                        data-target="#staticBackdrop{{ $sekawans->find(5)->id }}">Edit</a>
+                        data-target="#sekawanEdit{{ $sekawans->find(5)->id }}">Edit</a>
                     </td>
                   </tr>
                   <tr>
@@ -88,7 +88,7 @@
                     </td>
                     <td>
                       <a href="#" class="badge badge-warning" data-toggle="modal"
-                        data-target="#staticBackdrop{{ $sekawans->find(6)->id }}">Edit</a>
+                        data-target="#sekawanEdit{{ $sekawans->find(6)->id }}">Edit</a>
                     </td>
                   </tr>
                   <tr>
@@ -98,7 +98,7 @@
                     </td>
                     <td>
                       <a href="#" class="badge badge-warning" data-toggle="modal"
-                        data-target="#staticBackdrop{{ $sekawans->find(7)->id }}">Edit</a>
+                        data-target="#sekawanEdit{{ $sekawans->find(7)->id }}">Edit</a>
                     </td>
                   </tr>
                   <tr>
@@ -108,7 +108,7 @@
                     </td>
                     <td>
                       <a href="#" class="badge badge-warning" data-toggle="modal"
-                        data-target="#staticBackdrop{{ $sekawans->find(7)->id }}">Edit</a>
+                        data-target="#sekawanEdit{{ $sekawans->find(7)->id }}">Edit</a>
                     </td>
                   </tr>
                 </tbody>
@@ -123,7 +123,7 @@
 </section>
 
 <section class="edit-modal">
-  @include('components.edit-modal')
+  @include('components.edit-modal-sekawan')
 </section>
 @endsection
 
@@ -146,17 +146,4 @@
     document.querySelector('.img-preview').src = "";
   }
 </script>
-{{--
-<script>
-  let expand = document.querySelectorAll("tr.expand-row");
-
-expand.forEach((ex) => {
-    let angel = ex.querySelector("td>i");
-  
-    ex.addEventListener('click', () => {
-      angel.classList.toggle("fa-angle-up");
-    })
-});
-
-</script> --}}
 @endsection

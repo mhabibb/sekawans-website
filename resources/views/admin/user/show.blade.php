@@ -14,18 +14,14 @@
                 <div class="row mb-3">
                     <div class="col-12 col-sm-6 form-group">
                         <label>Nama</label>
-                        <input type="text" name="adminName" class="form-control" value="{{ $user->name }}">
+                        <div class="form-control">{{ $user->name }}</div>
                     </div>
                     <div class="col-12 col-sm-6 form-group">
                         <label>Email</label>
-                        <input type="text" name="email" class="form-control" value="{{ $user->email }}">
+                        <div class="form-control">{{ $user->email }}</div>
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-12 col-sm-6">
-                        <label>Jumlah postingan : </label>
-                        <strong>{{ count($articles) }}</strong>
-                    </div>
                     <div class="col-12 col-sm-6">
                         <a href="#" class="btn btn-warning mr-2" data-toggle="modal" data-target="#editProfile">Update
                             Profil</a>

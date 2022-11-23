@@ -51,9 +51,8 @@ class UserController extends Controller
         if ($user != auth()->user()) {
             return abort(403);
         }
-        $articles = Article::latest()->user($user->id)->get();
 
-        return view('admin.user.show', compact('user', 'articles'));
+        return view('admin.user.show', compact('user'));
     }
 
     /**

@@ -35,8 +35,8 @@
 </section>
 
 <section class="edit-modal">
-    @include('components.edit-modal-profile')
-    @include('components.edit-modal-password')
+    @include('admin.user.edit')
+    @include('admin.user.edit-password')
 </section>
 
 @endsection

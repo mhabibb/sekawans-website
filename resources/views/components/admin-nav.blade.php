@@ -31,13 +31,13 @@
         <nav class="mt-2">
             <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
                 <!-- Add icons to the links using the .nav-icon class with font-awesome or any other icon font library -->
-                <li class="user-panel nav-item pb-1">
-                    <a href="#" class="nav-link">
+                <li class="user-panel nav-item pb-1 mb-1">
+                    <a href="#" class="nav-link d-flex align-items-center">
                         <i class="nav-icon fas fa-user"></i>
-                        <p>
+                        <span class="d-inline-block text-truncate" style="max-width: 150px;">
                             {{ Auth::user()->name }}
-                            <i class="right fas fa-angle-left"></i>
-                        </p>
+                        </span>
+                        <i class="right fas fa-angle-left"></i>
                     </a>
                     <ul class="nav nav-treeview">
                         <li class="nav-item">

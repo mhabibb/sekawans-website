@@ -26,7 +26,8 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="reset" class="btn btn-secondary">Batalkan</button>
+                    <button type="reset" class="btn btn-secondary" onclick="reset()"
+                        data-dismiss="modal">Batalkan</button>
                     <button type="submit" class="btn btn-primary">Update Password</button>
                 </div>
             </div>

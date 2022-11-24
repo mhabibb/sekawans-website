@@ -32,7 +32,7 @@
               <tbody>
                 @foreach ($articles as $article)
                 <tr>
-                  <td><a href="{{ route($showRoute, $article) }}" class="text-dark">{{$article->title}}</a></td>
+                  <td><a href="{{ route($showRoute, $article) }}">{{$article->title}}</a></td>
                   <td>{{ date('d M Y, H:i', strtotime($article->updated_at)) }}</td>
                   <td>{{ $article->user->name }}</td>
                   <td>

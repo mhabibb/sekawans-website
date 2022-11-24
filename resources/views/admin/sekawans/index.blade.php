@@ -78,7 +78,7 @@
                     </td>
                     <td>
                       <a href="#" class="badge badge-warning" data-toggle="modal"
-                        data-target="#sekawanEdit{{ $sekawans->find(5)->id }}">Edit</a>
+                        data-target="#sekawanEdit{{ $sekawans->find(4)->id }}">Edit</a>
                     </td>
                   </tr>
                   <tr>
@@ -88,7 +88,7 @@
                     </td>
                     <td>
                       <a href="#" class="badge badge-warning" data-toggle="modal"
-                        data-target="#sekawanEdit{{ $sekawans->find(6)->id }}">Edit</a>
+                        data-target="#sekawanEdit{{ $sekawans->find(5)->id }}">Edit</a>
                     </td>
                   </tr>
                   <tr>
@@ -98,7 +98,7 @@
                     </td>
                     <td>
                       <a href="#" class="badge badge-warning" data-toggle="modal"
-                        data-target="#sekawanEdit{{ $sekawans->find(7)->id }}">Edit</a>
+                        data-target="#sekawanEdit{{ $sekawans->find(6)->id }}">Edit</a>
                     </td>
                   </tr>
                   <tr>
@@ -123,7 +123,7 @@
 </section>
 
 <section class="edit-modal">
-  @include('components.edit-modal-sekawan')
+  @include('admin.sekawans.edit')
 </section>
 @endsection
 
@@ -140,10 +140,6 @@
     oFReader.onload = function(oFREvent) {
       imgPreview.src = oFREvent.target.result;
     }
-  }
-
-  function resetImg() {
-    document.querySelector('.img-preview').src = "";
   }
 </script>
 @endsection

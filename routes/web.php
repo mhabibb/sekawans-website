@@ -25,7 +25,7 @@ Auth::routes(['register' => false]);
 
 Route::middleware('auth')->prefix('admin')->name('admin.')->group(function () {
     Route::get('/', [DashboardController::class, 'index'])->name('dashboard.index');
-    Route::resource('/users', UserController::class)->except('edit');
+    Route::resource('/users', UserController::class)->except('create', 'edit');
     Route::put('/users/{user}', [UserController::class, 'updatePassword'])->name('users.password.update');
     Route::resource('/patients', PatientController::class);
     Route::resource('/sekawans', StaticElementController::class)->except(['create', 'destroy', 'store']);

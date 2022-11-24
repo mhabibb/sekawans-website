@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Article;
 use App\Models\User;
 use Illuminate\Http\Request;
 
@@ -15,18 +14,12 @@ class UserController extends Controller
      */
     public function index()
     {
-        $user = User::select('id', 'name', 'email')->get();
-        return view('admin.user.index', ['users' => $user]);
-    }
+        if (auth()->user()->role != 1) {
+            return abort(403);
+        }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
+        $users = User::select('id', 'name', 'email')->get();
+        return view('admin.user.index', compact('users'));
     }
 
     /**
@@ -37,7 +30,7 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        return $request;
     }
 
     /**
@@ -53,17 +46,6 @@ class UserController extends Controller
         }
 
         return view('admin.user.show', compact('user'));
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\User  $user
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(User $user)
-    {
-        //
     }
 
     /**
@@ -91,6 +73,8 @@ class UserController extends Controller
      */
     public function destroy(User $user)
     {
-        //
+        if (auth()->user()->role != 1) {
+            return abort(403);
+        }
     }
 }

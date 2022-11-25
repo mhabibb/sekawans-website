@@ -33,7 +33,7 @@ class DatabaseSeeder extends Seeder
             StaticElementSeeder::class,
         ]);
 
-        \App\Models\Article::factory(100)->create();
+        \App\Models\Article::factory(100)->createQuietly();
         \App\Models\Worker::factory(150)->create();
         \App\Models\EmergencyContact::factory(20)->create();
         \App\Models\Patient::factory(100)->create();

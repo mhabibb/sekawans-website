@@ -97,17 +97,11 @@ class ArticleController extends Controller
     {
         $request = $request->validated();
         $request['img'] = $request['img']->store('img/articles');
-        switch ($request['category_id']) {
-            case 1:
-                $route = 'admin.infotbc.show';
-                break;
-            case 2:
-                $route = 'admin.articles.show';
-                break;
-            case 3:
-                $route = 'admin.kegiatan.show';
-                break;
-        }
+        $route = match ($request['category_id']) {
+            1 => 'admin.infotbc.show',
+            2 => 'admin.articles.show',
+            3 => 'admin.kegiatan.show'
+        };
         $article = Article::create($request);
         (!$article ? Storage::delete($request['img']) : '');
         return redirect()->route($route, $article);
@@ -130,10 +124,7 @@ class ArticleController extends Controller
         } else {
             abort(404);
         }
-        return view('admin.article.show', [
-            'article' => $article,
-            'editRoute' => $editRoute
-        ]);
+        return view('admin.article.show', compact('article', 'editRoute'));
     }
 
     /**
@@ -145,23 +136,16 @@ class ArticleController extends Controller
     public function edit(Article $article)
     {
         if (request()->routeIs('admin.infotbc.edit')) {
-            $category = 1;
             $title = 'Info TBC';
         } else if (request()->routeIs('admin.articles.edit')) {
-            $category = 2;
             $title = 'Artikel';
         } else if (request()->routeIs('admin.kegiatan.edit')) {
-            $category = 3;
             $title = 'Kegiatan';
         } else {
             abort(404);
         }
 
-        return view('admin.article.edit', [
-            'article' => $article,
-            'category' => $category,
-            'title' => $title
-        ]);
+        return view('admin.article.edit', compact('article', 'title'));
     }
 
     /**
@@ -197,10 +181,25 @@ class ArticleController extends Controller
      */
     public function destroy(Article $article)
     {
-        $activity = Activity::all()->last();
-        dd($activity->changes);
+        $category = $article->category_id;
+        $article->delete();
+        return match ($category) {
+            1 => redirect()->route('admin.infotbc.index'),
+            2 => redirect()->route('admin.articles.index'),
+            3 => redirect()->route('admin.kegiatan.index')
+        };
+    }
+
+    public function forceDestroy(Article $article)
+    {
+        $this->authorize('superAdmin');
         Storage::delete($article->img);
-        Article::destroy($article->id);
-        return back();
+        $article->forceDelete();
+        $category = $article->category_id;
+        return match ($category) {
+            1 => redirect()->route('admin.infotbc.index'),
+            2 => redirect()->route('admin.articles.index'),
+            3 => redirect()->route('admin.kegiatan.index')
+        };
     }
 }

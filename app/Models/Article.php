@@ -6,11 +6,13 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Spatie\Activitylog\Traits\LogsActivity;
 use Spatie\Activitylog\LogOptions;
+use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Database\Eloquent\Prunable;
+use Illuminate\Support\Facades\Storage;
 
 class Article extends Model
 {
-    use HasFactory;
-    use LogsActivity;
+    use HasFactory, LogsActivity, softDeletes, Prunable;
 
     protected $guarded = ['id', 'created_at', 'updated_at'];
 
@@ -22,15 +24,37 @@ class Article extends Model
 
     protected static $logName = 'article';
 
+
+    /**
+     * Get the prunable model query.
+     *
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function prunable()
+    {
+        activity()->disableLogging();
+        return static::where('deleted_at', '<=', now()->subMonths(3));
+    }
+
+    /**
+     * Prepare the model for pruning.
+     *
+     * @return void
+     */
+    protected function pruning()
+    {
+        Storage::delete($this->img);
+    }
+
     public function getActivitylogOptions(): LogOptions
     {
-        $user = auth()->user()->name;
+        $user = auth()->user()->name ?? 'System';
         return LogOptions::defaults()
             ->logFillable()
             ->logUnguarded()
             ->logOnlyDirty()
             ->useLogName('article')
-            ->setDescriptionForEvent(fn(string $eventName) => "{$user} {$eventName} article");
+            ->setDescriptionForEvent(fn (string $eventName) => "{$user} {$eventName} article");
     }
 
     public function scopeCategory($query, $category)

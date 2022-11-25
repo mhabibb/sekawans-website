@@ -23,6 +23,7 @@ class ArticleFactory extends Factory
             'img' => fake()->imageUrl(600, 400, fake()->randomElement(['virus', 'activity', 'article']), true),
             'contents' => fake()->realTextBetween(1000, 10000),
             'category_id' => fake()->numberBetween(1, 3),
+            'deleted_at' => fake()->randomElement([null, fake()->date()]),
         ];
     }
 }

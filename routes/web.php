@@ -5,8 +5,8 @@ use App\Http\Controllers\PatientController;
 use App\Http\Controllers\StaticElementController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\WebController;
-use App\Http\Controllers\WorkerController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\SateliteHealthFacilityController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 
@@ -25,10 +25,11 @@ Auth::routes(['register' => false]);
 
 Route::middleware('auth')->prefix('admin')->name('admin.')->group(function () {
     Route::get('/', [DashboardController::class, 'index'])->name('dashboard.index');
-    Route::resource('/users', UserController::class);
+    Route::resource('/users', UserController::class)->except('create', 'edit');
+    Route::put('/users/{user}', [UserController::class, 'updatePassword'])->name('users.password.update');
     Route::resource('/patients', PatientController::class);
     Route::resource('/sekawans', StaticElementController::class)->except(['create', 'destroy', 'store']);
-    Route::resource('/fasyankes', WorkerController::class);
+    Route::resource('/fasyankes', SateliteHealthFacilityController::class);
     Route::resource('/articles', ArticleController::class);
     Route::controller(ArticleController::class)->group(function () {
         Route::get('/infos', 'index')->name('infotbc.index');

@@ -16,7 +16,7 @@
       <div class="col-12">
         <div class="card">
           <div class="card-header">
-            <a href="#" class="card-title">Buat Akun Baru</a>
+            <a href="#" class="btn btn-primary" data-toggle="modal" data-target="#createAdmin">Buat Akun Baru</a>
 
             <div class="card-tools">
               <div class="input-group input-group-sm" style="width: 200px;">
@@ -67,4 +67,30 @@
   </div><!-- /.container-fluid -->
 </section>
 <!-- /.content -->
+
+<section class="create-modal">
+  @include('admin.user.create')
+</section>
+@endsection
+
+@section('js')
+<script>
+  const genBtn = document.getElementById('generatePass');
+  const password = document.getElementById('password');
+  
+  genBtn.addEventListener('click', function () {
+    let chars = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ!@#$%^&*()";
+    let passLength = 8;
+    let pass = "";
+
+    for (let i = 0; i < passLength; i++) {
+      let randNumber = Math.floor(Math.random() * chars.length);
+      pass += chars.substring(randNumber, randNumber + 1);
+    }
+
+    password.value = pass;
+  })
+
+
+</script>
 @endsection

@@ -24,19 +24,16 @@ class AdminNav extends Component
      */
     public function render()
     {
-        View::composer('components.admin-nav', function () {
-            $navLinks = array(
-                'admin.dashboard' => ['Dashboard', 'fas fa-tachometer-alt'],
-                'admin.sekawans' => ['Tentang', 'fas fa-users'],
-                'admin.infotbc' => ['Informasi TBC', 'fas fa-circle-info'],
-                'admin.patients' => ['Data Pasien TBC', 'fas fa-database'],
-                'admin.fasyankes' => ['Fasyankes', 'fas fa-notes-medical'],
-                'admin.articles' => ['Artikel', 'fas fa-newspaper'],
-                'admin.kegiatan' => ['Kegiatan', 'fas fa-square-person-confined']
-            );
-            view()->share('navLinks', $navLinks);
-        });
+        $navLinks = array(
+            'admin.dashboard' => ['Dashboard', 'fas fa-tachometer-alt'],
+            'admin.sekawans' => ['Tentang', 'fas fa-users'],
+            'admin.infotbc' => ['Informasi TBC', 'fas fa-circle-info'],
+            'admin.patients' => ['Data Pasien TBC', 'fas fa-database'],
+            'admin.fasyankes' => ['Fasyankes', 'fas fa-notes-medical'],
+            'admin.articles' => ['Artikel', 'fas fa-newspaper'],
+            'admin.kegiatan' => ['Kegiatan', 'fas fa-square-person-confined']
+        );
 
-        return view('components.admin-nav');
+        return view('components.admin-nav', compact('navLinks'));
     }
 }

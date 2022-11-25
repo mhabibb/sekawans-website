@@ -9,28 +9,6 @@
 
     <!-- Right navbar links -->
     <ul class="navbar-nav ml-auto">
-        <!-- Navbar Search -->
-        <li class="nav-item">
-            <a class="nav-link" data-widget="navbar-search" href="#" role="button">
-                <i class="fas fa-search"></i>
-            </a>
-            <div class="navbar-search-block">
-                <form class="form-inline">
-                    <div class="input-group input-group-sm">
-                        <input class="form-control form-control-navbar" type="search" placeholder="Search"
-                            aria-label="Search">
-                        <div class="input-group-append">
-                            <button class="btn btn-navbar" type="submit">
-                                <i class="fas fa-search"></i>
-                            </button>
-                            <button class="btn btn-navbar" type="button" data-widget="navbar-search">
-                                <i class="fas fa-times"></i>
-                            </button>
-                        </div>
-                    </div>
-                </form>
-            </div>
-        </li>
         <li class="nav-item d-sm-inline-block">
             <a href="{{ route('beranda') }}" target="blank" class="nav-link">Beranda</a>
         </li>
@@ -53,17 +31,17 @@
         <nav class="mt-2">
             <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
                 <!-- Add icons to the links using the .nav-icon class with font-awesome or any other icon font library -->
-                <li class="user-panel nav-item pb-1">
-                    <a href="#" class="nav-link">
+                <li class="user-panel nav-item pb-1 mb-1">
+                    <a href="#" class="nav-link d-flex align-items-center">
                         <i class="nav-icon fas fa-user"></i>
-                        <p>
+                        <span class="d-inline-block text-truncate" style="max-width: 150px;">
                             {{ Auth::user()->name }}
-                            <i class="right fas fa-angle-left"></i>
-                        </p>
+                        </span>
+                        <i class="right fas fa-angle-left"></i>
                     </a>
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
-                            <a href="#" class="nav-link">
+                            <a href="{{ route('admin.users.show', Auth::user()) }}" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Profil</p>
                             </a>
@@ -81,7 +59,8 @@
                 </li>
                 @foreach ($navLinks as $route => [$name, $icon])
                 <li class="nav-item">
-                    <a href="{{ route($route.'.index') }}" class="nav-link {{ request()->routeIs($route.'*') ? ' active' : '' }}">
+                    <a href="{{ route($route.'.index') }}"
+                        class="nav-link {{ request()->routeIs($route.'*') ? ' active' : '' }}">
                         <i class="nav-icon {{ $icon }}"></i>
                         <p>
                             {{ $name }}
@@ -89,9 +68,12 @@
                     </a>
                 </li>
                 @endforeach
+
+                @if (Auth::user()->role == 1)
                 <li class="nav-header">SUPER ADMIN</li>
                 <li class="nav-item">
-                    <a href="{{route('admin.users.index')}}" class="nav-link {{ request()->routeIs('admin.users.index*') ? ' active' : '' }}">
+                    <a href="{{route('admin.users.index')}}"
+                        class="nav-link {{ request()->routeIs('admin.users.index*') ? ' active' : '' }}">
                         <i class="nav-icon fas fa-lock"></i>
                         <p>
                             Kelola Akun
@@ -106,6 +88,7 @@
                         </p>
                     </a>
                 </li>
+                @endif
             </ul>
         </nav>
         <!-- /.sidebar-menu -->

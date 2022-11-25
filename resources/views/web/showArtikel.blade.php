@@ -22,7 +22,7 @@
         loading="lazy">
       <figcaption class="figure-caption text-center">Sumber : A caption for the above image.</figcaption>
     </figure>
-    <div class="body">
+    <div class="body" style="text-align: justify;">
       <p>{{ $article->contents }}</p>
     </div>
   </article>

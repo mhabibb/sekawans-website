@@ -89,6 +89,14 @@
     src="https://cdn.datatables.net/v/bs4/jszip-2.5.0/dt-1.13.1/b-2.3.3/b-html5-2.3.3/b-print-2.3.3/r-2.4.0/datatables.min.js">
   </script>
 
+  <script>
+    function reset() {
+    document.querySelector('.img-preview').src = "";
+    document.querySelector('input').reset();
+    document.querySelector('textarea').reset();
+  }
+  </script>
+
   <script src="{{ asset('sw.js') }}"></script>
   <script>
     if (!navigator.serviceWorker.controller) {
@@ -97,7 +105,6 @@
       });
     }
   </script>
-
 
   {{-- Logout --}}
   <script type="text/javascript">

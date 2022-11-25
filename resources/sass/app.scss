@@ -41,4 +41,6 @@ body {
   right: 0;
   top: 48px;
   display: block;
+  max-height: 80vh;
+  overflow: auto;
 }

@@ -21,30 +21,26 @@
                 <div class="col-12 col-sm-6 col-lg-3 mb-3">
                     <h5 class="mb-3">Media Sosial</h5>
                     <ul class="nav flex-column d-inline-flex">
+                        @foreach ($socials as $social)
                         <li class="nav-item mb-3">
+                            @if ($loop->first)
                             <a href="#" class="nav-link p-0 link-light">
-                                <i class="fa-brands fa-whatsapp fa-lg"></i>
+                                <i class="fa-brands fa-{{ $social->element }} fa-lg"></i>
                                 <span class="ms-1">
-                                    Whatsapp
+                                    {{ ucfirst($social->element) }}
                                 </span>
                             </a>
-                        </li>
-                        <li class="nav-item mb-3">
-                            <a href="{{ $ig->contents }}" target="blank" class="nav-link p-0 link-light">
-                                <i class="fa-brands fa-instagram fa-lg"></i>
+                            @else
+                            <a href="{{ $social->contents }}" target="blank" class="nav-link p-0 link-light">
+                                <i class="fa-brands fa-{{ $social->element }} fa-lg"></i>
                                 <span class="ms-1">
-                                    {{ ucfirst($ig->element) }}
+                                    {{ ucfirst($social->element) }} <i
+                                        class="fa-solid fa-arrow-up-right-from-square fa-2xs"></i>
                                 </span>
                             </a>
+                            @endif
                         </li>
-                        <li class="nav-item mb-3">
-                            <a href="{{ $tiktok->contents }}" target="blank" class="nav-link p-0 link-light">
-                                <i class="fa-brands fa-tiktok fa-lg"></i>
-                                <span class="ms-1">
-                                    {{ ucfirst($tiktok->element) }}
-                                </span>
-                            </a>
-                        </li>
+                        @endforeach
                     </ul>
                 </div>
 

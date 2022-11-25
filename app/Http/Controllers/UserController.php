@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use App\Http\Requests\StoreUserRequest;
 use App\Http\Requests\UpdateUserRequest;
+use Illuminate\Http\Request;
 
 class UserController extends Controller
 {
@@ -15,8 +16,9 @@ class UserController extends Controller
      */
     public function index()
     {
-        $user = User::select('id', 'name', 'email')->get();
-        return view('admin.users.index', ['users' => $user]);
+        if (auth()->user()->role != 1) {
+            return abort(403);
+        }
     }
 
     /**
@@ -27,7 +29,8 @@ class UserController extends Controller
     public function create()
     {
         $this->authorize('superAdmin');
-        return view();
+        $users = User::select('id', 'name', 'email')->get();
+        return view('admin.user.index', compact('users'));
     }
 
     /**
@@ -52,18 +55,11 @@ class UserController extends Controller
      */
     public function show(User $user)
     {
-        //
-    }
+        if ($user != auth()->user()) {
+            return abort(403);
+        }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\User  $user
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(User $user)
-    {
-        //
+        return view('admin.user.show', compact('user'));
     }
 
     /**
@@ -78,6 +74,11 @@ class UserController extends Controller
         $request = $request->validated();
         $user->update($request);
         return redirect()->route('admin.users.show');
+    }
+
+    public function updatePassword(Request $request, User $user)
+    {
+        return $request;
     }
 
     /**

@@ -16,23 +16,18 @@ class StaticElementSeeder extends Seeder
     public function run()
     {
         StaticElement::create([
-            'element' => 'profile',
+            'element' => 'profil',
             'contents' => fake()->realText(300),
         ]);
 
         StaticElement::create([
-            'element' => 'vision-mision',
+            'element' => 'visimisi',
             'contents' => fake()->realText(500),
         ]);
 
         StaticElement::create([
-            'element' => 'structur',
+            'element' => 'struktur',
             'contents' => fake()->imageUrl(1080, 720),
-        ]);
-
-        StaticElement::create([
-            'element' => 'structur-details',
-            'contents' => fake()->realText(1000),
         ]);
 
         StaticElement::create([
@@ -48,6 +43,11 @@ class StaticElementSeeder extends Seeder
         StaticElement::create([
             'element' => 'tiktok',
             'contents' => 'https://www.tiktok.com/@sekawanstbc_jember',
+        ]);
+
+        StaticElement::create([
+            'element' => 'youtube',
+            'contents' => 'https://www.youtube.com/@sekawanstb5619',
         ]);
     }
 }

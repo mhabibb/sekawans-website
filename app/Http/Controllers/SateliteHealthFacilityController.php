@@ -15,7 +15,9 @@ class SateliteHealthFacilityController extends Controller
      */
     public function index()
     {
-        //
+        $fasyankes = collect(["RS PARU JEMBER", "RSD DR. SOEBANDI JEMBER"]);
+        $satelites = SateliteHealthFacility::get();
+        return view('admin.fasyankes.index', compact('fasyankes', 'satelites'));
     }
 
     /**

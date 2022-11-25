@@ -62,6 +62,10 @@
             <img src="https://tbindonesia.or.id/wp-content/uploads/2019/10/logo-tosstb.png" alt="" height="80px">
         </div>
         <div class="col p-3">
+            <img src="https://poptbindonesia.org/wp-content/uploads/2020/10/Samping-trans-300x162.png" alt=""
+                height="80px">
+        </div>
+        <div class="col p-3">
             <img src="https://promkes.kemkes.go.id/__asset/__images/content_wysiwyg//LOGO_GERMAS_NORMAL.png" alt=""
                 height="80px">
         </div>
@@ -97,7 +101,7 @@
     <h1 class="fw-bold mb-5 text-center text-primary">Artikel Terbaru</h1>
     <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 justify-content-center g-4">
         @foreach ($articles as $article)
-        <div class="col">
+        <div class="col" style="max-width: 400px;">
             <div class="card border h-100">
                 <img src="{{ $article->img }}" class="card-img-top thumbnail" alt="card-image">
                 <div class="card-body">

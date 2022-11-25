@@ -33,12 +33,7 @@ class Footer extends Component
             'kegiatan' => 'Kegiatan',
         );
 
-        $socials = StaticElement::get();
-        return view('components.footer', [
-            'navLinks' => $navLinks,
-            'wa' => $socials->find(5),
-            'ig' => $socials->find(6),
-            'tiktok' => $socials->find(7)
-        ]);
+        $socials = StaticElement::where('id', '>=', 4)->where('id', '<=', 7)->get();
+        return view('components.footer', compact('navLinks', 'socials'));
     }
 }

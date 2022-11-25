@@ -35,8 +35,8 @@
                   <th>No. Registrasi</th>
                   <th>Nama Lengkap</th>
                   <th>Kecamatan</th>
-                  <th>Fasyankes</th>
                   <th>Mulai Berobat</th>
+                  <th>PS</th>
                   <th>Status</th>
                 </tr>
               </thead>
@@ -44,10 +44,11 @@
                 @foreach ($patients as $patient)
                 <tr>
                   <td>{{ $patient->no_regis }}</td>
-                  <td><a href="{{ route('admin.patients.show', $patient->patient) }}">{{ $patient->patient->name }}</a></td>
+                  <td><a href="{{ route('admin.patients.show', $patient->patient) }}">{{ $patient->patient->name }}</a>
+                  </td>
                   <td>{{ $patient->patient->district->name }}</td>
-                  <td>{{ $patient->sateliteHealthFacility->name }}</td>
-                  <td>01-01-2022</td>
+                  <td>{{ date('d M Y') }}</td>
+                  <td>Faisol</td>
                   <td>{{ $patient->patientStatus->status }}</td>
                 </tr>
                 @endforeach

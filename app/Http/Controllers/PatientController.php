@@ -8,7 +8,9 @@ use App\Http\Requests\UpdatePatientRequest;
 use App\Models\Education;
 use App\Models\PatientDetail;
 use App\Models\PatientStatus;
+use App\Models\Regency;
 use App\Models\Religion;
+use App\Models\SateliteHealthFacility;
 
 class PatientController extends Controller
 {
@@ -37,10 +39,12 @@ class PatientController extends Controller
    */
   public function create()
   {
+    $fasyankes = collect(["RS PARU JEMBER", "RSD DR. SOEBANDI JEMBER"]);
     $religions = Religion::all();
     $educations = Education::all();
     $statuses = PatientStatus::all();
-    return view('admin.patient.create', compact('religions', 'educations', 'statuses'));
+    $regencies = Regency::all();
+    return view('admin.patient.create', compact('fasyankes', 'religions', 'regencies', 'educations', 'statuses'));
   }
 
   /**
@@ -73,7 +77,13 @@ class PatientController extends Controller
    */
   public function edit(Patient $patient)
   {
-    //
+    $fasyankes = collect(["RS PARU JEMBER", "RSD DR. SOEBANDI JEMBER"]);
+    $religions = Religion::all();
+    $educations = Education::all();
+    $statuses = PatientStatus::all();
+    $regencies = Regency::all();
+    $detail = $patient->patientDetail;
+    return view('admin.patient.edit', compact('patient', 'detail', 'fasyankes', 'religions', 'regencies', 'educations', 'statuses'));
   }
 
   /**
@@ -85,7 +95,7 @@ class PatientController extends Controller
    */
   public function update(UpdatePatientRequest $request, Patient $patient)
   {
-    //
+    dd($request->request);
   }
 
   /**

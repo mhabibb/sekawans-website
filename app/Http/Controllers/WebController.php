@@ -94,13 +94,13 @@ class WebController extends Controller
         if ($request->ajax()) {
             switch ($request->target) {
                 case 'info-tbc':
-                    $results = Article::latest()->where('category_id', 1)->where('title', 'like', '%' . $request->search . '%')->get();
+                    $results = Article::latest()->category(1)->where('title', 'like', '%' . $request->search . '%')->get();
                     break;
                 case 'artikel':
-                    $results = Article::latest()->where('category_id', 2)->where('title', 'like', '%' . $request->search . '%')->get();
+                    $results = Article::latest()->category(2)->where('title', 'like', '%' . $request->search . '%')->get();
                     break;
                 case 'kegiatan':
-                    $results = Article::latest()->where('category_id', 3)->where('title', 'like', '%' . $request->search . '%')->get();
+                    $results = Article::latest()->category(3)->where('title', 'like', '%' . $request->search . '%')->get();
                     break;
                 default:
                     $result = '';
@@ -109,12 +109,23 @@ class WebController extends Controller
 
             if (count($results) > 0) {
                 $output = '
-                <div class="search-list bg-light border px-2">';
+                <div class="search-list px-2">';
                 foreach ($results as $result) {
                     $output .= '
-                <div class="border-bottom py-3">
-                    <a href="' . route('artikel.show', $result) . '" class="text-decoration-none link-dark">' . $result->title . '</a>
-                </div>';
+                <div class="border-bottom py-3">';
+                    if ($result->category->id == 1) {
+                        $output .= '<a href="' . route('infotbc.show', $result) . '" class="text-decoration-none link-dark d-block">' . $result->title . '</a>
+                                    <small class="text-muted">' . $result->category->name . '</small>
+                        </div>';
+                    } elseif ($result->category->id == 2) {
+                        $output .= '<a href="' . route('artikel.show', $result) . '" class="text-decoration-none link-dark d-block">' . $result->title . '</a>
+                                    <small class="text-muted">' . $result->category->name . '</small>
+                        </div>';
+                    } elseif ($result->category->id == 3) {
+                        $output .= '<a href="' . route('kegiatan.show', $result) . '" class="text-decoration-none link-dark d-block">' . $result->title . '</a>
+                                    <small class="text-muted">' . $result->category->name . '</small>
+                        </div>';
+                    }
                 }
                 $output .= '</div>';
             } else {
@@ -124,7 +135,6 @@ class WebController extends Controller
                 </div>';
             }
         }
-
         return $output;
     }
 }

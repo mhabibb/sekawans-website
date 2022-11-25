@@ -18,10 +18,10 @@ class ArticleFactory extends Factory
     public function definition()
     {
         return [
-            'user_id' => fake()->numberBetween(1, 25),
-            'title' => fake()->realTextBetween(5, 20),
+            'user_id' => fake()->numberBetween(1, 10),
+            'title' => fake()->realTextBetween(20, 40),
             'img' => fake()->imageUrl(600, 400, fake()->randomElement(['virus', 'activity', 'article']), true),
-            'contents' => fake()->realTextBetween(1000, 10000),
+            'contents' => fake()->realTextBetween(1000, 5000),
             'category_id' => fake()->numberBetween(1, 3),
         ];
     }

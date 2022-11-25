@@ -14,18 +14,12 @@ class UserController extends Controller
      */
     public function index()
     {
-        $user = User::select('id', 'name', 'email')->get();
-        return view('admin.users.index', ['users' => $user]);
-    }
+        if (auth()->user()->role != 1) {
+            return abort(403);
+        }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
+        $users = User::select('id', 'name', 'email')->get();
+        return view('admin.user.index', compact('users'));
     }
 
     /**
@@ -36,7 +30,7 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        return $request;
     }
 
     /**
@@ -47,18 +41,11 @@ class UserController extends Controller
      */
     public function show(User $user)
     {
-        //
-    }
+        if ($user != auth()->user()) {
+            return abort(403);
+        }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\User  $user
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(User $user)
-    {
-        //
+        return view('admin.user.show', compact('user'));
     }
 
     /**
@@ -70,7 +57,12 @@ class UserController extends Controller
      */
     public function update(Request $request, User $user)
     {
-        //
+        return $request;
+    }
+
+    public function updatePassword(Request $request, User $user)
+    {
+        return $request;
     }
 
     /**
@@ -81,6 +73,8 @@ class UserController extends Controller
      */
     public function destroy(User $user)
     {
-        //
+        if (auth()->user()->role != 1) {
+            return abort(403);
+        }
     }
 }

@@ -21,19 +21,23 @@
                     </div>
                     <div class="col-sm-6 form-group">
                         <label for="fasyankes">Fasyankes TB RO</label>
-                        <div class="form-control">{{ $patient->patientDetail->sateliteHealthFacility->name }}</div>
+                        <div class="form-control">RS PARU JEMBER</div>
                     </div>
                     <div class="col-sm-6 form-group">
                         <label for="satelite">Fasyankes Satelit</label>
-                        <div class="form-control">{{ $patient->patientDetail->worker_id }}</div>
+                        <div class="form-control">{{ $patient->patientDetail->sateliteHealthFacility->name }}</div>
                     </div>
                     <div class="col-sm-6 form-group">
                         <label for="dateStart">Tanggal Mulai Berobat</label>
-                        <div class="form-control"></div>
+                        <div class="form-control">{{ date("D, d M Y") }}</div>
                     </div>
                     <div class="col-sm-6 form-group">
                         <label for="regNum">No. Registrasi Pasien</label>
                         <div class="form-control">{{ $patient->patientDetail->no_regis }}</div>
+                    </div>
+                    <div class="col-sm-6 form-group">
+                        <label>Pendamping/Patient Supporter (PS)</label>
+                        <div class="form-control">Faisol</div>
                     </div>
                 </div>
                 <div class="row mb-4 pb-2 border-bottom">
@@ -53,22 +57,12 @@
 
                     <div class="col-sm-6 form-group">
                         <label>Jenis Kelamin</label>
-                        <div class="form-check">
-                            <input class="form-check-input" type="radio" checked>
-                            <label class="form-check-label">
-                                {{ ucwords($patient->sex) }}
-                            </label>
-                        </div>
+                        <div class="form-control">{{ ucwords($patient->sex) }}</div>
                     </div>
 
                     <div class="col-sm-6 form-group">
                         <label>Agama</label>
-                        <div class="form-check">
-                            <input class="form-check-input" type="radio" checked>
-                            <label class="form-check-label">
-                                {{ $patient->religion->name }}
-                            </label>
-                        </div>
+                        <div class="form-control">{{ $patient->religion->name }}</div>
                     </div>
 
                     <div class="col-sm-6 form-group">
@@ -87,8 +81,10 @@
                     </div>
 
                     <div class="col-sm-6 form-group">
-                        <label>Kecamatan Domisili</label>
-                        <div class="form-control">{{ $patient->district->name }}</div>
+                        <label>Kecamatan</label>
+                        <div class="form-control">{{ $patient->district->name }}, {{
+                            $patient->district->regency->name
+                            }}</div>
                     </div>
 
                     <div class="col-sm-6 form-group">
@@ -103,31 +99,17 @@
 
                     <div class="col-sm-6 form-group">
                         <label>Status Pendidikan</label>
-                        <div class="form-check">
-                            <input class="form-check-input" type="radio" checked>
-                            <label class="form-check-label">
-                                {{ $patient->education->education }}
-                            </label>
-                        </div>
+                        <div class="form-control">{{ $patient->education->education }}</div>
                     </div>
 
                     <div class="col-sm-6 form-group">
                         <label>Status Pernikahan</label>
-                        <div class="form-check">
-                            <input class="form-check-input" type="radio" checked>
-                            <label class="form-check-label">
-                                {{ ucwords($patient->marital_status) }}
-                            </label>
-                        </div>
+                        <div class="form-control">{{ ucwords($patient->marital_status) }}</div>
                     </div>
 
                     <div class="col-sm-6 form-group">
                         <label>Status Pekerjaan</label>
-                        <div class="form-check">
-                            <input class="form-check-input" type="radio" checked>
-                            <label class="form-check-label">
-                                {{ $patient->has_job == true ? "Bekerja" : "Tidak Bekerja" }}
-                            </label>
+                        <div class="form-control">{{ $patient->has_job == true ? "Bekerja" : "Tidak Bekerja" }}
                         </div>
                     </div>
 
@@ -158,12 +140,7 @@
 
                     <div class="col-sm-6 form-group">
                         <label>Status Pasien</label>
-                        <div class="form-check">
-                            <input class="form-check-input" type="radio" checked>
-                            <label class="form-check-label">
-                                {{ $patient->patientDetail->patientStatus->status }}
-                            </label>
-                        </div>
+                        <div class="form-control">{{ $patient->patientDetail->patientStatus->status }}</div>
                     </div>
                 </div>
 
@@ -184,7 +161,8 @@
 
                     <div class="col-sm-6 form-group">
                         <label>Alamat</label>
-                        <div class="form-control">{{ $patient->guardian_address }}, {{ $patient->guardian_district }}
+                        <div class="form-control">{{ $patient->guardian_address }}, {{ $patient->guardian_district
+                            }}
                         </div>
                     </div>
 
@@ -227,19 +205,16 @@
 
                     <div class="col-sm-6 form-group">
                         <label>Tahu Penyakit Pasien</label>
-                        <div class="form-check">
-                            <input class="form-check-input" type="radio" checked>
-                            <label class="form-check-label">
-                                {{ $patient->emergency_contact->is_know == true ? "Ya" : "Tidak" }}
-                            </label>
+                        <div class="form-control">{{ $patient->emergency_contact->is_know == true ? "Ya" : "Tidak"
+                            }}
                         </div>
                     </div>
                 </div>
 
                 <div class="row">
                     <div class="col-12">
-                        <button type="reset" class="btn btn-warning">Edit Data</button>
-                        <form action="#" method="POST" class="d-inline">
+                        <a href="{{ route('admin.patients.edit', $patient) }}" class="btn btn-warning">Edit Data</a>
+                        <form action="{{ route('admin.patients.destroy', $patient) }}" method="POST" class="d-inline">
                             @csrf
                             @method('DELETE')
                             <button type="submit" class="btn btn-danger"

@@ -13,6 +13,16 @@ use App\Models\Religion;
 class PatientController extends Controller
 {
   /**
+   * Instantiate a new controller instance.
+   *
+   * @return void
+   */
+  public function __construct()
+  {
+    $this->middleware('auth');
+  }
+
+  /**
    * Display a listing of the resource.
    *
    * @return \Illuminate\Http\Response
@@ -60,8 +70,9 @@ class PatientController extends Controller
    * @param  \App\Models\Patient  $patient
    * @return \Illuminate\Http\Response
    */
-  public function show(Patient $patient)
+  public function show(PatientDetail $patient)
   {
+    // dd($patient);
     return view('admin.patient.show', compact('patient'));
   }
 
@@ -73,7 +84,7 @@ class PatientController extends Controller
    */
   public function edit(Patient $patient)
   {
-    //
+    //  
   }
 
   /**
@@ -85,7 +96,7 @@ class PatientController extends Controller
    */
   public function update(UpdatePatientRequest $request, Patient $patient)
   {
-    //
+    //  
   }
 
   /**
@@ -96,6 +107,6 @@ class PatientController extends Controller
    */
   public function destroy(Patient $patient)
   {
-    //
+    //  
   }
 }

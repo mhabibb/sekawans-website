@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class UpdateWorkerRequest extends FormRequest
+class UpdateUserRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -13,7 +13,7 @@ class UpdateWorkerRequest extends FormRequest
      */
     public function authorize()
     {
-        return auth()->check(); 
+        return auth()->id() == $this->route('user')->id;
     }
 
     /**
@@ -24,8 +24,9 @@ class UpdateWorkerRequest extends FormRequest
     public function rules()
     {
         return [
-            'name'      => "required|string|unique:workers,name,{$this->route('worker')->id}|max:50",
-            'is_active' => 'nullable|boolean',
+            'email'         => 'required|email',
+            'password'      => 'required|string',
+            'newPassword'   => 'nullable|string',
         ];
     }
 }

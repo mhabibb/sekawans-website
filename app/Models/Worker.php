@@ -13,8 +13,8 @@ class Worker extends Model
 
     public $timestamps = false;
 
-    public function patients()
+    public function patientDetails()
     {
-        return $this->hasMany(Patient::class);
+        return $this->hasMany(PatientDetail::class);
     }
 }

@@ -3,7 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
-use Illuminate\Http\Request;
+use App\Http\Requests\StoreUserRequest;
+use App\Http\Requests\UpdateUserRequest;
 
 class UserController extends Controller
 {
@@ -25,7 +26,8 @@ class UserController extends Controller
      */
     public function create()
     {
-        //
+        $this->authorize('superAdmin');
+        return view();
     }
 
     /**
@@ -34,9 +36,12 @@ class UserController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreUserRequest $request)
     {
-        //
+        $this->authorize('superAdmin');
+        $request = $request->validated();
+        User::create($request);
+        return view('admin.users.index');
     }
 
     /**
@@ -68,9 +73,11 @@ class UserController extends Controller
      * @param  \App\Models\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, User $user)
+    public function update(UpdateUserRequest $request, User $user)
     {
-        //
+        $request = $request->validated();
+        $user->update($request);
+        return redirect()->route('admin.users.show');
     }
 
     /**
@@ -81,6 +88,7 @@ class UserController extends Controller
      */
     public function destroy(User $user)
     {
-        //
+        $this->authorize('superAdmin');
+        User::destroy($user);
     }
 }

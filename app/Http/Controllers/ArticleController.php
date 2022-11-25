@@ -5,7 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Article;
 use App\Http\Requests\StoreArticleRequest;
 use App\Http\Requests\UpdateArticleRequest;
-use App\Models\Category;
+use Illuminate\Support\Facades\Storage;
+use Spatie\Activitylog\Models\Activity;
 
 class ArticleController extends Controller
 {
@@ -16,8 +17,9 @@ class ArticleController extends Controller
      */
     public function __construct()
     {
-        // $this->middleware('auth');
+        $this->middleware('auth');
     }
+
     /**
      * Display a listing of the resource.
      *
@@ -29,21 +31,21 @@ class ArticleController extends Controller
         //     : (last(request()->segments()) == "article" ? $article = Article::latest()->category(2)->get()
         //         : (last(request()->segments()) == "action" ? $article = Article::latest()->category(3)->get() : abort(404)));
         // return view('admin.artikel.index', $article);
-
-        if (last(request()->segments()) == "infos") {
-            $articles = Article::latest()->where('category_id', '1')->get();
+        $category = request()->segments()[1];
+        if ($category == "infos") {
+            $articles = Article::latest()->category(1);
             $title = 'Info TBC';
             $createRoute = 'admin.infotbc.create';
             $showRoute = 'admin.infotbc.show';
             $editRoute = 'admin.infotbc.edit';
-        } else if (last(request()->segments()) == "articles") {
-            $articles = Article::latest()->where('category_id', '2')->get();
+        } else if ($category == "articles") {
+            $articles = Article::latest()->category(2);
             $title = 'Artikel';
             $createRoute = 'admin.articles.create';
             $showRoute = 'admin.articles.show';
             $editRoute = 'admin.articles.edit';
-        } else if (last(request()->segments()) == "actions") {
-            $articles = Article::latest()->where('category_id', '3')->get();
+        } else if ($category == "actions") {
+            $articles = Article::latest()->category(3);
             $title = 'Kegiatan';
             $createRoute = 'admin.kegiatan.create';
             $showRoute = 'admin.kegiatan.show';
@@ -51,6 +53,8 @@ class ArticleController extends Controller
         } else {
             abort(404);
         };
+        (!auth()->user()->role ? $articles->user() : '');
+        $articles = $articles->get();
         return view('admin.article.index', [
             'title' => $title,
             'articles' => $articles,
@@ -67,13 +71,14 @@ class ArticleController extends Controller
      */
     public function create()
     {
-        if (request()->routeIs('admin.infotbc.create')) {
+        $category = request()->segments()[1];
+        if ($category == "infos") {
             $category = 1;
             $title = 'Info TBC';
-        } else if (request()->routeIs('admin.articles.create')) {
+        } else if ($category == "articles") {
             $category = 2;
             $title = 'Artikel';
-        } else if (request()->routeIs('admin.kegiatan.create')) {
+        } else if ($category == "actions") {
             $category = 3;
             $title = 'Kegiatan';
         } else {
@@ -94,7 +99,34 @@ class ArticleController extends Controller
      */
     public function store(StoreArticleRequest $request)
     {
-        dd($request);
+        $request = $request->validated();
+        $img = $request['articleImg']->store('img/articles');
+        // $category = request()->segments()[1];
+        switch ($request['category']) {
+            case 1:
+                $route = 'admin.infotbc.show';
+                break;
+            case 2:
+                $route = 'admin.articles.show';
+                break;
+            case 3:
+                $route = 'admin.kegiatan.show';
+                break;
+        }
+        // dd($category,$catId);
+        // $category == "infos" ? $catId = 1
+        //     : ($category == "articles" ? $catId = 2
+        //         : ($category == "actions" ? $catId = 3 : $catId = null));
+        // dd($request);
+        $article = Article::create([
+            'user_id'       => auth()->id(),
+            'title'         => $request['title'],
+            'img'           => $img,
+            'contents'      => $request['contents'],
+            'category_id'   => $request['category'],
+        ]);
+        (!$article ? Storage::delete($img) : '');
+        return redirect()->route($route, $article);
     }
 
     /**
@@ -157,7 +189,27 @@ class ArticleController extends Controller
      */
     public function update(UpdateArticleRequest $request, Article $article)
     {
-        dd($request, $article);
+        // dd($request);
+        $validated = $request->validated();
+        if (isset($validated['articleImg'])) {
+            $oldImg = $article->img;
+            $img = $validated['articleImg']->store('img/articles');
+        };
+        $article->update([
+            'title'         => $validated['title'],
+            'img'           => $img ?? $article->img,
+            'contents'      => $validated['contents'],
+        ]);
+
+        isset($validated['articleImg']) ? ($article->wasChanged() ? Storage::delete($oldImg) : Storage::delete($img)) : '';
+
+        // dd(isset($validated['articleImg']));
+        $category = (request()->segments()[1]);
+        $category == "infos" ? $route = 'admin.infotbc.show'
+            : ($category == "articles" ? $route = 'admin.articles.show'
+                : ($category == "actions" ? $route = 'admin.kegiatan.show' : $route = null));
+        // dd($route);
+        return redirect()->route($route, $article);
     }
 
     /**
@@ -168,6 +220,10 @@ class ArticleController extends Controller
      */
     public function destroy(Article $article)
     {
-        dd($article);
+        $activity = Activity::all()->last();
+        dd($activity->changes);
+        Storage::delete($article->img);
+        Article::destroy($article->id);
+        return back();
     }
 }

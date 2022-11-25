@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests;
 
+use App\Models\Article;
 use Illuminate\Foundation\Http\FormRequest;
 
 class UpdateArticleRequest extends FormRequest
@@ -13,7 +14,9 @@ class UpdateArticleRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        $article = $this->route('article');
+        $auth = $article->user_id == auth()->id() || auth()->user()->role;
+        return $auth;
     }
 
     /**
@@ -24,7 +27,9 @@ class UpdateArticleRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'title'         => "required|unique:articles,title,{$this->route('article')->id}|max:50",
+            'articleImg'    => 'nullable|image',
+            'contents'      => 'required',
         ];
     }
 }

@@ -10,6 +10,16 @@ use App\Models\SateliteHealthFacility;
 class WorkerController extends Controller
 {
   /**
+   * Instantiate a new controller instance.
+   *
+   * @return void
+   */
+  public function __construct()
+  {
+      $this->middleware('auth');
+  }
+  
+  /**
    * Display a listing of the resource.
    *
    * @return \Illuminate\Http\Response
@@ -26,9 +36,9 @@ class WorkerController extends Controller
    *
    * @return \Illuminate\Http\Response
    */
-  public function create()
+  public function create() 
   {
-    //
+    return view('admin.worker.create');
   }
 
   /**
@@ -39,7 +49,8 @@ class WorkerController extends Controller
    */
   public function store(StoreWorkerRequest $request)
   {
-    //
+    $request = $request->validated();
+    Worker::create($request);
   }
 
   /**
@@ -73,7 +84,8 @@ class WorkerController extends Controller
    */
   public function update(UpdateWorkerRequest $request, Worker $worker)
   {
-    //
+    $request = $request->validated();
+    $worker->update($request);
   }
 
   /**
@@ -84,6 +96,6 @@ class WorkerController extends Controller
    */
   public function destroy(Worker $worker)
   {
-    //
+    Worker::destroy($worker);
   }
 }

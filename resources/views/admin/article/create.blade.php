@@ -26,6 +26,7 @@
         <label for="contents">Isi konten</label>
         <textarea name="contents" id="summernote"></textarea>
       </div>
+      <input type="hidden" name="category" value="{{ $category }}" />
       <div class="col-12">
         <button type="reset" onclick="history.back()" class="btn btn-secondary">Batalkan</button>
         <button type="submit" class="btn btn-primary">Submit</button>

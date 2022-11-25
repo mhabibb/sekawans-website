@@ -32,11 +32,10 @@ class PatientFactory extends Factory
             'workplace' => fake()->company(),
             'work_address' => fake()->streetAddress(),
             'dependent' => fake()->numberBetween(1, 21),
-            'mother\'s_name' => fake()->name('female'),
-            'father\'s_name' => fake()->name('mele'),
+            'mother_name' => fake()->name('female'),
+            'father_name' => fake()->name('mele'),
             'guardian_phone' => fake()->phoneNumber(),
             'guardian_address' => fake()->streetAddress(),
-            'guardian_district' => fake()->city(),
             'emergency_contact_id' => fake()->numberBetween(1, 20)
         ];
     }

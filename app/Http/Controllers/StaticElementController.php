@@ -15,7 +15,7 @@ class StaticElementController extends Controller
   public function index()
   {
     $elements = StaticElement::all();
-    return view('admin.sekawans.index', compact('elements'));
+    return view('admin.sekawans.index', compact('elements')); 
   }
 
   /**
@@ -49,6 +49,8 @@ class StaticElementController extends Controller
    */
   public function update(UpdateStaticElementRequest $request, StaticElement $staticElement)
   {
-    //
+    $request = $request->validated();
+    $staticElement->update($request);
+    return redirect()->route('admin.sekawans.index');
   }
 }

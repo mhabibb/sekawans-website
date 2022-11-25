@@ -6,6 +6,7 @@ use Illuminate\Foundation\Http\FormRequest;
 
 class StoreArticleRequest extends FormRequest
 {
+    protected $stopOnFirstFailure = true;
     /**
      * Determine if the user is authorized to make this request.
      *
@@ -13,7 +14,7 @@ class StoreArticleRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return auth()->check();
     }
 
     /**
@@ -24,7 +25,10 @@ class StoreArticleRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'title'         => 'required|unique:articles,title|max:50',
+            'articleImg'    => 'required|image',
+            'contents'      => 'required',
+            'category'      => 'required|integer|between:1,3',
         ];
     }
 }

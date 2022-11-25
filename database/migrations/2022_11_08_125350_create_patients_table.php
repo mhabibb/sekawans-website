@@ -39,16 +39,15 @@ return new class extends Migration
             $table->string('workplace');
             $table->string('work_address');
             $table->integer('dependent');
-            $table->string('mother\'s_name', 50);
-            $table->string('father\'s_name', 50);
+            $table->string('mother_name', 50);
+            $table->string('father_name', 50);
             $table->string('guardian_phone', 20);
             $table->string('guardian_address');
-            $table->string('guardian_district');
             $table->foreignId('emergency_contact_id')
                 ->constrained()
                 ->onUpdate('cascade')
                 ->onDelete('cascade');
-            $table->timestamps();
+            $table->timestamp('start_treatment');
         });
     }
 

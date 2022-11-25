@@ -19,10 +19,6 @@ return new class extends Migration
             $table->string('relation', 30);
             $table->boolean('is_know')->default(false);
             $table->string('address');
-            $table->foreignId('district_id')
-                ->constrained()
-                ->onUpdate('cascade')
-                ->onDelete('cascade');
             $table->string('phone', 20);
         });
     }

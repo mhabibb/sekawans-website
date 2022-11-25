@@ -13,7 +13,7 @@ class UpdateStaticElementRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return auth()->check(); 
     }
 
     /**

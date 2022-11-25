@@ -13,7 +13,7 @@ class StoreWorkerRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return auth()->check(); 
     }
 
     /**
@@ -24,7 +24,8 @@ class StoreWorkerRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'name'      => 'required|string|unique:workers|max:50',
+            'is_active' => 'nullable|boolean',
         ];
     }
 }

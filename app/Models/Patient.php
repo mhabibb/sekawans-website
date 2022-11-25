@@ -9,6 +9,8 @@ class Patient extends Model
 {
     use HasFactory;
 
+    public $timestamps = false;
+
     protected $guarded = ['id', 'created_at', 'updated_at'];
 
     protected $with = ['district', 'education', 'religion', 'emergency_contact'];

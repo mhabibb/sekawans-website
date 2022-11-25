@@ -9,9 +9,11 @@ class PatientDetail extends Model
 {
     use HasFactory;
 
+    // public $timestamps = false;
+
     protected $guarded = ['id'];
 
-    protected $with = ['patientStatus', 'patient', 'sateliteHealthFacility'];
+    protected $with = ['patientStatus', 'patient', 'sateliteHealthFacility', 'worker'];
 
     public function patientStatus()
     {
@@ -21,6 +23,11 @@ class PatientDetail extends Model
     public function patient()
     {
         return $this->belongsTo(Patient::class);
+    }
+
+    public function worker()
+    {
+        return $this->belongsTo(Worker::class);
     }
 
     public function sateliteHealthFacility()

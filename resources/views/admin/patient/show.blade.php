@@ -29,7 +29,7 @@
                     </div>
                     <div class="col-sm-6 form-group">
                         <label for="dateStart">Tanggal Mulai Berobat</label>
-                        <div class="form-control"></div>
+                        <div class="form-control">{{ $patient->start_treatment }}</div>
                     </div>
                     <div class="col-sm-6 form-group">
                         <label for="regNum">No. Registrasi Pasien</label>
@@ -214,11 +214,11 @@
                         <div class="form-control">{{ $patient->emergency_contact->address }}</div>
                     </div>
 
-                    <div class="col-sm-6 form-group">
+                    {{-- <div class="col-sm-6 form-group">
                         <label>Kecamatan</label>
                         <div class="form-control">{{ $patient->emergency_contact->district->name }}
                         </div>
-                    </div>
+                    </div> --}}
 
                     <div class="col-sm-6 form-group">
                         <label>No. Telepon/Hp</label>

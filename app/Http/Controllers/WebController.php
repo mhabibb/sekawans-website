@@ -103,7 +103,7 @@ class WebController extends Controller
                     $results = Article::latest()->where('category_id', 3)->where('title', 'like', '%' . $request->search . '%')->get();
                     break;
                 default:
-                    $result = '';
+                    $result = ''; 
             }
             $output = '';
 

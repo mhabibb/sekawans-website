@@ -13,8 +13,8 @@ class UpdatePatientDetailRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
-    }
+        return auth()->check();
+    } 
 
     /**
      * Get the validation rules that apply to the request.

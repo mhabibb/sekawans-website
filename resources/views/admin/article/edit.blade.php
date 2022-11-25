@@ -22,7 +22,7 @@
       <div class="form-group mb-3 col-md-6">
         <label for="articleImg">Gambar</label>
         @if ($article->img)
-        <img src="{{ $article->img }}" alt="..." class="img-preview img-fluid d-block mb-2">
+        <img src="{{ asset('storage/'.$article->img) }}" alt="..." class="img-preview img-fluid d-block mb-2">
         @else
         <img class="img-preview img-fluid d-block mb-2">
         @endif

@@ -13,7 +13,7 @@ class StorePatientRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return auth()->check();
     }
 
     /**
@@ -24,7 +24,27 @@ class StorePatientRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'fasyankes'     => 'required|string|max:50|',
+            'satelite'      => 'required|string',
+            'dateStart'     => 'required|date',
+            'regNum'        => 'required|integer|',
+            'name'          => 'required|string',
+            'nik'           => 'required|integer',
+            'sexs'          => 'required|string',
+            'religions'     => 'required|integer',
+            'address'       => 'required|string',
+            'addressNow'    => 'required|string',
+            'age'           => 'required|integer',
+            'phone'         => 'required|integer',
+            'educations'    => 'required|integer',
+            'maritals'      => 'required|string',
+            'jobstat'       => 'required|integer',
+            'workplace'     => 'required|string',
+            'workAddr'      => 'required|string',
+            'depend'        => 'required|integer',
+            'height'        => 'required|integer|between:10,250',
+            'weight'        => 'required|integer|between:3,100',
+            'statuses'      => 'required|integer|between:1,5',
         ];
     }
 }

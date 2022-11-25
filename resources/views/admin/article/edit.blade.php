@@ -20,13 +20,13 @@
           value="{{$article->title}}">
       </div>
       <div class="form-group mb-3 col-md-6">
-        <label for="articleImg">Gambar</label>
+        <label for="img">Gambar</label>
         @if ($article->img)
         <img src="{{ asset('storage/'.$article->img) }}" alt="..." class="img-preview img-fluid d-block mb-2">
         @else
         <img class="img-preview img-fluid d-block mb-2">
         @endif
-        <input type="file" class="form-control-file" name="articleImg" id="articleImg" onchange="previewImg()">
+        <input type="file" class="form-control-file" name="img" id="img" onchange="previewImg()">
       </div>
       <div class="form-group mb-3 col-12">
         <label for="contents">Isi konten</label>
@@ -52,7 +52,7 @@
 
 <script>
   function previewImg() {
-    const image = document.querySelector('#articleImg');
+    const image = document.querySelector('#img');
     const imgPreview = document.querySelector('.img-preview');
 
     const oFReader = new FileReader();

@@ -27,10 +27,6 @@ class ArticleController extends Controller
      */
     public function index()
     {
-        // last(request()->segments()) == "info" ? $article = Article::latest()->category(1)->get()
-        //     : (last(request()->segments()) == "article" ? $article = Article::latest()->category(2)->get()
-        //         : (last(request()->segments()) == "action" ? $article = Article::latest()->category(3)->get() : abort(404)));
-        // return view('admin.artikel.index', $article);
         $category = request()->segments()[1];
         if ($category == "infos") {
             $articles = Article::latest()->category(1);
@@ -100,9 +96,8 @@ class ArticleController extends Controller
     public function store(StoreArticleRequest $request)
     {
         $request = $request->validated();
-        $img = $request['articleImg']->store('img/articles');
-        // $category = request()->segments()[1];
-        switch ($request['category']) {
+        $request['img'] = $request['img']->store('img/articles');
+        switch ($request['category_id']) {
             case 1:
                 $route = 'admin.infotbc.show';
                 break;
@@ -113,19 +108,8 @@ class ArticleController extends Controller
                 $route = 'admin.kegiatan.show';
                 break;
         }
-        // dd($category,$catId);
-        // $category == "infos" ? $catId = 1
-        //     : ($category == "articles" ? $catId = 2
-        //         : ($category == "actions" ? $catId = 3 : $catId = null));
-        // dd($request);
-        $article = Article::create([
-            'user_id'       => auth()->id(),
-            'title'         => $request['title'],
-            'img'           => $img,
-            'contents'      => $request['contents'],
-            'category_id'   => $request['category'],
-        ]);
-        (!$article ? Storage::delete($img) : '');
+        $article = Article::create($request);
+        (!$article ? Storage::delete($request['img']) : '');
         return redirect()->route($route, $article);
     }
 
@@ -189,26 +173,19 @@ class ArticleController extends Controller
      */
     public function update(UpdateArticleRequest $request, Article $article)
     {
-        // dd($request);
         $validated = $request->validated();
-        if (isset($validated['articleImg'])) {
+        if (isset($validated['img'])) {
             $oldImg = $article->img;
-            $img = $validated['articleImg']->store('img/articles');
+            $validated['img'] = $validated['img']->store('img/articles');
         };
-        $article->update([
-            'title'         => $validated['title'],
-            'img'           => $img ?? $article->img,
-            'contents'      => $validated['contents'],
-        ]);
+        $article->update($validated);
 
-        isset($validated['articleImg']) ? ($article->wasChanged() ? Storage::delete($oldImg) : Storage::delete($img)) : '';
+        isset($validated['img']) ? ($article->wasChanged() ? Storage::delete($oldImg) : Storage::delete($validated['img'])) : '';
 
-        // dd(isset($validated['articleImg']));
         $category = (request()->segments()[1]);
         $category == "infos" ? $route = 'admin.infotbc.show'
             : ($category == "articles" ? $route = 'admin.articles.show'
                 : ($category == "actions" ? $route = 'admin.kegiatan.show' : $route = null));
-        // dd($route);
         return redirect()->route($route, $article);
     }
 

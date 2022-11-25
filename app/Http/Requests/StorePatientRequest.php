@@ -27,7 +27,7 @@ class StorePatientRequest extends FormRequest
             'fasyankes'     => 'required|string|max:50|',
             'satelite'      => 'required|string',
             'dateStart'     => 'required|date',
-            'regNum'        => 'required|integer|',
+            'registrationNumber'  => 'required|integer|',
             'name'          => 'required|string',
             'nik'           => 'required|integer',
             'sexs'          => 'required|string',

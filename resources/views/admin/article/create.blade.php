@@ -18,15 +18,15 @@
         <input type="text" name="title" class="form-control" id="title" placeholder="Tulis judul...">
       </div>
       <div class="form-group mb-3 col-md-6">
-        <label for="articleImg">Gambar</label>
+        <label for="img">Gambar</label>
         <img class="img-preview img-fluid d-block mb-2">
-        <input type="file" class="form-control-file" name="articleImg" id="articleImg" onchange="previewImg()">
+        <input type="file" class="form-control-file" name="img" id="img" onchange="previewImg()">
       </div>
       <div class="form-group mb-3 col-12">
         <label for="contents">Isi konten</label>
         <textarea name="contents" id="summernote"></textarea>
       </div>
-      <input type="hidden" name="category" value="{{ $category }}" />
+      <input type="hidden" name="category_id" value="{{ $category }}" />
       <div class="col-12">
         <button type="reset" onclick="history.back()" class="btn btn-secondary">Batalkan</button>
         <button type="submit" class="btn btn-primary">Submit</button>
@@ -47,7 +47,7 @@
 
 <script>
   function previewImg() {
-    const image = document.querySelector('#articleImg');
+    const image = document.querySelector('#img');
     const imgPreview = document.querySelector('.img-preview');
 
     const oFReader = new FileReader();

@@ -21,7 +21,7 @@ class PatientFactory extends Factory
             'sex' => fake()->randomElement(['laki-laki', 'perempuan']),
             'education_id' => fake()->numberBetween(1, 5),
             'id_card_address' => fake()->streetAddress(),
-            'id_card_district' => fake()->city(),
+            // 'id_card_district' => fake()->city(),
             'id_number' => fake()->nik(),
             'religion_id' => fake()->numberBetween(1, 6),
             'residence_address' => fake()->streetAddress(),

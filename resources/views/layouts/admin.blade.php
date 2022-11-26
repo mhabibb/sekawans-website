@@ -35,6 +35,19 @@
   <link rel="stylesheet" type="text/css"
     href="https://cdn.datatables.net/v/bs4/jszip-2.5.0/dt-1.13.1/b-2.3.3/b-html5-2.3.3/b-print-2.3.3/r-2.4.0/datatables.min.css" />
 
+    <style>
+        /* Chrome, Safari, Edge, Opera */
+        input::-webkit-outer-spin-button,
+        input::-webkit-inner-spin-button {
+          -webkit-appearance: none;
+          margin: 0;
+        }
+
+        /* Firefox */
+        input[type=number] {
+          -moz-appearance: textfield;
+        }
+    </style>
 
   @yield('css')
 
@@ -111,7 +124,18 @@
     $('#btn_logout').click(function (e){
         e.preventDefault();
         $('#logout-form').trigger('submit');
-      })
+    })
+
+    $(function(){
+        angka = $('input[type=number]');
+
+        angka.keydown(function(e){
+            if (e.which != 8 && e.which != 0 && e.which < 48 || e.which > 57)
+            {
+                e.preventDefault();
+            }
+        })
+    })
   </script>
   @yield('js')
 </body>

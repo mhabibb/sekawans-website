@@ -17,7 +17,8 @@
 <!-- Main content -->
 <section class="content">
     <div class="container-fluid pb-5">
-        <form action="{{ route('admin.patients.update', $patient) }}" method="POST" enctype="multipart/form-data"
+        {{-- @dd($patient) --}}
+        <form action="{{ route('admin.patients.update', $detail) }}" method="POST" enctype="multipart/form-data"
             class="card">
             @method('PUT')
             @csrf
@@ -44,7 +45,7 @@
                     </div>
                     <div class="col-sm-6 form-group">
                         <label>Tanggal Mulai Berobat</label>
-                        <input type="date" name="dateStart" class="form-control">
+                        <input type="date" value="{{ date('Y-m-d', strtotime($detail->patient->start_treatment)) }}" name="dateStart" class="form-control">
                     </div>
                     <div class="col-sm-6 form-group">
                         <label>No. Registrasi Pasien</label>
@@ -63,26 +64,26 @@
 
                     <div class="col-sm-6 form-group">
                         <label>Nama Lengkap</label>
-                        <input type="text" name="fullName" class="form-control" value="{{ $patient->name }}">
+                        <input type="text" name="fullName" class="form-control" value="{{ $detail->patient->name }}">
                     </div>
 
                     <div class="col-sm-6 form-group">
                         <label>NIK KTP</label>
-                        <input type="number" name="nik" class="form-control" value="{{ $patient->id_number }}">
+                        <input type="number" name="nik" class="form-control" value="{{ $detail->patient->id_number }}">
                     </div>
 
                     <div class="col-sm-6 form-group">
                         <label class="d-block">Jenis Kelamin</label>
                         <div class="form-check">
                             <input class="form-check-input" type="radio" name="sex" id="lakilaki" value="laki-laki" {{
-                                $patient->sex == "laki-laki" ? "checked" : "" }}>
+                                $detail->patient->sex == "laki-laki" ? "checked" : "" }}>
                             <label class="form-check-label" for="lakilaki">
                                 Laki-laki
                             </label>
                         </div>
                         <div class="form-check">
                             <input class="form-check-input" type="radio" name="sex" id="perempuan" value="perempuan" {{
-                                $patient->sex == "perempuan" ? "checked" : "" }}>
+                                $detail->patient->sex == "perempuan" ? "checked" : "" }}>
                             <label class="form-check-label" for="perempuan">
                                 Perempuan
                             </label>
@@ -96,7 +97,7 @@
                             <div class="form-check">
                                 <input class="form-check-input" type="radio" name="religion"
                                     id="{{'religion' . $religion->id}}" value="{{ $religion->id }}" {{
-                                    $patient->religion_id == $religion->id ? "checked" : "" }}>
+                                    $detail->patient->religion_id == $religion->id ? "checked" : "" }}>
                                 <label class="form-check-label" for="{{'religion' . $religion->id}}">
                                     {{ $religion->name }}
                                 </label>
@@ -108,19 +109,19 @@
                     <div class="col-sm-6 form-group">
                         <label>Alamat KTP</label>
                         <input type="text" name="addressKtp" class="form-control"
-                            value="{{ $patient->id_card_address }}">
+                            value="{{ $detail->patient->id_card_address }}">
                     </div>
 
                     <div class="col-sm-6 form-group">
-                        <label>Kecamatan KTP</label>
+                        {{-- <label>Kecamatan KTP</label>
                         <input type="text" name="districtKtp" class="form-control"
-                            value="{{ $patient->id_card_district }}">
+                            value="{{ $detail->patient->id_card_district }}"> --}}
                     </div>
 
                     <div class="col-sm-6 form-group">
                         <label>Alamat Domisili</label>
                         <input type="text" name="addressNow" class="form-control"
-                            value="{{ $patient->residence_address }}">
+                            value="{{ $detail->patient->residence_address }}">
                     </div>
 
                     <div class="col-sm-6">
@@ -131,7 +132,7 @@
                                 @foreach ($regencies as $regency)
                                 <optgroup label="{{ $regency->name }}">
                                     @foreach ($regency->districts as $district)
-                                    <option value="{{ $district->id }}" {{ $patient->district_id == $district->id ?
+                                    <option value="{{ $district->id }}" {{ $detail->patient->district_id == $district->id ?
                                         "selected" : "" }} >{{ $district->name }}</option>
                                     @endforeach
                                 </optgroup>
@@ -139,7 +140,7 @@
                             </select>
                         </div>
                     </div>
-
+                    {{-- @dd($patient) --}}
                     <div class="col-sm-6 form-group">
                         <label>Umur (Tahun)</label>
                         <input type="number" name="age" class="form-control" value="{{ $detail->age }}">
@@ -147,7 +148,7 @@
 
                     <div class="col-sm-6 form-group">
                         <label>No. Telepon/Hp</label>
-                        <input type="text" name="phoneNumber" class="form-control" value="{{ $patient->phone }}">
+                        <input type="text" name="phoneNumber" class="form-control" value="{{ $detail->patient->phone }}">
                     </div>
 
                     <div class="col-sm-6 form-group">
@@ -156,7 +157,7 @@
                             @foreach ($educations as $edu)
                             <div class="form-check">
                                 <input class="form-check-input" type="radio" name="education" id="{{'edu' . $edu->id}}"
-                                    value="{{ $edu->id }}" {{ $patient->education_id == $edu->id ? "checked" : "" }}>
+                                    value="{{ $edu->id }}" {{ $detail->patient->education_id == $edu->id ? "checked" : "" }}>
                                 <label class="form-check-label" for="{{'edu' . $edu->id}}">
                                     {{ $edu->education }}
                                 </label>
@@ -170,14 +171,14 @@
                         <div class="row row-cols-2 mx-1">
                             <div class="form-check">
                                 <input class="form-check-input" type="radio" name="maritalStatus" id="menikah"
-                                    value="menikah" {{ $patient->marital_status == "menikah" ? "checked" : "" }}>
+                                    value="menikah" {{ $detail->patient->marital_status == "menikah" ? "checked" : "" }}>
                                 <label class="form-check-label" for="menikah">
                                     Menikah
                                 </label>
                             </div>
                             <div class="form-check">
                                 <input class="form-check-input" type="radio" name="maritalStatus" id="belum-menikah"
-                                    value="belum menikah" {{ $patient->marital_status == "belum menikah" ? "checked" :
+                                    value="belum menikah" {{ $detail->patient->marital_status == "belum menikah" ? "checked" :
                                 "" }}>
                                 <label class="form-check-label" for="belum-menikah">
                                     Belum Menikah
@@ -185,7 +186,7 @@
                             </div>
                             <div class="form-check">
                                 <input class="form-check-input" type="radio" name="maritalStatus" id="janda-duda"
-                                    value="janda/duda" {{ $patient->marital_status == "janda/duda" ? "checked" : "" }}>
+                                    value="janda/duda" {{ $detail->patient->marital_status == "janda/duda" ? "checked" : "" }}>
                                 <label class="form-check-label" for="janda-duda">
                                     Janda/Duda
                                 </label>
@@ -197,14 +198,14 @@
                         <label>Status Pekerjaan</label>
                         <div class="form-check">
                             <input class="form-check-input" type="radio" name="hasJob" id="bekerja" value="1" {{
-                                $patient->has_job == 1 ? "checked" : "" }}>
+                                $detail->patient->has_job == 1 ? "checked" : "" }}>
                             <label class="form-check-label" for="bekerja">
                                 Bekerja
                             </label>
                         </div>
                         <div class="form-check">
                             <input class="form-check-input" type="radio" name="hasJob" id="tidak-kerja" value="2" {{
-                                $patient->has_job == 0 ? "checked" : "" }}>
+                                $detail->patient->has_job == 0 ? "checked" : "" }}>
                             <label class="form-check-label" for="tidak-kerja">
                                 Tidak Bekerja
                             </label>
@@ -213,18 +214,18 @@
 
                     <div class="col-sm-6 form-group">
                         <label>Tempat Bekerja</label>
-                        <input type="text" name="workplace" class="form-control" value="{{ $patient->workplace }}">
+                        <input type="text" name="workplace" class="form-control" value="{{ $detail->patient->workplace }}">
                     </div>
 
                     <div class="col-sm-6 form-group">
                         <label>Alamat Tempat Bekerja</label>
-                        <input type="text" name="workAddress" class="form-control" value="{{ $patient->work_address }}">
+                        <input type="text" name="workAddress" class="form-control" value="{{ $detail->patient->work_address }}">
                     </div>
 
                     <div class="col-sm-6 form-group">
                         <label for="dependent">Jumlah Tanggungan</label>
                         <input type="number" name="dependent" class="form-control" value="{{
-                            $patient->dependent }}">
+                            $detail->patient->dependent }}">
                     </div>
 
                     <div class="col-sm-6 form-group">
@@ -260,30 +261,30 @@
                     </div>
                     <div class="col-sm-6 form-group">
                         <label>Nama Ibu</label>
-                        <input type="text" name="motherName" class="form-control" value="{{ $patient->mother_name }}">
+                        <input type="text" name="motherName" class="form-control" value="{{ $detail->patient->mother_name }}">
                     </div>
 
                     <div class="col-sm-6 form-group">
                         <label>Nama Bapak</label>
-                        <input type="text" name="fatherName" class="form-control" value="{{ $patient->father_name }}">
+                        <input type="text" name="fatherName" class="form-control" value="{{ $detail->patient->father_name }}">
                     </div>
 
                     <div class="col-sm-6 form-group">
                         <label>Alamat</label>
                         <input type="text" name="parentAddress" class="form-control"
-                            value="{{ $patient->guardian_address }}">
+                            value="{{ $detail->patient->guardian_address }}">
                     </div>
 
-                    <div class="col-sm-6 form-group">
+                    {{-- <div class="col-sm-6 form-group">
                         <label>Kecamatan</label>
                         <input type="text" name="parentDistrict" class="form-control"
-                            value="{{ $patient->guardian_district }}">
-                    </div>
+                            value="{{ $detail->patient->guardian_district }}">
+                    </div> --}}
 
                     <div class="col-sm-6 form-group">
                         <label>No. Telepon/Hp</label>
                         <input type="text" name="parentPhone" class="form-control"
-                            value="{{ $patient->guardian_phone }}">
+                            value="{{ $detail->patient->guardian_phone }}">
                     </div>
                 </div>
 
@@ -295,57 +296,57 @@
                     <div class="col-sm-6 form-group">
                         <label>Nama</label>
                         <input type="text" name="emergencyContactName" class="form-control"
-                            value="{{ $patient->emergency_contact->name }}">
+                            value="{{ $detail->patient->emergency_contact->name }}">
                     </div>
 
                     <div class="col-sm-6 form-group">
                         <label>Hubungan</label>
                         <input type="text" name="emergencyContactRelations" class="form-control"
-                            value="{{ $patient->emergency_contact->relation }}">
+                            value="{{ $detail->patient->emergency_contact->relation }}">
                     </div>
 
                     <div class="col-sm-6 form-group">
                         <label>Alamat</label>
                         <input type="text" name="emergencyContactAddress" class="form-control"
-                            value="{{ $patient->emergency_contact->address }}">
+                            value="{{ $detail->patient->emergency_contact->address }}">
                     </div>
 
                     <div class="col-sm-6">
                         <div class="form-group">
-                            <label>Kecamatan</label>
+                            {{-- <label>Kecamatan</label>
                             <select class="select2" name="emergencyContactDistrict" style="width: 100%;">
                                 <option>Pilih Kecamatan</option>
                                 @foreach ($regencies as $regency)
                                 <optgroup label="{{ $regency->name }}">
                                     @foreach ($regency->districts as $district)
-                                    <option value="{{ $district->id }}" {{ $patient->emergency_contact->district->id ==
+                                    <option value="{{ $district->id }}" {{ $detail->patient->emergency_contact->district->id ==
                                         $district->id ? "selected" : "" }}
                                         >{{ $district->name }}</option>
                                     @endforeach
                                 </optgroup>
                                 @endforeach
-                            </select>
+                            </select> --}}
                         </div>
                     </div>
 
                     <div class="col-sm-6 form-group">
                         <label>No. Telepon/Hp</label>
                         <input type="text" name="emergencyContactPhone" class="form-control"
-                            value="{{ $patient->emergency_contact->phone }}">
+                            value="{{ $detail->patient->emergency_contact->phone }}">
                     </div>
 
                     <div class="col-sm-6 form-group">
                         <label>Tahu Penyakit Pasien</label>
                         <div class="form-check">
                             <input class="form-check-input" type="radio" name="isKnow" id="ya-tahu" value="1" {{
-                                $patient->emergency_contact->is_know == 1 ? "checked" : ""}}>
+                                $detail->patient->emergency_contact->is_know == 1 ? "checked" : ""}}>
                             <label class="form-check-label" for="ya-tahu">
                                 Ya
                             </label>
                         </div>
                         <div class="form-check">
                             <input class="form-check-input" type="radio" name="isKnow" id="tidak-tahu" value="0" {{
-                                $patient->emergency_contact->is_know == 0 ? "checked" : ""}}>
+                                $detail->patient->emergency_contact->is_know == 0 ? "checked" : ""}}>
                             <label class="form-check-label" for="tidak-tahu">
                                 Tidak
                             </label>

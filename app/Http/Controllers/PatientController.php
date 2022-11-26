@@ -77,7 +77,7 @@ class PatientController extends Controller
     public function show(PatientDetail $patient)
     {
         // dd($patient);
-        return view('admin.patient.show', compact('patient'));
+        return view('admin.patient.show', ['patientDetail' => $patient]);
     }
 
     /**
@@ -86,15 +86,16 @@ class PatientController extends Controller
      * @param  \App\Models\Patient  $patient
      * @return \Illuminate\Http\Response
      */
-    public function edit(Patient $patient)
+    public function edit(PatientDetail $patient)
     {
         $fasyankes = collect(["RS PARU JEMBER", "RSD DR. SOEBANDI JEMBER"]);
         $religions = Religion::all();
         $educations = Education::all();
         $statuses = PatientStatus::all();
-        $regencies = Regency::all();
-        $detail = $patient->patientDetail;
-        return view('admin.patient.edit', compact('patient', 'detail', 'fasyankes', 'religions', 'regencies', 'educations', 'statuses'));
+        $regencies = Regency::withWhereHas('districts', fn ($query) => $query->without('regency'))->get();
+        $detail = $patient;
+        // dd($patient, $detail);
+        return view('admin.patient.edit', compact('detail', 'fasyankes', 'religions', 'regencies', 'educations', 'statuses'));
     }
 
     /**

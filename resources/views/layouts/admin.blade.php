@@ -36,6 +36,7 @@
     href="https://cdn.datatables.net/v/bs4/jszip-2.5.0/dt-1.13.1/b-2.3.3/b-html5-2.3.3/b-print-2.3.3/r-2.4.0/datatables.min.css" />
 
     <style>
+      {{-- Disable input number arrow --}}
         /* Chrome, Safari, Edge, Opera */
         input::-webkit-outer-spin-button,
         input::-webkit-inner-spin-button {
@@ -126,6 +127,7 @@
         $('#logout-form').trigger('submit');
     })
 
+    {{-- Disable other number input --}}
     $(function(){
         angka = $('input[type=number]');
 

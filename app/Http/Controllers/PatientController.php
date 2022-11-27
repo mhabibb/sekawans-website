@@ -75,7 +75,6 @@ class PatientController extends Controller
         $emergency = EmergencyContact::create($request['emergency']);
         isset($emergency) ? $patient = Patient::create($request) : '';
         isset($patient) ? $detail = PatientDetail::create($request) : '';
-        // $detail = PatientDetail::create($request);
         $detail = PatientDetail::find($detail->id);
 
         return redirect()->route('admin.patients.show',$detail);
@@ -89,7 +88,7 @@ class PatientController extends Controller
      */
     public function show(PatientDetail $patient)
     {
-        // dd($patient);
+        dd($patient);
         return view('admin.patient.show', ['patientDetail' => $patient]);
     }
 
@@ -118,9 +117,15 @@ class PatientController extends Controller
      * @param  \App\Models\Patient  $patient
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdatePatientRequest $request, Patient $patient)
+    public function update(UpdatePatientRequest $request, PatientDetail $patient)
     {
-        //  
+        $request = $request->validated();
+        $patient->patient->emergency_contact->update($request['emergency']);
+        $patient->patient->update($request);
+        $patient->update($request);
+        $detail = PatientDetail::find($patient);
+
+        return redirect()->route('admin.patients.show',$detail);
     }
 
     /**
@@ -131,6 +136,8 @@ class PatientController extends Controller
      */
     public function destroy(Patient $patient)
     {
-        //  
+        EmergencyContact::destroy($patient->patient->emergency_contact);
+        Patient::destroy($patient->patient);
+        PatientDetail::destroy($patient);
     }
 }

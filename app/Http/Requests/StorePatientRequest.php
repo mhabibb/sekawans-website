@@ -2,10 +2,13 @@
 
 namespace App\Http\Requests;
 
+use App\Models\SateliteHealthFacility;
+use App\Models\Worker;
 use Illuminate\Foundation\Http\FormRequest;
 
 class StorePatientRequest extends FormRequest
 {
+    protected $stopOnFirstFailure = true;
     /**
      * Determine if the user is authorized to make this request.
      *
@@ -17,6 +20,25 @@ class StorePatientRequest extends FormRequest
     }
 
     /**
+     * Prepare the data for validation.
+     *
+     * @return void
+     */
+    protected function prepareForValidation()
+    {
+        $this->merge([
+            'satelite_health_facility_id' => SateliteHealthFacility::firstOrCreate(
+                ["id"    => $this->satelite_health_facility_id],
+                ["name"  => $this->satelite_health_facility_id]
+            )->id,
+            'worker_id' => Worker::firstOrCreate(
+                ["id"    => $this->worker_id],
+                ["name"  => $this->worker_id]
+            )->id,
+        ]);
+    }
+
+    /**
      * Get the validation rules that apply to the request.
      *
      * @return array<string, mixed>
@@ -24,27 +46,38 @@ class StorePatientRequest extends FormRequest
     public function rules()
     {
         return [
-            'fasyankes'     => 'required|string|max:50|',
-            'satelite'      => 'required|string',
-            'dateStart'     => 'required|date',
-            'registrationNumber'  => 'required|integer|',
-            'name'          => 'required|string',
-            'nik'           => 'required|integer',
-            'sexs'          => 'required|string',
-            'religions'     => 'required|integer',
-            'address'       => 'required|string',
-            'addressNow'    => 'required|string',
-            'age'           => 'required|integer',
-            'phone'         => 'required|integer',
-            'educations'    => 'required|integer',
-            'maritals'      => 'required|string',
-            'jobstat'       => 'required|integer',
-            'workplace'     => 'required|string',
-            'workAddr'      => 'required|string',
-            'depend'        => 'required|integer',
-            'height'        => 'required|integer|between:10,250',
-            'weight'        => 'required|integer|between:3,100',
-            'statuses'      => 'required|integer|between:1,5',
+            // 'tb_health_facility'            => 'required|string|max:50',
+            'satelite_health_facility_id'   => 'required|integer',
+            // 'start_treatment'               => 'required|date|before_or_equal:today',
+            // 'no_regis'                      => 'required|integer|',
+            'worker_id'                     => 'required|integer',
+            // 'name'                          => 'required|string|max:50',
+            // 'id_number'                     => 'required|integer|digits:16',
+            // 'sex'                           => 'required|string|in:laki-laki,perempuan',
+            // 'religion_id'                   => 'required|integer|between:1,6',
+            // 'id_card_address'               => 'required|string',
+            // 'residence_address'             => 'required|string',
+            // 'district_id'                   => 'required|integer|digits:7',
+            // 'age'                           => 'required|integer|between:1,100',
+            // 'phone'                         => 'required|integer|digits_between:10,16',
+            // 'education_id'                  => 'required|integer|between:1,5',
+            // 'marital_status'                => 'required|string|in:menikah,belum menikah,janda/duda',
+            // 'has_job'                       => 'required|boolean',
+            // 'workplace'                     => 'exclude_unless:has_job,1|string|max:50',
+            // 'work_address'                  => 'exclude_unless:has_job,1|string',
+            // 'dependent'                     => 'required|integer|between:0,100',
+            // 'height'                        => 'required|integer|between:10,250',
+            // 'weight'                        => 'required|integer|between:3,100',
+            // 'mother_name'                   => 'required|string|max:50',
+            // 'father_name'                   => 'required|string|max:50',
+            // 'guardian_address'              => 'required|string',
+            // 'guardian_phone'                => 'required|integer|digits_between:10,16',
+            // 'emergency'                     => 'required|array|size:5',
+            // "emergency.name"                => 'required|string|max:50',
+            // "emergency.relations"           => 'required|string|max:50',
+            // "emergency.address"             => 'required|string',
+            // "emergency.phone"               => 'required|integer|digits_between:10,16',
+            // "emergency.is_know"             => 'required|boolean',
         ];
     }
 }

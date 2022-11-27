@@ -21,7 +21,7 @@ return new class extends Migration
                 ->onDelete('cascade');
             $table->string('title', 50);
             $table->string('img');
-            $table->text('contents');
+            $table->longText('contents');
             $table->foreignId('category_id')
                 ->constrained()
                 ->onUpdate('cascade')

@@ -13,6 +13,11 @@ class Worker extends Model
 
     public $timestamps = false;
 
+    public function scopeActive($query)
+    {
+        return  $query->where('is_active', 1);
+    }
+
     public function patientDetails()
     {
         return $this->hasMany(PatientDetail::class);

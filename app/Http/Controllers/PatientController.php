@@ -11,6 +11,9 @@ use App\Models\PatientStatus;
 use App\Models\Regency;
 use App\Models\Religion;
 use App\Models\SateliteHealthFacility;
+use App\Models\Worker;
+use Illuminate\Support\Arr;
+use Illuminate\Support\Str;
 
 class PatientController extends Controller
 {
@@ -52,9 +55,11 @@ class PatientController extends Controller
         $fasyankes = collect(["RS PARU JEMBER", "RSD DR. SOEBANDI JEMBER"]);
         $religions = Religion::all();
         $educations = Education::all();
-        $statuses = PatientStatus::all();
-        $regencies = Regency::all();
-        return view('admin.patient.create', compact('fasyankes', 'religions', 'regencies', 'educations', 'statuses'));
+        $satelites = SateliteHealthFacility::all();
+        $workers = Worker::active()->get();
+        // $statuses = PatientStatus::all();
+        $regencies = Regency::withWhereHas('districts', fn ($query) => $query->without('regency'))->get();
+        return view('admin.patient.create', compact('fasyankes', 'religions', 'regencies', 'educations', 'satelites', 'workers'));
     }
 
     /**
@@ -65,6 +70,16 @@ class PatientController extends Controller
      */
     public function store(StorePatientRequest $request)
     {
+        $request = $request->validated();
+        // $request->satelite_health_facility_id = SateliteHealthFacility::firstOrCreate(
+        //     ["id"    => $request->satelite_health_facility],
+        //     ["name"  => $request->satelite_health_facility]
+        // )->id;
+        // $request->worker_id = Worker::firstOrCreate(
+        //     ["id"    => $request->worker],
+        //     ["name"  => $request->worker]
+        // )->id;
+
         dd($request);
     }
 

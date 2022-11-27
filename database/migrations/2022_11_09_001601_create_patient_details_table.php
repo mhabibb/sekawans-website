@@ -32,7 +32,8 @@ return new class extends Migration
             $table->foreignId('patient_status_id')
                 ->constrained()
                 ->onUpdate('cascade')
-                ->onDelete('cascade');
+                ->onDelete('cascade')
+                ->default(2);
             $table->integer('age');
             $table->integer('weight');
             $table->integer('height');

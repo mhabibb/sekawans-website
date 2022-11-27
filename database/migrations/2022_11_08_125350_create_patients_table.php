@@ -36,8 +36,8 @@ return new class extends Migration
             $table->string('phone', 20);
             $table->enum('marital_status', ['menikah', 'belum menikah', 'janda/duda']);
             $table->boolean('has_job');
-            $table->string('workplace');
-            $table->string('work_address');
+            $table->string('workplace')->nullable();
+            $table->string('work_address')->nullable();
             $table->integer('dependent');
             $table->string('mother_name', 50);
             $table->string('father_name', 50);

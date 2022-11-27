@@ -15,9 +15,11 @@ class PatientDetailObserver
      */
     public function creating(PatientDetail $patientDetail)
     {
-        $last = Patient::last()->get()->first()->id;
-        $patientDetail->patient_id = $last;
-        $patientDetail->patient_status_id = 2;
+        if (auth()->check()) {
+            $last = Patient::last()->get()->first()->id;
+            $patientDetail->patient_id = $last;
+            // $patientDetail->patient_status_id = 2;
+        }
     }
 
     /**

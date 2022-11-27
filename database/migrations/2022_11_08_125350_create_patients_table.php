@@ -35,8 +35,8 @@ return new class extends Migration
             $table->string('phone', 20);
             $table->enum('marital_status', ['menikah', 'belum menikah', 'janda/duda']);
             $table->boolean('has_job');
-            $table->string('workplace')->nullable();
-            $table->string('work_address')->nullable();
+            $table->string('workplace')->nullable()->default(null);
+            $table->string('work_address')->nullable()->default(null);
             $table->integer('dependent');
             $table->string('mother_name', 50);
             $table->string('father_name', 50);
@@ -45,7 +45,8 @@ return new class extends Migration
             $table->foreignId('emergency_contact_id')
                 ->constrained()
                 ->onUpdate('cascade')
-                ->onDelete('cascade');
+                ->onDelete('cascade')
+                ->unique();
             $table->timestamp('start_treatment');
         });
     }

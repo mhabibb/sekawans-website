@@ -18,7 +18,8 @@ return new class extends Migration
             $table->foreignId('patient_id')
                 ->constrained()
                 ->onUpdate('cascade')
-                ->onDelete('cascade');
+                ->onDelete('cascade')
+                ->unique();
             $table->enum('tb_health_facility', ['RSD DR. SOEBANDI JEMBER', 'RS PARU JEMBER']);
             $table->foreignId('satelite_health_facility_id')
                 ->constrained()

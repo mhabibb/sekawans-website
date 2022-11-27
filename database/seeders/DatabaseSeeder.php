@@ -7,6 +7,12 @@ use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
 {
+    private $user = 24;
+    private $article = 200;
+    private $worker = 80;
+    private $satelite = 100;
+    private $patient = 150;
+
     /**
      * Seed the application's database.
      *
@@ -14,15 +20,6 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        \App\Models\User::factory()->create([
-            'name' => 'Compek',
-            'email' => 'compek@dr.com',
-            'password' => bcrypt('compek'),
-            'role' => true,
-        ]);
-
-        \App\Models\User::factory(9)->create();
-
         $this->call([
             ReligionSeeder::class,
             CategorySeeder::class,
@@ -33,11 +30,18 @@ class DatabaseSeeder extends Seeder
             StaticElementSeeder::class,
         ]);
 
-        \App\Models\Article::factory(100)->createQuietly();
-        \App\Models\Worker::factory(150)->create();
-        \App\Models\EmergencyContact::factory(100)->create();
-        \App\Models\Patient::factory(100)->create();
-        \App\Models\SateliteHealthFacility::factory(20)->create();
-        \App\Models\PatientDetail::factory(100)->create();
+        \App\Models\User::factory()->create([
+            'name' => 'Compek',
+            'email' => 'compek@dr.com',
+            'password' => bcrypt('compek'),
+            'role' => true,
+        ]);
+        \App\Models\User::factory($this->user)->create();
+        \App\Models\Article::factory($this->article)->createQuietly();
+        \App\Models\Worker::factory($this->worker)->create();
+        \App\Models\SateliteHealthFacility::factory($this->satelite)->create();
+        \App\Models\EmergencyContact::factory($this->patient)->create();
+        \App\Models\Patient::factory($this->patient)->create();
+        \App\Models\PatientDetail::factory($this->patient)->create();
     }
 }

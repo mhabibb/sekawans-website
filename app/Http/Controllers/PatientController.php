@@ -136,8 +136,8 @@ class PatientController extends Controller
      */
     public function destroy(Patient $patient)
     {
-        EmergencyContact::destroy($patient->patient->emergency_contact);
-        Patient::destroy($patient->patient);
+        // EmergencyContact::destroy($patient->patient->emergency_contact);
+        // Patient::destroy($patient->patient);
         PatientDetail::destroy($patient);
     }
 }

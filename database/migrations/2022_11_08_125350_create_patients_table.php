@@ -22,7 +22,6 @@ return new class extends Migration
                 ->onUpdate('cascade')
                 ->onDelete('cascade');
             $table->string('id_card_address');
-            // $table->string('id_card_district');
             $table->string('id_number', 16)->unique();
             $table->foreignId('religion_id')
                 ->constrained()

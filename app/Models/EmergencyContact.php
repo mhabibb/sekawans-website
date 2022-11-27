@@ -15,6 +15,11 @@ class EmergencyContact extends Model
 
     public $timestamps = false;
 
+    public function scopeLast($query)
+    {
+        $query->orderBy('id', 'desc')->take(1);
+    }
+
     public function patient()
     {
         return $this->hasMany(Patient::class);

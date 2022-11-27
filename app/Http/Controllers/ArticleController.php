@@ -98,9 +98,9 @@ class ArticleController extends Controller
         $request = $request->validated();
         $request['img'] = $request['img']->store('img/articles');
         $route = match ($request['category_id']) {
-            1 => 'admin.infotbc.show',
-            2 => 'admin.articles.show',
-            3 => 'admin.kegiatan.show'
+            '1' => 'admin.infotbc.show',
+            '2' => 'admin.articles.show',
+            '3' => 'admin.kegiatan.show'
         };
         $article = Article::create($request);
         (!$article ? Storage::delete($request['img']) : '');

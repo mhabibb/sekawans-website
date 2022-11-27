@@ -17,7 +17,7 @@ class WorkerFactory extends Factory
     public function definition()
     {
         return [
-            'name' => fake()->name(),
+            'name' => fake()->unique()->name(),
             'is_active' => fake()->boolean(),
         ];
     }

@@ -289,7 +289,7 @@
 
           <div class="col-sm-6 form-group">
             <label>Hubungan</label>
-            <input type="text" name="emergency[relations]" class="form-control">
+            <input type="text" name="emergency[relation]" class="form-control">
           </div>
 
           <div class="col-sm-6 form-group">

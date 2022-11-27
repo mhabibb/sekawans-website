@@ -6,6 +6,7 @@ use App\Models\Patient;
 use App\Http\Requests\StorePatientRequest;
 use App\Http\Requests\UpdatePatientRequest;
 use App\Models\Education;
+use App\Models\EmergencyContact;
 use App\Models\PatientDetail;
 use App\Models\PatientStatus;
 use App\Models\Regency;
@@ -71,16 +72,12 @@ class PatientController extends Controller
     public function store(StorePatientRequest $request)
     {
         $request = $request->validated();
-        // $request->satelite_health_facility_id = SateliteHealthFacility::firstOrCreate(
-        //     ["id"    => $request->satelite_health_facility],
-        //     ["name"  => $request->satelite_health_facility]
-        // )->id;
-        // $request->worker_id = Worker::firstOrCreate(
-        //     ["id"    => $request->worker],
-        //     ["name"  => $request->worker]
-        // )->id;
-
-        dd($request);
+        $emergency = EmergencyContact::create($request['emergency']);
+        isset($emergency) ? $patient = Patient::create($request) : '';
+        isset($patient) ? $detail = PatientDetail::create($request) : '';
+        // $detail = PatientDetail::create($request);
+        $detail = PatientDetail::find($detail->id);
+        dd($detail);
     }
 
     /**

@@ -15,10 +15,10 @@ class Patient extends Model
 
     protected $with = ['district', 'education', 'religion', 'emergency_contact'];
 
-    // public function patientStatus()
-    // {
-    //     return $this->hasOneThrough(PatientStatus::class, PatientDetail::class);
-    // }
+    public function scopeLast($query)
+    {
+        $query->orderBy('id', 'desc')->take(1);
+    }
 
     public function district()
     {

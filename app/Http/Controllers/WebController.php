@@ -41,7 +41,7 @@ class WebController extends Controller
 
     public function info()
     {
-        $infos = Article::oldest()->category(1)->get();
+        $infos = Article::oldest()->category(1)->get()->paginate(6);
         return view('web.infotbc', ['infos' => $infos]);
     }
 
@@ -92,7 +92,7 @@ class WebController extends Controller
     public function liveSearch(Request $request)
     {
         if ($request->ajax()) {
-            $results = match($request->target){
+            $results = match ($request->target) {
                 'info-tbc'  => Article::latest()->category(1)->where('title', 'like', '%' . $request->search . '%')->get(),
                 'artikel'   => Article::latest()->category(2)->where('title', 'like', '%' . $request->search . '%')->get(),
                 'kegiatan'  => Article::latest()->category(3)->where('title', 'like', '%' . $request->search . '%')->get(),

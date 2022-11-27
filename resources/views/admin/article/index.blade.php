@@ -32,16 +32,17 @@
               <tbody>
                 @foreach ($articles as $article)
                 <tr>
-                  <td><a href="{{ route($showRoute, $article) }}">{{$article->title}}</a></td>
+                  <td>{{$article->title}}</td>
                   <td>{{ date('d M Y, H:i', strtotime($article->updated_at)) }}</td>
                   <td>{{ $article->user->name }}</td>
                   <td>
+                    <a href="{{ route($showRoute, $article) }}" class="badge badge-success mr-2">Lihat</a>
                     <a href="{{route($editRoute , $article)}}" class="badge badge-warning mr-2">
                       <i class="fa-solid fa-pen-to-square"></i> Edit</a>
                     <form action="{{route('admin.articles.destroy', $article)}}" method="POST" class="d-inline-block">
-                      @csrf
                       @method('DELETE')
-                      <button type="submit" class="badge badge-danger border-0"
+                      @csrf
+                      <button class="badge badge-danger border-0"
                         onclick="return confirm('Yakin untuk menghapus {{ $article->title }} ?')">
                         <i class="fa-solid fa-trash-can"></i> Hapus</button>
                     </form>
@@ -51,9 +52,7 @@
               </tbody>
             </table>
           </div>
-
         </div>
-
       </div>
     </div>
 
@@ -66,7 +65,7 @@
 <script>
   $(function () {
     $("#articlesData").DataTable({
-      "responsive": false, 
+      "responsive": true, 
       "lengthChange": true,
     });
   });

@@ -4,7 +4,7 @@
 <section class="container py-5 d-flex flex-column gap-4 align-items-center">
   <h1 class="fw-bold text-primary">Artikel</h1>
   <div class="row justify-content-center row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
-    @foreach ($articles as $article)
+    @forelse ($articles as $article)
     <div class="col" style="max-width: 400px;">
       <div class="card shadow-sm h-100 mx-auto">
         <img src="{{ $article->img }}" class="card-img-top thumbnail" alt="..." loading="lazy">
@@ -26,7 +26,10 @@
         </div>
       </div>
     </div>
-    @endforeach
+    @empty
+    <hr>
+    Data Kosong
+    @endforelse
   </div>
   {{ $articles->onEachSide(1)->links() }}
 </section>

@@ -21,7 +21,7 @@
 
     <div class="container py-5">
         @foreach ($infos as $info)
-        <div class="row flex-lg-row align-items-center g-5 py-5 border-bottom">
+        <div class="row flex-lg-row align-items-center g-5 py-5">
             <div class="col col-md-6 col-lg-4 mx-auto">
                 <img src="{{$info->img}}" class="d-block mx-lg-auto img-fluid" alt="..." width="300" height="200"
                     loading="lazy">
@@ -32,6 +32,9 @@
             </div>
         </div>
         @endforeach
+        <div class="d-flex justify-content-center">
+            {{ $infos->links() }}
+        </div>
     </div>
 </section>
 @endsection

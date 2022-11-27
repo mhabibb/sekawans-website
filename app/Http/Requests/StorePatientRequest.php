@@ -5,6 +5,7 @@ namespace App\Http\Requests;
 use App\Models\SateliteHealthFacility;
 use App\Models\Worker;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Str;
 
 class StorePatientRequest extends FormRequest
 {
@@ -29,11 +30,11 @@ class StorePatientRequest extends FormRequest
         $this->merge([
             'satelite_health_facility_id' => SateliteHealthFacility::firstOrCreate(
                 ["id"    => $this->satelite_health_facility_id],
-                ["name"  => $this->satelite_health_facility_id]
+                ["name"  => Str::title($this->satelite_health_facility_id)]
             )->id,
             'worker_id' => Worker::firstOrCreate(
                 ["id"    => $this->worker_id],
-                ["name"  => $this->worker_id]
+                ["name"  => Str::title($this->worker_id)]
             )->id,
         ]);
     }

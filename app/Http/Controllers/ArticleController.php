@@ -18,6 +18,27 @@ class ArticleController extends Controller
     public function __construct()
     {
         $this->middleware('auth');
+        $this->authorizeResource(Article::class, 'article');
+    }
+
+    /**
+     * Get the map of resource methods to ability names.
+     *
+     * @return array
+     */
+    protected function resourceAbilityMap()
+    {
+        return [
+            'index'       => 'viewAny',
+            'show'        => 'view',
+            'create'      => 'create',
+            'store'       => 'create',
+            'edit'        => 'update',
+            'update'      => 'update',
+            'destroy'     => 'delete',
+            'restore'     => 'restore',
+            'forceDelete' => 'forceDelete'
+        ];
     }
 
     /**
@@ -190,9 +211,20 @@ class ArticleController extends Controller
         };
     }
 
-    public function forceDestroy(Article $article)
+    public function restore(Article $article)
     {
-        $this->authorize('superAdmin');
+        $article->getDeletedAtColumn() ? $article->restore() : '';
+        return redirect()->back();
+    }
+
+    public function forceDelete(Article $article)
+    {
+        $ext = collect(explode('.',$article->img));
+        // dd($ext);
+        $base64img = base64_encode(file_get_contents(storage_path('app/public/' . $article->img)));
+        $base64img = "data:image/{$ext};base64, {$base64img}";
+        $ext = explode('/', explode(':', substr($base64img, 0, strpos($base64img, ';')))[1])[1]; 
+        dd($base64img,$ext);
         Storage::delete($article->img);
         $article->forceDelete();
         $category = $article->category_id;

@@ -15,7 +15,6 @@ class ArticleObserver
     public function creating(Article $article)
     {
         $article->user_id = auth()->id();
-        dd($article);
     }
 
     /**

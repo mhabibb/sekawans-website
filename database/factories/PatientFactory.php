@@ -20,6 +20,11 @@ class PatientFactory extends Factory
     {
         $emergency = EmergencyContact::count();
         $district = District::select('id')->get();
+        $has_job = fake()->boolean();
+        if ($has_job) {
+            $place = fake()->company();
+            $addr = fake()->streetAddress();
+        }
 
         return [
             'name' => fake()->name(),
@@ -32,9 +37,9 @@ class PatientFactory extends Factory
             'district_id' => fake()->randomElement($district),
             'phone' => fake()->unique()->numerify('##########'),
             'marital_status' => fake()->randomElement(['menikah', 'belum menikah', 'janda/duda']),
-            'has_job' => fake()->boolean(),
-            'workplace' => fake()->company(),
-            'work_address' => fake()->streetAddress(),
+            'has_job' => $has_job,
+            'workplace' => $place ?? null,
+            'work_address' => $addr ?? null,
             'dependent' => fake()->numberBetween(1, 21),
             'mother_name' => fake()->name('female'),
             'father_name' => fake()->name('mele'),

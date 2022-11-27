@@ -77,7 +77,8 @@ class PatientController extends Controller
         isset($patient) ? $detail = PatientDetail::create($request) : '';
         // $detail = PatientDetail::create($request);
         $detail = PatientDetail::find($detail->id);
-        dd($detail);
+
+        return redirect()->route('admin.patients.show',$detail);
     }
 
     /**

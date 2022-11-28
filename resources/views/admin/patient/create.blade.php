@@ -27,10 +27,12 @@
           <div class="col-sm-6">
             <div class="form-group">
               <label>Fasyankes TB RO</label>
-              <select class="custom-select @error('tb_health_facility') is-invalid @else @if(old('tb_health_facility') ?? false) is-valid @endif @enderror" name="tb.health.facility" required>
+              <select
+                class="custom-select @error('tb_health_facility') is-invalid @else @if(old('tb_health_facility') ?? false) is-valid @endif @enderror"
+                name="tb.health.facility" required>
                 <option disabled selected>Pilih Fasyankes</option>
                 @foreach ($fasyankes as $rs)
-                <option value="{{ $rs }}" @selected(old('tb_health_facility') == $rs)>{{ $rs }}</option>
+                <option value="{{ $rs }}" @selected(old('tb_health_facility')==$rs)>{{ $rs }}</option>
                 @endforeach
               </select>
             </div>
@@ -40,25 +42,32 @@
             <select class="form-control tags" id="satelite" name="satelite.health.facility.id" style="width: 100%;">
               <option disabled selected>Pilih Fasyankes Satelit</option>
               @foreach ($satelites as $satelite)
-                <option value="{{ $satelite->id }}" @selected(old('satelite_health_facility_id') == $satelite->id)>{{ $satelite->name }}</option>
+              <option value="{{ $satelite->id }}" @selected(old('satelite_health_facility_id')==$satelite->id)>{{
+                $satelite->name }}</option>
               @endforeach
             </select>
           </div>
           <div class="col-sm-6 form-group">
             <label>Tanggal Mulai Berobat</label>
-            <input type="date" name="start_treatment" max="{{ date('Y-m-d', strtotime(now())) }}" class="form-control">
+            <input type="date" name="start_treatment" max="{{ date('Y-m-d', strtotime(now())) }}"
+              class="form-control @error('start_treatment') is-invalid @else @if(old('start_treatment') ?? false) is-valid @endif @enderror"
+              value="{{ old('start_treatment') }}">
           </div>
           <div class="col-sm-6 form-group">
             <label>No. Registrasi Pasien</label>
-            <input type="number" name="no.regis" class="form-control">
+            <input type="number" name="no.regis"
+              class="form-control @error('no_regis') is-invalid @else @if(old('no_regis') ?? false) is-valid @endif @enderror"
+              value="{{ old('no_regis') }}">
           </div>
           <div class="col-sm-6 form-group">
             <label>Pendamping/Patient Supporter (PS)</label>
             <select class="form-control tags 
-            @error('worker_id') is-invalid @else @if(old('worker_id') ?? false) is-valid @endif @enderror" name="worker.id" style="width: 100%;">
+            @error('worker_id') is-invalid @else @if(old('worker_id') ?? false) is-valid @endif @enderror"
+              name="worker.id" style="width: 100%;">
               <option disabled selected>Pilih Pendamping/Patient Supporter (PS)</option>
               @foreach ($workers as $worker)
-                <option value="{{ $worker->id }}">{{ $worker->name }}</option>
+              <option value="{{ $worker->id }}" @selected(old('worker_id')==$worker->id)>{{
+                $worker->name }}</option>
               @endforeach
             </select>
           </div>
@@ -71,24 +80,33 @@
 
           <div class="col-sm-6 form-group">
             <label>Nama Lengkap</label>
-            <input type="text" name="name" class="form-control">
+            <input type="text" name="name"
+              class="form-control @error('name') is-invalid @else @if(old('name') ?? false) is-valid @endif @enderror"
+              value="{{ old('name') }}">
           </div>
 
           <div class="col-sm-6 form-group">
-            <label>NIK KTP</label>
-            <input type="number" name="id.number" class="form-control">
+            <label>NIK KTP (16 digit)</label>
+            <input type="number" name="id.number"
+              class="form-control @error('id_number') is-invalid @else @if(old('id_number') ?? false) is-valid @endif @enderror"
+              value="{{ old('id_number') }}">
           </div>
 
           <div class="col-sm-6 form-group">
             <label>Jenis Kelamin</label>
+            @error('sex')
+            <span class="text-danger">Invalid</span>
+            @enderror
             <div class="form-check">
-              <input class="form-check-input" type="radio" name="sex" id="lakilaki" value="laki-laki">
+              <input class="form-check-input" type="radio" name="sex" id="lakilaki" value="laki-laki"
+                @checked(old('sex')=='laki-laki' )>
               <label class="form-check-label" for="lakilaki">
                 Laki-laki
               </label>
             </div>
             <div class="form-check">
-              <input class="form-check-input" type="radio" name="sex" id="perempuan" value="perempuan">
+              <input class="form-check-input" type="radio" name="sex" id="perempuan" value="perempuan"
+                @checked(old('sex')=='perempuan' )>
               <label class="form-check-label" for="perempuan">
                 Perempuan
               </label>
@@ -97,11 +115,14 @@
 
           <div class="col-sm-6 form-group">
             <label>Agama</label>
+            @error('religion_id')
+            <span class="text-danger">Invalid</span>
+            @enderror
             <div class="row row-cols-2 mx-1">
               @foreach ($religions as $religion)
               <div class="form-check">
                 <input class="form-check-input" type="radio" name="religion.id" id="{{'religion' . $religion->id}}"
-                  value="{{ $religion->id }}">
+                  value="{{ $religion->id }}" @checked(old('religion_id')==$religion->id)>
                 <label class="form-check-label" for="{{'religion' . $religion->id}}">
                   {{ $religion->name }}
                 </label>
@@ -112,28 +133,30 @@
 
           <div class="col-sm-6 form-group">
             <label>Alamat KTP</label>
-            <input type="text" name="id.card.address" class="form-control">
-          </div>
-
-          <div class="col-sm-6 form-group">
-            {{-- <label>Kecamatan KTP</label>
-            <input type="text" name="districtKtp" class="form-control"> --}}
+            <input type="text" name="id.card.address"
+              class="form-control @error('id_card_address') is-invalid @else @if(old('id_card_address') ?? false) is-valid @endif @enderror"
+              value="{{ old('id_card_address') }}">
           </div>
 
           <div class="col-sm-6 form-group">
             <label>Alamat Domisili</label>
-            <input type="text" name="residence.address" class="form-control">
+            <input type="text" name="residence.address" class="form-control @error('residence_address') is-invalid
+            @else @if(old('residence_address') ?? false) is-valid @endif @enderror"
+              value="{{ old('residence_address') }}">
           </div>
 
           <div class="col-sm-6">
             <div class="form-group">
               <label>Kecamatan</label>
-              <select class="form-control select2" name="district.id" style="width: 100%;">
+              <select
+                class="form-control select2 @error('district_id') is-invalid @else @if(old('district_id') ?? false) is-valid @endif @enderror"
+                name="district.id" style="width: 100%;">
                 <option disabled selected>Pilih Kecamatan</option>
                 @foreach ($regencies as $regency)
                 <optgroup label="{{ $regency->name }}">
                   @foreach ($regency->districts as $district)
-                  <option value="{{ $district->id }}">{{ $district->name }}</option>
+                  <option value="{{ $district->id }}" @selected(old('district_id')==$district->id)>{{ $district->name }}
+                  </option>
                   @endforeach
                 </optgroup>
                 @endforeach
@@ -143,21 +166,26 @@
 
           <div class="col-sm-6 form-group">
             <label>Umur (Tahun)</label>
-            <input type="number" name="age" class="form-control">
+            <input type="number" name="age" class="form-control @error('age') is-invalid
+            @else @if(old('age') ?? false) is-valid @endif @enderror" value="{{ old('age') }}">
           </div>
 
           <div class="col-sm-6 form-group">
             <label>No. Telepon/Hp</label>
-            <input type="text" name="phone" class="form-control">
+            <input type="text" name="phone" class="form-control @error('phone') is-invalid
+            @else @if(old('phone') ?? false) is-valid @endif @enderror" value="{{ old('phone') }}">
           </div>
 
           <div class="col-sm-6 form-group">
             <label>Status Pendidikan</label>
+            @error('education_id')
+            <span class="text-danger">Invalid</span>
+            @enderror
             <div class="row row-cols-2 mx-1">
               @foreach ($educations as $edu)
               <div class="form-check">
                 <input class="form-check-input" type="radio" name="education.id" id="{{'edu' . $edu->id}}"
-                  value="{{ $edu->id }}">
+                  value="{{ $edu->id }}" @checked(old('education_id')==$edu->id)>
                 <label class="form-check-label" for="{{'edu' . $edu->id}}">
                   {{ $edu->education }}
                 </label>
@@ -167,23 +195,28 @@
           </div>
 
           <div class="col-sm-6 form-group">
-            <label class="d-block">Status Pernikahan</label>
+            <label>Status Pernikahan</label>
+            @error('marital_status')
+            <span class="text-danger">Invalid</span>
+            @enderror
             <div class="row row-cols-2 mx-1">
               <div class="form-check">
-                <input class="form-check-input" type="radio" name="marital.status" id="menikah" value="menikah">
+                <input class="form-check-input" type="radio" name="marital.status" id="menikah" value="menikah"
+                  @checked(old('marital_status')=='menikah' )>
                 <label class="form-check-label" for="menikah">
                   Menikah
                 </label>
               </div>
               <div class="form-check">
                 <input class="form-check-input" type="radio" name="marital.status" id="belum-menikah"
-                  value="belum menikah">
+                  value="belum menikah" @checked(old('marital_status')=='belum menikah' )>
                 <label class="form-check-label" for="belum-menikah">
                   Belum Menikah
                 </label>
               </div>
               <div class="form-check">
-                <input class="form-check-input" type="radio" name="marital.status" id="janda-duda" value="janda/duda">
+                <input class="form-check-input" type="radio" name="marital.status" id="janda-duda" value="janda/duda"
+                  @checked(old('marital_status')=='janda/duda' )>
                 <label class="form-check-label" for="janda-duda">
                   Janda/Duda
                 </label>
@@ -193,43 +226,53 @@
 
           <div class="col-sm-6 form-group">
             <label>Status Pekerjaan</label>
+            @error('has_job')
+            <span class="text-danger">Invalid</span>
+            @enderror
             <div class="form-check">
-              <input class="form-check-input" type="radio" name="has.job" id="bekerja" value="1">
+              <input class="form-check-input" type="radio" name="has.job" id="bekerja" value="1"
+                @checked(old('has_job')=="1" )>
               <label class="form-check-label" for="bekerja">
                 Bekerja
               </label>
             </div>
             <div class="form-check">
-              <input class="form-check-input" type="radio" name="has.job" id="tidak-kerja" value="0">
+              <input class="form-check-input" type="radio" name="has.job" id="tidak-kerja" value="0"
+                @checked(old('has_job')=="0" )>
               <label class="form-check-label" for="tidak-kerja">
                 Tidak Bekerja
               </label>
             </div>
           </div>
 
-          <div class="col-sm-6 form-group">
+          <div class="col-sm-6 form-group" id="workplace">
             <label>Tempat Bekerja</label>
-            <input type="text" name="workplace" class="form-control">
+            <input type="text" name="workplace" class="form-control @error('workplace') is-invalid
+            @else @if(old('workplace') ?? false) is-valid @endif @enderror" value="{{ old('workplace') }}">
           </div>
 
-          <div class="col-sm-6 form-group">
+          <div class="col-sm-6 form-group" id="work-address">
             <label>Alamat Tempat Bekerja</label>
-            <input type="text" name="work.address" class="form-control">
+            <input type="text" name="work.address" class="form-control @error('work_address') is-invalid
+            @else @if(old('work_address') ?? false) is-valid @endif @enderror" value="{{ old('work_address') }}">
           </div>
 
-          <div class="col-sm-6 form-group">
+          <div class=" col-sm-6 form-group">
             <label>Jumlah Tanggungan</label>
-            <input type="number" name="dependent" class="form-control">
+            <input type="number" name="dependent" class="form-control @error('dependent') is-invalid
+            @else @if(old('dependent') ?? false) is-valid @endif @enderror" value="{{ old('dependent') }}">
           </div>
 
           <div class="col-sm-6 form-group">
             <label>Tinggi Badan (cm)</label>
-            <input type="number" name="height" class="form-control">
+            <input type="number" name="height" class="form-control @error('height') is-invalid
+            @else @if(old('workplace') ?? false) is-valid @endif @enderror" value="{{ old('height') }}">
           </div>
 
           <div class="col-sm-6 form-group">
             <label>Berat Badan (kg)</label>
-            <input type="number" name="weight" class="form-control">
+            <input type="number" name="weight" class="form-control @error('weight') is-invalid
+            @else @if(old('workplace') ?? false) is-valid @endif @enderror" value="{{ old('weight') }}">
           </div>
 
           {{-- <div class="col-sm-6 form-group">
@@ -254,27 +297,26 @@
           </div>
           <div class="col-sm-6 form-group">
             <label>Nama Ibu</label>
-            <input type="text" name="mother.name" class="form-control">
+            <input type="text" name="mother.name" class="form-control @error('mother_name') is-invalid
+            @else @if(old('workplace') ?? false) is-valid @endif @enderror" value="{{ old('mother_name') }}">
           </div>
 
           <div class="col-sm-6 form-group">
             <label>Nama Bapak</label>
-            <input type="text" name="father.name" class="form-control">
+            <input type="text" name="father.name" class="form-control @error('father_name') is-invalid
+            @else @if(old('workplace') ?? false) is-valid @endif @enderror" value="{{ old('father_name') }}">
           </div>
 
           <div class="col-sm-6 form-group">
             <label>Alamat</label>
-            <input type="text" name="guardian.address" class="form-control">
+            <input type="text" name="guardian.address" class="form-control @error('guardian_address') is-invalid
+            @else @if(old('workplace') ?? false) is-valid @endif @enderror" value="{{ old('guardian_address') }}">
           </div>
-
-          {{-- <div class="col-sm-6 form-group">
-            <label>Kecamatan</label>
-            <input type="text" name="parentDistrict" class="form-control">
-          </div> --}}
 
           <div class="col-sm-6 form-group">
             <label>No. Telepon/Hp</label>
-            <input type="text" name="guardian.phone" class="form-control">
+            <input type="text" name="guardian.phone" class="form-control @error('guardian_phone') is-invalid
+            @else @if(old('workplace') ?? false) is-valid @endif @enderror" value="{{ old('guardian_phone') }}">
           </div>
         </div>
 
@@ -285,50 +327,43 @@
 
           <div class="col-sm-6 form-group">
             <label>Nama</label>
-            <input type="text" name="emergency[name]" class="form-control">
+            <input type="text" name="emergency[name]" class="form-control @error('emergency.name') is-invalid
+            @else @if(old('workplace') ?? false) is-valid @endif @enderror" value="{{ old('emergency.name') }}">
           </div>
 
           <div class="col-sm-6 form-group">
             <label>Hubungan</label>
-            <input type="text" name="emergency[relation]" class="form-control">
+            <input type="text" name="emergency[relation]" class="form-control @error('emergency.relation') is-invalid
+            @else @if(old('workplace') ?? false) is-valid @endif @enderror" value="{{ old('emergency.relation') }}">
           </div>
 
           <div class="col-sm-6 form-group">
             <label>Alamat</label>
-            <input type="text" name="emergency[address]" class="form-control">
+            <input type="text" name="emergency[address]" class="form-control @error('emergency.address') is-invalid
+            @else @if(old('workplace') ?? false) is-valid @endif @enderror" value="{{ old('emergency.address') }}">
           </div>
-
-          {{-- <div class="col-sm-6">
-            <div class="form-group">
-              <label>Kecamatan</label>
-              <select class="select2" name="emergencyContactDistrict" style="width: 100%;">
-                <option disabled selected>Pilih Kecamatan</option>
-                @foreach ($regencies as $regency)
-                <optgroup label="{{ $regency->name }}">
-                  @foreach ($regency->districts as $district)
-                  <option value="{{ $district->id }}">{{ $district->name }}</option>
-                  @endforeach
-                </optgroup>
-                @endforeach
-              </select>
-            </div>
-          </div> --}}
 
           <div class="col-sm-6 form-group">
             <label>No. Telepon/Hp</label>
-            <input type="text" name="emergency[phone]" class="form-control">
+            <input type="text" name="emergency[phone]" class="form-control @error('emergency.phone') is-invalid
+            @else @if(old('workplace') ?? false) is-valid @endif @enderror" value="{{ old('emergency.phone') }}">
           </div>
 
           <div class="col-sm-6 form-group">
             <label>Tahu Penyakit Pasien</label>
+            @error('emergency.is_know')
+            <span class="text-danger">Invalid</span>
+            @enderror
             <div class="form-check">
-              <input class="form-check-input" type="radio" name="emergency[is_know]" id="ya-tahu" value="1">
+              <input class="form-check-input" type="radio" name="emergency[is_know]" id="ya-tahu" value="1"
+                @checked(old('emergency.is_know')=="1" )>
               <label class="form-check-label" for="ya-tahu">
                 Ya
               </label>
             </div>
             <div class="form-check">
-              <input class="form-check-input" type="radio" name="emergency[is_know]" id="tidak-tahu" value="0">
+              <input class="form-check-input" type="radio" name="emergency[is_know]" id="tidak-tahu" value="0"
+                @checked(old('emergency.is_know')=="0" )>
               <label class="form-check-label" for="tidak-tahu">
                 Tidak
               </label>
@@ -352,6 +387,23 @@
 
 <script>
   $(document).ready(function() {
+    if($('#tidak-kerja').is(":checked")) {
+      $('#workplace').addClass('d-none');
+      $('#work-address').addClass('d-none');
+    }
+    $('#tidak-kerja').click(function() {
+      if($(this).is(":checked")) {
+        $('#workplace').addClass('d-none');
+        $('#work-address').addClass('d-none');
+      }
+    })
+    $('#bekerja').click(function() {
+      if($(this).is(":checked")) {
+        $('#workplace').removeClass('d-none');
+        $('#work-address').removeClass('d-none');
+      }
+    })
+
     $('.select2').select2({
         theme: 'bootstrap4',
         selectOnClose: true

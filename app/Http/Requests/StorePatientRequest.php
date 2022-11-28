@@ -9,7 +9,7 @@ use Illuminate\Support\Str;
 
 class StorePatientRequest extends FormRequest
 {
-    protected $stopOnFirstFailure = true;
+    // protected $stopOnFirstFailure = true;
     /**
      * Determine if the user is authorized to make this request.
      *
@@ -28,14 +28,14 @@ class StorePatientRequest extends FormRequest
     protected function prepareForValidation()
     {
         $this->merge([
-            'satelite_health_facility_id' => SateliteHealthFacility::firstOrCreate(
+            'satelite_health_facility_id' => $this->satelite_health_facility_id ? SateliteHealthFacility::firstOrCreate(
                 ["id"    => $this->satelite_health_facility_id],
                 ["name"  => Str::title($this->satelite_health_facility_id)]
-            )->id,
-            'worker_id' => Worker::firstOrCreate(
+            )->id : false,
+            'worker_id'  => $this->worker_id ? Worker::firstOrCreate(
                 ["id"    => $this->worker_id],
                 ["name"  => Str::title($this->worker_id)]
-            )->id,
+            )->id : false,
         ]);
     }
 

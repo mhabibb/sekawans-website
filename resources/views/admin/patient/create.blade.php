@@ -27,20 +27,30 @@
           <div class="col-sm-6">
             <div class="form-group">
               <label>Fasyankes TB RO</label>
-              <select class="custom-select" name="tb.health.facility" required>
+              <select class="custom-select @error('tb_health_facility') is-invalid @else @if(old('tb_health_facility') ?? false) is-valid @endif @enderror" name="tb.health.facility" required>
                 <option disabled selected>Pilih Fasyankes</option>
                 @foreach ($fasyankes as $rs)
-                <option value="{{ $rs }}">{{ $rs }}</option>
+                <option value="{{ $rs }}" @selected(old('tb_health_facility') == $rs)>{{ $rs }}</option>
                 @endforeach
               </select>
             </div>
           </div>
+          {{-- @if ($errors->any())
+            @dd($errors)
+          @endif --}}
           <div class="col-sm-6 form-group">
+            {{-- @error('satelite_health_facility_id')
+              <div class="error errorSelect2" id="cekSatelite"></div>
+            @else
+                @if(old('satelite_health_facility_id') ?? false)
+                    <div class="error validSelect2" id="cekSatelite"></div>
+                @endif
+            @enderror --}}
             <label>Fasyankes Satelit</label>
-            <select class="form-control tags" name="satelite.health.facility.id" style="width: 100%;">
+            <select class="form-control tags" id="satelite" name="satelite.health.facility.id" style="width: 100%;">
               <option disabled selected>Pilih Fasyankes Satelit</option>
               @foreach ($satelites as $satelite)
-                <option value="{{ $satelite->id }}">{{ $satelite->name }}</option>
+                <option value="{{ $satelite->id }}" @selected(old('satelite_health_facility_id') == $satelite->id)>{{ $satelite->name }}</option>
               @endforeach
             </select>
           </div>
@@ -54,7 +64,8 @@
           </div>
           <div class="col-sm-6 form-group">
             <label>Pendamping/Patient Supporter (PS)</label>
-            <select class="form-control tags" name="worker.id" style="width: 100%;">
+            <select class="form-control tags 
+            @error('worker_id') is-invalid @else @if(old('worker_id') ?? false) is-valid @endif @enderror" name="worker.id" style="width: 100%;">
               <option disabled selected>Pilih Pendamping/Patient Supporter (PS)</option>
               @foreach ($workers as $worker)
                 <option value="{{ $worker->id }}">{{ $worker->name }}</option>
@@ -362,6 +373,22 @@
         selectOnClose: true,
         tags: true
     });
+
+    function cekErrorSelect2(){
+        @error('satelite_health_facility_id')
+            $('#satelite').addClass('is-invalid')
+                @else
+                    @if(old('satelite_health_facility_id') ?? false)
+                        $('#satelite').addClass('is-valid')
+                    @endif
+        @enderror
+    }
+
+    cekErrorSelect2();
+
+    // $('#satelite').find(':selected')
+
+    // $('#satelite').trigger('change');
 
     {{-- Auto focus search select2 --}}
     $(document).on('select2:open', () => {

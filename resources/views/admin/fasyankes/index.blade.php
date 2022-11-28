@@ -40,11 +40,22 @@
                 </tr>
               </thead>
               <tbody>
-                @foreach ($satelites as $satelite)
+                @forelse ($satelites as $satelite)
                 <tr>
                   <td> {{ $satelite->name }} </td>
+                  <td>
+                    <form action="{{ route('admin.fasyankes.destroy', $satelite) }}" method="post">
+                      @csrf
+                      @method('delete')
+                      <button type="submit" class="badge badge-danger border-0">Hapus</button>
+                    </form>
+                  </td>
                 </tr>
-                @endforeach
+                @empty
+                <tr>
+                  <td>Data Kosong</td>
+                </tr>
+                @endforelse
               </tbody>
             </table>
           </div>

@@ -31,10 +31,10 @@ return new class extends Migration
                 ->onDelete('cascade');
             $table->string('no_regis', 10)->unique();
             $table->foreignId('patient_status_id')
+                ->default(2)
                 ->constrained()
                 ->onUpdate('cascade')
-                ->onDelete('cascade')
-                ->default(2);
+                ->onDelete('cascade');
             $table->integer('age');
             $table->integer('weight');
             $table->integer('height');

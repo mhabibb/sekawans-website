@@ -13,7 +13,7 @@ class UpdateStaticElementRequest extends FormRequest
      */
     public function authorize()
     {
-        return auth()->check(); 
+        return auth()->check();
     }
 
     /**
@@ -23,20 +23,13 @@ class UpdateStaticElementRequest extends FormRequest
      */
     protected function prepareForValidation()
     {
-        // dd($this->hasFile('contents'));
-        // $this->hasFile('contents')?$this->merge([
-        //     'contents' => 
-        // ])
-        $this->merge([
-            // 'satelite_health_facility_id' => SateliteHealthFacility::firstOrCreate(
-            //     ["id"    => $this->satelite_health_facility_id],
-            //     ["name"  => Str::title($this->satelite_health_facility_id)]
-            // )->id,
-            // 'worker_id' => Worker::firstOrCreate(
-            //     ["id"    => $this->worker_id],
-            //     ["name"  => Str::title($this->worker_id)]
-            // )->id,
-        ]);
+        if ($this->hasFile('content')) {
+            $this->merge([
+                'contents'  => $this->file('content')->store('img/about'),
+                'img'       => true
+            ]);
+        }
+        // dd($this->file('content'));
     }
 
     /**
@@ -48,6 +41,7 @@ class UpdateStaticElementRequest extends FormRequest
     {
         return [
             'contents'  => 'required|string',
+            'img'       => 'nullable|boolean',
         ];
     }
 }

@@ -27,7 +27,7 @@
                     loading="lazy">
             </div>
             <div class="col-md-6 col-lg-8">
-                <h3 class=" fw-bold mb-3">{{$info->title}}</h3>
+                <h3 class=" fw-bold mb-3">{!! $info->title !!}</h3>
                 <a href="{{ route('infotbc.show', $info) }}" class="btn btn-secondary px-4">Selengkapnya</a>
             </div>
         </div>

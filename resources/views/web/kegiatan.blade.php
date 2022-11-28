@@ -10,17 +10,17 @@
                 <img src="{{ $action->img }}" class="card-img-top thumbnail" alt="card-image">
                 <div class="card-body">
                     <div class="mb-1 d-flex gap-3">
-                        <div class="col-4 text-truncate" style="font-size: 14px;">
+                        <div class="col-4 text-truncate font-sm">
                             <i class="fa-solid fa-user"></i>
                             {{ $action->user->name }}
                         </div>
-                        <div class="px-2" style="font-size: 14px;">
+                        <div class="px-2 font-sm">
                             <i class="fa-solid fa-calendar-days"></i>
                             {{ date('d M Y', strtotime($action->updated_at)) }}
                         </div>
                     </div>
                     <div class="module line-clamp">
-                        <h5>{{ $action->title }}</h5>
+                        <h5>{!! $action->title !!}</h5>
                     </div>
                     <a href="{{ route('kegiatan.show', $action) }}" class="link-primary text-underline">Baca
                         selengkapnya</a>

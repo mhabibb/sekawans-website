@@ -1,10 +1,10 @@
 @extends('layouts.app')
 
 @section('content')
-<section class="container py-5">
+<section class="container py-5 col-lg-8">
   <div class="article-header d-flex flex-column align-items-center gap-3 mb-2">
     <button class="link-secondary btn" onclick="history.back()"><i class="fa-solid fa-arrow-left"></i> Kembali</button>
-    <h3 class="fw-bold text-center">{{ $article->title }}</h3>
+    <h3 class="fw-bold text-center">{!! $article->title !!}</h3>
   </div>
   <div class="d-flex justify-content-center gap-5 mb-3 text-muted">
     <div>
@@ -20,10 +20,10 @@
     <figure class="figure">
       <img src="{{ $article->img }}" class="figure-img img-fluid rounded" style="max-height: 600px" alt="..."
         loading="lazy">
-      <figcaption class="figure-caption text-center">Sumber : A caption for the above image.</figcaption>
+      {{-- <figcaption class="figure-caption text-center">Sumber : A caption for the above image.</figcaption> --}}
     </figure>
-    <div class="body" style="text-align: justify;">
-      <p>{{ $article->contents }}</p>
+    <div class="body">
+      {!! $article->contents !!}
     </div>
   </article>
 </section>

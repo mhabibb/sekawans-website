@@ -93,6 +93,7 @@ class SateliteHealthFacilityController extends Controller
      */
     public function destroy(SateliteHealthFacility $sateliteHealthFacility)
     {
-        //
+        $sateliteHealthFacility->delete();
+        return redirect()->route('admin.fasyankes.index');
     }
 }

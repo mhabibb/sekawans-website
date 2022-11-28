@@ -93,6 +93,7 @@ class WorkerController extends Controller
      */
     public function destroy(Worker $worker)
     {
-        Worker::destroy($worker);
+        $worker->update(['is_active' => false]);
+        return redirect()->route('admin.fasyankes.index');
     }
 }

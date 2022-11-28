@@ -62,8 +62,8 @@
                 <!-- small box -->
                 <div class="small-box bg-light">
                     <div class="inner">
-                        <h3>{{$fesyankes}}</h3>
-                        <h5>Fesyankes Satelit</h5>
+                        <h3>{{$pasien}}</h3>
+                        <h5>Total Pasien</h5>
                     </div>
                     <a href="{{ route('admin.fasyankes.index') }}" class="small-box-footer">Selengkapnya <i
                             class="fas fa-arrow-circle-right"></i></a>

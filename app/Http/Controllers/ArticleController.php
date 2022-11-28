@@ -219,7 +219,7 @@ class ArticleController extends Controller
 
     public function forceDelete(Article $article)
     {
-        $ext = collect(explode('.',$article->img));
+        $ext = collect(explode('.',$article->img))->last();
         // dd($ext);
         $base64img = base64_encode(file_get_contents(storage_path('app/public/' . $article->img)));
         $base64img = "data:image/{$ext};base64, {$base64img}";

@@ -24,7 +24,7 @@ class UpdateStaticElementRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'contents'  => 'required|string',
         ];
     }
 }

@@ -35,17 +35,7 @@
               </select>
             </div>
           </div>
-          {{-- @if ($errors->any())
-            @dd($errors)
-          @endif --}}
           <div class="col-sm-6 form-group">
-            {{-- @error('satelite_health_facility_id')
-              <div class="error errorSelect2" id="cekSatelite"></div>
-            @else
-                @if(old('satelite_health_facility_id') ?? false)
-                    <div class="error validSelect2" id="cekSatelite"></div>
-                @endif
-            @enderror --}}
             <label>Fasyankes Satelit</label>
             <select class="form-control tags" id="satelite" name="satelite.health.facility.id" style="width: 100%;">
               <option disabled selected>Pilih Fasyankes Satelit</option>
@@ -385,10 +375,6 @@
     }
 
     cekErrorSelect2();
-
-    // $('#satelite').find(':selected')
-
-    // $('#satelite').trigger('change');
 
     {{-- Auto focus search select2 --}}
     $(document).on('select2:open', () => {

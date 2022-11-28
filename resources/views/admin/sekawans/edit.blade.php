@@ -16,13 +16,13 @@
                 <div class="modal-body">
                     @if ($sekawan->id == 3)
                     <img class="img-preview img-fluid d-block mb-2">
-                    <input type="file" class="form-control-file" name="content{{ $sekawan->id }}" id="image"
+                    <input type="file" class="form-control-file" name="contents" id="image"
                         onchange="previewImg()">
                     @elseif ($sekawan->id > 3 )
-                    <input type="text" class="form-control" name="content{{ $sekawan->id }}"
+                    <input type="text" class="form-control" name="contents"
                         value="{{ $sekawan->contents }}">
                     @else
-                    <textarea type="text" class="form-control" name="content{{ $sekawan->id }}" rows="10"
+                    <textarea type="text" class="form-control" name="contents" rows="10"
                         style="resize: none;">{{ $sekawan->contents }}</textarea>
                     @endif
                 </div>

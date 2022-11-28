@@ -16,14 +16,14 @@
       <div class="col-12">
         <div class="card">
           <div class="card-header">
-            <a href="{{ route($createRoute) }}" class="btn btn-primary card-title">Buat Artikel Baru</a>
+            <a href="{{ route($createRoute) }}" class="btn btn-primary card-title">Buat {{ $title }} Baru</a>
           </div>
 
           <div class="card-body">
             <table id="articlesData" class="table table-bordered table-striped">
               <thead>
                 <tr>
-                  <th>Judul Artikel</th>
+                  <th>Judul {{ $title }}</th>
                   <th>Waktu Upload</th>
                   <th>Author</th>
                   <th></th>
@@ -67,6 +67,7 @@
     $("#articlesData").DataTable({
       "responsive": true, 
       "lengthChange": true,
+      order: [[1, 'desc']],
     });
   });
 </script>

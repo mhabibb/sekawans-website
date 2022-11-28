@@ -56,7 +56,7 @@ class UserController extends Controller
     public function show(User $user)
     {
         if ($user != auth()->user()) {
-            return abort(403);
+            return redirect()->route('admin.users.show', auth()->id());
         }
 
         return view('admin.user.show', compact('user'));

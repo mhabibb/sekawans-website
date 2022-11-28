@@ -4,6 +4,7 @@ use App\Http\Controllers\ArticleController;
 use App\Http\Controllers\PatientController;
 use App\Http\Controllers\StaticElementController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\LogController;
 use App\Http\Controllers\WebController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\SateliteHealthFacilityController;
@@ -29,6 +30,7 @@ Route::middleware('auth')->prefix('admin')->name('admin.')->group(function () {
     Route::put('/users/{user}', [UserController::class, 'updatePassword'])->name('users.password.update');
     Route::resource('/patients', PatientController::class);
     Route::resource('/sekawans', StaticElementController::class)->except(['create', 'destroy', 'store']);
+    Route::resource('/logs', LogController::class)->only(['index', 'destroy', 'show']);
     Route::resource('/fasyankes', SateliteHealthFacilityController::class);
     Route::resource('/articles', ArticleController::class);
     Route::controller(ArticleController::class)->group(function () {
@@ -46,6 +48,8 @@ Route::middleware('auth')->prefix('admin')->name('admin.')->group(function () {
         Route::get('/actions/{article}/edit', 'edit')->name('kegiatan.edit');
         Route::put('/actions/{article}', 'update')->name('kegiatan.update');
         Route::delete('/actions/{article}', 'destroy')->name('kegiatan.destroy');
+        Route::get('/restore/{article}', 'restore')->name('articles.restore');
+        Route::get('/force/{article}', 'forceDelete')->name('articles.forceDelete');
     });
 });
 

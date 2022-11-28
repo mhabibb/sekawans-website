@@ -25,7 +25,7 @@ class PatientDetailFactory extends Factory
         $worker = Worker::count();
         $status = PatientStatus::count();
         return [
-            'patient_id' => fake()->unique()->numberBetween(1, $patient),
+            'patient_id' => fake()->numberBetween(1, $patient),
             'satelite_health_facility_id' => fake()->numberBetween(1, $satelite),
             'worker_id' => fake()->numberBetween(1, $worker),
             'no_regis' => fake()->unique()->numerify('##########'),

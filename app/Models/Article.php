@@ -50,8 +50,7 @@ class Article extends Model
     {
         $user = auth()->user()->name ?? 'System';
         return LogOptions::defaults()
-            ->logFillable()
-            ->logUnguarded()
+            ->logAll()
             ->logOnlyDirty()
             ->useLogName('article')
             ->setDescriptionForEvent(fn (string $eventName) => "{$user} {$eventName} article");

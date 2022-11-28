@@ -15,8 +15,10 @@ class PatientObserver
      */
     public function creating(Patient $patient)
     {
-        $last = EmergencyContact::last()->get()->first()->id;
-        $patient->emergency_contact_id = $last;
+        if (auth()->check()) {
+            $last = EmergencyContact::last()->get()->first()->id;
+            $patient->emergency_contact_id = $last;
+        }
     }
 
     /**

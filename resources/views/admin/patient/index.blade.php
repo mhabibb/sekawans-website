@@ -47,8 +47,8 @@
                   <td><a href="{{ route('admin.patients.show', $patient->patient) }}">{{ $patient->patient->name }}</a>
                   </td>
                   <td>{{ $patient->patient->district->name }}</td>
-                  <td>{{ date('d M Y') }}</td>
-                  <td>Faisol</td>
+                  <td>{{ date('d M Y', strtotime($patient->patient->start_treatment)) }}</td>
+                  <td>{{ $patient->worker->name }}</td>
                   <td>{{ $patient->patientStatus->status }}</td>
                 </tr>
                 @endforeach
@@ -70,7 +70,8 @@
   $(function () {
     $("#patientsData").DataTable({
       "responsive": true, "lengthChange": false, "autoWidth": false,
-      "buttons": ["csv", "excel", "pdf", "print"]
+      "buttons": ["csv", "excel", "pdf", "print"],
+      order: [[3, 'desc']],
     }).buttons().container().appendTo('#patientsData_wrapper .col-md-6:eq(0)');
   });
 </script>

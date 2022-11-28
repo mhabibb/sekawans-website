@@ -88,7 +88,7 @@ class PatientController extends Controller
      */
     public function show(PatientDetail $patient)
     {
-        dd($patient);
+        // dd($patient);
         return view('admin.patient.show', ['patientDetail' => $patient]);
     }
 

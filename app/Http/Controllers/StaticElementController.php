@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\StaticElement;
 use App\Http\Requests\UpdateStaticElementRequest;
+use Illuminate\Support\Facades\Storage;
 
 class StaticElementController extends Controller
 {
@@ -50,7 +51,8 @@ class StaticElementController extends Controller
     public function update(UpdateStaticElementRequest $request, StaticElement $sekawan)
     {
         $request = $request->validated();
-        // dd($sekawan);
+        isset($request['img']) ? Storage::delete($sekawan->contents) : '';
+        // dd($request);
         $sekawan->update($request);
         return redirect()->route('admin.sekawans.index');
         // return $sekawan->wasChanged();

@@ -16,7 +16,7 @@
                 <div class="modal-body">
                     @if ($sekawan->id == 3)
                     <img class="img-preview img-fluid d-block mb-2">
-                    <input type="file" class="form-control-file" name="contents" id="image"
+                    <input type="file" class="form-control-file" name="content" id="image"
                         onchange="previewImg()">
                     @elseif ($sekawan->id > 3 )
                     <input type="text" class="form-control" name="contents"

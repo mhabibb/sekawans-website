@@ -44,7 +44,8 @@
                 @foreach ($patients as $patient)
                 <tr>
                   <td>{{ $patient->no_regis }}</td>
-                  <td><a href="{{ route('admin.patients.show', $patient->patient) }}">{{ $patient->patient->name }}</a>
+                  <td><a href="{{ route('admin.patients.show', $patient) }}">{{ $patient->patient->name
+                      }}</a>
                   </td>
                   <td>{{ $patient->patient->district->name }}</td>
                   <td>{{ date('d M Y', strtotime($patient->patient->start_treatment)) }}</td>

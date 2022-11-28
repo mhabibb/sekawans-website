@@ -21,7 +21,7 @@
                     </div>
                     <div class="col-sm-6 form-group">
                         <label for="fasyankes">Fasyankes TB RO</label>
-                        <div class="form-control">RS PARU JEMBER</div>
+                        <div class="form-control">{{ $patientDetail->tb_health_facility }}</div>
                     </div>
                     <div class="col-sm-6 form-group">
                         <label for="satelite">Fasyankes Satelit</label>
@@ -29,7 +29,8 @@
                     </div>
                     <div class="col-sm-6 form-group">
                         <label for="dateStart">Tanggal Mulai Berobat</label>
-                        <div class="form-control">{{ $patientDetail->patient->start_treatment }}</div>
+                        <div class="form-control">{{ date('d M Y', strtotime($patientDetail->patient->start_treatment))
+                            }}</div>
                     </div>
                     <div class="col-sm-6 form-group">
                         <label for="regNum">No. Registrasi Pasien</label>
@@ -37,7 +38,7 @@
                     </div>
                     <div class="col-sm-6 form-group">
                         <label>Pendamping/Patient Supporter (PS)</label>
-                        <div class="form-control">Faisol</div>
+                        <div class="form-control">{{ $patientDetail->worker->name }}</div>
                     </div>
                 </div>
                 <div class="row mb-4 pb-2 border-bottom">
@@ -71,20 +72,18 @@
                     </div>
 
                     <div class="col-sm-6 form-group">
-                        {{-- <label>Kecamatan KTP</label>
-                        <div class="form-control">{{ $patientDetail->patient->id_card_district }}</div> --}}
-                    </div>
-
-                    <div class="col-sm-6 form-group">
                         <label>Alamat Domisili</label>
                         <div class="form-control">{{ $patientDetail->patient->residence_address }}</div>
                     </div>
 
                     <div class="col-sm-6 form-group">
                         <label>Kecamatan</label>
-                        <div class="form-control">{{ $patientDetail->patient->district->name }}, {{
-                            $patientDetail->patient->district->regency->name
-                            }}</div>
+                        <div class="form-control">{{ $patientDetail->patient->district->name }}</div>
+                    </div>
+
+                    <div class="col-sm-6 form-group">
+                        <label>Kabupaten</label>
+                        <div class="form-control">{{ $patientDetail->patient->district->regency->name }}</div>
                     </div>
 
                     <div class="col-sm-6 form-group">
@@ -109,16 +108,17 @@
 
                     <div class="col-sm-6 form-group">
                         <label>Status Pekerjaan</label>
-                        <div class="form-control">{{ $patientDetail->patient->has_job == true ? "Bekerja" : "Tidak Bekerja" }}
+                        <div class="form-control" id="isJob">{{ $patientDetail->patient->has_job == true ? "Bekerja" :
+                            "Tidak Bekerja" }}
                         </div>
                     </div>
 
-                    <div class="col-sm-6 form-group">
+                    <div class="col-sm-6 form-group job-place">
                         <label>Tempat Bekerja</label>
                         <div class="form-control">{{ $patientDetail->patient->workplace }}</div>
                     </div>
 
-                    <div class="col-sm-6 form-group">
+                    <div class="col-sm-6 form-group job-place">
                         <label>Alamat Tempat Bekerja</label>
                         <div class="form-control">{{ $patientDetail->patient->work_address }}</div>
                     </div>
@@ -161,7 +161,8 @@
 
                     <div class="col-sm-6 form-group">
                         <label>Alamat</label>
-                        <div class="form-control">{{ $patientDetail->patient->guardian_address }}, {{ $patientDetail->patient->guardian_district
+                        <div class="form-control">{{ $patientDetail->patient->guardian_address }}, {{
+                            $patientDetail->patient->guardian_district
                             }}
                         </div>
                     </div>
@@ -184,19 +185,14 @@
 
                     <div class="col-sm-6 form-group">
                         <label>Hubungan</label>
-                        <div class="form-control">{{ ucfirst($patientDetail->patient->emergency_contact->relation) }}</div>
+                        <div class="form-control">{{ ucfirst($patientDetail->patient->emergency_contact->relation) }}
+                        </div>
                     </div>
 
                     <div class="col-sm-6 form-group">
                         <label>Alamat</label>
                         <div class="form-control">{{ $patientDetail->patient->emergency_contact->address }}</div>
                     </div>
-
-                    {{-- <div class="col-sm-6 form-group">
-                        <label>Kecamatan</label>
-                        <div class="form-control">{{ $patientDetail->patient->emergency_contact->district->name }}
-                        </div>
-                    </div> --}}
 
                     <div class="col-sm-6 form-group">
                         <label>No. Telepon/Hp</label>
@@ -205,16 +201,18 @@
 
                     <div class="col-sm-6 form-group">
                         <label>Tahu Penyakit Pasien</label>
-                        <div class="form-control">{{ $patientDetail->patient->emergency_contact->is_know == true ? "Ya" : "Tidak"
-                            }}
+                        <div class="form-control">{{ $patientDetail->patient->emergency_contact->is_know == true ? "Ya"
+                            : "Tidak" }}
                         </div>
                     </div>
                 </div>
 
                 <div class="row">
                     <div class="col-12">
-                        <a href="{{ route('admin.patients.edit', $patientDetail) }}" class="btn btn-warning">Edit Data</a>
-                        <form action="{{ route('admin.patients.destroy', $patientDetail) }}" method="POST" class="d-inline">
+                        <a href="{{ route('admin.patients.edit', $patientDetail) }}" class="btn btn-warning">Edit
+                            Data</a>
+                        <form action="{{ route('admin.patients.destroy', $patientDetail) }}" method="POST"
+                            class="d-inline">
                             @csrf
                             @method('DELETE')
                             <button type="submit" class="btn btn-danger"
@@ -228,4 +226,13 @@
     </div><!-- /.container -->
 </section>
 <!-- /.content -->
+@endsection
+
+@section('js')
+<script>
+    $(document).ready(function() {
+        let text = $('#isJob').text();
+        $.trim(text) == "Tidak Bekerja" ? $('.job-place').addClass('d-none') : $('.job-place').removeClass('d-none');
+    })
+</script>
 @endsection

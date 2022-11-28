@@ -68,6 +68,7 @@
     $("#articlesData").DataTable({
       "responsive": false, 
       "lengthChange": true,
+      order: [[1, 'desc']],
     });
   });
 </script>

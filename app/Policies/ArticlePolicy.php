@@ -21,6 +21,11 @@ class ArticlePolicy
         return auth()->check();
     }
 
+    public function viewTrash(User $user)
+    {
+        return $user->role;
+    }
+
     /**
      * Determine whether the user can view the model.
      *

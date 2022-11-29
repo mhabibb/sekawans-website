@@ -30,6 +30,7 @@ class ArticleController extends Controller
     {
         return [
             'index'        => 'viewAny',
+            'trashed'      => 'viewTrash',
             'show'         => 'view',
             'create'       => 'create',
             'store'        => 'create',
@@ -79,6 +80,10 @@ class ArticleController extends Controller
             'showRoute' => $showRoute,
             'editRoute' => $editRoute
         ]);
+    }
+
+    public function trashed(){
+        return Article::onlyTrashed()->get();
     }
 
     /**

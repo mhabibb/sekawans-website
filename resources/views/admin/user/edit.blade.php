@@ -1,4 +1,4 @@
-<form action="{{ route('admin.users.update', Auth()->user() ) }}" method="POST" enctype="multipart/form-data">
+<form action="{{ route('admin.users.update', Auth()->user() ) }}" method="POST">
     @csrf
     @method('PUT')
     <div class="modal fade" id="editProfile" data-backdrop="static" data-keyboard="false" tabindex="-1"
@@ -33,13 +33,13 @@
                     </div>
                     <div class="form-group new-password">
                         <label>Password Baru</label>
-                        <input type="password" name="newPassword"
-                            class="form-control @error('newPassword') is-invalid @enderror">
+                        <input type="password" name="new_password"
+                            class="form-control @error('new_password') is-invalid @enderror">
                     </div>
                     <div class="form-group new-password">
                         <label>Ulangi Password Baru</label>
-                        <input type="password" name="confirmPassword"
-                            class="form-control @error('confirmPassword') is-invalid @enderror">
+                        <input type="password" name="new_password_confirmation"
+                            class="form-control @error('new_password_confirmation') is-invalid @enderror">
                     </div>
                 </div>
                 <div class="modal-footer">

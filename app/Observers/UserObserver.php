@@ -23,9 +23,9 @@ class UserObserver
      * @param  \App\Models\User  $user
      * @return void
      */
-    public function updated(User $user)
+    public function updating(User $user)
     {
-        //
+        request('new_password') ? '' : $user->password = bcrypt(request('password'));
     }
 
     /**

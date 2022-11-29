@@ -69,10 +69,12 @@ class UserController extends Controller
      */
     public function update(UpdateUserRequest $request, User $user)
     {
-        dd($request);
         $request = $request->validated();
+        if(isset($request['new_password'])){
+            $request['password'] = bcrypt($request['new_password']);
+        }
         $user->update($request);
-        return redirect()->route('admin.users.show');
+        return redirect()->route('admin.users.show', $user);
     }
 
     /**

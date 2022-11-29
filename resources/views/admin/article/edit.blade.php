@@ -15,22 +15,32 @@
       @csrf
       @method('PUT')
       <div class="form-group mb-3 col-md-6">
-        <label for="title" class="form-label">Judul {{ $title }}</label>
-        <input type="text" name="title" class="form-control" id="title" placeholder="Tulis judul..."
-          value="{{$article->title}}">
+        <label for="title" class="form-label">Judul {{ $title }} (minimal 50 karakter)</label>
+        <input type="text" name="title" class="form-control @error('title') is-invalid
+        @else @if(old('title') ?? false) is-valid @endif @enderror" id="title" placeholder="Tulis judul..."
+          value="{{ old('title', $article->title) }}">
       </div>
       <div class="form-group mb-3 col-md-6">
         <label for="img">Gambar</label>
+
         @if ($article->img)
         <img src="{{ asset('storage/'.$article->img) }}" alt="..." class="img-preview img-fluid d-block mb-2">
         @else
         <img class="img-preview img-fluid d-block mb-2">
         @endif
+
+        <input type="hidden" name="oldImg" value="{{ $article->img }}">
         <input type="file" class="form-control-file" name="img" id="img" onchange="previewImg()">
+        @error('img')
+        <span class="text-danger">Invalid</span>
+        @enderror
       </div>
       <div class="form-group mb-3 col-12">
-        <label for="contents">Isi konten</label>
-        <textarea id="summernote" name="contents">{{ $article->contents }}</textarea>
+        <label for="contents">Isi konten (minimal 100 karakter)</label>
+        @error('contents')
+        <span class="text-danger">Invalid</span>
+        @enderror
+        <textarea id="summernote" name="contents">{{ old('contents', $article->contents) }}</textarea>
       </div>
       <div class="col-12">
         <button type="reset" onclick="history.back()" class="btn btn-secondary">Batalkan</button>

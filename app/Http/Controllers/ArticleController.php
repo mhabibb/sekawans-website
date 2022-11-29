@@ -137,15 +137,18 @@ class ArticleController extends Controller
     public function show(Article $article)
     {
         if (request()->routeIs('admin.infotbc.show')) {
+            $indexRoute = 'admin.infotbc.index';
             $editRoute = 'admin.infotbc.edit';
         } else if (request()->routeIs('admin.articles.show')) {
+            $indexRoute = 'admin.articles.index';
             $editRoute = 'admin.articles.edit';
         } else if (request()->routeIs('admin.kegiatan.show')) {
+            $indexRoute = 'admin.kegiatan.index';
             $editRoute = 'admin.kegiatan.edit';
         } else {
             abort(404);
         }
-        return view('admin.article.show', compact('article', 'editRoute'));
+        return view('admin.article.show', compact('article', 'indexRoute', 'editRoute'));
     }
 
     /**
@@ -219,12 +222,12 @@ class ArticleController extends Controller
 
     public function forceDelete(Article $article)
     {
-        $ext = collect(explode('.',$article->img))->last();
+        $ext = collect(explode('.', $article->img))->last();
         // dd($ext);
         $base64img = base64_encode(file_get_contents(storage_path('app/public/' . $article->img)));
         $base64img = "data:image/{$ext};base64, {$base64img}";
-        $ext = explode('/', explode(':', substr($base64img, 0, strpos($base64img, ';')))[1])[1]; 
-        dd($base64img,$ext);
+        $ext = explode('/', explode(':', substr($base64img, 0, strpos($base64img, ';')))[1])[1];
+        dd($base64img, $ext);
         Storage::delete($article->img);
         $article->forceDelete();
         $category = $article->category_id;

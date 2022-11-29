@@ -1,10 +1,10 @@
 @extends('layouts.admin')
 
 @section('admin-content')
-<section class="container p-3">
+<section class="container py-5 col-lg-8">
   <div class="article-header d-flex flex-column align-items-center mb-2">
-    <button class="btn text-muted mb-3" onclick="history.back()">
-      <i class="fa-solid fa-arrow-left"></i> Kembali</button>
+    <a href="{{ route($indexRoute) }}" class="btn text-muted mb-3">
+      <i class="fa-solid fa-arrow-left"></i> Kembali</a>
     <div class="d-flex mb-3">
       <a href="{{route($editRoute , $article)}}" class="btn btn-warning btn-sm mx-2">
         <i class="fa-solid fa-pen-to-square"></i> Edit</a>
@@ -32,10 +32,13 @@
   </div>
   <article class="d-flex flex-column align-items-center justify-content-center border-top pt-4">
     <figure class="figure">
-      <img src="{{ asset('storage/'.$article->img) }}" class="figure-img img-fluid rounded" style="max-height: 600px" alt="...">
-      <figcaption class="figure-caption text-center">Sumber : A caption for the above image.</figcaption>
+      @if ($article->img)
+      <img src="{{ asset('storage/'.$article->img) }}" class="figure-img img-fluid rounded" style="max-height: 600px"
+        alt="...">
+      @endif
+      {{-- <figcaption class="figure-caption text-center">Sumber : A caption for the above image.</figcaption> --}}
     </figure>
-    <div class="body text-justify">
+    <div class="body">
       {!! $article->contents !!}
     </div>
   </article>

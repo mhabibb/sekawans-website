@@ -24,7 +24,7 @@
               <thead>
                 <tr>
                   <th>Judul {{ $title }}</th>
-                  <th>Waktu Upload</th>
+                  <th>Waktu Update</th>
                   <th>Author</th>
                   <th></th>
                 </tr>

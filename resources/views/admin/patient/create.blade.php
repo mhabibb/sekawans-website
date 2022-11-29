@@ -29,7 +29,7 @@
               <label>Fasyankes TB RO</label>
               <select
                 class="custom-select @error('tb_health_facility') is-invalid @else @if(old('tb_health_facility') ?? false) is-valid @endif @enderror"
-                name="tb.health.facility" required>
+                name="tb.health.facility">
                 <option disabled selected>Pilih Fasyankes</option>
                 @foreach ($fasyankes as $rs)
                 <option value="{{ $rs }}" @selected(old('tb_health_facility')==$rs)>{{ $rs }}</option>
@@ -39,7 +39,9 @@
           </div>
           <div class="col-sm-6 form-group">
             <label>Fasyankes Satelit</label>
-            <select class="form-control tags" id="satelite" name="satelite.health.facility.id" style="width: 100%;">
+            <select
+              class="form-control tags @error('satelite_health_facility_id') is-invalid @else @if(old('satelite_health_facility_id') ?? false) is-valid @endif @enderror"
+              id="satelite" name="satelite.health.facility.id" style="width: 100%;">
               <option disabled selected>Pilih Fasyankes Satelit</option>
               @foreach ($satelites as $satelite)
               <option value="{{ $satelite->id }}" @selected(old('satelite_health_facility_id')==$satelite->id)>{{
@@ -409,26 +411,14 @@
         selectOnClose: true
     });
 
-    {{-- Dynamic option select2 --}}
+    // Dynamic option select2
     $(".tags").select2({
         theme: 'bootstrap4',
         selectOnClose: true,
         tags: true
     });
 
-    function cekErrorSelect2(){
-        @error('satelite_health_facility_id')
-            $('#satelite').addClass('is-invalid')
-                @else
-                    @if(old('satelite_health_facility_id') ?? false)
-                        $('#satelite').addClass('is-valid')
-                    @endif
-        @enderror
-    }
-
-    cekErrorSelect2();
-
-    {{-- Auto focus search select2 --}}
+    // Auto focus search select2
     $(document).on('select2:open', () => {
         document.querySelector('.select2-search__field').focus();
     });

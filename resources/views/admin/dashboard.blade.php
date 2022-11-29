@@ -63,9 +63,9 @@
                 <div class="small-box bg-light">
                     <div class="inner">
                         <h3>{{$pasien}}</h3>
-                        <h5>Total Pasien</h5>
+                        <h5>Pasien</h5>
                     </div>
-                    <a href="{{ route('admin.fasyankes.index') }}" class="small-box-footer">Selengkapnya <i
+                    <a href="{{ route('admin.patients.index') }}" class="small-box-footer">Selengkapnya <i
                             class="fas fa-arrow-circle-right"></i></a>
                 </div>
             </div>
@@ -91,13 +91,9 @@
 
                     <div class="card-footer">
                         <h5 class="card-title">DATA {{ $kab->name }}</h5>
+                        <p class="card-text"> <a href="{{ route('admin.patients.index') }}"
+                                class="card-link">Selengkapnya <i class="fas fa-arrow-circle-right"></i></a> </p>
 
-                        <p class="card-text">
-                            Some quick example text to build on the card title and make up the bulk of the card's
-                            content.
-                        </p>
-                        <a href="{{ route('admin.patients.index') }}" class="card-link">Selengkapnya <i
-                                class="fas fa-arrow-circle-right"></i></a>
                     </div><!-- /.card -->
                 </div>
                 <!-- /.col-md-6 -->

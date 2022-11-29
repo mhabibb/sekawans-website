@@ -3,364 +3,406 @@
 @section('css')
 <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
 <link rel="stylesheet"
-    href="https://cdn.jsdelivr.net/npm/@ttskch/select2-bootstrap4-theme@x.x.x/dist/select2-bootstrap4.min.css">
+  href="https://cdn.jsdelivr.net/npm/@ttskch/select2-bootstrap4-theme@x.x.x/dist/select2-bootstrap4.min.css">
 @endsection
 
 @section('admin-content')
 <!-- Content Header (Page header) -->
 <section class="content-header">
-    <div class="container-fluid">
-        <h1>Edit Data Pasien</h1>
-    </div>
+  <div class="container-fluid">
+    <h1>Edit Data Pasien</h1>
+  </div>
 </section>
 
 <!-- Main content -->
 <section class="content">
-    <div class="container-fluid pb-5">
-        {{-- @dd($patient) --}}
-        <form action="{{ route('admin.patients.update', $detail) }}" method="POST" enctype="multipart/form-data"
-            class="card">
-            @method('PUT')
-            @csrf
-            <div class="card-body">
-                <div class="row mb-4">
-                    <div class="col-12 card-title">
-                        <h5>Data Dasar Pasien</h5>
-                    </div>
-                    <div class="col-sm-6">
-                        <div class="form-group">
-                            <label>Fasyankes TB RO</label>
-                            <select class="custom-select" name="fasyankes">
-                                <option disabled selected>Pilih Fasyankes</option>
-                                @foreach ($fasyankes as $rs)
-                                <option value="{{ $rs }}">{{ $rs }}</option>
-                                @endforeach
-                            </select>
-                        </div>
-                    </div>
-                    <div class="col-sm-6 form-group">
-                        <label>Fasyankes Satelit</label>
-                        <input type="text" name="satelite" class="form-control"
-                            value="{{ $detail->sateliteHealthFacility->name }}">
-                    </div>
-                    <div class="col-sm-6 form-group">
-                        <label>Tanggal Mulai Berobat</label>
-                        <input type="date" value="{{ date('Y-m-d', strtotime($detail->patient->start_treatment)) }}" name="dateStart" class="form-control">
-                    </div>
-                    <div class="col-sm-6 form-group">
-                        <label>No. Registrasi Pasien</label>
-                        <input type="number" name="registrationNumber" class="form-control"
-                            value="{{ $detail->no_regis }}">
-                    </div>
-                    <div class="col-sm-6 form-group">
-                        <label>Pendamping/Patient Supporter (PS)</label>
-                        <input type="text" name="supporter" class="form-control" value="Faisol">
-                    </div>
-                </div>
-                <div class="row mb-4">
-                    <div class="col-12 card-title">
-                        <h5>Identitas Pasien</h5>
-                    </div>
-
-                    <div class="col-sm-6 form-group">
-                        <label>Nama Lengkap</label>
-                        <input type="text" name="fullName" class="form-control" value="{{ $detail->patient->name }}">
-                    </div>
-
-                    <div class="col-sm-6 form-group">
-                        <label>NIK KTP</label>
-                        <input type="number" name="nik" class="form-control" value="{{ $detail->patient->id_number }}">
-                    </div>
-
-                    <div class="col-sm-6 form-group">
-                        <label class="d-block">Jenis Kelamin</label>
-                        <div class="form-check">
-                            <input class="form-check-input" type="radio" name="sex" id="lakilaki" value="laki-laki" {{
-                                $detail->patient->sex == "laki-laki" ? "checked" : "" }}>
-                            <label class="form-check-label" for="lakilaki">
-                                Laki-laki
-                            </label>
-                        </div>
-                        <div class="form-check">
-                            <input class="form-check-input" type="radio" name="sex" id="perempuan" value="perempuan" {{
-                                $detail->patient->sex == "perempuan" ? "checked" : "" }}>
-                            <label class="form-check-label" for="perempuan">
-                                Perempuan
-                            </label>
-                        </div>
-                    </div>
-
-                    <div class="col-sm-6 form-group">
-                        <label>Agama</label>
-                        <div class="row row-cols-2 mx-1">
-                            @foreach ($religions as $religion)
-                            <div class="form-check">
-                                <input class="form-check-input" type="radio" name="religion"
-                                    id="{{'religion' . $religion->id}}" value="{{ $religion->id }}" {{
-                                    $detail->patient->religion_id == $religion->id ? "checked" : "" }}>
-                                <label class="form-check-label" for="{{'religion' . $religion->id}}">
-                                    {{ $religion->name }}
-                                </label>
-                            </div>
-                            @endforeach
-                        </div>
-                    </div>
-
-                    <div class="col-sm-6 form-group">
-                        <label>Alamat KTP</label>
-                        <input type="text" name="addressKtp" class="form-control"
-                            value="{{ $detail->patient->id_card_address }}">
-                    </div>
-
-                    <div class="col-sm-6 form-group">
-                        {{-- <label>Kecamatan KTP</label>
-                        <input type="text" name="districtKtp" class="form-control"
-                            value="{{ $detail->patient->id_card_district }}"> --}}
-                    </div>
-
-                    <div class="col-sm-6 form-group">
-                        <label>Alamat Domisili</label>
-                        <input type="text" name="addressNow" class="form-control"
-                            value="{{ $detail->patient->residence_address }}">
-                    </div>
-
-                    <div class="col-sm-6">
-                        <div class="form-group">
-                            <label>Kecamatan</label>
-                            <select class="form-control select2" name="district" style="width: 100%;">
-                                <option>Pilih Kecamatan</option>
-                                @foreach ($regencies as $regency)
-                                <optgroup label="{{ $regency->name }}">
-                                    @foreach ($regency->districts as $district)
-                                    <option value="{{ $district->id }}" {{ $detail->patient->district_id == $district->id ?
-                                        "selected" : "" }} >{{ $district->name }}</option>
-                                    @endforeach
-                                </optgroup>
-                                @endforeach
-                            </select>
-                        </div>
-                    </div>
-                    {{-- @dd($patient) --}}
-                    <div class="col-sm-6 form-group">
-                        <label>Umur (Tahun)</label>
-                        <input type="number" name="age" class="form-control" value="{{ $detail->age }}">
-                    </div>
-
-                    <div class="col-sm-6 form-group">
-                        <label>No. Telepon/Hp</label>
-                        <input type="text" name="phoneNumber" class="form-control" value="{{ $detail->patient->phone }}">
-                    </div>
-
-                    <div class="col-sm-6 form-group">
-                        <label>Status Pendidikan</label>
-                        <div class="row row-cols-2 mx-1">
-                            @foreach ($educations as $edu)
-                            <div class="form-check">
-                                <input class="form-check-input" type="radio" name="education" id="{{'edu' . $edu->id}}"
-                                    value="{{ $edu->id }}" {{ $detail->patient->education_id == $edu->id ? "checked" : "" }}>
-                                <label class="form-check-label" for="{{'edu' . $edu->id}}">
-                                    {{ $edu->education }}
-                                </label>
-                            </div>
-                            @endforeach
-                        </div>
-                    </div>
-
-                    <div class="col-sm-6 form-group">
-                        <label>Status Pernikahan</label>
-                        <div class="row row-cols-2 mx-1">
-                            <div class="form-check">
-                                <input class="form-check-input" type="radio" name="maritalStatus" id="menikah"
-                                    value="menikah" {{ $detail->patient->marital_status == "menikah" ? "checked" : "" }}>
-                                <label class="form-check-label" for="menikah">
-                                    Menikah
-                                </label>
-                            </div>
-                            <div class="form-check">
-                                <input class="form-check-input" type="radio" name="maritalStatus" id="belum-menikah"
-                                    value="belum menikah" {{ $detail->patient->marital_status == "belum menikah" ? "checked" :
-                                "" }}>
-                                <label class="form-check-label" for="belum-menikah">
-                                    Belum Menikah
-                                </label>
-                            </div>
-                            <div class="form-check">
-                                <input class="form-check-input" type="radio" name="maritalStatus" id="janda-duda"
-                                    value="janda/duda" {{ $detail->patient->marital_status == "janda/duda" ? "checked" : "" }}>
-                                <label class="form-check-label" for="janda-duda">
-                                    Janda/Duda
-                                </label>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-sm-6 form-group">
-                        <label>Status Pekerjaan</label>
-                        <div class="form-check">
-                            <input class="form-check-input" type="radio" name="hasJob" id="bekerja" value="1" {{
-                                $detail->patient->has_job == 1 ? "checked" : "" }}>
-                            <label class="form-check-label" for="bekerja">
-                                Bekerja
-                            </label>
-                        </div>
-                        <div class="form-check">
-                            <input class="form-check-input" type="radio" name="hasJob" id="tidak-kerja" value="2" {{
-                                $detail->patient->has_job == 0 ? "checked" : "" }}>
-                            <label class="form-check-label" for="tidak-kerja">
-                                Tidak Bekerja
-                            </label>
-                        </div>
-                    </div>
-
-                    <div class="col-sm-6 form-group">
-                        <label>Tempat Bekerja</label>
-                        <input type="text" name="workplace" class="form-control" value="{{ $detail->patient->workplace }}">
-                    </div>
-
-                    <div class="col-sm-6 form-group">
-                        <label>Alamat Tempat Bekerja</label>
-                        <input type="text" name="workAddress" class="form-control" value="{{ $detail->patient->work_address }}">
-                    </div>
-
-                    <div class="col-sm-6 form-group">
-                        <label for="dependent">Jumlah Tanggungan</label>
-                        <input type="number" name="dependent" class="form-control" value="{{
-                            $detail->patient->dependent }}">
-                    </div>
-
-                    <div class="col-sm-6 form-group">
-                        <label>Tinggi Badan (cm)</label>
-                        <input type="number" name="height" class="form-control" value="{{ $detail->height }}">
-                    </div>
-
-                    <div class="col-sm-6 form-group">
-                        <label>Berat Badan (kg)</label>
-                        <input type="number" name="weight" class="form-control" value="{{ $detail->weight }}">
-                    </div>
-
-                    <div class="col-sm-6 form-group">
-                        <label>Status Pasien</label>
-                        <div class="row row-cols-2 mx-1">
-                            @foreach ($statuses as $status)
-                            <div class="form-check">
-                                <input class="form-check-input" type="radio" name="patientStatus"
-                                    id="{{'status' . $status->id}}" value="{{ $status->id }}" {{
-                                    $detail->patientStatus->id == $status->id ? "checked" : "" }}>
-                                <label class="form-check-label" for="{{'status' . $status->id}}">
-                                    {{ $status->status }}
-                                </label>
-                            </div>
-                            @endforeach
-                        </div>
-                    </div>
-
-                </div>
-                <div class="row mb-4">
-                    <div class="col-12 card-title">
-                        <h5>Identitas Orang Tua/Wali</h5>
-                    </div>
-                    <div class="col-sm-6 form-group">
-                        <label>Nama Ibu</label>
-                        <input type="text" name="motherName" class="form-control" value="{{ $detail->patient->mother_name }}">
-                    </div>
-
-                    <div class="col-sm-6 form-group">
-                        <label>Nama Bapak</label>
-                        <input type="text" name="fatherName" class="form-control" value="{{ $detail->patient->father_name }}">
-                    </div>
-
-                    <div class="col-sm-6 form-group">
-                        <label>Alamat</label>
-                        <input type="text" name="parentAddress" class="form-control"
-                            value="{{ $detail->patient->guardian_address }}">
-                    </div>
-
-                    {{-- <div class="col-sm-6 form-group">
-                        <label>Kecamatan</label>
-                        <input type="text" name="parentDistrict" class="form-control"
-                            value="{{ $detail->patient->guardian_district }}">
-                    </div> --}}
-
-                    <div class="col-sm-6 form-group">
-                        <label>No. Telepon/Hp</label>
-                        <input type="text" name="parentPhone" class="form-control"
-                            value="{{ $detail->patient->guardian_phone }}">
-                    </div>
-                </div>
-
-                <div class="row mb-4 pb-2 border-bottom">
-                    <div class="col-12 card-title">
-                        <h5>Kontak Darurat</h5>
-                    </div>
-
-                    <div class="col-sm-6 form-group">
-                        <label>Nama</label>
-                        <input type="text" name="emergencyContactName" class="form-control"
-                            value="{{ $detail->patient->emergency_contact->name }}">
-                    </div>
-
-                    <div class="col-sm-6 form-group">
-                        <label>Hubungan</label>
-                        <input type="text" name="emergencyContactRelations" class="form-control"
-                            value="{{ $detail->patient->emergency_contact->relation }}">
-                    </div>
-
-                    <div class="col-sm-6 form-group">
-                        <label>Alamat</label>
-                        <input type="text" name="emergencyContactAddress" class="form-control"
-                            value="{{ $detail->patient->emergency_contact->address }}">
-                    </div>
-
-                    <div class="col-sm-6">
-                        <div class="form-group">
-                            {{-- <label>Kecamatan</label>
-                            <select class="select2" name="emergencyContactDistrict" style="width: 100%;">
-                                <option>Pilih Kecamatan</option>
-                                @foreach ($regencies as $regency)
-                                <optgroup label="{{ $regency->name }}">
-                                    @foreach ($regency->districts as $district)
-                                    <option value="{{ $district->id }}" {{ $detail->patient->emergency_contact->district->id ==
-                                        $district->id ? "selected" : "" }}
-                                        >{{ $district->name }}</option>
-                                    @endforeach
-                                </optgroup>
-                                @endforeach
-                            </select> --}}
-                        </div>
-                    </div>
-
-                    <div class="col-sm-6 form-group">
-                        <label>No. Telepon/Hp</label>
-                        <input type="text" name="emergencyContactPhone" class="form-control"
-                            value="{{ $detail->patient->emergency_contact->phone }}">
-                    </div>
-
-                    <div class="col-sm-6 form-group">
-                        <label>Tahu Penyakit Pasien</label>
-                        <div class="form-check">
-                            <input class="form-check-input" type="radio" name="isKnow" id="ya-tahu" value="1" {{
-                                $detail->patient->emergency_contact->is_know == 1 ? "checked" : ""}}>
-                            <label class="form-check-label" for="ya-tahu">
-                                Ya
-                            </label>
-                        </div>
-                        <div class="form-check">
-                            <input class="form-check-input" type="radio" name="isKnow" id="tidak-tahu" value="0" {{
-                                $detail->patient->emergency_contact->is_know == 0 ? "checked" : ""}}>
-                            <label class="form-check-label" for="tidak-tahu">
-                                Tidak
-                            </label>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-12">
-                    <button type="reset" onclick="history.back()" class="btn btn-secondary">Batalkan</button>
-                    <button type="submit" class="btn btn-primary">Submit</button>
-                </div>
+  <div class="container-fluid pb-5">
+    <form action="{{ route('admin.patients.update', $detail) }}" method="POST" enctype="multipart/form-data"
+      class="card">
+      @method('PUT')
+      @csrf
+      <div class="card-body">
+        <div class="row mb-4">
+          <div class="col-12 card-title">
+            <h5>Data Dasar Pasien</h5>
+          </div>
+          <div class="col-sm-6">
+            <div class="form-group">
+              <label>Fasyankes TB RO</label>
+              <select
+                class="custom-select @error('tb_health_facility') is-invalid @else @if(old('tb_health_facility') ?? false) is-valid @endif @enderror"
+                name="tb.health.facility">
+                <option disabled selected>Pilih Fasyankes</option>
+                @foreach ($fasyankes as $rs)
+                <option value="{{ $rs }}" @selected(old('tb_health_facility', $detail->tb_health_facility)==$rs)>{{ $rs
+                  }}</option>
+                @endforeach
+              </select>
             </div>
-        </form>
-    </div><!-- /.container -->
+          </div>
+          <div class="col-sm-6 form-group">
+            <label>Fasyankes Satelit</label>
+            <select
+              class="form-control tags @error('satelite_health_facility_id') is-invalid @else @if(old('satelite_health_facility_id') ?? false) is-valid @endif @enderror"
+              id="satelite" name="satelite.health.facility.id" style="width: 100%;">
+              <option disabled selected>Pilih Fasyankes Satelit</option>
+              @foreach ($satelites as $satelite)
+              <option value="{{ $satelite->id }}" @selected(old('satelite_health_facility_id', $detail->
+                satelite_health_facility_id)==$satelite->id)>{{
+                $satelite->name }}</option>
+              @endforeach
+            </select>
+          </div>
+          <div class="col-sm-6 form-group">
+            <label>Tanggal Mulai Berobat</label>
+            <input type="date" name="start_treatment" max="{{ date('Y-m-d', strtotime(now())) }}"
+              class="form-control @error('start_treatment') is-invalid @else @if(old('start_treatment') ?? false) is-valid @endif @enderror"
+              value="{{ old('start_treatment', date('Y-m-d', strtotime($detail->patient->start_treatment))) }}">
+          </div>
+          <div class="col-sm-6 form-group">
+            <label>No. Registrasi Pasien</label>
+            <input type="number" name="no.regis"
+              class="form-control @error('no_regis') is-invalid @else @if(old('no_regis') ?? false) is-valid @endif @enderror"
+              value="{{ old('no_regis', $detail->no_regis) }}">
+          </div>
+          <div class="col-sm-6 form-group">
+            <label>Pendamping/Patient Supporter (PS)</label>
+            <select class="form-control tags 
+            @error('worker_id') is-invalid @else @if(old('worker_id') ?? false) is-valid @endif @enderror"
+              name="worker.id" style="width: 100%;">
+              <option disabled selected>Pilih Pendamping/Patient Supporter (PS)</option>
+              @foreach ($workers as $worker)
+              <option value="{{ $worker->id }}" @selected(old('worker_id', $detail->worker_id)==$worker->id)>{{
+                $worker->name }}</option>
+              @endforeach
+            </select>
+          </div>
+          <div class="col-sm-6 form-group">
+            <label>Status Pasien</label>
+            @error('patient_status_id')
+            <span class="text-danger">Invalid</span>
+            @enderror
+            <div class="row row-cols-2 mx-1">
+              @foreach ($statuses as $status)
+              <div class="form-check">
+                <input class="form-check-input" type="radio" name="patient_status_id" id="{{'status' . $status->id}}"
+                  value="{{ $status->id }}" @checked(old('patient_status_id', $detail->patient_status_id)==$status->id)>
+                <label class="form-check-label" for="{{'status' . $status->id}}">
+                  {{ $status->status }}
+                </label>
+              </div>
+              @endforeach
+            </div>
+          </div>
+        </div>
+
+        <div class="row mb-4">
+          <div class="col-12 card-title">
+            <h5>Identitas Pasien</h5>
+          </div>
+
+          <div class="col-sm-6 form-group">
+            <label>Nama Lengkap</label>
+            <input type="text" name="name"
+              class="form-control @error('name') is-invalid @else @if(old('name') ?? false) is-valid @endif @enderror"
+              value="{{ old('name', $detail->patient->name) }}">
+          </div>
+
+          <div class="col-sm-6 form-group">
+            <label>NIK KTP (16 digit)</label>
+            <input type="number" name="id.number"
+              class="form-control @error('id_number') is-invalid @else @if(old('id_number') ?? false) is-valid @endif @enderror"
+              value="{{ old('id_number', $detail->patient->id_number) }}">
+          </div>
+
+          <div class="col-sm-6 form-group">
+            <label>Jenis Kelamin</label>
+            @error('sex')
+            <span class="text-danger">Invalid</span>
+            @enderror
+            <div class="form-check">
+              <input class="form-check-input" type="radio" name="sex" id="lakilaki" value="laki-laki"
+                @checked(old('sex', $detail->patient->sex)=='laki-laki' )>
+              <label class="form-check-label" for="lakilaki">
+                Laki-laki
+              </label>
+            </div>
+            <div class="form-check">
+              <input class="form-check-input" type="radio" name="sex" id="perempuan" value="perempuan"
+                @checked(old('sex', $detail->patient->sex)=='perempuan' )>
+              <label class="form-check-label" for="perempuan">
+                Perempuan
+              </label>
+            </div>
+          </div>
+
+          <div class="col-sm-6 form-group">
+            <label>Agama</label>
+            @error('religion_id')
+            <span class="text-danger">Invalid</span>
+            @enderror
+            <div class="row row-cols-2 mx-1">
+              @foreach ($religions as $religion)
+              <div class="form-check">
+                <input class="form-check-input" type="radio" name="religion.id" id="{{'religion' . $religion->id}}"
+                  value="{{ $religion->id }}" @checked(old('religion_id',
+                  $detail->patient->religion_id)==$religion->id)>
+                <label class="form-check-label" for="{{'religion' . $religion->id}}">
+                  {{ $religion->name }}
+                </label>
+              </div>
+              @endforeach
+            </div>
+          </div>
+
+          <div class="col-sm-6 form-group">
+            <label>Alamat KTP</label>
+            <input type="text" name="id.card.address"
+              class="form-control @error('id_card_address') is-invalid @else @if(old('id_card_address') ?? false) is-valid @endif @enderror"
+              value="{{ old('id_card_address', $detail->patient->id_card_address) }}">
+          </div>
+
+          <div class="col-sm-6 form-group">
+            <label>Alamat Domisili</label>
+            <input type="text" name="residence.address" class="form-control @error('residence_address') is-invalid
+            @else @if(old('residence_address') ?? false) is-valid @endif @enderror"
+              value="{{ old('residence_address', $detail->patient->residence_address) }}">
+          </div>
+
+          <div class="col-sm-6">
+            <div class="form-group">
+              <label>Kecamatan</label>
+              <select
+                class="form-control select2 @error('district_id') is-invalid @else @if(old('district_id') ?? false) is-valid @endif @enderror"
+                name="district.id" style="width: 100%;">
+                <option disabled selected>Pilih Kecamatan</option>
+                @foreach ($regencies as $regency)
+                <optgroup label="{{ $regency->name }}">
+                  @foreach ($regency->districts as $district)
+                  <option value="{{ $district->id }}" @selected(old('district_id', $detail->
+                    patient->district_id)==$district->id)>{{ $district->name }}
+                  </option>
+                  @endforeach
+                </optgroup>
+                @endforeach
+              </select>
+            </div>
+          </div>
+
+          <div class="col-sm-6 form-group">
+            <label>Umur (Tahun)</label>
+            <input type="number" name="age" class="form-control @error('age') is-invalid
+            @else @if(old('age') ?? false) is-valid @endif @enderror" value="{{ old('age', $detail->age) }}">
+          </div>
+
+          <div class="col-sm-6 form-group">
+            <label>No. Telepon/Hp</label>
+            <input type="text" name="phone" class="form-control @error('phone') is-invalid
+            @else @if(old('phone') ?? false) is-valid @endif @enderror"
+              value="{{ old('phone', $detail->patient->phone) }}">
+          </div>
+
+          <div class="col-sm-6 form-group">
+            <label>Status Pendidikan</label>
+            @error('education_id')
+            <span class="text-danger">Invalid</span>
+            @enderror
+            <div class="row row-cols-2 mx-1">
+              @foreach ($educations as $edu)
+              <div class="form-check">
+                <input class="form-check-input" type="radio" name="education.id" id="{{'edu' . $edu->id}}"
+                  value="{{ $edu->id }}" @checked(old('education_id', $detail->patient->education_id)==$edu->id)>
+                <label class="form-check-label" for="{{'edu' . $edu->id}}">
+                  {{ $edu->education }}
+                </label>
+              </div>
+              @endforeach
+            </div>
+          </div>
+
+          <div class="col-sm-6 form-group">
+            <label>Status Pernikahan</label>
+            @error('marital_status')
+            <span class="text-danger">Invalid</span>
+            @enderror
+            <div class="row row-cols-2 mx-1">
+              <div class="form-check">
+                <input class="form-check-input" type="radio" name="marital.status" id="menikah" value="menikah"
+                  @checked(old('marital_status', $detail->patient->marital_status)=='menikah' )>
+                <label class="form-check-label" for="menikah">
+                  Menikah
+                </label>
+              </div>
+              <div class="form-check">
+                <input class="form-check-input" type="radio" name="marital.status" id="belum-menikah"
+                  value="belum menikah" @checked(old('marital_status', $detail->patient->marital_status)=='belum
+                menikah' )>
+                <label class="form-check-label" for="belum-menikah">
+                  Belum Menikah
+                </label>
+              </div>
+              <div class="form-check">
+                <input class="form-check-input" type="radio" name="marital.status" id="janda-duda" value="janda/duda"
+                  @checked(old('marital_status', $detail->patient->marital_status)=='janda/duda' )>
+                <label class="form-check-label" for="janda-duda">
+                  Janda/Duda
+                </label>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-sm-6 form-group">
+            <label>Status Pekerjaan</label>
+            @error('has_job')
+            <span class="text-danger">Invalid</span>
+            @enderror
+            <div class="form-check">
+              <input class="form-check-input" type="radio" name="has.job" id="bekerja" value="1" @checked(old('has_job',
+                $detail->patient->has_job)=="1" )>
+              <label class="form-check-label" for="bekerja">
+                Bekerja
+              </label>
+            </div>
+            <div class="form-check">
+              <input class="form-check-input" type="radio" name="has.job" id="tidak-kerja" value="0"
+                @checked(old('has_job', $detail->patient->has_job)=="0" )>
+              <label class="form-check-label" for="tidak-kerja">
+                Tidak Bekerja
+              </label>
+            </div>
+          </div>
+
+          <div class="col-sm-6 form-group" id="workplace">
+            <label>Tempat Bekerja</label>
+            <input type="text" name="workplace" class="form-control @error('workplace') is-invalid
+            @else @if(old('workplace') ?? false) is-valid @endif @enderror"
+              value="{{ old('workplace', $detail->patient->workplace) }}">
+          </div>
+
+          <div class="col-sm-6 form-group" id="work-address">
+            <label>Alamat Tempat Bekerja</label>
+            <input type="text" name="work.address" class="form-control @error('work_address') is-invalid
+            @else @if(old('work_address') ?? false) is-valid @endif @enderror"
+              value="{{ old('work_address', $detail->patient->work_address) }}">
+          </div>
+
+          <div class=" col-sm-6 form-group">
+            <label>Jumlah Tanggungan</label>
+            <input type="number" name="dependent" class="form-control @error('dependent') is-invalid
+            @else @if(old('dependent') ?? false) is-valid @endif @enderror"
+              value="{{ old('dependent', $detail->patient->dependent) }}">
+          </div>
+
+          <div class="col-sm-6 form-group">
+            <label>Tinggi Badan (cm)</label>
+            <input type="number" name="height" class="form-control @error('height') is-invalid
+            @else @if(old('workplace') ?? false) is-valid @endif @enderror"
+              value="{{ old('height', $detail->height) }}">
+          </div>
+
+          <div class="col-sm-6 form-group">
+            <label>Berat Badan (kg)</label>
+            <input type="number" name="weight" class="form-control @error('weight') is-invalid
+            @else @if(old('workplace') ?? false) is-valid @endif @enderror"
+              value="{{ old('weight', $detail->weight) }}">
+          </div>
+        </div>
+
+        <div class="row mb-4">
+          <div class="col-12 card-title">
+            <h5>Identitas Orang Tua/Wali</h5>
+          </div>
+          <div class="col-sm-6 form-group">
+            <label>Nama Ibu</label>
+            <input type="text" name="mother.name" class="form-control @error('mother_name') is-invalid
+            @else @if(old('workplace') ?? false) is-valid @endif @enderror"
+              value="{{ old('mother_name', $detail->patient->mother_name) }}">
+          </div>
+
+          <div class="col-sm-6 form-group">
+            <label>Nama Bapak</label>
+            <input type="text" name="father.name" class="form-control @error('father_name') is-invalid
+            @else @if(old('workplace') ?? false) is-valid @endif @enderror"
+              value="{{ old('father_name', $detail->patient->father_name) }}">
+          </div>
+
+          <div class="col-sm-6 form-group">
+            <label>Alamat</label>
+            <input type="text" name="guardian.address" class="form-control @error('guardian_address') is-invalid
+            @else @if(old('workplace') ?? false) is-valid @endif @enderror"
+              value="{{ old('guardian_address', $detail->patient->guardian_address) }}">
+          </div>
+
+          <div class="col-sm-6 form-group">
+            <label>No. Telepon/Hp</label>
+            <input type="text" name="guardian.phone" class="form-control @error('guardian_phone') is-invalid
+            @else @if(old('workplace') ?? false) is-valid @endif @enderror"
+              value="{{ old('guardian_phone', $detail->patient->guardian_phone) }}">
+          </div>
+        </div>
+
+        <div class="row mb-4 pb-2 border-bottom">
+          <div class="col-12 card-title">
+            <h5>Kontak Darurat</h5>
+          </div>
+
+          <div class="col-sm-6 form-group">
+            <label>Nama</label>
+            <input type="text" name="emergency[name]" class="form-control @error('emergency.name') is-invalid
+            @else @if(old('workplace') ?? false) is-valid @endif @enderror"
+              value="{{ old('emergency.name', $detail->patient->emergency_contact->name) }}">
+          </div>
+
+          <div class="col-sm-6 form-group">
+            <label>Hubungan</label>
+            <input type="text" name="emergency[relation]" class="form-control @error('emergency.relation') is-invalid
+            @else @if(old('workplace') ?? false) is-valid @endif @enderror"
+              value="{{ old('emergency.relation', $detail->patient->emergency_contact->relation) }}">
+          </div>
+
+          <div class="col-sm-6 form-group">
+            <label>Alamat</label>
+            <input type="text" name="emergency[address]" class="form-control @error('emergency.address') is-invalid
+            @else @if(old('workplace') ?? false) is-valid @endif @enderror"
+              value="{{ old('emergency.address', $detail->patient->emergency_contact->address) }}">
+          </div>
+
+          <div class="col-sm-6 form-group">
+            <label>No. Telepon/Hp</label>
+            <input type="text" name="emergency[phone]" class="form-control @error('emergency.phone') is-invalid
+            @else @if(old('workplace') ?? false) is-valid @endif @enderror"
+              value="{{ old('emergency.phone', $detail->patient->emergency_contact->phone) }}">
+          </div>
+
+          <div class="col-sm-6 form-group">
+            <label>Tahu Penyakit Pasien</label>
+            @error('emergency.is_know')
+            <span class="text-danger">Invalid</span>
+            @enderror
+            <div class="form-check">
+              <input class="form-check-input" type="radio" name="emergency[is_know]" id="ya-tahu" value="1"
+                @checked(old('emergency.is_know', $detail->patient->emergency_contact->is_know)=="1" )>
+              <label class="form-check-label" for="ya-tahu">
+                Ya
+              </label>
+            </div>
+            <div class="form-check">
+              <input class="form-check-input" type="radio" name="emergency[is_know]" id="tidak-tahu" value="0"
+                @checked(old('emergency.is_know', $detail->patient->emergency_contact->is_know)=="0" )>
+              <label class="form-check-label" for="tidak-tahu">
+                Tidak
+              </label>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-12">
+          <button type="reset" onclick="history.back()" class="btn btn-secondary">Batalkan</button>
+          <button type="submit" class="btn btn-primary">Submit</button>
+        </div>
+      </div>
+    </form>
+  </div><!-- /.container -->
 </section>
 <!-- /.content -->
 @endsection
@@ -369,9 +411,39 @@
 <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 
 <script>
-    $(document).ready(function() {
+  $(document).ready(function() {
+    if($('#tidak-kerja').is(":checked")) {
+      $('#workplace').addClass('d-none');
+      $('#work-address').addClass('d-none');
+    }
+    $('#tidak-kerja').click(function() {
+      if($(this).is(":checked")) {
+        $('#workplace').addClass('d-none');
+        $('#work-address').addClass('d-none');
+      }
+    })
+    $('#bekerja').click(function() {
+      if($(this).is(":checked")) {
+        $('#workplace').removeClass('d-none');
+        $('#work-address').removeClass('d-none');
+      }
+    })
+
     $('.select2').select2({
-        theme: 'bootstrap4'
+        theme: 'bootstrap4',
+        selectOnClose: true
+    });
+
+    // Dynamic option select2
+    $(".tags").select2({
+        theme: 'bootstrap4',
+        selectOnClose: true,
+        tags: true
+    });
+
+    // Auto focus search select2
+    $(document).on('select2:open', () => {
+        document.querySelector('.select2-search__field').focus();
     });
 });
 </script>

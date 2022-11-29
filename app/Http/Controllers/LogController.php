@@ -14,7 +14,7 @@ class LogController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth');
+        // $this->middleware('log');
     }
 
     /**
@@ -24,7 +24,6 @@ class LogController extends Controller
      */
     public function index()
     {
-        $this->authorize('superAdmin');
         $log = Activity::all();
         return dd($log);
     }
@@ -35,9 +34,20 @@ class LogController extends Controller
      * @param  \App\Models\Activity  $activity
      * @return \Illuminate\Http\Response
      */
-    public function show(Activity $activity)
+    public function show(Activity $log)
     {
-        return $activity;
+        return dd($log->changes());
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  \App\Models\Activity  $activity
+     * @return \Illuminate\Http\Response
+     */
+    public function restore(Activity $activity)
+    {
+        $model = $activity->changes;
     }
 
     /**

@@ -3,6 +3,9 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use App\Models\SateliteHealthFacility;
+use App\Models\Worker;
+use Illuminate\Support\Str;
 
 class UpdatePatientRequest extends FormRequest
 {
@@ -14,7 +17,26 @@ class UpdatePatientRequest extends FormRequest
     public function authorize()
     {
         return auth()->check();
-    } 
+    }
+
+    /**
+     * Prepare the data for validation.
+     *
+     * @return void
+     */
+    protected function prepareForValidation()
+    {
+        $this->merge([
+            'satelite_health_facility_id' => $this->satelite_health_facility_id ? SateliteHealthFacility::firstOrCreate(
+                ["id"    => $this->satelite_health_facility_id],
+                ["name"  => Str::title($this->satelite_health_facility_id)]
+            )->id : false,
+            'worker_id'  => $this->worker_id ? Worker::firstOrCreate(
+                ["id"    => $this->worker_id],
+                ["name"  => Str::title($this->worker_id)]
+            )->id : false,
+        ]);
+    }
 
     /**
      * Get the validation rules that apply to the request.
@@ -38,7 +60,7 @@ class UpdatePatientRequest extends FormRequest
             'residence_address'             => 'required|string',
             'district_id'                   => 'required|integer|digits:7',
             'age'                           => 'required|integer|between:1,100',
-            'phone'                         => 'required|integer|digits_between:10,16',
+            'phone'                         => 'required|numeric|digits_between:10,16',
             'education_id'                  => 'required|integer|between:1,5',
             'marital_status'                => 'required|string|in:menikah,belum menikah,janda/duda',
             'has_job'                       => 'required|boolean',
@@ -50,12 +72,12 @@ class UpdatePatientRequest extends FormRequest
             'mother_name'                   => 'required|string|max:50',
             'father_name'                   => 'required|string|max:50',
             'guardian_address'              => 'required|string',
-            'guardian_phone'                => 'required|integer|digits_between:10,16',
+            'guardian_phone'                => 'required|numeric|digits_between:10,16',
             'emergency'                     => 'required|array|size:5',
             "emergency.name"                => 'required|string|max:50',
             "emergency.relation"            => 'required|string|max:50',
             "emergency.address"             => 'required|string',
-            "emergency.phone"               => 'required|integer|digits_between:10,16',
+            "emergency.phone"               => 'required|numeric|digits_between:10,16',
             "emergency.is_know"             => 'required|boolean',
         ];
     }

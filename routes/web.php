@@ -30,7 +30,7 @@ Route::middleware('auth')->prefix('admin')->name('admin.')->group(function () {
     Route::put('/users/{user}', [UserController::class, 'updatePassword'])->name('users.password.update');
     Route::resource('/patients', PatientController::class);
     Route::resource('/sekawans', StaticElementController::class)->except(['create', 'destroy', 'store']);
-    Route::resource('/logs', LogController::class)->only(['index', 'destroy', 'show']);
+    Route::resource('/logs', LogController::class)->only(['index', 'destroy', 'show'])->middleware(['can:superAdmin']);
     Route::resource('/fasyankes', SateliteHealthFacilityController::class);
     Route::resource('/articles', ArticleController::class);
     Route::controller(ArticleController::class)->group(function () {

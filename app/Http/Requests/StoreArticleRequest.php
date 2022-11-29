@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Str;
 
 class StoreArticleRequest extends FormRequest
 {
@@ -15,6 +16,22 @@ class StoreArticleRequest extends FormRequest
     public function authorize()
     {
         return auth()->check();
+    }
+
+    /**
+     * Prepare the data for validation.
+     *
+     * @return void
+     */
+    protected function prepareForValidation()
+    {
+        // Str::contains($this->contents, 'base64') ? dd($this->contents) : dd("Kok gak kenek??");
+        // if (Str::contains($this->contents, 'base64')) {
+        //     $base64 = Str::of(Str::of($this->contents)->explode('src="')[1])->explode('" ')[0];
+        //     $this->contents = Str::of($this->contents)->replace($base64, '??');
+        //     dd($base64, $this->contents);
+        // }
+        // $this->merge([]);
     }
 
     /**

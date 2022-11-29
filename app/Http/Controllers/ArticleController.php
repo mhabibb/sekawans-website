@@ -6,7 +6,7 @@ use App\Models\Article;
 use App\Http\Requests\StoreArticleRequest;
 use App\Http\Requests\UpdateArticleRequest;
 use Illuminate\Support\Facades\Storage;
-use Spatie\Activitylog\Models\Activity;
+use Illuminate\Support\Str;
 
 class ArticleController extends Controller
 {
@@ -29,15 +29,15 @@ class ArticleController extends Controller
     protected function resourceAbilityMap()
     {
         return [
-            'index'       => 'viewAny',
-            'show'        => 'view',
-            'create'      => 'create',
-            'store'       => 'create',
-            'edit'        => 'update',
-            'update'      => 'update',
-            'destroy'     => 'delete',
-            'restore'     => 'restore',
-            'forceDelete' => 'forceDelete'
+            'index'        => 'viewAny',
+            'show'         => 'view',
+            'create'       => 'create',
+            'store'        => 'create',
+            'edit'         => 'update',
+            'update'       => 'update',
+            'destroy'      => 'delete',
+            'restore'      => 'restore',
+            'forceDelete'  => 'forceDelete',
         ];
     }
 
@@ -117,6 +117,7 @@ class ArticleController extends Controller
     public function store(StoreArticleRequest $request)
     {
         $request = $request->validated();
+        $request['contents'] = $this->contentDecode($request['contents']);
         $request['img'] = $request['img']->store('img/articles');
         $route = match ($request['category_id']) {
             '1' => 'admin.infotbc.show',
@@ -125,7 +126,7 @@ class ArticleController extends Controller
         };
         $article = Article::create($request);
         (!$article ? Storage::delete($request['img']) : '');
-        return redirect()->route($route, $article);
+        return to_route($route, $article);
     }
 
     /**
@@ -183,6 +184,7 @@ class ArticleController extends Controller
             $oldImg = $article->img;
             $validated['img'] = $validated['img']->store('img/articles');
         };
+        $validated['contents'] = $this->contentDecode($validated['contents']);
         $article->update($validated);
 
         isset($validated['img']) ? ($article->wasChanged() ? Storage::delete($oldImg) : Storage::delete($validated['img'])) : '';
@@ -191,7 +193,7 @@ class ArticleController extends Controller
         $category == "infos" ? $route = 'admin.infotbc.show'
             : ($category == "articles" ? $route = 'admin.articles.show'
                 : ($category == "actions" ? $route = 'admin.kegiatan.show' : $route = null));
-        return redirect()->route($route, $article);
+        return to_route($route, $article);
     }
 
     /**
@@ -219,12 +221,12 @@ class ArticleController extends Controller
 
     public function forceDelete(Article $article)
     {
-        $ext = collect(explode('.',$article->img))->last();
-        // dd($ext);
-        $base64img = base64_encode(file_get_contents(storage_path('app/public/' . $article->img)));
-        $base64img = "data:image/{$ext};base64, {$base64img}";
-        $ext = explode('/', explode(':', substr($base64img, 0, strpos($base64img, ';')))[1])[1]; 
-        dd($base64img,$ext);
+        // $ext = collect(explode('.', $article->img))->last();
+        // // dd($ext);
+        // $base64img = base64_encode(file_get_contents(storage_path('app/public/' . $article->img)));
+        // $base64img = "data:image/{$ext};base64, {$base64img}";
+        // // $ext = explode('/', explode(':', substr($base64img, 0, strpos($base64img, ';')))[1])[1];
+        // dd($base64img, $ext);
         Storage::delete($article->img);
         $article->forceDelete();
         $category = $article->category_id;
@@ -233,5 +235,34 @@ class ArticleController extends Controller
             2 => redirect()->route('admin.articles.index'),
             3 => redirect()->route('admin.kegiatan.index')
         };
+    }
+
+    public function contentEncode($contents)
+    {
+        $ext = collect(explode('.', $contents))->last();
+        $base64 = base64_encode(file_get_contents(storage_path('app/public/' . $contents)));
+        $base64 = "data:image/{$ext};base64, {$base64}";
+        return $base64;
+    }
+
+    public function contentDecode($contents)
+    {
+        $count = substr_count($contents, ';base64,');
+        // dd($contents);
+        for ($i = 0; $i < $count; $i++) {
+            $base64 = Str::of(Str::of($contents)->explode(' src="data:')[1])->explode('" ')[0];
+            $contents = Str::of($contents)->replace('data:' . $base64, '??');
+            $ext = Str::of(Str::of(Str::of($contents)->explode('data-filename="')[$i + 1])->explode('"')[0])->explode('.')[1];
+            $base64 = Str::of($base64)->explode(',')[1];
+            $img = base64_decode(Str::of($base64));
+            do {
+                $imgName = 'img/articles/contents/' . Str::random(80) . '.' . $ext;
+                $status = Storage::get($imgName);
+            } while ($status);
+            $status = Storage::put($imgName, $img);
+            $contents = Str::of($contents)->replace('??', asset('storage/' . $imgName));
+        }
+        // dd($contents);
+        return $contents;
     }
 }

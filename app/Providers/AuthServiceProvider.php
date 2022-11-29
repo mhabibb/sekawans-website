@@ -30,7 +30,7 @@ class AuthServiceProvider extends ServiceProvider
         $this->registerPolicies();
 
         Gate::define('superAdmin', function (User $user) {
-            return $user->role;
+            return ($user->role ?? redirect()->route('admin'));
         });
     }
 }

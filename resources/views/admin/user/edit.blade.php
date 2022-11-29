@@ -14,11 +14,34 @@
                 <div class="modal-body">
                     <div class="form-group">
                         <label>Nama</label>
-                        <input type="text" name="adminName" class="form-control" value="{{ $user->name }}">
+                        <input type="text" name="name" class="form-control @error('name') is-invalid
+                        @else @if(old('name') ?? false) is-valid @endif @enderror"
+                            value="{{ old('name', $user->name) }}">
                     </div>
                     <div class="form-group">
                         <label>Email</label>
-                        <input type="email" name="email" class="form-control" value="{{ $user->email }}">
+                        <input type="email" name="email" class="form-control @error('email') is-invalid
+                        @else @if(old('email') ?? false) is-valid @endif @enderror"
+                            value="{{ old('email', $user->email) }}">
+                    </div>
+                    <div class="custom-control custom-checkbox mb-2">
+                        <input type="checkbox" class="custom-control-input" id="passBtn">
+                        <label class="custom-control-label" for="passBtn">Ubah Password?</label>
+                    </div>
+                    <div class="form-group old-password">
+                        <label>Konfirmasi Password</label>
+                        <input type="password" name="password"
+                            class="form-control @error('password') is-invalid @enderror">
+                    </div>
+                    <div class="form-group new-password">
+                        <label>Password Baru</label>
+                        <input type="password" name="newPassword"
+                            class="form-control @error('newPassword') is-invalid @enderror">
+                    </div>
+                    <div class="form-group new-password">
+                        <label>Ulangi Password Baru</label>
+                        <input type="password" name="confirmPassword"
+                            class="form-control @error('confirmPassword') is-invalid @enderror">
                     </div>
                 </div>
                 <div class="modal-footer">

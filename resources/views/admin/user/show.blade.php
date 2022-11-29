@@ -7,16 +7,16 @@
     </div>
 </section>
 
-<section class="content">
+<section class="content col-md-8 col-lg-6">
     <div class="container-fluid">
         <div class="card">
             <div class="card-body">
                 <div class="row mb-3">
-                    <div class="col-12 col-sm-6 form-group">
+                    <div class="col-12 form-group">
                         <label>Nama</label>
                         <div class="form-control">{{ $user->name }}</div>
                     </div>
-                    <div class="col-12 col-sm-6 form-group">
+                    <div class="col-12 form-group">
                         <label>Email</label>
                         <div class="form-control">{{ $user->email }}</div>
                     </div>
@@ -25,8 +25,6 @@
                     <div class="col-12 col-sm-6">
                         <a href="#" class="btn btn-warning mr-2" data-toggle="modal" data-target="#editProfile">Update
                             Profil</a>
-                        <a href="#" class="btn btn-danger" data-toggle="modal" data-target="#editPassword">Ubah
-                            Password</a>
                     </div>
                 </div>
             </div>
@@ -36,12 +34,24 @@
 
 <section class="edit-modal">
     @include('admin.user.edit')
-    @include('admin.user.edit-password')
+    {{-- @include('admin.user.edit-password') --}}
 </section>
 
 @endsection
 
 @section('js')
 <script>
+    $(document).ready(function() {
+        $('.new-password').addClass('d-none');
+        $('#passBtn').click(function() {
+            if ($('#passBtn').is(":checked")) {
+                $('.new-password').removeClass('d-none');
+                $('.old-password label').text('Password Lama');
+            } else {
+                $('.new-password').addClass('d-none');
+                $('.old-password label').text('Konfirmasi Password');
+            }
+        })
+    })
 </script>
 @endsection

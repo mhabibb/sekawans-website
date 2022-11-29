@@ -46,7 +46,7 @@
                   <td>{{ $user->name }}</td>
                   <td>{{ $user->email }}</td>
                   <td>
-                    <form action="#" method="POST" class="d-inline-block">
+                    <form action="{{ route('admin.users.destroy', $user) }}" method="POST" class="d-inline-block">
                       @csrf
                       @method('DELETE')
                       <button type="submit" class="badge badge-danger border-0"

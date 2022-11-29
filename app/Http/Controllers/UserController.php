@@ -16,9 +16,9 @@ class UserController extends Controller
      */
     public function index()
     {
-        if (auth()->user()->role != 1) {
-            return abort(403);
-        }
+        $this->authorize('superAdmin');
+        $users = User::select('id', 'name', 'email')->latest()->get();
+        return view('admin.user.index', compact('users'));
     }
 
     /**
@@ -28,9 +28,7 @@ class UserController extends Controller
      */
     public function create()
     {
-        $this->authorize('superAdmin');
-        $users = User::select('id', 'name', 'email')->get();
-        return view('admin.user.index', compact('users'));
+        //
     }
 
     /**
@@ -44,7 +42,7 @@ class UserController extends Controller
         $this->authorize('superAdmin');
         $request = $request->validated();
         User::create($request);
-        return view('admin.users.index');
+        return redirect()->route('admin.users.index');
     }
 
     /**
@@ -71,14 +69,10 @@ class UserController extends Controller
      */
     public function update(UpdateUserRequest $request, User $user)
     {
+        dd($request);
         $request = $request->validated();
         $user->update($request);
         return redirect()->route('admin.users.show');
-    }
-
-    public function updatePassword(Request $request, User $user)
-    {
-        return $request;
     }
 
     /**
@@ -91,5 +85,6 @@ class UserController extends Controller
     {
         $this->authorize('superAdmin');
         User::destroy($user);
+        return redirect()->route('admin.users.index');
     }
 }

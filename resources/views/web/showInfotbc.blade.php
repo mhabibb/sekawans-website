@@ -10,8 +10,10 @@
     </div>
     <article class="d-flex flex-column align-items-center justify-content-center border-top pt-4">
         <figure class="figure">
+            @if ($info->img)
             <img src="{{ asset('storage/'.$info->img) }}" class="figure-img img-fluid rounded" style="max-height: 600px"
                 alt="..." loading="lazy">
+            @endif
         </figure>
         <div class="body">
             {!! $info->contents !!}

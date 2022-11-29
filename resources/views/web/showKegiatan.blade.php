@@ -19,8 +19,10 @@
     </div>
     <article class="d-flex flex-column align-items-center justify-content-center border-top pt-4">
         <figure class="figure">
+            @if ($action->img)
             <img src="{{ asset('storage/'.$action->img) }}" class="figure-img img-fluid rounded"
-                style="max-height: 600px" alt="...">
+                style="max-height: 600px" alt="..." loading="lazy">
+            @endif
             {{-- <figcaption class="figure-caption text-center">Sumber : A caption for the above image.</figcaption>
             --}}
         </figure>

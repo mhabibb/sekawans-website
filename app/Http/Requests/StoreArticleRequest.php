@@ -19,22 +19,6 @@ class StoreArticleRequest extends FormRequest
     }
 
     /**
-     * Prepare the data for validation.
-     *
-     * @return void
-     */
-    protected function prepareForValidation()
-    {
-        // Str::contains($this->contents, 'base64') ? dd($this->contents) : dd("Kok gak kenek??");
-        // if (Str::contains($this->contents, 'base64')) {
-        //     $base64 = Str::of(Str::of($this->contents)->explode('src="')[1])->explode('" ')[0];
-        //     $this->contents = Str::of($this->contents)->replace($base64, '??');
-        //     dd($base64, $this->contents);
-        // }
-        // $this->merge([]);
-    }
-
-    /**
      * Get the validation rules that apply to the request.
      *
      * @return array<string, mixed>

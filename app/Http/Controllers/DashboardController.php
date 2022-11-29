@@ -12,34 +12,37 @@ use Illuminate\Support\Facades\Hash;
 
 class DashboardController extends Controller
 {
-  /**
-   * Instantiate a new controller instance.
-   *
-   * @return void
-   */
-  public function __construct()
-  {
-    $this->middleware('auth');
-  }
+    /**
+     * Instantiate a new controller instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
 
-  public function index()
-  {
-    // Hash::check('password', auth()->user()->password) ? alert('Ndang ganti password') : '';
-    $info = Article::latest()->category(1)->get()->count();
-    $article = Article::latest()->category(2)->get()->count();
-    $action = Article::latest()->category(3)->get()->count();
-    $workers = Worker::all()->count();
-    $facilities = SateliteHealthFacility::all()->count();
+    public function index()
+    {
+        // Hash::check('password', auth()->user()->password) ? alert('Ndang ganti password') : '';
+        $info = Article::latest()->category(1)->get()->count();
+        $article = Article::latest()->category(2)->get()->count();
+        $action = Article::latest()->category(3)->get()->count();
+        $workers = Worker::all()->count();
+        $facilities = SateliteHealthFacility::all()->count();
+        $first = Hash::check('password', auth()->user()->password) ?? false;
+        // dd($first);
 
-    $regency = Regency::count('status')->get();
+        $regency = Regency::count('status')->get();
 
-    return view('admin.dashboard', [
-      'info' => $info,
-      'artikel' => $article,
-      'kegiatan' => $action,
-      'ps' => $workers,
-      'fesyankes' => $facilities,
-      'kabupaten' => $regency,
-    ]);
-  }
+        return view('admin.dashboard', [
+            'info' => $info,
+            'artikel' => $article,
+            'kegiatan' => $action,
+            'ps' => $workers,
+            'fesyankes' => $facilities,
+            'kabupaten' => $regency,
+            'first' => $first,
+        ]);
+    }
 }

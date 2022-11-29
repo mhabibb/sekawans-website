@@ -48,6 +48,7 @@ Route::middleware('auth')->prefix('admin')->name('admin.')->group(function () {
         Route::get('/actions/{article}/edit', 'edit')->name('kegiatan.edit');
         Route::put('/actions/{article}', 'update')->name('kegiatan.update');
         Route::delete('/actions/{article}', 'destroy')->name('kegiatan.destroy');
+        Route::get('/trashed', 'trashed')->name('sampah.index');
         Route::get('/restore/{article}', 'restore')->name('articles.restore');
         Route::get('/force/{article}', 'forceDelete')->name('articles.forceDelete');
     });

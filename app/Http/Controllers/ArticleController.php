@@ -212,9 +212,9 @@ class ArticleController extends Controller
         $category = $article->category_id;
         $article->delete();
         return match ($category) {
-            1 => redirect()->route('admin.infotbc.index'),
-            2 => redirect()->route('admin.articles.index'),
-            3 => redirect()->route('admin.kegiatan.index')
+            1 => to_route('admin.infotbc.index'),
+            2 => to_route('admin.articles.index'),
+            3 => to_route('admin.kegiatan.index')
         };
     }
 
@@ -226,19 +226,16 @@ class ArticleController extends Controller
 
     public function forceDelete(Article $article)
     {
-        // $ext = collect(explode('.', $article->img))->last();
-        // // dd($ext);
-        // $base64img = base64_encode(file_get_contents(storage_path('app/public/' . $article->img)));
-        // $base64img = "data:image/{$ext};base64, {$base64img}";
-        // // $ext = explode('/', explode(':', substr($base64img, 0, strpos($base64img, ';')))[1])[1];
-        // dd($base64img, $ext);
+        str($article->contents)->contains('<img src="http://sekawans-jember.test/storage/img/articles/contents/') ?
+            str($article->contents)->matchAll('/<img[^>]+src="([^">]+)/')->each(fn ($src) =>
+            Storage::delete(str($src)->remove('http://sekawans-jember.test/storage/'))) : '';
         Storage::delete($article->img);
-        $article->forceDelete();
         $category = $article->category_id;
+        $article->forceDelete();
         return match ($category) {
-            1 => redirect()->route('admin.infotbc.index'),
-            2 => redirect()->route('admin.articles.index'),
-            3 => redirect()->route('admin.kegiatan.index')
+            1 => to_route('admin.infotbc.index'),
+            2 => to_route('admin.articles.index'),
+            3 => to_route('admin.kegiatan.index')
         };
     }
 
@@ -252,7 +249,7 @@ class ArticleController extends Controller
 
     public function contentDecode($contents)
     {
-        $count = substr_count($contents, ';base64,');
+        $count = Str::substrCount($contents, ';base64,');
         // dd($contents);
         for ($i = 0; $i < $count; $i++) {
             $base64 = Str::of(Str::of($contents)->explode(' src="data:')[1])->explode('" ')[0];

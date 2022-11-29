@@ -7,47 +7,58 @@ use Spatie\Activitylog\Models\Activity;
 
 class LogController extends Controller
 {
-  /**
-   * Instantiate a new controller instance.
-   *
-   * @return void
-   */
-  public function __construct()
-  {
-    $this->middleware('auth');
-  }
+    /**
+     * Instantiate a new controller instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        // $this->middleware('log');
+    }
 
-  /**
-   * Display a listing of the resource.
-   *
-   * @return \Illuminate\Http\Response
-   */
-  public function index()
-  {
-    $this->authorize('superAdmin');
-    $logs = Activity::where('event', 'updated')->get();
-    return view('admin.activitylog.index', compact('logs'));
-  }
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function index()
+    {
+        $log = Activity::all();
+        return view('admin.activitylog.index', compact('logs'));
+        // return dd($log);
+    }
 
-  /**
-   * Display the specified resource.
-   *
-   * @param  \App\Models\Activity  $activity
-   * @return \Illuminate\Http\Response
-   */
-  public function show(Activity $activity)
-  {
-    return $activity;
-  }
+    /**
+     * Display the specified resource.
+     *
+     * @param  \App\Models\Activity  $activity
+     * @return \Illuminate\Http\Response
+     */
+    public function show(Activity $log)
+    {
+        return dd($log->changes());
+    }
 
-  /**
-   * Remove the specified resource from storage.
-   *
-   * @param  \App\Models\Activity  $activity
-   * @return \Illuminate\Http\Response
-   */
-  public function destroy(Activity $activity)
-  {
-    //
-  }
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  \App\Models\Activity  $activity
+     * @return \Illuminate\Http\Response
+     */
+    public function restore(Activity $activity)
+    {
+        $model = $activity->changes;
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  \App\Models\Activity  $activity
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy(Activity $activity)
+    {
+        //
+    }
 }

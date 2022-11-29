@@ -15,6 +15,12 @@ class PatientDetail extends Model
 
     protected $with = ['patientStatus', 'patient', 'sateliteHealthFacility', 'worker'];
 
+
+    public function scopeInTreatment($query)
+    {
+        $query->whereIn('patient_status_id', [2, 3]);
+    }
+
     public function patientStatus()
     {
         return $this->belongsTo(PatientStatus::class);

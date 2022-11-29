@@ -2,9 +2,9 @@
 
 namespace App\Http\Requests;
 
+use Illuminate\Foundation\Http\FormRequest;
 use App\Models\SateliteHealthFacility;
 use App\Models\Worker;
-use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Str;
 
 class StorePatientRequest extends FormRequest
@@ -60,24 +60,24 @@ class StorePatientRequest extends FormRequest
             'residence_address'             => 'required|string',
             'district_id'                   => 'required|integer|digits:7',
             'age'                           => 'required|integer|between:1,100',
-            'phone'                         => 'required|integer|digits_between:10,16',
+            'phone'                         => 'required|numeric|digits_between:10,16',
             'education_id'                  => 'required|integer|between:1,5',
             'marital_status'                => 'required|string|in:menikah,belum menikah,janda/duda',
             'has_job'                       => 'required|boolean',
-            'workplace'                     => 'exclude_unless:has_job,1|string|max:50',
-            'work_address'                  => 'exclude_unless:has_job,1|string',
+            'workplace'                     => 'required_unless:has_job,0|exclude_unless:has_job,1|string|max:50',
+            'work_address'                  => 'required_unless:has_job,0|exclude_unless:has_job,1|string',
             'dependent'                     => 'required|integer|between:0,100',
             'height'                        => 'required|integer|between:10,250',
             'weight'                        => 'required|integer|between:3,100',
             'mother_name'                   => 'required|string|max:50',
             'father_name'                   => 'required|string|max:50',
             'guardian_address'              => 'required|string',
-            'guardian_phone'                => 'required|integer|digits_between:10,16',
+            'guardian_phone'                => 'required|numeric|digits_between:10,16',
             'emergency'                     => 'required|array|size:5',
             "emergency.name"                => 'required|string|max:50',
             "emergency.relation"            => 'required|string|max:50',
             "emergency.address"             => 'required|string',
-            "emergency.phone"               => 'required|integer|digits_between:10,16',
+            "emergency.phone"               => 'required|numeric|digits_between:10,16',
             "emergency.is_know"             => 'required|boolean',
         ];
     }

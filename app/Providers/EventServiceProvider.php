@@ -5,7 +5,9 @@ namespace App\Providers;
 use App\Models\Article;
 use App\Models\Patient;
 use App\Models\PatientDetail;
+use App\Models\User;
 use App\Observers\ArticleObserver;
+use App\Observers\UserObserver;
 use App\Observers\PatientObserver;
 use App\Observers\PatientDetailObserver;
 use Illuminate\Auth\Events\Registered;
@@ -35,6 +37,7 @@ class EventServiceProvider extends ServiceProvider
     {
         Article::observe(ArticleObserver::class);
         Patient::observe(PatientObserver::class);
+        User::observe(UserObserver::class);
         PatientDetail::observe(PatientDetailObserver::class);
     }
 

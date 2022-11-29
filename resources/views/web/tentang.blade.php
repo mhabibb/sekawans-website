@@ -12,7 +12,7 @@
           alt="...">
       </figure>
       <div class="body text-justify">
-        {!! $profile->contents !!}
+        {{ $profile->contents }}
       </div>
     </article>
   </section>
@@ -23,7 +23,7 @@
     </div>
     <article class="d-flex flex-column align-items-center justify-content-center border-top pt-4">
       <div class="body text-justify">
-        {!! $visimisi->contents !!}
+        {{ $visimisi->contents }}
       </div>
     </article>
   </section>

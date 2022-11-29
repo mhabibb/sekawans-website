@@ -13,10 +13,8 @@
                 </div>
                 <div class="modal-body">
                     <div class="form-group">
-                        <label>Nama</label>
-                        <input type="text" name="name" class="form-control @error('name') is-invalid
-                        @else @if(old('name') ?? false) is-valid @endif @enderror"
-                            value="{{ old('name', $user->name) }}">
+                        <label>Nama (Tidak dapat diubah)</label>
+                        <input class="form-control" disabled value="{{ $user->name }}">
                     </div>
                     <div class="form-group">
                         <label>Email</label>

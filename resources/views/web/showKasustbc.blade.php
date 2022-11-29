@@ -10,7 +10,7 @@
                         Kembali</button>
                 </div>
                 <div>
-                    <h2 class="fw-bold mb-3"> KASUS TBC DI {{ $regency->name }} </h2>
+                    <h3 class="fw-bold mb-3"> KASUS TBC DI {{ $regency->name }} </h3>
                 </div>
             </div>
         </div>

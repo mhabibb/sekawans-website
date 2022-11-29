@@ -42,8 +42,8 @@
                 </div>
             </div>
             <div class="col-lg-6">
-                <h1 class="fw-bold mb-3">Yuk, Lawan TBC
-                    Dengan Hidup Bersih dan Sehat </h1>
+                <h2 class="fw-bold mb-3">Yuk, Lawan TBC
+                    Dengan Hidup Bersih dan Sehat </h2>
                 <p class="lead">Quickly design and customize responsive mobile-first sites with Bootstrap, the world’s
                     most
                     popular front-end open source toolkit, featuring Sass variables and mixins, responsive grid system,
@@ -75,7 +75,7 @@
 {{-- TENTANG --}}
 <section id="tentang" class="container-fluid py-5 text-center bg-primary">
     <div class="container text-white">
-        <h1 class="fw-bold mb-3">Tentang Sekawan'S</h1>
+        <h2 class="fw-bold mb-3">Tentang Sekawan'S</h2>
         <p class="lead mb-3">{{ $about[0] }}</p>
         <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
             <a href="{{route('tentang')}}" class="btn btn-secondary btn-lg px-4">Selengkapnya</a>
@@ -84,8 +84,8 @@
 </section>
 
 {{-- RIWAYAT --}}
-<section id="riwayat" class="container py-5 text-center">
-    <h1 class="fw-bold mb-5">Riwayat Jumlah Pasien TBC</h1>
+<section id="riwayat" class="container py-5 text-center border-bottom">
+    <h2 class="fw-bold mb-5">Riwayat Jumlah Pasien TBC</h2>
     <div class="row gap-4">
         @foreach ($regencies as $regency)
         <div class="p-2 text-center col-md mx-auto" style="max-width: 200px;">
@@ -98,19 +98,19 @@
 
 {{-- ARTIKEL --}}
 <section id="artikel" class="container py-5">
-    <h1 class="fw-bold mb-5 text-center text-primary">Artikel Terbaru</h1>
+    <h2 class="fw-bold mb-5 text-center text-primary">Artikel Terbaru</h2>
     <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 justify-content-center g-4">
         @foreach ($articles as $article)
         <div class="col" style="max-width: 400px;">
             <div class="card border h-100">
-                <img src="{{ $article->img }}" class="card-img-top thumbnail" alt="card-image">
+                <img src="{{ asset('storage/'.$article->img) }}" class="card-img-top thumbnail" alt="...">
                 <div class="card-body">
                     <div class="mb-1 d-flex gap-3">
-                        <div class="col-4 text-truncate" style="font-size: 14px;">
+                        <div class="col-4 text-truncate font-sm">
                             <i class="fa-solid fa-user"></i>
                             {{ $article->user->name }}
                         </div>
-                        <div class="px-2" style="font-size: 14px;">
+                        <div class="px-2 font-sm">
                             <i class="fa-solid fa-calendar-days"></i>
                             {{ date('d M Y', strtotime($article->updated_at)) }}
                         </div>

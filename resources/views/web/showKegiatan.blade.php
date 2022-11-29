@@ -10,16 +10,17 @@
     <div class="d-flex justify-content-center gap-5 mb-3 text-muted">
         <div>
             <i class="fa-solid fa-user"></i>
-            <span class="ms-1">{{ $action->user->name }}</span>
+            <small class="ms-1">{{ $action->user->name }}</small>
         </div>
         <div>
             <i class="fa-solid fa-calendar-days"></i>
-            <span class="ms-1">{{ date('d M Y', strtotime($action->updated_at)) }}</span>
+            <small class="ms-1">{{ date('d M Y', strtotime($action->updated_at)) }}</small>
         </div>
     </div>
     <article class="d-flex flex-column align-items-center justify-content-center border-top pt-4">
         <figure class="figure">
-            <img src="{{ $action->img }}" class="figure-img img-fluid rounded" style="max-height: 600px" alt="...">
+            <img src="{{ asset('storage/'.$action->img) }}" class="figure-img img-fluid rounded"
+                style="max-height: 600px" alt="...">
             {{-- <figcaption class="figure-caption text-center">Sumber : A caption for the above image.</figcaption>
             --}}
         </figure>

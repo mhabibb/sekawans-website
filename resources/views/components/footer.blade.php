@@ -23,14 +23,6 @@
                     <ul class="nav flex-column d-inline-flex">
                         @foreach ($socials as $social)
                         <li class="nav-item mb-3">
-                            @if ($loop->first)
-                            <a href="#" class="nav-link p-0 link-light">
-                                <i class="fa-brands fa-{{ $social->element }} fa-lg"></i>
-                                <span class="ms-1">
-                                    {{ ucfirst($social->element) }}
-                                </span>
-                            </a>
-                            @else
                             <a href="{{ $social->contents }}" target="blank" class="nav-link p-0 link-light">
                                 <i class="fa-brands fa-{{ $social->element }} fa-lg"></i>
                                 <span class="ms-1">
@@ -38,7 +30,6 @@
                                         class="fa-solid fa-arrow-up-right-from-square fa-2xs"></i>
                                 </span>
                             </a>
-                            @endif
                         </li>
                         @endforeach
                     </ul>

@@ -33,7 +33,7 @@ class Footer extends Component
             'kegiatan' => 'Kegiatan',
         );
 
-        $socials = StaticElement::where('id', '>=', 4)->where('id', '<=', 7)->get();
+        $socials = StaticElement::where('id', '>', 4)->where('id', '<=', 7)->get();
         return view('components.footer', compact('navLinks', 'socials'));
     }
 }

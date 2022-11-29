@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\SateliteHealthFacility;
 use App\Http\Requests\StoreSateliteHealthFacilityRequest;
 use App\Http\Requests\UpdateSateliteHealthFacilityRequest;
+use App\Models\Worker;
 
 class SateliteHealthFacilityController extends Controller
 {
@@ -17,17 +18,18 @@ class SateliteHealthFacilityController extends Controller
     {
         $this->middleware('auth');
     }
-    
+
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index() 
+    public function index()
     {
         $fasyankes = collect(["RS PARU JEMBER", "RSD DR. SOEBANDI JEMBER"]);
-        $satelites = SateliteHealthFacility::get();
-        return view('admin.fasyankes.index', compact('fasyankes', 'satelites'));
+        $satelites = SateliteHealthFacility::orderBy('name', 'asc')->get();
+        $workers = Worker::orderBy('name', 'asc')->get();
+        return view('admin.fasyankes.index', compact('fasyankes', 'satelites', 'workers'));
     }
 
     /**

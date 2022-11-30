@@ -35,20 +35,21 @@
   <link rel="stylesheet" type="text/css"
     href="https://cdn.datatables.net/v/bs4/jszip-2.5.0/dt-1.13.1/b-2.3.3/b-html5-2.3.3/b-print-2.3.3/r-2.4.0/datatables.min.css" />
 
-    <style>
-      {{-- Disable input number arrow --}}
-        /* Chrome, Safari, Edge, Opera */
-        input::-webkit-outer-spin-button,
-        input::-webkit-inner-spin-button {
-          -webkit-appearance: none;
-          margin: 0;
-        }
+  <style>
+    /* Disable input number arrow */
 
-        /* Firefox */
-        input[type=number] {
-          -moz-appearance: textfield;
-        }
-    </style>
+    /* Chrome, Safari, Edge, Opera */
+    input::-webkit-outer-spin-button,
+    input::-webkit-inner-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
+    }
+
+    /* Firefox */
+    input[type=number] {
+      -moz-appearance: textfield;
+    }
+  </style>
 
   @yield('css')
 
@@ -104,11 +105,14 @@
   </script>
 
   <script>
+    $(function() {
+            $('div[onload]').trigger('onload');
+    });
     function reset() {
-    document.querySelector('.img-preview').src = "";
-    document.querySelector('input').reset();
-    document.querySelector('textarea').reset();
-  }
+      document.querySelector('.img-preview').src = "";
+      document.querySelector('input').reset();
+      document.querySelector('textarea').reset();
+    }
   </script>
 
   <script src="{{ asset('sw.js') }}"></script>

@@ -7,7 +7,7 @@
     </div>
 </section>
 
-<section class="content col-md-8 col-lg-6">
+<section class="content col-md-8 col-lg-6 ">
     <div class="container-fluid">
         <div class="card">
             <div class="card-body">
@@ -34,7 +34,15 @@
 
 <section class="edit-modal">
     @include('admin.user.edit')
-    {{-- @include('admin.user.edit-password') --}}
+    @error('password')
+    <div onload="$('#editProfile').modal('show')"></div>
+    @enderror
+    @error('new_password')
+    <div onload="$('#editProfile').modal('show')"></div>
+    @enderror
+    @error('new_password_confirmation')
+    <div onload="$('#editProfile').modal('show')"></div>
+    @enderror
 </section>
 
 @endsection
@@ -42,7 +50,11 @@
 @section('js')
 <script>
     $(document).ready(function() {
-        $('.new-password').addClass('d-none');
+        if ($('#passBtn').is(":checked")) {
+            $('.new-password').removeClass('d-none');
+            $('.old-password label').text('Password Lama');
+        }
+        
         $('#passBtn').click(function() {
             if ($('#passBtn').is(":checked")) {
                 $('.new-password').removeClass('d-none');

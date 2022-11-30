@@ -17,7 +17,7 @@
         <div class="card">
           <div class="card-header">
             <a href="{{ route($createRoute) }}" class="btn btn-primary">Buat {{ $title }} Baru</a>
-            <button class="mx-1 btn btn-info" id="trashBtn">Lihat Sampah</button>
+            <button class="mx-1 btn btn-info" id="trashBtn"><i class="fa-solid fa-recycle "></i> Lihat Sampah</button>
             <button class="mx-1 btn btn-info d-none" id="dataBtn">Tutup</button>
           </div>
 
@@ -39,7 +39,8 @@
                     <td>{{ date('d M Y, H:i', strtotime($article->updated_at)) }}</td>
                     <td>{{ $article->user->name }}</td>
                     <td>
-                      <a href="{{ route($showRoute, $article) }}" class="badge badge-success mr-2">Lihat</a>
+                      <a href="{{ route($showRoute, $article) }}" class="badge badge-success mr-2"><i
+                          class="fa-regular fa-eye"></i> Lihat</a>
                       <a href="{{route($editRoute , $article)}}" class="badge badge-warning mr-2">
                         <i class="fa-solid fa-pen-to-square"></i> Edit</a>
                       <form action="{{route('admin.articles.destroy', $article)}}" method="POST" class="d-inline-block">
@@ -92,7 +93,7 @@
         alert("Maaf, telah terjadi kesalahan.");
       }
     };
-    ajax.open('GET', '{{ route('admin.articles.trash') }}');
+    ajax.open('GET', '{{ route('admin.trashed.index') }}');
     ajax.send();
   })
 

@@ -76,7 +76,11 @@
               <tbody>
                 @forelse ($workers as $ps)
                 <tr>
+                  @if ($ps->is_active == 1)
                   <td> {{ $ps->name }} </td>
+                  @else
+                  <td class="text-muted"> {{ $ps->name }} </td>
+                  @endif
                   <td>
                     <form action="{{ route('admin.fasyankes.destroy', $ps) }}" method="post">
                       @csrf

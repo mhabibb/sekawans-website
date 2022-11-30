@@ -145,14 +145,17 @@ class ArticleController extends Controller
     {
         if (request()->routeIs('admin.infotbc.show')) {
             $editRoute = 'admin.infotbc.edit';
+            $indexRoute = 'admin.infotbc.index';
         } else if (request()->routeIs('admin.articles.show')) {
             $editRoute = 'admin.articles.edit';
+            $indexRoute = 'admin.articles.index';
         } else if (request()->routeIs('admin.kegiatan.show')) {
             $editRoute = 'admin.kegiatan.edit';
+            $indexRoute = 'admin.kegiatan.index';
         } else {
             abort(404);
         }
-        return view('admin.article.show', compact('article', 'editRoute'));
+        return view('admin.article.show', compact('article', 'editRoute', 'indexRoute'));
     }
 
     /**

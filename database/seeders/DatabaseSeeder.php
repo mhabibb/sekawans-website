@@ -7,9 +7,9 @@ use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
 {
-    private $user = 24;
+    private $user = 9;
     private $article = 200;
-    private $worker = 80;
+    private $worker = 50;
     private $satelite = 100;
     private $patient = 150;
 
@@ -31,9 +31,9 @@ class DatabaseSeeder extends Seeder
         ]);
 
         \App\Models\User::factory()->create([
-            'name' => 'Compek',
-            'email' => 'compek@dr.com',
-            'password' => bcrypt('compek'),
+            'name' => 'Sekawan',
+            'email' => 'sekawansjember@gmail.com',
+            'password' => bcrypt('password'),
             'role' => true,
         ]);
         \App\Models\User::factory($this->user)->create();

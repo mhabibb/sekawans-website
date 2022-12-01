@@ -22,24 +22,24 @@
         @foreach ($regencies as $regency)
         <div class="py-5 text-center border-bottom">
             <h2 class="fw-bold mb-5">{{ $regency->total }} PASIEN TB DI {{ $regency->name }}</h2>
-            <div class="row gap-4 justify-content-center">
-                <div class="col-12 col-sm-4 col-md-2 p-2 text-center" style="max-width: 200px;">
+            <div class="row gap-4 justify-content-center mb-3">
+                <div class="col-12 col-sm-4 col-md-2 text-center" style="width: 150px;">
                     <h1>{{ $regency->sembuh }}</h1>
                     <p class="lead fw-bold">Sembuh</p>
                 </div>
-                <div class="col-12 col-sm-4 col-md-2 p-2 text-center" style="max-width: 200px;">
+                <div class="col-12 col-sm-4 col-md-2 text-center" style="width: 150px;">
                     <h1>{{ $regency->berobat }}</h1>
                     <p class="lead fw-bold">Berobat</p>
                 </div>
-                <div class="col-12 col-sm-4 col-md-2 p-2 text-center" style="max-width: 200px;">
+                <div class="col-12 col-sm-4 col-md-2 text-center" style="width: 150px;">
                     <h1>{{ $regency->mangkir }}</h1>
                     <p class="lead fw-bold">Mangkir</p>
                 </div>
-                <div class="col-12 col-sm-4 col-md-2 p-2 text-center" style="max-width: 200px;">
+                <div class="col-12 col-sm-4 col-md-2 text-center" style="width: 150px;">
                     <h1>{{ $regency->ltfu }}</h1>
                     <p class="lead fw-bold">Loss To Follow Up</p>
                 </div>
-                <div class="col-12 col-sm-4 col-md-2 p-2 text-center" style="max-width: 200px;">
+                <div class="col-12 col-sm-4 col-md-2 text-center" style="width: 150px;">
                     <h1>{{ $regency->meninggal }}</h1>
                     <p class="lead fw-bold">Meninggal</p>
                 </div>

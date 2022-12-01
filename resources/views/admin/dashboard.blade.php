@@ -52,7 +52,7 @@
                 <div class="small-box bg-light">
                     <div class="inner">
                         <h3>{{$ps}}</h3>
-                        <h5>PS</h5>
+                        <h5>PS Aktif</h5>
                     </div>
                     <a href="{{ route('admin.fasyankes.index') }}" class="small-box-footer">Selengkapnya <i
                             class="fas fa-arrow-circle-right"></i></a>
@@ -63,7 +63,7 @@
                 <div class="small-box bg-light">
                     <div class="inner">
                         <h3>{{$pasien}}</h3>
-                        <h5>Pasien</h5>
+                        <h5>Dalam Pengobatan</h5>
                     </div>
                     <a href="{{ route('admin.patients.index') }}" class="small-box-footer">Selengkapnya <i
                             class="fas fa-arrow-circle-right"></i></a>

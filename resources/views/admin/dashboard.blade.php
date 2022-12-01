@@ -104,48 +104,104 @@
     </div>
 </div>
 <!-- /.content -->
+<section>
+    @if ($first)
+        @include('admin.first')
+    @endif
+</section>
+
 @endsection
 
 @section('js')
 {{-- ChartJS --}}
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-<script>
+<script type="text/javascript">
     $(function () {
-      @foreach ($kabupaten as $kab) 
-      const chart{{ $kab->id }} = $('#pieChart{{ $kab->id }}')
-      new Chart(chart{{ $kab->id }}, {
-        type: 'pie',
-        data: {
-          labels: ['Sembuh', 'Berobat', 'Mangkir', 'LTFU', 'Meninggal'],
-          datasets: [{
-            label: ' ~ Pasien',
-            data: [
-              {{ $kab->sembuh }}, 
-              {{ $kab->berobat }}, 
-              {{ $kab->mangkir }}, 
-              {{ $kab->ltfu }}, 
-              {{ $kab->meninggal }}
-            ],
-            backgroundColor: [
-              '#5dff4d',
-              '#f7ff1a',
-              '#ff7200',
-              '#ff0000',
-              '#474347',
-            ],
-            borderWidth: 1,
-            hoverOffset: 30
-          }]
-        },
-        options: {
-          scales: {
-            y: {
-              beginAtZero: true
+
+        @if ($first)
+            $('#first-login').modal('show');
+
+            $.ajaxSetup({
+            headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+
+            $(".submit").click(function(e) {
+                e.preventDefault();
+                var new_password_confirmation = $('#new_password_confirmation').val();
+                var new_password = $('#new_password').val();
+                
+                $.ajax({
+                    type: "POST",
+                    url: "{{ route('admin.users.firstLogin') }}",
+                    dataType: 'json',
+                    data: {
+                        new_password_confirmation:new_password_confirmation, 
+                        new_password:new_password,
+                        _token:'{!! csrf_token() !!}',
+                    },
+                    // success:function(data){
+                    //     if($.isEmptyObject(data.error)){
+                    //         alert(data.success);
+                    //         location.reload();
+                    //     }else{
+                    //         printErrorMsg(data.error);
+                    //     }
+                    // }
+                })
+                .done(function(status){
+                    if (status.status) {
+                        $('#first-login').modal('hide');
+                        alert('Sukses');
+                    } else {
+                        $('#new_password_confirmation').addClass('is-invalid');
+                        $('#new_password_confirmation').val('');
+                        $('#new_password').addClass('is-invalid');
+                        $('#new_password').val('');
+                    }
+                })
+                // .fail(function() {
+                //     alert("error");
+                // });
+            });
+        @endif
+
+        @foreach ($kabupaten as $kab) 
+        const chart{{ $kab->id }} = $('#pieChart{{ $kab->id }}')
+        new Chart(chart{{ $kab->id }}, {
+            type: 'pie',
+            data: {
+            labels: ['Sembuh', 'Berobat', 'Mangkir', 'LTFU', 'Meninggal'],
+            datasets: [{
+                label: ' ~ Pasien',
+                data: [
+                {{ $kab->sembuh }}, 
+                {{ $kab->berobat }}, 
+                {{ $kab->mangkir }}, 
+                {{ $kab->ltfu }}, 
+                {{ $kab->meninggal }}
+                ],
+                backgroundColor: [
+                '#5dff4d',
+                '#f7ff1a',
+                '#ff7200',
+                '#ff0000',
+                '#474347',
+                ],
+                borderWidth: 1,
+                hoverOffset: 30
+            }]
+            },
+            options: {
+            scales: {
+                y: {
+                beginAtZero: true
+                }
             }
-          }
-        }
-      });
-      @endforeach
+            }
+        });
+        @endforeach
     })
 </script>
 @endsection

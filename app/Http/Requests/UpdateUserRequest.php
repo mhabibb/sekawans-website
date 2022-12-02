@@ -24,14 +24,9 @@ class UpdateUserRequest extends FormRequest
      */
     protected function prepareForValidation()
     {
-        str($this->password)->length() > 7 ?
-            $this->merge([
-                'password'  => Hash::check($this->password, auth()->user()->password),
-                // 'pass'      => $this->password,
-            ]) : '';
-        $this->email ?? $this->merge([
-            'email'  => auth()->user()->email
-        ]);
+        // $this->email ?? $this->merge([
+        //     'email'  => auth()->user()->email
+        // ]);
     }
 
     /**
@@ -41,10 +36,10 @@ class UpdateUserRequest extends FormRequest
      */
     public function rules()
     {
+        $id = auth()->id();
         return [
-            'email'                      => 'required|email',
-            'password'                   => 'required|accepted',
-            // 'pass'                       => 'required',
+            'email'                      => "required|email|unique:users,email,{$id}",
+            'password'                   => 'required|current_password',
             'new_password'               => 'nullable|confirmed|string|min:8',
             'new_password_confirmation'  => 'required_with:new_password',
         ];

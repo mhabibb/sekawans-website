@@ -6,6 +6,8 @@ use App\Models\User;
 use App\Http\Requests\StoreUserRequest;
 use App\Http\Requests\UpdateUserRequest;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Validator;
 
 class UserController extends Controller
 {
@@ -17,7 +19,7 @@ class UserController extends Controller
     public function index()
     {
         $this->authorize('superAdmin');
-        $users = User::select('id', 'name', 'email')->latest()->get();
+        $users = User::select('id', 'name', 'email')->where('role', 0)->get();
         return view('admin.user.index', compact('users'));
     }
 
@@ -42,7 +44,7 @@ class UserController extends Controller
         $this->authorize('superAdmin');
         $request = $request->validated();
         User::create($request);
-        return redirect()->route('admin.users.index');
+        return to_route('admin.users.index');
     }
 
     /**
@@ -54,7 +56,7 @@ class UserController extends Controller
     public function show(User $user)
     {
         if ($user != auth()->user()) {
-            return redirect()->route('admin.users.show', auth()->id());
+            return to_route('admin.users.show', auth()->id());
         }
 
         return view('admin.user.show', compact('user'));
@@ -70,11 +72,32 @@ class UserController extends Controller
     public function update(UpdateUserRequest $request, User $user)
     {
         $request = $request->validated();
-        if(isset($request['new_password'])){
-            $request['password'] = bcrypt($request['new_password']);
+        if (isset($request['new_password'])) {
+            $request['password'] = $request['new_password'];
         }
         $user->update($request);
-        return redirect()->route('admin.users.show', $user);
+        return to_route('admin.users.show', $user);
+    }
+
+    public function firstLogin(Request $request)
+    {
+        if ($request->ajax()) {
+            $validator = Validator::make($request->all(), [
+                'new_password'               => 'required|confirmed|string|min:8',
+                'new_password_confirmation'  => 'required',
+            ]);
+
+            $user = User::find(auth()->id());
+            if ($validator->fails()) {
+                return response()->json(['status' => false]);
+            } else {
+                // $request['password'] = Hash::make($request['new_password']);
+                $user->password = bcrypt($request['new_password']);
+                $user->saveQuietly();
+                // dd($user, $request);
+            }
+            return response()->json(['status' => $user->wasChanged()]);
+        }
     }
 
     /**
@@ -87,6 +110,6 @@ class UserController extends Controller
     {
         $this->authorize('superAdmin');
         User::destroy($user);
-        return redirect()->route('admin.users.index');
+        return to_route('admin.users.index');
     }
 }

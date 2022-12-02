@@ -22,12 +22,17 @@ use Illuminate\Support\Facades\Auth;
 |
 */
 
-Auth::routes(['register' => false]);
+Auth::routes([
+    'register' => false,
+    'reset'    => false,
+    'confirm'  => false,
+    'verify'   => false,
+]);
 
 Route::middleware('auth')->prefix('admin')->name('admin.')->group(function () {
     Route::get('/', [DashboardController::class, 'index'])->name('dashboard.index');
     Route::resource('/users', UserController::class)->except('edit');
-    // Route::put('/users/{user}', [UserController::class, 'update'])->name('users.password.update');
+    Route::post('/users/first', [UserController::class, 'firstLogin'])->name('users.firstLogin');
     Route::resource('/patients', PatientController::class);
     Route::resource('/sekawans', StaticElementController::class)->except(['create', 'destroy', 'store']);
     Route::resource('/logs', LogController::class)->only(['index', 'destroy', 'show'])->middleware(['can:superAdmin']);
@@ -49,8 +54,8 @@ Route::middleware('auth')->prefix('admin')->name('admin.')->group(function () {
         Route::put('/actions/{article}', 'update')->name('kegiatan.update');
         Route::delete('/actions/{article}', 'destroy')->name('kegiatan.destroy');
         Route::get('/trashed', 'trashed')->name('trashed.index');
-        Route::get('/restore/{article}', 'restore')->name('articles.restore');
-        Route::get('/force/{article}', 'forceDelete')->name('articles.forceDelete');
+        Route::put('/restore/{article}', 'restore')->name('articles.restore');
+        Route::delete('/force/{article}', 'forceDelete')->name('articles.forceDelete');
     });
 });
 

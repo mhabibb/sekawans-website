@@ -3,6 +3,7 @@
 namespace App\Observers;
 
 use App\Models\User;
+use Illuminate\Support\Facades\Hash;
 
 class UserObserver
 {
@@ -14,7 +15,7 @@ class UserObserver
      */
     public function creating(User $user)
     {
-        $user->password = bcrypt('password');
+        $user->remember_token ? '' : $user->password = bcrypt('password');
     }
 
     /**
@@ -25,7 +26,7 @@ class UserObserver
      */
     public function updating(User $user)
     {
-        request('new_password') ? '' : $user->password = bcrypt(request('password'));
+        $user->remember_token ? '' : $user->password = bcrypt($user->password);
     }
 
     /**

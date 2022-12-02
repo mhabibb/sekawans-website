@@ -30,14 +30,14 @@ class ArticleController extends Controller
     {
         return [
             'index'        => 'viewAny',
-            'trashed'      => 'viewTrash',
+            // 'trashed'      => 'viewTrash',
             'show'         => 'view',
             'create'       => 'create',
             'store'        => 'create',
             'edit'         => 'update',
             'update'       => 'update',
             'destroy'      => 'delete',
-            'restore'      => 'restore',
+            // 'restore'      => 'restore',
             'forceDelete'  => 'forceDelete',
         ];
     }
@@ -73,6 +73,9 @@ class ArticleController extends Controller
         };
         (!auth()->user()->role ? $articles->user() : '');
         $articles = $articles->get();
+        if(request()->ajax()){
+            return json_encode(['articles' => $articles]);
+        }
         return view('admin.article.index', [
             'title' => $title,
             'articles' => $articles,
@@ -84,7 +87,9 @@ class ArticleController extends Controller
 
     public function trashed()
     {
-        return Article::onlyTrashed()->get();
+        $this->authorize('superAdmin');
+        $articles =  Article::onlyTrashed()->get();
+        return json_encode(['articles' => $articles]);
     }
 
     /**
@@ -222,10 +227,12 @@ class ArticleController extends Controller
         };
     }
 
-    public function restore(Article $article)
+    public function restore($id)
     {
+        $this->authorize('superAdmin');
+        $article = Article::onlyTrashed()->find($id);
         $article->getDeletedAtColumn() ? $article->restore() : '';
-        return redirect()->back();
+        return $article->wasChanged();
     }
 
     public function forceDelete(Article $article)

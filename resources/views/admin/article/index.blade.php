@@ -112,7 +112,11 @@
                             {
                                 data: date,
                                 render: function(data) {
-                                    return data.toString('dd-MM-yyyy')
+                                    fullDate = new Date(data)
+                                    date = fullDate.toISOString().split('T')[0]
+                                    time = fullDate.toISOString().split('.')[0]
+                                    time = time.split('T')[1]
+                                    return date + ' ' + time
                                 }
                             },
                             {
@@ -153,7 +157,11 @@
                             {
                                 data: date,
                                 render: function(data) {
-                                    return data.toString('dd-MM-yyyy')
+                                    fullDate = new Date(data)
+                                    date = fullDate.toISOString().split('T')[0]
+                                    time = fullDate.toISOString().split('.')[0]
+                                    time = time.split('T')[1]
+                                    return date + ' ' + time
                                 }
                             },
                             {

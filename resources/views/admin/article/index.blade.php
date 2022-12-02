@@ -89,6 +89,7 @@
                 table.DataTable().destroy();
                 time = $('#time')
                 if (time.html() == 'Waktu Update') {
+                    $('.toggler').text('Tutup')
                     time.html('Waktu Hapus')
                     url = "{{ route('admin.trashed.index') }}";
                     date = 'deleted_at';
@@ -130,6 +131,7 @@
                         ]
                     })
                 } else {
+                    $('.toggler').text('Lihat Sampah')
                     time.html('Waktu Update')
                     url = "{{ route('admin.articles.index') }}";
                     date = 'updated_at';

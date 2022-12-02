@@ -83,7 +83,7 @@ class UserController extends Controller
     {
         if ($request->ajax()) {
             $validator = Validator::make($request->all(), [
-                'password'               => 'required|confirmed|string|min:8',
+                'password'               => 'required|confirmed|string|not_in:password|min:8',
                 'password_confirmation'  => 'required',
             ]);
 

@@ -40,7 +40,7 @@ class UpdateUserRequest extends FormRequest
         return [
             'email'                     => "required|email|unique:users,email,{$id}",
             'current_password'          => 'required|current_password',
-            'password'                  => 'nullable|confirmed|string|min:8',
+            'password'                  => 'nullable|confirmed|string|not_in:password|min:8',
             'password_confirmation'     => 'required_with:new_password',
         ];
     }

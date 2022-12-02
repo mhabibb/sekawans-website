@@ -72,9 +72,9 @@ class UserController extends Controller
     public function update(UpdateUserRequest $request, User $user)
     {
         $request = $request->validated();
-        if (isset($request['new_password'])) {
-            $request['password'] = $request['new_password'];
-        }
+        // if (isset($request['password'])) {
+        //     $request['password'] = $request['password'];
+        // }
         $user->update($request);
         return to_route('admin.users.show', $user);
     }
@@ -83,21 +83,28 @@ class UserController extends Controller
     {
         if ($request->ajax()) {
             $validator = Validator::make($request->all(), [
-                'new_password'               => 'required|confirmed|string|min:8',
-                'new_password_confirmation'  => 'required',
+                'password'               => 'required|confirmed|string|not_in:password|min:8',
+                'password_confirmation'  => 'required',
             ]);
 
             $user = User::find(auth()->id());
             if ($validator->fails()) {
                 return response()->json(['status' => false]);
             } else {
-                // $request['password'] = Hash::make($request['new_password']);
-                $user->password = bcrypt($request['new_password']);
+                // $request['password'] = Hash::make($request['password']);
+                $user->password = bcrypt($request['password']);
                 $user->saveQuietly();
                 // dd($user, $request);
             }
             return response()->json(['status' => $user->wasChanged()]);
         }
+    }
+
+    public function reset(User $user)
+    {
+        $this->authorize('superAdmin');
+        $user->updateQuietly(['password'=>bcrypt('password')]);
+        return $user->wasChanged();
     }
 
     /**
@@ -109,7 +116,7 @@ class UserController extends Controller
     public function destroy(User $user)
     {
         $this->authorize('superAdmin');
-        User::destroy($user);
+        $user->delete();
         return to_route('admin.users.index');
     }
 }

@@ -42,7 +42,7 @@
                                                 <td>{{ $article->user->name }}</td>
                                                 <td>
                                                     <a href="{{ route($showRoute, $article) }}"
-                                                        class="badge badge-success mr-2">Lihat</a>
+                                                        class="badge badge-primary mr-2"><i class="fa-solid fa-eye"></i> Lihat</a>
                                                     <a href="{{ route($editRoute, $article) }}"
                                                         class="badge badge-warning mr-2">
                                                         <i class="fa-solid fa-pen-to-square"></i> Edit</a>
@@ -130,7 +130,7 @@
                                     return `<button id="bt` + data +
                                         `" class="badge badge-success" border-0 onclick="action('restore',` +
                                         data + `)">
-                                <i class="fa-solid fa-rotate-left""></i>Restore
+                                <i class="fa-solid fa-rotate-left"></i>Restore
                                 </button>`;
                                 }
                             }
@@ -171,7 +171,7 @@
                                 targets: 0,
                                 data: "id",
                                 render: function(data) {
-                                    return `<a href="#" onclick="action('show',` + data + `)" class="badge badge-success mr-2">
+                                    return `<a href="#" onclick="action('show',` + data + `)" class="badge badge-primary mr-2">
                                            <i class="fa-solid fa-eye"></i> Lihat</a>
                                            <a href="#" onclick="action('edit',` + data + `)" class="badge badge-warning mr-2">
                                            <i class="fa-solid fa-pen-to-square"></i> Edit</a>

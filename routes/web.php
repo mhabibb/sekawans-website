@@ -33,11 +33,15 @@ Route::middleware('auth')->prefix('admin')->name('admin.')->group(function () {
     Route::get('/', [DashboardController::class, 'index'])->name('dashboard.index');
     Route::resource('/users', UserController::class)->except('edit');
     Route::post('/users/first', [UserController::class, 'firstLogin'])->name('users.firstLogin');
+    Route::post('/users/{user}/reset', [UserController::class, 'reset'])->name('users.reset');
     Route::resource('/patients', PatientController::class);
     Route::resource('/sekawans', StaticElementController::class)->except(['create', 'destroy', 'store']);
     Route::resource('/logs', LogController::class)->only(['index', 'destroy', 'show'])->middleware(['can:superAdmin']);
-    Route::resource('/fasyankes', SateliteHealthFacilityController::class);
     Route::resource('/articles', ArticleController::class);
+    Route::controller(SateliteHealthFacilityController::class)->group(function(){
+        Route::get('/fasyankes', 'index')->name('fasyankes.index');
+        Route::delete('/fasyankes/{table}/{id}', 'destroy')->name('fasyankes.destroy');
+    });
     Route::controller(ArticleController::class)->group(function () {
         Route::get('/infos', 'index')->name('infotbc.index');
         Route::post('/infos', 'store')->name('infotbc.store');

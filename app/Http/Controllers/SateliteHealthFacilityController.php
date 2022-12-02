@@ -6,6 +6,7 @@ use App\Models\SateliteHealthFacility;
 use App\Http\Requests\StoreSateliteHealthFacilityRequest;
 use App\Http\Requests\UpdateSateliteHealthFacilityRequest;
 use App\Models\Worker;
+use Illuminate\Http\Request;
 
 class SateliteHealthFacilityController extends Controller
 {
@@ -54,17 +55,6 @@ class SateliteHealthFacilityController extends Controller
     }
 
     /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\SateliteHealthFacility  $sateliteHealthFacility
-     * @return \Illuminate\Http\Response
-     */
-    public function show(SateliteHealthFacility $sateliteHealthFacility)
-    {
-        //
-    }
-
-    /**
      * Show the form for editing the specified resource.
      *
      * @param  \App\Models\SateliteHealthFacility  $sateliteHealthFacility
@@ -93,9 +83,12 @@ class SateliteHealthFacilityController extends Controller
      * @param  \App\Models\SateliteHealthFacility  $sateliteHealthFacility
      * @return \Illuminate\Http\Response
      */
-    public function destroy(SateliteHealthFacility $sateliteHealthFacility)
+    public function destroy($table, $id)
     {
-        $sateliteHealthFacility->delete();
-        return redirect()->route('admin.fasyankes.index');
+        $status = match($table){
+            'satelite'=> SateliteHealthFacility::find($id)->delete(),
+            'workers' => Worker::find($id)->delete()
+        };
+        return $status;
     }
 }

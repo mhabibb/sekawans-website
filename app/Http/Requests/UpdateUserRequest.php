@@ -38,10 +38,10 @@ class UpdateUserRequest extends FormRequest
     {
         $id = auth()->id();
         return [
-            'email'                      => "required|email|unique:users,email,{$id}",
-            'password'                   => 'required|current_password',
-            'new_password'               => 'nullable|confirmed|string|min:8',
-            'new_password_confirmation'  => 'required_with:new_password',
+            'email'                     => "required|email|unique:users,email,{$id}",
+            'current_password'          => 'required|current_password',
+            'password'                  => 'nullable|confirmed|string|min:8',
+            'password_confirmation'     => 'required_with:new_password',
         ];
     }
 }

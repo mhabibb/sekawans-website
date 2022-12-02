@@ -130,7 +130,7 @@
                                     return `<button id="bt` + data +
                                         `" class="badge badge-success" border-0 onclick="action('restore',` +
                                         data + `)">
-                                <i class="fa-solid fa-rotate-left""></i>Restore
+                                <i class="fa-solid fa-rotate-left"></i>Restore
                                 </button>`;
                                 }
                             }

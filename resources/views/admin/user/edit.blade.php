@@ -29,18 +29,18 @@
                     </div>
                     <div class="form-group old-password">
                         <label>Konfirmasi Password</label>
+                        <input type="password" name="current_password"
+                            class="form-control @error('current_password') is-invalid @enderror">
+                    </div>
+                    <div class="form-group new-password d-none">
+                        <label>Password Baru</label>
                         <input type="password" name="password"
                             class="form-control @error('password') is-invalid @enderror">
                     </div>
                     <div class="form-group new-password d-none">
-                        <label>Password Baru</label>
-                        <input type="password" name="new_password"
-                            class="form-control @error('new_password') is-invalid @enderror">
-                    </div>
-                    <div class="form-group new-password d-none">
                         <label>Ulangi Password Baru</label>
-                        <input type="password" name="new_password_confirmation"
-                            class="form-control @error('new_password_confirmation') is-invalid @enderror">
+                        <input type="password" name="password_confirmation"
+                            class="form-control @error('password_confirmation') is-invalid @enderror">
                     </div>
                 </div>
                 <div class="modal-footer">

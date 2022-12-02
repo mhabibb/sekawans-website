@@ -4,6 +4,9 @@
 <section class="content-header">
   <div class="container-fluid">
     <h1>Data Profil Sekawan'S</h1>
+    @error('contents')
+    <p class="text-danger">Gagal Update</p>
+    @enderror
   </div>
 </section>
 
@@ -57,7 +60,7 @@
                 </tr>
                 <tr class="expandable-body">
                   <td colspan="2">
-                    <img src="{{ $sekawans->find(3)->contents }}" class="img-fluid p-2"
+                    <img src="{{ asset('storage/'. $sekawans->find(3)->contents) }}" class="img-fluid p-2"
                       style="width: auto; max-height: 600px;">
                   </td>
                 </tr>
@@ -132,7 +135,6 @@
   function previewImg() {
     const image = document.querySelector('#image');
     const imgPreview = document.querySelector('.img-preview');
-    imgPreview.src = "";
 
     const oFReader = new FileReader();
     oFReader.readAsDataURL(image.files[0]);

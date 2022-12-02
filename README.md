@@ -1,6 +1,6 @@
 # Source Code Website SEKAWAN'S TB JEMBER
 
-Website dikembangkan dengan menggunakan framework Laravel 9 dan Bootstrap v5.2
+Website dikembangkan dengan menggunakan framework Laravel 9
 
 ## Instalasi Frontend
 

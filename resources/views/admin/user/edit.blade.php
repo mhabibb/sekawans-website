@@ -20,10 +20,11 @@
                         <label>Email</label>
                         <input type="email" name="email" class="form-control @error('email') is-invalid
                         @else @if(old('email') ?? false) is-valid @endif @enderror"
-                            value="{{ old('email', $user->email) }}">
+                            value="{{ old('email', $user->email) }}" required>
                     </div>
                     <div class="custom-control custom-checkbox mb-2">
-                        <input type="checkbox" class="custom-control-input" id="passBtn">
+                        <input type="checkbox" name="passBtn" class="custom-control-input" id="passBtn"
+                            @checked(old('passBtn'))>
                         <label class="custom-control-label" for="passBtn">Ubah Password?</label>
                     </div>
                     <div class="form-group old-password">
@@ -31,12 +32,12 @@
                         <input type="password" name="password"
                             class="form-control @error('password') is-invalid @enderror">
                     </div>
-                    <div class="form-group new-password">
+                    <div class="form-group new-password d-none">
                         <label>Password Baru</label>
                         <input type="password" name="new_password"
                             class="form-control @error('new_password') is-invalid @enderror">
                     </div>
-                    <div class="form-group new-password">
+                    <div class="form-group new-password d-none">
                         <label>Ulangi Password Baru</label>
                         <input type="password" name="new_password_confirmation"
                             class="form-control @error('new_password_confirmation') is-invalid @enderror">

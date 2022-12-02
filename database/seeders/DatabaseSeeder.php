@@ -7,9 +7,9 @@ use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
 {
-    private $user = 24;
+    private $user = 9;
     private $article = 200;
-    private $worker = 80;
+    private $worker = 50;
     private $satelite = 100;
     private $patient = 150;
 

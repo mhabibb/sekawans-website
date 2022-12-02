@@ -42,7 +42,7 @@
                                                 <td>{{ $article->user->name }}</td>
                                                 <td>
                                                     <a href="{{ route($showRoute, $article) }}"
-                                                        class="badge badge-success mr-2">Lihat</a>
+                                                        class="badge badge-primary mr-2"><i class="fa-solid fa-eye"></i> Lihat</a>
                                                     <a href="{{ route($editRoute, $article) }}"
                                                         class="badge badge-warning mr-2">
                                                         <i class="fa-solid fa-pen-to-square"></i> Edit</a>
@@ -71,7 +71,10 @@
 @endsection
 
 @section('js')
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.4/moment-with-locales.min.js" integrity="sha512-42PE0rd+wZ2hNXftlM78BSehIGzezNeQuzihiBCvUEB3CVxHvsShF86wBWwQORNxNINlBPuq7rG4WWhNiTVHFg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://cdn.datatables.net/plug-ins/1.13.1/sorting/datetime-moment.js"></script>
     <script>
+        moment.locale('id');
         $(function() {
             table = $("#articlesData");
             table.DataTable({
@@ -88,11 +91,14 @@
             $('.toggler').click(function() {
                 table.DataTable().destroy();
                 time = $('#time')
+                path = window.location.pathname.split('/')[2];
                 if (time.html() == 'Waktu Update') {
                     $('.toggler').text('Tutup')
                     time.html('Waktu Hapus')
-                    url = "{{ route('admin.trashed.index') }}";
+                    url = "{{ route('admin.trashed.index', 'path') }}";
+                    url = url.replace('path', path)
                     date = 'deleted_at';
+                    $.fn.dataTable.moment('DD.MM.YYYY');
 
                     table.DataTable({
                         "responsive": true,
@@ -111,7 +117,8 @@
                             {
                                 data: date,
                                 render: function(data) {
-                                    return data.toString('dd-MM-yyyy')
+                                    date = new Date(data);
+                                    return moment(date).format('Do MMMM YYYY, hh:mm:ss');
                                 }
                             },
                             {
@@ -124,7 +131,7 @@
                                     return `<button id="bt` + data +
                                         `" class="badge badge-success" border-0 onclick="action('restore',` +
                                         data + `)">
-                                <i class="fa-solid fa-rotate-left""></i>Restore
+                                <i class="fa-solid fa-rotate-left"></i>Restore
                                 </button>`;
                                 }
                             }
@@ -134,7 +141,9 @@
                     $('.toggler').text('Lihat Sampah')
                     time.html('Waktu Update')
                     url = "{{ route('admin.articles.index') }}";
+                    url = url.replace('articles', path)
                     date = 'updated_at';
+                    $.fn.dataTable.moment('DD.MM.YYYY');
 
                     table.DataTable({
                         "responsive": true,
@@ -153,7 +162,8 @@
                             {
                                 data: date,
                                 render: function(data) {
-                                    return data.toString('dd-MM-yyyy')
+                                    date = new Date(data);
+                                    return moment(date).format('Do MMMM YYYY, hh:mm:ss');
                                 }
                             },
                             {
@@ -163,11 +173,11 @@
                                 targets: 0,
                                 data: "id",
                                 render: function(data) {
-                                    return `<a  onclick="action('show',` + data + `)" class="badge badge-success mr-2">
-                                           <i class="fa-solid fa-eye"></i>Lihat</a>
-                                           <a  onclick="action('edit'` + data + `)" class="badge badge-warning mr-2">
+                                    return `<a href="#" onclick="action('show',` + data + `)" class="badge badge-primary mr-2">
+                                           <i class="fa-solid fa-eye"></i> Lihat</a>
+                                           <a href="#" onclick="action('edit',` + data + `)" class="badge badge-warning mr-2">
                                            <i class="fa-solid fa-pen-to-square"></i> Edit</a>
-                                           <a class="badge badge-danger border-0" onclick="action("delete",` + data + `)">
+                                           <a href="#" id="` + data + `" onclick="action('delete',` + data + `)" class="badge badge-danger">
                                            <i class="fa-solid fa-trash-can"></i> Hapus</a>`
                                 }
                             }
@@ -177,12 +187,17 @@
             })
 
             function action(action, id) {
-                console.log(action);
                 switch (action) {
                     case 'show':
+                        url = "{{ route('admin.articles.show', 'id') }}"
+                        url = url.replace('articles', path).replace('id', id)
+                        location.href = url;
                         break;
-                        case 'edit':
-                            break;
+                    case 'edit':
+                        url = "{{ route('admin.articles.edit', 'id') }}"
+                        url = url.replace('articles', path).replace('id', id)
+                        location.href = url;
+                        break;
                     case 'restore':
                         $.ajaxSetup({
                             headers: {
@@ -190,7 +205,7 @@
                             }
                         });
                         url = "{{ route('admin.articles.restore', 'id') }}";
-                        url = url.replace('id', id);
+                        url = url.replace('articles', path).replace('id', id)
 
                         $.ajax({
                                 type: "PUT",
@@ -206,8 +221,32 @@
                                 alert("error");
                             });
                         break;
-                        case 'delete':
-                            break;
+                    case 'delete':
+                        result = confirm("Yakin untuk menghapus " + $($('#' + id).parent().parent().find('td')[0]).html())
+                        if (result) {
+                            $.ajaxSetup({
+                                headers: {
+                                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                                }
+                            });
+                            url = "{{ route('admin.articles.destroy', 'id') }}";
+                            url = url.replace('articles', path).replace('id', id)
+
+                            $.ajax({
+                                    type: "DELETE",
+                                    url: url,
+                                    // dataType: 'json',
+                                    data: id,
+                                })
+                                .done(function(status) {
+                                    alert('Sukses');
+                                    table.DataTable().ajax.reload();
+                                })
+                                .fail(function() {
+                                    alert("error");
+                                });
+                        }
+                        break;
                     default:
                         break;
                 }

@@ -13,19 +13,13 @@
                 <div class="modal-body">
                     <div class="form-group">
                         <label>Nama</label>
-                        <input type="text" name="name" class="form-control @error('name') is-invalid
+                        <input type="text" id="name" name="name" class="form-control @error('name') is-invalid
                         @else @if(old('name') ?? false) is-valid @endif @enderror">
                     </div>
                     <div class="form-group">
                         <label>Email</label>
-                        <input type="email" name="email" class="form-control @error('email') is-invalid
+                        <input type="email" id="email" name="email" class="form-control @error('email') is-invalid
                         @else @if(old('email') ?? false) is-valid @endif @enderror">
-                    </div>
-                    <div class="form-group">
-                        <label>Password</label>
-                        <input type="button" value="Generate Password" id="generatePass">
-                        <input type="text" name="password" id="password"
-                            class="form-control @error('password') is-invalid @enderror">
                     </div>
                 </div>
                 <div class="modal-footer">

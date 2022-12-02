@@ -113,9 +113,9 @@
                                 data: date,
                                 render: function(data) {
                                     fullDate = new Date(data)
-                                    date = fullDate.toISOString().split('T')[0]
-                                    time = fullDate.toISOString().split('.')[0]
-                                    time = time.split('T')[1]
+                                    date = fullDate.toLocaleDateString()
+                                    time = fullDate.toLocaleTimeString()
+                                    return date + ' ' + time
                                     return date + ' ' + time
                                 }
                             },
@@ -158,9 +158,8 @@
                                 data: date,
                                 render: function(data) {
                                     fullDate = new Date(data)
-                                    date = fullDate.toISOString().split('T')[0]
-                                    time = fullDate.toISOString().split('.')[0]
-                                    time = time.split('T')[1]
+                                    date = fullDate.toLocaleDateString()
+                                    time = fullDate.toLocaleTimeString()
                                     return date + ' ' + time
                                 }
                             },

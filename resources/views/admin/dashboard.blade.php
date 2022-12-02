@@ -139,16 +139,7 @@
                     data: {
                         new_password_confirmation:new_password_confirmation, 
                         new_password:new_password,
-                        _token:'{!! csrf_token() !!}',
                     },
-                    // success:function(data){
-                    //     if($.isEmptyObject(data.error)){
-                    //         alert(data.success);
-                    //         location.reload();
-                    //     }else{
-                    //         printErrorMsg(data.error);
-                    //     }
-                    // }
                 })
                 .done(function(status){
                     if (status.status) {
@@ -161,9 +152,9 @@
                         $('#new_password').val('');
                     }
                 })
-                // .fail(function() {
-                //     alert("error");
-                // });
+                .fail(function() {
+                    alert("error");
+                });
             });
         @endif
 

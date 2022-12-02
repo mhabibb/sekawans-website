@@ -19,7 +19,7 @@ class UserController extends Controller
     public function index()
     {
         $this->authorize('superAdmin');
-        $users = User::select('id', 'name', 'email')->latest()->get();
+        $users = User::select('id', 'name', 'email')->where('role', 0)->get();
         return view('admin.user.index', compact('users'));
     }
 
@@ -86,7 +86,7 @@ class UserController extends Controller
                 'new_password'               => 'required|confirmed|string|min:8',
                 'new_password_confirmation'  => 'required',
             ]);
-            
+
             $user = User::find(auth()->id());
             if ($validator->fails()) {
                 return response()->json(['status' => false]);

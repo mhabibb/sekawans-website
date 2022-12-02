@@ -161,11 +161,11 @@
                                 targets: 0,
                                 data: "id",
                                 render: function(data) {
-                                    return `<a  onclick="action('show',` + data + `)" class="badge badge-success mr-2">
-                                           <i class="fa-solid fa-eye"></i>Lihat</a>
-                                           <a  onclick="action('edit'` + data + `)" class="badge badge-warning mr-2">
+                                    return `<a href="" onclick="action('show',` + data + `)" class="badge badge-success mr-2">
+                                           <i class="fa-solid fa-eye"></i> Lihat</a>
+                                           <a href="" onclick="action('edit'` + data + `)" class="badge badge-warning mr-2">
                                            <i class="fa-solid fa-pen-to-square"></i> Edit</a>
-                                           <a class="badge badge-danger border-0" onclick="action("delete",` + data + `)">
+                                           <a href="" class="badge badge-danger border-0" onclick="action("delete",` + data + `)">
                                            <i class="fa-solid fa-trash-can"></i> Hapus</a>`
                                 }
                             }

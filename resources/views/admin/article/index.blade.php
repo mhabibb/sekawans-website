@@ -38,7 +38,7 @@
                                         @foreach ($articles as $article)
                                             <tr>
                                                 <td>{{ $article->title }}</td>
-                                                <td>{{ date('d M Y, H:i', strtotime($article->updated_at)) }}</td>
+                                                <td>{{ date('j F Y, H:i:s', strtotime($article->updated_at)) }}</td>
                                                 <td>{{ $article->user->name }}</td>
                                                 <td>
                                                     <a href="{{ route($showRoute, $article) }}"
@@ -129,7 +129,7 @@
                                 data: "id",
                                 render: function(data) {
                                     return `<button id="bt` + data +
-                                        `" class="badge badge-success" border-0 onclick="action('restore',` +
+                                        `" class="badge badge-success border-0" onclick="action('restore',` +
                                         data + `)">
                                 <i class="fa-solid fa-rotate-left"></i>Restore
                                 </button>`;

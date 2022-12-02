@@ -89,6 +89,6 @@ class SateliteHealthFacilityController extends Controller
             'satelite'=> SateliteHealthFacility::find($id)->delete(),
             'workers' => Worker::find($id)->delete()
         };
-        return $status;
+        return to_route('admin.fasyankes.index');
     }
 }

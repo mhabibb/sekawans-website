@@ -46,7 +46,7 @@
                 <tr>
                   <td> {{ $satelite->name }} </td>
                   <td>
-                    <form action="{{ route('admin.fasyankes.destroy', $satelite) }}" method="post">
+                    <form action="{{ route('admin.fasyankes.destroy', ['table'=> 'satelite', 'id' => $satelite->id]) }}" method="post">
                       @csrf
                       @method('delete')
                       <button type="submit" class="badge badge-danger border-0">Hapus</button>
@@ -82,7 +82,7 @@
                   <td class="text-muted"> {{ $ps->name }} </td>
                   @endif
                   <td>
-                    <form action="{{ route('admin.fasyankes.destroy', $ps) }}" method="post">
+                    <form action="{{ route('admin.fasyankes.destroy', ['table'=> 'workers', 'id' => $ps->id]) }}" method="post">
                       @csrf
                       @method('delete')
                       <button type="submit" class="badge badge-danger border-0">Hapus</button>

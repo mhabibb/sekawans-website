@@ -37,8 +37,11 @@ Route::middleware('auth')->prefix('admin')->name('admin.')->group(function () {
     Route::resource('/patients', PatientController::class);
     Route::resource('/sekawans', StaticElementController::class)->except(['create', 'destroy', 'store']);
     Route::resource('/logs', LogController::class)->only(['index', 'destroy', 'show'])->middleware(['can:superAdmin']);
-    Route::resource('/fasyankes', SateliteHealthFacilityController::class);
     Route::resource('/articles', ArticleController::class);
+    Route::controller(SateliteHealthFacilityController::class)->group(function(){
+        Route::get('/fasyankes', 'index')->name('fasyankes.index');
+        Route::delete('/fasyankes/{table}/{id}', 'destroy')->name('fasyankes.destroy');
+    });
     Route::controller(ArticleController::class)->group(function () {
         Route::get('/infos', 'index')->name('infotbc.index');
         Route::post('/infos', 'store')->name('infotbc.store');

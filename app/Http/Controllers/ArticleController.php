@@ -73,7 +73,7 @@ class ArticleController extends Controller
         };
         (!auth()->user()->role ? $articles->user() : '');
         $articles = $articles->get();
-        if(request()->ajax()){
+        if (request()->ajax()) {
             return json_encode(['articles' => $articles]);
         }
         return view('admin.article.index', [
@@ -88,10 +88,10 @@ class ArticleController extends Controller
     public function trashed($path)
     {
         $this->authorize('superAdmin');
-        $articles = match($path) {
-            'infos'=>Article::onlyTrashed()->category(1)->get(),
-            'articles'=>Article::onlyTrashed()->category(2)->get(),
-            'actions'=>Article::onlyTrashed()->category(3)->get(),
+        $articles = match ($path) {
+            'infos' => Article::onlyTrashed()->category(1)->get(),
+            'articles' => Article::onlyTrashed()->category(2)->get(),
+            'actions' => Article::onlyTrashed()->category(3)->get(),
         };
         return json_encode(['articles' => $articles]);
     }
@@ -224,7 +224,7 @@ class ArticleController extends Controller
     {
         $category = $article->category_id;
         $article->delete();
-        if(request()->ajax()){
+        if (request()->ajax()) {
             return true;
         }
         return match ($category) {

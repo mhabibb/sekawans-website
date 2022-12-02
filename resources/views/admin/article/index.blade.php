@@ -71,7 +71,10 @@
 @endsection
 
 @section('js')
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.4/moment-with-locales.min.js" integrity="sha512-42PE0rd+wZ2hNXftlM78BSehIGzezNeQuzihiBCvUEB3CVxHvsShF86wBWwQORNxNINlBPuq7rG4WWhNiTVHFg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://cdn.datatables.net/plug-ins/1.13.1/sorting/datetime-moment.js"></script>
     <script>
+        moment.locale('id');
         $(function() {
             table = $("#articlesData");
             table.DataTable({
@@ -94,6 +97,7 @@
                     url = "{{ route('admin.trashed.index', 'path') }}";
                     url = url.replace('path', path)
                     date = 'deleted_at';
+                    $.fn.dataTable.moment('DD.MM.YYYY');
 
                     table.DataTable({
                         "responsive": true,
@@ -112,11 +116,8 @@
                             {
                                 data: date,
                                 render: function(data) {
-                                    fullDate = new Date(data)
-                                    date = fullDate.toLocaleDateString()
-                                    time = fullDate.toLocaleTimeString()
-                                    return date + ' ' + time
-                                    return date + ' ' + time
+                                    date = new Date(data);
+                                    return moment(date).format('Do MMMM YYYY, hh:mm:ss');
                                 }
                             },
                             {
@@ -138,7 +139,9 @@
                 } else {
                     time.html('Waktu Update')
                     url = "{{ route('admin.articles.index') }}";
+                    url = url.replace('articles', path)
                     date = 'updated_at';
+                    $.fn.dataTable.moment('DD.MM.YYYY');
 
                     table.DataTable({
                         "responsive": true,
@@ -157,10 +160,8 @@
                             {
                                 data: date,
                                 render: function(data) {
-                                    fullDate = new Date(data)
-                                    date = fullDate.toLocaleDateString()
-                                    time = fullDate.toLocaleTimeString()
-                                    return date + ' ' + time
+                                    date = new Date(data);
+                                    return moment(date).format('Do MMMM YYYY, hh:mm:ss');
                                 }
                             },
                             {
@@ -174,7 +175,7 @@
                                            <i class="fa-solid fa-eye"></i> Lihat</a>
                                            <a href="#" onclick="action('edit',` + data + `)" class="badge badge-warning mr-2">
                                            <i class="fa-solid fa-pen-to-square"></i> Edit</a>
-                                           <a href="#" onclick="action('delete',` + data + `)" class="badge badge-danger">
+                                           <a href="#" id="` + data + `" onclick="action('delete',` + data + `)" class="badge badge-danger">
                                            <i class="fa-solid fa-trash-can"></i> Hapus</a>`
                                 }
                             }
@@ -219,27 +220,30 @@
                             });
                         break;
                     case 'delete':
-                        $.ajaxSetup({
-                            headers: {
-                                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                            }
-                        });
-                        url = "{{ route('admin.articles.destroy', 'id') }}";
-                        url = url.replace('articles', path).replace('id', id)
-
-                        $.ajax({
-                                type: "DELETE",
-                                url: url,
-                                // dataType: 'json',
-                                data: id,
-                            })
-                            .done(function(status) {
-                                alert('Sukses');
-                                table.DataTable().ajax.reload();
-                            })
-                            .fail(function() {
-                                alert("error");
+                        result = confirm("Yakin untuk menghapus " + $($('#' + id).parent().parent().find('td')[0]).html())
+                        if (result) {
+                            $.ajaxSetup({
+                                headers: {
+                                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                                }
                             });
+                            url = "{{ route('admin.articles.destroy', 'id') }}";
+                            url = url.replace('articles', path).replace('id', id)
+
+                            $.ajax({
+                                    type: "DELETE",
+                                    url: url,
+                                    // dataType: 'json',
+                                    data: id,
+                                })
+                                .done(function(status) {
+                                    alert('Sukses');
+                                    table.DataTable().ajax.reload();
+                                })
+                                .fail(function() {
+                                    alert("error");
+                                });
+                        }
                         break;
                     default:
                         break;

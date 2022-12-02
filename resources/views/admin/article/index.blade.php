@@ -88,9 +88,11 @@
             $('.toggler').click(function() {
                 table.DataTable().destroy();
                 time = $('#time')
+                path = window.location.pathname.split('/')[2];
                 if (time.html() == 'Waktu Update') {
                     time.html('Waktu Hapus')
-                    url = "{{ route('admin.trashed.index') }}";
+                    url = "{{ route('admin.trashed.index', 'path') }}";
+                    url = url.replace('path', path)
                     date = 'deleted_at';
 
                     table.DataTable({
@@ -161,11 +163,11 @@
                                 targets: 0,
                                 data: "id",
                                 render: function(data) {
-                                    return `<a href="" onclick="action('show',` + data + `)" class="badge badge-success mr-2">
+                                    return `<a href="#" onclick="action('show',` + data + `)" class="badge badge-success mr-2">
                                            <i class="fa-solid fa-eye"></i> Lihat</a>
-                                           <a href="" onclick="action('edit'` + data + `)" class="badge badge-warning mr-2">
+                                           <a href="#" onclick="action('edit',` + data + `)" class="badge badge-warning mr-2">
                                            <i class="fa-solid fa-pen-to-square"></i> Edit</a>
-                                           <a href="" class="badge badge-danger border-0" onclick="action("delete",` + data + `)">
+                                           <a href="#" onclick="action('delete',` + data + `)" class="badge badge-danger">
                                            <i class="fa-solid fa-trash-can"></i> Hapus</a>`
                                 }
                             }
@@ -175,12 +177,17 @@
             })
 
             function action(action, id) {
-                console.log(action);
                 switch (action) {
                     case 'show':
+                        url = "{{ route('admin.articles.show', 'id') }}"
+                        url = url.replace('articles', path).replace('id', id)
+                        location.href = url;
                         break;
-                        case 'edit':
-                            break;
+                    case 'edit':
+                        url = "{{ route('admin.articles.edit', 'id') }}"
+                        url = url.replace('articles', path).replace('id', id)
+                        location.href = url;
+                        break;
                     case 'restore':
                         $.ajaxSetup({
                             headers: {
@@ -188,7 +195,7 @@
                             }
                         });
                         url = "{{ route('admin.articles.restore', 'id') }}";
-                        url = url.replace('id', id);
+                        url = url.replace('articles', path).replace('id', id)
 
                         $.ajax({
                                 type: "PUT",
@@ -204,8 +211,29 @@
                                 alert("error");
                             });
                         break;
-                        case 'delete':
-                            break;
+                    case 'delete':
+                        $.ajaxSetup({
+                            headers: {
+                                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                            }
+                        });
+                        url = "{{ route('admin.articles.destroy', 'id') }}";
+                        url = url.replace('articles', path).replace('id', id)
+
+                        $.ajax({
+                                type: "DELETE",
+                                url: url,
+                                // dataType: 'json',
+                                data: id,
+                            })
+                            .done(function(status) {
+                                alert('Sukses');
+                                table.DataTable().ajax.reload();
+                            })
+                            .fail(function() {
+                                alert("error");
+                            });
+                        break;
                     default:
                         break;
                 }

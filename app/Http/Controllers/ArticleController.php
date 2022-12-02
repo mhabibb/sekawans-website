@@ -85,10 +85,14 @@ class ArticleController extends Controller
         ]);
     }
 
-    public function trashed()
+    public function trashed($path)
     {
         $this->authorize('superAdmin');
-        $articles =  Article::onlyTrashed()->get();
+        $articles = match($path) {
+            'infos'=>Article::onlyTrashed()->category(1)->get(),
+            'articles'=>Article::onlyTrashed()->category(2)->get(),
+            'actions'=>Article::onlyTrashed()->category(3)->get(),
+        };
         return json_encode(['articles' => $articles]);
     }
 
@@ -220,6 +224,9 @@ class ArticleController extends Controller
     {
         $category = $article->category_id;
         $article->delete();
+        if(request()->ajax()){
+            return true;
+        }
         return match ($category) {
             1 => to_route('admin.infotbc.index'),
             2 => to_route('admin.articles.index'),

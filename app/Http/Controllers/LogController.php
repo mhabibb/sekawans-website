@@ -27,12 +27,14 @@ class LogController extends Controller
     {
         $this->uuid = null;
         $logs = Activity::all()->filter(function ($value) {
-            if ($value->batch_uuid) {
-                if ($this->uuid !== $value->batch_uuid) {
-                    $this->uuid = $value->batch_uuid;
-                    return $value;
-                }
-            } else return $value;
+            if(!($value->log_name=='article' && ($value->event == 'restored'||$value->event == 'deleted'))){
+                if ($value->batch_uuid) {
+                    if ($this->uuid !== $value->batch_uuid) {
+                        $this->uuid = $value->batch_uuid;
+                        return $value;
+                    }
+                } else return $value;
+            }
         });
         return view('admin.activitylog.index', compact('logs'));
     }
@@ -65,9 +67,10 @@ class LogController extends Controller
         $user = $activity->causer;
         $properties = $activity->changes();
         $model::unguard();
-        $status = match ($activity->event) {
-            'deleted' => $model::updateOrCreate($properties['old'])
-        };
+        $status = $model::updateOrCreate($properties['old']);
+        // $status = match ($activity->event) {
+        //     'deleted' => $model::updateOrCreate($properties['old'])
+        // };
         $activity->delete();
         $model::reguard();
         dd($subject, $model, $user, $properties, $status);

@@ -60,6 +60,7 @@
 </head>
 
     <body class="hold-transition sidebar-mini layout-fixed layout-navbar-fixed">
+        @include('sweetalert::alert')
     <div class="wrapper">
         <x-admin-nav />
 

@@ -55,19 +55,24 @@
     </div>
     <div class="container mx-auto row text-center pt-4 mb-5 border-top">
         <div class="col p-3">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/3a/Logo_of_the_Ministry_of_Health_of_the_Republic_of_Indonesia.svg/1280px-Logo_of_the_Ministry_of_Health_of_the_Republic_of_Indonesia.svg.png"
+            <img src="{{ asset('img/kemenkes.png') }}"
                 alt="" height="80px">
         </div>
         <div class="col p-3">
-            <img src="https://tbindonesia.or.id/wp-content/uploads/2019/10/logo-tosstb.png" alt="" height="80px">
+            <img src="{{ asset('img/rsdsoebandi.png') }}"
+                alt="" height="80px">
         </div>
         <div class="col p-3">
-            <img src="https://poptbindonesia.org/wp-content/uploads/2020/10/Samping-trans-300x162.png" alt=""
-                height="80px">
+            <img src="{{ asset('img/rsparu.png') }}"
+                alt="" height="80px">
         </div>
         <div class="col p-3">
-            <img src="https://promkes.kemkes.go.id/__asset/__images/content_wysiwyg//LOGO_GERMAS_NORMAL.png" alt=""
-                height="80px">
+            <img src="{{ asset('img/tosstb.png') }}"
+                alt="" height="80px">
+        </div>
+        <div class="col p-3">
+            <img src="{{ asset('img/poptb.png') }}"
+                alt="" height="80px">
         </div>
     </div>
 </section>

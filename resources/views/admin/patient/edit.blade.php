@@ -235,8 +235,7 @@
               </div>
               <div class="form-check">
                 <input class="form-check-input" type="radio" name="marital.status" id="belum-menikah"
-                  value="belum menikah" @checked(old('marital_status', $detail->patient->marital_status)=='belum
-                menikah' )>
+                  value="belum menikah" @checked(old('marital_status', $detail->patient->marital_status)=='belum menikah' )>
                 <label class="form-check-label" for="belum-menikah">
                   Belum Menikah
                 </label>
@@ -397,7 +396,7 @@
         </div>
 
         <div class="col-12">
-          <button type="reset" onclick="history.back()" class="btn btn-secondary">Batalkan</button>
+          <a href="{{ route('admin.patients.show', $detail) }}" type="reset" class="btn btn-secondary">Batalkan</a>
           <button type="submit" class="btn btn-primary">Submit</button>
         </div>
       </div>

@@ -209,7 +209,7 @@
           <div class="col-12">
             <a href="{{ route('admin.patients.edit', $patientDetail) }}" class="btn btn-warning">Edit
               Data</a>
-            <a role="button" class="btn btn-danger" onclick="deletePatient(id)">Hapus Data</a>
+            <a role="button" class="btn btn-danger" onclick="deletePatient({{ $patientDetail->id }})">Hapus Data</a>
           </div>
         </div>
       </div>
@@ -257,10 +257,11 @@
                     Swal.fire({
                         title: 'Data telah Terhapus',
                         icon: 'success',
-                        showConfirmButton: false,
-                        timer: 2000
+                        showConfirmButton: false
                     })
-                    window.location.href = "{{ route('admin.patients.index') }}"
+                    setTimeout(function() {
+                        window.location.href = "{{ route('admin.patients.index') }}";
+                    }, 2000);
                 })
                 .fail(function() {
                     Swal.fire(

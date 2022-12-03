@@ -295,14 +295,14 @@
           <div class="col-sm-6 form-group">
             <label>Tinggi Badan (cm)</label>
             <input type="number" name="height" class="form-control @error('height') is-invalid
-            @else @if(old('workplace') ?? false) is-valid @endif @enderror"
+            @else @if(old('height') ?? false) is-valid @endif @enderror"
               value="{{ old('height', $detail->height) }}">
           </div>
 
           <div class="col-sm-6 form-group">
             <label>Berat Badan (kg)</label>
             <input type="number" name="weight" class="form-control @error('weight') is-invalid
-            @else @if(old('workplace') ?? false) is-valid @endif @enderror"
+            @else @if(old('weight') ?? false) is-valid @endif @enderror"
               value="{{ old('weight', $detail->weight) }}">
           </div>
         </div>
@@ -314,28 +314,28 @@
           <div class="col-sm-6 form-group">
             <label>Nama Ibu</label>
             <input type="text" name="mother.name" class="form-control @error('mother_name') is-invalid
-            @else @if(old('workplace') ?? false) is-valid @endif @enderror"
+            @else @if(old('mother_name') ?? false) is-valid @endif @enderror"
               value="{{ old('mother_name', $detail->patient->mother_name) }}">
           </div>
 
           <div class="col-sm-6 form-group">
             <label>Nama Bapak</label>
             <input type="text" name="father.name" class="form-control @error('father_name') is-invalid
-            @else @if(old('workplace') ?? false) is-valid @endif @enderror"
+            @else @if(old('father_name') ?? false) is-valid @endif @enderror"
               value="{{ old('father_name', $detail->patient->father_name) }}">
           </div>
 
           <div class="col-sm-6 form-group">
             <label>Alamat</label>
             <input type="text" name="guardian.address" class="form-control @error('guardian_address') is-invalid
-            @else @if(old('workplace') ?? false) is-valid @endif @enderror"
+            @else @if(old('guardian_address') ?? false) is-valid @endif @enderror"
               value="{{ old('guardian_address', $detail->patient->guardian_address) }}">
           </div>
 
           <div class="col-sm-6 form-group">
             <label>No. Telepon/Hp</label>
             <input type="text" name="guardian.phone" class="form-control @error('guardian_phone') is-invalid
-            @else @if(old('workplace') ?? false) is-valid @endif @enderror"
+            @else @if(old('guardian_phone') ?? false) is-valid @endif @enderror"
               value="{{ old('guardian_phone', $detail->patient->guardian_phone) }}">
           </div>
         </div>
@@ -348,28 +348,28 @@
           <div class="col-sm-6 form-group">
             <label>Nama</label>
             <input type="text" name="emergency[name]" class="form-control @error('emergency.name') is-invalid
-            @else @if(old('workplace') ?? false) is-valid @endif @enderror"
+            @else @if(old('emergency.name') ?? false) is-valid @endif @enderror"
               value="{{ old('emergency.name', $detail->patient->emergency_contact->name) }}">
           </div>
 
           <div class="col-sm-6 form-group">
             <label>Hubungan</label>
             <input type="text" name="emergency[relation]" class="form-control @error('emergency.relation') is-invalid
-            @else @if(old('workplace') ?? false) is-valid @endif @enderror"
+            @else @if(old('emergency.relation') ?? false) is-valid @endif @enderror"
               value="{{ old('emergency.relation', $detail->patient->emergency_contact->relation) }}">
           </div>
 
           <div class="col-sm-6 form-group">
             <label>Alamat</label>
             <input type="text" name="emergency[address]" class="form-control @error('emergency.address') is-invalid
-            @else @if(old('workplace') ?? false) is-valid @endif @enderror"
+            @else @if(old('emergency.address') ?? false) is-valid @endif @enderror"
               value="{{ old('emergency.address', $detail->patient->emergency_contact->address) }}">
           </div>
 
           <div class="col-sm-6 form-group">
             <label>No. Telepon/Hp</label>
             <input type="text" name="emergency[phone]" class="form-control @error('emergency.phone') is-invalid
-            @else @if(old('workplace') ?? false) is-valid @endif @enderror"
+            @else @if(old('emergency.phone') ?? false) is-valid @endif @enderror"
               value="{{ old('emergency.phone', $detail->patient->emergency_contact->phone) }}">
           </div>
 

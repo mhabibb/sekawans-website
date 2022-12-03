@@ -76,7 +76,7 @@ class PatientController extends Controller
         isset($patient) ? $detail = PatientDetail::create($request) : '';
         $detail = PatientDetail::find($detail->id);
 
-        return redirect()->route('admin.patients.show', $detail);
+        return redirect()->route('admin.patients.show', $detail)->withSuccess("Data berhasil dibuat!");;
     }
 
     /**
@@ -124,7 +124,7 @@ class PatientController extends Controller
         $patient->update($request);
         // $detail = PatientDetail::find($patient);
 
-        return redirect()->route('admin.patients.show', $patient);
+        return redirect()->route('admin.patients.show', $patient)->withSuccess("Data berhasil diperbarui!");
     }
 
     /**
@@ -136,6 +136,9 @@ class PatientController extends Controller
     public function destroy(PatientDetail $patient)
     {
         $patient->delete();
+        if (request()->ajax()) {
+            return true;
+        };
         return to_route('admin.patients.index');
     }
 }

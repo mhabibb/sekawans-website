@@ -18,7 +18,6 @@ class PatientDetailObserver
         if (auth()->check()) {
             $last = Patient::last()->get()->first()->id;
             $patientDetail->patient_id = $last;
-            // $patientDetail->patient_status_id = 2;
         }
     }
 
@@ -41,7 +40,8 @@ class PatientDetailObserver
      */
     public function deleted(PatientDetail $patientDetail)
     {
-        //
+        $patientDetail->patient->emergency_contact->delete();
+        $patientDetail->patient->delete();
     }
 
     /**

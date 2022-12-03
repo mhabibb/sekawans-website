@@ -122,9 +122,9 @@ class PatientController extends Controller
         $patient->patient->emergency_contact->update($request['emergency']);
         $patient->patient->update($request);
         $patient->update($request);
-        $detail = PatientDetail::find($patient);
+        // $detail = PatientDetail::find($patient);
 
-        return redirect()->route('admin.patients.show', $detail);
+        return redirect()->route('admin.patients.show', $patient);
     }
 
     /**
@@ -135,8 +135,7 @@ class PatientController extends Controller
      */
     public function destroy(PatientDetail $patient)
     {
-        // EmergencyContact::destroy($patient->patient->emergency_contact);
-        // Patient::destroy($patient->patient);
-        PatientDetail::destroy($patient);
+        $patient->delete();
+        return to_route('admin.patients.index');
     }
 }

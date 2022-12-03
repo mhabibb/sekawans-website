@@ -24,7 +24,7 @@ class LogController extends Controller
      */
     public function index()
     {
-        $logs = Activity::all();
+        $logs = Activity::latest()->get();
         // dd($logs->first());
         return view('admin.activitylog.index', compact('logs'));
         // return dd($log);

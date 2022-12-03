@@ -68,9 +68,15 @@
 @section('js')
 
 <script>
-  $(function () {
+  // $.fn.dataTable.moment('DD/MM/YY');
+  $(document).ready(function () {
     $("#patientsData").DataTable({
-      "responsive": true, "lengthChange": false, "autoWidth": false,
+      "responsive": true, 
+      "lengthChange": false, 
+      "autoWidth": false,
+      "columnDefs": [ {
+        "targets": 3, "type": "date"
+      } ],
       "buttons": ["csv", "excel", "pdf", "print"],
       order: [[3, 'desc']],
     }).buttons().container().appendTo('#patientsData_wrapper .col-md-6:eq(0)');

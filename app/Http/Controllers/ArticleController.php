@@ -7,6 +7,7 @@ use App\Http\Requests\StoreArticleRequest;
 use App\Http\Requests\UpdateArticleRequest;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class ArticleController extends Controller
 {
@@ -139,7 +140,7 @@ class ArticleController extends Controller
         };
         $article = Article::create($request);
         (!$article ? Storage::delete($request['img']) : '');
-        return to_route($route, $article);
+        return to_route($route, $article)->withSuccess('Data berhasil ditambahkan!');
     }
 
     /**
@@ -209,7 +210,7 @@ class ArticleController extends Controller
         $category == "infos" ? $route = 'admin.infotbc.show'
             : ($category == "articles" ? $route = 'admin.articles.show'
                 : ($category == "actions" ? $route = 'admin.kegiatan.show' : $route = null));
-        return to_route($route, $article);
+        return to_route($route, $article)->withSuccess('Data berhasil diperbarui!');
     }
 
     /**

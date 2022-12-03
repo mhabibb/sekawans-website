@@ -34,21 +34,16 @@
 
 <section class="edit-modal">
     @include('admin.user.edit')
-    @error('password')
-    <div onload="$('#editProfile').modal('show')"></div>
-    @enderror
-    @error('new_password')
-    <div onload="$('#editProfile').modal('show')"></div>
-    @enderror
-    @error('new_password_confirmation')
-    <div onload="$('#editProfile').modal('show')"></div>
-    @enderror
 </section>
 
 @endsection
 
 @section('js')
 <script>
+    @if($errors->any())
+        $('#editProfile').modal('show');
+    @endif
+
     $(document).ready(function() {
         if ($('#passBtn').is(":checked")) {
             $('.new-password').removeClass('d-none');

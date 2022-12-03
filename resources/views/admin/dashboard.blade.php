@@ -90,10 +90,7 @@
                             </div>
 
                             <div class="card-footer">
-                                <h5 class="card-title">DATA {{ $kab->name }}</h5>
-                                <p class="card-text"> <a href="{{ route('admin.patients.index') }}"
-                                        class="card-link">Selengkapnya <i class="fas fa-arrow-circle-right"></i></a> </p>
-
+                                <h5 class="card-title">TOTAL PASIEN : <strong>{{ $kab->total }}</strong></h5>
                             </div><!-- /.card -->
                         </div>
                         <!-- /.col-md-6 -->

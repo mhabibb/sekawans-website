@@ -9,7 +9,6 @@
         <div class="card-body py-5">
           <form method="POST" action="{{ route('login') }}">
             @csrf
-@dump(Hash::check('        ', '$2y$10$6ZF5IwclZjUG.itzvVmZbenvrg30XP0PjKTdYAYF/tLVZ1/8EFD0G'))
             <div class="row mb-3">
               <label for="email" class="col-md-4 col-form-label text-md-end">{{ __('Email Address')
                 }}</label>

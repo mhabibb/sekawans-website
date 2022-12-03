@@ -43,17 +43,22 @@ class Article extends Model
      */
     protected function pruning()
     {
+        str($this->contents)->contains('<img src="' . asset('storage/img/articles/contents/')) ?
+            str($this->contents)->matchAll('/<img[^>]+src="([^">]+)/')->each(fn ($src) =>
+            Storage::delete(str($src)->remove(asset('storage/')))) : '';
         Storage::delete($this->img);
     }
 
     public function getActivitylogOptions(): LogOptions
     {
         $user = auth()->user()->name ?? 'System';
+        $title = $this->title;
         return LogOptions::defaults()
             ->logAll()
             ->logOnlyDirty()
             ->useLogName('article')
-            ->setDescriptionForEvent(fn (string $eventName) => "{$user} {$eventName} article");
+            ->dontLogIfAttributesChangedOnly(['deleted_at', 'updated_at'])
+            ->setDescriptionForEvent(fn (string $eventName) => "{$user} {$eventName} article {$title}");
     }
 
     public function scopeCategory($query, $category)

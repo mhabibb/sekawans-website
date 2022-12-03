@@ -20,12 +20,12 @@ class PatientDetailFactory extends Factory
      */
     public function definition()
     {
-        $patient = Patient::count();
+        $patient = Patient::select('id')->get();
         $satelite = SateliteHealthFacility::count();
         $worker = Worker::count();
         $status = PatientStatus::count();
         return [
-            'patient_id' => fake()->numberBetween(1, $patient),
+            'patient_id' => fake()->unique()->randomElement($patient),
             'satelite_health_facility_id' => fake()->numberBetween(1, $satelite),
             'worker_id' => fake()->numberBetween(1, $worker),
             'no_regis' => fake()->unique()->numerify('##########'),

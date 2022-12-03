@@ -13,8 +13,6 @@ use App\Models\Regency;
 use App\Models\Religion;
 use App\Models\SateliteHealthFacility;
 use App\Models\Worker;
-use Illuminate\Support\Arr;
-use Illuminate\Support\Str;
 
 class PatientController extends Controller
 {
@@ -35,15 +33,17 @@ class PatientController extends Controller
      */
     public function index()
     {
-        // $patients = Patient::withOnly(['patientDetail'], function($query){
-        //   $query->withOnly('patientStatus')->get();
-        // })->get();
         $patients = PatientDetail::all();
-        // dd($patients->first());
         return view('admin.patient.index', [
             'title' => 'Data Pasien',
             'patients' => $patients
         ]);
+    }
+
+    public function regency($regency)
+    {
+        $regency = Patient::withWhereHas('district.regency', fn ($query) => $query->where('id', $regency))->get();
+        return json_encode($regency);
     }
 
     /**
@@ -58,7 +58,6 @@ class PatientController extends Controller
         $workers = Worker::active()->get();
         $religions = Religion::all();
         $educations = Education::all();
-        // $statuses = PatientStatus::all();
         $regencies = Regency::withWhereHas('districts', fn ($query) => $query->without('regency'))->get();
         return view('admin.patient.create', compact('fasyankes', 'religions', 'regencies', 'educations', 'satelites', 'workers'));
     }
@@ -88,7 +87,6 @@ class PatientController extends Controller
      */
     public function show(PatientDetail $patient)
     {
-        // dd($patient);
         return view('admin.patient.show', ['patientDetail' => $patient]);
     }
 
@@ -108,7 +106,6 @@ class PatientController extends Controller
         $educations = Education::all();
         $regencies = Regency::withWhereHas('districts', fn ($query) => $query->without('regency'))->get();
         $detail = $patient;
-        // dd($patient, $detail);
         return view('admin.patient.edit', compact('detail', 'fasyankes', 'satelites', 'workers', 'religions', 'regencies', 'educations', 'statuses'));
     }
 
@@ -136,7 +133,7 @@ class PatientController extends Controller
      * @param  \App\Models\Patient  $patient
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Patient $patient)
+    public function destroy(PatientDetail $patient)
     {
         // EmergencyContact::destroy($patient->patient->emergency_contact);
         // Patient::destroy($patient->patient);

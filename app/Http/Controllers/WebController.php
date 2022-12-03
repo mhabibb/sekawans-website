@@ -26,7 +26,6 @@ class WebController extends Controller
     public function about()
     {
         $abouts = StaticElement::get();
-        // dd($abouts);
         return view('web.tentang', [
             'profile' => $abouts->find(1),
             'visimisi' => $abouts->find(2),
@@ -96,7 +95,7 @@ class WebController extends Controller
                 'info-tbc'  => Article::latest()->category(1)->where('title', 'like', '%' . $request->search . '%')->get(),
                 'artikel'   => Article::latest()->category(2)->where('title', 'like', '%' . $request->search . '%')->get(),
                 'kegiatan'  => Article::latest()->category(3)->where('title', 'like', '%' . $request->search . '%')->get(),
-                default     => ''
+                default     => []
             };
             $output = '';
 

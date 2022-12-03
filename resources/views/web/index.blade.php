@@ -4,7 +4,7 @@
 {{-- HERO --}}
 <section id="hero">
     <div class="container py-5">
-        <div class="row flex-lg-row-reverse align-items-center g-5 pb-5">
+        <div class="row flex-lg-row-reverse align-items-center g-5 pb-4">
             <div class="col col-lg-6 mx-auto">
                 <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="true">
                     <div class="carousel-indicators">
@@ -42,18 +42,14 @@
                 </div>
             </div>
             <div class="col-lg-6">
-                <h2 class="fw-bold mb-3">Yuk, Lawan TBC
-                    Dengan Hidup Bersih dan Sehat </h2>
-                <p class="lead">Quickly design and customize responsive mobile-first sites with Bootstrap, the world’s
-                    most
-                    popular front-end open source toolkit, featuring Sass variables and mixins, responsive grid system,
-                    extensive
-                    prebuilt components, and powerful JavaScript plugins.</p>
+                <h1 class="fw-bold mb-3">Yuk, Lawan TBC
+                    Dengan Hidup Bersih dan Sehat </h1>
+                <p class="lead">Sudah menjadi hal yang wajib bagi masyarakat untuk mulai memahami penyakit TBC dan gejalanya, dengan demikian, dapat dilakukan deteksi dini, penanganan dan pencegahan yang efektif pada penyakit TBC. Berbagai cara dilakukan untuk mencegah penyakit TBC yaitu salah satunya dengan menerapkan perilaku hidup bersih dan sehat.</p>
             </div>
         </div>
     </div>
     </div>
-    <div class="container mx-auto row text-center pt-4 mb-5 border-top">
+    <div class="container mx-auto row text-center justify-content-between pt-4 mb-5 border-top">
         <div class="col p-3">
             <img src="{{ asset('img/kemenkes.png') }}"
                 alt="" height="80px">

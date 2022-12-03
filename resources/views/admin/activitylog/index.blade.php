@@ -19,6 +19,8 @@
                 @forelse ($logs as $log)
                 <tr>
                   <td>{{ $log->description }}</td>
+                  <td>judul</td>
+                  <td>{{ date('j F Y, H:i:s', strtotime($log->updated_at)) }}</td>
                   <td>
                     <button class="btn badge badge-success border-0">Restore</button>
                   </td>

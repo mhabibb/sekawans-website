@@ -44,7 +44,7 @@ class UserController extends Controller
         $this->authorize('superAdmin');
         $request = $request->validated();
         User::create($request);
-        return to_route('admin.users.index');
+        return to_route('admin.users.index')->withSuccess("Admin Berhasil Dibuat!");
     }
 
     /**
@@ -76,7 +76,7 @@ class UserController extends Controller
         //     $request['password'] = $request['password'];
         // }
         $user->update($request);
-        return to_route('admin.users.show', $user);
+        return to_route('admin.users.show', $user)->withSuccess("Profil berhasil diperbarui!");
     }
 
     public function firstLogin(Request $request)
@@ -117,6 +117,9 @@ class UserController extends Controller
     {
         $this->authorize('superAdmin');
         $user->delete();
+        if (request()->ajax()) {
+            return true;
+        }
         return to_route('admin.users.index');
     }
 }

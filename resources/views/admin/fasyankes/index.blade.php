@@ -12,46 +12,27 @@
     <div class="row row-cols-1 row-cols-md-2">
       <div class="col">
         <div class="card">
-          <div class="card-body table-responsive" style="height: 50vh;">
-            <table class="table">
-              <thead>
-                <tr>
-                  <th>Fasyankes TB RO</th>
-                </tr>
-              </thead>
-              <tbody>
-                @foreach ($fasyankes as $rs)
-                <tr>
-                  <td>{{ $rs }}</td>
-                </tr>
-                @endforeach
-              </tbody>
-            </table>
-          </div>
-        </div>
-
-      </div>
-      <div class="col">
-        <div class="card">
-          <div class="card-body table-responsive" style="height: 50vh;">
-            <table class="table">
-              <thead>
+          <div class="card-body table-responsive p-0" style="max-height: 50vh;">
+            <table class="table table-head-fixed">
+              <thead data-toggle="collapse" role="button" data-target="#satelitList">
                 <tr>
                   <th>Fasyankes Satelit</th>
-                  <th class="col-2"></th>
+                  <th class="col-2"><i class="fas fa-angle-down"></th>
                 </tr>
               </thead>
-              <tbody>
+              <tbody class="collapse" id="satelitList">
                 @forelse ($satelites as $satelite)
                 <tr>
                   <td> {{ $satelite->name }} </td>
                   <td>
+                    <a href="#" class="badge badge-warning" data-toggle="modal" data-target="#editSatelite{{ $satelite->id }}">Edit</a>
                     <form action="{{ route('admin.fasyankes.destroy', ['table'=> 'satelite', 'id' => $satelite->id]) }}" method="post">
                       @csrf
                       @method('delete')
                       <button type="submit" class="badge badge-danger border-0">Hapus</button>
                     </form>
                   </td>
+                  @include('admin.fasyankes.edit-satelit')
                 </tr>
                 @empty
                 <tr>
@@ -65,15 +46,15 @@
       </div>
       <div class="col">
         <div class="card">
-          <div class="card-body table-responsive" style="height: 50vh;">
-            <table class="table">
-              <thead>
+          <div class="card-body table-responsive p-0" style="max-height: 50vh;">
+            <table class="table table-head-fixed">
+              <thead data-toggle="collapse" role="button" data-target="#workerList">
                 <tr>
                   <th>Patient Supporter</th>
-                  <th class="col-2"></th>
+                  <th class="col-2"><i class="fas fa-angle-down"></i></th>
                 </tr>
               </thead>
-              <tbody>
+              <tbody class="collapse" id="workerList">
                 @forelse ($workers as $ps)
                 <tr>
                   @if ($ps->is_active == 1)
@@ -82,12 +63,14 @@
                   <td class="text-muted"> {{ $ps->name }} </td>
                   @endif
                   <td>
+                    <a href="#" class="badge badge-warning" data-toggle="modal" data-target="#editPS{{ $ps->id }}">Edit</a>
                     <form action="{{ route('admin.fasyankes.destroy', ['table'=> 'workers', 'id' => $ps->id]) }}" method="post">
                       @csrf
                       @method('delete')
                       <button type="submit" class="badge badge-danger border-0">Hapus</button>
                     </form>
                   </td>
+                  @include('admin.fasyankes.edit-ps')
                 </tr>
                 @empty
                 <tr>
@@ -102,4 +85,7 @@
     </div>
   </div>
 </section>
+{{-- <section class="edit-modal">
+  @include('admin.fasyankes.edit')
+</section> --}}
 @endsection

@@ -30,14 +30,12 @@ class ArticleController extends Controller
     {
         return [
             'index'        => 'viewAny',
-            // 'trashed'      => 'viewTrash',
             'show'         => 'view',
             'create'       => 'create',
             'store'        => 'create',
             'edit'         => 'update',
             'update'       => 'update',
             'destroy'      => 'delete',
-            // 'restore'      => 'restore',
             'forceDelete'  => 'forceDelete',
         ];
     }
@@ -244,9 +242,9 @@ class ArticleController extends Controller
 
     public function forceDelete(Article $article)
     {
-        str($article->contents)->contains('<img src="http://sekawans-jember.test/storage/img/articles/contents/') ?
+        str($article->contents)->contains('<img src="' . asset('storage/img/articles/contents/')) ?
             str($article->contents)->matchAll('/<img[^>]+src="([^">]+)/')->each(fn ($src) =>
-            Storage::delete(str($src)->remove('http://sekawans-jember.test/storage/'))) : '';
+            Storage::delete(str($src)->remove(asset('storage/')))) : '';
         Storage::delete($article->img);
         $category = $article->category_id;
         $article->forceDelete();
@@ -268,7 +266,6 @@ class ArticleController extends Controller
     public function contentDecode($contents)
     {
         $count = Str::substrCount($contents, ';base64,');
-        // dd($contents);
         for ($i = 0; $i < $count; $i++) {
             $base64 = Str::of(Str::of($contents)->explode(' src="data:')[1])->explode('" ')[0];
             $contents = Str::of($contents)->replace('data:' . $base64, '??');
@@ -282,7 +279,6 @@ class ArticleController extends Controller
             $status = Storage::put($imgName, $img);
             $contents = Str::of($contents)->replace('??', asset('storage/' . $imgName));
         }
-        // dd($contents);
         return $contents;
     }
 }

@@ -4,14 +4,26 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Spatie\Activitylog\Traits\LogsActivity;
+use Spatie\Activitylog\LogOptions;
 
 class SateliteHealthFacility extends Model
 {
-    use HasFactory;
+    use HasFactory, LogsActivity;
 
-    protected $guarded = ['id'];
+    protected $fillable = ['id'];
 
     public $timestamps = false;
+
+    public function getActivitylogOptions(): LogOptions
+    {
+        $user = auth()->user()->name ?? 'System';
+        $name = $this->name;
+        return LogOptions::defaults()
+            ->logAll()
+            ->useLogName('satelite health facility')
+            ->setDescriptionForEvent(fn (string $eventName) => "{$user} {$eventName} satellite health facility {$name}");
+    }
 
     public function patientDetails()
     {

@@ -25,6 +25,7 @@ class LogController extends Controller
     public function index()
     {
         $logs = Activity::all();
+        // dd($logs->first());
         return view('admin.activitylog.index', compact('logs'));
         // return dd($log);
     }
@@ -48,7 +49,17 @@ class LogController extends Controller
      */
     public function restore(Activity $activity)
     {
-        $model = $activity->changes;
+        $subject = $activity->subject;
+        $model = $activity->subject_type;
+        $user = $activity->causer;
+        $properties = $activity->changes();
+        $model::unguard();
+        $status = match ($activity->event) {
+            'deleted' => $model::updateOrCreate($properties['old'])
+        };
+        $activity->delete();
+        $model::reguard();
+        dd($subject, $model, $user, $properties, $status);
     }
 
     /**

@@ -209,13 +209,7 @@
           <div class="col-12">
             <a href="{{ route('admin.patients.edit', $patientDetail) }}" class="btn btn-warning">Edit
               Data</a>
-            <form action="{{ route('admin.patients.destroy', $patientDetail) }}" method="POST" class="d-inline">
-              @csrf
-              @method('DELETE')
-              <button type="submit" class="btn btn-danger"
-                onclick="return confirm('Yakin untuk menghapus data {{ $patientDetail->patient->name }} ?')">
-                Hapus Data</button>
-            </form>
+            <a role="button" class="btn btn-danger" onclick="deletePatient(id)">Hapus Data</a>
           </div>
         </div>
       </div>
@@ -231,5 +225,52 @@
         let text = $('#isJob').text();
         $.trim(text) == "Tidak Bekerja" ? $('.job-place').addClass('d-none') : $('.job-place').removeClass('d-none');
     })
+</script>
+
+<script>
+  function deletePatient(id) {
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
+    url = "{{ route('admin.patients.destroy', 'id') }}";
+    url = url.replace('id', id)
+
+    Swal.fire({
+        title: 'Yakin Untuk Menghapus?',
+        text: "Data akan terhapus dari database",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Yakin',
+        cancelButtonText: 'Batalkan',
+    }).then((result) => {
+        if (result.isConfirmed) {
+            $.ajax({
+                    type: "DELETE",
+                    url: url,
+                    data: id,
+                })
+                .done(function(status) {
+                    Swal.fire({
+                        title: 'Data telah Terhapus',
+                        icon: 'success',
+                        showConfirmButton: false,
+                        timer: 2000
+                    })
+                    window.location.href = "{{ route('admin.patients.index') }}"
+                })
+                .fail(function() {
+                    Swal.fire(
+                        'Terjadi Kesalahan',
+                        '',
+                        'error'
+                    )
+                });
+        }
+    })
+  }
 </script>
 @endsection

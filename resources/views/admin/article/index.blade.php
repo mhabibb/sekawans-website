@@ -98,7 +98,7 @@
                     url = "{{ route('admin.trashed.index', 'path') }}";
                     url = url.replace('path', path)
                     date = 'deleted_at';
-                    $.fn.dataTable.moment('DD.MM.YYYY');
+                    $.fn.dataTable.moment('D MMMM YYYY, hh:mm:ss');
 
                     table.DataTable({
                         "responsive": true,
@@ -143,7 +143,7 @@
                     url = "{{ route('admin.articles.index') }}";
                     url = url.replace('articles', path)
                     date = 'updated_at';
-                    $.fn.dataTable.moment('DD.MM.YYYY');
+                    $.fn.dataTable.moment('D MMMM YYYY, hh:mm:ss');
 
                     table.DataTable({
                         "responsive": true,

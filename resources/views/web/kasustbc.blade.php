@@ -11,8 +11,8 @@
                 </div>
                 <div class="col-lg-6">
                     <h2 class="fw-bold mb-3">Kasus TBC di Jember dan Sekitarnya</h2>
-                    <p class="lead">Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsam quos dignissimos
-                        voluptates quibusdam. Perspiciatis dolorem odit dignissimos? Suscipit, pariatur quae!</p>
+                    {{-- <p class="lead">Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsam quos dignissimos
+                        voluptates quibusdam. Perspiciatis dolorem odit dignissimos? Suscipit, pariatur quae!</p> --}}
                 </div>
             </div>
         </div>

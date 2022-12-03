@@ -34,14 +34,22 @@ Route::middleware('auth')->prefix('admin')->name('admin.')->group(function () {
     Route::resource('/users', UserController::class)->except('edit');
     Route::post('/users/first', [UserController::class, 'firstLogin'])->name('users.firstLogin');
     Route::post('/users/{user}/reset', [UserController::class, 'reset'])->name('users.reset');
-    Route::resource('/patients', PatientController::class);
     Route::resource('/sekawans', StaticElementController::class)->except(['create', 'destroy', 'store']);
+    Route::resource('/patients', PatientController::class);
+    Route::controller(PatientController::class)->group(function(){
+        Route::get('/patient/{regencies}', 'regency')->name('patients.regency');
+    });
     Route::resource('/logs', LogController::class)->only(['index', 'destroy', 'show'])->middleware(['can:superAdmin']);
-    Route::resource('/articles', ArticleController::class);
+    Route::controller(LogController::class)->group(function(){
+        Route::get('/logs/{activity}/restore', 'restore')->name('logs.restore');
+    })->middleware(['can:superAdmin']);
+
     Route::controller(SateliteHealthFacilityController::class)->group(function(){
         Route::get('/fasyankes', 'index')->name('fasyankes.index');
         Route::delete('/fasyankes/{table}/{id}', 'destroy')->name('fasyankes.destroy');
     });
+    
+    Route::resource('/articles', ArticleController::class);
     Route::controller(ArticleController::class)->group(function () {
         Route::get('/infos', 'index')->name('infotbc.index');
         Route::post('/infos', 'store')->name('infotbc.store');
@@ -59,7 +67,7 @@ Route::middleware('auth')->prefix('admin')->name('admin.')->group(function () {
         Route::delete('/actions/{article}', 'destroy')->name('kegiatan.destroy');
         Route::get('/trashed/{path}', 'trashed')->name('trashed.index');
         Route::put('/restore/{article}', 'restore')->name('articles.restore');
-        Route::delete('/force/{article}', 'forceDelete')->name('articles.forceDelete');
+        Route::get('/force/{article}', 'forceDelete')->name('articles.forceDelete');
     });
 });
 

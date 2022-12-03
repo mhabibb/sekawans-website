@@ -4,10 +4,12 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Spatie\Activitylog\Traits\LogsActivity;
+use Spatie\Activitylog\LogOptions;
 
 class PatientDetail extends Model
 {
-    use HasFactory;
+    use HasFactory, LogsActivity;
 
     // public $timestamps = false;
 
@@ -15,6 +17,15 @@ class PatientDetail extends Model
 
     protected $with = ['patientStatus', 'patient', 'sateliteHealthFacility', 'worker'];
 
+    public function getActivitylogOptions(): LogOptions
+    {
+        $user = auth()->user()->name ?? 'System';
+        $name = $this->patient->name;
+        return LogOptions::defaults()
+            ->logAll()
+            ->useLogName('patient')
+            ->setDescriptionForEvent(fn (string $eventName) => "{$user} {$eventName} patient {$name}");
+    }
 
     public function scopeInTreatment($query)
     {

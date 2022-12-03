@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Spatie\Activitylog\Models\Activity;
 
 class LogController extends Controller
@@ -24,10 +25,16 @@ class LogController extends Controller
      */
     public function index()
     {
-        $logs = Activity::all();
-        // dd($logs->first());
+        $this->uuid = null;
+        $logs = Activity::all()->filter(function ($value) {
+            if ($value->batch_uuid) {
+                if ($this->uuid !== $value->batch_uuid) {
+                    $this->uuid = $value->batch_uuid;
+                    return $value;
+                }
+            } else return $value;
+        });
         return view('admin.activitylog.index', compact('logs'));
-        // return dd($log);
     }
 
     /**
@@ -38,7 +45,11 @@ class LogController extends Controller
      */
     public function show(Activity $log)
     {
-        return dd($log->changes());
+        $subject = $log->subject;
+        $model = $log->subject_type;
+        $user = $log->causer;
+        $properties = $log->changes();
+        return dd($subject, $model, $user, $properties);
     }
 
     /**

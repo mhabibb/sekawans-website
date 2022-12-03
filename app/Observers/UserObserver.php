@@ -26,7 +26,7 @@ class UserObserver
      */
     public function updating(User $user)
     {
-        $user->remember_token ? '' : $user->password = bcrypt($user->password);
+        $user->isDirty('remember_token') ? '' : $user->password = bcrypt($user->password);
     }
 
     /**

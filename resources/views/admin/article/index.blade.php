@@ -180,11 +180,10 @@
                             targets: 0,
                             data: "id",
                             render: function(data) {
-                                return `<button id="bt` + data +
-                                    `" class="badge badge-success border-0" onclick="action('restore',` +
-                                    data + `)">
-                            <i class="fa-solid fa-rotate-left"></i>Restore
-                            </button>`;
+                                return `<a href="#" class="btn badge badge-success" onclick="action('restore',` +
+                                        data + `)"><i class="fa-solid fa-rotate-left"></i> Restore</a>
+                                        <a href="#" class="btn badge badge-danger" onclick="action('forceDelete',` +
+                                        data + `)"><i class="fa-solid fa-xmark"></i> Force Delete</a>`;
                             }
                         }
                     ]
@@ -325,6 +324,51 @@
                                     Swal.fire({
                                         title: 'Terhapus',
                                         text: 'Data telah dibuang ke sampah',
+                                        icon: 'success',
+                                        showConfirmButton: false,
+                                        timer: 2000
+                                    })
+                                    table.DataTable().ajax.reload();
+                                })
+                                .fail(function() {
+                                    Swal.fire(
+                                        'Terjadi Kesalahan',
+                                        '',
+                                        'error'
+                                    )
+                                });
+                        }
+                    })
+                    break;
+                case 'forceDelete':
+                    $.ajaxSetup({
+                        headers: {
+                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                        }
+                    });
+                    url = "{{ route('admin.articles.forceDelete', 'id') }}";
+                    url = url.replace('articles', path).replace('id', id)
+
+                    Swal.fire({
+                        title: 'Yakin Untuk Hapus Permanen?',
+                        text: "Data akan hilang selamanya dan tidak dapat dikembalikan",
+                        icon: 'warning',
+                        showCancelButton: true,
+                        confirmButtonColor: '#3085d6',
+                        cancelButtonColor: '#d33',
+                        confirmButtonText: 'Yakin',
+                        cancelButtonText: 'Batalkan',
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            $.ajax({
+                                    type: "DELETE",
+                                    url: url,
+                                    data: id,
+                                })
+                                .done(function(status) {
+                                    Swal.fire({
+                                        title: 'Terhapus',
+                                        text: 'Data telah dihapus permanen',
                                         icon: 'success',
                                         showConfirmButton: false,
                                         timer: 2000

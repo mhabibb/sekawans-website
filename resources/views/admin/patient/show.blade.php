@@ -261,7 +261,7 @@
                     })
                     setTimeout(function() {
                         window.location.href = "{{ route('admin.patients.index') }}";
-                    }, 2000);
+                    }, 1500);
                 })
                 .fail(function() {
                     Swal.fire(

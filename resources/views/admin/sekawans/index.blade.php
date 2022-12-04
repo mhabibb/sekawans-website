@@ -30,7 +30,7 @@
                 </tr>
                 <tr class="expandable-body">
                   <td colspan="2">
-                    <p class="text-justify overflow-auto" style="max-height: 360px;">{{ $sekawans->find(1)->contents }}
+                    <p class="overflow-auto" style="max-height: 360px;">{{ $sekawans->find(1)->contents }}
                     </p>
                   </td>
                 </tr>
@@ -45,7 +45,7 @@
                 </tr>
                 <tr class="expandable-body">
                   <td colspan="2">
-                    <p class="text-justify overflow-auto" style="max-height: 360px;">{{ $sekawans->find(2)->contents }}
+                    <p class="overflow-auto" style="max-height: 360px;">{{ $sekawans->find(2)->contents }}
                     </p>
                   </td>
                 </tr>
@@ -61,7 +61,7 @@
                 <tr class="expandable-body">
                   <td colspan="2">
                     <img src="{{ asset('storage/'. $sekawans->find(3)->contents) }}" class="img-fluid p-2"
-                      style="width: auto; max-height: 600px;">
+                      style="width: auto; max-height: 720px;">
                   </td>
                 </tr>
               </tbody>
@@ -74,46 +74,20 @@
                     <td class="col-1">
                     </td>
                   </tr>
-                  <tr>
-                    <td>
-                      <strong class="d-block">Whatsapp</strong>
-                      {{ $sekawans->find(4)->contents }}
-                    </td>
-                    <td>
-                      <a href="#" class="badge badge-warning" data-toggle="modal"
-                        data-target="#sekawanEdit{{ $sekawans->find(4)->id }}">Edit</a>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>
-                      <strong class="d-block">Instagram</strong>
-                      {{ $sekawans->find(5)->contents }}
-                    </td>
-                    <td>
-                      <a href="#" class="badge badge-warning" data-toggle="modal"
-                        data-target="#sekawanEdit{{ $sekawans->find(5)->id }}">Edit</a>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>
-                      <strong class="d-block">Tiktok</strong>
-                      {{ $sekawans->find(6)->contents }}
-                    </td>
-                    <td>
-                      <a href="#" class="badge badge-warning" data-toggle="modal"
-                        data-target="#sekawanEdit{{ $sekawans->find(6)->id }}">Edit</a>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>
-                      <strong class="d-block">Youtube</strong>
-                      {{ $sekawans->find(7)->contents }}
-                    </td>
-                    <td>
-                      <a href="#" class="badge badge-warning" data-toggle="modal"
-                        data-target="#sekawanEdit{{ $sekawans->find(7)->id }}">Edit</a>
-                    </td>
-                  </tr>
+                  @foreach ($sekawans as $social)
+                    @if ($social->id > 3)
+                    <tr>
+                      <td>
+                        <strong class="d-block">{{ ucfirst($social->element) }}</strong>
+                        <div>{{ $social->contents }}</div>
+                      </td>
+                      <td>
+                        <a href="#" class="badge badge-warning" data-toggle="modal"
+                          data-target="#sekawanEdit{{ $social->id }}">Edit</a>
+                      </td>
+                    </tr>
+                    @endif
+                  @endforeach
                 </tbody>
               </table>
             </div>

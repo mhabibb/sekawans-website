@@ -30,10 +30,10 @@ class StaticElementSeeder extends Seeder
             'contents' => fake()->imageUrl(1080, 720),
         ]);
 
-        StaticElement::create([
-            'element' => 'whatsapp',
-            'contents' => fake()->phoneNumber(),
-        ]);
+        // StaticElement::create([
+        //     'element' => 'whatsapp',
+        //     'contents' => fake()->phoneNumber(),
+        // ]);
 
         StaticElement::create([
             'element' => 'instagram',

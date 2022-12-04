@@ -54,13 +54,23 @@ class LogController extends Controller
                 if ($log->log_name === "patient detail") $patientDetail = $log;
                 if ($log->log_name === "emergency contact") $emergencyContact = $log;
             }
-            dd($patient->changes(), $patientDetail->changes(), $emergencyContact->changes());
+            // dd($patient->changes(), $patientDetail->changes(), $emergencyContact->changes());
+            // if (request()->ajax()) {
+            //     return true;
+            // }
+            return json_encode([
+                "patient" => $patient->changes(),
+                "patientDetail" => $patientDetail->changes(),
+                "emergencyContact" => $emergencyContact->changes()
+            ]);
         } else {
+            $log_name = $log->log_name;
             $subject = $log->subject;
             $model = $log->subject_type;
             $user = $log->causer;
             $properties = $log->changes();
-            return dd($subject, $model, $user, $properties);
+            dd($subject, $model, $user, $properties);
+            return view('admin.activitylog.show', compact('log_name', 'subject', 'model', 'user', 'properties'));
         }
     }
 

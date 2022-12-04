@@ -89,12 +89,16 @@ class LogController extends Controller
         $user = $activity->causer;
         $properties = $activity->changes();
         $model::unguard();
-        $status = $model::updateOrCreate($properties['old']);
-        // $status = match ($activity->event) {
-        //     'deleted' => $model::updateOrCreate($properties['old'])
-        // };
+        activity()->disableLogging();
+        // $status = $model::updateOrCreate($properties['old']);
+        $status = match ($activity->event) {
+            'deleted', 'updated' => $model::updateOrCreate($properties['old']),
+            'created' => $model->delete()
+        };
         $activity->delete();
+        activity()->enableLogging();
         $model::reguard();
+        return $status;
     }
 
     /**

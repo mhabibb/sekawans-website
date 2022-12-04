@@ -7,7 +7,6 @@ use App\Http\Requests\StoreArticleRequest;
 use App\Http\Requests\UpdateArticleRequest;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
-use RealRashid\SweetAlert\Facades\Alert;
 
 class ArticleController extends Controller
 {
@@ -18,7 +17,6 @@ class ArticleController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth');
         $this->authorizeResource(Article::class, 'article');
     }
 
@@ -37,6 +35,7 @@ class ArticleController extends Controller
             'edit'         => 'update',
             'update'       => 'update',
             'destroy'      => 'delete',
+            'restore'      => 'restore',
             'forceDelete'  => 'forceDelete',
         ];
     }
@@ -70,7 +69,8 @@ class ArticleController extends Controller
         } else {
             abort(404);
         };
-        (!auth()->user()->role ? $articles->user() : '');
+
+        if (!auth()->user()->role) $articles->user();
         $articles = $articles->get();
         if (request()->ajax()) {
             return json_encode(['articles' => $articles]);
@@ -139,7 +139,7 @@ class ArticleController extends Controller
             '3' => 'admin.kegiatan.show'
         };
         $article = Article::create($request);
-        (!$article ? Storage::delete($request['img']) : '');
+        if (!$article) Storage::delete($request['img']);
         return to_route($route, $article)->withSuccess('Data berhasil ditambahkan!');
     }
 
@@ -174,16 +174,12 @@ class ArticleController extends Controller
      */
     public function edit(Article $article)
     {
-        if (request()->routeIs('admin.infotbc.edit')) {
-            $title = 'Info TBC';
-        } else if (request()->routeIs('admin.articles.edit')) {
-            $title = 'Artikel';
-        } else if (request()->routeIs('admin.kegiatan.edit')) {
-            $title = 'Kegiatan';
-        } else {
-            abort(404);
-        }
-
+        $title = match (request()->segments()[1]) {
+            'infos'     => 'Info TBC',
+            'articles'  => 'Artikel',
+            'actions'   => 'Kegiatan',
+            default     => abort(404)
+        };
         return view('admin.article.edit', compact('article', 'title'));
     }
 
@@ -204,7 +200,7 @@ class ArticleController extends Controller
         $validated['contents'] = $this->contentDecode($validated['contents'], $article->contents);
         $article->update($validated);
 
-        isset($validated['img']) ? ($article->wasChanged() ? Storage::delete($oldImg) : Storage::delete($validated['img'])) : '';
+        if (isset($validated['img'])) ($article->wasChanged() ? Storage::delete($oldImg) : Storage::delete($validated['img']));
 
         $category = (request()->segments()[1]);
         $category == "infos" ? $route = 'admin.infotbc.show'
@@ -222,25 +218,15 @@ class ArticleController extends Controller
     public function destroy(Article $article)
     {
         activity()->disableLogging();
-        $category = $article->category_id;
         $article->delete();
         activity()->enableLogging();
-        if (request()->ajax()) {
-            return true;
-        }
-        return match ($category) {
-            1 => to_route('admin.infotbc.index'),
-            2 => to_route('admin.articles.index'),
-            3 => to_route('admin.kegiatan.index')
-        };
+        return $article->delete();
     }
 
-    public function restore($id)
+    public function restore(Article $article)
     {
-        $this->authorize('superAdmin');
         activity()->disableLogging();
-        $article = Article::onlyTrashed()->find($id);
-        if ($article->getDeletedAtColumn()) $article->restore();
+        if ($article->trashed()) $article->restore();
         activity()->enableLogging();
         return $article->wasChanged();
     }
@@ -249,21 +235,7 @@ class ArticleController extends Controller
     {
         $this->deleteContentImg($article->contents);
         Storage::delete($article->img);
-        $category = $article->category_id;
-        $article->forceDelete();
-        return match ($category) {
-            1 => to_route('admin.infotbc.index'),
-            2 => to_route('admin.articles.index'),
-            3 => to_route('admin.kegiatan.index')
-        };
-    }
-
-    private function contentEncode($contents)
-    {
-        $ext = collect(explode('.', $contents))->last();
-        $base64 = base64_encode(file_get_contents(storage_path('app/public/' . $contents)));
-        $base64 = "data:image/{$ext};base64, {$base64}";
-        return $base64;
+        return $article->forceDelete();
     }
 
     ## Decode contents article image then save image in storage
@@ -293,31 +265,4 @@ class ArticleController extends Controller
         if (str($contents)->contains('<img src="' . asset('storage/img/articles/contents/')))
             str($contents)->matchAll('/<img[^>]+src="([^">]+)/')->each(fn ($src) => str($src)->contains($exclude) ? '' : Storage::delete(str($src)->remove(asset('storage/'))));
     }
-
-    // ## Decode contents article image then save image in storage
-    // private function contentDecode($contents, $old = null)
-    // {
-    //     $count = Str::substrCount($contents, ';base64,');
-    //     $url = collect([]);
-    //     for ($i = 0; $i < $count; $i++) {
-    //         $base64 = str(str($contents)->explode(' src="data:')[1])->explode('" ')[0];
-    //         $contents = str($contents)->replace('data:' . $base64, '??');
-    //         $ext = str(str(str($contents)->explode('data-filename="')[$i + 1])->explode('"')[0])->explode('.')[1];
-    //         $base64 = str($base64)->explode(',')[1];
-    //         $img = base64_decode(str($base64));
-    //         do {
-    //             $imgName = 'img/articles/contents/' . Str::random(80) . '.' . $ext;
-    //             $status = Storage::get($imgName);
-    //         } while ($status);
-    //         $status = Storage::put($imgName, $img);
-    //         $contents = str($contents)->replace('??', asset('storage/' . $imgName));
-    //         $url->add($imgName);
-    //     }
-    //     if ($old) {
-    //         str($old)->contains('<img src="' . asset('storage/img/articles/contents/')) ?
-    //             str($old)->matchAll('/<img[^>]+src="([^">]+)/')->each(fn ($src) =>
-    //             Storage::delete(str($src)->remove(asset('storage/')))) : '';
-    //     }
-    //     return $contents;
-    // }
 }

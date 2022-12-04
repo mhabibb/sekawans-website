@@ -32,7 +32,7 @@ class Article extends Model
      */
     public function prunable()
     {
-        activity()->disableLogging();
+        // activity()->disableLogging();
         return static::where('deleted_at', '<=', now()->subMonths(3));
     }
 

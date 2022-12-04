@@ -40,8 +40,8 @@ class PatientDetailObserver
      */
     public function deleted(PatientDetail $patientDetail)
     {
-        $patientDetail->patient->emergency_contact->delete();
         $patientDetail->patient->delete();
+        $patientDetail->patient->emergency_contact->delete();
     }
 
     /**

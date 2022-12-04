@@ -284,7 +284,6 @@ class ArticleController extends Controller
         $urls = str($contents)->matchAll('/<img[^>]+src="([^">]+)/')->each(fn ($src) => $src = str($src)->remove(asset('storage/')));
 
         $this->deleteContentImg($old, $urls);
-        dd(str(str($old)->matchAll('/<img[^>]+src="([^">]+)/')[0])->contains(null) ? true : 'compek');
         return $contents;
     }
 

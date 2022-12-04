@@ -23,8 +23,9 @@ class PatientDetail extends Model
         $name = $this->patient->name;
         return LogOptions::defaults()
             ->logAll()
-            ->useLogName('patient')
-            ->setDescriptionForEvent(fn (string $eventName) => "{$user} {$eventName} patient {$name}");
+            ->logOnlyDirty()
+            ->useLogName('patient detail')
+            ->setDescriptionForEvent(fn (string $eventName) => "{$user} {$eventName} patient detail {$name}");
     }
 
     public function scopeInTreatment($query)

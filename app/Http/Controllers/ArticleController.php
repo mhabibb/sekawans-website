@@ -201,7 +201,7 @@ class ArticleController extends Controller
             $oldImg = $article->img;
             $validated['img'] = $validated['img']->store('img/articles');
         };
-        $validated['contents'] = $this->contentDecode($validated['contents']);
+        $validated['contents'] = $this->contentDecode($validated['contents'], $article->contents);
         $article->update($validated);
 
         isset($validated['img']) ? ($article->wasChanged() ? Storage::delete($oldImg) : Storage::delete($validated['img'])) : '';
@@ -221,8 +221,10 @@ class ArticleController extends Controller
      */
     public function destroy(Article $article)
     {
+        activity()->disableLogging();
         $category = $article->category_id;
         $article->delete();
+        activity()->enableLogging();
         if (request()->ajax()) {
             return true;
         }
@@ -236,16 +238,16 @@ class ArticleController extends Controller
     public function restore($id)
     {
         $this->authorize('superAdmin');
+        activity()->disableLogging();
         $article = Article::onlyTrashed()->find($id);
-        $article->getDeletedAtColumn() ? $article->restore() : '';
+        if ($article->getDeletedAtColumn()) $article->restore();
+        activity()->enableLogging();
         return $article->wasChanged();
     }
 
     public function forceDelete(Article $article)
     {
-        str($article->contents)->contains('<img src="' . asset('storage/img/articles/contents/')) ?
-            str($article->contents)->matchAll('/<img[^>]+src="([^">]+)/')->each(fn ($src) =>
-            Storage::delete(str($src)->remove(asset('storage/')))) : '';
+        $this->deleteContentImg($article->contents);
         Storage::delete($article->img);
         $category = $article->category_id;
         $article->forceDelete();
@@ -256,7 +258,7 @@ class ArticleController extends Controller
         };
     }
 
-    public function contentEncode($contents)
+    private function contentEncode($contents)
     {
         $ext = collect(explode('.', $contents))->last();
         $base64 = base64_encode(file_get_contents(storage_path('app/public/' . $contents)));
@@ -264,22 +266,58 @@ class ArticleController extends Controller
         return $base64;
     }
 
-    public function contentDecode($contents)
+    ## Decode contents article image then save image in storage
+    private function contentDecode($contents, $old = null)
     {
-        $count = Str::substrCount($contents, ';base64,');
-        for ($i = 0; $i < $count; $i++) {
-            $base64 = Str::of(Str::of($contents)->explode(' src="data:')[1])->explode('" ')[0];
-            $contents = Str::of($contents)->replace('data:' . $base64, '??');
-            $ext = Str::of(Str::of(Str::of($contents)->explode('data-filename="')[$i + 1])->explode('"')[0])->explode('.')[1];
-            $base64 = Str::of($base64)->explode(',')[1];
-            $img = base64_decode(Str::of($base64));
+        while (str($contents)->contains(';base64,')) {
+            $base64 = str(str($contents)->match('/<img src="data([^">]+)/'));
+            $contents = str($contents)->replace('data' . $base64, '??');
+            $ext = str(str($contents)->match('/<img src="\?\?"([^>]+)/')->explode('.')->last())->trim('"');
+            $base64 = str($base64)->explode(',')[1];
+            $img = base64_decode(str($base64));
             do {
                 $imgName = 'img/articles/contents/' . Str::random(80) . '.' . $ext;
                 $status = Storage::get($imgName);
             } while ($status);
             $status = Storage::put($imgName, $img);
-            $contents = Str::of($contents)->replace('??', asset('storage/' . $imgName));
+            $contents = str($contents)->replace('??', asset('storage/' . $imgName));
         }
+        $urls = str($contents)->matchAll('/<img[^>]+src="([^">]+)/')->each(fn ($src) => $src = str($src)->remove(asset('storage/')));
+
+        $this->deleteContentImg($old, $urls);
         return $contents;
     }
+
+    private function deleteContentImg($contents, $exclude = null)
+    {
+        if (str($contents)->contains('<img src="' . asset('storage/img/articles/contents/')))
+            str($contents)->matchAll('/<img[^>]+src="([^">]+)/')->each(fn ($src) => str($src)->contains($exclude) ? '' : Storage::delete(str($src)->remove(asset('storage/'))));
+    }
+
+    // ## Decode contents article image then save image in storage
+    // private function contentDecode($contents, $old = null)
+    // {
+    //     $count = Str::substrCount($contents, ';base64,');
+    //     $url = collect([]);
+    //     for ($i = 0; $i < $count; $i++) {
+    //         $base64 = str(str($contents)->explode(' src="data:')[1])->explode('" ')[0];
+    //         $contents = str($contents)->replace('data:' . $base64, '??');
+    //         $ext = str(str(str($contents)->explode('data-filename="')[$i + 1])->explode('"')[0])->explode('.')[1];
+    //         $base64 = str($base64)->explode(',')[1];
+    //         $img = base64_decode(str($base64));
+    //         do {
+    //             $imgName = 'img/articles/contents/' . Str::random(80) . '.' . $ext;
+    //             $status = Storage::get($imgName);
+    //         } while ($status);
+    //         $status = Storage::put($imgName, $img);
+    //         $contents = str($contents)->replace('??', asset('storage/' . $imgName));
+    //         $url->add($imgName);
+    //     }
+    //     if ($old) {
+    //         str($old)->contains('<img src="' . asset('storage/img/articles/contents/')) ?
+    //             str($old)->matchAll('/<img[^>]+src="([^">]+)/')->each(fn ($src) =>
+    //             Storage::delete(str($src)->remove(asset('storage/')))) : '';
+    //     }
+    //     return $contents;
+    // }
 }

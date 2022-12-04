@@ -4,16 +4,29 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Spatie\Activitylog\Traits\LogsActivity;
+use Spatie\Activitylog\LogOptions;
 
 class EmergencyContact extends Model
 {
-    use HasFactory;
+    use HasFactory, LogsActivity;
 
     protected $guarded = ['id'];
 
     protected $with = ['district'];
 
     public $timestamps = false;
+
+    public function getActivitylogOptions(): LogOptions
+    {
+        $user = auth()->user()->name ?? 'System';
+        $name = $this->name;
+        return LogOptions::defaults()
+            ->logAll()
+            ->logOnlyDirty()
+            ->useLogName('emergency contact')
+            ->setDescriptionForEvent(fn (string $eventName) => "{$user} {$eventName} patient emergency contact {$name}");
+    }
 
     public function scopeLast($query)
     {

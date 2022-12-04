@@ -75,6 +75,7 @@ class UserController extends Controller
         // if (isset($request['password'])) {
         //     $request['password'] = $request['password'];
         // }
+        // dd($request);
         $user->update($request);
         return to_route('admin.users.show', $user)->withSuccess("Profil berhasil diperbarui!");
     }

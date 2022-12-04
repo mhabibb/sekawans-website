@@ -13,6 +13,8 @@ use App\Models\Regency;
 use App\Models\Religion;
 use App\Models\SateliteHealthFacility;
 use App\Models\Worker;
+use Spatie\Activitylog\Facades\LogBatch;
+use Spatie\Activitylog\Models\Activity;
 
 class PatientController extends Controller
 {
@@ -71,9 +73,12 @@ class PatientController extends Controller
     public function store(StorePatientRequest $request)
     {
         $request = $request->validated();
+        LogBatch::startBatch();
         $emergency = EmergencyContact::create($request['emergency']);
         isset($emergency) ? $patient = Patient::create($request) : '';
         isset($patient) ? $detail = PatientDetail::create($request) : '';
+        LogBatch::endBatch();
+
         $detail = PatientDetail::find($detail->id);
 
         return redirect()->route('admin.patients.show', $detail)->withSuccess("Data berhasil dibuat!");;
@@ -119,9 +124,11 @@ class PatientController extends Controller
     public function update(UpdatePatientRequest $request, PatientDetail $patient)
     {
         $request = $request->validated();
+        LogBatch::startBatch();
         $patient->patient->emergency_contact->update($request['emergency']);
         $patient->patient->update($request);
         $patient->update($request);
+        LogBatch::endBatch();
         // $detail = PatientDetail::find($patient);
 
         return redirect()->route('admin.patients.show', $patient)->withSuccess("Data berhasil diperbarui!");
@@ -135,10 +142,12 @@ class PatientController extends Controller
      */
     public function destroy(PatientDetail $patient)
     {
+        LogBatch::startBatch();
         $patient->delete();
         if (request()->ajax()) {
             return true;
         };
+        LogBatch::endBatch();
         return to_route('admin.patients.index');
     }
 }

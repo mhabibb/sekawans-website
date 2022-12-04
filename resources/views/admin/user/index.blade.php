@@ -36,9 +36,9 @@
                                             <td>{{ $user->email }}</td>
                                             <td>
                                                 <a href="#" id="bt{{ $user->id }}" class="badge badge-success" onclick="resetUser({{ $user->id }})">
-                                                    <i class="fa-solid fa-rotate-left"></i>Reset</a>
+                                                    <i class="fa-solid fa-rotate-left"></i> Reset</a>
                                                 <a href="#" id="bt{{ $user->id }}" class="badge badge-danger" onclick="deleteUser({{ $user->id }})">
-                                                    <i class="fa-solid fa-rotate-left"></i>Hapus</a>
+                                                    <i class="fa-solid fa-trash-can"></i> Hapus</a>
                                             </td>
                                         </tr>
                                     @endforeach

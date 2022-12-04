@@ -41,9 +41,8 @@
                     <td><div class="truncate">{{ $log->description }}</div></td>
                     <td>{{ date('j F Y, H:i:s', strtotime($log->updated_at)) }}</td>
                     <td style="white-space: nowrap;">
-                      <button class="btn badge badge-info border-0">Show</button>
-                      <button class="btn badge badge-success border-0">Restore</button>
-                      <button class="btn badge badge-danger border-0">Delete</button>
+                      <a href="{{ route('admin.logs.show', $log) }}" class="btn badge badge-info">Show</a>
+                      <a role="button" onclick="restoreLog({{ $log->id }})" class="btn badge badge-success">Restore</a>
                     </td>
                   </tr>
                   @empty
@@ -70,8 +69,54 @@
         $('#logsData').DataTable({
             "responsive": true,
             "autoWidth": false,
-            "ordering": false
+            order: [[1, 'desc']]
         });
       })
+
+      function restoreLog(id) {
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+        url = "{{ route('admin.logs.restore', 'id') }}";
+        url = url.replace('id', id)
+
+        Swal.fire({
+            title: 'Yakin Untuk Memulihkan?',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yakin',
+            cancelButtonText: 'Batalkan',
+        }).then((result) => {
+            if (result.isConfirmed) {
+                $.ajax({
+                        type: "PUT",
+                        url: url,
+                        data: id,
+                    })
+                    .done(function(status) {
+                        Swal.fire({
+                            title: 'Sukses',
+                            text: 'Data telah dipulihkan',
+                            icon: 'success',
+                            showConfirmButton: false
+                        })
+                        setTimeout(() => {
+                          location.href = "{{ route('admin.logs.index') }}";
+                        }, 1500);
+                    })
+                    .fail(function() {
+                        Swal.fire(
+                            'Terjadi Kesalahan',
+                            '',
+                            'error'
+                        )
+                    });
+            }
+        })
+      }
     </script>
 @endsection

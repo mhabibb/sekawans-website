@@ -54,7 +54,7 @@ class StaticElementController extends Controller
         isset($request['img']) ? Storage::delete($sekawan->contents) : '';
         // dd($request);
         $sekawan->update($request);
-        return redirect()->route('admin.sekawans.index');
+        return redirect()->route('admin.sekawans.index')->withSuccess("Data berhasil diperbarui!");
         // return $sekawan->wasChanged();
     }
 }

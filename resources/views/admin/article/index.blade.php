@@ -127,16 +127,7 @@
                 }
             ]
         })
-        // table = $("#articlesData");
-        // table.DataTable({
-        //     "responsive": true,
-        //     "autoWidth": false,
-        //     "lengthChange": true,
-        //     order: [
-        //         [1, 'desc']
-        //     ],
-
-        // });
+        
     });
 
     @can('superAdmin')

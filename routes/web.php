@@ -66,8 +66,8 @@ Route::middleware('auth')->prefix('admin')->name('admin.')->group(function () {
         Route::put('/actions/{article}', 'update')->name('kegiatan.update');
         Route::delete('/actions/{article}', 'destroy')->name('kegiatan.destroy');
         Route::get('/trashed/{path}', 'trashed')->name('trashed.index');
-        Route::put('/restore/{article}', 'restore')->name('articles.restore');
-        Route::delete('/force/{article}', 'forceDelete')->name('articles.forceDelete');
+        Route::put('/restore/{article}', 'restore')->name('articles.restore')->withTrashed();
+        Route::delete('/force/{article}', 'forceDelete')->name('articles.forceDelete')->withTrashed();
     });
 });
 

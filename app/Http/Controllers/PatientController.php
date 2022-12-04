@@ -16,6 +16,8 @@ use App\Models\Worker;
 use Spatie\Activitylog\Facades\LogBatch;
 use Spatie\Activitylog\Models\Activity;
 
+use function PHPUnit\Framework\isNull;
+
 class PatientController extends Controller
 {
     /**
@@ -36,16 +38,16 @@ class PatientController extends Controller
     public function index()
     {
         $patients = PatientDetail::all();
-        return view('admin.patient.index', [
-            'title' => 'Data Pasien',
-            'patients' => $patients
-        ]);
+        $regencies = Regency::all();
+        $title = 'Data Pasien';
+        return view('admin.patient.index', compact('regencies', 'title', 'patients'));
     }
 
     public function regency($regency)
     {
-        $regency = Patient::withWhereHas('district.regency', fn ($query) => $query->where('id', $regency))->get();
-        return json_encode($regency);
+        $patients = $regency !== '0' ? PatientDetail::withWhereHas('patient.district.regency', fn ($query) => $query->where('id', $regency))->get() : PatientDetail::all();
+        // dd($patients, isset($regency));
+        return json_encode(['patients' => $patients]);
     }
 
     /**

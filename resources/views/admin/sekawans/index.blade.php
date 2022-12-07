@@ -23,9 +23,9 @@
                       <strong>{{ ucfirst($sekawan->element) }}</strong>
                       <div class="text-break">{{ $sekawan->contents }}</div>
                     </td>
-                    <td class="border-0">
-                      <a role="button" class="badge badge-warning" data-toggle="modal" data-target="#sekawanEdit{{ $sekawan->id }}">Edit</a>
-                      {{-- <a role="button" class="badge badge-info" onclick="editElement({{ $sekawan }})">Edit</a> --}}
+                    <td class="border-0 col-1">
+                      {{-- <a role="button" class="badge badge-warning" data-toggle="modal" data-target="#sekawanEdit{{ $sekawan->id }}">Edit</a> --}}
+                      <a role="button" class="badge badge-warning" onclick="editElement({{ $sekawan }})">Edit</a>
                     </td>
                   </tr>
                   @elseif ($sekawan->id == 3)
@@ -36,9 +36,9 @@
                   </tr>
                   <tr class="expandable-body border-bottom">
                     <td colspan="2">
-                      <img src="{{ asset('storage/'. $sekawan->contents) }}" class="img-fluid p-2 d-block"
-                        style="width: auto; max-height: 720px;">
-                      <a role="button" class="m-2 btn btn-warning" data-toggle="modal" data-target="#sekawanEdit{{ $sekawan->id }}">Edit</a>
+                      <a role="button" class="float-right m-3 btn btn-warning" data-toggle="modal" data-target="#sekawanEdit{{ $sekawan->id }}">Edit</a>
+                      <img src="{{ asset('storage/'. $sekawan->contents) }}" class="img-fluid p-3 d-block" style="width: auto; max-height: 720px;">
+                      {{-- <a role="button" class="m-2 btn btn-warning" data-toggle="modal" data-target="#sekawanEdit{{ $sekawan->id }}">Edit</a> --}}
                     </td>
                   </tr>
                   @else
@@ -49,9 +49,10 @@
                   </tr>
                   <tr class="expandable-body">
                     <td colspan="2">
+                      <a role="button" class="float-right m-3 btn btn-warning" onclick="editElement({{ $sekawan }})">Edit</a>
                       <div class="overflow-auto" style="max-height: 360px;">{{ $sekawan->contents }}
                       </div>
-                      <a role="button" class="m-2 btn btn-warning" data-toggle="modal" data-target="#sekawanEdit{{ $sekawan->id }}">Edit</a>
+                      {{-- <a role="button" class="m-2 btn btn-warning" data-toggle="modal" data-target="#sekawanEdit{{ $sekawan->id }}">Edit</a> --}}
                     </td>
                   </tr>
                   @endif
@@ -63,29 +64,15 @@
                         tabindex="-1">
                         <div class="modal-dialog modal-dialog-centered modal-lg">
                             <div class="modal-content">
-                                <div class="modal-header">
-                                    <h5 class="modal-title" id="staticBackdropLabel">Edit</h5>
-                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                        <span aria-hidden="true">&times;</span>
-                                    </button>
-                                </div>
                                 <div class="modal-body">
-                                    @if ($sekawan->id > 3 )
-                                    <input type="text" class="form-control @error('contents') is-invalid @enderror" name="contents"
-                                        value="{{ $sekawan->contents }}">
-                                    @elseif ($sekawan->id == 3)
-                                    <img src="{{ asset('storage/'.$sekawan->contents) }}" alt="..."
-                                        class="img-preview img-fluid d-block mb-2">
-                                    <input type="file" class="form-control-file" accept="image/*" name="content" id="image" onchange="previewImg()">
-                                    @else
-                                    <textarea type="text" class="form-control @error('contents') is-invalid @enderror" name="contents"
-                                        rows="10" style="resize: none;">{{ $sekawan->contents }}</textarea>
-                                    @endif
+                                  <img src="{{ asset('storage/'.$sekawan->contents) }}" alt="..."
+                                      class="img-preview img-fluid d-block mb-2">
+                                  <input type="file" class="form-control-file @error('content') is-invalid @enderror" accept="image/*" name="content" id="image" onchange="previewImg()">
                                 </div>
                                 <div class="modal-footer">
                                     <button type="reset" class="btn btn-secondary" onclick="reset()"
                                         data-dismiss="modal">Batalkan</button>
-                                    <button type="submit" class="btn btn-primary">Perbarui</button>
+                                    <button type="submit" class="btn btn-primary">Update</button>
                                 </div>
                             </div>
                         </div>
@@ -110,22 +97,74 @@
 
 @section('js')
 <script>
+  function previewImg() {
+    const image = document.querySelector('#image');
+    const imgPreview = document.querySelector('.img-preview');
+
+    const oFReader = new FileReader();
+    oFReader.readAsDataURL(image.files[0]);
+
+    oFReader.onload = function(oFREvent) {
+      imgPreview.src = oFREvent.target.result;
+    }
+  }
+  
   function editElement(sekawan) {
-    id = sekawan.id;
-    url = "{{ route('admin.sekawans.edit', 'id') }}";
-    url = url.replace('id', id);
-    $.ajax({
-      type: "GET",
-      url: url,
-      success: function(data) {
-        datas = JSON.parse(data);
-        data = datas[id-1];
-        console.log(data);
-        $('.form-control').val(data.contents);
-        $('#sekawanEdit').modal('show');
+    $.ajaxSetup({
+      headers: {
+          'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+      }
+    });
+    url = "{{ route('admin.sekawans.update', 'id') }}"
+    url = url.replace('id', sekawan.id)
+
+    if (sekawan.id > 3) {
+      type = 'text'
+      attr = ''
+    } else if (sekawan.id < 3) {
+      type = 'textarea'
+      attr = {'style': 'height: 360px; resize: none'}
+    }
+    const { value: data } = Swal.fire({
+      title: `Update ${sekawan.element}`,
+      input: type,
+      inputValue: sekawan.contents,
+      inputAttributes: attr,
+      showCancelButton: true,
+      confirmButtonText: "Update",
+      cancelButtonText: "Batalkan",
+      inputValidator: (value) => {
+        if (!value) {
+          return 'Tidak boleh kosong!'
+        }
       }
     })
-
+    .then((result) => {
+      if (result.isConfirmed) {
+        $.ajax({
+          type: "PUT",
+          url: url,
+          data: {contents: result.value},
+        })
+        .done(function(status) {
+            Swal.fire({
+                title: 'Update Berhasil!',
+                icon: 'success',
+                showConfirmButton: false,
+            })
+            setTimeout(function() {
+                location.reload()
+            }, 1500);
+        })
+        .fail(function() {
+            Swal.fire(
+                'Terjadi Kesalahan',
+                '',
+                'error'
+            )
+        });
+      }
+    })
   }
 
   function updateElement(sekawan) {
@@ -210,17 +249,14 @@
     )
   @endif
 
-  function previewImg() {
-    const file = document.querySelector('#image').files[0];
-    const preview = document.querySelector('.img-preview');
-    const oFReader = new FileReader();
-    if (file) {
-      oFReader.readAsDataURL(file);
-    }
-
-    oFReader.onload = function(oFREvent) {
-      preview.src = oFREvent.target.result;
-    };
-  }
+  // function previewImg() {
+  //   const image = document.querySelector('#image');
+  //   const imgPreview = document.querySelector('.img-preview');
+  //   const oFReader = new FileReader();
+  //   oFReader.readAsDataURL(image.files[0]);
+  //   oFReader.onload = function(oFREvent) {
+  //     imgPreview.src = oFREvent.target.result;
+  //   }
+  // };
 </script>
 @endsection

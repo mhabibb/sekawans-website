@@ -34,7 +34,7 @@ Route::middleware('auth')->prefix('admin')->name('admin.')->group(function () {
     Route::resource('/users', UserController::class)->except('edit');
     Route::post('/users/first', [UserController::class, 'firstLogin'])->name('users.firstLogin');
     Route::post('/users/{user}/reset', [UserController::class, 'reset'])->name('users.reset');
-    Route::resource('/sekawans', StaticElementController::class)->except(['create', 'destroy', 'store']);
+    Route::resource('/sekawans', StaticElementController::class)->only(['index', 'update']);
     Route::resource('/patients', PatientController::class);
     Route::controller(PatientController::class)->group(function(){
         Route::get('/patient/{regencies}', 'regency')->name('patients.regency');

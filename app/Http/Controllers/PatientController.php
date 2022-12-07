@@ -37,17 +37,15 @@ class PatientController extends Controller
      */
     public function index()
     {
-        $patients = PatientDetail::all();
         $regencies = Regency::all();
         $title = 'Data Pasien';
-        return view('admin.patient.index', compact('regencies', 'title', 'patients'));
+        return view('admin.patient.index', compact('regencies', 'title'));
     }
 
     public function regency($regency)
     {
         $patients = $regency !== '0' ? PatientDetail::withWhereHas('patient.district.regency', fn ($query) => $query->where('id', $regency))->get() : PatientDetail::all();
-        // dd($patients, isset($regency));
-        return json_encode(['patients' => $patients]);
+        return $patients;
     }
 
     /**

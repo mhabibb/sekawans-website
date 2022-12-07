@@ -35,30 +35,9 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @foreach ($articles as $article)
-                                            <tr>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                {{-- <td>{{ $article->title }}</td>
-                                                <td>{{ date('j F Y, H:i:s', strtotime($article->updated_at)) }}</td>
-                                                <td>{{ $article->user->name }}</td>
-                                                <td>
-                                                    <a href="{{ route($showRoute, $article) }}"
-                                                        class="badge badge-primary mr-2"><i class="fa-solid fa-eye"></i> Lihat</a>
-                                                    <a href="{{ route($editRoute, $article) }}"
-                                                        class="badge badge-warning mr-2">
-                                                        <i class="fa-solid fa-pen-to-square"></i> Edit</a>
-                                                    <a href="#" class="badge badge-danger border-0" onclick="deleteArticle({{ $article->id }})">
-                                                        <i class="fa-solid fa-trash-can"></i> Hapus</a>
-                                                </td> --}}
-                                            </tr>
-                                        @endforeach
                                     </tbody>
                                 </table>
                             </div>
-                            {{-- <table id="trashData" class="table table-striped mx-auto d-none"></table> --}}
                         </div>
                     </div>
                 </div>
@@ -69,122 +48,47 @@
 @endsection
 
 @section('js')
-<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.4/moment-with-locales.min.js" integrity="sha512-42PE0rd+wZ2hNXftlM78BSehIGzezNeQuzihiBCvUEB3CVxHvsShF86wBWwQORNxNINlBPuq7rG4WWhNiTVHFg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.4/moment-with-locales.min.js"
+        integrity="sha512-42PE0rd+wZ2hNXftlM78BSehIGzezNeQuzihiBCvUEB3CVxHvsShF86wBWwQORNxNINlBPuq7rG4WWhNiTVHFg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdn.datatables.net/plug-ins/1.13.1/sorting/datetime-moment.js"></script>
 
-<script src="https://cdn.datatables.net/plug-ins/1.13.1/sorting/datetime-moment.js"></script>
-
-<script>
-    // moment.locale('en');
-    $(document).ready(function() {
-        table = $("#articlesData");
-        table.DataTable().destroy();
-        time = $('#time')
-        path = window.location.pathname.split('/')[2];
-        
-        $('.toggler').text('Lihat Sampah')
-        time.html('Waktu Update')
-        url = "{{ route('admin.articles.index') }}";
-        url = url.replace('articles', path)
-        date = 'updated_at';
-        $.fn.dataTable.moment('D MMMM YYYY, hh:mm:ss');
-
-        table.DataTable({
-            "responsive": true,
-            "autoWidth": false,
-            "lengthChange": true,
-            order: [
-                [1, 'desc']
-            ],
-            ajax: {
-                'url': url,
-                'type': "GET",
-                'dataSrc': 'articles'
-            },
-            columns: [{
-                    data: "title"
-                },
-                {
-                    data: date,
-                    render: function(data) {
-                        date = new Date(data);
-                        return moment(date).format('D MMMM YYYY, hh:mm:ss');
-                    }
-                },
-                {
-                    data: "user.name"
-                },
-                {
-                    targets: 0,
-                    data: "id",
-                    render: function(data) {
-                        return `<a href="#" onclick="action('show',` + data + `)" class="badge badge-primary mr-2">
-                                <i class="fa-solid fa-eye"></i> Lihat</a>
-                                <a href="#" onclick="action('edit',` + data + `)" class="badge badge-warning mr-2">
-                                <i class="fa-solid fa-pen-to-square"></i> Edit</a>
-                                <a href="#" id="` + data + `" onclick="action('delete',` + data + `)" class="badge badge-danger">
-                                <i class="fa-solid fa-trash-can"></i> Hapus</a>`
-                    }
-                }
-            ]
-        })
-        
-    });
-
-    @can('superAdmin')
-        $('.toggler').click(function() {
-            table.DataTable().destroy();
+    <script>
+        moment.locale('id');
+        $(function() {
+            table = $("#articlesData");
             time = $('#time')
             path = window.location.pathname.split('/')[2];
-            if (time.html() == 'Waktu Update') {
-                $('.toggler').text('Tutup')
-                time.html('Waktu Hapus')
-                url = "{{ route('admin.trashed.index', 'path') }}";
-                url = url.replace('path', path)
-                date = 'deleted_at';
-                $.fn.dataTable.moment('D MMMM YYYY, hh:mm:ss');
+            url = "{{ route('admin.articles.index') }}";
+            url = url.replace('articles', path)
+            date = 'updated_at';
+            tableAjax();
 
-                table.DataTable({
-                    "responsive": true,
-                    "lengthChange": true,
-                    order: [
-                        [1, 'desc']
-                    ],
-                    ajax: {
-                        'url': url,
-                        'type': "GET",
-                        'dataSrc': 'articles'
-                    },
-                    columns: [{
-                            data: "title"
-                        },
-                        {
-                            data: date,
-                            render: function(data) {
-                                date = new Date(data);
-                                return moment(date).format('D MMMM YYYY, hh:mm:ss');
-                            }
-                        },
-                        {
-                            data: "user.name"
-                        },
-                        {
-                            targets: 0,
-                            data: "id",
-                            render: function(data) {
-                                return `<a href="#" class="btn badge badge-success" onclick="action('restore',` +
-                                        data + `)"><i class="fa-solid fa-rotate-left"></i> Restore</a>
-                                        <a href="#" class="btn badge badge-danger" onclick="action('forceDelete',` +
-                                        data + `)"><i class="fa-solid fa-xmark"></i> Force Delete</a>`;
-                            }
-                        }
-                    ]
+            @can('superAdmin')
+                toggler = $('.toggler')
+                toggler.click(function() {
+                    if ($(this).hasClass('trash')) {
+                        $(this).removeClass('trash')
+                        $('.toggler').text('Lihat Sampah')
+                        time.html('Waktu Update')
+                        url = "{{ route('admin.articles.index') }}";
+                        url = url.replace('articles', path)
+                        date = 'updated_at';
+                        tableAjax();
+                    } else {
+                        $(this).addClass('trash');
+                        $('.toggler').text('Tutup');
+                        time.html('Waktu Hapus');
+                        url = "{{ route('admin.trashed.index', 'path') }}";
+                        url = url.replace('path', path);
+                        date = 'deleted_at';
+                        tableAjax();
+                    }
                 })
-            } else {
-                $('.toggler').text('Lihat Sampah')
-                time.html('Waktu Update')
-                url = "{{ route('admin.articles.index') }}";
-                url = url.replace('articles', path)
-                date = 'updated_at';
+            @endcan
+
+            function tableAjax() {
+                table.DataTable().destroy();
                 $.fn.dataTable.moment('D MMMM YYYY, hh:mm:ss');
 
                 table.DataTable({
@@ -216,12 +120,21 @@
                             targets: 0,
                             data: "id",
                             render: function(data) {
+                                @can('superAdmin')
+                                    if (time.html() !== 'Waktu Update') {
+                                        return `<a href="#" class="btn badge badge-success" onclick="action('restore',` +
+                                            data + `)"><i class="fa-solid fa-rotate-left"></i> Pulihkan</a>
+                                        <a href="#" class="btn badge badge-danger" onclick="action('forceDelete',` +
+                                            data +
+                                            `)"><i class="fa-solid fa-xmark"></i> Hapus Permanen</a>`;
+                                    } else
+                                @endcan
                                 return `<a href="#" onclick="action('show',` + data + `)" class="badge badge-primary mr-2">
-                                        <i class="fa-solid fa-eye"></i> Lihat</a>
-                                        <a href="#" onclick="action('edit',` + data + `)" class="badge badge-warning mr-2">
-                                        <i class="fa-solid fa-pen-to-square"></i> Edit</a>
-                                        <a href="#" id="` + data + `" onclick="action('delete',` + data + `)" class="badge badge-danger">
-                                        <i class="fa-solid fa-trash-can"></i> Hapus</a>`
+                                    <i class="fa-solid fa-eye"></i> Lihat</a>
+                                    <a href="#" onclick="action('edit',` + data + `)" class="badge badge-warning mr-2">
+                                    <i class="fa-solid fa-pen-to-square"></i> Ubah</a>
+                                    <a href="#" id="` + data + `" onclick="action('delete',` + data + `)" class="badge badge-danger">
+                                    <i class="fa-solid fa-trash-can"></i> Hapus</a>`
                             }
                         }
                     ]
@@ -241,145 +154,95 @@
                     url = url.replace('articles', path).replace('id', id)
                     location.href = url;
                     break;
-                case 'restore':
-                    $.ajaxSetup({
-                        headers: {
-                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                        }
-                    });
-                    url = "{{ route('admin.articles.restore', 'id') }}";
-                    url = url.replace('articles', path).replace('id', id)
-
-                    Swal.fire({
-                        title: 'Yakin Untuk Memulihkan?',
-                        text: "Data akan dapat diakses kembali",
-                        icon: 'warning',
-                        showCancelButton: true,
-                        confirmButtonColor: '#3085d6',
-                        cancelButtonColor: '#d33',
-                        confirmButtonText: 'Yakin',
-                        cancelButtonText: 'Batalkan',
-                    }).then((result) => {
-                        if (result.isConfirmed) {
-                            $.ajax({
-                                    type: "PUT",
-                                    url: url,
-                                    data: id,
-                                })
-                                .done(function(status) {
-                                    Swal.fire({
-                                        title: 'Sukses',
-                                        text: 'Data telah dipulihkan',
-                                        icon: 'success',
-                                        showConfirmButton: false,
-                                        timer: 2000
-                                    })
-                                    table.DataTable().ajax.reload();
-                                })
-                                .fail(function() {
-                                    Swal.fire(
-                                        'Terjadi Kesalahan',
-                                        '',
-                                        'error'
-                                    )
-                                });
-                        }
-                    })
-                    break;
                 case 'delete':
-                    $.ajaxSetup({
-                        headers: {
-                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                        }
-                    });
                     url = "{{ route('admin.articles.destroy', 'id') }}";
                     url = url.replace('articles', path).replace('id', id)
-
-                    Swal.fire({
+                    text = {
                         title: 'Yakin Untuk Menghapus?',
-                        text: "Data akan dibuang ke sampah",
-                        icon: 'warning',
-                        showCancelButton: true,
-                        confirmButtonColor: '#3085d6',
-                        cancelButtonColor: '#d33',
-                        confirmButtonText: 'Yakin',
-                        cancelButtonText: 'Batalkan',
-                    }).then((result) => {
-                        if (result.isConfirmed) {
-                            $.ajax({
-                                    type: "DELETE",
-                                    url: url,
-                                    data: id,
-                                })
-                                .done(function(status) {
-                                    Swal.fire({
-                                        title: 'Terhapus',
-                                        text: 'Data telah dibuang ke sampah',
-                                        icon: 'success',
-                                        showConfirmButton: false,
-                                        timer: 2000
-                                    })
-                                    table.DataTable().ajax.reload();
-                                })
-                                .fail(function() {
-                                    Swal.fire(
-                                        'Terjadi Kesalahan',
-                                        '',
-                                        'error'
-                                    )
-                                });
+                        text: 'Data akan dibuang ke sampah',
+                        success: {
+                            title: 'Terhapus',
+                            text: 'Data telah dibuang ke sampah'
                         }
-                    })
+                    }
+                    btnAjax('DELETE')
                     break;
-                case 'forceDelete':
-                    $.ajaxSetup({
-                        headers: {
-                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                        }
-                    });
-                    url = "{{ route('admin.articles.forceDelete', 'id') }}";
-                    url = url.replace('articles', path).replace('id', id)
 
-                    Swal.fire({
-                        title: 'Yakin Untuk Hapus Permanen?',
-                        text: "Data akan hilang selamanya dan tidak dapat dikembalikan",
-                        icon: 'warning',
-                        showCancelButton: true,
-                        confirmButtonColor: '#3085d6',
-                        cancelButtonColor: '#d33',
-                        confirmButtonText: 'Yakin',
-                        cancelButtonText: 'Batalkan',
-                    }).then((result) => {
-                        if (result.isConfirmed) {
-                            $.ajax({
-                                    type: "DELETE",
-                                    url: url,
-                                    data: id,
-                                })
-                                .done(function(status) {
-                                    Swal.fire({
-                                        title: 'Terhapus',
-                                        text: 'Data telah dihapus permanen',
-                                        icon: 'success',
-                                        showConfirmButton: false,
-                                        timer: 2000
-                                    })
-                                    table.DataTable().ajax.reload();
-                                })
-                                .fail(function() {
-                                    Swal.fire(
-                                        'Terjadi Kesalahan',
-                                        '',
-                                        'error'
-                                    )
-                                });
+                    @can('superAdmin')
+                        case 'restore':
+                        url = "{{ route('admin.articles.restore', 'id') }}";
+                        url = url.replace('articles', path).replace('id', id)
+                        text = {
+                            title: 'Yakin Untuk Memulihkan?',
+                            text: 'Data akan dapat diakses kembali',
+                            success: {
+                                title: 'Sukses',
+                                text: 'Data telah dipulihkan'
+                            }
                         }
-                    })
-                    break;
-                default:
-                    break;
+                        btnAjax('PUT')
+                        break;
+                        case 'forceDelete':
+                        url = "{{ route('admin.articles.forceDelete', 'id') }}";
+                        url = url.replace('articles', path).replace('id', id)
+                        text = {
+                            title: 'Yakin Untuk Hapus Permanen?',
+                            text: 'Data akan hilang selamanya dan tidak dapat dikembalikan',
+                            success: {
+                                title: 'Terhapus',
+                                text: 'Data telah dihapus permanen'
+                            }
+                        }
+                        btnAjax('DELETE')
+                        break;
+                    @endcan
+                    default:
+                        break;
+            }
+
+            function btnAjax(type) {
+                $.ajaxSetup({
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    }
+                });
+
+                Swal.fire({
+                    title: text.title,
+                    text: text.text,
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Yakin',
+                    cancelButtonText: 'Batalkan',
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        $.ajax({
+                                type: type,
+                                url: url,
+                                data: id,
+                            })
+                            .done(function(status) {
+                                Swal.fire({
+                                    title: text.success.title,
+                                    text: text.success.text,
+                                    icon: 'success',
+                                    showConfirmButton: false,
+                                    timer: 2000
+                                })
+                                table.DataTable().ajax.reload();
+                            })
+                            .fail(function() {
+                                Swal.fire(
+                                    'Terjadi Kesalahan',
+                                    '',
+                                    'error'
+                                )
+                            });
+                    }
+                })
             }
         }
-    @endcan
-</script>
+    </script>
 @endsection

@@ -21,14 +21,18 @@
             <div class="row">
                 <div class="col-12">
                     <div class="card">
-                        <div class="card-header">
-                            <a href="{{ route('admin.patients.create') }}" class="btn btn-primary card-title">Input Data</a>
-                            <select name="regency" id="regency">
-                                <option value="0" selected>Seluruh Kabupaten</option>
-                                @foreach ($regencies as $regency)
-                                    <option value="{{ $regency->id }}">{{ str($regency->name)->title() }}</option>
-                                @endforeach
-                            </select>
+                        <div class="card-header d-flex">
+                            <div class="d-inline-block mr-2">
+                                <a href="{{ route('admin.patients.create') }}" class="btn btn-primary card-title float-left">Input</a>
+                            </div>
+                            <div>
+                                <select class="form-control" name="regency" id="regency">
+                                    <option value="0" selected>Seluruh Kabupaten</option>
+                                    @foreach ($regencies as $regency)
+                                        <option value="{{ $regency->id }}">{{ str($regency->name)->title() }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
                         </div>
 
                         <div class="card-body">
@@ -135,7 +139,7 @@
                             data: 'patient.start_treatment',
                             render: function(data) {
                                 date = new Date(data);
-                                return moment(date).format('D MMMM YYYY, hh:mm:ss');
+                                return moment(date).format('D MMMM YYYY');
                             }
                         },
                         {

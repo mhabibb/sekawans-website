@@ -66,6 +66,7 @@
         $('#userTable').DataTable({
             "responsive": true, 
             "autoWidth": false,
+            "searching": false,
             paging: false,
             order: [
                 [0, 'asc']

@@ -6,6 +6,9 @@
             display: flex;
             flex-wrap: wrap;
         }
+        .dataTables_wrapper .dt-buttons {
+            float: left;
+        }
     </style>
 @endsection
 
@@ -149,8 +152,9 @@
                             data: "patient_status.status"
                         },
                     ],
+                    dom: 'Bfrtip',
                     "buttons": ["csv", "excel", "pdf", "print"],
-                }).buttons().container().appendTo('#patientsData_wrapper .col-md-6:eq(0)');
+                })
             }
         });
     </script>

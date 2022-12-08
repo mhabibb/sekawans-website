@@ -25,7 +25,7 @@
                 <tr>
                   <td> {{ $satelite->name }} </td>
                   <td>
-                    <a href="#" class="badge badge-warning" data-toggle="modal" data-target="#editSatelite{{ $satelite->id }}">Edit</a>
+                    {{-- <a href="#" class="badge badge-warning" data-toggle="modal" data-target="#editSatelite{{ $satelite->id }}">Edit</a> --}}
                     <form action="{{ route('admin.fasyankes.destroy', ['table'=> 'satelite', 'id' => $satelite->id]) }}" method="post">
                       @csrf
                       @method('delete')
@@ -63,7 +63,7 @@
                   <td class="text-muted"> {{ $ps->name }} </td>
                   @endif
                   <td>
-                    <a href="#" class="badge badge-warning" data-toggle="modal" data-target="#editPS{{ $ps->id }}">Edit</a>
+                    {{-- <a href="#" class="badge badge-warning" data-toggle="modal" data-target="#editPS{{ $ps->id }}">Edit</a> --}}
                     <form action="{{ route('admin.fasyankes.destroy', ['table'=> 'workers', 'id' => $ps->id]) }}" method="post">
                       @csrf
                       @method('delete')

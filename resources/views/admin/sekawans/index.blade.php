@@ -36,7 +36,7 @@
                   </tr>
                   <tr class="expandable-body border-bottom">
                     <td colspan="2">
-                      <a role="button" class="float-right m-3 btn btn-warning" data-toggle="modal" data-target="#sekawanEdit{{ $sekawan->id }}">Edit</a>
+                      <a role="button" class="mx-3 mt-2 btn btn-warning" data-toggle="modal" data-target="#sekawanEdit{{ $sekawan->id }}">Ubah Gambar</a>
                       <img src="{{ asset('storage/'. $sekawan->contents) }}" class="img-fluid p-3 d-block" style="width: auto; max-height: 720px;">
                       {{-- <a role="button" class="m-2 btn btn-warning" data-toggle="modal" data-target="#sekawanEdit{{ $sekawan->id }}">Edit</a> --}}
                     </td>
@@ -49,7 +49,7 @@
                   </tr>
                   <tr class="expandable-body">
                     <td colspan="2">
-                      <a role="button" class="float-right m-3 btn btn-warning" onclick="editElement({{ $sekawan }})">Edit</a>
+                      <a role="button" class="mx-3 mt-2 btn btn-warning" onclick="editElement({{ $sekawan }})">Edit Data</a>
                       <div class="overflow-auto" style="max-height: 360px;">{{ $sekawan->contents }}
                       </div>
                       {{-- <a role="button" class="m-2 btn btn-warning" data-toggle="modal" data-target="#sekawanEdit{{ $sekawan->id }}">Edit</a> --}}

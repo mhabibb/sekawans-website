@@ -41,7 +41,7 @@ Route::middleware('auth')->prefix('admin')->name('admin.')->group(function () {
     });
     Route::resource('/logs', LogController::class)->only(['index', 'destroy', 'show'])->middleware(['can:superAdmin']);
     Route::controller(LogController::class)->group(function(){
-        Route::get('/logs/{activity}/restore', 'restore')->name('logs.restore');
+        Route::put('/logs/{activity}/restore', 'restore')->name('logs.restore');
     })->middleware(['can:superAdmin']);
 
     Route::controller(SateliteHealthFacilityController::class)->group(function(){

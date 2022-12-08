@@ -42,9 +42,8 @@
                 </div>
             </div>
             <div class="col-lg-6">
-                <h1 class="fw-bold mb-3">Yuk, Lawan TBC
-                    Dengan Hidup Bersih dan Sehat </h1>
-                <p class="lead">Sudah menjadi hal yang wajib bagi masyarakat untuk mulai memahami penyakit TBC dan gejalanya, dengan demikian, dapat dilakukan deteksi dini, penanganan dan pencegahan yang efektif pada penyakit TBC. Berbagai cara dilakukan untuk mencegah penyakit TBC yaitu salah satunya dengan menerapkan perilaku hidup bersih dan sehat.</p>
+                <h1 class="fw-bold mb-3">Yuk, Lawan TBC Dengan Hidup Bersih dan Sehat </h1>
+                <p class="lead">Sudah menjadi hal yang wajib bagi masyarakat untuk mulai memahami penyakit TBC dan gejalanya. Dengan demikian, dapat dilakukan deteksi dini, penanganan dan pencegahan yang efektif pada penyakit TBC. Berbagai cara dilakukan untuk mencegah penyakit TBC yaitu salah satunya dengan menerapkan perilaku hidup bersih dan sehat.</p>
             </div>
         </div>
     </div>

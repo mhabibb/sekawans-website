@@ -29,7 +29,6 @@ class UpdateStaticElementRequest extends FormRequest
                 'img'       => true
             ]);
         }
-        // dd($this->file('content'));
     }
 
     /**

@@ -31,18 +31,18 @@ class DatabaseSeeder extends Seeder
         ]);
 
         \App\Models\User::factory()->create([
-            'name' => 'Compek',
-            'email' => 'compek@dr.com',
-            'password' => bcrypt('compekiah'),
+            'name' => 'Sekawans',
+            'email' => 'sekawan.tbc@gmail.com',
+            'password' => bcrypt('100%tuntas'),
             'role' => true,
         ]);
         
-        \App\Models\User::factory($this->user--)->create();
-        \App\Models\Article::factory($this->article)->createQuietly();
-        \App\Models\EmergencyContact::factory($this->patient)->create();
-        \App\Models\Patient::factory($this->patient)->create();
-        \App\Models\Worker::factory($this->worker)->create();
-        \App\Models\SateliteHealthFacility::factory($this->satelite)->create();
-        \App\Models\PatientDetail::factory($this->patient)->create();
+        // \App\Models\User::factory($this->user--)->create();
+        // \App\Models\Article::factory($this->article)->createQuietly();
+        // \App\Models\EmergencyContact::factory($this->patient)->create();
+        // \App\Models\Patient::factory($this->patient)->create();
+        // \App\Models\Worker::factory($this->worker)->create();
+        // \App\Models\SateliteHealthFacility::factory($this->satelite)->create();
+        // \App\Models\PatientDetail::factory($this->patient)->create();
     }
 }

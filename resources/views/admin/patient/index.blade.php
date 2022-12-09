@@ -43,8 +43,9 @@
                             <table id="patientsData" class="table table-bordered table-striped">
                                 <thead>
                                     <tr>
-                                        <th>No. Registrasi</th>
+                                        <th></th>
                                         <th>Nama Lengkap</th>
+                                        <th>No. Registrasi</th>
                                         <th>Kecamatan</th>
                                         <th>Mulai Berobat</th>
                                         <th>PS</th>
@@ -96,8 +97,9 @@
                         $(result).each(function(key, patient) {
                             bodi.append(`
                                     <tr>
-                                        <td>` + patient.no_regis + `</td>
+                                        <td></td>
                                         <td><a href="patients/` + patient.id + `">` + patient.patient.name + `</a></td>
+                                        <td>` + patient.no_regis + `</td>
                                         <td>` + patient.patient.district.name + `</td>
                                         <td>` + moment(patient.patient.start_treatment).format('D MMMM YYYY') + `</td>
                                         <td>` + patient.worker.name + `</td>
@@ -109,15 +111,43 @@
                             "responsive": true,
                             "lengthChange": false,
                             "autoWidth": false,
-                            "columnDefs": [{
-                                "targets": 3,
-                                "type": "date"
-                            }],
-                            "buttons": ["csv", "excel", "pdf", "print"],
+                            "columnDefs": [
+                                {
+                                    "targets": 4,
+                                    "type": "date"
+                                },
+                                {
+                                    "targets": 0,
+                                    searchable: false,
+                                    orderable: false
+                                }
+                            ],
+                            dom: 'Bfrtip',
+                            buttons: [
+                                {
+                                    extend: "excel",
+                                    title: "Data pasien TBC - Sekawan'S TB Jember"
+                                }, 
+                                {
+                                    extend: "pdf",
+                                    title: "Data pasien TBC - Sekawan'S TB Jember"
+                                }, 
+                                {
+                                    extend: "print",
+                                    title: "Data pasien TBC - Sekawan'S TB Jember"
+                                }
+                            ],
                             order: [
-                                [3, 'desc']
+                                [4, 'desc']
                             ],
                         }).buttons().container().appendTo('#patientsData_wrapper .col-md-6:eq(0)');
+                        
+                        table.DataTable().on('order.dt search.dt', function () {
+                            let i = 1;
+                            table.DataTable().cells(null, 0, { search: 'applied', order: 'applied' }).every(function (cell) {
+                                this.data(i++);
+                            });
+                        }).draw();
                     })
                     .fail(function() {
                         console.log("error");

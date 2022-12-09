@@ -53,7 +53,7 @@
                                             </tr>
                                             <tr class="expandable-body">
                                                 <td colspan="2">
-                                                    <a role="button" class="mx-3 mt-3 btn btn-warning" onclick="updateElement({{ $sekawan->id }},'{{ $sekawan->element }}')">Edit Data</a>
+                                                    <a role="button" class="m-3 btn btn-warning" onclick="updateElement({{ $sekawan->id }},'{{ $sekawan->element }}')">Edit Data</a>
                                                     <div id="target{{ $sekawan->id }}" class="overflow-auto" style="max-height: 360px;">
                                                         {{ $sekawan->contents }}
                                                     </div>

@@ -51,17 +51,6 @@
                     <!-- small box -->
                     <div class="small-box bg-light">
                         <div class="inner">
-                            <h3>{{ $ps }}</h3>
-                            <h5>PS Aktif</h5>
-                        </div>
-                        <a href="{{ route('admin.fasyankes.index') }}" class="small-box-footer">Selengkapnya <i
-                                class="fas fa-arrow-circle-right"></i></a>
-                    </div>
-                </div>
-                <div class="col">
-                    <!-- small box -->
-                    <div class="small-box bg-light">
-                        <div class="inner">
                             <h3>{{ $pasien }}</h3>
                             <h5>Dalam Pengobatan</h5>
                         </div>

@@ -44,7 +44,9 @@
                     <p class="lead fw-bold">Meninggal</p>
                 </div>
             </div>
+            @if ($regency->total)
             <a href="{{ route('kasustbc.show', $regency) }}" class="btn btn-secondary">Lihat per Kecamatan</a>
+            @endif
         </div>
         @endforeach
     </div>

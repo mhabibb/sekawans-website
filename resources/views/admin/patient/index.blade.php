@@ -30,7 +30,7 @@
                                     class="btn btn-primary card-title float-left">Input</a>
                             </div>
                             <div>
-                                <select class="form-control" name="regency" id="regency">
+                                <select class="custom-select" name="regency" id="regency">
                                     <option value="0" selected>Seluruh Kabupaten</option>
                                     @foreach ($regencies as $regency)
                                         <option value="{{ $regency->id }}">{{ str($regency->name)->title() }}</option>

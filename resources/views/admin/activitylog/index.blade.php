@@ -98,7 +98,8 @@
                                 title: 'Sukses',
                                 text: 'Data telah dipulihkan',
                                 icon: 'success',
-                                showConfirmButton: false
+                                showConfirmButton: false,
+                                timer: 2000
                             })
                             $('#logsData').DataTable().destroy();
                             $('#' + id).remove();
@@ -125,6 +126,10 @@
                         orderable: false,
                         targets: 2,
                     },
+                    {
+                        targets: 0,
+                        orderable: false,
+                    }
                 ],
                 order: [
                     [1, 'desc']

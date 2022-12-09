@@ -40,7 +40,7 @@ class WebController extends Controller
 
     public function info()
     {
-        $infos = Article::oldest()->category(1)->get()->paginate(6);
+        $infos = Article::orderBy("id", "asc")->category(1)->get()->paginate(6);
         return view('web.infotbc', ['infos' => $infos]);
     }
 
@@ -61,6 +61,11 @@ class WebController extends Controller
     public function showCase(Regency $regency)
     {
         $regency = Regency::count('detailStatus')->find($regency->id);
+
+        if(!$regency) {
+            abort(404);
+        }
+
         return view('web.showKasustbc', compact('regency'));
     }
 

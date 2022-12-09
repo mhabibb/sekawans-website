@@ -23,7 +23,6 @@ class EmergencyContact extends Model
         $name = $this->name;
         return LogOptions::defaults()
             ->logAll()
-            ->logOnlyDirty()
             ->useLogName('emergency contact')
             ->setDescriptionForEvent(fn (string $eventName) => "{$user} {$eventName} patient emergency contact {$name}");
     }

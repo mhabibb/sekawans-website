@@ -55,7 +55,6 @@ class Article extends Model
         $title = $this->title;
         return LogOptions::defaults()
             ->logAll()
-            ->logOnlyDirty()
             ->useLogName('article')
             ->dontLogIfAttributesChangedOnly(['deleted_at', 'updated_at'])
             ->setDescriptionForEvent(fn (string $eventName) => "{$user} {$eventName} article {$title}");

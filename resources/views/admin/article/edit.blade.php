@@ -54,10 +54,24 @@
 
 @section('js')
 <script>
-  $('#summernote').summernote({
-    tabsize: 2,
-    height: 300
-  });
+  $('#summernote').summernote(
+    {
+      toolbar: [
+        // [groupName, [list of button]]
+        ['fontname', ['fontname']],
+        ['style', ['bold', 'italic', 'underline', 'clear']],
+        ['font', ['strikethrough', 'superscript', 'subscript']],
+        ['fontsize', ['fontsize']],
+        ['color', ['color']],
+        ['para', ['ul', 'ol', 'paragraph']],
+        ['height', ['height']],
+        ['insert', ['link', 'picture', 'video']],
+        ['view', ['fullscreen', 'help']],
+      ],
+      tabsize: 2,
+      height: 300,
+    }
+  );
 </script>
 
 <script>

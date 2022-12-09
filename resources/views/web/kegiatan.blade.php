@@ -9,7 +9,7 @@
       <div class="card shadow-sm h-100">
         <img src="{{ asset('storage/'.$action->img) }}" class="card-img-top thumbnail" alt="..." loading="lazy">
         <div class="card-body">
-          <div class="mb-1 d-flex gap-3">
+          <div class="mb-2 d-flex gap-3">
             <div class="col-4 text-truncate font-sm">
               <i class="fa-solid fa-user"></i>
               {{ $action->user->name }}

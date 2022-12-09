@@ -7,7 +7,7 @@
     @forelse ($actions as $action)
     <div class="col" style="max-width: 400px;">
       <div class="card shadow-sm h-100">
-        <img src="{{ asset('storage/'.$action->img) }}" class="card-img-top thumbnail" alt="...">
+        <img src="{{ asset('storage/'.$action->img) }}" class="card-img-top thumbnail" alt="..." loading="lazy">
         <div class="card-body">
           <div class="mb-1 d-flex gap-3">
             <div class="col-4 text-truncate font-sm">
@@ -22,8 +22,7 @@
           <div class="module line-clamp">
             <h5>{{ $action->title }}</h5>
           </div>
-          <a href="{{ route('kegiatan.show', $action) }}" class="link-primary text-underline">Baca
-            selengkapnya</a>
+          <a href="{{ route('kegiatan.show', $action) }}" class="link-primary text-underline">Baca selengkapnya</a>
         </div>
       </div>
     </div>

@@ -14,7 +14,7 @@
     <form action="{{ route('admin.articles.store') }}" method="POST" enctype="multipart/form-data">
       @csrf
       <div class="form-group mb-3 col-md-6">
-        <label for="title" class="form-label">Judul {{ $title }} (minimal 50 karakter)</label>
+        <label for="title" class="form-label">Judul {{ $title }} (maksimal 50 karakter)</label>
         <input type="text" name="title" class="form-control @error('title') is-invalid
         @else @if(old('title') ?? false) is-valid @endif @enderror" id="title" placeholder="Tulis judul..."
           value="{{ old('title') }}">

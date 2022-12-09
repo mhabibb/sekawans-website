@@ -37,8 +37,8 @@
                                             </tr>
                                             <tr class="expandable-body border-bottom">
                                                 <td colspan="2">
-                                                    <a role="button" class="float-right m-3 btn btn-warning"
-                                                        onclick="updateElement({{ $sekawan->id }},'{{ $sekawan->element }}')">Edit</a>
+                                                    <a role="button" class="mx-3 mt-3 btn btn-warning"
+                                                        onclick="updateElement({{ $sekawan->id }},'{{ $sekawan->element }}')">Ganti Gambar</a>
                                                     <img id="target{{ $sekawan->id }}"
                                                         src="{{ asset('storage/' . $sekawan->contents) }}"
                                                         class="img-fluid p-3 d-block"
@@ -53,10 +53,8 @@
                                             </tr>
                                             <tr class="expandable-body">
                                                 <td colspan="2">
-                                                    <a role="button" class="float-right m-3 btn btn-warning"
-                                                        onclick="updateElement({{ $sekawan->id }},'{{ $sekawan->element }}')">Edit</a>
-                                                    <div id="target{{ $sekawan->id }}" class="overflow-auto"
-                                                        style="max-height: 360px;">
+                                                    <a role="button" class="mx-3 mt-3 btn btn-warning" onclick="updateElement({{ $sekawan->id }},'{{ $sekawan->element }}')">Edit Data</a>
+                                                    <div id="target{{ $sekawan->id }}" class="overflow-auto" style="max-height: 360px;">
                                                         {{ $sekawan->contents }}
                                                     </div>
                                                 </td>
@@ -167,6 +165,7 @@
                         title: 'Update Berhasil!',
                         icon: 'success',
                         showConfirmButton: false,
+                        timer: 2000
                     })
                 })
                 .fail(function() {

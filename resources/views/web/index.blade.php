@@ -50,23 +50,23 @@
     </div>
     <div class="container mx-auto row text-center justify-content-between pt-4 mb-5 border-top">
         <div class="col p-3">
-            <img src="{{ asset('img/kemenkes.png') }}"
+            <img src="{{ asset('img/logo-stakeholder/kemenkes.png') }}"
                 alt="" height="80px">
         </div>
         <div class="col p-3">
-            <img src="{{ asset('img/rsdsoebandi.png') }}"
+            <img src="{{ asset('img/logo-stakeholder/rsdsoebandi.png') }}"
                 alt="" height="80px">
         </div>
         <div class="col p-3">
-            <img src="{{ asset('img/rsparu.png') }}"
+            <img src="{{ asset('img/logo-stakeholder/rsparu.png') }}"
                 alt="" height="80px">
         </div>
         <div class="col p-3">
-            <img src="{{ asset('img/tosstb.png') }}"
+            <img src="{{ asset('img/logo-stakeholder/tosstb.png') }}"
                 alt="" height="80px">
         </div>
         <div class="col p-3">
-            <img src="{{ asset('img/poptb.png') }}"
+            <img src="{{ asset('img/logo-stakeholder/poptb.png') }}"
                 alt="" height="80px">
         </div>
     </div>

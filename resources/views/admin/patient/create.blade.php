@@ -63,9 +63,9 @@
           </div>
           <div class="col-sm-6 form-group">
             <label>Pendamping/Patient Supporter (PS)</label>
-            <select class="form-control tags 
-            @error('worker_id') is-invalid @else @if(old('worker_id') ?? false) is-valid @endif @enderror"
-              name="worker.id" style="width: 100%;">
+            <select 
+              class="form-control tags @error('worker_id') is-invalid @else @if(old('worker_id') ?? false) is-valid @endif @enderror"
+              id="worker" name="worker.id" style="width: 100%;">
               <option disabled selected>Pilih Pendamping/Patient Supporter (PS)</option>
               @foreach ($workers as $worker)
               <option value="{{ $worker->id }}" @selected(old('worker_id')==$worker->id)>{{
@@ -408,15 +408,33 @@
 
     $('.select2').select2({
         theme: 'bootstrap4',
-        selectOnClose: true
+        // selectOnClose: true
     });
 
     // Dynamic option select2
     $(".tags").select2({
         theme: 'bootstrap4',
-        selectOnClose: true,
+        // selectOnClose: true,
         tags: true
     });
+
+    var select2Id = ['#satelite', '#worker'];
+    select2Id.map((id) => {
+      $(id).on('select2:open', () => {
+        var find = $(id).select2('data');
+        if (!find[0].disabled) {
+          $('.select2-search__field').val(find[0].text);
+        }
+      })
+    })
+
+    // $('#worker').on('select2:open', () => {
+    //   $('.select2-search__field').focus();
+    //   var find = $('#worker').select2('data');
+    //   if (!find[0].disabled) {
+    //     $('.select2-search__field').val(find[0].text);
+    //   }
+    // })
 
     // Auto focus search select2
     $(document).on('select2:open', () => {

@@ -16,7 +16,7 @@ class LogController extends Controller
     public function index()
     {
         $this->uuid = null;
-        $logs = Activity::all()->filter(function ($value) {
+        $logs = Activity::all()->reverse()->filter(function ($value) {
             if (!($value->log_name == 'article' && ($value->event == 'restored' || $value->event == 'deleted'))) {
                 if ($value->batch_uuid) {
                     if ($this->uuid !== $value->batch_uuid) {
@@ -26,7 +26,6 @@ class LogController extends Controller
                 } else return $value;
             }
         });
-        $activity = Activity::latest()->take(1)->get();
         return view('admin.activitylog.index', compact('logs'));
     }
 

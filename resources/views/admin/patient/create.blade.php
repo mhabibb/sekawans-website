@@ -428,14 +428,6 @@
       })
     })
 
-    // $('#worker').on('select2:open', () => {
-    //   $('.select2-search__field').focus();
-    //   var find = $('#worker').select2('data');
-    //   if (!find[0].disabled) {
-    //     $('.select2-search__field').val(find[0].text);
-    //   }
-    // })
-
     // Auto focus search select2
     $(document).on('select2:open', () => {
         document.querySelector('.select2-search__field').focus();

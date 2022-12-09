@@ -92,8 +92,8 @@
                         data: regency,
                     })
                     .done(function(result) {
+                        bodi.html('');
                         $(result).each(function(key, patient) {
-                            console.log(patient);
                             bodi.append(`
                                     <tr>
                                         <td>` + patient.no_regis + `</td>

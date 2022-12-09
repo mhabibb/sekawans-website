@@ -50,12 +50,13 @@ class StaticElementController extends Controller
      */
     public function update(UpdateStaticElementRequest $request, StaticElement $sekawan)
     {
+        // dd($request->all());
         $request = $request->validated();
         isset($request['img']) ? Storage::delete($sekawan->contents) : '';
-        // dd($request);
         $sekawan->update($request);
-        if ($request['img']) {
-            return redirect()->back()->withSuccess('Update Berhasil');
-        }
+        return $sekawan;
+        // if ($request['img']) {
+        //     return redirect()->back()->withSuccess('Update Berhasil');
+        // }
     }
 }

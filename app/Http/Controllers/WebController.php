@@ -97,36 +97,36 @@ class WebController extends Controller
                 'kegiatan'  => Article::latest()->category(3)->where('title', 'like', '%' . $request->search . '%')->get(),
                 default     => []
             };
-            $output = '';
+            // $output = '';
 
-            if (count($results) > 0) {
-                $output = '
-                <div class="search-list px-2">';
-                foreach ($results as $result) {
-                    $output .= '
-                <div class="border-bottom py-3">';
-                    if ($result->category->id == 1) {
-                        $output .= '<a href="' . route('infotbc.show', $result) . '" class="text-decoration-none link-dark d-block">' . $result->title . '</a>
-                                    <small class="text-muted">' . $result->category->name . '</small>
-                        </div>';
-                    } elseif ($result->category->id == 2) {
-                        $output .= '<a href="' . route('artikel.show', $result) . '" class="text-decoration-none link-dark d-block">' . $result->title . '</a>
-                                    <small class="text-muted">' . $result->category->name . '</small>
-                        </div>';
-                    } elseif ($result->category->id == 3) {
-                        $output .= '<a href="' . route('kegiatan.show', $result) . '" class="text-decoration-none link-dark d-block">' . $result->title . '</a>
-                                    <small class="text-muted">' . $result->category->name . '</small>
-                        </div>';
-                    }
-                }
-                $output .= '</div>';
-            } else {
-                $output .= '
-                <div class="search-list bg-light px-2 border"> 
-                    <div class="py-3 text-muted">Data tidak ditemukan</div> 
-                </div>';
-            }
+            // if (count($results) > 0) {
+            //     $output = '
+            //     <div class="search-list px-2">';
+            //     foreach ($results as $result) {
+            //         $output .= '
+            //     <div class="border-bottom py-3">';
+            //         if ($result->category->id == 1) {
+            //             $output .= '<a href="' . route('infotbc.show', $result) . '" class="text-decoration-none link-dark d-block">' . $result->title . '</a>
+            //                         <small class="text-muted">' . $result->category->name . '</small>
+            //             </div>';
+            //         } elseif ($result->category->id == 2) {
+            //             $output .= '<a href="' . route('artikel.show', $result) . '" class="text-decoration-none link-dark d-block">' . $result->title . '</a>
+            //                         <small class="text-muted">' . $result->category->name . '</small>
+            //             </div>';
+            //         } elseif ($result->category->id == 3) {
+            //             $output .= '<a href="' . route('kegiatan.show', $result) . '" class="text-decoration-none link-dark d-block">' . $result->title . '</a>
+            //                         <small class="text-muted">' . $result->category->name . '</small>
+            //             </div>';
+            //         }
+            //     }
+            //     $output .= '</div>';
+            // } else {
+            //     $output .= '
+            //     <div class="search-list bg-light px-2 border"> 
+            //         <div class="py-3 text-muted">Data tidak ditemukan</div> 
+            //     </div>';
+            // }
         }
-        return $output;
+        return $results;
     }
 }

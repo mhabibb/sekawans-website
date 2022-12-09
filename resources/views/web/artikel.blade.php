@@ -6,7 +6,7 @@
   <div class="row justify-content-center row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
     @forelse ($articles as $article)
     <div class="col" style="max-width: 400px;">
-      <div class="card shadow-sm h-100 mx-auto">
+      <div class="card shadow-sm h-100">
         <img src="{{ asset('storage/'.$article->img) }}" class="card-img-top thumbnail" alt="..." loading="lazy">
         <div class="card-body">
           <div class="mb-1 d-flex gap-3">

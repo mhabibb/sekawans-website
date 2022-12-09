@@ -6,8 +6,7 @@
     <div class="container">
       <div class="row flex-lg-row-reverse align-items-center g-5 py-5">
         <div class="col col-lg-6 mx-auto">
-          <img src="https://picsum.photos/600/400" class="d-block mx-auto img-fluid" alt="..." width="600" height="400"
-            loading="lazy">
+          <img src="https://picsum.photos/600/400" class="d-block mx-auto img-fluid" alt="..." width="600" height="400" loading="lazy">
         </div>
         <div class="col-lg-6">
           <h2 class="fw-bold mb-3">Informasi TBC</h1>

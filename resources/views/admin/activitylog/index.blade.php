@@ -24,7 +24,7 @@
     <div class="row">
       <div class="col-12">
         <div class="card">
-          <div class="card-header"></div>
+          <div class="card-header">Setiap log akan otomatis hilang setelah 360 hari</div>
           <div class="card-body">
             <div>
               <table id="logsData" class="table table-bordered table-striped mx-auto">
@@ -41,7 +41,7 @@
                     <td><div class="truncate">{{ $log->description }}</div></td>
                     <td>{{ date('j F Y, H:i:s', strtotime($log->updated_at)) }}</td>
                     <td style="white-space: nowrap;">
-                      <a href="{{ route('admin.logs.show', $log) }}" class="btn badge badge-info">Show</a>
+                      {{-- <a href="{{ route('admin.logs.show', $log) }}" class="btn badge badge-info">Show</a> --}}
                       <a role="button" onclick="restoreLog({{ $log->id }})" class="btn badge badge-success">Restore</a>
                     </td>
                   </tr>

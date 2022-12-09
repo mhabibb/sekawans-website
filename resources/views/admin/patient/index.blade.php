@@ -6,6 +6,9 @@
             display: flex;
             flex-wrap: wrap;
         }
+        .dataTables_wrapper .dt-buttons {
+            float: left;
+        }
     </style>
 @endsection
 

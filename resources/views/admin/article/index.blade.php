@@ -77,7 +77,7 @@
                         tableAjax();
                     } else {
                         $(this).addClass('trash');
-                        $('.toggler').text('Tutup');
+                        $('.toggler').text('Tutup Sampah');
                         time.html('Waktu Hapus');
                         url = "{{ route('admin.trashed.index', 'path') }}";
                         url = url.replace('path', path);

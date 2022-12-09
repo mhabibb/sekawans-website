@@ -34,17 +34,20 @@ Route::middleware('auth')->prefix('admin')->name('admin.')->group(function () {
     Route::resource('/users', UserController::class)->except('edit');
     Route::post('/users/first', [UserController::class, 'firstLogin'])->name('users.firstLogin');
     Route::post('/users/{user}/reset', [UserController::class, 'reset'])->name('users.reset');
+
     Route::controller(StaticElementController::class)->group(function () {
         Route::get('/sekawans', 'index')->name('sekawans.index');
-        Route::match(['put', 'post'], 'sekawans/{sekawan}', 'update')->name('sekawans.update');
+        Route::post('admin/sekawans/{sekawan}', 'update')->name('sekawans.update');
     });
+
     Route::resource('/patients', PatientController::class);
     Route::controller(PatientController::class)->group(function () {
         Route::get('/patient/{regencies}', 'regency')->name('patients.regency');
     });
-    Route::resource('/logs', LogController::class)->only(['index', 'destroy', 'show'])->middleware(['can:superAdmin']);
+
     Route::controller(LogController::class)->group(function () {
-        Route::get('/logs/{activity}/restore', 'restore')->name('logs.restore');
+        Route::get('/logs', 'index')->name('logs.index');
+        Route::put('/logs/{activity}/restore', 'restore')->name('logs.restore');
     })->middleware(['can:superAdmin']);
 
     Route::controller(SateliteHealthFacilityController::class)->group(function () {

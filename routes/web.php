@@ -44,14 +44,9 @@ Route::middleware('auth')->prefix('admin')->name('admin.')->group(function () {
     Route::controller(PatientController::class)->group(function () {
         Route::get('/patient/{regencies}', 'regency')->name('patients.regency');
     });
-<<<<<<< HEAD
-    Route::resource('/logs', LogController::class)->only(['index', 'destroy', 'show'])->middleware(['can:superAdmin']);
-    Route::controller(LogController::class)->group(function(){
-=======
 
     Route::controller(LogController::class)->group(function () {
         Route::get('/logs', 'index')->name('logs.index');
->>>>>>> beken
         Route::put('/logs/{activity}/restore', 'restore')->name('logs.restore');
     })->middleware(['can:superAdmin']);
 

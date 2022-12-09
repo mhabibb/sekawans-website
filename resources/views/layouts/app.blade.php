@@ -64,6 +64,9 @@
                   } else {
                     $('#searchList').html(`<div class="py-3 text-muted">Data tidak ditemukan</div>`)
                   }
+                })
+                .fail(function() {
+                  alert("Terjadi kesalahan!")
                 });
             } else {
               $.get("{{ route('search') }}", {}, function(data, status) {

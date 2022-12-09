@@ -26,6 +26,7 @@ class LogController extends Controller
                 } else return $value;
             }
         });
+        $activity = Activity::latest()->take(1)->get();
         return view('admin.activitylog.index', compact('logs'));
     }
 
@@ -74,14 +75,14 @@ class LogController extends Controller
     {
         if ($activity->batch_uuid) {
             $activities = $activity->forBatch($activity->batch_uuid)->get()->reverse();
+            $status = collect();
             foreach ($activities as $activity) {
-                // dump($activity->changes());
-                $this->restoring($activity);
+                $status->add($this->restoring($activity));
             }
+            $this->connect($activities, $status);
         } else {
-            // $this->restoring($activity);
+            $this->restoring($activity);
         }
-        dd();
     }
 
     private function restoring($activity)
@@ -97,7 +98,16 @@ class LogController extends Controller
         $activity->delete();
         activity()->enableLogging();
         $model::reguard();
-        dump($properties);
         return $status;
+    }
+
+    private function connect($activities, $result){
+        $i = 0;
+        activity()->disableLogging();
+        foreach ($activities as $activity) {
+            $result[$i]->update($activity->changes()['old']);
+            $i++;
+        }
+        activity()->enableLogging();
     }
 }

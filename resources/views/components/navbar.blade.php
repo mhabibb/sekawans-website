@@ -18,7 +18,11 @@
                 <div class="search-bar mb-3 mb-lg-0" role="search">
                     <input id="keyword" class="form-control rounded-0 me-1" name="keyword" type="text"
                         placeholder="Cari..." autocomplete="off">
-                    <div id="searchResult" class="search-result border bg-light d-none"></div>
+                    <div id="searchResult" class="search-result border bg-light d-none">
+                        <div id="searchList" class="search-list px-2">
+                            
+                        </div>
+                    </div>
                 </div>
                 <ul class="navbar-nav navbar-nav-scroll justify-content-end flex-grow-1 pe-3">
                     @foreach ($navLinks as $route => $linkName)

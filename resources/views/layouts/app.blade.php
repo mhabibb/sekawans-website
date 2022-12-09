@@ -42,13 +42,32 @@
                     type: "get",
                     url: "{{ route('search') }}",
                     data: 'search=' + $(keyword).val() + '&&target=' + (target),
-                    success: function (data) {
-                      $(result).html(data);
-                    },
+                    // success: function (data) {
+                    //   $(result).html(data);
+                    //   console.log(data);
+                    // },
+                })
+                .done(function(status) {
+                  if (status.length > 0) {
+                    html = ''
+                    status.forEach((data) => {
+                      url = "{{ route('infotbc.show', 'id') }}";
+                      url = url.replace('id', data.id)
+                      console.log(data);
+                      html += `
+                      <div class="border-bottom py-3">
+                        <a href=`+ url +` class="text-decoration-none link-dark d-block">${data.title}</a>
+                        <small class="text-muted">${data.category.name}</small>
+                      </div>`
+                      $('#searchList').html(html)
+                    })
+                  } else {
+                    $('#searchList').html(`<div class="py-3 text-muted">Data tidak ditemukan</div>`)
+                  }
                 });
             } else {
               $.get("{{ route('search') }}", {}, function(data, status) {
-                $(result).html(data);
+                $('#searchList').html(data);
               })
             }
         });

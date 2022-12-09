@@ -119,6 +119,13 @@
             $('#logsData').DataTable({
                 "responsive": true,
                 "autoWidth": false,
+                columnDefs: [
+                    {
+                        searchable: false,
+                        orderable: false,
+                        targets: 2,
+                    },
+                ],
                 order: [
                     [1, 'desc']
                 ],

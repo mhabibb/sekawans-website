@@ -93,6 +93,13 @@
                     order: [
                         [1, 'desc']
                     ],
+                    columnDefs: [
+                        {
+                            searchable: false,
+                            orderable: false,
+                            targets: 3,
+                        },
+                    ],
                     ajax: {
                         'url': url,
                         'type': "GET",

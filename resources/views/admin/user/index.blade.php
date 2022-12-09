@@ -67,6 +67,13 @@
             "responsive": true, 
             "autoWidth": false,
             "searching": false,
+            columnDefs: [
+                {
+                    searchable: false,
+                    orderable: false,
+                    targets: 2,
+                },
+            ],
             paging: false,
             order: [
                 [0, 'asc']

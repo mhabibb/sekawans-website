@@ -89,6 +89,7 @@
                         data: regency,
                     })
                     .done(function(result) {
+                        bodi.html('');
                         $(result).each(function(key, patient) {
                             bodi.append(`
                                     <tr>

@@ -63,7 +63,7 @@
           </div>
           <div class="col-sm-6 form-group">
             <label>Pendamping/Patient Supporter (PS)</label>
-            <select class="form-control tags 
+            <select id="worker" class="form-control tags 
             @error('worker_id') is-invalid @else @if(old('worker_id') ?? false) is-valid @endif @enderror"
               name="worker.id" style="width: 100%;">
               <option disabled selected>Pilih Pendamping/Patient Supporter (PS)</option>

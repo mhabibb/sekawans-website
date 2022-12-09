@@ -3,9 +3,9 @@
 @section('content')
 {{-- HERO --}}
 <section id="hero">
-    <div class="container py-5">
+    <div class="container px-4 py-5">
         <div class="row flex-lg-row-reverse align-items-center g-5 pb-4">
-            <div class="col col-lg-6 mx-auto">
+            <div class="col col-lg-6">
                 <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="true">
                     <div class="carousel-indicators">
                         <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0"
@@ -46,7 +46,6 @@
                 <p class="lead">Sudah menjadi hal yang wajib bagi masyarakat untuk mulai memahami penyakit TBC dan gejalanya. Dengan demikian, dapat dilakukan deteksi dini, penanganan dan pencegahan yang efektif pada penyakit TBC. Berbagai cara dilakukan untuk mencegah penyakit TBC yaitu salah satunya dengan menerapkan perilaku hidup bersih dan sehat.</p>
             </div>
         </div>
-    </div>
     </div>
     <div class="container mx-auto row text-center justify-content-between pt-4 mb-5 border-top">
         <div class="col p-3">

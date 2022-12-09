@@ -27,8 +27,10 @@
       </div>
     </div>
     @empty
-    <hr>
-    Data Kosong
+    <div class="col">
+      <hr>
+      <p class="text-center">Data Kosong</p>
+    </div>
     @endforelse
   </div>
   {{ $articles->onEachSide(1)->links() }}

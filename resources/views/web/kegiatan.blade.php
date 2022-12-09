@@ -3,7 +3,7 @@
 @section('content')
 <section class="container py-5">
   <h2 class="fw-bold mb-4 text-center text-primary">Kegiatan</h2>
-  <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 justify-content-center  g-4">
+  <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 justify-content-center g-4">
     @forelse ($actions as $action)
     <div class="col" style="max-width: 400px;">
       <div class="card shadow-sm h-100">
@@ -27,8 +27,10 @@
       </div>
     </div>
     @empty
-    <hr>
-    Data Kosong
+    <div class="col">
+      <hr>
+      <p class="text-center">Data Kosong</p>
+    </div>
     @endforelse
   </div>
   {{ $actions->links() }}

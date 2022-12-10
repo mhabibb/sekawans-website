@@ -84,7 +84,7 @@
 
             function tableAjax() {
                 table.DataTable().destroy();
-                $.fn.dataTable.moment('D MMMM YYYY, hh:mm:ss');
+                $.fn.dataTable.moment('D MMMM YYYY, HH:mm:ss');
 
                 table.DataTable({
                     "responsive": true,
@@ -112,7 +112,7 @@
                             data: date,
                             render: function(data) {
                                 date = new Date(data);
-                                return moment(date).format('D MMMM YYYY, hh:mm:ss');
+                                return moment(date).format('D MMMM YYYY, HH:mm:ss');
                             }
                         },
                         {

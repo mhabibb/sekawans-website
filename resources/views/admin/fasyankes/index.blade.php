@@ -32,7 +32,7 @@
                       <button type="submit" class="badge badge-danger border-0">Hapus</button>
                     </form>
                   </td>
-                  @include('admin.fasyankes.edit-satelit')
+                  {{-- @include('admin.fasyankes.edit-satelit') --}}
                 </tr>
                 @empty
                 <tr>
@@ -70,7 +70,7 @@
                       <button type="submit" class="btn badge badge-danger">Hapus</button>
                     </form>
                   </td>
-                  @include('admin.fasyankes.edit-ps')
+                  {{-- @include('admin.fasyankes.edit-ps') --}}
                 </tr>
                 @empty
                 <tr>
@@ -85,7 +85,5 @@
     </div>
   </div>
 </section>
-{{-- <section class="edit-modal">
-  @include('admin.fasyankes.edit')
-</section> --}}
+
 @endsection

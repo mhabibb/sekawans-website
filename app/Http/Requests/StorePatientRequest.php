@@ -3,7 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
-use App\Models\SateliteHealthFacility;
+use App\Models\SatelliteHealthFacility;
 use App\Models\Worker;
 use Illuminate\Support\Str;
 
@@ -28,7 +28,7 @@ class StorePatientRequest extends FormRequest
     protected function prepareForValidation()
     {
         $this->merge([
-            'satelite_health_facility_id' => $this->satelite_health_facility_id ? SateliteHealthFacility::firstOrCreate(
+            'satelite_health_facility_id' => $this->satelite_health_facility_id ? SatelliteHealthFacility::firstOrCreate(
                 ["id"    => $this->satelite_health_facility_id],
                 ["name"  => Str::title($this->satelite_health_facility_id)]
             )->id : false,

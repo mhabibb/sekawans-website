@@ -36,7 +36,6 @@ class DashboardController extends Controller
             'artikel' => $article,
             'kegiatan' => $action,
             'pasien' => $patient,
-            'fesyankes' => $facilities,
             'kabupaten' => $regency,
             'first' => $first,
         ]);

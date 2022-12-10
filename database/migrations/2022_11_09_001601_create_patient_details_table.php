@@ -21,7 +21,7 @@ return new class extends Migration
                 ->onDelete('cascade')
                 ->unique();
             $table->enum('tb_health_facility', ['RSD DR. SOEBANDI JEMBER', 'RS PARU JEMBER']);
-            $table->foreignId('satelite_health_facility_id')
+            $table->foreignId('satellite_health_facility_id')
                 ->constrained()
                 ->onUpdate('cascade')
                 ->onDelete('cascade');

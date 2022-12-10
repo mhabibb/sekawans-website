@@ -52,6 +52,8 @@ Route::middleware('auth')->prefix('admin')->name('admin.')->group(function () {
 
     Route::controller(SatelliteWorkerController::class)->group(function () {
         Route::get('/fasyankes', 'index')->name('fasyankes.index');
+        Route::get('/fasyankes/{table}/{name}', 'check')->name('fasyankes.check');
+        Route::put('/fasyankes/{table}/{data}', 'update')->name('fasyankes.update');
         Route::delete('/fasyankes/{table}/{id}', 'destroy')->name('fasyankes.destroy');
     });
 

@@ -2,9 +2,9 @@
 
 namespace App\Http\Requests;
 
-use Illuminate\Foundation\Http\FormRequest;
+// use Illuminate\Foundation\Http\FormRequest;
 
-class UpdateWorkerRequest extends FormRequest
+class UpdateWorkerRequest extends UpdateSatelliteWorkerRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,7 +24,7 @@ class UpdateWorkerRequest extends FormRequest
     public function rules()
     {
         return [
-            'name'      => "required|string|unique:workers|max:50",
+            'name'      => "required|string|unique:workers|max:64",
         ];
     }
 }

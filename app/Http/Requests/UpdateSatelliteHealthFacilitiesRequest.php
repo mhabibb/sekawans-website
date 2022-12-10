@@ -2,9 +2,9 @@
 
 namespace App\Http\Requests;
 
-use Illuminate\Foundation\Http\FormRequest;
+// use Illuminate\Foundation\Http\FormRequest;
 
-class UpdateSatelliteHealthFacilityRequest extends FormRequest
+class UpdateSatelliteHealthFacilityRequest extends UpdateSatelliteWorkerRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,7 +24,7 @@ class UpdateSatelliteHealthFacilityRequest extends FormRequest
     public function rules()
     {
         return [
-            'name'      => "required|string|unique:satelite_health_facilities|max:100",
+            'name'      => "required|string|unique:satelite_health_facilities|max:64",
         ];
     }
 }

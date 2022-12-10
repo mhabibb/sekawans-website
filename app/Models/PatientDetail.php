@@ -47,8 +47,8 @@ class PatientDetail extends Model
         return $this->belongsTo(Worker::class);
     }
 
-    public function sateliteHealthFacility()
+    public function satelliteHealthFacility()
     {
-        return $this->belongsTo(SateliteHealthFacility::class);
+        return $this->belongsTo(SatelliteHealthFacility::class);
     }
 }

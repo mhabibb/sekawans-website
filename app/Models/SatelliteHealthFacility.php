@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 use Spatie\Activitylog\Traits\LogsActivity;
 use Spatie\Activitylog\LogOptions;
 
-class SateliteHealthFacility extends Model
+class SatelliteHealthFacility extends Model
 {
     use HasFactory, LogsActivity;
 
@@ -21,7 +21,7 @@ class SateliteHealthFacility extends Model
         $name = $this->name;
         return LogOptions::defaults()
             ->logAll()
-            ->useLogName('satelite health facility')
+            ->useLogName('satellite health facility')
             ->setDescriptionForEvent(fn (string $eventName) => "{$user} {$eventName} satellite health facility {$name}");
     }
 

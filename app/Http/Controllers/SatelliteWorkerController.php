@@ -2,13 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\SateliteHealthFacility;
-use App\Http\Requests\StoreSateliteHealthFacilityRequest;
-use App\Http\Requests\UpdateSateliteHealthFacilityRequest;
+use App\Models\SatelliteHealthFacility;
+use App\Http\Requests\StoreSatelliteHealthFacilityRequest;
+use App\Http\Requests\UpdateSatelliteHealthFacilityRequest;
 use App\Models\Worker;
 use Illuminate\Http\Request;
 
-class SateliteHealthFacilityController extends Controller
+class SatelliteWorkerController extends Controller
 {
     /**
      * Instantiate a new controller instance.
@@ -28,7 +28,7 @@ class SateliteHealthFacilityController extends Controller
     public function index()
     {
         $fasyankes = collect(["RS PARU JEMBER", "RSD DR. SOEBANDI JEMBER"]);
-        $satelites = SateliteHealthFacility::orderBy('name', 'asc')->get();
+        $satelites = SatelliteHealthFacility::orderBy('name', 'asc')->get();
         $workers = Worker::orderBy('name', 'asc')->get();
         return view('admin.fasyankes.index', compact('fasyankes', 'satelites', 'workers'));
     }
@@ -46,10 +46,10 @@ class SateliteHealthFacilityController extends Controller
     // /**
     //  * Store a newly created resource in storage.
     //  *
-    //  * @param  \App\Http\Requests\StoreSateliteHealthFacilityRequest  $request
+    //  * @param  \App\Http\Requests\StoreSatelliteHealthFacilityRequest  $request
     //  * @return \Illuminate\Http\Response
     //  */
-    // public function store(StoreSateliteHealthFacilityRequest $request)
+    // public function store(StoreSatelliteHealthFacilityRequest $request)
     // {
     //     //
     // }
@@ -57,10 +57,10 @@ class SateliteHealthFacilityController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\SateliteHealthFacility  $sateliteHealthFacility
+     * @param  \App\Models\SatelliteHealthFacility  $satelliteHealthFacility
      * @return \Illuminate\Http\Response
      */
-    public function edit(SateliteHealthFacility $sateliteHealthFacility)
+    public function edit(SatelliteHealthFacility $satelliteHealthFacility)
     {
         //
     }
@@ -68,11 +68,11 @@ class SateliteHealthFacilityController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \App\Http\Requests\UpdateSateliteHealthFacilityRequest  $request
-     * @param  \App\Models\SateliteHealthFacility  $sateliteHealthFacility
+     * @param  \App\Http\Requests\UpdateSatelliteHealthFacilityRequest  $request
+     * @param  \App\Models\SatelliteHealthFacility  $satelliteHealthFacility
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateSateliteHealthFacilityRequest $request, SateliteHealthFacility $sateliteHealthFacility)
+    public function update(UpdateSatelliteHealthFacilityRequest $request, SatelliteHealthFacility $satelliteHealthFacility)
     {
         //
     }
@@ -80,13 +80,13 @@ class SateliteHealthFacilityController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\SateliteHealthFacility  $sateliteHealthFacility
+     * @param  \App\Models\SatelliteHealthFacility  $satelliteHealthFacility
      * @return \Illuminate\Http\Response
      */
     public function destroy($table, $id)
     {
         match ($table) {
-            'satelite'  => SateliteHealthFacility::find($id)->delete(),
+            'satelite'  => SatelliteHealthFacility::find($id)->delete(),
             'workers'   => Worker::find($id)->delete()
         };
         return to_route('admin.fasyankes.index')->withSuccess("Data Terhapus!");

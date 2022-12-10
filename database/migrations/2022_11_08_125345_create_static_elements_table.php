@@ -14,7 +14,7 @@ return new class extends Migration
     public function up()
     {
         Schema::create('static_elements', function (Blueprint $table) {
-            $table->increments('id');
+            $table->id();
             $table->string('element', 16);
             $table->text('contents');
             $table->timestamps();

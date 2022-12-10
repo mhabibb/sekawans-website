@@ -35,9 +35,9 @@ return new class extends Migration
                 ->constrained()
                 ->onUpdate('cascade')
                 ->onDelete('cascade');
-            $table->integer('age', 3);
-            $table->integer('weight', 3);
-            $table->integer('height', 3);
+            $table->integer('age');
+            $table->integer('weight');
+            $table->integer('height');
             $table->timestamps();
         });
     }

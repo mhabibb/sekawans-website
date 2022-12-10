@@ -11,7 +11,7 @@ class SateliteHealthFacility extends Model
 {
     use HasFactory, LogsActivity;
 
-    protected $fillable = ['id'];
+    protected $guarded = ['id'];
 
     public $timestamps = false;
 

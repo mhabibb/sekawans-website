@@ -19,14 +19,13 @@ return new class extends Migration
                 ->constrained()
                 ->onUpdate('cascade')
                 ->onDelete('cascade');
-            $table->string('title', 50);
+            $table->string('title', 100);
             $table->string('img');
             $table->longText('contents');
             $table->foreignId('category_id')
                 ->constrained()
                 ->onUpdate('cascade')
                 ->onDelete('cascade');
-            // $table->timestamp('deleted_at')->nullable()->default(null);
             $table->softDeletes();
             $table->timestamps();
         });

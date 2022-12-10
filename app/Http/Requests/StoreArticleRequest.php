@@ -38,7 +38,7 @@ class StoreArticleRequest extends FormRequest
     public function rules()
     {
         return [
-            'title'         => 'required|unique:articles,title|max:50',
+            'title'         => 'required|unique:articles,title|max:100',
             'img'           => 'required|image',
             'contents'      => 'required|min:100',
             'category_id'   => 'required|integer|between:1,3',

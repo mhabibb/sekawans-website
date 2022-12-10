@@ -139,7 +139,7 @@
                                     form = new FormData();
                                     form.append("content", data);
                                     ajax()
-                                } else compekiah();
+                                } else swal();
                             })
                     }
                     reader.readAsDataURL(data)

@@ -24,7 +24,7 @@ class UpdateSateliteHealthFacilityRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'name'      => "required|string|unique:satelite_health_facilities|max:100",
         ];
     }
 }

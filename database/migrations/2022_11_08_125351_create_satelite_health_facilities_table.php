@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('satelite_health_facilities', function (Blueprint $table) {
             $table->id();
-            $table->string('name')->unique();
+            $table->string('name', 100)->unique();
         });
     }
 

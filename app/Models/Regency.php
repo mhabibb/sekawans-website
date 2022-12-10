@@ -40,11 +40,16 @@ class Regency extends Model
     {
         return $query->withCount([
             'patients as total',
-            'patients as sembuh' => fn ($query) => $query->withWhereHas('patientDetail', fn ($query) => $query->where('patient_status_id', 1)),
-            'patients as berobat' => fn ($query) => $query->withWhereHas('patientDetail', fn ($query) => $query->where('patient_status_id', 2)),
-            'patients as mangkir' => fn ($query) => $query->withWhereHas('patientDetail', fn ($query) => $query->where('patient_status_id', 3)),
-            'patients as ltfu' => fn ($query) => $query->withWhereHas('patientDetail', fn ($query) => $query->where('patient_status_id', 4)),
-            'patients as meninggal' => fn ($query) => $query->withWhereHas('patientDetail', fn ($query) => $query->where('patient_status_id', 5))
+            'patients as sembuh'    => fn ($query) => $this->countStatus($query, 1),
+            'patients as berobat'   => fn ($query) => $this->countStatus($query, 2),
+            'patients as mangkir'   => fn ($query) => $this->countStatus($query, 3),
+            'patients as ltfu'      => fn ($query) => $this->countStatus($query, 4),
+            'patients as meninggal' => fn ($query) => $this->countStatus($query, 5)
         ]);
+    }
+
+    private function countStatus($query, $id)
+    {
+        return $query->withWhereHas('patientDetail', fn ($query) => $query->where('patient_status_id', $id));
     }
 }

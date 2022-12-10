@@ -220,7 +220,7 @@ class ArticleController extends Controller
         activity()->disableLogging();
         $article->delete();
         activity()->enableLogging();
-        return $article->delete();
+        return $article->wasChanged();
     }
 
     public function restore(Article $article)
@@ -242,9 +242,9 @@ class ArticleController extends Controller
     private function contentDecode($contents, $old = null)
     {
         while (str($contents)->contains(';base64,')) {
-            $base64 = str(str($contents)->match('/<img src="data([^">]+)/'));
+            $base64 = str(str($contents)->match('/<img.+src="data([^">]+)/'));
             $contents = str($contents)->replace('data' . $base64, '??');
-            $ext = str(str($contents)->match('/<img src="\?\?"([^>]+)/')->explode('.')->last())->trim('"');
+            $ext = str(str($contents)->match('/<img.+src="\?\?"([^>]+)/')->explode('.')->last())->trim('"');
             $base64 = str($base64)->explode(',')[1];
             $img = base64_decode(str($base64));
             do {
@@ -254,15 +254,15 @@ class ArticleController extends Controller
             $status = Storage::put($imgName, $img);
             $contents = str($contents)->replace('??', asset('storage/' . $imgName));
         }
-        $urls = str($contents)->matchAll('/<img[^>]+src="([^">]+)/')->each(fn ($src) => $src = str($src)->remove(asset('storage/')));
+        if ($old) $this->deleteContentImg($old, $contents);
 
-        $this->deleteContentImg($old, $urls);
         return $contents;
     }
 
     private function deleteContentImg($contents, $exclude = null)
     {
-        if (str($contents)->contains('<img src="' . asset('storage/img/articles/contents/')))
-            str($contents)->matchAll('/<img[^>]+src="([^">]+)/')->each(fn ($src) => str($src)->contains($exclude) ? '' : Storage::delete(str($src)->remove(asset('storage/'))));
+        if($exclude) $exclude = str($exclude)->matchAll('/<img.+src="([^">]+)/');
+        if (str($contents)->contains('/<img.+src="/' . asset('storage/img/articles/contents/')))
+            str($contents)->matchAll('/<img.+src="([^">]+)/')->each(fn ($src) => str($src)->contains($exclude) ? '' : Storage::delete(str($src)->remove(asset('storage/'))));
     }
 }

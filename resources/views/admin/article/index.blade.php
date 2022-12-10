@@ -16,11 +16,11 @@
                 <div class="col-12">
                     <div class="card">
                         <div class="card-header">
-                            <a href="{{ route($createRoute) }}" class="btn btn-primary">Buat {{ $title }} Baru</a>
+                            <a href="{{ route($createRoute) }}" class="mb-2 mr-2 btn btn-primary">Buat {{ $title }} Baru</a>
                             @can('superAdmin')
-                                <div class="mx-1 btn btn-info toggler" id="trashBtn">Lihat Sampah</div>
+                                <div class="mb-2 btn btn-info toggler" id="trashBtn">Lihat Sampah</div>
+                                <div class="trash-desc"></div>
                             @endcan
-                            <button class="mx-1 btn btn-info d-none" id="dataBtn">Tutup</button>
                         </div>
 
                         <div class="card-body">
@@ -65,6 +65,7 @@
                     if ($(this).hasClass('trash')) {
                         $(this).removeClass('trash')
                         $('.toggler').text('Lihat Sampah')
+                        $('.trash-desc').text('')
                         time.html('Waktu Update')
                         url = "{{ route('admin.articles.index') }}";
                         url = url.replace('articles', path)
@@ -73,6 +74,7 @@
                     } else {
                         $(this).addClass('trash');
                         $('.toggler').text('Tutup Sampah');
+                        $('.trash-desc').text('Tiap entri sampah akan hilang dalam 90 hari (3 bulan)')
                         time.html('Waktu Hapus');
                         url = "{{ route('admin.trashed.index', 'path') }}";
                         url = url.replace('path', path);

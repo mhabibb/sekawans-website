@@ -7,11 +7,11 @@ use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
 {
-    private $user = 10;
-    private $article = 200;
-    private $worker = 50;
-    private $satelite = 100;
-    private $patient = 150;
+    // private $user = 10;
+    // private $article = 200;
+    // private $worker = 50;
+    // private $satelite = 100;
+    // private $patient = 150;
 
     /**
      * Seed the application's database.

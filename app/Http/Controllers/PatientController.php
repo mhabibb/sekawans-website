@@ -57,7 +57,7 @@ class PatientController extends Controller
     {
         $fasyankes = collect(["RS PARU JEMBER", "RSD DR. SOEBANDI JEMBER"]);
         $satelites = SateliteHealthFacility::all();
-        $workers = Worker::active()->get();
+        $workers = Worker::all();
         $religions = Religion::all();
         $educations = Education::all();
         $regencies = Regency::withWhereHas('districts', fn ($query) => $query->without('regency'))->get();
@@ -105,7 +105,7 @@ class PatientController extends Controller
     {
         $fasyankes = collect(["RS PARU JEMBER", "RSD DR. SOEBANDI JEMBER"]);
         $satelites = SateliteHealthFacility::all();
-        $workers = Worker::active()->get();
+        $workers = Worker::get();
         $statuses = PatientStatus::get();
         $religions = Religion::all();
         $educations = Education::all();

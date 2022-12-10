@@ -25,10 +25,10 @@ class Worker extends Model
             ->setDescriptionForEvent(fn (string $eventName) => "{$user} {$eventName} PS {$name}");
     }
 
-    public function scopeActive($query)
-    {
-        return  $query->where('is_active', 1);
-    }
+    // public function scopeActive($query)
+    // {
+    //     return  $query->where('is_active', 1);
+    // }
 
     public function patientDetails()
     {

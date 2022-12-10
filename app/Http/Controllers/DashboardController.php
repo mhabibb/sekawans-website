@@ -28,7 +28,6 @@ class DashboardController extends Controller
         $info = Article::latest()->category(1)->get()->count();
         $article = Article::latest()->category(2)->get()->count();
         $action = Article::latest()->category(3)->get()->count();
-        $workers = Worker::active()->count();
         $patient = PatientDetail::inTreatment()->count();
         $facilities = SateliteHealthFacility::all()->count();
         $first = Hash::check('password', auth()->user()->password) ?? false;
@@ -41,7 +40,6 @@ class DashboardController extends Controller
             'artikel' => $article,
             'kegiatan' => $action,
             'pasien' => $patient,
-            'ps' => $workers,
             'fesyankes' => $facilities,
             'kabupaten' => $regency,
             'first' => $first,

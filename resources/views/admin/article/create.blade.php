@@ -59,7 +59,7 @@
         ['para', ['ul', 'ol', 'paragraph']],
         ['height', ['height']],
         ['insert', ['link', 'picture', 'video']],
-        ['view', ['fullscreen', 'help']],
+        ['view', ['undo', 'redo', 'fullscreen', 'help']],
       ],
       tabsize: 2,
       height: 300,

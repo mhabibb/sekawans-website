@@ -18,7 +18,6 @@ class WorkerFactory extends Factory
     {
         return [
             'name' => fake()->unique()->name(),
-            'is_active' => fake()->boolean(),
         ];
     }
 }

@@ -3,11 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Article;
-use App\Models\Patient;
 use App\Models\PatientDetail;
 use App\Models\Regency;
-use App\Models\SateliteHealthFacility;
-use App\Models\Worker;
 use Illuminate\Support\Facades\Hash;
 
 class DashboardController extends Controller
@@ -29,7 +26,6 @@ class DashboardController extends Controller
         $article = Article::latest()->category(2)->get()->count();
         $action = Article::latest()->category(3)->get()->count();
         $patient = PatientDetail::inTreatment()->count();
-        $facilities = SateliteHealthFacility::all()->count();
         $first = Hash::check('password', auth()->user()->password) ?? false;
         // dd($first);
 
@@ -40,7 +36,6 @@ class DashboardController extends Controller
             'artikel' => $article,
             'kegiatan' => $action,
             'pasien' => $patient,
-            'fesyankes' => $facilities,
             'kabupaten' => $regency,
             'first' => $first,
         ]);

@@ -29,15 +29,15 @@ return new class extends Migration
                 ->constrained()
                 ->onUpdate('cascade')
                 ->onDelete('cascade');
-            $table->string('no_regis', 10)->unique();
+            $table->string('no_regis', 16)->unique();
             $table->foreignId('patient_status_id')
                 ->default(2)
                 ->constrained()
                 ->onUpdate('cascade')
                 ->onDelete('cascade');
-            $table->integer('age');
-            $table->integer('weight');
-            $table->integer('height');
+            $table->integer('age', 3);
+            $table->integer('weight', 3);
+            $table->integer('height', 3);
             $table->timestamps();
         });
     }

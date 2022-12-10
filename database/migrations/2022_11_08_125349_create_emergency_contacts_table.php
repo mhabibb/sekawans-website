@@ -15,8 +15,8 @@ return new class extends Migration
     {
         Schema::create('emergency_contacts', function (Blueprint $table) {
             $table->id();
-            $table->string('name', 50);
-            $table->string('relation', 30);
+            $table->string('name', 64);
+            $table->string('relation', 16);
             $table->boolean('is_know')->default(false);
             $table->string('address');
             $table->string('phone', 20);

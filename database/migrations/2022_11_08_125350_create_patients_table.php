@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('patients', function (Blueprint $table) {
             $table->id();
-            $table->string('name', 50);
+            $table->string('name', 64);
             $table->enum('sex', ['laki-laki', 'perempuan']);
             $table->foreignId('education_id')
                 ->constrained()
@@ -37,9 +37,9 @@ return new class extends Migration
             $table->boolean('has_job');
             $table->string('workplace')->nullable()->default(null);
             $table->string('work_address')->nullable()->default(null);
-            $table->integer('dependent');
-            $table->string('mother_name', 50);
-            $table->string('father_name', 50);
+            $table->integer('dependent', 3);
+            $table->string('mother_name', 64);
+            $table->string('father_name', 64);
             $table->string('guardian_phone', 20);
             $table->string('guardian_address');
             $table->foreignId('emergency_contact_id')

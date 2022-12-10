@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Models\Article;
 use App\Models\PatientDetail;
 use App\Models\Regency;
-use App\Models\SatelliteHealthFacility;
 use Illuminate\Support\Facades\Hash;
 
 class DashboardController extends Controller
@@ -26,7 +25,6 @@ class DashboardController extends Controller
         $article = Article::latest()->category(2)->get()->count();
         $action = Article::latest()->category(3)->get()->count();
         $patient = PatientDetail::inTreatment()->count();
-        $facilities = SatelliteHealthFacility::all()->count();
         $first = Hash::check('password', auth()->user()->password) ?? false;
 
         $regency = Regency::count('status')->get();

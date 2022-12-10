@@ -4,7 +4,7 @@ namespace Database\Factories;
 
 use App\Models\Patient;
 use App\Models\PatientStatus;
-use App\Models\SateliteHealthFacility;
+use App\Models\SatelliteHealthFacility;
 use App\Models\Worker;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
@@ -21,12 +21,12 @@ class PatientDetailFactory extends Factory
     public function definition()
     {
         $patient = Patient::select('id')->get();
-        $satelite = SateliteHealthFacility::count();
+        $satellite = SatelliteHealthFacility::count();
         $worker = Worker::count();
         $status = PatientStatus::count();
         return [
             'patient_id' => fake()->unique()->randomElement($patient),
-            'satelite_health_facility_id' => fake()->numberBetween(1, $satelite),
+            'satellite_health_facility_id' => fake()->numberBetween(1, $satellite),
             'worker_id' => fake()->numberBetween(1, $worker),
             'no_regis' => fake()->unique()->numerify('##########'),
             'patient_status_id' => fake()->numberBetween(1, $status),

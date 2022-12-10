@@ -132,7 +132,7 @@ class SatelliteWorkerController extends Controller
     public function destroy($table, $id)
     {
         match ($table) {
-            'satelite'  => SatelliteHealthFacility::find($id)->delete(),
+            'satellite'  => SatelliteHealthFacility::find($id)->delete(),
             'workers'   => Worker::find($id)->delete()
         };
         return to_route('admin.fasyankes.index')->withSuccess("Data Terhapus!");

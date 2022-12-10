@@ -27,9 +27,9 @@ class UpdatePatientRequest extends FormRequest
     protected function prepareForValidation()
     {
         $this->merge([
-            'satelite_health_facility_id' => $this->satelite_health_facility_id ? SatelliteHealthFacility::firstOrCreate(
-                ["id"    => $this->satelite_health_facility_id],
-                ["name"  => Str::title($this->satelite_health_facility_id)]
+            'satellite_health_facility_id' => $this->satellite_health_facility_id ? SatelliteHealthFacility::firstOrCreate(
+                ["id"    => $this->satellite_health_facility_id],
+                ["name"  => Str::title($this->satellite_health_facility_id)]
             )->id : false,
             'worker_id'  => $this->worker_id ? Worker::firstOrCreate(
                 ["id"    => $this->worker_id],
@@ -47,7 +47,7 @@ class UpdatePatientRequest extends FormRequest
     {
         return [
             'tb_health_facility'            => 'required|string|max:50',
-            'satelite_health_facility_id'   => 'required|integer',
+            'satellite_health_facility_id'   => 'required|integer',
             'start_treatment'               => 'required|date|before_or_equal:today',
             'no_regis'                      => 'required|integer|',
             'worker_id'                     => 'required|integer',

@@ -24,7 +24,7 @@ class UpdateSatelliteHealthFacilityRequest extends UpdateSatelliteWorkerRequest
     public function rules()
     {
         return [
-            'name'      => "required|string|unique:satelite_health_facilities|max:64",
+            'name'      => "required|string|unique:satellite_health_facilities|max:64",
         ];
     }
 }

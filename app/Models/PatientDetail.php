@@ -15,7 +15,7 @@ class PatientDetail extends Model
 
     protected $guarded = ['id'];
 
-    protected $with = ['patientStatus', 'patient', 'sateliteHealthFacility', 'worker'];
+    protected $with = ['patientStatus', 'patient', 'satelliteHealthFacility', 'worker'];
 
     public function getActivitylogOptions(): LogOptions
     {

@@ -27,10 +27,6 @@ class StorePatientRequest extends FormRequest
      */
     protected function prepareForValidation()
     {
-        // dd(SateliteHealthFacility::firstOrCreate(
-        //     ["id"    => $this->satelite_health_facility_id],
-        //     ["name"  => Str::title($this->satelite_health_facility_id)]
-        // ));
         $this->merge([
             'satelite_health_facility_id' => $this->satelite_health_facility_id ? SateliteHealthFacility::firstOrCreate(
                 ["id"    => $this->satelite_health_facility_id],

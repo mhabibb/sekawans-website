@@ -11,7 +11,7 @@ use App\Models\PatientDetail;
 use App\Models\PatientStatus;
 use App\Models\Regency;
 use App\Models\Religion;
-use App\Models\SateliteHealthFacility;
+use App\Models\SatelliteHealthFacility;
 use App\Models\Worker;
 use Spatie\Activitylog\Facades\LogBatch;
 use Spatie\Activitylog\Models\Activity;
@@ -56,7 +56,7 @@ class PatientController extends Controller
     public function create()
     {
         $fasyankes = collect(["RS PARU JEMBER", "RSD DR. SOEBANDI JEMBER"]);
-        $satelites = SateliteHealthFacility::all();
+        $satelites = SatelliteHealthFacility::all();
         $workers = Worker::all();
         $religions = Religion::all();
         $educations = Education::all();
@@ -104,8 +104,8 @@ class PatientController extends Controller
     public function edit(PatientDetail $patient)
     {
         $fasyankes = collect(["RS PARU JEMBER", "RSD DR. SOEBANDI JEMBER"]);
-        $satelites = SateliteHealthFacility::all();
-        $workers = Worker::get();
+        $satelites = SatelliteHealthFacility::all();
+        $workers = Worker::all();
         $statuses = PatientStatus::get();
         $religions = Religion::all();
         $educations = Education::all();

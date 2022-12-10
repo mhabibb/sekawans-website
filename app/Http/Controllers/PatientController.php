@@ -56,12 +56,12 @@ class PatientController extends Controller
     public function create()
     {
         $fasyankes = collect(["RS PARU JEMBER", "RSD DR. SOEBANDI JEMBER"]);
-        $satelites = SatelliteHealthFacility::all();
+        $satellites = SatelliteHealthFacility::all();
         $workers = Worker::all();
         $religions = Religion::all();
         $educations = Education::all();
         $regencies = Regency::withWhereHas('districts', fn ($query) => $query->without('regency'))->get();
-        return view('admin.patient.create', compact('fasyankes', 'religions', 'regencies', 'educations', 'satelites', 'workers'));
+        return view('admin.patient.create', compact('fasyankes', 'religions', 'regencies', 'educations', 'satellites', 'workers'));
     }
 
     /**
@@ -104,14 +104,14 @@ class PatientController extends Controller
     public function edit(PatientDetail $patient)
     {
         $fasyankes = collect(["RS PARU JEMBER", "RSD DR. SOEBANDI JEMBER"]);
-        $satelites = SatelliteHealthFacility::all();
+        $satellites = SatelliteHealthFacility::all();
         $workers = Worker::all();
         $statuses = PatientStatus::get();
         $religions = Religion::all();
         $educations = Education::all();
         $regencies = Regency::withWhereHas('districts', fn ($query) => $query->without('regency'))->get();
         $detail = $patient;
-        return view('admin.patient.edit', compact('detail', 'fasyankes', 'satelites', 'workers', 'religions', 'regencies', 'educations', 'statuses'));
+        return view('admin.patient.edit', compact('detail', 'fasyankes', 'satellites', 'workers', 'religions', 'regencies', 'educations', 'statuses'));
     }
 
     /**

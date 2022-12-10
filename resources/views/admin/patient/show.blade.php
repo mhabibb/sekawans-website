@@ -24,8 +24,8 @@
             <div class="form-control">{{ $patientDetail->tb_health_facility }}</div>
           </div>
           <div class="col-sm-6 form-group">
-            <label for="satelite">Fasyankes Satelit</label>
-            <div class="form-control">{{ $patientDetail->sateliteHealthFacility->name }}</div>
+            <label for="satellite">Fasyankes Satelit</label>
+            <div class="form-control">{{ $patientDetail->satelliteHealthFacility->name }}</div>
           </div>
           <div class="col-sm-6 form-group">
             <label for="dateStart">Tanggal Mulai Berobat</label>

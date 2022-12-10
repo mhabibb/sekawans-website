@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Models\StaticElement;
 use App\Models\Article;
 use App\Models\Regency;
-use App\Models\PatientStatus;
 use Illuminate\Http\Request;
 
 class WebController extends Controller

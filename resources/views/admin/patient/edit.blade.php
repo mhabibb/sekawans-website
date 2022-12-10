@@ -43,13 +43,13 @@
           <div class="col-sm-6 form-group">
             <label>Fasyankes Satelit</label>
             <select
-              class="form-control tags @error('satelite_health_facility_id') is-invalid @else @if(old('satelite_health_facility_id') ?? false) is-valid @endif @enderror"
-              id="satelite" name="satelite.health.facility.id" style="width: 100%;">
+              class="form-control tags @error('satellite_health_facility_id') is-invalid @else @if(old('satellite_health_facility_id') ?? false) is-valid @endif @enderror"
+              id="satellite" name="satellite.health.facility.id" style="width: 100%;">
               <option disabled selected>Pilih Fasyankes Satelit</option>
-              @foreach ($satelites as $satelite)
-              <option value="{{ $satelite->id }}" @selected(old('satelite_health_facility_id', $detail->
-                satelite_health_facility_id)==$satelite->id)>{{
-                $satelite->name }}</option>
+              @foreach ($satellites as $satellite)
+              <option value="{{ $satellite->id }}" @selected(old('satellite_health_facility_id', $detail->
+                satellite_health_facility_id)==$satellite->id)>{{
+                $satellite->name }}</option>
               @endforeach
             </select>
           </div>
@@ -440,7 +440,7 @@
         tags: true
     });
 
-    var select2Id = ['#satelite', '#worker'];
+    var select2Id = ['#satellite', '#worker'];
     select2Id.map((id) => {
       $(id).on('select2:open', () => {
         var find = $(id).select2('data');

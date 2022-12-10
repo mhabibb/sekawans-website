@@ -25,7 +25,6 @@ class UpdateWorkerRequest extends FormRequest
     {
         return [
             'name'      => "required|string|unique:workers|max:50",
-            'is_active' => 'nullable|boolean',
         ];
     }
 }

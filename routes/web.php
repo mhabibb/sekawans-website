@@ -7,7 +7,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\LogController;
 use App\Http\Controllers\WebController;
 use App\Http\Controllers\DashboardController;
-use App\Http\Controllers\SateliteHealthFacilityController;
+use App\Http\Controllers\SatelliteWorkerController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 
@@ -50,7 +50,7 @@ Route::middleware('auth')->prefix('admin')->name('admin.')->group(function () {
         Route::put('/logs/{activity}/restore', 'restore')->name('logs.restore');
     })->middleware(['can:superAdmin']);
 
-    Route::controller(SateliteHealthFacilityController::class)->group(function () {
+    Route::controller(SatelliteWorkerController::class)->group(function () {
         Route::get('/fasyankes', 'index')->name('fasyankes.index');
         Route::delete('/fasyankes/{table}/{id}', 'destroy')->name('fasyankes.destroy');
     });

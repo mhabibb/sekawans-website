@@ -43,16 +43,16 @@ class SateliteHealthFacilityController extends Controller
         //
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \App\Http\Requests\StoreSateliteHealthFacilityRequest  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(StoreSateliteHealthFacilityRequest $request)
-    {
-        //
-    }
+    // /**
+    //  * Store a newly created resource in storage.
+    //  *
+    //  * @param  \App\Http\Requests\StoreSateliteHealthFacilityRequest  $request
+    //  * @return \Illuminate\Http\Response
+    //  */
+    // public function store(StoreSateliteHealthFacilityRequest $request)
+    // {
+    //     //
+    // }
 
     /**
      * Show the form for editing the specified resource.
@@ -85,9 +85,9 @@ class SateliteHealthFacilityController extends Controller
      */
     public function destroy($table, $id)
     {
-        $status = match($table){
-            'satelite'=> SateliteHealthFacility::find($id)->delete(),
-            'workers' => Worker::find($id)->delete()
+        match ($table) {
+            'satelite'  => SateliteHealthFacility::find($id)->delete(),
+            'workers'   => Worker::find($id)->delete()
         };
         return to_route('admin.fasyankes.index')->withSuccess("Data Terhapus!");
     }

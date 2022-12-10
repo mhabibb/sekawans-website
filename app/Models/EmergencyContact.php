@@ -20,7 +20,7 @@ class EmergencyContact extends Model
     public function getActivitylogOptions(): LogOptions
     {
         $user = auth()->user()->name ?? 'System';
-        $name = $this->name;
+        $name = $this->patient[0]->name;
         return LogOptions::defaults()
             ->logAll()
             ->useLogName('emergency contact')

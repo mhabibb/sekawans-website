@@ -40,7 +40,7 @@ class UpdateArticleRequest extends FormRequest
     public function rules()
     {
         return [
-            'title'         => "required|unique:articles,title,{$this->route('article')->id}|max:50",
+            'title'         => "required|unique:articles,title,{$this->route('article')->id}|max:100",
             'img'           => 'nullable|image',
             'contents'      => 'required',
         ];

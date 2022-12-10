@@ -2,8 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
 use Spatie\Activitylog\Models\Activity;
 
 class LogController extends Controller
@@ -17,15 +16,16 @@ class LogController extends Controller
     {
         $this->uuid = null;
         $logs = Activity::all()->reverse()->filter(function ($value) {
-            if (!($value->log_name == 'article' && ($value->event == 'restored' || $value->event == 'deleted'))) {
-                if ($value->batch_uuid) {
-                    if ($this->uuid !== $value->batch_uuid) {
-                        $this->uuid = $value->batch_uuid;
-                        return $value;
-                    }
-                } else return $value;
-            }
+            // if (!($value->log_name == 'article' && ($value->event == 'restored' || $value->event == 'deleted'))) {
+            if ($value->batch_uuid) {
+                if ($this->uuid !== $value->batch_uuid) {
+                    $this->uuid = $value->batch_uuid;
+                    return $value;
+                }
+            } else return $value;
+            // }
         });
+        // dd($logs->first());
         return view('admin.activitylog.index', compact('logs'));
     }
 
@@ -74,11 +74,11 @@ class LogController extends Controller
     {
         if ($activity->batch_uuid) {
             $activities = $activity->forBatch($activity->batch_uuid)->get()->reverse();
-            $status = collect();
+            $restored = collect();
             foreach ($activities as $activity) {
-                $status->add($this->restoring($activity));
+                $restored->add($this->restoring($activity));
             }
-            $this->connect($activities, $status);
+            $this->connect($activities, $restored);
         } else {
             $this->restoring($activity);
         }
@@ -94,19 +94,47 @@ class LogController extends Controller
             'deleted', 'updated' => $model::updateOrCreate(['id' => $properties['old']['id']], $properties['old']),
             'created' => $model->delete()
         };
+        match ($activity->log_name) {
+            'about'     => $properties['old']['id'] == 3 ? $this->deleteContentImg($properties['attributes']['contents']) : '',
+            'article'   => [
+                $properties['old']['img'] !== $properties['attributes']['img'] ? $this->deleteContentImg($properties['attributes']['img']) : '',
+                $properties['old']['contents'] !== $properties['attributes']['contents'] ? $this->deleteContentImg($properties['attributes']['contents'], $properties['old']['contents']) : '',
+            ],
+            default     => ''
+        };
         $activity->delete();
         activity()->enableLogging();
         $model::reguard();
         return $status;
     }
 
-    private function connect($activities, $result){
+    private function connect($activities, $restored)
+    {
         $i = 0;
         activity()->disableLogging();
         foreach ($activities as $activity) {
-            $result[$i]->update($activity->changes()['old']);
+            $restored[$i]->update($activity->changes()['old']);
             $i++;
         }
         activity()->enableLogging();
+    }
+
+    private function isContainImg($contents)
+    {
+        return str($contents)->contains('img/about/') || str($contents)->contains('img/articles/');
+    }
+
+    private function getImgSrc($contents)
+    {
+        return str($contents)->matchAll('/((storage\/|^)?img\/(articles|about)\/([^"]+))/')->map(fn ($src) => str($src)->start('img/'));
+    }
+
+    private function deleteContentImg($contents, $exclude = null)
+    {
+        if ($exclude) if ($this->isContainImg($exclude))
+            $exclude = $this->getImgSrc($exclude);
+        // dd($this->getImgSrc($contents), $contents, $exclude);
+        if ($this->isContainImg($contents))
+            $this->getImgSrc($contents)->each(fn ($src) => str($src)->contains($exclude) ? '' : Storage::delete($src));
     }
 }

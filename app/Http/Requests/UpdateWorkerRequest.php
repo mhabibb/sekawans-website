@@ -24,7 +24,7 @@ class UpdateWorkerRequest extends FormRequest
     public function rules()
     {
         return [
-            'name'      => "required|string|unique:workers,name,{$this->route('worker')->id}|max:50",
+            'name'      => "required|string|unique:workers|max:50",
             'is_active' => 'nullable|boolean',
         ];
     }

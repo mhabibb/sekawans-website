@@ -40,7 +40,7 @@
                                                 <td>
                                                     <div class="truncate">{{ $log->description }}</div>
                                                 </td>
-                                                <td>{{ date('j F Y, H:i:s', strtotime($log->updated_at)) }}</td>
+                                                <td>{{ $log->updated_at }}</td>
                                                 <td style="white-space: nowrap;">
                                                     <a role="button" onclick="restoreLog({{ $log->id }})"
                                                         class="btn badge badge-success">Restore</a>
@@ -100,11 +100,13 @@
                                 text: 'Data telah dipulihkan',
                                 icon: 'success',
                                 showConfirmButton: false,
-                                timer: 2000
                             })
-                            $('#logsData').DataTable().destroy();
-                            $('#' + id).remove();
-                            table();
+                            setTimeout(function() {
+                                location.reload()
+                            }, 2000)
+                            // $('#logsData').DataTable().destroy();
+                            // $('#' + id).remove();
+                            // table();
                         })
                         .fail(function() {
                             Swal.fire(
@@ -119,7 +121,7 @@
 
         function table() {
             $.fn.dataTable.moment('D MMMM YYYY, HH:mm:ss');
-            $('#logsData').DataTable({
+            var table = $('#logsData').DataTable({
                 "responsive": true,
                 "autoWidth": false,
                 columnDefs: [
@@ -127,10 +129,10 @@
                         targets: 2,
                         orderable: false,
                         searchable: false,
-                    },
+                    }, 
                     {
                         targets: 1,
-                        render: function(data) {
+                        render: function(data, type, row) {
                             date = new Date(data)
                             return moment(date).format('D MMMM YYYY, HH:mm:ss')
                         }

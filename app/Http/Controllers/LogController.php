@@ -16,16 +16,13 @@ class LogController extends Controller
     {
         $this->uuid = null;
         $logs = Activity::all()->reverse()->filter(function ($value) {
-            // if (!($value->log_name == 'article' && ($value->event == 'restored' || $value->event == 'deleted'))) {
             if ($value->batch_uuid) {
                 if ($this->uuid !== $value->batch_uuid) {
                     $this->uuid = $value->batch_uuid;
                     return $value;
                 }
             } else return $value;
-            // }
         });
-        // dd($logs->first()->subject_id);
         return view('admin.activitylog.index', compact('logs'));
     }
 
@@ -102,11 +99,6 @@ class LogController extends Controller
             ],
             default     => ''
         };
-        // $compek = Activity::where('id', '>', $activity->id)
-        //     ->where('subject_type', $model)
-        //     ->where('subject_id', $activity->subject_id)->get()
-        //     ->filter(fn ($activity) => $activity->uuid != ($activity->batch_uuid ?? 'compek'));
-        // dd($compek, $activity);
         Activity::where('id', '>', $activity->id)
             ->where('subject_type', $model)
             ->where('subject_id', $activity->subject_id)->get()
@@ -142,7 +134,6 @@ class LogController extends Controller
     private function deleteContentImg($contents, $exclude = null)
     {
         if ($exclude) $exclude = $this->getImgSrc($exclude);
-        // dd(str($this->getImgSrc($contents)[0]), $contents, $exclude);
         if ($this->isContainImg($contents))
             $this->getImgSrc($contents)->each(fn ($src) => str($src)->contains($exclude) ? '' : Storage::delete($src));
     }

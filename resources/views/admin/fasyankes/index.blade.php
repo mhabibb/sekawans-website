@@ -137,7 +137,7 @@
                 url = "{{ route('admin.fasyankes.update', ['table', 'id']) }}"
                 url = url.replace('table', table).replace('id', id)
                 type = 'put'
-                success = 'Update Berhasil!'
+                success = 'Berhasil Diperbarui!'
                 datas = {
                     name: data
                 }
@@ -148,8 +148,13 @@
         $('.form').each(function() {
             $(this).submit(function(e) {
                 e.preventDefault()
-                console.log(this.action);
-
+                url = this.action
+                type = 'delete'
+                datas = ''
+                success = 'Berhasil Hapus!'
+                elm = $(this).parents('tr')
+                console.log(elm);
+                ajax(elm)
             })
         })
 
@@ -160,7 +165,8 @@
                     data: datas,
                 })
                 .done(function(name) {
-                    if (name) {
+                    console.log(name);
+                    if (name != 0) {
                         Swal.fire({
                             title: success,
                             icon: 'success',
@@ -170,6 +176,7 @@
                         type == 'put' ? elm.html(name.trim()) : elm.remove();
                     } else Swal.fire(
                         'Terjadi Kesalahan',
+                        '',
                         'error'
                     )
                 })

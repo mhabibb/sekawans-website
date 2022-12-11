@@ -49,38 +49,6 @@ class SatelliteWorkerController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    // /**
-    //  * Store a newly created resource in storage.
-    //  *
-    //  * @param  \App\Http\Requests\StoreSatelliteHealthFacilityRequest  $request
-    //  * @return \Illuminate\Http\Response
-    //  */
-    // public function store(StoreSatelliteHealthFacilityRequest $request)
-    // {
-    //     //
-    // }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\SatelliteHealthFacility  $satelliteHealthFacility
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(SatelliteHealthFacility $satelliteHealthFacility)
-    {
-        //
-    }
-
-    /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\UpdateSatelliteWorkerRequest  $request
@@ -130,10 +98,10 @@ class SatelliteWorkerController extends Controller
      */
     public function destroy($table, $id)
     {
-        // match ($table) {
-        //     'satellite'  => SatelliteHealthFacility::find($id)->delete(),
-        //     'workers'   => Worker::find($id)->delete()
-        // };
-        // return to_route('admin.fasyankes.index')->withSuccess("Data Terhapus!");
+        $status = match ($table) {
+            'satellite'  => SatelliteHealthFacility::find($id)->delete(),
+            'workers'   => Worker::find($id)->delete()
+        };
+        return $status;
     }
 }

@@ -126,14 +126,13 @@ class LogController extends Controller
 
     private function getImgSrc($contents)
     {
-        return str($contents)->matchAll('/((storage\/|^)?img\/(articles|about)\/([^"]+))/')->map(fn ($src) => str($src)->start('img/'));
+        return str($contents)->matchAll('/((storage\/|^)?img\/(articles|about)\/([^"]+))/')->map(fn ($src) => str($src)->remove('storage/'));
     }
 
     private function deleteContentImg($contents, $exclude = null)
     {
-        if ($exclude) if ($this->isContainImg($exclude))
-            $exclude = $this->getImgSrc($exclude);
-        // dd($this->getImgSrc($contents), $contents, $exclude);
+        if ($exclude) $exclude = $this->getImgSrc($exclude);
+        // dd(str($this->getImgSrc($contents)[0]), $contents, $exclude);
         if ($this->isContainImg($contents))
             $this->getImgSrc($contents)->each(fn ($src) => str($src)->contains($exclude) ? '' : Storage::delete($src));
     }

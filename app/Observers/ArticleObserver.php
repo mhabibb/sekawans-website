@@ -96,10 +96,20 @@ class ArticleObserver
         return $contents;
     }
 
+    private function isContainImg($contents)
+    {
+        return str($contents)->contains(asset('storage/img/articles/contents/'));
+    }
+
+    private function getImgSrc($contents)
+    {
+        return str($contents)->matchAll('/<img[^>]+src="([^">]+)/')->map(fn ($src) => str($src)->remove(asset('storage/')));
+    }
+
     private function deleteContentImg($contents, $exclude = null)
     {
-        if ($exclude) $exclude = str($contents)->matchAll('/<img[^>]+src="([^">]+)/');
-        if (str($contents)->contains('/<img[^>]+src="([^">]+)/' . asset('storage/img/articles/contents/')))
-            str($contents)->matchAll('/<img[^>]+src="([^">]+)/')->each(fn ($src) => str($src)->contains($exclude) ? '' : Storage::delete(str($src)->remove(asset('storage/'))));
+        if ($exclude) $exclude = $this->getImgSrc($exclude);
+        if ($this->isContainImg($contents))
+            $this->getImgSrc($contents)->each(fn ($src) => str($src)->contains($exclude) ? '' : Storage::delete($src));
     }
 }

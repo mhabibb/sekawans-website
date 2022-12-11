@@ -30,8 +30,7 @@ class StorePatientRequest extends FormRequest
         $this->merge([
             'satellite_health_facility_id' => $this->satellite_health_facility_id ? SatelliteHealthFacility::firstOrCreate(
                 ["id"    => $this->satellite_health_facility_id],
-                ["name"  => str(str($this->satellite_health_facility_id)->whenContains(' ', fn ($name)
-                => (str($name)->explode(' ')->map(fn ($name, $key) => $key !== 0 ? ucfirst($name) : $name))->implode(' ')))->value()]
+                ["name"  => Str::upper($this->satellite_health_facility_id)]
             )->id : false,
             'worker_id'  => $this->worker_id ? Worker::firstOrCreate(
                 ["id"    => $this->worker_id],

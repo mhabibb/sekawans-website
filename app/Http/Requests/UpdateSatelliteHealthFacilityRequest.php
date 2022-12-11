@@ -26,8 +26,7 @@ class UpdateSatelliteHealthFacilityRequest extends UpdateSatelliteWorkerRequest
     protected function prepareForValidation()
     {
         $this->merge(
-            ["name"  => str(str($this->name)->whenContains(' ', fn ($name)
-            => (str($name)->explode(' ')->map(fn ($name, $key) => $key !== 0 ? ucfirst($name) : $name))->implode(' ')))->value()]
+            ["name"  => Str::upper($this->name)]
         );
     }
 

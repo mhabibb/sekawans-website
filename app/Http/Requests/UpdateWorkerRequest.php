@@ -2,6 +2,8 @@
 
 namespace App\Http\Requests;
 
+use Illuminate\Support\Str;
+
 // use Illuminate\Foundation\Http\FormRequest;
 
 class UpdateWorkerRequest extends UpdateSatelliteWorkerRequest
@@ -13,7 +15,20 @@ class UpdateWorkerRequest extends UpdateSatelliteWorkerRequest
      */
     public function authorize()
     {
-        return auth()->check(); 
+        return auth()->check();
+    }
+
+    /**
+     * Prepare the data for validation.
+     *
+     * @return void
+     */
+    protected function prepareForValidation()
+    {
+        $this->merge(
+            ["name"  => str(str(Str::title($this->name))->whenContains('.', fn ($name)
+            => (str($name)->explode('.')->map(fn ($name) => ucfirst($name)))->implode('.')))->value()]
+        );
     }
 
     /**

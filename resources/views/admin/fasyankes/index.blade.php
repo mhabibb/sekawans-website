@@ -28,7 +28,7 @@
                                             <td>
                                                 <a href="#" class="badge badge-warning"
                                                     onclick="update(this, 'satellite', {{ $satellite->id }})">Edit</a>
-                                                <form
+                                                <form class="form"
                                                     action="{{ route('admin.fasyankes.destroy', ['table' => 'satellite', 'id' => $satellite->id]) }}"
                                                     method="post">
                                                     @csrf
@@ -69,7 +69,7 @@
                                             <td>
                                                 <a href="#" class="badge badge-warning"
                                                     onclick="update(this, 'worker', {{ $ps->id }})">Edit</a>
-                                                <form
+                                                <form class="form"
                                                     action="{{ route('admin.fasyankes.destroy', ['table' => 'workers', 'id' => $ps->id]) }}"
                                                     method="post">
                                                     @csrf
@@ -95,18 +95,20 @@
 
 @section('js')
     <script>
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+
         async function update(elm, table, id) {
-            $.ajaxSetup({
-                headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                }
-            });
+            elm = $(elm).parent().siblings();
             const {
                 value: data
             } = await Swal.fire({
-                title: `Update ${$(elm).parent().siblings().html().trim()}`,
+                title: `Update ${elm.html().trim()}`,
                 input: 'text',
-                inputValue: $(elm).parent().siblings().html().trim(),
+                inputValue: elm.html().trim(),
                 showCancelButton: true,
                 confirmButtonText: 'Update',
                 cancelButtonText: 'Batalkan',
@@ -134,35 +136,50 @@
             if (data) {
                 url = "{{ route('admin.fasyankes.update', ['table', 'id']) }}"
                 url = url.replace('table', table).replace('id', id)
-                $.ajax({
-                        type: 'put',
-                        url: url,
-                        data: {
-                            name: data
-                        },
-                    })
-                    .done(function(status) {
-                        if (status) {
-                            $(elm).parent().siblings().html(data.trim())
-                            Swal.fire({
-                                title: 'Update Berhasil!',
-                                icon: 'success',
-                                showConfirmButton: false,
-                                timer: 2000
-                            })
-                        } else Swal.fire(
-                            'Terjadi Kesalahan',
-                            'error'
-                        )
-                    })
-                    .fail(function() {
-                        Swal.fire(
-                            'Terjadi Kesalahan',
-                            '',
-                            'error'
-                        )
-                    });
+                type = 'put'
+                success = 'Update Berhasil!'
+                datas = {
+                    name: data
+                }
+                ajax(elm)
             }
+        }
+
+        $('.form').each(function() {
+            $(this).submit(function(e) {
+                e.preventDefault()
+                console.log(this.action);
+
+            })
+        })
+
+        function ajax(elm) {
+            $.ajax({
+                    type: type,
+                    url: url,
+                    data: datas,
+                })
+                .done(function(name) {
+                    if (name) {
+                        Swal.fire({
+                            title: success,
+                            icon: 'success',
+                            showConfirmButton: false,
+                            timer: 2000
+                        })
+                        type == 'put' ? elm.html(name.trim()) : elm.remove();
+                    } else Swal.fire(
+                        'Terjadi Kesalahan',
+                        'error'
+                    )
+                })
+                .fail(function() {
+                    Swal.fire(
+                        'Terjadi Kesalahan',
+                        '',
+                        'error'
+                    )
+                });
         }
     </script>
 @endsection

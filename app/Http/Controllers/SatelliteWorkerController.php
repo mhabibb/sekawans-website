@@ -105,7 +105,7 @@ class SatelliteWorkerController extends Controller
     {
         $request = $request->validated();
         $satelliteHealthFacility->update($request);
-        return $satelliteHealthFacility->wasChanged();
+        return $satelliteHealthFacility->name;
     }
 
     /**
@@ -119,7 +119,7 @@ class SatelliteWorkerController extends Controller
     {
         $request = $request->validated();
         $worker->update($request);
-        return $worker->wasChanged();
+        return $worker->name;
     }
 
     /**
@@ -130,10 +130,10 @@ class SatelliteWorkerController extends Controller
      */
     public function destroy($table, $id)
     {
-        match ($table) {
-            'satellite'  => SatelliteHealthFacility::find($id)->delete(),
-            'workers'   => Worker::find($id)->delete()
-        };
-        return to_route('admin.fasyankes.index')->withSuccess("Data Terhapus!");
+        // match ($table) {
+        //     'satellite'  => SatelliteHealthFacility::find($id)->delete(),
+        //     'workers'   => Worker::find($id)->delete()
+        // };
+        // return to_route('admin.fasyankes.index')->withSuccess("Data Terhapus!");
     }
 }

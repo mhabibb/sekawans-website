@@ -25,17 +25,22 @@ class WebController extends Controller
     public function about()
     {
         $abouts = StaticElement::get();
+        $profilFig = array(
+            'image' => "img/sekawans.jpg",
+            'caption' => "Sekawan'S TB bersama mahasiswa magang MSIB dan pasien sembuh pada kegiatan FGD 3 November 2022",
+        );
         return view('web.tentang', [
             'profile' => $abouts->find(1),
+            'figure' => $profilFig,
             'visimisi' => $abouts->find(2),
             'structure' => $abouts->find(3)
         ]);
     }
 
-    public function structur()
-    {
-        return view('tentang.struktur');
-    }
+    // public function structur()
+    // {
+    //     return view('tentang.struktur');
+    // }
 
     public function info()
     {

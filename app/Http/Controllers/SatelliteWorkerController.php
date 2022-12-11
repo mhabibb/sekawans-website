@@ -80,13 +80,12 @@ class SatelliteWorkerController extends Controller
         //
     }
 
-    // /**
-    //  * Update the specified resource in storage.
-    //  *
-    //  * @param  \Illuminate\Http\UpdateSatelliteWorkerRequest  $request
-    //  * @param  \App\Models\SatelliteHealthFacility  $satelliteHealthFacility
-    //  * @return \Illuminate\Http\Response
-    //  */
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\UpdateSatelliteWorkerRequest  $request
+     * @return \Illuminate\Http\Response
+     */
     public function update($table, UpdateSatelliteWorkerRequest $request, $data)
     {
         return match ($table) {
@@ -95,13 +94,13 @@ class SatelliteWorkerController extends Controller
         };
     }
 
-    // /**
-    //  * Update the specified resource in storage.
-    //  *
-    //  * @param  \App\Http\Requests\UpdateSatelliteHealthFacilityRequest  $request
-    //  * @param  \App\Models\SatelliteHealthFacility  $satelliteHealthFacility
-    //  * @return \Illuminate\Http\Response
-    //  */
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \App\Http\Requests\UpdateSatelliteHealthFacilityRequest  $request
+     * @param  \App\Models\SatelliteHealthFacility  $satelliteHealthFacility
+     * @return \Illuminate\Http\Response
+     */
     private function updateSatellite(UpdateSatelliteHealthFacilityRequest $request, SatelliteHealthFacility $satelliteHealthFacility)
     {
         $request = $request->validated();
@@ -109,13 +108,13 @@ class SatelliteWorkerController extends Controller
         return $satelliteHealthFacility->wasChanged();
     }
 
-    // /**
-    //  * Update the specified resource in storage.
-    //  *
-    //  * @param  \App\Http\Requests\UpdateWorkerRequest  $request
-    //  * @param  \App\Models\Worker  $worker
-    //  * @return \Illuminate\Http\Response
-    //  */
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \App\Http\Requests\UpdateWorkerRequest  $request
+     * @param  \App\Models\Worker  $worker
+     * @return \Illuminate\Http\Response
+     */
     private function updateWorker(UpdateWorkerRequest $request, Worker $worker)
     {
         $request = $request->validated();

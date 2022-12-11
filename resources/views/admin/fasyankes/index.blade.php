@@ -144,7 +144,8 @@
                     })
                     .done(function(status) {
                         if (status) {
-                            $(elm).parent().siblings().html(data).trim()
+                            console.log(status);
+                            $(elm).parent().siblings().html(data.trim())
                             Swal.fire({
                                 title: 'Update Berhasil!',
                                 icon: 'success',

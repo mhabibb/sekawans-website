@@ -101,7 +101,6 @@
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 }
             });
-            console.log($(elm));
             const {
                 value: data
             } = await Swal.fire({
@@ -144,7 +143,6 @@
                     })
                     .done(function(status) {
                         if (status) {
-                            console.log(status);
                             $(elm).parent().siblings().html(data.trim())
                             Swal.fire({
                                 title: 'Update Berhasil!',

@@ -15,7 +15,7 @@
       @csrf
       @method('PUT')
       <div class="form-group mb-3 col-md-6">
-        <label for="title" class="form-label">Judul {{ $title }} (maksimal 100 karakter)</label>
+        <label for="title" class="form-label">Judul {{ $title }} (maksimal 128 karakter)</label>
         <input type="text" name="title" class="form-control @error('title') is-invalid
         @else @if(old('title') ?? false) is-valid @endif @enderror" id="title" placeholder="Tulis judul..."
           value="{{ old('title', $article->title) }}">
@@ -36,7 +36,7 @@
         @enderror
       </div>
       <div class="form-group mb-3 col-12">
-        <label for="contents">Isi konten (minimal 100 karakter)</label>
+        <label for="contents">Isi konten</label>
         @error('contents')
         <span class="text-danger">Invalid</span>
         @enderror

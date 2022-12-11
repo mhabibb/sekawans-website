@@ -6,7 +6,6 @@ use App\Models\Article;
 use App\Http\Requests\StoreArticleRequest;
 use App\Http\Requests\UpdateArticleRequest;
 use Illuminate\Support\Facades\Storage;
-use Illuminate\Support\Str;
 
 class ArticleController extends Controller
 {
@@ -193,14 +192,8 @@ class ArticleController extends Controller
     public function update(UpdateArticleRequest $request, Article $article)
     {
         $validated = $request->validated();
-        if (isset($validated['img'])) {
-            $oldImg = $article->img;
-            $validated['img'] = $validated['img']->store('img/articles');
-        };
-        $validated['contents'] = $this->contentDecode($validated['contents'], $article->contents);
+        if (isset($validated['img'])) $validated['img'] = $validated['img']->store('img/articles');
         $article->update($validated);
-
-        if (isset($validated['img'])) ($article->wasChanged() ? Storage::delete($oldImg) : Storage::delete($validated['img']));
 
         $category = (request()->segments()[1]);
         $category == "infos" ? $route = 'admin.infotbc.show'
@@ -233,36 +226,6 @@ class ArticleController extends Controller
 
     public function forceDelete(Article $article)
     {
-        $this->deleteContentImg($article->contents);
-        Storage::delete($article->img);
         return $article->forceDelete();
-    }
-
-    ## Decode contents article image then save image in storage
-    private function contentDecode($contents, $old = null)
-    {
-        while (str($contents)->contains(';base64,')) {
-            $base64 = str(str($contents)->match('/<img.+src="data([^">]+)/'));
-            $contents = str($contents)->replace('data' . $base64, '??');
-            $ext = str(str($contents)->match('/<img.+src="\?\?"([^>]+)/')->explode('.')->last())->trim('"');
-            $base64 = str($base64)->explode(',')[1];
-            $img = base64_decode(str($base64));
-            do {
-                $imgName = 'img/articles/contents/' . Str::random(80) . '.' . $ext;
-                $status = Storage::get($imgName);
-            } while ($status);
-            $status = Storage::put($imgName, $img);
-            $contents = str($contents)->replace('??', asset('storage/' . $imgName));
-        }
-        if ($old) $this->deleteContentImg($old, $contents);
-
-        return $contents;
-    }
-
-    private function deleteContentImg($contents, $exclude = null)
-    {
-        if($exclude) $exclude = str($exclude)->matchAll('/<img.+src="([^">]+)/');
-        if (str($contents)->contains('/<img.+src="/' . asset('storage/img/articles/contents/')))
-            str($contents)->matchAll('/<img.+src="([^">]+)/')->each(fn ($src) => str($src)->contains($exclude) ? '' : Storage::delete(str($src)->remove(asset('storage/'))));
     }
 }

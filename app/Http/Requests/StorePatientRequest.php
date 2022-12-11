@@ -32,12 +32,28 @@ class StorePatientRequest extends FormRequest
                 ["id"    => $this->satellite_health_facility_id],
                 ["name"  => Str::upper($this->satellite_health_facility_id)]
             )->id : false,
+
             'worker_id'  => $this->worker_id ? Worker::firstOrCreate(
                 ["id"    => $this->worker_id],
-                ["name"  => str(str(Str::title($this->worker_id))->whenContains('.', fn ($name)
-                => (str($name)->explode('.')->map(fn ($name) => ucfirst($name)))->implode('.')))->value()]
+                ["name"  => $this->nameCase($this->worker_id)]
             )->id : false,
+
+            "name"              => $this->nameCase($this->name),
+            "mother_name"       => $this->nameCase($this->mother_name),
+            "father_name"       => $this->nameCase($this->father_name),
+            "emergency"         => [
+                'name'      => $this->nameCase($this->emergency['name']),
+                'relation'  => $this->emergency['relation'],
+                'address'   => $this->emergency['address'],
+                'phone'     => $this->emergency['phone'],
+                'is_know'   => $this->emergency['is_know'],
+            ],
         ]);
+    }
+
+    private function nameCase($name)
+    {
+        return str(str(Str::title($name))->whenContains('.', fn ($name) => (str($name)->explode('.')->map(fn ($name) => ucfirst($name)))->implode('.')))->value();
     }
 
     /**
@@ -49,7 +65,7 @@ class StorePatientRequest extends FormRequest
     {
         return [
             'tb_health_facility'            => 'required|string|max:50',
-            'satellite_health_facility_id'   => 'required|integer',
+            'satellite_health_facility_id'  => 'required|integer',
             'start_treatment'               => 'required|date|before_or_equal:today',
             'no_regis'                      => 'required|integer|',
             'worker_id'                     => 'required|integer',

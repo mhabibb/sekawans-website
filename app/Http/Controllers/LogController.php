@@ -25,7 +25,7 @@ class LogController extends Controller
             } else return $value;
             // }
         });
-        // dd($logs->first());
+        // dd($logs->first()->subject_id);
         return view('admin.activitylog.index', compact('logs'));
     }
 
@@ -102,6 +102,16 @@ class LogController extends Controller
             ],
             default     => ''
         };
+        // $compek = Activity::where('id', '>', $activity->id)
+        //     ->where('subject_type', $model)
+        //     ->where('subject_id', $activity->subject_id)->get()
+        //     ->filter(fn ($activity) => $activity->uuid != ($activity->batch_uuid ?? 'compek'));
+        // dd($compek, $activity);
+        Activity::where('id', '>', $activity->id)
+            ->where('subject_type', $model)
+            ->where('subject_id', $activity->subject_id)->get()
+            ->filter(fn ($activity) => $activity->uuid != ($activity->batch_uuid ?? 'compek'))
+            ->each(fn ($activity) => $activity->delete());
         $activity->delete();
         activity()->enableLogging();
         $model::reguard();

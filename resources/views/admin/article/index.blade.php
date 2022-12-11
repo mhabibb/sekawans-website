@@ -74,7 +74,7 @@
                     } else {
                         $(this).addClass('trash');
                         $('.toggler').text('Tutup Sampah');
-                        $('.trash-desc').text('Tiap entri sampah akan hilang dalam 90 hari (3 bulan)')
+                        $('.trash-desc').text('Tiap entri sampah akan hilang dalam 3 bulan')
                         time.html('Waktu Hapus');
                         url = "{{ route('admin.trashed.index', 'path') }}";
                         url = url.replace('path', path);

@@ -9,13 +9,14 @@ use Illuminate\Support\Str;
 class ArticleObserver
 {
     /**
-     * Handle the Article "created" event.
+     * Handle the Article "creating" event.
      *
      * @param  \App\Models\Article  $article
      * @return void
      */
     public function creating(Article $article)
     {
+        $article->deleted_at = null;
         $article->user_id = auth()->id();
     }
 

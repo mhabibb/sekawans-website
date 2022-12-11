@@ -94,7 +94,7 @@ class LogController extends Controller
             'deleted', 'updated' => $model::updateOrCreate(['id' => $properties['old']['id']], $properties['old']),
             'created' => $model->delete()
         };
-        match ($activity->log_name) {
+        if ($activity->event !== 'deleted') match ($activity->log_name) {
             'about'     => $properties['old']['id'] == 3 ? $this->deleteContentImg($properties['attributes']['contents']) : '',
             'article'   => [
                 $properties['old']['img'] !== $properties['attributes']['img'] ? $this->deleteContentImg($properties['attributes']['img']) : '',

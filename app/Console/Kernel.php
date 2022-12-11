@@ -15,8 +15,10 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
+        $schedule->command('down')->daily();
         $schedule->command('model:prune')->daily();
         $schedule->command('activitylog:clean')->daily();
+        $schedule->command('up')->dailyAt('00:30');
     }
 
     /**

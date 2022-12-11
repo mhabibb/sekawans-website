@@ -16,9 +16,9 @@ return new class extends Migration
         Schema::create('articles', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')
+                ->nullable()
                 ->constrained()
-                ->onUpdate('cascade')
-                ->onDelete('cascade');
+                ->nullOnDelete();
             $table->string('title', 128);
             $table->string('img', 64);
             $table->longText('contents');

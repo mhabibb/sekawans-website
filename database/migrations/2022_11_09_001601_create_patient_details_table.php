@@ -22,13 +22,13 @@ return new class extends Migration
                 ->unique();
             $table->enum('tb_health_facility', ['RSD DR. SOEBANDI JEMBER', 'RS PARU JEMBER']);
             $table->foreignId('satellite_health_facility_id')
+                ->nullable()
                 ->constrained()
-                ->onUpdate('cascade')
-                ->onDelete('cascade');
+                ->nullOnDelete();
             $table->foreignId('worker_id')
+                ->nullable()
                 ->constrained()
-                ->onUpdate('cascade')
-                ->onDelete('cascade');
+                ->nullOnDelete();
             $table->string('no_regis', 16)->unique();
             $table->foreignId('patient_status_id')
                 ->default(2)

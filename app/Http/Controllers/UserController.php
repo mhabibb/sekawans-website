@@ -6,7 +6,6 @@ use App\Models\User;
 use App\Http\Requests\StoreUserRequest;
 use App\Http\Requests\UpdateUserRequest;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 
 class UserController extends Controller
@@ -72,10 +71,6 @@ class UserController extends Controller
     public function update(UpdateUserRequest $request, User $user)
     {
         $request = $request->validated();
-        // if (isset($request['password'])) {
-        //     $request['password'] = $request['password'];
-        // }
-        // dd($request);
         $user->update($request);
         return to_route('admin.users.show', $user)->withSuccess("Profil berhasil diperbarui!");
     }
@@ -92,10 +87,8 @@ class UserController extends Controller
             if ($validator->fails()) {
                 return response()->json(['status' => false]);
             } else {
-                // $request['password'] = Hash::make($request['password']);
                 $user->password = bcrypt($request['password']);
                 $user->saveQuietly();
-                // dd($user, $request);
             }
             return response()->json(['status' => $user->wasChanged()]);
         }

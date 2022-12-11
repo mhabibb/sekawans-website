@@ -35,9 +35,11 @@
                                             <td>{{ $user->name }}</td>
                                             <td>{{ $user->email }}</td>
                                             <td>
-                                                <a href="#" id="bt{{ $user->id }}" class="badge badge-success" onclick="resetUser({{ $user->id }})">
+                                                <a href="#" id="bt{{ $user->id }}" class="badge badge-success"
+                                                    onclick="resetUser({{ $user->id }})">
                                                     <i class="fa-solid fa-rotate-left"></i> Reset</a>
-                                                <a href="#" id="bt{{ $user->id }}" class="badge badge-danger" onclick="deleteUser({{ $user->id }})">
+                                                <a href="#" id="bt{{ $user->id }}" class="badge badge-danger"
+                                                    onclick="deleteUser({{ $user->id }})">
                                                     <i class="fa-solid fa-trash-can"></i> Hapus</a>
                                             </td>
                                         </tr>
@@ -63,24 +65,28 @@
 @section('js')
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script>
-        $('#userTable').DataTable({
-            "responsive": true, 
-            "autoWidth": false,
-            "searching": false,
-            columnDefs: [
-                {
+        $(function() {
+            table()
+        })
+
+        function table() {
+            $('#userTable').DataTable({
+                "responsive": true,
+                "autoWidth": false,
+                "searching": false,
+                columnDefs: [{
                     searchable: false,
                     orderable: false,
                     targets: 2,
-                },
-            ],
-            paging: false,
-            order: [
-                [0, 'asc']
-            ],
-        })
+                }, ],
+                paging: false,
+                order: [
+                    [0, 'asc']
+                ],
+            })
+        }
 
-        @if($errors->any())
+        @if ($errors->any())
             Swal.fire(
                 'Gagal Menambah Akun',
                 '',
@@ -96,41 +102,18 @@
                 }
             });
             url = "{{ route('admin.users.reset', 'id') }}";
-            url = url.replace('id', id)
+            ajax = {
+                url: url.replace('id', id),
+                id: id,
+                text: 'Berhasil Reset Akun',
+                type: 'POST'
+            }
             name = $('#bt' + id).parent().parent().find('td').html();
-
-            Swal.fire({
-                title: 'Yakin Reset Akun?',
+            swal = {
                 text: "Autentikasi akun " + name + " akan direset",
-                icon: 'warning',
-                showCancelButton: true,
-                confirmButtonColor: '#3085d6',
-                cancelButtonColor: '#d33',
-                confirmButtonText: 'Yakin',
-                cancelButtonText: 'Batalkan',
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    $.ajax({
-                            type: "POST",
-                            url: url,
-                            data: id,
-                        })
-                        .done(function(status) {
-                            Swal.fire(
-                                'Berhasil Reset Akun',
-                                '',
-                                'success'
-                            )
-                        })
-                        .fail(function() {
-                            Swal.fire(
-                                'Terjadi Kesalahan',
-                                '',
-                                'error'
-                            )
-                        });
-                }
-            })
+                title: 'Yakin Reset Akun?'
+            }
+            swalFn()
         }
 
         function deleteUser(id) {
@@ -140,12 +123,26 @@
                 }
             });
             url = "{{ route('admin.users.destroy', 'id') }}";
-            url = url.replace('id', id)
+            ajax = {
+                url: url.replace('id', id),
+                id: id,
+                text: 'Akun Berhasil Dihapus',
+                type: 'DELETE'
+            }
+            name = $('#bt' + id).parent().parent().find('td').html();
+            swal = {
+                text: "Autentikasi akun " + name + " akan direset",
+                title: 'Yakin Hapus Akun?'
+            }
             name = $('#bt' + id).parent().parent().find('td').html();
 
+            swalFn()
+        }
+
+        function swalFn() {
             Swal.fire({
-                title: 'Yakin Hapus Akun?',
-                text: "Akun " + name + " akan dihapus",
+                title: swal.title,
+                text: swal.text,
                 icon: 'warning',
                 showCancelButton: true,
                 confirmButtonColor: '#3085d6',
@@ -154,30 +151,36 @@
                 cancelButtonText: 'Batalkan',
             }).then((result) => {
                 if (result.isConfirmed) {
-                    $.ajax({
-                            type: "DELETE",
-                            url: url,
-                            data: id,
-                        })
-                        .done(function(status) {
-                            Swal.fire({
-                                title: 'Akun Berhasil Dihapus',
-                                icon: 'success',
-                                showConfirmButton: false
-                            })
-                            setTimeout(function() {
-                                window.location.href = "{{ route('admin.users.index') }}";
-                            }, 2000);
-                        })
-                        .fail(function() {
-                            Swal.fire(
-                                'Terjadi Kesalahan',
-                                '',
-                                'error'
-                            )
-                        });
+                    ajaxFn()
                 }
             })
+        }
+
+        function ajaxFn() {
+            $.ajax({
+                    type: ajax.type,
+                    url: ajax.url,
+                    data: ajax.id,
+                })
+                .done(function(status) {
+                    Swal.fire(
+                        ajax.text,
+                        '',
+                        'success'
+                    )
+                    if (ajax.type == 'DELETE') {
+                        $('#userTable').DataTable().destroy();
+                        $('#bt' + ajax.id).parents('tr').remove()
+                        table();
+                    }
+                })
+                .fail(function() {
+                    Swal.fire(
+                        'Terjadi Kesalahan',
+                        '',
+                        'error'
+                    )
+                });
         }
     </script>
 @endsection

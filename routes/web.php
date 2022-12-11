@@ -83,13 +83,13 @@ Route::controller(WebController::class)->group(function () {
     Route::get('/', 'index')->name('beranda');
     Route::get('/tentang', 'about')->name('tentang');
     Route::get('/struktur', 'structur')->name('struktur');
-    Route::get('/info-tbc', 'info')->name('infotbc');
-    Route::get('/info-tbc/{article}', 'showInfo')->name('infotbc.show');
+    Route::get('/info-tbc', 'article')->name('infotbc');
+    Route::get('/info-tbc/{article}', 'showArticle')->name('infotbc.show');
     Route::get('/kasus-tbc', 'case')->name('kasustbc');
     Route::get('/kasus-tbc/{regency}', 'showCase')->name('kasustbc.show');
     Route::get('/artikel', 'article')->name('artikel');
     Route::get('/artikel/{article}', 'showArticle')->name('artikel.show');
-    Route::get('/kegiatan', 'action')->name('kegiatan');
-    Route::get('/kegiatan/{article}', 'showAction')->name('kegiatan.show');
+    Route::get('/kegiatan', 'article')->name('kegiatan');
+    Route::get('/kegiatan/{article}', 'showArticle')->name('kegiatan.show');
     Route::get('search', 'liveSearch')->name('search');
 });

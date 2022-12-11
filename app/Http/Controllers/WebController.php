@@ -16,8 +16,8 @@ class WebController extends Controller
         $regencies = Regency::whereHas('patients')->withCount('patients')->get();
         $articles = Article::latest()->category(2)->take(3)->get();
         return view('web.index', [
-            'about' => $about,
-            'articles' => $articles,
+            'about'     => $about,
+            'articles'  => $articles,
             'regencies' => $regencies,
         ]);
     }
@@ -26,50 +26,45 @@ class WebController extends Controller
     {
         $abouts = StaticElement::get();
         $profilFig = array(
-            'image' => "img/sekawans.jpg",
-            'caption' => "Sekawan'S TB bersama mahasiswa magang MSIB dan pasien sembuh pada kegiatan FGD 3 November 2022",
+            'image'     => "img/sekawans.jpg",
+            'caption'   => "Sekawan'S TB bersama mahasiswa magang MSIB dan pasien sembuh pada kegiatan FGD 3 November 2022",
         );
         return view('web.tentang', [
-            'profile' => $abouts->find(1),
-            'figure' => $profilFig,
-            'visimisi' => $abouts->find(2),
+            'profile'   => $abouts->find(1),
+            'figure'    => $profilFig,
+            'visimisi'  => $abouts->find(2),
             'structure' => $abouts->find(3)
         ]);
     }
 
-    public function info()
-    {
-        $infos = Article::orderBy("id", "asc")->category(1)->get()->paginate(6);
-        return view('web.infotbc', ['infos' => $infos]);
-    }
-
-    public function showInfo(Article $article)
-    {
-        return view('web.showInfotbc', ['info' => $article]);
-    }
-
     public function article()
     {
-        $articles = Article::latest()->category(2)->get()->paginate(12);
-        return view('web.artikel', ['articles' => $articles]);
+        $category = request()->segments()[0];
+        match ($category) {
+            'info-tbc'  => [
+                $infos = Article::orderBy("id", "asc")->category(1)->get()->paginate(6),
+                $view = view('web.infotbc', ['infos' => $infos])
+            ],
+            'artikel'   => [
+                $articles = Article::orderBy("id", "asc")->category(2)->get()->paginate(12),
+                $view = view('web.artikel', ['articles' => $articles])
+            ],
+            'kegiatan'  => [
+                $actions = Article::orderBy("id", "asc")->category(3)->get()->paginate(12),
+                $view = view('web.kegiatan', ['actions' => $actions])
+            ]
+        };
+        return $view;
     }
 
     public function showArticle(Article $article)
     {
-        return view('web.showArtikel', [
-            'article' => $article
-        ]);
-    }
-
-    public function action()
-    {
-        $actions = Article::latest()->category(3)->get()->paginate(12);
-        return view('web.kegiatan', ['actions' => $actions]);
-    }
-
-    public function showAction(Article $article)
-    {
-        return view('web.showKegiatan', ['action' => $article]);
+        $category = request()->segments()[0];
+        return match ($category) {
+            'info-tbc'  => view('web.showInfotbc', ['info' => $article]),
+            'artikel'   => view('web.showArtikel', ['article' => $article]),
+            'kegiatan'  => view('web.showKegiatan', ['action' => $article])
+        };
     }
 
     public function case()
@@ -85,7 +80,7 @@ class WebController extends Controller
     {
         $regency = Regency::count('detailStatus')->find($regency->id);
 
-        if(!$regency) {
+        if (!$regency) {
             abort(404);
         }
 
@@ -96,12 +91,17 @@ class WebController extends Controller
     {
         if ($request->ajax()) {
             $results = match ($request->target) {
-                'info-tbc'  => Article::latest()->category(1)->where('title', 'like', '%' . $request->search . '%')->get(),
-                'artikel'   => Article::latest()->category(2)->where('title', 'like', '%' . $request->search . '%')->get(),
-                'kegiatan'  => Article::latest()->category(3)->where('title', 'like', '%' . $request->search . '%')->get(),
+                'info-tbc'  => $this->articleSearch(1, $request->search),
+                'artikel'   => $this->articleSearch(2, $request->search),
+                'kegiatan'  => $this->articleSearch(3, $request->search),
                 default     => []
             };
         }
         return $results;
+    }
+
+    private function articleSearch($id, $search)
+    {
+        return Article::latest()->category($id)->where('title', 'like', '%' . $search . '%')->get();
     }
 }

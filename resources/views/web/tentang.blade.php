@@ -8,8 +8,8 @@
     </div>
     <article class="d-flex flex-column align-items-center justify-content-center border-top pt-4">
       <figure class="figure">
-        <img src="{{ asset('img/sekawans.jpg') }}" class="figure-img img-fluid rounded" style="max-height: 600px" alt="...">
-        <figcaption class="figure-caption text-center">Sekawan'S TB bersama mahasiswa magang MSIB dan pasien sembuh pada kegiatan FGD 3 November 2022</figcaption>
+        <img src="{{ $figure['image'] }}" class="figure-img img-fluid rounded" style="max-height: 600px" alt="...">
+        <figcaption class="figure-caption text-center">{{ $figure['caption'] }}</figcaption>
       </figure>
       <div class="body text-justify">
         <p style="white-space: break-spaces;">{{ $profile->contents }}</p>

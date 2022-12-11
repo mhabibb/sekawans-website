@@ -34,7 +34,7 @@
                                                     @csrf
                                                     @method('delete')
                                                     <button type="submit"
-                                                        class="badge badge-danger border-0">Hapus</button>
+                                                        class="badge badge-danger btn">Hapus</button>
                                                 </form>
                                             </td>
                                         </tr>
@@ -153,7 +153,7 @@
                 datas = ''
                 success = 'Berhasil Hapus!'
                 elm = $(this).parents('tr')
-                console.log(elm);
+                // console.log(elm);
                 ajax(elm)
             })
         })
@@ -165,7 +165,7 @@
                     data: datas,
                 })
                 .done(function(name) {
-                    console.log(name);
+                    // console.log(name);
                     if (name != 0) {
                         Swal.fire({
                             title: success,

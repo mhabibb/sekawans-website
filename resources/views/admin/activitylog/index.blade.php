@@ -65,6 +65,7 @@
 
 @section('js')
     <script>
+        moment.locale('id');
         $(document).ready(function() {
             table();
         })
@@ -117,14 +118,22 @@
         }
 
         function table() {
+            $.fn.dataTable.moment('D MMMM YYYY, HH:mm:ss');
             $('#logsData').DataTable({
                 "responsive": true,
                 "autoWidth": false,
                 columnDefs: [
                     {
-                        searchable: false,
-                        orderable: false,
                         targets: 2,
+                        orderable: false,
+                        searchable: false,
+                    },
+                    {
+                        targets: 1,
+                        render: function(data) {
+                            date = new Date(data)
+                            return moment(date).format('D MMMM YYYY, HH:mm:ss')
+                        }
                     },
                     {
                         targets: 0,

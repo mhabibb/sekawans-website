@@ -24,7 +24,7 @@
   <div class="d-flex justify-content-center mb-3 text-muted">
     <div class="mr-5">
       <i class="fa-solid fa-user"></i>
-      <span class="ml-1">{{ $article->user->name }}</span>
+      <span class="ml-1">{{ $article->user->name ?? 'Deleted User' }}</span>
     </div>
     <div>
       <i class="fa-solid fa-calendar-days"></i>

@@ -6,6 +6,7 @@
             display: flex;
             flex-wrap: wrap;
         }
+
         .dataTables_wrapper .dt-buttons {
             float: left;
         }
@@ -95,6 +96,7 @@
                     .done(function(result) {
                         bodi.html('');
                         $(result).each(function(key, patient) {
+                            patient.worker = patient.worker ?? 'Deleted Worker'
                             bodi.append(`
                                     <tr>
                                         <td></td>
@@ -102,7 +104,7 @@
                                         <td>` + patient.no_regis + `</td>
                                         <td>` + patient.patient.district.name + `</td>
                                         <td>` + moment(patient.patient.start_treatment).format('D MMMM YYYY') + `</td>
-                                        <td>` + patient.worker.name + `</td>
+                                        <td>` + (patient.worker.name ?? 'Deleted Worker') + `</td>
                                         <td>` + patient.patient_status.status + `</td>
                                     </tr>`)
                         })
@@ -111,8 +113,7 @@
                             "responsive": true,
                             "lengthChange": false,
                             "autoWidth": false,
-                            "columnDefs": [
-                                {
+                            "columnDefs": [{
                                     "targets": 4,
                                     "type": "date"
                                 },
@@ -123,15 +124,14 @@
                                 }
                             ],
                             dom: 'Bfrtip',
-                            buttons: [
-                                {
+                            buttons: [{
                                     extend: "excel",
                                     title: "Data pasien TBC - Sekawan'S TB Jember"
-                                }, 
+                                },
                                 {
                                     extend: "pdf",
                                     title: "Data pasien TBC - Sekawan'S TB Jember"
-                                }, 
+                                },
                                 {
                                     extend: "print",
                                     title: "Data pasien TBC - Sekawan'S TB Jember"
@@ -141,10 +141,13 @@
                                 [4, 'desc']
                             ],
                         }).buttons().container().appendTo('#patientsData_wrapper .col-md-6:eq(0)');
-                        
-                        table.DataTable().on('order.dt search.dt', function () {
+
+                        table.DataTable().on('order.dt search.dt', function() {
                             let i = 1;
-                            table.DataTable().cells(null, 0, { search: 'applied', order: 'applied' }).every(function (cell) {
+                            table.DataTable().cells(null, 0, {
+                                search: 'applied',
+                                order: 'applied'
+                            }).every(function(cell) {
                                 this.data(i++);
                             });
                         }).draw();

@@ -16,7 +16,8 @@
                 <div class="col-12">
                     <div class="card">
                         <div class="card-header">
-                            <a href="{{ route($createRoute) }}" class="mb-2 mr-2 btn btn-primary">Buat {{ $title }} Baru</a>
+                            <a href="{{ route($createRoute) }}" class="mb-2 mr-2 btn btn-primary">Buat {{ $title }}
+                                Baru</a>
                             @can('superAdmin')
                                 <div class="mb-2 btn btn-info toggler" id="trashBtn">Lihat Sampah</div>
                                 <div class="trash-desc"></div>
@@ -95,13 +96,11 @@
                     order: [
                         [1, 'desc']
                     ],
-                    columnDefs: [
-                        {
-                            searchable: false,
-                            orderable: false,
-                            targets: 3,
-                        },
-                    ],
+                    columnDefs: [{
+                        searchable: false,
+                        orderable: false,
+                        targets: 3,
+                    }, ],
                     ajax: {
                         'url': url,
                         'type': "GET",
@@ -118,7 +117,11 @@
                             }
                         },
                         {
-                            data: "user.name"
+                            data: "user",
+                            render: (data) => {
+                                data = data  ?? 'Deleted User'
+                                return data.name ?? 'Deleted User'
+                            }
                         },
                         {
                             targets: 0,

@@ -10,7 +10,7 @@
   <div class="d-flex justify-content-center gap-5 mb-3 text-muted">
     <div>
       <i class="fa-solid fa-user"></i>
-      <small class="ms-1">{{ $action->user->name }}</small>
+      <small class="ms-1">{{ $action->user->name ?? 'Deleted User' }}</small>
     </div>
     <div>
       <i class="fa-solid fa-calendar-days"></i>

@@ -107,7 +107,7 @@
                     <div class="mb-2 d-flex gap-3">
                         <div class="col-4 text-truncate font-sm">
                             <i class="fa-solid fa-user"></i>
-                            {{ $article->user->name }}
+                            {{ $article->user->name ?? 'Deleted User' }}
                         </div>
                         <div class="px-2 font-sm">
                             <i class="fa-solid fa-calendar-days"></i>

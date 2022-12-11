@@ -20,7 +20,7 @@ return new class extends Migration
                 ->constrained()
                 ->nullOnDelete();
             $table->string('title', 128);
-            $table->string('img', 64);
+            $table->string('img', 128);
             $table->longText('contents');
             $table->foreignId('category_id')
                 ->constrained()

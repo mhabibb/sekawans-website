@@ -25,7 +25,7 @@
           </div>
           <div class="col-sm-6 form-group">
             <label for="satellite">Fasyankes Satelit</label>
-            <div class="form-control">{{ $patientDetail->satelliteHealthFacility->name }}</div>
+            <div class="form-control">{{ $patientDetail->satelliteHealthFacility->name ?? 'Deleted Satellite Health Facility' }}</div>
           </div>
           <div class="col-sm-6 form-group">
             <label for="dateStart">Tanggal Mulai Berobat</label>
@@ -38,7 +38,7 @@
           </div>
           <div class="col-sm-6 form-group">
             <label>Pendamping/Patient Supporter (PS)</label>
-            <div class="form-control">{{ $patientDetail->worker->name }}</div>
+            <div class="form-control">{{ $patientDetail->worker->name ?? 'Deleted Worker' }}</div>
           </div>
 
           <div class="col-sm-6 form-group">

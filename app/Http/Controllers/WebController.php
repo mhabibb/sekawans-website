@@ -42,15 +42,15 @@ class WebController extends Controller
         $category = request()->segments()[0];
         match ($category) {
             'info-tbc'  => [
-                $infos = Article::orderBy("id", "asc")->category(1)->get()->paginate(6),
+                $infos = Article::oldest()->category(1)->get()->paginate(6),
                 $view = view('web.infotbc', ['infos' => $infos])
             ],
             'artikel'   => [
-                $articles = Article::orderBy("id", "asc")->category(2)->get()->paginate(12),
+                $articles = Article::latest()->category(2)->get()->paginate(12),
                 $view = view('web.artikel', ['articles' => $articles])
             ],
             'kegiatan'  => [
-                $actions = Article::orderBy("id", "asc")->category(3)->get()->paginate(12),
+                $actions = Article::latest()->category(3)->get()->paginate(12),
                 $view = view('web.kegiatan', ['actions' => $actions])
             ]
         };

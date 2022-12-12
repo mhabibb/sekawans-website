@@ -67,6 +67,7 @@
     <script>
         moment.locale('id');
         $(document).ready(function() {
+            crPage = 0;
             table();
         })
 
@@ -101,6 +102,7 @@
                                 icon: 'success',
                                 showConfirmButton: false,
                             })
+                            crPage = dtTable.page.info().page;
                             $('#logsData').DataTable().destroy();
                             $('#' + id).remove();
                             table();
@@ -118,9 +120,10 @@
 
         function table() {
             $.fn.dataTable.moment('D MMMM YYYY, HH:mm:ss');
-            var table = $('#logsData').DataTable({
+            dtTable = $('#logsData').DataTable({
                 "responsive": true,
                 "autoWidth": false,
+                displayStart: 4,
                 columnDefs: [{
                         targets: 2,
                         orderable: false,
@@ -129,7 +132,8 @@
                     {
                         targets: 1,
                         render: function(data, type, row) {
-                            date = new Date(data) == 'Invalid Date' ? data : moment(data, 'D MMMM YYYY, HH:mm:ss').toDate();
+                            date = new Date(data) == 'Invalid Date' ? data : moment(data,
+                                'D MMMM YYYY, HH:mm:ss').toDate();
                             return moment(date).format('D MMMM YYYY, HH:mm:ss')
                         }
                     },
@@ -141,6 +145,9 @@
                 order: [
                     [1, 'desc']
                 ],
+                initComplete: function() {
+                    this.api().page(crPage).draw('page');
+                }
             });
         }
     </script>

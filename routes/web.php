@@ -60,15 +60,15 @@ Route::middleware('auth')->prefix('admin')->name('admin.')->group(function () {
     Route::resource('/articles', ArticleController::class);
     Route::controller(ArticleController::class)->group(function () {
         Route::get('/infos', 'index')->name('infotbc.index');
-        Route::post('/infos', 'store')->name('infotbc.store');
         Route::get('/infos/create', 'create')->name('infotbc.create');
-        Route::put('/infos/{article}', 'update')->name('infotbc.update');
-        Route::delete('/infos/{article}', 'destroy')->name('infotbc.destroy');
+        Route::post('/infos', 'store')->name('infotbc.store');
         Route::get('/infos/{article}', 'show')->name('infotbc.show');
         Route::get('/infos/{article}/edit', 'edit')->name('infotbc.edit');
+        Route::put('/infos/{article}', 'update')->name('infotbc.update');
+        Route::delete('/infos/{article}', 'destroy')->name('infotbc.destroy');
         Route::get('/actions', 'index')->name('kegiatan.index');
-        Route::post('/actions', 'store')->name('kegiatan.store');
         Route::get('/actions/create', 'create')->name('kegiatan.create');
+        Route::post('/actions', 'store')->name('kegiatan.store');
         Route::get('/actions/{article}', 'show')->name('kegiatan.show');
         Route::get('/actions/{article}/edit', 'edit')->name('kegiatan.edit');
         Route::put('/actions/{article}', 'update')->name('kegiatan.update');

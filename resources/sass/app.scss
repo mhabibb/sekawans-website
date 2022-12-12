@@ -12,6 +12,15 @@ body {
   margin: 0;
 }
 
+img {
+  object-fit: cover;
+}
+
+.pagination {
+  display: flex;
+  flex-wrap: wrap;
+}
+
 .text-justify {
   text-align: justify;
 }

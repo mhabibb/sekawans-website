@@ -22,8 +22,7 @@
     @foreach ($infos as $info)
     <div class="row flex-lg-row align-items-center g-5 py-4">
       <div class="col col-md-6 col-lg-4 mx-auto">
-        <img src="{{ asset('storage/'.$info->img) }}" class="d-block mx-lg-auto img-fluid" alt="..." width="300"
-          height="200" loading="lazy">
+        <img src="{{ asset('storage/'.$info->img) }}" class="d-block mx-lg-auto" alt="..." width="300" height="200" loading="lazy">
       </div>
       <div class="col-md-6 col-lg-8">
         <h4 class="fw-bold mb-3">{{ $info->title }}</h3>
@@ -31,8 +30,8 @@
       </div>
     </div>
     @endforeach
-    <div class="d-flex justify-content-center">
-      {{ $infos->links() }}
+    <div class="d-flex justify-content-center mt-4">
+      {{ $infos->onEachSide(2)->links() }}
     </div>
   </div>
 </section>

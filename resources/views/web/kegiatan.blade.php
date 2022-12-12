@@ -33,6 +33,8 @@
     </div>
     @endforelse
   </div>
-  {{ $actions->links() }}
+  <div class="d-flex justify-content-center mt-4">
+    {{ $actions->onEachSide(2)->links() }}
+  </div>
 </section>
 @endsection

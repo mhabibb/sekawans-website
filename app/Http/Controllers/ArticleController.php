@@ -172,20 +172,12 @@ class ArticleController extends Controller
      */
     public function edit(Article $article)
     {
-        $title = match (request()->segments()[1]) {
-            'infos'     => 'Info TBC',
-            'articles'  => 'Artikel',
-            'actions'   => 'Kegiatan',
+        match ($article->category_id) {
+            1   => [$title = 'Info TBC',    $route = 'admin.infotbc.update'],
+            2   => [$title = 'Artikel',     $route = 'admin.articles.update'],
+            3   => [$title = 'Kegiatan',    $route = 'admin.kegiatan.update'],
             default     => abort(404)
         };
-
-        $route = match ($article['category_id']) {
-            1 => 'admin.infotbc.update',
-            2 => 'admin.articles.update',
-            3 => 'admin.kegiatan.update',
-            default     => abort(404)
-        };
-        
         return view('admin.article.edit', compact('article', 'title', 'route'));
     }
 

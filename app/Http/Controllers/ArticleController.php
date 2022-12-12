@@ -178,7 +178,15 @@ class ArticleController extends Controller
             'actions'   => 'Kegiatan',
             default     => abort(404)
         };
-        return view('admin.article.edit', compact('article', 'title'));
+
+        $route = match ($article['category_id']) {
+            1 => 'admin.infotbc.update',
+            2 => 'admin.articles.update',
+            3 => 'admin.kegiatan.update',
+            default     => abort(404)
+        };
+        
+        return view('admin.article.edit', compact('article', 'title', 'route'));
     }
 
     /**
@@ -198,6 +206,7 @@ class ArticleController extends Controller
         $category == "infos" ? $route = 'admin.infotbc.show'
             : ($category == "articles" ? $route = 'admin.articles.show'
                 : ($category == "actions" ? $route = 'admin.kegiatan.show' : $route = null));
+
         return to_route($route, $article)->withSuccess('Data berhasil diperbarui!');
     }
 

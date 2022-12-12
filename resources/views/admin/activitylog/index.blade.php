@@ -101,12 +101,9 @@
                                 icon: 'success',
                                 showConfirmButton: false,
                             })
-                            setTimeout(function() {
-                                location.reload()
-                            }, 2000)
-                            // $('#logsData').DataTable().destroy();
-                            // $('#' + id).remove();
-                            // table();
+                            $('#logsData').DataTable().destroy();
+                            $('#' + id).remove();
+                            table();
                         })
                         .fail(function() {
                             Swal.fire(
@@ -124,16 +121,15 @@
             var table = $('#logsData').DataTable({
                 "responsive": true,
                 "autoWidth": false,
-                columnDefs: [
-                    {
+                columnDefs: [{
                         targets: 2,
                         orderable: false,
                         searchable: false,
-                    }, 
+                    },
                     {
                         targets: 1,
                         render: function(data, type, row) {
-                            date = new Date(data)
+                            date = new Date(data) == 'Invalid Date' ? data : moment(data, 'D MMMM YYYY, HH:mm:ss').toDate();
                             return moment(date).format('D MMMM YYYY, HH:mm:ss')
                         }
                     },

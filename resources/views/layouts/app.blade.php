@@ -31,7 +31,6 @@
     let result = document.getElementById("searchResult");
     target = window.location.href.split('/');
     target = target[target.length-1];
-    console.log(target);
 
     $(document).ready(function () {
         $(keyword).keyup(function () {

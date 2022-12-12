@@ -17,6 +17,7 @@ class ArticleObserver
     public function creating(Article $article)
     {
         $article->deleted_at = null;
+        $article->contents = $this->contentDecode($article->contents);
         $article->user_id = auth()->id();
     }
 

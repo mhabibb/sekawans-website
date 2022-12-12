@@ -130,7 +130,6 @@ class ArticleController extends Controller
     public function store(StoreArticleRequest $request)
     {
         $request = $request->validated();
-        $request['contents'] = $this->contentDecode($request['contents']);
         $request['img'] = $request['img']->store('img/articles');
         $route = match ($request['category_id']) {
             '1' => 'admin.infotbc.show',

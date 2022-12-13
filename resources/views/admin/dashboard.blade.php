@@ -107,19 +107,6 @@
             @if ($first)
                 $('#first-login').modal('show');
 
-                $('.show-hide').click(function() {
-                    var id = $(this).attr('toggle');
-                    var input = $(id);
-                    var eye = $("a[toggle='"+ id +"'] i");
-
-                    eye.toggleClass('fa-eye fa-eye-slash');
-                    if (input.attr('type') == 'password') {
-                        input.attr('type', 'text')
-                    } else {
-                        input.attr('type', 'password')
-                    }
-                })
-
                 $.ajaxSetup({
                     headers: {
                         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')

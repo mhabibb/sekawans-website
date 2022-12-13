@@ -29,26 +29,26 @@
                     </div>
                     <div class="form-group old-password">
                         <label>Konfirmasi Password</label>
-                        <div class="input-group" id="current_password">
-                            <input type="password" name="current_password"
+                        <div class="input-group">
+                            <input type="password" name="current_password" id="current_password"
                                 class="form-control @error('current_password') is-invalid @enderror">
                             <a role="button" toggle="#current_password" class="show-hide input-group-text"><i class="fa-solid fa-eye"></i></a>
                         </div>
                     </div>
                     <div class="form-group new-password d-none">
                         <label>Password Baru</label>
-                        <div class="input-group" id="password">
-                            <input type="password" name="password"
+                        <div class="input-group">
+                            <input type="password" name="password" id="password"
                                 class="form-control @error('password') is-invalid @enderror">
                             <a role="button" toggle="#password" class="show-hide input-group-text"><i class="fa-solid fa-eye"></i></a>
                         </div>
                     </div>
                     <div class="form-group new-password d-none">
                         <label>Ulangi Password Baru</label>
-                        <div class="input-group" id="password_confirmation">
-                            <input type="password" name="password_confirmation"
+                        <div class="input-group">
+                            <input type="password" name="password_confirmation" id="password_confirmation"
                                 class="form-control @error('password_confirmation') is-invalid @enderror">
-                            <a role="button" toggle="#password" class="show-hide input-group-text"><i class="fa-solid fa-eye"></i></a>
+                            <a role="button" toggle="#password_confirmation" class="show-hide input-group-text"><i class="fa-solid fa-eye"></i></a>
                         </div>
                     </div>
                 </div>

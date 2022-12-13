@@ -45,18 +45,6 @@
     @endif
 
     $(document).ready(function() {
-        $('.show-hide').click(function() {
-            var group = $(this).attr('toggle');
-            var input = $(group + ' input');
-            var eye = $(group + ' i');
-
-            eye.toggleClass('fa-eye fa-eye-slash');
-            if (input.attr('type') == 'password') {
-                input.attr('type', 'text')
-            } else {
-                input.attr('type', 'password')
-            }
-        })
 
         if ($('#passBtn').is(":checked")) {
             $('.new-password').removeClass('d-none');

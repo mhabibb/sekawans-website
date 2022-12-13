@@ -1,16 +1,5 @@
 @extends('layouts.admin')
 
-@section('css')
-    <style>
-        .truncate {
-            display: -webkit-box;
-            overflow: hidden;
-            -webkit-line-clamp: 4;
-            -webkit-box-orient: vertical;
-        }
-    </style>
-@endsection
-
 @section('admin-content')
     <section class="content-header">
         <div class="container-fluid">
@@ -29,7 +18,7 @@
                                 <table id="logsData" class="table table-bordered table-striped mx-auto">
                                     <thead>
                                         <tr>
-                                            <th style="white-space: nowrap;">Deskripsi Aktivitas</th>
+                                            <th class="text-nowrap">Deskripsi Aktivitas</th>
                                             <th>Tanggal/Waktu</th>
                                             <th></th>
                                         </tr>

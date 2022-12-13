@@ -37,7 +37,7 @@
         href="https://cdn.datatables.net/v/bs4/jszip-2.5.0/dt-1.13.1/b-2.3.3/b-html5-2.3.3/b-print-2.3.3/r-2.4.0/datatables.min.css" />
 
         <style>
-            {{-- Disable input number arrow --}}
+            /* Disable input number arrow */
               /* Chrome, Safari, Edge, Opera */
               input::-webkit-outer-spin-button,
               input::-webkit-inner-spin-button {
@@ -48,6 +48,18 @@
               /* Firefox */
               input[type=number] {
                 -moz-appearance: textfield;
+              }
+
+              .badge {
+                font-size: 14px;
+                margin: 4px;
+              }
+              
+              .truncate {
+                display: -webkit-box;
+                overflow: hidden;
+                -webkit-line-clamp: 3;
+                -webkit-box-orient: vertical;
               }
         </style>
 
@@ -116,10 +128,10 @@
 
     <script>
         function reset() {
-        document.querySelector('.img-preview').src = "";
-        document.querySelector('input').reset();
-        document.querySelector('textarea').reset();
-      }
+            document.querySelector('.img-preview').src = "";
+            document.querySelector('input').reset();
+            document.querySelector('textarea').reset();
+        }
     </script>
 
     <script src="{{ asset('sw.js') }}"></script>

@@ -35,12 +35,14 @@
                                             <td>{{ $user->name }}</td>
                                             <td>{{ $user->email }}</td>
                                             <td>
-                                                <a href="#" id="bt{{ $user->id }}" class="badge badge-success"
-                                                    onclick="resetUser({{ $user->id }})">
-                                                    <i class="fa-solid fa-rotate-left"></i> Reset</a>
-                                                <a href="#" id="bt{{ $user->id }}" class="badge badge-danger"
-                                                    onclick="deleteUser({{ $user->id }})">
-                                                    <i class="fa-solid fa-trash-can"></i> Hapus</a>
+                                                <div class="d-flex">
+                                                    <a role="button" id="bt{{ $user->id }}" class="badge badge-success"
+                                                        onclick="resetUser({{ $user->id }})">
+                                                        <i class="fa-solid fa-rotate-left"></i> Reset</a>
+                                                    <a role="button" id="bt{{ $user->id }}" class="badge badge-danger"
+                                                        onclick="deleteUser({{ $user->id }})">
+                                                        <i class="fa-solid fa-trash-can"></i> Hapus</a>
+                                                </div>
                                             </td>
                                         </tr>
                                     @endforeach

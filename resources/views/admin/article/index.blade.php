@@ -29,9 +29,9 @@
                                 <table id="articlesData" class="table table-bordered table-striped mx-auto">
                                     <thead>
                                         <tr>
-                                            <th>Judul {{ $title }}</th>
-                                            <th id="time">Waktu Update</th>
-                                            <th>Author</th>
+                                            <th class="text-nowrap">Judul {{ $title }}</th>
+                                            <th id="time" class="text-nowrap">Waktu Update</th>
+                                            <th class="text-nowrap">Author</th>
                                             <th></th>
                                         </tr>
                                     </thead>
@@ -107,7 +107,10 @@
                         'dataSrc': 'articles'
                     },
                     columns: [{
-                            data: "title"
+                            data: "title",
+                            render: function(data) {
+                                return `<div class="truncate">${data}</div>`
+                            }
                         },
                         {
                             data: date,
@@ -129,19 +132,18 @@
                             render: function(data) {
                                 @can('superAdmin')
                                     if (time.html() !== 'Waktu Update') {
-                                        return `<a href="#" class="btn badge badge-success" onclick="action('restore',` +
-                                            data + `)"><i class="fa-solid fa-rotate-left"></i> Pulihkan</a>
-                                        <a href="#" class="btn badge badge-danger" onclick="action('forceDelete',` +
-                                            data +
-                                            `)"><i class="fa-solid fa-xmark"></i> Hapus Permanen</a>`;
+                                        return `<div class="d-flex"><a href="#" class="badge badge-success" onclick="action('restore',` + data + `)">
+                                                <i class="fa-solid fa-rotate-left"></i> Pulihkan</a>
+                                            <a href="#" class="badge badge-danger" onclick="action('forceDelete',` + data + `)">
+                                                <i class="fa-solid fa-xmark"></i> Hapus Permanen</a></div>`;
                                     } else
                                 @endcan
-                                return `<a href="#" onclick="action('show',` + data + `)" class="badge badge-primary mr-2">
-                                    <i class="fa-solid fa-eye"></i> Lihat</a>
-                                    <a href="#" onclick="action('edit',` + data + `)" class="badge badge-warning mr-2">
-                                    <i class="fa-solid fa-pen-to-square"></i> Ubah</a>
+                                return `<div class="d-flex"><a href="#" onclick="action('show',` + data + `)" class="badge badge-primary">
+                                        <i class="fa-solid fa-eye"></i> Lihat</a>
+                                    <a href="#" onclick="action('edit',` + data + `)" class="badge badge-warning">
+                                        <i class="fa-solid fa-pen-to-square"></i> Ubah</a>
                                     <a href="#" id="` + data + `" onclick="action('delete',` + data + `)" class="badge badge-danger">
-                                    <i class="fa-solid fa-trash-can"></i> Hapus</a>`
+                                        <i class="fa-solid fa-trash-can"></i> Hapus</a><div>`
                             }
                         }
                     ]

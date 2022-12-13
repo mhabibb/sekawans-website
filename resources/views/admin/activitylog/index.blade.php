@@ -68,6 +68,7 @@
         moment.locale('id');
         $(document).ready(function() {
             crPage = 0;
+            crPageLength = 10;
             table();
         })
 
@@ -102,6 +103,7 @@
                                 icon: 'success',
                                 showConfirmButton: false,
                             })
+                            crPageLength = dtTable.page.info().length;
                             crPage = dtTable.page.info().page;
                             $('#logsData').DataTable().destroy();
                             $('#' + id).remove();
@@ -121,6 +123,7 @@
         function table() {
             $.fn.dataTable.moment('D MMMM YYYY, HH:mm:ss');
             dtTable = $('#logsData').DataTable({
+                "pageLength": crPageLength,
                 "responsive": true,
                 "autoWidth": false,
                 displayStart: 4,
@@ -132,8 +135,8 @@
                     {
                         targets: 1,
                         render: function(data, type, row) {
-                            date = new Date(data) == 'Invalid Date' ? data : moment(data,
-                                'D MMMM YYYY, HH:mm:ss').toDate();
+                            date = new Date(data) == 'Invalid Date' ? moment(data,
+                                'D MMMM YYYY, HH:mm:ss').toDate() : data;
                             return moment(date).format('D MMMM YYYY, HH:mm:ss')
                         }
                     },

@@ -24,7 +24,7 @@
                 }}</label>
 
               <div class="col-md-6">
-                <div class="input-group" id="password">
+                <div class="input-group">
                   <input id="password" type="password" class="form-control @error('password') is-invalid @enderror"
                     name="password" required>
                   <a role="button" style="text-decoration: none;" toggle="#password" class="show-hide input-group-text"><i class="fa-solid fa-eye"></i></a>
@@ -71,18 +71,17 @@
 
 @section('script')
     <script>
-      $('.show-hide').click(function(e) {
-        // e.preventDefault()
-        var group = $(this).attr('toggle');
-        var input = $(group + ' input');
-        var eye = $(group + ' i');
+      $('.show-hide').click(function() {
+          var id = $(this).attr('toggle');
+          var input = $(id);
+          var eye = $("a[toggle='"+ id +"'] i");
 
-        eye.toggleClass('fa-eye fa-eye-slash');
-        if (input.attr('type') == 'password') {
-            input.attr('type', 'text')
-        } else {
-            input.attr('type', 'password')
-        }
+          eye.toggleClass('fa-eye fa-eye-slash');
+          if (input.attr('type') == 'password') {
+              input.attr('type', 'text')
+          } else {
+              input.attr('type', 'password')
+          }
       })
     </script>
 @endsection

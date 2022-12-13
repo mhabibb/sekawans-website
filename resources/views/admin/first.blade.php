@@ -11,14 +11,20 @@
                 <div class="modal-body">
                     <div class="form-group new-password">
                         <label>Password Baru</label>
-                        <input type="password" name="password" id="password"
-                            class="form-control">
+                        <div class="input-group">
+                            <input type="password" name="password" id="password"
+                                class="form-control">
+                            <a role="button" toggle="#password" class="show-hide input-group-text"><i class="fa-solid fa-eye"></i></a>
+                        </div>
                     </div>
                     <input type="hidden" name="first_login" value="{{ $first }}">
                     <div class="form-group new-password">
                         <label>Ulangi Password Baru</label>
-                        <input type="password" name="password_confirmation" id="password_confirmation"
-                            class="form-control">
+                        <div class="input-group">
+                            <input type="password" name="password_confirmation" id="password_confirmation"
+                                class="form-control">
+                            <a role="button" toggle="#password_confirmation" class="show-hide input-group-text"><i class="fa-solid fa-eye"></i></a>
+                        </div>
                     </div>
                 </div>
                 <div class="modal-footer">

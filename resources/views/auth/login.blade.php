@@ -24,8 +24,11 @@
                 }}</label>
 
               <div class="col-md-6">
-                <input id="password" type="password" class="form-control @error('password') is-invalid @enderror"
-                  name="password" required>
+                <div class="input-group" id="password">
+                  <input id="password" type="password" class="form-control @error('password') is-invalid @enderror"
+                    name="password" required>
+                  <a role="button" style="text-decoration: none;" toggle="#password" class="show-hide input-group-text"><i class="fa-solid fa-eye"></i></a>
+                </div>
                 @if ($errors->any())
                   <span class="text-danger">Invalid email atau password</span>
                 @endif
@@ -64,4 +67,22 @@
     </div>
   </div>
 </div>
+@endsection
+
+@section('script')
+    <script>
+      $('.show-hide').click(function(e) {
+        // e.preventDefault()
+        var group = $(this).attr('toggle');
+        var input = $(group + ' input');
+        var eye = $(group + ' i');
+
+        eye.toggleClass('fa-eye fa-eye-slash');
+        if (input.attr('type') == 'password') {
+            input.attr('type', 'text')
+        } else {
+            input.attr('type', 'password')
+        }
+      })
+    </script>
 @endsection

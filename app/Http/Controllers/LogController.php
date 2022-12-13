@@ -89,13 +89,13 @@ class LogController extends Controller
         activity()->disableLogging();
         $status = match ($activity->event) {
             'deleted', 'updated' => $model::updateOrCreate(['id' => $properties['old']['id']], $properties['old']),
-            'created' => $activity->subject->delete()
+            'created' => $activity->subject->delete() ?? ''
         };
         if ($activity->event !== 'deleted') match ($activity->log_name) {
             'about'     => $properties['old']['id'] == 3 ? $this->deleteContentImg($properties['attributes']['contents']) : '',
             'article'   => [
                 $properties['old']['img'] !== $properties['attributes']['img'] ? $this->deleteContentImg($properties['attributes']['img']) : '',
-                $properties['old']['contents'] !== $properties['attributes']['contents'] ? $this->deleteContentImg($properties['attributes']['contents'], $properties['old']['contents']) : '',
+                $properties['old']['contents'] !== $properties['attributes']['contents'] ? $this->deleteContentImg($properties['attributes']['contents'], $properties['old']['contents'] ?? null) : '',
             ],
             default     => ''
         };

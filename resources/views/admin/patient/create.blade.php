@@ -56,8 +56,8 @@
               value="{{ old('start_treatment') }}">
           </div>
           <div class="col-sm-6 form-group">
-            <label>No. Registrasi Pasien</label>
-            <input type="number" name="no.regis"
+            <label>No. Registrasi Pasien (max 10 digit)</label>
+            <input type="number" name="no.regis" maxlength="10" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
               class="form-control @error('no_regis') is-invalid @else @if(old('no_regis') ?? false) is-valid @endif @enderror"
               value="{{ old('no_regis') }}">
           </div>
@@ -268,13 +268,13 @@
           <div class="col-sm-6 form-group">
             <label>Tinggi Badan (cm)</label>
             <input type="number" name="height" class="form-control @error('height') is-invalid
-            @else @if(old('workplace') ?? false) is-valid @endif @enderror" value="{{ old('height') }}">
+            @else @if(old('height') ?? false) is-valid @endif @enderror" value="{{ old('height') }}">
           </div>
 
           <div class="col-sm-6 form-group">
             <label>Berat Badan (kg)</label>
             <input type="number" name="weight" class="form-control @error('weight') is-invalid
-            @else @if(old('workplace') ?? false) is-valid @endif @enderror" value="{{ old('weight') }}">
+            @else @if(old('weight') ?? false) is-valid @endif @enderror" value="{{ old('weight') }}">
           </div>
 
           {{-- <div class="col-sm-6 form-group">
@@ -300,25 +300,25 @@
           <div class="col-sm-6 form-group">
             <label>Nama Ibu</label>
             <input type="text" name="mother.name" class="form-control @error('mother_name') is-invalid
-            @else @if(old('workplace') ?? false) is-valid @endif @enderror" value="{{ old('mother_name') }}">
+            @else @if(old('mother_name') ?? false) is-valid @endif @enderror" value="{{ old('mother_name') }}">
           </div>
 
           <div class="col-sm-6 form-group">
             <label>Nama Bapak</label>
             <input type="text" name="father.name" class="form-control @error('father_name') is-invalid
-            @else @if(old('workplace') ?? false) is-valid @endif @enderror" value="{{ old('father_name') }}">
+            @else @if(old('father_name') ?? false) is-valid @endif @enderror" value="{{ old('father_name') }}">
           </div>
 
           <div class="col-sm-6 form-group">
             <label>Alamat</label>
             <input type="text" name="guardian.address" class="form-control @error('guardian_address') is-invalid
-            @else @if(old('workplace') ?? false) is-valid @endif @enderror" value="{{ old('guardian_address') }}">
+            @else @if(old('guardian_address') ?? false) is-valid @endif @enderror" value="{{ old('guardian_address') }}">
           </div>
 
           <div class="col-sm-6 form-group">
             <label>No. Telepon/Hp</label>
             <input type="text" name="guardian.phone" class="form-control @error('guardian_phone') is-invalid
-            @else @if(old('workplace') ?? false) is-valid @endif @enderror" value="{{ old('guardian_phone') }}">
+            @else @if(old('guardian_phone') ?? false) is-valid @endif @enderror" value="{{ old('guardian_phone') }}">
           </div>
         </div>
 
@@ -330,25 +330,25 @@
           <div class="col-sm-6 form-group">
             <label>Nama</label>
             <input type="text" name="emergency[name]" class="form-control @error('emergency.name') is-invalid
-            @else @if(old('workplace') ?? false) is-valid @endif @enderror" value="{{ old('emergency.name') }}">
+            @else @if(old('emergency.name') ?? false) is-valid @endif @enderror" value="{{ old('emergency.name') }}">
           </div>
 
           <div class="col-sm-6 form-group">
             <label>Hubungan</label>
             <input type="text" name="emergency[relation]" class="form-control @error('emergency.relation') is-invalid
-            @else @if(old('workplace') ?? false) is-valid @endif @enderror" value="{{ old('emergency.relation') }}">
+            @else @if(old('emergency.relation') ?? false) is-valid @endif @enderror" value="{{ old('emergency.relation') }}">
           </div>
 
           <div class="col-sm-6 form-group">
             <label>Alamat</label>
             <input type="text" name="emergency[address]" class="form-control @error('emergency.address') is-invalid
-            @else @if(old('workplace') ?? false) is-valid @endif @enderror" value="{{ old('emergency.address') }}">
+            @else @if(old('emergency.address') ?? false) is-valid @endif @enderror" value="{{ old('emergency.address') }}">
           </div>
 
           <div class="col-sm-6 form-group">
             <label>No. Telepon/Hp</label>
             <input type="text" name="emergency[phone]" class="form-control @error('emergency.phone') is-invalid
-            @else @if(old('workplace') ?? false) is-valid @endif @enderror" value="{{ old('emergency.phone') }}">
+            @else @if(old('emergency.phone') ?? false) is-valid @endif @enderror" value="{{ old('emergency.phone') }}">
           </div>
 
           <div class="col-sm-6 form-group">
@@ -358,7 +358,7 @@
             @enderror
             <div class="form-check">
               <input class="form-check-input" type="radio" name="emergency[is_know]" id="ya-tahu" value="1"
-                @checked(old('emergency.is_know')=="1" )>
+                @checked(old('emergency.is_know')=="1" ) @if (!old('emergency.is_know') ?? false) checked @endif>
               <label class="form-check-label" for="ya-tahu">
                 Ya
               </label>

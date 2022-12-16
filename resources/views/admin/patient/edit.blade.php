@@ -60,8 +60,8 @@
               value="{{ old('start_treatment', date('Y-m-d', strtotime($detail->patient->start_treatment))) }}">
           </div>
           <div class="col-sm-6 form-group">
-            <label>No. Registrasi Pasien</label>
-            <input type="number" name="no.regis"
+            <label>No. Registrasi Pasien (max 10 digit)</label>
+            <input type="number" name="no.regis" maxlength="10" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
               class="form-control @error('no_regis') is-invalid @else @if(old('no_regis') ?? false) is-valid @endif @enderror"
               value="{{ old('no_regis', $detail->no_regis) }}">
           </div>

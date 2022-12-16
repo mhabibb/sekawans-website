@@ -67,7 +67,7 @@ class StorePatientRequest extends FormRequest
             'tb_health_facility'            => 'required|string|max:50',
             'satellite_health_facility_id'  => 'required|integer',
             'start_treatment'               => 'required|date|before_or_equal:today',
-            'no_regis'                      => 'required|integer|',
+            'no_regis'                      => 'required|integer|max_digits:10',
             'worker_id'                     => 'required|integer',
             'name'                          => 'required|string|max:50',
             'id_number'                     => 'required|integer|digits:16',

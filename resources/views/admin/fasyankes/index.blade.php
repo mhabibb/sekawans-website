@@ -33,7 +33,7 @@
                                                     method="post">
                                                     @csrf
                                                     @method('delete')
-                                                    <button type="submit"
+                                                    <button type="submit" id="bt{{ $satellite->id }}"
                                                         class="badge badge-danger btn">Hapus</button>
                                                 </form>
                                             </td>
@@ -70,7 +70,8 @@
                                                     method="post">
                                                     @csrf
                                                     @method('delete')
-                                                    <button type="submit" class="btn badge badge-danger">Hapus</button>
+                                                    <button id="bt{{ $ps->id }}" type="submit" 
+                                                        class="btn badge badge-danger">Hapus</button>
                                                 </form>
                                             </td>
                                         </tr>
@@ -149,8 +150,22 @@
                 datas = ''
                 success = 'Berhasil Hapus!'
                 elm = $(this).parents('tr')
+                id = $(url.split('/')).last()[0]
+                name = $('#bt' + id).parents('tr').find('td').html()
+                Swal.fire({
+                    title: "Yakin untuk hapus " + name + "?",
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Yakin',
+                    cancelButtonText: 'Batalkan',
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        ajax(elm)
+                    }
+                })
                 // console.log(elm);
-                ajax(elm)
             })
         })
 

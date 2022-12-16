@@ -110,7 +110,7 @@
 
           <div class="col-sm-6 form-group">
             <label>NIK KTP (16 digit)</label>
-            <input type="number" name="id.number"
+            <input type="number" name="id.number" maxlength="16" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
               class="form-control @error('id_number') is-invalid @else @if(old('id_number') ?? false) is-valid @endif @enderror"
               value="{{ old('id_number', $detail->patient->id_number) }}">
           </div>

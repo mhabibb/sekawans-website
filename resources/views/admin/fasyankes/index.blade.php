@@ -18,14 +18,14 @@
                                     aria-expanded="true">
                                     <tr>
                                         <th>Fasyankes Satelit</th>
-                                        <th class="col-2"><i class="fas fa-angle-down"></th>
+                                        <th class="col-2 text-right"><i class="fas fa-angle-down"></th>
                                     </tr>
                                 </thead>
                                 <tbody class="collapse show" id="satelitList">
                                     @forelse ($satellites as $satellite)
                                         <tr>
                                             <td> {{ $satellite->name }} </td>
-                                            <td>
+                                            <td class="d-flex">
                                                 <a href="#" class="badge badge-warning"
                                                     onclick="update(this, 'satellite', {{ $satellite->id }})">Edit</a>
                                                 <form class="form"
@@ -55,18 +55,14 @@
                                 <thead data-toggle="collapse" role="button" data-target="#workerList" aria-expanded="true">
                                     <tr>
                                         <th>Patient Supporter</th>
-                                        <th class="col-2"><i class="fas fa-angle-down"></i></th>
+                                        <th class="col-2 text-right"><i class="fas fa-angle-down"></i></th>
                                     </tr>
                                 </thead>
                                 <tbody class="collapse show" id="workerList">
                                     @forelse ($workers as $ps)
                                         <tr>
-                                            @if ($ps->is_active == 1)
-                                                <td> {{ $ps->name }} </td>
-                                            @else
-                                                <td class="text-muted"> {{ $ps->name }} </td>
-                                            @endif
-                                            <td>
+                                            <td> {{ $ps->name }} </td>
+                                            <td class="d-flex">
                                                 <a href="#" class="badge badge-warning"
                                                     onclick="update(this, 'worker', {{ $ps->id }})">Edit</a>
                                                 <form class="form"

@@ -29,7 +29,7 @@ SEKAWANS’s TBC terbentuk sejak 14 Juli 2016, disebut sebagai sekumpulan pendid
 
         StaticElement::create([
             'element' => 'struktur',
-            'contents' => fake()->imageUrl(1080, 720),
+            'contents' => "",
         ]);
 
         // StaticElement::create([

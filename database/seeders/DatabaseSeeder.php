@@ -32,7 +32,7 @@ class DatabaseSeeder extends Seeder
 
         \App\Models\User::factory()->create([
             'name' => 'Sekawans',
-            'email' => 'sekawan.tbc@gmail.com',
+            'email' => 'sekawanjember@gmail.com',
             'role' => true,
         ]);
         \App\Models\User::factory()->create([

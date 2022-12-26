@@ -33,7 +33,6 @@ class DatabaseSeeder extends Seeder
         \App\Models\User::factory()->create([
             'name' => 'Sekawans',
             'email' => 'sekawan.tbc@gmail.com',
-            'password' => bcrypt('100%tuntas'),
             'role' => true,
         ]);
         \App\Models\User::factory()->create([

@@ -12,7 +12,7 @@ class WebController extends Controller
     public function index()
     {
         $about = StaticElement::find(1);
-        preg_match('/^([^.!?]*[.!?]+){0,2}/', strip_tags($about->contents), $about);
+        preg_match('/^([^.!?]*[.!?]+){0,1}/', strip_tags($about->contents), $about);
         $regencies = Regency::whereHas('patients')->withCount('patients')->get();
         $articles = Article::latest()->category(2)->take(3)->get();
         return view('web.index', [

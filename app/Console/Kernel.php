@@ -16,9 +16,16 @@ class Kernel extends ConsoleKernel
     protected function schedule(Schedule $schedule)
     {
         $schedule->command('down')->daily();
+        $schedule->command('db:clean')->daily();
         $schedule->command('model:prune')->daily();
         $schedule->command('activitylog:clean')->daily();
-        $schedule->command('up')->dailyAt('00:30');
+        $schedule->command('cache:clear')->monthly();
+        $schedule->command('queue:clear')->monthly();
+        $schedule->command('view:clear')->monthly();
+        $schedule->command('config:cache')->monthly();
+        $schedule->command('event:cache')->monthly();
+        $schedule->command('route:cache')->monthly();
+        $schedule->command('view:cache')->monthly();
     }
 
     /**
@@ -28,7 +35,7 @@ class Kernel extends ConsoleKernel
      */
     protected function commands()
     {
-        $this->load(__DIR__.'/Commands');
+        $this->load(__DIR__ . '/Commands');
 
         require base_path('routes/console.php');
     }

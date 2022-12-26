@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Support\Facades\Storage;
 use Spatie\Activitylog\Models\Activity;
+use App\Models\Patient;
+use App\Models\PatientDetail;
+use App\Models\EmergencyContact;
 
 class LogController extends Controller
 {

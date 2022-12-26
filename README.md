@@ -1,98 +1,66 @@
-# Source Code Website SEKAWAN'S TB JEMBER
+# Website SEKAWAN'S TB JEMBER
 
-Website dikembangkan dengan menggunakan framework Laravel 9
+Website ini dikembangkan dengan framework Laravel 9. Aplikasi yang dipasang adalah AdminLTE sebagai template panel Admin Sekawan dan beberapa plugin bawaannya, penggunaan Bootstrap sebagai toolkit frontend, library jQuery, dan beberapa CDN lainnya. Web ini juga mengimplementasikan Progressive Web App dengan Service Worker pada panel Admin.
 
-## Instalasi Frontend
-
--   Pastikan composer dan node sudah terinstal di komputer
--   Clone repository ini
--   Masuk ke folder repository local
--   Instal composer
-
-```bash
-composer install
-```
-
--   Instal package 'laravel/ui' dan 'ladumor/laravel-pwa'
-
-```bash
-composer require laravel/ui
-```
-
+Package tambahan yang digunakan yaitu:
 ```bash
 composer require ladumor/laravel-pwa
+composer require laravel/ui
+composer require realrashid/sweet-alert
+composer require spatie/laravel-activitylog
+npm install chart.js
 ```
 
--   Instal node ke project
+## Instalasi
+- Kloning repository Github ke Local
+  ```bash
+  git clone https://github.com/azislhn/sekawans-jember.git
+  ```
+- Duplikat file .env.example dan rename menjadi .env. Kemudian memastikan koneksi database pada file .env seperti berikut
+  ```
+  DB_CONNECTION=mysql
+  DB_HOST=127.0.0.1
+  DB_PORT=3306
+  DB_DATABASE=sekawans_jember
+  DB_USERNAME=root
+  DB_PASSWORD=
+  ```
+- Menginstal dependensi yang ada di composer.json ke dalam folder vendor dan mengoptimasi autoloader
+  ```bash
+  composer install --optimize-autoloader
+  ```
+- Menginstal dependensi yang ada di package.json ke dalam folder node_modules
+  ```bash
+  npm install
+  ```
+- Menjalankan vite build untuk membangun file Javascript dan SASS ke dalam build di dalam folder public dengan npm
+  ```bash
+  npm run build
+  ```
+- Selanjutnya yaitu menjalankan web server dan koneksi ke phpMyAdmin, kemudian membuat database dengan nama yang sama seperti pada file .env 
+- Melakukan migrasi database yang tersimpan di folder database sekaligus menjalankan seeding data dan user
+  ```bash
+  php artisan migrate:fresh –-seed
+  ```
+  Terdapat 3 user awal yang dapat digunakan untuk login ke panel Admin, dengan satu role Super Admin (terdapat di file DatabaseSeeder.php)
+  ```php
+  // email asal-asalan
+  \App\Models\User::factory()->create([
+    'name' => 'Sekawans',
+    'email' => 'sekawanjember@gmail.com',
+    'role' => true,
+  ]);
+  \App\Models\User::factory()->create([
+      'name' => 'Divisi Komunikasi',
+      'email' => 'divkom.sekawan@gmail.com',
+  ]);
+  \App\Models\User::factory()->create([
+      'name' => 'Divisi IT Database',
+      'email' => 'itdb.sekawan@gmail.com',
+  ]);
 
-```bash
-npm install
-```
-
--   Pastikan variables di 'resources\sass_variables.scss' seperti berikut
-
-```scss
-// Body
-$body-bg: #f8fafc;
-
-// Typography
-$font-family-sans-serif: "Poppins", sans-serif;
-$font-size-base: 1rem;
-$line-height-base: 1.5;
-```
-
--   Pastikan custom css di 'resources\sass\app.scss' untuk font family, warna primary dan secondary, dan module line clamp (truncate text pada card artikel)
-
-```scss
-// Fonts
-@import url("https://fonts.bunny.net/css?family=Poppins");
-
-// Variables
-@import "variables";
-$primary: #5115b1;
-$secondary: #e71c36;
-
-// Bootstrap
-@import "bootstrap/scss/bootstrap";
-
-.module {
-    margin: 0 0 1em 0;
-    overflow: hidden;
-}
-
-.module p {
-    margin: 0;
-}
-
-.line-clamp {
-    display: -webkit-box;
-    -webkit-line-clamp: 3;
-    -webkit-box-orient: vertical;
-}
-```
-
--   Rename file .env.examples menjadi .env dan sesuaikan
-
--   Migrasi database dengan jalankan PHP Artisan
-
-```bash
-php artisan migrate:fresh
-```
-
-Atau bisa juga migrasi dengan dummy data dengan menjalankan PHP Artisan
-
-```bash
-php artisan migrate:fresh --seed
-```
-
--   Compile assets dan jalankan
-
-```bash
-npm run dev
-```
-
--   Buka terminal baru dan jalankan server
-
-```bash
-php artisan serve
-```
+  ```
+- Menjalankan server local dari project dan aplikasi dapat diakses dengan alamat http://localhost:8000 
+  ```bash
+  php artisan serve
+  ```

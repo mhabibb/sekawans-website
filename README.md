@@ -1,6 +1,6 @@
 # Website SEKAWAN'S TB JEMBER
 
-Website ini dikembangkan dengan framework Laravel 9. Aplikasi yang dipasang adalah AdminLTE sebagai template panel Admin Sekawan dan beberapa plugin bawaannya, penggunaan Bootstrap sebagai toolkit frontend, dan library jQuery. Web ini juga mengimplementasikan Progressive Web App dengan Service Worker pada panel Admin.
+Website ini dikembangkan dengan framework Laravel 9. Aplikasi yang dipasang adalah AdminLTE sebagai template panel Admin Sekawan dan beberapa plugin bawaannya, penggunaan Bootstrap sebagai toolkit frontend, library jQuery, dan beberapa CDN lainnya. Web ini juga mengimplementasikan Progressive Web App dengan Service Worker pada panel Admin.
 
 Package tambahan yang digunakan yaitu:
 ```bash

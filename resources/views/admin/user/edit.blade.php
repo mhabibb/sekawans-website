@@ -36,7 +36,7 @@
                         </div>
                     </div>
                     <div class="form-group new-password d-none">
-                        <label>Password Baru</label>
+                        <label>Password Baru (minimal 8 karakter)</label>
                         <div class="input-group">
                             <input type="password" name="password" id="password"
                                 class="form-control @error('password') is-invalid @enderror">

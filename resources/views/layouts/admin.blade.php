@@ -36,43 +36,52 @@
     <link rel="stylesheet" type="text/css"
         href="https://cdn.datatables.net/v/bs4/jszip-2.5.0/dt-1.13.1/b-2.3.3/b-html5-2.3.3/b-print-2.3.3/r-2.4.0/datatables.min.css" />
 
-        <style>
-            /* Disable input number arrow */
-              /* Chrome, Safari, Edge, Opera */
-              input::-webkit-outer-spin-button,
-              input::-webkit-inner-spin-button {
-                -webkit-appearance: none;
-                margin: 0;
-              }
+    <style>
+        /* Disable input number arrow */
+        /* Chrome, Safari, Edge, Opera */
+        input::-webkit-outer-spin-button,
+        input::-webkit-inner-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
 
-              /* Firefox */
-              input[type=number] {
-                -moz-appearance: textfield;
-              }
+        /* Firefox */
+        input[type=number] {
+            -moz-appearance: textfield;
+        }
+        
+        iframe {
+          width: 100%;
+          min-height: 360px;
+        }
+        
+        article .body img {
+          width: 100% !important;
+        }
 
-              .badge {
-                font-size: 14px;
-                margin: 4px;
-              }
-              
-              .truncate {
-                display: -webkit-box;
-                overflow: hidden;
-                -webkit-line-clamp: 3;
-                -webkit-box-orient: vertical;
-              }
-        </style>
+        .badge {
+            font-size: 14px;
+            margin: 4px;
+        }
+
+        .truncate {
+            display: -webkit-box;
+            overflow: hidden;
+            -webkit-line-clamp: 3;
+            -webkit-box-orient: vertical;
+        }
+    </style>
 
     @yield('css')
 
     <!-- PWA  -->
     <meta name="theme-color" content="#343a40" />
-    <link rel="apple-touch-icon" href="{{ asset('img/logo-sekawans.png') }}">
+    <link rel="apple-touch-icon" href="{{ asset('logos/ms-icon-144x144.png') }}">
     <link rel="manifest" href="{{ asset('/manifest.json') }}">
 </head>
 
-    <body class="hold-transition sidebar-mini layout-fixed layout-navbar-fixed">
-        @include('sweetalert::alert')
+<body class="hold-transition sidebar-mini layout-fixed layout-navbar-fixed">
+    @include('sweetalert::alert')
     <div class="wrapper">
         <x-admin-nav />
 
@@ -135,7 +144,7 @@
         $('.show-hide').click(function() {
             var id = $(this).attr('toggle');
             var input = $(id);
-            var eye = $("a[toggle='"+ id +"'] i");
+            var eye = $("a[toggle='" + id + "'] i");
 
             eye.toggleClass('fa-eye fa-eye-slash');
             if (input.attr('type') == 'password') {
@@ -146,34 +155,33 @@
         })
     </script>
 
-    <script src="{{ asset('sw.js') }}"></script>
-    <script>
-        if (!navigator.serviceWorker.controller) {
-          navigator.serviceWorker.register("/sw.js").then(function (reg) {
-            console.log("Service worker has been registered for scope: " + reg.scope);
-          });
-        }
-    </script>
-
     {{-- Logout --}}
     <script type="text/javascript">
-        $('#btn_logout').click(function (e){
+        $('#btn_logout').click(function(e) {
             e.preventDefault();
             $('#logout-form').trigger('submit');
         })
 
-        $(function(){
+        $(function() {
             {{-- Disable other number input --}}
             angka = $('input[type=number]');
-            angka.keydown(function(e){
-                if (e.which != 8 && e.which != 0 && e.which < 48 || e.which > 57)
-                {
+            angka.keydown(function(e) {
+                if (e.which != 8 && e.which != 0 && e.which < 48 || e.which > 57) {
                     e.preventDefault();
                 }
             })
         })
     </script>
     @yield('js')
+
+    <script src="{{ asset('sw.js') }}"></script>
+    <script>
+        if (!navigator.serviceWorker.controller) {
+            navigator.serviceWorker.register("/sw.js").then(function(reg) {
+                console.log("Service worker has been registered for scope: " + reg.scope);
+            });
+        }
+    </script>
 </body>
 
 </html>

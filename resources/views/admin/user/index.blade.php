@@ -131,7 +131,7 @@
                 text: 'Akun Berhasil Dihapus',
                 type: 'DELETE'
             }
-            name = $('#bt' + id).parent().parent().find('td').html();
+            name = $('#bt' + id).parents('tr').find('td').html();
             swal = {
                 text: "Autentikasi akun " + name + " akan direset",
                 title: 'Yakin Hapus Akun?'

@@ -6,7 +6,7 @@
         <div class="container px-4">
             <div class="row flex-lg-row-reverse align-items-center g-5 py-5">
                 <div class="col col-lg-6">
-                    <img src="https://picsum.photos/600/400" class="d-block img-fluid" alt="..." width="600"
+                    <img src="{{ asset('img/kasus-tbc.png') }}" class="d-block img-fluid" alt="..." width="600"
                         height="400" loading="lazy">
                 </div>
                 <div class="col-lg-6">

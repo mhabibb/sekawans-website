@@ -20,23 +20,21 @@
                                         @if ($sekawan->id > 3)
                                             <tr>
                                                 <td class="border-0">
-                                                    <strong>{{ ucfirst($sekawan->element) }}</strong>
+                                                    <strong>{{ ucfirst($sekawan->element) }} 
+                                                        <a role="button" class="badge badge-warning" style="font-weight: normal;" onclick="updateElement({{ $sekawan->id }}, '{{ $sekawan->element }}')">Edit</a>
+                                                    </strong>
                                                     <div id="target{{ $sekawan->id }}" class="text-break">
                                                         {{ $sekawan->contents }}</div>
-                                                </td>
-                                                <td class="border-0 col-1">
-                                                    <a role="button" class="badge badge-warning"
-                                                        onclick="updateElement({{ $sekawan->id }}, '{{ $sekawan->element }}')">Edit</a>
                                                 </td>
                                             </tr>
                                         @elseif ($sekawan->id == 3)
                                             <tr data-widget="expandable-table" aria-expanded="false" class="border-bottom">
-                                                <th colspan="2">
+                                                <th>
                                                     <i class="fas fa-angle-down"></i> {{ ucfirst($sekawan->element) }}
                                                 </th>
                                             </tr>
                                             <tr class="expandable-body border-bottom">
-                                                <td colspan="2">
+                                                <td>
                                                     <a role="button" class="mx-3 mt-3 btn btn-warning"
                                                         onclick="updateElement({{ $sekawan->id }},'{{ $sekawan->element }}')">Ganti Gambar</a>
                                                     <img id="target{{ $sekawan->id }}"
@@ -47,12 +45,12 @@
                                             </tr>
                                         @else
                                             <tr data-widget="expandable-table" aria-expanded="false">
-                                                <th colspan="2">
+                                                <th>
                                                     <i class="fas fa-angle-down"></i> {{ ucfirst($sekawan->element) }}
                                                 </th>
                                             </tr>
                                             <tr class="expandable-body">
-                                                <td colspan="2">
+                                                <td>
                                                     <a role="button" class="m-3 btn btn-warning" onclick="updateElement({{ $sekawan->id }},'{{ $sekawan->element }}')">Edit Data</a>
                                                     <div id="target{{ $sekawan->id }}" class="overflow-auto" style="max-height: 360px;">
                                                         {{ $sekawan->contents }}

@@ -6,7 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <link rel="shortcut icon" href="{{ asset('logos/favicon.ico') }}" type="image/x-icon">
-  <title>Sekawans TB Jember</title>
+  <title>Sekawan'S TB Jember</title>
 
   {{-- Font Awesome CDN --}}
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"
@@ -14,6 +14,22 @@
     crossorigin="anonymous" referrerpolicy="no-referrer" />
 
   @vite(['resources/sass/app.scss', 'resources/js/app.js'])
+  <style>
+      iframe {
+          width: 100%;
+          min-height: 360px;
+      }
+      article .body img {
+          width: 100% !important;
+      }
+      article .body a {
+          white-space: pre-wrap;
+          word-wrap: break-word;
+          word-break: break-all;
+          white-space: normal;
+          /*display:block;*/
+      }
+  </style>
 </head>
 
 <body>

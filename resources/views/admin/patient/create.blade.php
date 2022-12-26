@@ -57,8 +57,8 @@
           </div>
           <div class="col-sm-6 form-group">
             <label>No. Registrasi Pasien (max 10 digit)</label>
-            <input type="number" name="no.regis" maxlength="10" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
-              class="form-control @error('no_regis') is-invalid @else @if(old('no_regis') ?? false) is-valid @endif @enderror"
+            <input type="text" name="no.regis" maxlength="10" oninput="this.value = this.value.replace(/[^0-9]/g, '')"
+              class="input-number form-control @error('no_regis') is-invalid @else @if(old('no_regis') ?? false) is-valid @endif @enderror"
               value="{{ old('no_regis') }}">
           </div>
           <div class="col-sm-6 form-group">
@@ -89,7 +89,7 @@
 
           <div class="col-sm-6 form-group">
             <label>NIK KTP (16 digit)</label>
-            <input type="number" name="id.number" maxlength="16" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
+            <input type="text" name="id.number" maxlength="16" oninput="this.value = this.value.replace(/[^0-9]/g, '')"
               class="form-control @error('id_number') is-invalid @else @if(old('id_number') ?? false) is-valid @endif @enderror"
               value="{{ old('id_number') }}">
           </div>
@@ -239,8 +239,8 @@
               </label>
             </div>
             <div class="form-check">
-              <input class="form-check-input" type="radio" name="has.job" id="tidak-kerja" value="0"
-                @checked(old('has_job')=="0" )>
+              <input class="form-check-input" type="radio" name="has.job" id="tidak-kerja" value="0" 
+                @checked(old('has_job')=="0" ) @if (!old('emergency.is_know') ?? false) checked @endif>
               <label class="form-check-label" for="tidak-kerja">
                 Tidak Bekerja
               </label>
@@ -358,7 +358,7 @@
             @enderror
             <div class="form-check">
               <input class="form-check-input" type="radio" name="emergency[is_know]" id="ya-tahu" value="1"
-                @checked(old('emergency.is_know')=="1" ) @if (!old('emergency.is_know') ?? false) checked @endif>
+                @checked(old('emergency.is_know')=="1" )>
               <label class="form-check-label" for="ya-tahu">
                 Ya
               </label>

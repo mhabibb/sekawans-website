@@ -61,7 +61,7 @@
           </div>
           <div class="col-sm-6 form-group">
             <label>No. Registrasi Pasien (max 10 digit)</label>
-            <input type="number" name="no.regis" maxlength="10" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
+            <input type="text" name="no.regis" maxlength="10" oninput="this.value = this.value.replace(/[^0-9]/g, '')"
               class="form-control @error('no_regis') is-invalid @else @if(old('no_regis') ?? false) is-valid @endif @enderror"
               value="{{ old('no_regis', $detail->no_regis) }}">
           </div>
@@ -110,7 +110,7 @@
 
           <div class="col-sm-6 form-group">
             <label>NIK KTP (16 digit)</label>
-            <input type="number" name="id.number" maxlength="16" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
+            <input type="text" name="id.number" maxlength="16" oninput="this.value = this.value.replace(/[^0-9]/g, '')"
               class="form-control @error('id_number') is-invalid @else @if(old('id_number') ?? false) is-valid @endif @enderror"
               value="{{ old('id_number', $detail->patient->id_number) }}">
           </div>

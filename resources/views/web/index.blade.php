@@ -16,18 +16,18 @@
                             aria-label="Slide 3"></button>
                     </div>
                     <div class="carousel-inner">
-                        <div class="carousel-item active">
-                            <img src="https://picsum.photos/600/400" style="height: 400px; object-fit: cover;"
-                                class="d-block mx-auto" alt="pic">
+                        <div class="carousel-item">
+                            <img src="{{ asset('img/slide-1.png') }}" width="600" height="400" loading="lazy"
+                                class="d-block img-fluid mx-auto" alt="">
                         </div>
                         <div class="carousel-item">
-                            <img src="https://picsum.photos/500/500" style="height: 400px; object-fit: cover;"
-                                class="d-block mx-auto" alt="pic">
+                            <img src="{{ asset('img/slide-2.png') }}" width="600" height="400" loading="lazy"
+                                class="d-block img-fluid mx-auto" alt="">
                         </div>
-                        <div class="carousel-item">
-                            <img src="https://picsum.photos/400/600" style="height: 400px; object-fit: cover;"
-                                class="d-block mx-auto" alt="pic">
-                        </div>
+                        <div class="carousel-item active"><a href="https://drive.google.com/file/d/1aVpZadgj3-wL0YTus_WHWr4SBDnEcrd-/view" target="blank">
+                            <img src="{{ asset('img/slide-3.png') }}" width="600" height="400" loading="lazy"
+                                class="d-block img-fluid mx-auto" alt="">
+                        </a></div>
                     </div>
                     <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators"
                         data-bs-slide="prev">
@@ -50,6 +50,10 @@
     <div class="container mx-auto row text-center justify-content-between pt-4 mb-5 border-top">
         <div class="col p-3">
             <img src="{{ asset('img/logo-stakeholder/kemenkes.png') }}"
+                alt="" height="80px">
+        </div>
+        <div class="col p-3">
+            <img src="{{ asset('img/logo-stakeholder/yabhysa.png') }}"
                 alt="" height="80px">
         </div>
         <div class="col p-3">

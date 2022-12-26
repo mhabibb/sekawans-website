@@ -34,8 +34,8 @@
     </div>
     <div class="d-flex flex-column align-items-center justify-content-center border-top pt-4">
       <figure class="figure">
-        <img src="{{ $structure->contents }}" class="figure-img img-fluid rounded" style="max-height: 600px" alt="...">
-        <figcaption class="figure-caption text-center">Gambar Struktur Organisasi Sekawans TB</figcaption>
+        <img src="{{ $structure->contents != "" ? asset('storage/' . $structure->contents) : asset('img/struktur.png') }}" class="figure-img img-fluid rounded" style="max-height: 600px" alt="...">
+        <!--<figcaption class="figure-caption text-center">Gambar Struktur Organisasi Sekawans TB</figcaption>-->
       </figure>
       {{-- <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
         <a href="/struktur" class="btn btn-secondary btn-lg px-4 ">Selengkapnya</a>

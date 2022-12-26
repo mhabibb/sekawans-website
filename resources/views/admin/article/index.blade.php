@@ -132,17 +132,17 @@
                             render: function(data) {
                                 @can('superAdmin')
                                     if (time.html() !== 'Waktu Update') {
-                                        return `<div class="d-flex"><a href="#" class="badge badge-success" onclick="action('restore',` + data + `)">
+                                        return `<div class="d-flex"><a role="button" class="badge badge-success" onclick="action('restore',` + data + `)">
                                                 <i class="fa-solid fa-rotate-left"></i> Pulihkan</a>
-                                            <a href="#" class="badge badge-danger" onclick="action('forceDelete',` + data + `)">
+                                            <a role="button" class="badge badge-danger" onclick="action('forceDelete',` + data + `)">
                                                 <i class="fa-solid fa-xmark"></i> Hapus Permanen</a></div>`;
                                     } else
                                 @endcan
-                                return `<div class="d-flex"><a href="#" onclick="action('show',` + data + `)" class="badge badge-primary">
+                                return `<div class="d-flex"><a role="button" onclick="action('show',` + data + `)" class="badge badge-primary">
                                         <i class="fa-solid fa-eye"></i> Lihat</a>
-                                    <a href="#" onclick="action('edit',` + data + `)" class="badge badge-warning">
+                                    <a role="button" onclick="action('edit',` + data + `)" class="badge badge-warning">
                                         <i class="fa-solid fa-pen-to-square"></i> Ubah</a>
-                                    <a href="#" id="` + data + `" onclick="action('delete',` + data + `)" class="badge badge-danger">
+                                    <a role="button" id="` + data + `" onclick="action('delete',` + data + `)" class="badge badge-danger">
                                         <i class="fa-solid fa-trash-can"></i> Hapus</a><div>`
                             }
                         }

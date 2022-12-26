@@ -10,7 +10,7 @@
                 </div>
                 <div class="modal-body">
                     <div class="form-group new-password">
-                        <label>Password Baru</label>
+                        <label>Password Baru (minimal 8 karakter)</label>
                         <div class="input-group">
                             <input type="password" name="password" id="password"
                                 class="form-control">

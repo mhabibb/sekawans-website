@@ -44,9 +44,10 @@ npm install chart.js
   ```
   Terdapat 3 user awal yang dapat digunakan untuk login ke panel Admin, dengan satu role Super Admin (terdapat di file DatabaseSeeder.php)
   ```php
+  // email asal-asalan
   \App\Models\User::factory()->create([
     'name' => 'Sekawans',
-    'email' => 'sekawan.tbc@gmail.com',
+    'email' => 'sekawanjember@gmail.com',
     'role' => true,
   ]);
   \App\Models\User::factory()->create([

@@ -8,10 +8,10 @@ use Illuminate\Database\Seeder;
 class DatabaseSeeder extends Seeder
 {
     // private $user = 10;
-    // private $article = 50;
-    // private $worker = 50;
-    // private $satellite = 100;
-    // private $patient = 150;
+    private $article = 50;
+    private $worker = 50;
+    private $satellite = 100;
+    private $patient = 200;
 
     /**
      * Seed the application's database.
@@ -46,11 +46,11 @@ class DatabaseSeeder extends Seeder
         ]);
         
         // \App\Models\User::factory($this->user--)->create();
-        // \App\Models\Article::factory($this->article)->createQuietly();
-        // \App\Models\EmergencyContact::factory($this->patient)->create();
-        // \App\Models\Patient::factory($this->patient)->create();
-        // \App\Models\Worker::factory($this->worker)->create();
-        // \App\Models\SatelliteHealthFacility::factory($this->satellite)->create();
-        // \App\Models\PatientDetail::factory($this->patient)->create();
+        \App\Models\Article::factory($this->article)->createQuietly();
+        \App\Models\EmergencyContact::factory($this->patient)->create();
+        \App\Models\Patient::factory($this->patient)->create();
+        \App\Models\Worker::factory($this->worker)->create();
+        \App\Models\SatelliteHealthFacility::factory($this->satellite)->create();
+        \App\Models\PatientDetail::factory($this->patient)->create();
     }
 }

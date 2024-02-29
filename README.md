@@ -1,6 +1,6 @@
 # Website Sekawan'S TB JEMBER
 
-Website ini dikembangkan dengan framework Laravel 10. Aplikasi yang dipasang adalah AdminLTE sebagai template panel Admin Sekawan dan beberapa plugin bawaannya, penggunaan Bootstrap sebagai toolkit frontend, library jQuery, dan beberapa CDN lainnya. Web ini juga mengimplementasikan Progressive Web App dengan Service Worker pada panel Admin.
+Website ini dikembangkan dengan framework Laravel. Aplikasi yang dipasang adalah AdminLTE sebagai template panel Admin Sekawan dan beberapa plugin bawaannya, penggunaan Bootstrap sebagai toolkit frontend, library jQuery, dan beberapa CDN lainnya. Web ini juga mengimplementasikan Progressive Web App dengan Service Worker pada panel Admin.
 
 Package tambahan yang digunakan yaitu:
 ```bash
@@ -14,7 +14,7 @@ npm install chart.js
 ## Instalasi
 - Kloning repository Github ke Local
   ```bash
-  git clone https://github.com/azislhn/sekawans-jember.git
+  git clone https://github.com/mhabibb/sekawans-website.git
   ```
 - Duplikat file .env.example dan rename menjadi .env. Kemudian memastikan koneksi database pada file .env seperti berikut
   ```

@@ -21,7 +21,7 @@ npm install chart.js
   DB_CONNECTION=mysql
   DB_HOST=127.0.0.1
   DB_PORT=3306
-  DB_DATABASE=sekawans_jember
+  DB_DATABASE=sekawantb
   DB_USERNAME=root
   DB_PASSWORD=
   ```

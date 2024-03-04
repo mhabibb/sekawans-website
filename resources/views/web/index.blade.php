@@ -47,6 +47,50 @@
             </div>
         </div>
     </div>
+    <div class="container px-4 py-5">
+        <div class="row flex-lg-row-reverse align-items-center g-5 pb-4">
+            <div class="col col-lg-6">
+                <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="true">
+                    <div class="carousel-indicators">
+                        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0"
+                            class="active" aria-current="true" aria-label="Slide 1"></button>
+                        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1"
+                            aria-label="Slide 2"></button>
+                        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2"
+                            aria-label="Slide 3"></button>
+                    </div>
+                    <div class="carousel-inner">
+                        <div class="carousel-item">
+                            <img src="{{ asset('img/slide-1.png') }}" width="600" height="400" loading="lazy"
+                                class="d-block img-fluid mx-auto" alt="">
+                        </div>
+                        <div class="carousel-item">
+                            <img src="{{ asset('img/slide-2.png') }}" width="600" height="400" loading="lazy"
+                                class="d-block img-fluid mx-auto" alt="">
+                        </div>
+                        <div class="carousel-item active"><a href="https://drive.google.com/file/d/1aVpZadgj3-wL0YTus_WHWr4SBDnEcrd-/view" target="blank">
+                            <img src="{{ asset('img/slide-3.png') }}" width="600" height="400" loading="lazy"
+                                class="d-block img-fluid mx-auto" alt="">
+                        </a></div>
+                    </div>
+                    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators"
+                        data-bs-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Previous</span>
+                    </button>
+                    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators"
+                        data-bs-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Next</span>
+                    </button>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <h2 class="fw-bold mb-3">Yuk, Lawan TBC Dengan Hidup Bersih dan Sehat! </h2>
+                <p class="lead">Pahami penyakit TBC dan gejalanya, dan terapkan perilaku hidup bersih dan sehat untuk menghindari dan mencegah penyakit TBC.</p>
+            </div>
+        </div>
+    </div>
     <div class="container mx-auto row text-center justify-content-between pt-4 mb-5 border-top">
         <div class="col p-3">
             <img src="{{ asset('img/logo-stakeholder/kemenkes.png') }}"

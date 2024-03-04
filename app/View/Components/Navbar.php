@@ -31,6 +31,9 @@ class Navbar extends Component
             'kasustbc' => 'Kasus TBC',
             'artikel' => 'Artikel',
             'kegiatan' => 'Kegiatan',
+            'screening' => 'Screening',            
+            'dokumen' => 'Dokumen',            
+
         );
         return view('components.navbar', compact('navLinks'));
     }

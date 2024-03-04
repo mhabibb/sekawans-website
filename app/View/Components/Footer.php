@@ -31,6 +31,7 @@ class Footer extends Component
             'kasustbc' => 'Kasus TBC',
             'artikel' => 'Artikel',
             'kegiatan' => 'Kegiatan',
+            'kegiatan' => 'Kegiatan',
         );
 
         $socials = StaticElement::where('id', '>', 3)->get();

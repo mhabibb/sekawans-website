@@ -87,6 +87,16 @@ class WebController extends Controller
         return view('web.showKasustbc', compact('regency'));
     }
 
+    public function screening()
+    {
+        return view('web.screening');
+    }
+
+    public function dokumen()
+    {
+        return view('web.dokumen');
+    }
+    
     public function liveSearch(Request $request)
     {
         if ($request->ajax()) {

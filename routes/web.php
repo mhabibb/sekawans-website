@@ -92,4 +92,6 @@ Route::controller(WebController::class)->group(function () {
     Route::get('/kegiatan', 'article')->name('kegiatan');
     Route::get('/kegiatan/{article}', 'showArticle')->name('kegiatan.show');
     Route::get('search', 'liveSearch')->name('search');
+    Route::get('/screening', 'screening')->name('screening');
+    Route::get('/dokumen', 'dokumen')->name('dokumen');
 });

@@ -16,7 +16,6 @@
                             aria-label="Slide 3"></button>
                     </div>
 
-                    // Video Profile, Slide 2, Slide 3
                     <div class="carousel-inner">
                         <div class="carousel-item active">
                             <video id="heroVideo" class="d-block mx-auto video-slide" width="600" height="400" controls>
@@ -60,7 +59,6 @@
     }
 </style>
 
-// Video Profile
 <script>
     var myCarousel = document.querySelector('#carouselExampleIndicators')
     var carousel = new bootstrap.Carousel(myCarousel)

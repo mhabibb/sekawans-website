@@ -36,7 +36,7 @@
                 </div>
 
                 <div class="pt-3 border-top">
-                    <p>&copy; 2022 Sekawans TB Jember</p>
+                    <p>&copy; 2024 Sekawans TB Jember</p>
                 </div>
         </footer>
     </div>

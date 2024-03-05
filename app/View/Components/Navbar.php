@@ -29,11 +29,6 @@ class Navbar extends Component
             'tentang' => 'Tentang',
             'infotbc' => 'Info TBC',
             'kasustbc' => 'Kasus TBC',
-            'artikel' => 'Artikel',
-            'kegiatan' => 'Kegiatan',
-            'screening' => 'Screening',            
-            'dokumen' => 'Dokumen',            
-
         );
         return view('components.navbar', compact('navLinks'));
     }

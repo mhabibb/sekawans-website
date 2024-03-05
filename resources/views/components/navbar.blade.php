@@ -31,6 +31,19 @@
                             href="{{route($route)}}">{{$linkName}}</a>
                     </li>
                     @endforeach
+
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                            data-bs-toggle="dropdown" aria-expanded="false">
+                            Lainnya
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <li><a class="dropdown-item" href="{{ route('artikel') }}">Artikel</a></li>
+                            <li><a class="dropdown-item" href="{{ route('kegiatan') }}">Kegiatan</a></li>
+                            <li><a class="dropdown-item" href="{{ route('screening') }}">Screening</a></li>
+                            <li><a class="dropdown-item" href="{{ route('dokumen') }}">Dokumen</a></li>
+                        </ul>
+                    </li>
                 </ul>
             </div>
         </div>

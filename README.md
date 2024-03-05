@@ -1,4 +1,4 @@
-# Test Alya
+# Test Alya wkwkkwkkwk
 
 Website ini dikembangkan dengan framework Laravel. Aplikasi yang dipasang adalah AdminLTE sebagai template panel Admin Sekawan dan beberapa plugin bawaannya, penggunaan Bootstrap sebagai toolkit frontend, library jQuery, dan beberapa CDN lainnya. Web ini juga mengimplementasikan Progressive Web App dengan Service Worker pada panel Admin.
 

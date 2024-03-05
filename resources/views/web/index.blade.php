@@ -6,7 +6,7 @@
     <div class="container px-4 py-5">
         <div class="row flex-lg-row-reverse align-items-center g-5 pb-4">
             <div class="col col-lg-6">
-                <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="true">
+                <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
                     <div class="carousel-indicators">
                         <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0"
                             class="active" aria-current="true" aria-label="Slide 1"></button>
@@ -16,18 +16,20 @@
                             aria-label="Slide 3"></button>
                     </div>
                     <div class="carousel-inner">
-                        <div class="carousel-item">
-                            <img src="{{ asset('img/slide-1.png') }}" width="600" height="400" loading="lazy"
-                                class="d-block img-fluid mx-auto" alt="">
+                        <div class="carousel-item active">
+                            <video id="heroVideo" class="d-block mx-auto video-slide" width="600" height="338" controls>
+                                <source src="{{ asset('video/profile.mp4') }}" type="video/mp4">
+                                Your browser does not support the video tag.
+                            </video>
                         </div>
                         <div class="carousel-item">
-                            <img src="{{ asset('img/slide-2.png') }}" width="600" height="400" loading="lazy"
-                                class="d-block img-fluid mx-auto" alt="">
+                            <img src="{{ asset('img/slide-2.png') }}" width="600" height="338" loading="lazy"
+                                class="d-block img-fluid mx-auto video-slide" alt="">
                         </div>
-                        <div class="carousel-item active"><a href="https://drive.google.com/file/d/1aVpZadgj3-wL0YTus_WHWr4SBDnEcrd-/view" target="blank">
-                            <img src="{{ asset('img/slide-3.png') }}" width="600" height="400" loading="lazy"
-                                class="d-block img-fluid mx-auto" alt="">
-                        </a></div>
+                        <div class="carousel-item">
+                            <img src="{{ asset('img/slide-3.png') }}" width="600" height="338" loading="lazy"
+                                class="d-block img-fluid mx-auto video-slide" alt="">
+                        </div>
                     </div>
                     <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators"
                         data-bs-slide="prev">
@@ -47,6 +49,28 @@
             </div>
         </div>
     </div>
+</section>
+
+<style>
+    .video-slide,
+    .video-slide img {
+        max-width: 100%;
+        height: auto;
+    }
+</style>
+
+<script>
+    var myCarousel = document.querySelector('#carouselExampleIndicators')
+    var carousel = new bootstrap.Carousel(myCarousel)
+
+    myCarousel.addEventListener('slid.bs.carousel', function () {
+        var video = document.getElementById('heroVideo');
+        video.pause();
+    })
+</script>
+
+
+
 
 {{-- TENTANG --}}
 <section id="tentang" class="container-fluid py-5 text-center bg-primary">

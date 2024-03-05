@@ -69,9 +69,6 @@
     })
 </script>
 
-
-
-
 {{-- TENTANG --}}
 <section id="tentang" class="container-fluid py-5 text-center bg-primary">
     <div class="container text-white">

@@ -15,21 +15,22 @@
                         <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2"
                             aria-label="Slide 3"></button>
                     </div>
+
+                    // Video Profile, Slide 2, Slide 3
                     <div class="carousel-inner">
                         <div class="carousel-item active">
-                            <video id="heroVideo" class="d-block mx-auto video-slide" width="600" height="338" controls>
+                            <video id="heroVideo" class="d-block mx-auto video-slide" width="600" height="400" controls>
                                 <source src="{{ asset('video/profile.mp4') }}" type="video/mp4">
-                                Your browser does not support the video tag.
                             </video>
                         </div>
                         <div class="carousel-item">
-                            <img src="{{ asset('img/slide-2.png') }}" width="600" height="338" loading="lazy"
+                            <img src="{{ asset('img/slide-2.png') }}" width="600" height="400" loading="lazy"
                                 class="d-block img-fluid mx-auto video-slide" alt="">
                         </div>
-                        <div class="carousel-item">
-                            <img src="{{ asset('img/slide-3.png') }}" width="600" height="338" loading="lazy"
-                                class="d-block img-fluid mx-auto video-slide" alt="">
-                        </div>
+                        <div class="carousel-item active"><a href="https://drive.google.com/file/d/1aVpZadgj3-wL0YTus_WHWr4SBDnEcrd-/view" target="blank">
+                            <img src="{{ asset('img/slide-3.png') }}" width="600" height="400" loading="lazy"
+                                class="d-block img-fluid mx-auto" alt="">
+                        </a></div>
                     </div>
                     <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators"
                         data-bs-slide="prev">
@@ -59,6 +60,7 @@
     }
 </style>
 
+// Video Profile
 <script>
     var myCarousel = document.querySelector('#carouselExampleIndicators')
     var carousel = new bootstrap.Carousel(myCarousel)

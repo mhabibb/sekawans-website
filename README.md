@@ -1,8 +1,4 @@
-<<<<<<< HEAD
 # Alya LOL Pake Banget
-=======
-# Website Sekawan's TB Jember
->>>>>>> 318a5b4ad701d976245ed355c138e8142ab34d50
 
 Website ini dikembangkan dengan framework Laravel. Aplikasi yang dipasang adalah AdminLTE sebagai template panel Admin Sekawan dan beberapa plugin bawaannya, penggunaan Bootstrap sebagai toolkit frontend, library jQuery, dan beberapa CDN lainnya. Web ini juga mengimplementasikan Progressive Web App dengan Service Worker pada panel Admin.
 

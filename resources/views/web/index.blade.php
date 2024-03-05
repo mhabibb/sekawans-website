@@ -45,7 +45,7 @@
             </div>
             <div class="col-lg-6">
                 <h2 class="fw-bold mb-3">Yuk, Lawan TBC Dengan Hidup Bersih dan Sehat! </h2>
-                <p class="lead">Pahami penyakit TBC dan gejalanya, dan terapkan perilaku hidup bersih dan sehat untuk menghindari dan mencegah penyakit TBC.</p>
+                <p class="lead">Pahami penyakit TBC dan gejalanya, dan terapkan perilaku hidup yang bersih dan sehat untuk menghindari dan mencegah penyakit TBC.</p>
             </div>
         </div>
     </div>

@@ -5,7 +5,7 @@
     <!-- Dokumen 1 -->
     <div class="card mb-4">
         <div class="card-body">
-            <h2 class="card-title">Judul Dokumen 1</h2>
+            <h2 class="card-title">SAYA IZIN GA MASUK NTAR</h2>
             <p class="card-text">Ini adalah keterangan mengenai dokumen 1. Dokumen ini berisi informasi penting mengenai topik tertentu.</p>
 
             <div class="d-grid gap-2 d-md-flex justify-content-md-end">
@@ -17,7 +17,7 @@
     <!-- Dokumen 2 -->
     <div class="card mb-4">
         <div class="card-body">
-            <h2 class="card-title">Judul Dokumen 2</h2>
+            <h2 class="card-title">ANIESSS CURANG</h2>
             <p class="card-text">Ini adalah keterangan mengenai dokumen 2. Dokumen ini berisi informasi penting mengenai topik tertentu.</p>
 
             <div class="d-grid gap-2 d-md-flex justify-content-md-end">

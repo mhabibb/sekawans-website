@@ -8,7 +8,7 @@
             <h3 class="card-title">Persetujuan Screening</h3>
             <ol style="font-size: 16px;">
                 <li>Screening ini digunakan untuk mendeteksi dini penyakit TB.</li>
-                <li>Adapun hasil rencana tindak lanjut Screening berupa Rekomendasi tempat Fasilitas Layanan kesehatan terdekat yang dapat melakukan Screening TB dan dibawah nanungan Dinas Kesehatan.</li>
+                <li>Adapun hasil rencana tindak lanjut Screening berupa Rekomendasi tempat Fasilitas Layanan kesehatan terdekat yang dapat melakukan Screening TB dan dibawah naungan Dinas Kesehatan.</li>
                 <li>Data dalam formulir ini sangat dijaga privasinya dari pihak yang tidak memiliki wewenang.</li>
                 <li>Saya mengerti tujuan mengisi Screening ini, dan bersedia untuk melakukan investigasi kontak.</li>
                 <li>Saya bersedia mengisi semua data formulir Screening dengan sebenar-benarnya sesuai kondisi yang sedang saya alami.</li>

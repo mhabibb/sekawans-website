@@ -61,6 +61,13 @@
                     <label for="screeningDate" class="form-label" style="font-size: 16px;">Tanggal Skrining:</label>
                     <input type="date" class="form-control" id="screeningDate" required style="font-size: 16px;">
                 </div>
+                <div class="mb-3">
+                    <label for="contactWithTB" style="font-size: 16px;">Apakah ada kontak satu rumah dengan pasien TBC?</label><br>
+                    <input type="radio" id="contactYes" name="contactWithTB" value="yes" required>
+                    <label for="contactYes" style="font-size: 16px;">Ya</label>
+                    <input type="radio" id="contactNo" name="contactWithTB" value="no">
+                    <label for="contactNo" style="font-size: 16px;">Tidak</label>
+                </div>                
             </form>
         </div>
     </div>
@@ -138,6 +145,9 @@
     <div class="card mb-4">
         <div class="card-body">
             <h3 class="card-title">Kontak</h3>
+            <div class="mb-3" style="font-size: 16px;">
+                Berikan informasi skrining ini kepada kontak erat terdekatmu
+            </div>            
             <div class="mb-3">
                 <label for="contact1Name" style="font-size: 16px;">Kontak 1</label><br>
                 <input type="text" id="contact1Name" name="contact1Name" placeholder="Nama" required style="font-size: 16px;">

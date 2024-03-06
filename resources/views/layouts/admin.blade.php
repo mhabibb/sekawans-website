@@ -93,7 +93,7 @@
 
         <!-- Main Footer -->
         <footer class="main-footer">
-            <strong>&copy; 2022 Sekawans TB Jember</strong>
+            <strong>&copy; 2024 Sekawans TB Jember</strong>
         </footer>
     </div>
     <!-- ./wrapper -->

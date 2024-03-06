@@ -27,7 +27,7 @@ class WebController extends Controller
         $abouts = StaticElement::get();
         $profilFig = array(
             'image'     => "img/sekawans.jpg",
-            'caption'   => "Sekawan'S TB bersama mahasiswa magang MSIB dan pasien sembuh pada kegiatan FGD 3 November 2022",
+            'caption'   => "Sekawan'S TB bersama mahasiswa magang MSIB dan pasien sembuh pada kegiatan FGD Bulan Februari s/d Juni 2024",
         );
         return view('web.tentang', [
             'profile'   => $abouts->find(1),

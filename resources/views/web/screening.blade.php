@@ -2,16 +2,16 @@
 
 @section('content')
 <div class="container py-5">
-    <!-- Persetujuan Skrining -->
+    <!-- Persetujuan Screening -->
     <div class="card mb-4">
         <div class="card-body">
-            <h3 class="card-title">Persetujuan Skrining</h3>
+            <h3 class="card-title">Persetujuan Screening</h3>
             <ol style="font-size: 16px;">
-                <li>Skrining ini digunakan untuk mendeteksi dini penyakit TB.</li>
-                <li>Adapun hasil rencana tindak lanjut skrining berupa Rekomendasi tempat Fasilitas Layanan kesehatan terdekat yang dapat melakukan skrining TB dan dibawah nanungan Dinas Kesehatan.</li>
+                <li>Screening ini digunakan untuk mendeteksi dini penyakit TB.</li>
+                <li>Adapun hasil rencana tindak lanjut Screening berupa Rekomendasi tempat Fasilitas Layanan kesehatan terdekat yang dapat melakukan Screening TB dan dibawah nanungan Dinas Kesehatan.</li>
                 <li>Data dalam formulir ini sangat dijaga privasinya dari pihak yang tidak memiliki wewenang.</li>
-                <li>Saya mengerti tujuan mengisi skrining ini, dan bersedia untuk melakukan investigasi kontak.</li>
-                <li>Saya bersedia mengisi semua data formulir skrining dengan sebenar-benarnya sesuai kondisi yang sedang saya alami.</li>
+                <li>Saya mengerti tujuan mengisi Screening ini, dan bersedia untuk melakukan investigasi kontak.</li>
+                <li>Saya bersedia mengisi semua data formulir Screening dengan sebenar-benarnya sesuai kondisi yang sedang saya alami.</li>
             </ol>
             <div class="form-check">
                 <input class="form-check-input" type="checkbox" value="" id="agreement">
@@ -58,9 +58,22 @@
                     </select>
                 </div>
                 <div class="mb-3">
-                    <label for="screeningDate" class="form-label" style="font-size: 16px;">Tanggal Skrining:</label>
+                    <label for="screeningDate" class="form-label" style="font-size: 16px;">Tanggal Screening:</label>
                     <input type="date" class="form-control" id="screeningDate" required style="font-size: 16px;">
                 </div>
+                
+                <script>
+                    var today = new Date();
+            
+                    var year = today.getFullYear();
+                    var month = ("0" + (today.getMonth() + 1)).slice(-2);
+                    var day = ("0" + today.getDate()).slice(-2);
+                
+                    var formattedDate = year + "-" + month + "-" + day;
+                
+                    document.getElementById("screeningDate").value = formattedDate;
+                </script>
+                
                 <div class="mb-3">
                     <label for="contactWithTB" style="font-size: 16px;">Apakah ada kontak satu rumah dengan pasien TBC?</label><br>
                     <input type="radio" id="contactYes" name="contactWithTB" value="yes" required>
@@ -72,10 +85,10 @@
         </div>
     </div>
 
-    <!-- Pertanyaan Skrining -->
+    <!-- Pertanyaan Screening -->
     <div class="card mb-4">
         <div class="card-body">
-            <h3 class="card-title" style="font-size: 16px;">Pertanyaan Skrining</h3>
+            <h3 class="card-title" style="font-size: 16px;">Pertanyaan Screening</h3>
 
             <!-- Pertanyaan Batuk -->
             <div class="mb-3">
@@ -146,7 +159,7 @@
         <div class="card-body">
             <h3 class="card-title">Kontak</h3>
             <div class="mb-3" style="font-size: 16px;">
-                Berikan informasi skrining ini kepada kontak erat terdekatmu
+                Berikan informasi Screening ini kepada kontak erat terdekatmu
             </div>            
             <div class="mb-3">
                 <label for="contact1Name" style="font-size: 16px;">Kontak 1</label><br>
@@ -167,7 +180,7 @@
     </div>
 
     <div class="d-grid gap-2 d-md-flex justify-content-md-end mt-4">
-        <button class="btn btn-danger me-md-2 mb-2 mb-md-0">Kirim</button>
+        <button class="btn btn-danger me-md-2 mb-2 mb-md-0">Kirim Data Screening</button>
     </div>
 </div>
 @endsection

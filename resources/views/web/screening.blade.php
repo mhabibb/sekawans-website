@@ -2,182 +2,84 @@
 
 @section('content')
 <div class="container py-5">
-    <!-- Pertanyaan 1 -->
+    <!-- Persetujuan Skrining -->
     <div class="card mb-4">
         <div class="card-body">
-            <h3 class="card-title">Apakah Anda merasa tidak enak badan?</h3>
-            <p class="card-text">Jawab dengan Ya atau Tidak.</p>
-
-            <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-                <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" name="question1" id="yes1" value="yes">
-                    <label class="form-check-label" for="yes1">Ya</label>
-                </div>
-                <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" name="question1" id="no1" value="no">
-                    <label class="form-check-label" for="no1">Tidak</label>
-                </div>
+            <h3 class="card-title">Persetujuan Skrining</h3>
+            <ol>
+                <li>Skrining ini digunakan untuk mendeteksi dini penyakit TB.</li>
+                <li>Adapun hasil rencana tindak lanjut skrining berupa Rekomendasi tempat Fasilitas Layanan kesehatan terdekat yang dapat melakukan skrining TB dan dibawah nanungan Dinas Kesehatan.</li>
+                <li>Data dalam formulir ini sangat dijaga privasinya dari pihak yang tidak memiliki wewenang.</li>
+                <li>Saya mengerti tujuan mengisi skrining ini, dan bersedia untuk melakukan investigasi kontak.</li>
+                <li>Saya bersedia mengisi semua data formulir skrining dengan sebenar-benarnya sesuai kondisi yang sedang saya alami.</li>
+            </ol>
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" value="" id="agreement">
+                <label class="form-check-label" for="agreement">Ya, saya menyetujui</label>
             </div>
         </div>
     </div>
 
-    <!-- Pertanyaan 2 -->
+    <!-- Identitas Diri -->
     <div class="card mb-4">
         <div class="card-body">
-            <h3 class="card-title">Apa agama Anda?</h3>
-            <p class="card-text">Pilih salah satu dari opsi berikut.</p>
-
-            <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-                <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" name="question2" id="islam" value="islam">
-                    <label class="form-check-label" for="islam">Islam</label>
+            <h3 class="card-title">Identitas Diri</h3>
+            <form>
+                <div class="mb-3">
+                    <label for="fullName" class="form-label">Nama Lengkap:</label>
+                    <input type="text" class="form-control" id="fullName">
                 </div>
-                <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" name="question2" id="kristen" value="kristen">
-                    <label class="form-check-label" for="kristen">Kristen</label>
+                <div class="mb-3">
+                    <label for="contact" class="form-label">Kontak:</label>
+                    <input type="tel" class="form-control" id="contact">
                 </div>
-                <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" name="question2" id="budha" value="budha">
-                    <label class="form-check-label" for="budha">Budha</label>
+                <div class="mb-3">
+                    <label for="gender" class="form-label">Jenis Kelamin:</label>
+                    <select class="form-select" id="gender">
+                        <option value="male">Laki-laki</option>
+                        <option value="female">Perempuan</option>
+                    </select>
                 </div>
-                <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" name="question2" id="konghucu" value="konghucu">
-                    <label class="form-check-label" for="konghucu">Anies</label>
+                <div class="mb-3">
+                    <label for="age" class="form-label">Umur:</label>
+                    <input type="number" class="form-control" id="age">
                 </div>
-            </div>
+                <div class="mb-3">
+                    <label for="district" class="form-label">Domisili Kecamatan:</label>
+                    <select class="form-select" id="district">
+                        <option value="Kaliwates">Kaliwates</option>
+                        <option value="Patrang">Patrang</option>
+                        <option value="Sumbersari">Sumbersari</option>
+                        <option value="Arjasa">Arjasa</option>
+                        <option value="Pakusari">Pakusari</option>
+                        <option value="Sukorambi">Sukorambi</option>
+                    </select>
+                </div>
+                <div class="mb-3">
+                    <label for="screeningDate" class="form-label">Tanggal Skrining:</label>
+                    <input type="date" class="form-control" id="screeningDate">
+                </div>
+            </form>
         </div>
     </div>
 
-    <!-- Pertanyaan 3 -->
+    <!-- Pertanyaan Skrining -->
     <div class="card mb-4">
         <div class="card-body">
-            <h3 class="card-title">Apakah Anda sering batuk lebih dari 2 minggu?</h3>
-            <p class="card-text">Jawab dengan Ya atau Tidak.</p>
-
-            <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-                <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" name="question3" id="yes3" value="yes">
-                    <label class="form-check-label" for="yes3">Ya</label>
-                </div>
-                <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" name="question3" id="no3" value="no">
-                    <label class="form-check-label" for="no3">Tidak</label>
-                </div>
-            </div>
+            <h3 class="card-title">Pertanyaan Skrining</h3>
+            <!-- Pertanyaan-pertanyaan skrining disini -->
         </div>
     </div>
 
-    <!-- Pertanyaan 4 -->
-    <div class="card mb-4">
-        <div class="card-body">
-            <h3 class="card-title">Apakah Anda mengalami penurunan berat badan yang signifikan?</h3>
-            <p class="card-text">Jawab dengan Ya atau Tidak.</p>
-
-            <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-                <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" name="question4" id="yes4" value="yes">
-                    <label class="form-check-label" for="yes4">Ya</label>
-                </div>
-                <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" name="question4" id="no4" value="no">
-                    <label class="form-check-label" for="no4">Tidak</label>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Pertanyaan 5 -->
-    <div class="card mb-4">
-        <div class="card-body">
-            <h3 class="card-title">Apakah Anda mengalami demam?</h3>
-            <p class="card-text">Jawab dengan Ya atau Tidak.</p>
-
-            <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-                <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" name="question5" id="yes5" value="yes">
-                    <label class="form-check-label" for="yes5">Ya</label>
-                </div>
-                <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" name="question5" id="no5" value="no">
-                    <label class="form-check-label" for="no5">Tidak</label>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Pertanyaan 6 -->
-    <div class="card mb-4">
-        <div class="card-body">
-            <h3 class="card-title">Apakah Anda memiliki riwayat kontak dengan penderita TBC?</h3>
-            <p class="card-text">Pilih salah satu dari opsi berikut.</p>
-
-            <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-                <select class="form-select" aria-label="Kontak dengan penderita TBC" name="question6">
-                    <option selected disabled>Pilih jawaban</option>
-                    <option value="yes">Ya</option>
-                    <option value="no">Tidak</option>
-                </select>
-            </div>
-        </div>
-    </div>
-
-    <!-- Pertanyaan 7 -->
-    <div class="card mb-4">
-        <div class="card-body">
-            <h3 class="card-title">Apakah Anda memiliki riwayat perjalanan ke daerah endemis TBC?</h3>
-            <p class="card-text">Pilih salah satu dari opsi berikut.</p>
-
-            <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-                <select class="form-select" aria-label="Perjalanan ke daerah endemis TBC" name="question7">
-                    <option selected disabled>Pilih jawaban</option>
-                    <option value="yes">Ya</option>
-                    <option value="no">Tidak</option>
-                </select>
-            </div>
-        </div>
-    </div>
-
-    <!-- Pertanyaan 8 -->
-    <div class="card mb-4">
-        <div class="card-body">
-            <h3 class="card-title">Apakah Anda memiliki riwayat pengobatan TBC sebelumnya?</h3>
-            <p class="card-text">Pilih salah satu dari opsi berikut.</p>
-
-            <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-                <select class="form-select" aria-label="Pengobatan TBC sebelumnya" name="question8">
-                    <option selected disabled>Pilih jawaban</option>
-                    <option value="yes">Ya</option>
-                    <option value="no">Tidak</option>
-                </select>
-            </div>
-        </div>
-    </div>
-
-    <!-- Pertanyaan 9 -->
-    <div class="card mb-4">
-        <div class="card-body">
-            <h3 class="card-title">Apakah Anda memiliki gejala lain yang ingin Anda ceritakan?</h3>
-            <p class="card-text">Silakan ketik gejala Anda di sini.</p>
-
-            <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-                <textarea class="form-control me-md-2 mb-2 mb-md-0" rows="3" name="question9"></textarea>
-            </div>
-        </div>
-    </div>
-
-    <!-- Pertanyaan 10 -->
+    <!-- Kontak -->
     <div class="card">
         <div class="card-body">
-            <h3 class="card-title">Apakah Anda memiliki pertanyaan tambahan?</h3>
-            <p class="card-text">Silakan tulis pertanyaan Anda di sini.</p>
-
-            <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-                <textarea class="form-control me-md-2 mb-2 mb-md-0" rows="3" name="question10"></textarea>
-            </div>
+            <h3 class="card-title">Kontak</h3>
+            <!-- Formulir kontak terdekat disini -->
         </div>
     </div>
 
-    <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+    <div class="d-grid gap-2 d-md-flex justify-content-md-end mt-4">
         <button class="btn btn-danger me-md-2 mb-2 mb-md-0">Kirim</button>
     </div>
 </div>
@@ -188,6 +90,7 @@
         border-radius: 15px;
         box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
         padding: 20px;
+        margin-bottom: 20px;
     }
 
     .card-title {
@@ -196,9 +99,13 @@
         margin-bottom: 10px;
     }
 
-    .card-text {
+    .card-body {
         font-size: 14px;
         line-height: 1.5;
+    }
+
+    .form-check-label {
+        margin-left: 10px;
     }
 
     .btn-danger {

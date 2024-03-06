@@ -1,7 +1,4 @@
-# Website Sekawan's TB Jember Nisaayu
-
-bismillahirrahmanirrahim...
-
+# Website Sekawan's TB Jember 
 
 Package tambahan yang digunakan yaitu:
 ```bash

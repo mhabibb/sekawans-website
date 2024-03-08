@@ -32,7 +32,8 @@ class Footer extends Component
             'artikel' => 'Artikel',
             'kegiatan' => 'Kegiatan',
             'screening' => 'Screening',
-            'dokumen' => 'Dokumen'
+            'dokumen' => 'Dokumen',
+            'fasyankes' => 'Fasyankes'
         );
 
         $socials = StaticElement::where('id', '>', 3)->get();

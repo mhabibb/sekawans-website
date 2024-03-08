@@ -39,9 +39,10 @@
                         </a>
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                             <li><a class="dropdown-item" href="{{ route('artikel') }}">Artikel</a></li>
+                            <li><a class="dropdown-item" href="{{ route('dokumen') }}">Dokumen</a></li>
+                            <li><a class="dropdown-item" href="{{ route('fasyankes') }}">Fasilitas Kesehatan</a></li>
                             <li><a class="dropdown-item" href="{{ route('kegiatan') }}">Kegiatan</a></li>
                             <li><a class="dropdown-item" href="{{ route('screening') }}">Screening</a></li>
-                            <li><a class="dropdown-item" href="{{ route('dokumen') }}">Dokumen</a></li>
                         </ul>
                     </li>
                 </ul>

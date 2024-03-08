@@ -96,6 +96,11 @@ class WebController extends Controller
     {
         return view('web.dokumen');
     }
+
+    public function fasyankes()
+    {
+        return view('web.fasyankes');
+    }
     
     public function liveSearch(Request $request)
     {

@@ -8,6 +8,7 @@ use App\Http\Controllers\LogController;
 use App\Http\Controllers\WebController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\SatelliteWorkerController;
+use App\Http\Controllers\ScreeningController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 
@@ -94,4 +95,8 @@ Route::controller(WebController::class)->group(function () {
     Route::get('search', 'liveSearch')->name('search');
     Route::get('/screening', 'screening')->name('screening');
     Route::get('/dokumen', 'dokumen')->name('dokumen');
+    Route::get('/fasyankes', 'fasyankes')->name('fasyankes');
 });
+
+//Route::post('/screening', 'ScreeningController@store')->name('screening.store');
+Route::post('/screenings/store', [ScreeningController::class, 'store'])->name('screenings.store');

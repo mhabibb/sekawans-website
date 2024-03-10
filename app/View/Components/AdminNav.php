@@ -24,7 +24,7 @@ class AdminNav extends Component
      */
     public function render()
     {
-        $navLinks = array(
+        $navLinks = [
             'admin.dashboard' => ['Dashboard', 'fas fa-tachometer-alt'],
             'admin.sekawans' => ['Tentang', 'fas fa-users'],
             'admin.infotbc' => ['Informasi TBC', 'fas fa-circle-info'],
@@ -32,7 +32,8 @@ class AdminNav extends Component
             'admin.fasyankes' => ['Fasyankes', 'fas fa-notes-medical'],
             'admin.articles' => ['Artikel', 'fas fa-newspaper'],
             'admin.kegiatan' => ['Kegiatan', 'fas fa-square-person-confined'],
-        );
+            'admin.dokumen' => ['Dokumen', 'fas fa-file'],
+        ];
 
         return view('components.admin-nav', compact('navLinks'));
     }

@@ -5,13 +5,11 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Document extends Model
+class Dokumen extends Model
 {
     use HasFactory;
 
     protected $fillable = [
-        'judul',
-        'keterangan',
-        'link',
+        'judul', 'keterangan', 'file',
     ];
 }

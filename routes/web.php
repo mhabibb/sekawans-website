@@ -9,6 +9,7 @@ use App\Http\Controllers\WebController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\SatelliteWorkerController;
 use App\Http\Controllers\ScreeningController;
+use App\Http\Controllers\DokumenController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 
@@ -17,8 +18,8 @@ use Illuminate\Support\Facades\Auth;
 | Web Routes
 |--------------------------------------------------------------------------
 |
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
+| Here is where you can register web routes for your application.
+| These routes are loaded by the RouteServiceProvider within a group which
 | contains the "web" middleware group. Now create something great!
 |
 */
@@ -30,7 +31,7 @@ Auth::routes([
     'verify'   => false,
 ]);
 
-Route::middleware('auth')->prefix('admin')->name('admin.')->group(function () {
+Route::middleware(['auth', 'web'])->prefix('admin')->name('admin.')->group(function () {
     Route::get('/', [DashboardController::class, 'index'])->name('dashboard.index');
     Route::resource('/users', UserController::class)->except('edit');
     Route::post('/users/first', [UserController::class, 'firstLogin'])->name('users.firstLogin');
@@ -78,25 +79,34 @@ Route::middleware('auth')->prefix('admin')->name('admin.')->group(function () {
         Route::put('/restore/{article}', 'restore')->name('articles.restore')->withTrashed();
         Route::delete('/force/{article}', 'forceDelete')->name('articles.forceDelete')->withTrashed();
     });
+
+    // Rute untuk mengelola dokumen
+    Route::resource('/dokumen', DokumenController::class);
 });
 
-Route::controller(WebController::class)->group(function () {
-    Route::get('/', 'index')->name('beranda');
-    Route::get('/tentang', 'about')->name('tentang');
-    Route::get('/struktur', 'structur')->name('struktur');
-    Route::get('/info-tbc', 'article')->name('infotbc');
-    Route::get('/info-tbc/{article}', 'showArticle')->name('infotbc.show');
-    Route::get('/kasus-tbc', 'case')->name('kasustbc');
-    Route::get('/kasus-tbc/{regency}', 'showCase')->name('kasustbc.show');
-    Route::get('/artikel', 'article')->name('artikel');
-    Route::get('/artikel/{article}', 'showArticle')->name('artikel.show');
-    Route::get('/kegiatan', 'article')->name('kegiatan');
-    Route::get('/kegiatan/{article}', 'showArticle')->name('kegiatan.show');
-    Route::get('search', 'liveSearch')->name('search');
-    Route::get('/screening', 'screening')->name('screening');
-    Route::get('/dokumen', 'dokumen')->name('dokumen');
-    Route::get('/fasyankes', 'fasyankes')->name('fasyankes');
+Route::group(['middleware' => 'web'], function () {
+    Route::get('/', [WebController::class, 'index'])->name('beranda');
+    Route::get('/tentang', [WebController::class, 'about'])->name('tentang');
+    Route::get('/struktur', [WebController::class, 'structur'])->name('struktur');
+    Route::get('/info-tbc', [WebController::class, 'article'])->name('infotbc');
+    Route::get('/info-tbc/{article}', [WebController::class, 'showArticle'])->name('infotbc.show');
+    Route::get('/kasus-tbc', [WebController::class, 'case'])->name('kasustbc');
+    Route::get('/kasus-tbc/{regency}', [WebController::class, 'showCase'])->name('kasustbc.show');
+    Route::get('/artikel', [WebController::class, 'article'])->name('artikel');
+    Route::get('/artikel/{article}', [WebController::class, 'showArticle'])->name('artikel.show');
+    Route::get('/kegiatan', [WebController::class, 'article'])->name('kegiatan');
+    Route::get('/kegiatan/{article}', [WebController::class, 'showArticle'])->name('kegiatan.show');
+    Route::get('search', [WebController::class, 'liveSearch'])->name('search');
+    Route::get('/screening', [WebController::class, 'screening'])->name('screening');
+    Route::get('/dokumen', [WebController::class, 'dokumen'])->name('dokumen');
+    Route::get('/fasyankes', [WebController::class, 'fasyankes'])->name('fasyankes');
 });
 
-//Route::post('/screening', 'ScreeningController@store')->name('screening.store');
+// Definisi route untuk menyimpan data dokumen
+Route::post('/dokumens/store', [DokumenController::class, 'store'])->name('dokumens.store');
+
+// Definisi route untuk menyimpan data screening
 Route::post('/screenings/store', [ScreeningController::class, 'store'])->name('screenings.store');
+
+// Definisi route untuk halaman index dokumen
+Route::get('/dokumens', [DokumenController::class, 'index'])->name('dokumens.index');

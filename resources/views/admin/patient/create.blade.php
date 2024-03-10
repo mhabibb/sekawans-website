@@ -373,6 +373,71 @@
           </div>
         </div>
 
+        <!-- Tambahkan kontainer untuk inputan pertemuan -->
+        <div id="meetingContainer"></div>
+
+        <!-- Tambah bagian "Tambah Pertemuan" -->
+        <div class="row mb-4">
+          <div class="col-12 card-title">
+              <h5>Tambah Pertemuan</h5>
+          </div>
+          <div class="col-sm-12">
+              <button type="button" class="btn btn-success mb-2" id="addMeeting">Tambah Pertemuan</button>
+          </div>
+        </div>
+
+        <!-- Tambah pertanyaan-pertanyaan untuk setiap pertemuan -->
+        <div id="questionContainer" class="d-none">
+          <div class="row mb-2">
+              <div class="col-sm-12">
+                  <label class="meeting-number"></label>
+              </div>
+              <div class="col-sm-6 form-group">
+                  <label for="meeting_date">Hari/Tanggal</label>
+                  <input type="date" name="meeting_date" class="form-control" id="meeting_date" required>
+              </div>
+              <div class="col-sm-6 form-group">
+                  <label for="status_ro">Status TB RO</label>
+                  <select name="status_ro" class="form-control" id="status_ro" required onchange="toggleOtherInput(this)">
+                      <option value="">Pilih Status</option>
+                      <option value="1">Baru Mulai Pengobatan</option>
+                      <option value="2">Tahap Awal (masih disuntik)</option>
+                      <option value="3">Tahap Lanjutan</option>
+                      <option value="4">Lainnya</option>
+                  </select>
+                  <input type="text" name="status_ro_other" class="form-control d-none" id="status_ro_other" placeholder="Masukkan jawaban lainnya">
+              </div>
+              <div class="col-sm-6 form-group">
+                  <label for="contact_method">Kontak Melalui</label>
+                  <select name="contact_method" class="form-control" id="contact_method" required>
+                      <option value="">Pilih Metode Kontak</option>
+                      <option value="1">Telepon/SMS/dll</option>
+                      <option value="2">Kunjungan RS</option>
+                      <option value="3">Kunjungan PKM</option>
+                      <option value="4">Kunjungan Rumah</option>
+                  </select>
+              </div>
+              <div class="col-sm-6 form-group">
+                  <label for="contact_reason">Alasan Kontak</label>
+                  <select name="contact_reason" class="form-control" id="contact_reason" required>
+                      <option value="">Pilih Alasan Kontak</option>
+                      <option value="1">Belum mau memulai pengobatan</option>
+                      <option value="2">Mangkir</option>
+                      <option value="3">Keluhan Efek Samping Obat</option>
+                      <option value="4">Putus Berobat (≥ 2 bulan)</option>
+                      <option value="5">Edukasi dan motivasi</option>
+                  </select>
+              </div>
+              <div class="col-sm-12 form-group text-left">
+                  <label for="kki_given">KIE yang diberikan</label>
+                  <input type="text" name="kki_given" class="form-control" id="kki_given">
+              </div>
+              <div class="col-sm-12">
+                  <button type="button" class="btn btn-danger btn-sm float-right" onclick="removeMeeting(1)">Hapus Pertemuan</button>
+              </div>
+          </div>
+        </div>
+
         <div class="col-12">
           <button type="reset" onclick="history.back()" class="btn btn-secondary">Batalkan</button>
           <button type="submit" class="btn btn-primary">Submit</button>
@@ -433,5 +498,50 @@
         document.querySelector('.select2-search__field').focus();
     });
 });
+</script>
+
+<script>
+  $(document).ready(function() {
+      // Fungsi untuk menambahkan inputan pertemuan
+      $('#addMeeting').click(function() {
+          var meetingCount = $('#meetingContainer').children().length + 1;
+          var meetingInput = $('#questionContainer').clone().removeClass('d-none').attr('id', 'question_' + meetingCount);
+          meetingInput.find('.meeting-number').text('Pertemuan ke-' + meetingCount );
+          meetingInput.find('input, select').each(function() {
+              $(this).attr('name', $(this).attr('name').replace('meeting_date', 'meeting[' + meetingCount + '][date]'));
+          });
+          meetingInput.find('button').attr('onclick', 'removeMeeting(' + meetingCount + ')');
+          $('#meetingContainer').append(meetingInput);
+      });
+  });
+
+  // Fungsi untuk menampilkan/menyembunyikan input tambahan untuk jawaban Lainnya
+  function toggleOtherInput(select) {
+      var otherInput = $(select).parent().find('input[name="status_ro_other"]');
+      if (select.value == '4') {
+          otherInput.removeClass('d-none');
+      } else {
+          otherInput.addClass('d-none').val('');
+      }
+  }
+
+  // Fungsi untuk menghapus inputan pertemuan
+  window.removeMeeting = function(meetingCount) {
+      $('#question_' + meetingCount).remove();
+  };
+
+  // Validasi form saat dikirim
+  $('form').submit(function() {
+      var meetingDates = [];
+      $('input[name^="meeting["]').each(function() {
+          var date = $(this).val();
+          if (meetingDates.includes(date)) {
+              alert('Tanggal pertemuan harus unik.');
+              return false;
+          }
+          meetingDates.push(date);
+      });
+      return true;
+  });
 </script>
 @endsection

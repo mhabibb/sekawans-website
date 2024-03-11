@@ -396,6 +396,13 @@
                     <label for="meeting_date">Hari/Tanggal</label>
                     <input type="date" name="meeting_date" class="form-control" id="meeting_date" required>
                 </div>
+
+                <script>
+                  var today = new Date();
+                  var formattedDate = today.toISOString().substr(0, 10);
+                  document.getElementById('meeting_date').value = formattedDate;
+              </script>
+
                 <div class="col-sm-6 form-group">
                   <label for="status_ro">Status TB RO</label>
                   <select name="status_ro" class="form-control" id="status_ro" required onchange="toggleStatusOtherInput(this, 'status_ro_other')">

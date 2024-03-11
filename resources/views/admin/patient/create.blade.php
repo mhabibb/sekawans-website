@@ -378,27 +378,27 @@
 
         <!-- Tambah bagian "Tambah Pertemuan" -->
         <div class="row mb-4">
-          <div class="col-12 card-title">
-              <h5>Tambah Pertemuan</h5>
-          </div>
-          <div class="col-sm-12">
-              <button type="button" class="btn btn-success mb-2" id="addMeeting">Tambah Pertemuan</button>
-          </div>
+            <div class="col-12 card-title">
+                <h5>Tambah Pertemuan</h5>
+            </div>
+            <div class="col-sm-12">
+                <button type="button" class="btn btn-success mb-2" id="addMeeting">Tambah Pertemuan</button>
+            </div>
         </div>
-
+        
         <!-- Tambah pertanyaan-pertanyaan untuk setiap pertemuan -->
         <div id="questionContainer" class="d-none">
-          <div class="row mb-2">
-              <div class="col-sm-12">
-                  <label class="meeting-number"></label>
-              </div>
-              <div class="col-sm-6 form-group">
-                  <label for="meeting_date">Hari/Tanggal</label>
-                  <input type="date" name="meeting_date" class="form-control" id="meeting_date" required>
-              </div>
-              <div class="col-sm-6 form-group">
+            <div class="row mb-2">
+                <div class="col-sm-12">
+                    <label class="meeting-number"></label>
+                </div>
+                <div class="col-sm-6 form-group">
+                    <label for="meeting_date">Hari/Tanggal</label>
+                    <input type="date" name="meeting_date" class="form-control" id="meeting_date" required>
+                </div>
+                <div class="col-sm-6 form-group">
                   <label for="status_ro">Status TB RO</label>
-                  <select name="status_ro" class="form-control" id="status_ro" required onchange="toggleOtherInput(this)">
+                  <select name="status_ro" class="form-control" id="status_ro" required onchange="toggleStatusOtherInput(this, 'status_ro_other')">
                       <option value="">Pilih Status</option>
                       <option value="1">Baru Mulai Pengobatan</option>
                       <option value="2">Tahap Awal (masih disuntik)</option>
@@ -407,37 +407,109 @@
                   </select>
                   <input type="text" name="status_ro_other" class="form-control d-none" id="status_ro_other" placeholder="Masukkan jawaban lainnya">
               </div>
-              <div class="col-sm-6 form-group">
-                  <label for="contact_method">Kontak Melalui</label>
-                  <select name="contact_method" class="form-control" id="contact_method" required>
-                      <option value="">Pilih Metode Kontak</option>
-                      <option value="1">Telepon/SMS/dll</option>
-                      <option value="2">Kunjungan RS</option>
-                      <option value="3">Kunjungan PKM</option>
-                      <option value="4">Kunjungan Rumah</option>
+                <div class="col-sm-6 form-group">
+                    <label for="contact_method">Kontak Melalui</label>
+                    <select name="contact_method" class="form-control" id="contact_method" required>
+                        <option value="">Pilih Metode Kontak</option>
+                        <option value="1">Telepon/SMS/dll</option>
+                        <option value="2">Kunjungan RS</option>
+                        <option value="3">Kunjungan PKM</option>
+                        <option value="4">Kunjungan Rumah</option>
+                    </select>
+                </div>
+                <div class="col-sm-6 form-group">
+                    <label for="contact_reason">Alasan Kontak</label>
+                    <select name="contact_reason" class="form-control" id="contact_reason" required>
+                        <option value="">Pilih Alasan Kontak</option>
+                        <option value="1">Belum mau memulai pengobatan</option>
+                        <option value="2">Mangkir</option>
+                        <option value="3">Keluhan Efek Samping Obat</option>
+                        <option value="4">Putus Berobat (≥ 2 bulan)</option>
+                        <option value="5">Edukasi dan motivasi</option>
+                    </select>
+                </div>
+                <div class="col-sm-12 form-group">
+                    <label for="kie_given">KIE yang diberikan</label>
+                    <input type="text" name="kie_given" class="form-control" id="kie_given">
+                </div>
+        
+                <!-- Section Penilaian Kondisi Kesehatan -->
+                <div class="col-sm-12">
+                    <h5>Penilaian Kondisi Kesehatan</h5>
+                </div>
+                <div class="col-sm-6 form-group">
+                    <label for="berat_badan">A. Berat Badan Terakhir Ditimbang (kg)</label>
+                    <input type="number" name="berat_badan" class="form-control" id="berat_badan">
+                </div>
+                <div class="col-sm-6 form-group">
+                    <label for="kondisi_mental">B. Kondisi Mental</label>
+                    <select name="kondisi_mental" class="form-control" id="kondisi_mental">
+                        <option value="">Pilih Kondisi Mental</option>
+                        <option value="1">Terbuka</option>
+                        <option value="2">Tertutup</option>
+                        <option value="3">Semangat</option>
+                        <option value="4">Putus Asa</option>
+                    </select>
+                </div>
+                <div class="col-sm-6 form-group">
+                  <label for="efek_samping_obat">C. Efek Samping Obat yang Timbul</label>
+                  <select name="efek_samping_obat" class="form-control" id="efek_samping_obat" onchange="toggleSideEffectOtherInput(this, 'efek_samping_obat_other')">
+                      <option value="">Pilih Efek Samping Obat</option>
+                      <option value="1">Gangguan sal.cerna</option>
+                      <option value="2">Gangguan Otot&sendi</option>
+                      <option value="3">Gangguan Penglihatan</option>
+                      <option value="4">Gangguan Pendengaran</option>
+                      <option value="5">Gangguan Perilaku</option>
+                      <option value="6">Gangguan Kejiwaan</option>
+                      <option value="7">Lainnya</option>
                   </select>
-              </div>
-              <div class="col-sm-6 form-group">
-                  <label for="contact_reason">Alasan Kontak</label>
-                  <select name="contact_reason" class="form-control" id="contact_reason" required>
-                      <option value="">Pilih Alasan Kontak</option>
-                      <option value="1">Belum mau memulai pengobatan</option>
-                      <option value="2">Mangkir</option>
-                      <option value="3">Keluhan Efek Samping Obat</option>
-                      <option value="4">Putus Berobat (≥ 2 bulan)</option>
-                      <option value="5">Edukasi dan motivasi</option>
+                  <input type="text" name="efek_samping_obat_other" class="form-control d-none" id="efek_samping_obat_other" placeholder="Masukkan jawaban lainnya">
+                  </div>      
+                  <div class="col-sm-6 form-group">
+                    <label for="persepsi_pasien">D. Persepsi Pasien Terhadap Efek Samping Obat yang Dihadapi</label>
+                    <select name="persepsi_pasien" class="form-control" id="persepsi_pasien" onchange="togglePerceptionOtherInput(this, 'persepsi_pasien_other')">
+                        <option value="">Pilih Persepsi Pasien</option>
+                        <option value="1">Efek Samping Obat</option>
+                        <option value="2">Malpraktek</option>
+                        <option value="3">Lainnya</option>
+                    </select>
+                    <input type="text" name="persepsi_pasien_other" class="form-control d-none" id="persepsi_pasien_other" placeholder="Masukkan jawaban lainnya">
+                </div>            
+                <div class="col-sm-6 form-group">
+                    <label for="penyakit_penyerta">E. Penyakit Penyerta/Lain yang Timbul</label>
+                    <select name="penyakit_penyerta" class="form-control" id="penyakit_penyerta">
+                        <option value="">Pilih Penyakit Penyerta</option>
+                        <option value="1">Tidak Ada</option>
+                        <option value="2">Ada</option>
+                    </select>
+                </div>
+                <div class="col-sm-6 form-group">
+                  <label for="bantuan_sosial">F. Bantuan Sosial</label>
+                  <select name="bantuan_sosial" class="form-control" id="bantuan_sosial" onchange="toggleSocialAssistanceOtherInput(this, 'bantuan_sosial_other')">
+                      <option value="">Pilih Bantuan Sosial</option>
+                      <option value="1">Nutrisi</option>
+                      <option value="2">Transportasi</option>
+                      <option value="3">Lainnya</option>
                   </select>
-              </div>
-              <div class="col-sm-12 form-group text-left">
-                  <label for="kki_given">KIE yang diberikan</label>
-                  <input type="text" name="kki_given" class="form-control" id="kki_given">
-              </div>
+                  <input type="text" name="bantuan_sosial_other" class="form-control d-none" id="bantuan_sosial_other" placeholder="Masukkan jawaban lainnya">
+                </div>        
+                <div class="col-sm-6 form-group">
+                    <label for="hasil_pendampingan">G. Hasil Pendampingan</label>
+                    <select name="hasil_pendampingan" class="form-control" id="hasil_pendampingan">
+                        <option value="">Pilih Hasil Pendampingan</option>
+                        <option value="1">Pendampingan sesuai rencana</option>
+                        <option value="2">Rujuk ke fasyankes</option>
+                        <option value="3">Selesai Pengobatan</option>
+                    </select>
+                </div>
+            </div>
+            <div class="row">
               <div class="col-sm-12">
                   <button type="button" class="btn btn-danger btn-sm float-right" onclick="removeMeeting(1)">Hapus Pertemuan</button>
               </div>
-          </div>
-        </div>
-
+          </div>      
+        </div>        
+    
         <div class="col-12">
           <button type="reset" onclick="history.back()" class="btn btn-secondary">Batalkan</button>
           <button type="submit" class="btn btn-primary">Submit</button>
@@ -514,17 +586,47 @@
           $('#meetingContainer').append(meetingInput);
       });
   });
-
-  // Fungsi untuk menampilkan/menyembunyikan input tambahan untuk jawaban Lainnya
-  function toggleOtherInput(select) {
-      var otherInput = $(select).parent().find('input[name="status_ro_other"]');
-      if (select.value == '4') {
-          otherInput.removeClass('d-none');
+  
+  function toggleStatusOtherInput(selectElement, inputId) {
+      var otherInput = document.getElementById(inputId);
+      if (selectElement.value === '4') {
+          otherInput.classList.remove('d-none');
       } else {
-          otherInput.addClass('d-none').val('');
+          otherInput.classList.add('d-none');
+          otherInput.value = ''; // Clear the input value when not selected
       }
   }
 
+  function toggleSideEffectOtherInput(selectElement, inputId) {
+      var otherInput = document.getElementById(inputId);
+      if (selectElement.value === '7') {
+          otherInput.classList.remove('d-none');
+      } else {
+          otherInput.classList.add('d-none');
+          otherInput.value = ''; // Clear the input value when not selected
+      }
+  }
+
+  function togglePerceptionOtherInput(selectElement, inputId) {
+      var otherInput = document.getElementById(inputId);
+      if (selectElement.value === '3') {
+          otherInput.classList.remove('d-none');
+      } else {
+          otherInput.classList.add('d-none');
+          otherInput.value = ''; // Clear the input value when not selected
+      }
+  }
+
+  function toggleSocialAssistanceOtherInput(selectElement, inputId) {
+      var otherInput = document.getElementById(inputId);
+      if (selectElement.value === '3') {
+          otherInput.classList.remove('d-none');
+      } else {
+          otherInput.classList.add('d-none');
+          otherInput.value = ''; // Clear the input value when not selected
+      }
+  }
+  
   // Fungsi untuk menghapus inputan pertemuan
   window.removeMeeting = function(meetingCount) {
       $('#question_' + meetingCount).remove();

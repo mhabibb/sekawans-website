@@ -393,7 +393,7 @@
                     <label class="meeting-number"></label>
                 </div>
                 <div class="col-sm-6 form-group">
-                    <label for="meeting_date">Hari/Tanggal</label>
+                    <label for="meeting_date">Tanggal</label>
                     <input type="date" name="meeting_date" class="form-control" id="meeting_date" required>
                 </div>
 

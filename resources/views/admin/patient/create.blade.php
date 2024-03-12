@@ -401,19 +401,19 @@
                   var today = new Date();
                   var formattedDate = today.toISOString().substr(0, 10);
                   document.getElementById('meeting_date').value = formattedDate;
-              </script>
+                </script>
 
                 <div class="col-sm-6 form-group">
                   <label for="status_ro">Status TB RO</label>
                   <select name="status_ro" class="form-control" id="status_ro" required onchange="toggleStatusOtherInput(this, 'status_ro_other')">
                       <option value="">Pilih Status</option>
-                      <option value="1">Baru Mulai Pengobatan</option>
-                      <option value="2">Tahap Awal (masih disuntik)</option>
-                      <option value="3">Tahap Lanjutan</option>
-                      <option value="4">Lainnya</option>
+                      <option value="1">Lainnya</option>
+                      <option value="2">Baru Mulai Pengobatan</option>
+                      <option value="3">Tahap Awal (masih disuntik)</option>
+                      <option value="4">Tahap Lanjutan</option>
                   </select>
                   <input type="text" name="status_ro_other" class="form-control d-none" id="status_ro_other" placeholder="Masukkan jawaban lainnya">
-              </div>
+                </div>
                 <div class="col-sm-6 form-group">
                     <label for="contact_method">Kontak Melalui</label>
                     <select name="contact_method" class="form-control" id="contact_method" required>
@@ -460,25 +460,25 @@
                 </div>
                 <div class="col-sm-6 form-group">
                   <label for="efek_samping_obat">C. Efek Samping Obat yang Timbul</label>
-                  <select name="efek_samping_obat" class="form-control" id="efek_samping_obat" onchange="toggleSideEffectOtherInput(this, 'efek_samping_obat_other')">
+                  <select name="efek_samping_obat" class="form-control" id="efek_samping_obat" onchange="toggleStatusOtherInput(this, 'efek_samping_obat_other')">
                       <option value="">Pilih Efek Samping Obat</option>
-                      <option value="1">Gangguan sal.cerna</option>
-                      <option value="2">Gangguan Otot&sendi</option>
-                      <option value="3">Gangguan Penglihatan</option>
-                      <option value="4">Gangguan Pendengaran</option>
-                      <option value="5">Gangguan Perilaku</option>
-                      <option value="6">Gangguan Kejiwaan</option>
-                      <option value="7">Lainnya</option>
+                      <option value="1">Lainnya</option>
+                      <option value="2">Gangguan sal.cerna</option>
+                      <option value="3">Gangguan Otot&sendi</option>
+                      <option value="4">Gangguan Penglihatan</option>
+                      <option value="5">Gangguan Pendengaran</option>
+                      <option value="6">Gangguan Perilaku</option>
+                      <option value="7">Gangguan Kejiwaan</option>
                   </select>
                   <input type="text" name="efek_samping_obat_other" class="form-control d-none" id="efek_samping_obat_other" placeholder="Masukkan jawaban lainnya">
                   </div>      
                   <div class="col-sm-6 form-group">
                     <label for="persepsi_pasien">D. Persepsi Pasien Terhadap Efek Samping Obat yang Dihadapi</label>
-                    <select name="persepsi_pasien" class="form-control" id="persepsi_pasien" onchange="togglePerceptionOtherInput(this, 'persepsi_pasien_other')">
+                    <select name="persepsi_pasien" class="form-control" id="persepsi_pasien" onchange="toggleStatusOtherInput(this, 'persepsi_pasien_other')">
                         <option value="">Pilih Persepsi Pasien</option>
-                        <option value="1">Efek Samping Obat</option>
-                        <option value="2">Malpraktek</option>
-                        <option value="3">Lainnya</option>
+                        <option value="1">Lainnya</option>
+                        <option value="2">Efek Samping Obat</option>
+                        <option value="3">Malpraktek</option>
                     </select>
                     <input type="text" name="persepsi_pasien_other" class="form-control d-none" id="persepsi_pasien_other" placeholder="Masukkan jawaban lainnya">
                 </div>            
@@ -492,11 +492,11 @@
                 </div>
                 <div class="col-sm-6 form-group">
                   <label for="bantuan_sosial">F. Bantuan Sosial</label>
-                  <select name="bantuan_sosial" class="form-control" id="bantuan_sosial" onchange="toggleSocialAssistanceOtherInput(this, 'bantuan_sosial_other')">
+                  <select name="bantuan_sosial" class="form-control" id="bantuan_sosial" onchange="toggleStatusOtherInput(this, 'bantuan_sosial_other')">
                       <option value="">Pilih Bantuan Sosial</option>
-                      <option value="1">Nutrisi</option>
-                      <option value="2">Transportasi</option>
-                      <option value="3">Lainnya</option>
+                      <option value="1">Lainnya</option>
+                      <option value="2">Nutrisi</option>
+                      <option value="3">Transportasi</option>
                   </select>
                   <input type="text" name="bantuan_sosial_other" class="form-control d-none" id="bantuan_sosial_other" placeholder="Masukkan jawaban lainnya">
                 </div>        
@@ -575,82 +575,37 @@
     // Auto focus search select2
     $(document).on('select2:open', () => {
         document.querySelector('.select2-search__field').focus();
+      });
     });
+
+    $(document).ready(function() {
+    $('#addMeeting').click(function() {
+        var meetingCount = $('#meetingContainer').children().length + 1;
+        var meetingInput = $('#questionContainer').clone().removeClass('d-none').attr('id', 'question_' + meetingCount);
+        meetingInput.find('.meeting-number').text('Pertemuan ke-' + meetingCount);
+        meetingInput.find('input, select').each(function() {
+            var newName = $(this).attr('name').replace('meeting_date', 'meeting[' + meetingCount + '][date]');
+            $(this).attr('name', newName);
+            if ($(this).is('select')) {
+                $(this).attr('onchange', 'toggleStatusOtherInput(this, "' + newName + '_other")');
+            }
+        });
+        meetingInput.find('button').attr('onclick', 'removeMeeting(' + meetingCount + ')');
+        $('#meetingContainer').append(meetingInput);
+    });
+
+    window.removeMeeting = function(meetingCount) {
+        $('#question_' + meetingCount).remove();
+    };
+
+    window.toggleStatusOtherInput = function(selectElement, otherInputName) {
+        var otherInput = $('input[name="' + otherInputName + '"]');
+        if (selectElement.value === '1') {
+            otherInput.removeClass('d-none');
+        } else {
+            otherInput.addClass('d-none');
+        }
+    };
 });
-</script>
-
-<script>
-  $(document).ready(function() {
-      // Fungsi untuk menambahkan inputan pertemuan
-      $('#addMeeting').click(function() {
-          var meetingCount = $('#meetingContainer').children().length + 1;
-          var meetingInput = $('#questionContainer').clone().removeClass('d-none').attr('id', 'question_' + meetingCount);
-          meetingInput.find('.meeting-number').text('Pertemuan ke-' + meetingCount );
-          meetingInput.find('input, select').each(function() {
-              $(this).attr('name', $(this).attr('name').replace('meeting_date', 'meeting[' + meetingCount + '][date]'));
-          });
-          meetingInput.find('button').attr('onclick', 'removeMeeting(' + meetingCount + ')');
-          $('#meetingContainer').append(meetingInput);
-      });
-  });
-  
-  function toggleStatusOtherInput(selectElement, inputId) {
-      var otherInput = document.getElementById(inputId);
-      if (selectElement.value === '4') {
-          otherInput.classList.remove('d-none');
-      } else {
-          otherInput.classList.add('d-none');
-          otherInput.value = ''; // Clear the input value when not selected
-      }
-  }
-
-  function toggleSideEffectOtherInput(selectElement, inputId) {
-      var otherInput = document.getElementById(inputId);
-      if (selectElement.value === '7') {
-          otherInput.classList.remove('d-none');
-      } else {
-          otherInput.classList.add('d-none');
-          otherInput.value = ''; // Clear the input value when not selected
-      }
-  }
-
-  function togglePerceptionOtherInput(selectElement, inputId) {
-      var otherInput = document.getElementById(inputId);
-      if (selectElement.value === '3') {
-          otherInput.classList.remove('d-none');
-      } else {
-          otherInput.classList.add('d-none');
-          otherInput.value = ''; // Clear the input value when not selected
-      }
-  }
-
-  function toggleSocialAssistanceOtherInput(selectElement, inputId) {
-      var otherInput = document.getElementById(inputId);
-      if (selectElement.value === '3') {
-          otherInput.classList.remove('d-none');
-      } else {
-          otherInput.classList.add('d-none');
-          otherInput.value = ''; // Clear the input value when not selected
-      }
-  }
-  
-  // Fungsi untuk menghapus inputan pertemuan
-  window.removeMeeting = function(meetingCount) {
-      $('#question_' + meetingCount).remove();
-  };
-
-  // Validasi form saat dikirim
-  $('form').submit(function() {
-      var meetingDates = [];
-      $('input[name^="meeting["]').each(function() {
-          var date = $(this).val();
-          if (meetingDates.includes(date)) {
-              alert('Tanggal pertemuan harus unik.');
-              return false;
-          }
-          meetingDates.push(date);
-      });
-      return true;
-  });
 </script>
 @endsection

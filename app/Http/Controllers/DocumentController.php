@@ -25,7 +25,7 @@ class DocumentController extends Controller
             'judul' => 'required',
             'kategori' => 'required',
             'deskripsi' => 'required',
-            'file' => 'required|mimes:pdf,doc,docx|max:2048', // Validasi file
+            'file' => 'required|mimes:pdf,doc,docx|max:2048', 
         ]);
 
         $file = $request->file('file');

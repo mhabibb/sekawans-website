@@ -32,6 +32,7 @@ class CreateScreeningsTable extends Migration
             $table->string('contact2_number');
             $table->string('contact3_name');
             $table->string('contact3_number');
+            $table->boolean('is_positive')->default(false);
             $table->timestamps();
         });
     }

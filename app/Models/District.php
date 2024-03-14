@@ -29,4 +29,9 @@ class District extends Model
     {
         return $this->hasmanyThrough(PatientDetail::class, Patient::class);
     }
+
+    public function satelliteHealthFacility()
+    {
+        return $this->hasMany(SatelliteHealthFacility::class);
+    }
 }

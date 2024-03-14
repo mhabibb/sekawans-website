@@ -28,6 +28,7 @@ class DatabaseSeeder extends Seeder
             PatientStatusSeeder::class,
             DistrictSeeder::class,
             StaticElementSeeder::class,
+            SatelliteHealthFacilitySeeder::class,
         ]);
 
         \App\Models\User::factory()->create([
@@ -49,7 +50,7 @@ class DatabaseSeeder extends Seeder
         \App\Models\EmergencyContact::factory($this->patient)->create();
         \App\Models\Patient::factory($this->patient)->create();
         \App\Models\Worker::factory($this->worker)->create();
-        \App\Models\SatelliteHealthFacility::factory($this->satellite)->create();
+        // \App\Models\SatelliteHealthFacility::factory($this->satellite)->create();
         \App\Models\PatientDetail::factory($this->patient)->create();
     }
 }

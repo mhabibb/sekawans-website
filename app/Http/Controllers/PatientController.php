@@ -7,12 +7,15 @@ use App\Http\Requests\StorePatientRequest;
 use App\Http\Requests\UpdatePatientRequest;
 use App\Models\Education;
 use App\Models\EmergencyContact;
+use App\Models\Meeting;
 use App\Models\PatientDetail;
 use App\Models\PatientStatus;
 use App\Models\Regency;
 use App\Models\Religion;
 use App\Models\SatelliteHealthFacility;
 use App\Models\Worker;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Spatie\Activitylog\Facades\LogBatch;
 use Spatie\Activitylog\Models\Activity;
 
@@ -72,16 +75,46 @@ class PatientController extends Controller
      */
     public function store(StorePatientRequest $request)
     {
-        $request = $request->validated();
-        LogBatch::startBatch();
-        $emergency = EmergencyContact::create($request['emergency']);
-        isset($emergency) ? $patient = Patient::create($request) : '';
-        isset($patient) ? $detail = PatientDetail::create($request) : '';
-        LogBatch::endBatch();
+        try {
+            DB::beginTransaction();
 
-        $detail = PatientDetail::find($detail->id);
+            $validated = $request->validated();
+            LogBatch::startBatch();
+            $emergency = EmergencyContact::create($validated['emergency']);
+            isset($emergency) ? $patient = Patient::create($validated) : '';
+            isset($patient) ? $detail = PatientDetail::create($validated) : '';
+            LogBatch::endBatch();
+            
+            $detail = PatientDetail::find($detail->id);
 
-        return redirect()->route('admin.patients.show', $detail)->withSuccess("Data berhasil dibuat!");;
+            if ($request->pertemuan) {
+                if (count(($request->pertemuan)) > 0) {
+                    $deletedKey = ['status_ro','efek_samping_obat','persepsi_pasien','bantuan_sosial'];
+                    $meetings = [];
+                    foreach ($request->pertemuan as $item) {
+                        $temp = [];
+                        foreach ($item as $key => $value) {
+                            if (in_array($key,$deletedKey) and $value == '1') {
+                                continue;
+                            }
+                            $temp[$key] = $value;
+                        }
+                        $temp['patient_id'] = $detail->id;
+                        $meetings[] = $temp;
+                    }
+                    foreach ($meetings as $key => $value) {
+                        Meeting::create($value);
+                    }
+                }
+            }
+
+            DB::commit();
+            
+            return redirect()->route('admin.patients.show', $detail)->withSuccess("Data berhasil dibuat!");;
+        } catch (\Exception $ex) {
+            DB::rollBack();
+            return back();
+        }
     }
 
     /**

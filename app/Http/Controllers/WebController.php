@@ -98,7 +98,7 @@ class WebController extends Controller
 
     public function dokumen()
     {
-        return view('web.dokumen');
+        return view('web.document');
     }
 
     public function fasyankes()

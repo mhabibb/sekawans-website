@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\District;
+use App\Models\SatelliteHealthFacility;
 use Illuminate\Http\Request;
 use App\Models\Screening;
 use Exception;
@@ -12,8 +14,8 @@ class ScreeningController extends Controller
     public function store(Request $request)
     {
         try {
-            $data = $request->validate([
-                'agreement' => 'required|in:Ya',
+            $validated = $request->validate([
+                'agreement' => 'required',
                 'full_name' => 'required|string',
                 'contact' => 'required|string',
                 'gender' => 'required|in:male,female',
@@ -36,14 +38,50 @@ class ScreeningController extends Controller
                 'contact3_name' => 'required|string',
                 'contact3_number' => 'required|string'
             ]);
-
+            // Hitung hasil screening
+            $batuk = ['batuk'];
+            $gejala = ['sesak_nafas','keringat_malam_hari','demam_meriang'];
+            $resiko = ['ibu_hamil','lansia','diabetes_melitus','merokok'];
+            if ($validated['batuk'] == 'Ya') {
+                foreach ($gejala as  $item) {
+                    if ($validated[$item] == 'Ya') {
+                        foreach ($resiko as $item) {
+                            if ($validated[$item] == 'Ya') {
+                                $validated['is_positive'] = true;
+                                $screening = Screening::create($validated);
+                                // Menyimpan data screening ke session
+                                session()->put('screening', $validated);
+                    
+                                return redirect()->route('screening.result')->with('success', 'Formulir berhasil disimpan!');
+                            }
+                        }
+                    }
+                }
+            }
+            $validated['is_positive'] = false;
             // Simpan data ke dalam database
-            $screening = new Screening($data);
-            $screening->save();
+            $screening = Screening::create($validated);
+            // Menyimpan data screening ke session
+            session()->put('screening', $validated);
 
-            return redirect()->route('screenings.create')->with('success', 'Formulir berhasil disimpan!');
+            return redirect()->route('screening.result')->with('success', 'Formulir berhasil disimpan!');
         } catch (Exception $e) {
             return back()->withInput()->withErrors(['error' => $e->getMessage()]);
         }
+    }
+
+    public function result()
+    {
+        $screening = session()->get('screening');
+        if ($screening) {
+            $district = District::where('name',$screening['district'])->first();
+            $faskes = $district->satelliteHealthFacility;
+            return view('web.screening-result',[
+                'screening' => $screening,
+                'district' => $district,
+                'faskes' => $faskes,
+            ]);        
+        }
+        return to_route('screening');
     }
 }

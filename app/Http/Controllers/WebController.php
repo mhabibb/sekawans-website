@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\StaticElement;
 use App\Models\Article;
+use App\Models\District;
 use App\Models\Regency;
 use Illuminate\Http\Request;
 
@@ -89,7 +90,10 @@ class WebController extends Controller
 
     public function screening()
     {
-        return view('web.screening');
+        $district = District::all();
+        return view('web.screening',[
+            'district' => $district
+        ]);
     }
 
     public function dokumen()

@@ -98,5 +98,7 @@ Route::controller(WebController::class)->group(function () {
     Route::get('/fasyankes', 'fasyankes')->name('fasyankes');
 });
 
-//Route::post('/screening', 'ScreeningController@store')->name('screening.store');
-Route::post('/screenings/store', [ScreeningController::class, 'store'])->name('screenings.store');
+Route::controller(ScreeningController::class)->group(function () {
+    Route::post('/screening/store','store')->name('screening.store');
+    Route::get('/screening/hasil','result')->name('screening.result');
+});

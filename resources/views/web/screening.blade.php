@@ -6,12 +6,15 @@
     @if(session('success'))
         <div style="color: green;">{{ session('success') }}</div>
     @endif
-    
-    <form method="POST" action="{{ route('screenings.store') }}">
+    @if($errors->any())
+        {{ implode('', $errors->all('<div>:message</div>')) }}
+    @endif
+    <form method="POST" action="{{ route('screening.store') }}">
     @csrf
         <div class="card mb-4">
             <div class="card-body">
                 <h3 class="card-title">Persetujuan Screening</h3>
+                
                 <ol style="font-size: 16px;">
                     <li>Screening ini digunakan untuk mendeteksi dini penyakit TB.</li>
                     <li>Adapun hasil rencana tindak lanjut Screening berupa Rekomendasi tempat Fasilitas Layanan kesehatan terdekat yang dapat melakukan Screening TB dan dibawah naungan Dinas Kesehatan.</li>
@@ -20,7 +23,7 @@
                     <li>Saya bersedia mengisi semua data formulir Screening dengan sebenar-benarnya sesuai kondisi yang sedang saya alami.</li>
                 </ol>
                 <div class="form-check">
-                    <input class="form-check-input" type="checkbox" value="" id="agreement" name="agreement">
+                    <input required class="form-check-input" type="checkbox" value="1" id="agreement" name="agreement">
                     <label class="form-check-label" for="agreement" name="agreement" style="font-size: 16px;">Ya, saya menyetujui</label>
                 </div>
             </div>
@@ -54,12 +57,9 @@
                         <label for="district" class="form-label" style="font-size: 16px;">Domisili Kecamatan:</label>
                         <select class="form-select" id="district" name="district" required style="font-size: 16px;">
                             <option value="" selected disabled style="font-size: 16px;">Pilih Kecamatan di Jember</option>
-                            <option value="Kaliwates" style="font-size: 16px;">Kaliwates</option>
-                            <option value="Patrang" style="font-size: 16px;">Patrang</option>
-                            <option value="Sumbersari" style="font-size: 16px;">Sumbersari</option>
-                            <option value="Arjasa" style="font-size: 16px;">Arjasa</option>
-                            <option value="Pakusari" style="font-size: 16px;">Pakusari</option>
-                            <option value="Sukorambi" style="font-size: 16px;">Sukorambi</option>
+                            @foreach ($district as $item)
+                            <option value="{{ $item->name }}" style="font-size: 16px;">{{ $item->name }}</option>
+                            @endforeach
                         </select>
                     </div>
                     <div class="mb-3">
@@ -167,18 +167,24 @@
                 </div>            
                 <div class="mb-3">
                     <label for="contact1Name" style="font-size: 16px;">Kontak 1</label><br>
-                    <input type="text" id="contact1Name" name="contact1_name" placeholder="Nama" required style="font-size: 16px;">
-                    <input type="tel" id="contact1" name="contact1_number" placeholder="Nomor Kontak" required style="font-size: 16px;">
+                    <div class="d-flex">
+                        <input class="form-control me-2" type="text" id="contact1Name" name="contact1_name" placeholder="Nama" required style="font-size: 16px;">
+                        <input class="form-control" type="tel" id="contact1" name="contact1_number" placeholder="Nomor Kontak" required style="font-size: 16px;">
+                    </div>
                 </div>
                 <div class="mb-3">
                     <label for="contact2Name" style="font-size: 16px;">Kontak 2</label><br>
-                    <input type="text" id="contact2Name" name="contact2_name" placeholder="Nama" required style="font-size: 16px;">
-                    <input type="tel" id="contact2" name="contact2_number" placeholder="Nomor Kontak" required style="font-size: 16px;">
+                    <div class="d-flex">
+                        <input class="form-control me-2" type="text" id="contact2Name" name="contact2_name" placeholder="Nama" required style="font-size: 16px;">
+                        <input class="form-control" type="tel" id="contact2" name="contact2_number" placeholder="Nomor Kontak" required style="font-size: 16px;">
+                    </div>
                 </div>
                 <div class="mb-3">
                     <label for="contact3Name" style="font-size: 16px;">Kontak 3</label><br>
-                    <input type="text" id="contact3Name" name="contact3_name" placeholder="Nama" required style="font-size: 16px;">
-                    <input type="tel" id="contact3" name="contact3_number" placeholder="Nomor Kontak" required style="font-size: 16px;">
+                    <div class="d-flex">
+                        <input class="form-control me-2" type="text" id="contact3Name" name="contact3_name" placeholder="Nama" required style="font-size: 16px;">
+                        <input class="form-control" type="tel" id="contact3" name="contact3_number" placeholder="Nomor Kontak" required style="font-size: 16px;">
+                    </div>
                 </div>
             </div>
         </div>

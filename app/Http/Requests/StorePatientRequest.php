@@ -96,6 +96,7 @@ class StorePatientRequest extends FormRequest
             "emergency.address"             => 'nullable|string',
             "emergency.phone"               => 'nullable|numeric|digits_between:10,16',
             "emergency.is_know"             => 'nullable|boolean',
+            'pertemuan'                     => 'nullable'
         ];
     }
 }

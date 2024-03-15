@@ -16,7 +16,7 @@
                 <div class="col-12">
                     <div class="card">
                         <div class="card-header">
-                            <a href="{{ route('admin.documents.create') }}" class="mb-2 mr-2 btn btn-primary">Buat Dokumen Baru</a>
+                            <a href="{{ route('admin.documents.create') }}" class="mb-2 mr-2 btn btn-primary">Dokumen Baru</a>
                         </div>
 
                         <div class="card-body">
@@ -24,8 +24,8 @@
                                 <table id="documentsData" class="table table-bordered table-striped mx-auto">
                                     <thead>
                                         <tr>
-                                            <th class="text-nowrap">Judul Dokumen</th>
-                                            <th class="text-nowrap">Kategori</th>
+                                            <th class="text-nowrap">Nama Dokumen</th>
+                                            <th class="text-nowrap">Kategori Dokumen</th>
                                             <th class="text-nowrap">Deskripsi</th>
                                             <th class="text-nowrap">Waktu Update</th>
                                             <th></th>

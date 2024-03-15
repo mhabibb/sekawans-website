@@ -65,7 +65,7 @@ class DocumentController extends Controller
 
         $document->update($request->all());
 
-        return redirect()->route('document.index')
+        return redirect()->route('admin.documents.index')
             ->with('success', 'Dokumen berhasil diperbarui.');
     }
 
@@ -74,7 +74,7 @@ class DocumentController extends Controller
         Storage::delete($document->file_path);
         $document->delete();
 
-        return redirect()->route('documents.index')
+        return redirect()->route('admin.documents.index')
                         ->with('success', 'Dokumen berhasil dihapus.');
     }
 

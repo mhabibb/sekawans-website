@@ -35,7 +35,7 @@
         @enderror
       </div>
       <div class="form-group mb-3 col-12">
-        <label for="file" class="form-label">File (PDF atau Doc)</label>
+        <label for="file" class="form-label">File (pdf, doc, docx, xlsx, ppt) Max 10 mb</label>
         <div class="form-group mb-3 col-md-6">
                 <input type="file" name="file" class="form-control-file @error('file') is-invalid @enderror" id="file">
             </label>

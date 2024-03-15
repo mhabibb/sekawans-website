@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ArticleController;
+use App\Http\Controllers\DocumentController;
 use App\Http\Controllers\PatientController;
 use App\Http\Controllers\StaticElementController;
 use App\Http\Controllers\UserController;
@@ -17,8 +18,8 @@ use Illuminate\Support\Facades\Auth;
 | Web Routes
 |--------------------------------------------------------------------------
 |
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
+| Here is where you can register web routes for your application.
+| These routes are loaded by the RouteServiceProvider within a group which
 | contains the "web" middleware group. Now create something great!
 |
 */
@@ -77,6 +78,17 @@ Route::middleware('auth')->prefix('admin')->name('admin.')->group(function () {
         Route::get('/trashed/{path}', 'trashed')->name('trashed.index');
         Route::put('/restore/{article}', 'restore')->name('articles.restore')->withTrashed();
         Route::delete('/force/{article}', 'forceDelete')->name('articles.forceDelete')->withTrashed();
+    });
+
+    Route::resource('/documents', DocumentController::class);
+    Route::controller(DocumentController::class)->group(function () {
+        Route::get('/documents', 'index')->name('documents.index');
+        Route::get('/documents/create', 'create')->name('documents.create');
+        Route::post('/documents', 'store')->name('documents.store');
+        Route::get('/documents/{document}', 'show')->name('documents.show');
+        Route::get('/documents/{document}/edit', 'edit')->name('documents.edit');
+        Route::put('/documents/{document}', 'update')->name('documents.update');
+        Route::delete('/documents/{document}', 'destroy')->name('documents.destroy');
     });
 });
 

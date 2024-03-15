@@ -98,8 +98,12 @@ class WebController extends Controller
 
     public function dokumen()
     {
-        return view('web.document');
+        $documents = \App\Models\Document::all(); 
+        return view('web.document', [
+            'documents' => $documents, 
+        ]);
     }
+    
 
     public function fasyankes()
     {

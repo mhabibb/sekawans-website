@@ -16,8 +16,7 @@
                 <div class="col-12">
                     <div class="card">
                         <div class="card-header">
-                            <a href="{{ route('documents.create') }}" class="mb-2 mr-2 btn btn-primary">Buat Dokumen
-                                Baru</a>
+                            <a href="{{ route('admin.documents.create') }}" class="mb-2 mr-2 btn btn-primary">Buat Dokumen Baru</a>
                         </div>
 
                         <div class="card-body">
@@ -40,11 +39,11 @@
                                                 <td>{{ $document->deskripsi }}</td>
                                                 <td>{{ $document->updated_at->format('d M Y, H:i:s') }}</td>
                                                 <td>
-                                                    <a href="{{ route('documents.show', $document->id) }}"
+                                                    <a href="{{ route('admin.documents.show', $document->id) }}"
                                                         class="btn btn-primary">Lihat</a>
-                                                    <a href="{{ route('documents.edit', $document->id) }}"
+                                                    <a href="{{ route('admin.documents.edit', $document->id) }}"
                                                         class="btn btn-warning">Edit</a>
-                                                    <form action="{{ route('documents.destroy', $document->id) }}"
+                                                    <form action="{{ route('admin.documents.destroy', $document->id) }}"
                                                         method="POST" style="display: inline;">
                                                         @csrf
                                                         @method('DELETE')

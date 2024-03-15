@@ -32,7 +32,8 @@ class AdminNav extends Component
             'admin.fasyankes' => ['Fasyankes', 'fas fa-notes-medical'],
             'admin.articles' => ['Artikel', 'fas fa-newspaper'],
             'admin.kegiatan' => ['Kegiatan', 'fas fa-square-person-confined'],
-        );
+            'admin.documents' => ['Dokumen', 'fas fa-file-alt'], 
+        );        
 
         return view('components.admin-nav', compact('navLinks'));
     }

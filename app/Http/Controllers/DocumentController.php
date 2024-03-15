@@ -11,12 +11,14 @@ class DocumentController extends Controller
     public function index()
     {
         $documents = Document::all();
-        return view('admin.documents.index', compact('documents'));
+        $title = "Daftar Dokumen"; 
+        return view('admin.document.index', compact('documents', 'title'));
     }
+
 
     public function create()
     {
-        return view('admin.documents.create');
+        return view('admin.document.create');
     }
 
     public function store(Request $request)
@@ -39,18 +41,18 @@ class DocumentController extends Controller
             'file_path' => $filePath,
         ]);
 
-        return redirect()->route('documents.index')
+        return redirect()->route('admin.documents.index')
             ->with('success', 'Dokumen berhasil ditambahkan.');
     }
 
     public function show(Document $document)
     {
-        return view('admin.documents.show', compact('document'));
+        return view('admin.document.show', compact('document'));
     }
 
     public function edit(Document $document)
     {
-        return view('admin.documents.edit', compact('document'));
+        return view('admin.document.edit', compact('document'));
     }
 
     public function update(Request $request, Document $document)
@@ -63,16 +65,18 @@ class DocumentController extends Controller
 
         $document->update($request->all());
 
-        return redirect()->route('documents.index')
+        return redirect()->route('document.index')
             ->with('success', 'Dokumen berhasil diperbarui.');
     }
 
     public function destroy(Document $document)
     {
-        Storage::delete($document->file_path); 
+        Storage::delete($document->file_path);
         $document->delete();
 
         return redirect()->route('documents.index')
-            ->with('success', 'Dokumen berhasil dihapus.');
+                        ->with('success', 'Dokumen berhasil dihapus.');
     }
+
+
 }

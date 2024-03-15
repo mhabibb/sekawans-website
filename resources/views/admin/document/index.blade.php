@@ -39,18 +39,28 @@
                                                 <td>{{ $document->deskripsi }}</td>
                                                 <td>{{ $document->updated_at->format('d M Y, H:i:s') }}</td>
                                                 <td>
-                                                    <a href="{{ route('admin.documents.show', $document->id) }}"
-                                                        class="btn btn-primary">Lihat</a>
-                                                    <a href="{{ route('admin.documents.edit', $document->id) }}"
-                                                        class="btn btn-warning">Edit</a>
-                                                    <form action="{{ route('admin.documents.destroy', $document->id) }}"
-                                                        method="POST" style="display: inline;">
-                                                        @csrf
-                                                        @method('DELETE')
-                                                        <button type="submit" class="btn btn-danger"
-                                                            onclick="return confirm('Apakah Anda yakin ingin menghapus dokumen ini?')">Hapus</button>
-                                                    </form>
-                                                </td>
+                                                    <div class="btn-toolbar" role="toolbar">
+                                                        <div class="btn-group mr-2" role="group">
+                                                            <a href="{{ route('admin.documents.show', $document->id) }}" class="btn btn-primary btn-sm">
+                                                                <i class="fa-solid fa-eye"></i> Lihat
+                                                            </a>
+                                                        </div>
+                                                        <div class="btn-group mr-2" role="group">
+                                                            <a href="{{ route('admin.documents.edit', $document->id) }}" class="btn btn-warning btn-sm">
+                                                                <i class="fa-solid fa-pencil"></i> Ubah
+                                                            </a>
+                                                        </div>
+                                                        <div class="btn-group" role="group">
+                                                            <form action="{{ route('admin.documents.destroy', $document->id) }}" method="POST" style="display: inline;">
+                                                                @csrf
+                                                                @method('DELETE')
+                                                                <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Apakah Anda yakin ingin menghapus dokumen ini?')">
+                                                                    <i class="fa-solid fa-trash"></i> Hapus
+                                                                </button>
+                                                            </form>
+                                                        </div>
+                                                    </div>
+                                                </td>                                                                                                
                                             </tr>
                                         @endforeach
                                     </tbody>

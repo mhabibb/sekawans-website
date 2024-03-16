@@ -2,7 +2,6 @@
 
 @section('content')
 <div class="container py-5">
-    <!-- Persetujuan Screening -->
     @if(session('success'))
         <div style="color: green;">{{ session('success') }}</div>
     @endif
@@ -15,46 +14,96 @@
             <div class="d-flex justify-content-center">
                 <p class="fw-bold">Anda Positive TBC</p>
             </div>
-            <p style="font-size: 16px;">Berikut adalah beberapa fasilitas kesehatan yang tersedia di kecamatan anda:</p>
+            <p style="font-size: 16px;">Berikut adalah beberapa fasilitas kesehatan yang tersedia di kecamatan Anda:</p>
             <ol style="font-size: 16px;">
                 @foreach ($faskes as $item)
                 <li>{{ $item->name }}</li>
                 @endforeach
             </ol>
-<<<<<<< HEAD
             <p style="font-size: 16px;">Formulir TBC:</p>
             <br>
             <hr>
-            <html>
-                <head>
-                    <title> KOP SURAT </title>
-                    <style type= "text/css">
-                    body {font-family: arial; background-color : #ccc }
-                    .rangkasurat {width : 980px;margin:0 auto;background-color : #fff;height: 500px;padding: 20px;}
-                    table {border-bottom : 5px solid # 000; padding: 2px}
-                    .tengah {text-align : center;line-height: 5px;}
-                    </style >
-                </head>
-                <body>
-                    <div class = "rangkasurat">
-                        <table width = "100%">
-                            <tr>
-                                <td> <img src="../../../public/img/logo-stakeholder/germas.png" width="140px"> </td>
-                                <td class = "tengah">
-                                    <h3>SEKAWAN'S TB JEMBER</h3>
-                                    <h5>SK.MENTERI HUKUM DAN HAK ASASI MANUSIA RI</h5>
-                                    <h5>NOMOR: AHU-0016828.AH.01.07.TAHUN 2017</h5>
-                                    <h6>Alamat: Jl.Udang Windu No.17, Mangli-Jember</h6>
-                                    <h6>No.HP : 085732480822 Email : sekawansjember@gmail.com</h6>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="tanggal_screening">Jember, ….. (Tanggal Bulan Tahun Skrining)</td>
-                            </tr>
-                        </table >
-                    </div>
-                </body>
-            </html>
+            <div class="rangkasurat">
+                <table style="width: 100%;">
+                  <div class="kop-surat">
+                    <img src="/img/logo.png" width="10%">
+                    <h3>SEKAWAN'S TB JEMBER</h3>
+                    <h5>SK.MENTERI HUKUM DAN HAK ASASI MANUSIA RI</h5>
+                    <h5>NOMOR: AHU-0016828.AH.01.07.TAHUN 2017</h5>
+                    <h6>Alamat: Jl.Udang Windu No.17, Mangli-Jember</h6>
+                    <h6>No.HP : 085732480822 Email : sekawansjember@gmail.com</h6>
+                  </div>            
+                  <hr>    
+                     <td class="kiri">Jember, ….. (Tanggal Bulan Tahun Skrining) <br><br></td>
+
+
+
+                    <tr>
+                        <td colspan="2">Perihal : Rekomendasi Pemeriksaan Lanjutan Suspek TBC</td>
+                    </tr>
+                    <tr>
+                      <td colspan="2">Kepada : Yth. Penanggung Jawab Tuberkulosis di ….. (Fasyankes yang dituju dipilih saat skrining)<br><br></td>
+                  </tr>
+                  <tr>
+                      <td colspan="2">Mohon pemeriksaan dan penanganan lebih lanjut pada suspek :<br><br></td>
+                  </tr>                  
+                    <tr>
+                      <td colspan="2">
+                          Nama : <br>
+                          Umur : <br>
+                          Jenis Kelamin : <br><br>
+                          Diagnosis : 
+                          Suspek TBC dengan hasil skrining kesehatan yakni : <br>
+                      </td>
+                  </tr>                  
+                    <tr>
+                        <td colspan="2">
+                            <table class="pertanyaan" style="width: 100%;">
+                                <tr>
+                                    <th>Pertanyaan Skrining</th>
+                                    <th>Jawaban</th>
+                                </tr>
+                                <tr>
+                                    <td>Apakah ada kontak satu rumah dengan pasien TBC ?</td>
+                                    <td>Tidak</td>
+                                </tr>
+                                <tr>
+                                    <td>Apakah anda mengalami batuk selama 2 minggu atau lebih ?</td>
+                                    <td>Tidak</td>
+                                </tr>
+                                <tr>
+                                    <td>Apakah anda pernah mengalami sesak nafas dalam 2 bulan terakhir ?</td>
+                                    <td>Tidak</td>
+                                </tr>
+                                <tr>
+                                    <td>Apakah anda pernah berkeringat saat malam hari tanpa berkegiatan ?</td>
+                                    <td>Tidak</td>
+                                </tr>
+                                <tr>
+                                    <td>Apakah anda pernah mengalami demam meriang selama lebih dari 1 bulan ?</td>
+                                    <td>Tidak</td>
+                                </tr>
+                                <tr>
+                                    <td>Apakah anda ibu hamil ?</td>
+                                    <td>Tidak</td>
+                                </tr>
+                                <tr>
+                                    <td>Apakah anda adalah lansia lebih dari 60 tahun ?</td>
+                                    <td>Tidak</td>
+                                </tr>
+                                <tr>
+                                    <td>Apakah anda menderita diabetes melitus ?</td>
+                                    <td>Tidak</td>
+                                </tr>
+                                <tr>
+                                    <td>Apakah anda merokok ?</td>
+                                    <td>Tidak</td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+                </table>
+            </div>
             <!-- <iframe src="{{ asset('document/screening.pdf') }}" width="100%" height="650px"></iframe> -->
             @else
             <div class="d-flex justify-content-center">
@@ -68,7 +117,16 @@
 
 @section('custom_css')
 <style>
-    /* CSS yang telah dipindahkan ke sini */
+    .kop-surat {
+        text-align: center;
+        margin-bottom: 20px; 
+    }
+
+    .kop-surat img {
+        display: block;
+        margin: 0 auto 10px; 
+    }
+
     .card {
         border-radius: 16px;
         box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
@@ -96,58 +154,42 @@
         border-color: #dc3545;
     }
 
-<<<<<<< HEAD
     .tanggal_screening {
         text-align: right;
     }
-</style>
-=======
-    h1,h3,h5,h6{
-    text-align:center;
-    padding-right:200px;
+
+    .kiri {
+        text-align: right;
     }
-    .row{
-    margin-top: 20px;
+
+    .kanan {
+        text-align: right;
     }
-    .keclogo{
-    font-size:24px;
-    font-size:3vw;
+
+    .pertanyaan {
+        width: 100%;
+        border-collapse: collapse;
     }
-    .kablogo{
-    font-size:2vw;
+
+    .pertanyaan th, .pertanyaan td {
+        border: 1px solid #ddd;
+        padding: 8px;
+        text-align: left;
     }
-    .alamatlogo{
-    font-size:1.5vw;
+
+    .pertanyaan th {
+        background-color: #f2f2f2;
     }
-    .kodeposlogo{
-    font-size:1.7vw;
+
+    @media only screen and (max-width: 768px) {
+        .kop-surat img {
+            width: 50%;
+        }
     }
-    #tls{
-    text-align:right; 
-    }
-    .alamat-tujuan{
-    margin-left:50%;
-    }
-    .garis1{
-    border-top:3px solid black;
-    height: 2px;
-    border-bottom:1px solid black;
-    }
-    #logo{
-    margin: auto;
-    margin-left: 50%;
-    margin-right: auto;
-    }
-    #tempat-tgl{
-    margin-left:120px;
-    }
-    #camat{
-    text-align:center;
-    }
-    #nama-camat{
-    margin-top:100px;
-    text-align:center;
+
+    @media only screen and (max-width: 576px) {
+        .kop-surat img {
+            width: 70%;
+        }
     }
 </style>
-@endsection
->>>>>>> 14e53932e623a0dd3da134df3a394ac66012ab0f

@@ -1,4 +1,4 @@
-# Website Sekawan's TB Jember Test
+# Website Sekawan's TB Jember
 
 Package tambahan yang digunakan yaitu:
 ```bash

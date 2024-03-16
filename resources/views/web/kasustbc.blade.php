@@ -10,14 +10,17 @@
                         height="400" loading="lazy">
                 </div>
                 <div class="col-lg-6">
-                    <h2 class="fw-bold mb-3">Kasus TBC di Jember dan Sekitarnya</h2>
-                    <p class="lead">Berikut data jumlah pasien TBC yang diterima Sekawan's di kabupaten Lumajang, Jember, Bondowoso, dan Situbondo.</p>
+                    <h2 class="fw-bold mb-3">PASIEN TB DI JEMBER</h2>
+                    <p class="lead">Berikut data jumlah pasien TBC yang diterima Sekawan's di Jember <br><br></p>
+                    <p class="lead">Cek data penyakit TBC dari tahun ke tahun</p>
+                    <a href="" class="btn btn-secondary">Cek Data TBC</a>
                 </div>
             </div>
         </div>
     </div>
 
     <div class="container py-5">
+        @if (isset($regencies) && count($regencies) > 0)
         @foreach ($regencies as $regency)
         <div class="py-5 text-center border-bottom">
             <h2 class="fw-bold mb-5">{{ $regency->total }} PASIEN TB DI {{ $regency->name }}</h2>
@@ -48,6 +51,12 @@
             @endif
         </div>
         @endforeach
+        @else
+        <div class="py-5 text-center border-bottom">
+            <p class="lead">Data tidak tersedia.</p>
+        </div>
+        @endif
     </div>
 </section>
 @endsection
+

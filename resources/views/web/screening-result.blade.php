@@ -34,7 +34,7 @@
                     <h6>No.HP : 085732480822 Email : sekawansjember@gmail.com</h6>
                   </div>            
                   <hr>    
-                     <td class="kiri">Jember, ….. (Tanggal Bulan Tahun Skrining) <br><br></td>
+                     <td class="kiri">Jember, {{ $screening['screening_date'] }} <br><br></td>
 
 
 
@@ -42,16 +42,16 @@
                         <td colspan="2">Perihal : Rekomendasi Pemeriksaan Lanjutan Suspek TBC</td>
                     </tr>
                     <tr>
-                      <td colspan="2">Kepada : Yth. Penanggung Jawab Tuberkulosis di ….. (Fasyankes yang dituju dipilih saat skrining)<br><br></td>
+                      <td colspan="2">Kepada : Yth. Penanggung Jawab Tuberkulosis di {{ $screening['district'] }}<br><br></td>
                   </tr>
                   <tr>
                       <td colspan="2">Mohon pemeriksaan dan penanganan lebih lanjut pada suspek :<br><br></td>
                   </tr>                  
                     <tr>
                       <td colspan="2">
-                          Nama : <br>
-                          Umur : <br>
-                          Jenis Kelamin : <br><br>
+                          Nama : {{ $screening['full_name'] }}<br>
+                          Umur : {{ $screening['age'] }}<br>
+                          Jenis Kelamin : {{ $screening['gender'] }}<br><br>
                           Diagnosis : 
                           Suspek TBC dengan hasil skrining kesehatan yakni : <br>
                       </td>
@@ -65,39 +65,39 @@
                                 </tr>
                                 <tr>
                                     <td>Apakah ada kontak satu rumah dengan pasien TBC ?</td>
-                                    <td>Tidak</td>
+                                    <td>{{ $screening['contact_with_tb'] }}</td>
                                 </tr>
                                 <tr>
                                     <td>Apakah anda mengalami batuk selama 2 minggu atau lebih ?</td>
-                                    <td>Tidak</td>
+                                    <td>{{ $screening['batuk'] }}</td>
                                 </tr>
                                 <tr>
                                     <td>Apakah anda pernah mengalami sesak nafas dalam 2 bulan terakhir ?</td>
-                                    <td>Tidak</td>
+                                    <td>{{ $screening['sesak_nafas'] }}</td>
                                 </tr>
                                 <tr>
                                     <td>Apakah anda pernah berkeringat saat malam hari tanpa berkegiatan ?</td>
-                                    <td>Tidak</td>
+                                    <td>{{ $screening['keringat_malam_hari'] }}</td>
                                 </tr>
                                 <tr>
                                     <td>Apakah anda pernah mengalami demam meriang selama lebih dari 1 bulan ?</td>
-                                    <td>Tidak</td>
+                                    <td>{{ $screening['demam_meriang'] }}</td>
                                 </tr>
                                 <tr>
                                     <td>Apakah anda ibu hamil ?</td>
-                                    <td>Tidak</td>
+                                    <td>{{ $screening['ibu_hamil'] }}</td>
                                 </tr>
                                 <tr>
                                     <td>Apakah anda adalah lansia lebih dari 60 tahun ?</td>
-                                    <td>Tidak</td>
+                                    <td>{{ $screening['lansia'] }}</td>
                                 </tr>
                                 <tr>
                                     <td>Apakah anda menderita diabetes melitus ?</td>
-                                    <td>Tidak</td>
+                                    <td>{{ $screening['diabetes_melitus'] }}</td>
                                 </tr>
                                 <tr>
                                     <td>Apakah anda merokok ?</td>
-                                    <td>Tidak</td>
+                                    <td>{{ $screening['merokok'] }}</td>
                                 </tr>
                             </table>
                         </td>

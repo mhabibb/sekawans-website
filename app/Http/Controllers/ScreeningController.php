@@ -80,6 +80,19 @@ class ScreeningController extends Controller
                 'screening' => $screening,
                 'district' => $district,
                 'faskes' => $faskes,
+                'screening_date' => $screening['screening_date'],
+                'full_name' => $screening['full_name'],
+                'age' => $screening['age'],
+                'gender' => $screening['gender'],
+                'contact_with_tb' => $screening['contact_with_tb'],
+                'batuk' => $screening['batuk'],
+                'sesak_nafas' => $screening['sesak_nafas'],
+                'keringat_malam_hari' => $screening['keringat_malam_hari'],
+                'demam_meriang' => $screening['demam_meriang'],
+                'ibu_hamil' => $screening['ibu_hamil'],
+                'lansia' => $screening['lansia'],
+                'diabetes_melitus' => $screening['diabetes_melitus'],
+                'merokok' => $screening['merokok'],
             ]);        
         }
         return to_route('screening');

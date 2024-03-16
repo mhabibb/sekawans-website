@@ -41,7 +41,7 @@
                             <li><a class="dropdown-item" href="{{ route('artikel') }}">Artikel</a></li>
                             <li><a class="dropdown-item" href="{{ route('kegiatan') }}">Kegiatan</a></li>
                             <li><a class="dropdown-item" href="{{ route('screening') }}">Screening</a></li>
-                            <li><a class="dropdown-item" href="{{ route('fasyankes') }}">Faskes</a></li>
+                            <li><a class="dropdown-item" href="{{ route('fasyankes') }}">Fasyankes</a></li>
                             <li><a class="dropdown-item" href="{{ route('dokumen') }}">Dokumen</a></li>
                         </ul>
                     </li>

@@ -98,9 +98,9 @@ class WebController extends Controller
 
     public function dokumen()
     {
-        $documents = \App\Models\Document::all(); 
+        $documents = \App\Models\Document::all(); // Mengambil semua dokumen dari model Document
         return view('web.document', [
-            'documents' => $documents, 
+            'documents' => $documents, // Menyediakan variabel $documents ke dalam view
         ]);
     }
     

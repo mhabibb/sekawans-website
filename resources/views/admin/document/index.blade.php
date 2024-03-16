@@ -16,7 +16,7 @@
                 <div class="col-12">
                     <div class="card">
                         <div class="card-header">
-                            <a href="{{ route('admin.documents.create') }}" class="mb-2 mr-2 btn btn-primary">Dokumen Baru</a>
+                            <a href="{{ route('admin.documents.create') }}" class="mb-2 mr-2 btn btn-primary">Input Dokumen Baru</a>
                         </div>
 
                         <div class="card-body">

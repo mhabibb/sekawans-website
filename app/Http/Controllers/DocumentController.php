@@ -28,6 +28,7 @@ class DocumentController extends Controller
             'kategori' => 'required',
             'deskripsi' => 'required',
             'file' => 'required|mimes:pdf,doc,docx,xlsx,xls,ppt,pptx|max:10240',
+
         ]);
 
         $file = $request->file('file');

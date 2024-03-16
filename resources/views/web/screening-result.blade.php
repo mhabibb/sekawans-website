@@ -21,6 +21,7 @@
                 <li>{{ $item->name }}</li>
                 @endforeach
             </ol>
+<<<<<<< HEAD
             <p style="font-size: 16px;">Formulir TBC:</p>
             <br>
             <hr>
@@ -65,7 +66,9 @@
 </div>
 @endsection
 
+@section('custom_css')
 <style>
+    /* CSS yang telah dipindahkan ke sini */
     .card {
         border-radius: 16px;
         box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
@@ -93,7 +96,58 @@
         border-color: #dc3545;
     }
 
+<<<<<<< HEAD
     .tanggal_screening {
         text-align: right;
     }
 </style>
+=======
+    h1,h3,h5,h6{
+    text-align:center;
+    padding-right:200px;
+    }
+    .row{
+    margin-top: 20px;
+    }
+    .keclogo{
+    font-size:24px;
+    font-size:3vw;
+    }
+    .kablogo{
+    font-size:2vw;
+    }
+    .alamatlogo{
+    font-size:1.5vw;
+    }
+    .kodeposlogo{
+    font-size:1.7vw;
+    }
+    #tls{
+    text-align:right; 
+    }
+    .alamat-tujuan{
+    margin-left:50%;
+    }
+    .garis1{
+    border-top:3px solid black;
+    height: 2px;
+    border-bottom:1px solid black;
+    }
+    #logo{
+    margin: auto;
+    margin-left: 50%;
+    margin-right: auto;
+    }
+    #tempat-tgl{
+    margin-left:120px;
+    }
+    #camat{
+    text-align:center;
+    }
+    #nama-camat{
+    margin-top:100px;
+    text-align:center;
+    }
+</style>
+@endsection
+>>>>>>> 14e53932e623a0dd3da134df3a394ac66012ab0f

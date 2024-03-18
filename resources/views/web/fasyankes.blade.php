@@ -2,9 +2,9 @@
 
 @section('content')
 <div class="container py-5">
+    <h2 class="fw-bold mb-4 text-center text-primary">Fasilitas Layanan Kesehatan TBC</h2>
     <div class="card mb-4">
         <div class="card-body">
-            <h3 class="card-title">Fasilitas Layanan Kesehatan di Kabupaten Jember</h3>
             
             <div class="row">
                 <div class="col-md-6">

@@ -7,6 +7,9 @@ use App\Models\SatelliteHealthFacility;
 use Illuminate\Http\Request;
 use App\Models\Screening;
 use Exception;
+use Illuminate\Support\Facades\Response;
+use Illuminate\Support\Facades\View;
+use Dompdf\Dompdf;
 
 class ScreeningController extends Controller
 {
@@ -38,6 +41,7 @@ class ScreeningController extends Controller
                 'contact3_name' => 'required|string',
                 'contact3_number' => 'required|string'
             ]);
+
             // Hitung hasil screening
             $batuk = ['batuk'];
             $gejala = ['sesak_nafas','keringat_malam_hari','demam_meriang'];
@@ -95,6 +99,21 @@ class ScreeningController extends Controller
                 'merokok' => $screening['merokok'],
             ]);        
         }
-        return to_route('screening');
+        return redirect()->route('screening');
+    }
+
+    public function downloadSuratRekomendasi()
+    {
+        $screening = session()->get('screening');
+        if ($screening) {
+            $pdf = new Dompdf();
+            $html = view('web.suratrekomendasi', ['screening' => $screening])->render();
+            $pdf->loadHtml($html);
+            $pdf->setPaper('A4', 'portrait');
+            $pdf->render();
+            return $pdf->stream('Surat Rekomendasi TBC.pdf');
+        } else {
+            return redirect()->route('screening')->with('error', 'Data screening tidak tersedia.');
+        }
     }
 }

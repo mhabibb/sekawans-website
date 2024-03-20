@@ -1,7 +1,5 @@
 <?php
 
-use Illuminate\Support\Facades\Facade;
-
 return [
 
     /*
@@ -155,7 +153,6 @@ return [
     */
 
     'providers' => [
-
         /*
          * Laravel Framework Service Providers...
          */
@@ -196,6 +193,10 @@ return [
         App\Providers\RouteServiceProvider::class,
         Ladumor\LaravelPwa\PWAServiceProvider::class,
 
+        /*
+         * DomPDF Service Provider
+         */
+        Barryvdh\DomPDF\ServiceProvider::class,
     ],
 
     /*
@@ -209,8 +210,10 @@ return [
     |
     */
 
-    'aliases' => Facade::defaultAliases()->merge([
-        'LaravelPwa' => \Ladumor\LaravelPwa\LaravelPwa::class,
-    ])->toArray(),
+    'aliases' => [
+        //...
+
+        'PDF' => Dompdf\Dompdf::class,
+    ],
 
 ];

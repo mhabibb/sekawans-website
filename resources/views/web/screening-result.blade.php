@@ -12,8 +12,10 @@
             <p class="d-flex justify-content-center">{{ $screening['full_name'] }}</p>
             @if ($screening['is_positive'] == true)
             <div class="d-flex justify-content-center">
-                <p class="fw-bold fs-4">Anda Positive TBC <br><br></p>
+                <p class="fw-bold fs-4">Anda diduga Positive TBC <br><br></p>
             </div>
+            <a href="{{ route('download.surat.rekomendasi') }}" class="btn btn-secondary" style="display: block; width: fit-content; margin: 0 auto;">Download Surat Rekomendasi</a>
+            <br><br>
             <p style="font-size: 16px;">Berikut adalah beberapa fasilitas kesehatan yang tersedia di kecamatan Anda:</p>
             <ol style="font-size: 16px;">
                 @foreach ($faskes as $item)

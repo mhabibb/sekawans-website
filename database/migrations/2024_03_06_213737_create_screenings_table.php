@@ -42,5 +42,3 @@ class CreateScreeningsTable extends Migration
         Schema::dropIfExists('patient_statuses');
     }
 }
-
-?>

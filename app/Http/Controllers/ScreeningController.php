@@ -10,6 +10,7 @@ use Exception;
 use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\View;
 use Dompdf\Dompdf;
+use Dompdf\Options;
 
 class ScreeningController extends Controller
 {
@@ -105,14 +106,23 @@ class ScreeningController extends Controller
     public function downloadSuratRekomendasi()
     {
         $screening = session()->get('screening');
+
         if ($screening) {
-            $pdf = new Dompdf();
+            $options = new Options();
+            $options->set('isHtml5ParserEnabled', true);
+            $options->set('isRemoteEnabled', true);
+
+            $pdf = new Dompdf($options);
+
             $html = view('web.suratrekomendasi', ['screening' => $screening])->render();
+
             $pdf->loadHtml($html);
             $pdf->setPaper('A4', 'portrait');
             $pdf->render();
+
             return $pdf->stream('Surat Rekomendasi TBC.pdf');
         } else {
+            // Redirect jika data screening tidak tersedia
             return redirect()->route('screening')->with('error', 'Data screening tidak tersedia.');
         }
     }

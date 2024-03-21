@@ -58,8 +58,9 @@
                     <tr>
                       <td colspan="2">
                           Nama : {{ $screening['full_name'] }}<br>
-                          Umur : {{ $screening['age'] }}<br>
-                          Jenis Kelamin : {{ $screening['gender'] }}<br><br>
+                          Umur : {{ $screening['age'] }} Tahun<br>
+                          Jenis Kelamin : {{ $screening['gender'] === 'male' ? 'Laki-laki' : ($screening['gender'] === 'female' ? 'Perempuan' : 'Tidak Diketahui') }}
+                          <br><br>
                           Diagnosis,  
                           Suspek TBC dengan hasil skrining kesehatan yakni : <br>
                       </td>
@@ -73,39 +74,47 @@
                                 </tr>
                                 <tr>
                                     <td>Apakah ada kontak satu rumah dengan pasien TBC ?</td>
-                                    <td>{{ $screening['home_contact'] }}</td>
+                                    <td>{{ $screening['home_contact'] ? 'Ya' : 'Tidak' }}</td>
                                 </tr>
                                 <tr>
                                     <td>Apakah anda mengalami batuk selama 2 minggu atau lebih ?</td>
-                                    <td>{{ $screening['cough'] }}</td>
+                                    <td>{{ $screening['cough'] ? 'Ya' : 'Tidak' }}</td>
                                 </tr>
                                 <tr>
                                     <td>Apakah anda pernah mengalami sesak nafas dalam 2 bulan terakhir ?</td>
-                                    <td>{{ $screening['breath'] }}</td>
+                                    <td>{{ $screening['breath'] ? 'Ya' : 'Tidak' }}</td>
                                 </tr>
                                 <tr>
                                     <td>Apakah anda pernah berkeringat saat malam hari tanpa berkegiatan ?</td>
-                                    <td>{{ $screening['sweat'] }}</td>
+                                    <td>{{ $screening['sweat'] ? 'Ya' : 'Tidak' }}</td>
                                 </tr>
                                 <tr>
                                     <td>Apakah anda pernah mengalami demam meriang selama lebih dari 1 bulan ?</td>
-                                    <td>{{ $screening['fever'] }}</td>
+                                    <td>{{ $screening['fever'] ? 'Ya' : 'Tidak' }}</td>
+                                </tr>
+                                <tr>
+                                    <td>Apakah anda mengalami penurunan berat badan drastis disertasi nafsu makan yang berkurang ?</td>
+                                    <td>{{ $screening['weight_loss'] ? 'Ya' : 'Tidak' }}</td>
                                 </tr>
                                 <tr>
                                     <td>Apakah anda ibu hamil ?</td>
-                                    <td>{{ $screening['pregnant'] }}</td>
+                                    <td>{{ $screening['pregnant'] ? 'Ya' : 'Tidak' }}</td>
                                 </tr>
                                 <tr>
                                     <td>Apakah anda adalah lansia lebih dari 60 tahun ?</td>
-                                    <td>{{ $screening['elderly'] }}</td>
+                                    <td>{{ $screening['elderly'] ? 'Ya' : 'Tidak' }}</td>
                                 </tr>
                                 <tr>
                                     <td>Apakah anda menderita diabetes melitus ?</td>
-                                    <td>{{ $screening['diabetes'] }}</td>
+                                    <td>{{ $screening['diabetes'] ? 'Ya' : 'Tidak' }}</td>
                                 </tr>
                                 <tr>
                                     <td>Apakah anda merokok ?</td>
-                                    <td>{{ $screening['smoking'] }}</td>
+                                    <td>{{ $screening['smoking'] ? 'Ya' : 'Tidak' }}</td>
+                                </tr>
+                                <tr>
+                                    <td>Apakah anda pernah melakukan pengobatan Tuberkulosis ?</td>
+                                    <td>{{ $screening['ever_treatment'] ? 'Ya' : 'Tidak' }}</td>
                                 </tr>
                             </table>
                         </td>

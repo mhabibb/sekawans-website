@@ -7,8 +7,6 @@ use App\Models\SatelliteHealthFacility;
 use Illuminate\Http\Request;
 use App\Models\Screening;
 use Exception;
-use Illuminate\Support\Facades\Response;
-use Illuminate\Support\Facades\View;
 use Dompdf\Dompdf;
 use Dompdf\Options;
 
@@ -26,15 +24,18 @@ class ScreeningController extends Controller
                 'age' => 'required|numeric',
                 'district' => 'required|string',
                 'screening_date' => 'required|date',
-                'contact_with_tb' => 'required|in:Ya,Tidak',
-                'batuk' => 'required|in:Ya,Tidak',
-                'sesak_nafas' => 'required|in:Ya,Tidak',
-                'keringat_malam_hari' => 'required|in:Ya,Tidak',
-                'demam_meriang' => 'required|in:Ya,Tidak',
-                'ibu_hamil' => 'required|in:Ya,Tidak',
-                'lansia' => 'required|in:Ya,Tidak',
-                'diabetes_melitus' => 'required|in:Ya,Tidak',
-                'merokok' => 'required|in:Ya,Tidak',
+                'home_contact' => 'required|in:1,0',
+                'cough' => 'required|in:1,0',
+                'breath' => 'required|in:1,0',
+                'sweat' => 'required|in:1,0',
+                'fever' => 'required|in:1,0',
+                'weight_loss' => 'required|in:1,0',
+                'pregnant' => 'required|in:1,0',
+                'elderly' => 'required|in:1,0',
+                'diabetes' => 'required|in:1,0',
+                'smoking' => 'required|in:1,0',
+                'close_contact' => 'required|in:1,0',
+                'ever_treatment' => 'required|in:1,0',
                 'contact1_name' => 'required|string',
                 'contact1_number' => 'required|string',
                 'contact2_name' => 'required|string',
@@ -42,16 +43,15 @@ class ScreeningController extends Controller
                 'contact3_name' => 'required|string',
                 'contact3_number' => 'required|string'
             ]);
-
             // Hitung hasil screening
-            $batuk = ['batuk'];
-            $gejala = ['sesak_nafas','keringat_malam_hari','demam_meriang'];
-            $resiko = ['ibu_hamil','lansia','diabetes_melitus','merokok'];
-            if ($validated['batuk'] == 'Ya') {
+            $cough = ['cough'];
+            $gejala = ['breath','sweat','fever','weight_loss'];
+            $resiko = ['pregnant','elderly','diabetes','smoking','close_contact','ever_treatment'];
+            if ($validated['cough'] == '1') {
                 foreach ($gejala as  $item) {
-                    if ($validated[$item] == 'Ya') {
+                    if ($validated[$item] == '1') {
                         foreach ($resiko as $item) {
-                            if ($validated[$item] == 'Ya') {
+                            if ($validated[$item] == '1') {
                                 $validated['is_positive'] = true;
                                 $screening = Screening::create($validated);
                                 // Menyimpan data screening ke session
@@ -89,18 +89,21 @@ class ScreeningController extends Controller
                 'full_name' => $screening['full_name'],
                 'age' => $screening['age'],
                 'gender' => $screening['gender'],
-                'contact_with_tb' => $screening['contact_with_tb'],
-                'batuk' => $screening['batuk'],
-                'sesak_nafas' => $screening['sesak_nafas'],
-                'keringat_malam_hari' => $screening['keringat_malam_hari'],
-                'demam_meriang' => $screening['demam_meriang'],
-                'ibu_hamil' => $screening['ibu_hamil'],
-                'lansia' => $screening['lansia'],
-                'diabetes_melitus' => $screening['diabetes_melitus'],
-                'merokok' => $screening['merokok'],
+                'home_contact' => $screening['home_contact'],
+                'cough' => $screening['cough'],
+                'breath' => $screening['breath'],
+                'sweat' => $screening['sweat'],
+                'fever' => $screening['fever'],
+                'weight_loss' => $screening['weight_loss'],
+                'pregnant' => $screening['pregnant'],
+                'elderly' => $screening['elderly'],
+                'diabetes' => $screening['diabetes'],
+                'smoking' => $screening['smoking'],
+                'close_contact' => $screening['close_contact'],
+                'ever_treatment' => $screening['ever_treatment'],
             ]);        
         }
-        return redirect()->route('screening');
+        return to_route('screening');
     }
 
     public function downloadSuratRekomendasi()

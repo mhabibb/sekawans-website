@@ -1,116 +1,171 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rekomendasi Pemeriksaan Lanjutan Suspek TBC</title>
     <style>
-        @page {
-            size: A4 portrait;
-            margin: 0;
+        @import url('https://fonts.googleapis.com/css2?family=Niconne&display=swap');
+        .unique-font {
+            font-family: 'Srisakdi', cursive;
         }
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
+
+        .kop-surat {
+            text-align: center;
+            margin-bottom: 20px; 
         }
-        .container {
-            width: auto;
-            height: auto; 
-            margin: 0;
-            padding: 20mm;
-            border: 2px solid black;
+
+        .kop-surat img {
+            display: block;
+            margin: 0 auto 10px; 
+            width: 80%;
         }
-        table {
+
+        .card {
+            border-radius: 16px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+
+        .card-title {
+            font-size: 16px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .form-label {
+            font-size: 16px;
+        }
+
+        .form-check-label {
+            font-size: 16px;
+            margin-left: 10px;
+        }
+
+        .btn-danger {
+            background-color: #dc3545;
+            border-color: #dc3545;
+        }
+
+        .tanggal_screening {
+            text-align: right;
+        }
+
+        .kiri {
+            text-align: right;
+        }
+
+        .kanan {
+            text-align: right;
+        }
+
+        .pertanyaan {
             width: 100%;
             border-collapse: collapse;
         }
-        th, td {
+
+        .pertanyaan th, .pertanyaan td {
+            border: 1px solid #ddd;
             padding: 8px;
             text-align: left;
         }
-        .title {
-            text-align: center;
-            font-weight: bold;
-            font-size: 20px;
-        }
-        .content {
-            margin-top: 0px;
-        }
-        .content p {
-            margin-bottom: 10px;
-        }
-        .content .info {
-            margin-bottom: 20px;
-        }
-        .content .info label {
-            font-weight: bold;
-        }
-        .content .info span {
-            margin-left: 10px;
-        }
-        .content .checkboxes {
-            margin-bottom: 20px;
-        }
-        .content .checkboxes label {
-            display: inline-block;
-            width: 50%; 
-        }
-        .content .checkboxes input {
-            margin-right: 5px;
-        }
-        .content .signature {
-            margin-top: 50px;
-            text-align: right;
+
+        .pertanyaan th {
+            background-color: #f2f2f2;
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <table>
+    <div class="rangkasurat">
+        <table style="width: 100%;">
+            <div class="kop-surat">
+                <div class="d-flex justify-content-between">
+                    <div style="width: 30%; margin-left: 100px;">
+                        <img src="{{ public_path('img/logo.png') }}" alt="Logo" width="100">
+                    </div>
+                    <div style="width: 100%;">
+                        <h3><strong class="unique-font">SEKAWAN'S</strong> <strong class="unique-font" style="color: red;">TB</strong> <strong class="unique-font">JEMBER</strong></h3>
+                        <h5><strong>SK.MENTERI HUKUM DAN HAK ASASI MANUSIA RI</strong></h5>
+                        <h5><strong>NOMOR: AHU-0016828.AH.01.07.TAHUN 2017</strong></h5>
+                        <h6>Alamat: Jl.Udang Windu No.17, Mangli-Jember</h6>
+                        <h6>No.HP : 085732480822 Email : sekawansjember@gmail.com</h6>
+                    </div>
+                </div>
+            </div>
+            <hr>
+            <td class="kiri">Jember, {{ \Carbon\Carbon::parse($screening['screening_date'])->isoFormat('LL') }} <br><br></td>
             <tr>
-                <th colspan="3" style="background-color: #d3d3d3;">Surat Pengantar Pemeriksaan TBC</th>
+                <td colspan="2">Perihal : Rekomendasi Pemeriksaan Lanjutan Suspek TBC</td>
             </tr>
             <tr>
-                <td colspan="3">
-                    <div class="content">
-                        <p>Kepada,</p>
-                        <p>Puskesmas .......................</p>
-                        <p>Di tempat</p>
-                        <p>Mohon untuk dilakukan pemeriksaan kepada:</p>
-                        <div class="info">
-                            <p><label>Nama:</label><span>____________________</span></p>
-                            <p><label>Umur:</label><span>____________________</span></p>
-                            <p><label>Jenis Kelamin:</label><span>____________________</span></p>
-                            <p><label>Alamat:</label><span>____________________</span></p>
-                        </div>
-                        <div class="checkboxes">
-                            <p>Hasil Skrining oleh Kader: </p>
-                            <label><input type="checkbox"> Kontak Serumah</label>
-                            <label><input type="checkbox"> Kontak Erat</label>
-                            <label><input type="checkbox"> Batuk</label>
-                        </div>
-                        <div class="checkboxes">
-                            <p>Gejala lain :</p>
-                            <div style="display: flex;">
-                                <div style="flex: 1;">
-                                    <label><input type="checkbox"> Batuk Berdarah</label><br>
-                                    <label><input type="checkbox"> Sesak Nafas</label><br>
-                                    <label><input type="checkbox"> Berkeringat di Malam Hari</label><br>
-                                    <label><input type="checkbox"> Demam/Mering >1 bulan</label>
-                                </div>
-                                <div style="flex: 1;">
-                                    <label><input type="checkbox"> DM</label><br>
-                                    <label><input type="checkbox"> Umur > 60th</label><br>
-                                    <label><input type="checkbox"> Ibu Hamil</label><br>
-                                    <label><input type="checkbox"> Perokok</label><br>
-                                    <label><input type="checkbox"> Pernah berobat TB tapi tidak tuntas</label>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="signature">
-                            <p>Atas perhatiannya diucapkan terima kasih.</p>
-                            <p>_______________________</p>
-                            <p>Kader</p>
-                        </div>
-                    </div>
+                <td colspan="2">Kepada : Yth. Penanggung Jawab Tuberkulosis di {{ $screening['district'] }}<br><br></td>
+            </tr>
+            <tr>
+                <td colspan="2">Mohon pemeriksaan dan penanganan lebih lanjut pada suspek :<br><br></td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    Nama : {{ $screening['full_name'] }}<br>
+                    Umur : {{ $screening['age'] }} Tahun<br>
+                    Jenis Kelamin : {{ $screening['gender'] === 'male' ? 'Laki-laki' : ($screening['gender'] === 'female' ? 'Perempuan' : 'Tidak Diketahui') }}
+                    <br><br>
+                    Diagnosis,
+                    Suspek TBC dengan hasil skrining kesehatan yakni : <br>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <table class="pertanyaan" style="width: 100%;">
+                        <tr>
+                            <th>Pertanyaan Skrining</th>
+                            <th>Jawaban</th>
+                        </tr>
+                        <tr>
+                            <td>Apakah ada kontak satu rumah dengan pasien TBC ?</td>
+                            <td>{{ $screening['home_contact'] ? 'Ya' : 'Tidak' }}</td>
+                        </tr>
+                        <tr>
+                            <td>Apakah anda mengalami batuk selama 2 minggu atau lebih ?</td>
+                            <td>{{ $screening['cough'] ? 'Ya' : 'Tidak' }}</td>
+                        </tr>
+                        <tr>
+                            <td>Apakah anda pernah mengalami sesak nafas dalam 2 bulan terakhir ?</td>
+                            <td>{{ $screening['breath'] ? 'Ya' : 'Tidak' }}</td>
+                        </tr>
+                        <tr>
+                            <td>Apakah anda pernah berkeringat saat malam hari tanpa berkegiatan ?</td>
+                            <td>{{ $screening['sweat'] ? 'Ya' : 'Tidak' }}</td>
+                        </tr>
+                        <tr>
+                            <td>Apakah anda pernah mengalami demam meriang selama lebih dari 1 bulan ?</td>
+                            <td>{{ $screening['fever'] ? 'Ya' : 'Tidak' }}</td>
+                        </tr>
+                        <tr>
+                            <td>Apakah anda mengalami penurunan berat badan drastis disertasi nafsu makan yang berkurang ?</td>
+                            <td>{{ $screening['weight_loss'] ? 'Ya' : 'Tidak' }}</td>
+                        </tr>
+                        <tr>
+                            <td>Apakah anda ibu hamil ?</td>
+                            <td>{{ $screening['pregnant'] ? 'Ya' : 'Tidak' }}</td>
+                        </tr>
+                        <tr>
+                            <td>Apakah anda adalah lansia lebih dari 60 tahun ?</td>
+                            <td>{{ $screening['elderly'] ? 'Ya' : 'Tidak' }}</td>
+                        </tr>
+                        <tr>
+                            <td>Apakah anda menderita diabetes melitus ?</td>
+                            <td>{{ $screening['diabetes'] ? 'Ya' : 'Tidak' }}</td>
+                        </tr>
+                        <tr>
+                            <td>Apakah anda merokok ?</td>
+                            <td>{{ $screening['smoking'] ? 'Ya' : 'Tidak' }}</td>
+                        </tr>
+                        <tr>
+                            <td>Apakah anda pernah melakukan pengobatan Tuberkulosis ?</td>
+                            <td>{{ $screening['ever_treatment'] ? 'Ya' : 'Tidak' }}</td>
+                        </tr>
+                    </table>
                 </td>
             </tr>
         </table>

@@ -5,36 +5,44 @@
     @if(session('success'))
         <div style="color: green;">{{ session('success') }}</div>
     @endif
+    <h2 class="fw-bold mb-4 text-center text-primary">Hasil Screening</h2>
     
     <div class="card mb-4">
         <div class="card-body">
-            <h3 class="card-title">Hasil Screening</h3>
             <p class="d-flex justify-content-center">{{ $screening['full_name'] }}</p>
             @if ($screening['is_positive'] == true)
             <div class="d-flex justify-content-center">
-                <p class="fw-bold">Anda Positive TBC</p>
+                <p class="fw-bold fs-4">Anda diduga Positive TBC <br><br></p>
             </div>
+            <a href="{{ route('download.surat.rekomendasi') }}" class="btn btn-secondary" style="display: block; width: fit-content; margin: 0 auto;">Download Surat Rekomendasi</a>
+            <br><br>
             <p style="font-size: 16px;">Berikut adalah beberapa fasilitas kesehatan yang tersedia di kecamatan Anda:</p>
             <ol style="font-size: 16px;">
                 @foreach ($faskes as $item)
                 <li>{{ $item->name }}</li>
                 @endforeach
             </ol>
-            <p style="font-size: 16px;">Formulir TBC:</p>
             <br>
+            <p style="font-size: 16px;">Formulir TBC:</p>
             <hr>
             <div class="rangkasurat">
                 <table style="width: 100%;">
-                  <div class="kop-surat">
-                    <img src="/img/logo.png" width="10%">
-                    <h3>SEKAWAN'S TB JEMBER</h3>
-                    <h5>SK.MENTERI HUKUM DAN HAK ASASI MANUSIA RI</h5>
-                    <h5>NOMOR: AHU-0016828.AH.01.07.TAHUN 2017</h5>
-                    <h6>Alamat: Jl.Udang Windu No.17, Mangli-Jember</h6>
-                    <h6>No.HP : 085732480822 Email : sekawansjember@gmail.com</h6>
-                  </div>            
+                    <div class="kop-surat">
+                        <div class="d-flex justify-content-between">
+                            <div style="width: 30%; margin-left: 100px;">
+                                <img src="/img/logo.png" width="80%" alt="Logo">
+                            </div>
+                            <div style="width: 100%;">
+                                <h3><strong class="unique-font">SEKAWAN'S</strong> <strong class="unique-font" style="color: red;">TB</strong> <strong class="unique-font">JEMBER</strong></h3>
+                                <h5><strong>SK.MENTERI HUKUM DAN HAK ASASI MANUSIA RI</strong></h5>
+                                <h5><strong>NOMOR: AHU-0016828.AH.01.07.TAHUN 2017</strong></h5>
+                                <h6>Alamat: Jl.Udang Windu No.17, Mangli-Jember</h6>
+                                <h6>No.HP : 085732480822 Email : sekawansjember@gmail.com</h6>
+                            </div>
+                        </div>
+                    </div>                                                                      
                   <hr>    
-                     <td class="kiri">Jember, {{ $screening['screening_date'] }} <br><br></td>
+                  <td class="kiri">Jember, {{ \Carbon\Carbon::parse($screening['screening_date'])->isoFormat('LL') }} <br><br></td>
 
 
 
@@ -51,74 +59,55 @@
                       <td colspan="2">
                           Nama : {{ $screening['full_name'] }}<br>
                           Umur : {{ $screening['age'] }}<br>
-                          Jenis Kelamin : @if($screening['gender'] === 'male')
-                                Laki-laki
-                            @elseif($screening['gender'] === 'female')
-                                Perempuan
-                            @else
-                                {{ $screening['gender'] }}
-                            @endif<br><br>
-                          Diagnosis : 
+                          Jenis Kelamin : {{ $screening['gender'] }}<br><br>
+                          Diagnosis,  
                           Suspek TBC dengan hasil skrining kesehatan yakni : <br>
                       </td>
                   </tr>                  
                     <tr>
                         <td colspan="2">
-                        <table class="pertanyaan" style="width: 100%;">
-                            <tr>
-                                <th>Pertanyaan Skrining</th>
-                                <th>Jawaban</th>
-                            </tr>
-                            <tr>
-                                <td>Apakah ada kontak satu rumah dengan pasien TBC ?</td>
-                                <td>{{ $screening['home_contact'] == 1 ? 'Ya' : 'Tidak' }}</td>
-                            </tr>
-                            <tr>
-                                <td>Apakah anda mengalami batuk selama 2 minggu atau lebih ?</td>
-                                <td>{{ $screening['cough'] == 1 ? 'Ya' : 'Tidak' }}</td>
-                            </tr>
-                            <tr>
-                                <td>Apakah anda pernah mengalami sesak nafas dalam 2 bulan terakhir ?</td>
-                                <td>{{ $screening['breath'] == 1 ? 'Ya' : 'Tidak' }}</td>
-                            </tr>
-                            <tr>
-                                <td>Apakah anda pernah berkeringat saat malam hari tanpa berkegiatan ?</td>
-                                <td>{{ $screening['sweat'] == 1 ? 'Ya' : 'Tidak' }}</td>
-                            </tr>
-                            <tr>
-                                <td>Apakah anda pernah mengalami demam meriang selama lebih dari 1 bulan ?</td>
-                                <td>{{ $screening['fever'] == 1 ? 'Ya' : 'Tidak' }}</td>
-                            </tr>
-                            <tr>
-                                <td>Apakah anda mengalami penurunan berat badan drastis disertasi nafsu makan yang berkurang?</td>
-                                <td>{{ $screening['weight_loss'] == 1 ? 'Ya' : 'Tidak' }}</td>
-                            </tr>
-                            <tr>
-                                <td>Apakah anda ibu hamil ?</td>
-                                <td>{{ $screening['pregnant'] == 1 ? 'Ya' : 'Tidak' }}</td>
-                            </tr>
-                            <tr>
-                                <td>Apakah anda adalah lansia lebih dari 60 tahun ?</td>
-                                <td>{{ $screening['elderly'] == 1 ? 'Ya' : 'Tidak' }}</td>
-                            </tr>
-                            <tr>
-                                <td>Apakah anda menderita diabetes melitus ?</td>
-                                <td>{{ $screening['diabetes'] == 1 ? 'Ya' : 'Tidak' }}</td>
-                            </tr>
-                            <tr>
-                                <td>Apakah anda merokok ?</td>
-                                <td>{{ $screening['smoking'] == 1 ? 'Ya' : 'Tidak' }}</td>
-                            </tr>
-                            <tr>
-                                <td>Apakah anda pernah melakukan kontak erat dengan penderita Tuberkulosis ? (teman kantor, dll)</td>
-                                <td>{{ $screening['close_contact'] == 1 ? 'Ya' : 'Tidak' }}</td>
-                            </tr>
-                            <tr>
-                                <td>Apakah anda pernah melakukan pengobatan Tuberkulosis ?</td>
-                                <td>{{ $screening['ever_treatment'] == 1 ? 'Ya' : 'Tidak' }}</td>
-                            </tr>
-                        </table>
-
+                            <table class="pertanyaan" style="width: 100%;">
+                                <tr>
+                                    <th>Pertanyaan Skrining</th>
+                                    <th>Jawaban</th>
+                                </tr>
+                                <tr>
+                                    <td>Apakah ada kontak satu rumah dengan pasien TBC ?</td>
+                                    <td>{{ $screening['home_contact'] }}</td>
+                                </tr>
+                                <tr>
+                                    <td>Apakah anda mengalami batuk selama 2 minggu atau lebih ?</td>
+                                    <td>{{ $screening['cough'] }}</td>
+                                </tr>
+                                <tr>
+                                    <td>Apakah anda pernah mengalami sesak nafas dalam 2 bulan terakhir ?</td>
+                                    <td>{{ $screening['breath'] }}</td>
+                                </tr>
+                                <tr>
+                                    <td>Apakah anda pernah berkeringat saat malam hari tanpa berkegiatan ?</td>
+                                    <td>{{ $screening['sweat'] }}</td>
+                                </tr>
+                                <tr>
+                                    <td>Apakah anda pernah mengalami demam meriang selama lebih dari 1 bulan ?</td>
+                                    <td>{{ $screening['fever'] }}</td>
+                                </tr>
+                                <tr>
+                                    <td>Apakah anda ibu hamil ?</td>
+                                    <td>{{ $screening['pregnant'] }}</td>
+                                </tr>
+                                <tr>
+                                    <td>Apakah anda adalah lansia lebih dari 60 tahun ?</td>
+                                    <td>{{ $screening['elderly'] }}</td>
+                                </tr>
+                                <tr>
+                                    <td>Apakah anda menderita diabetes melitus ?</td>
+                                    <td>{{ $screening['diabetes'] }}</td>
+                                </tr>
+                                <tr>
+                                    <td>Apakah anda merokok ?</td>
+                                    <td>{{ $screening['smoking'] }}</td>
+                                </tr>
+                            </table>
                         </td>
                     </tr>
                 </table>
@@ -135,6 +124,12 @@
 
 @section('custom_css')
 <style>
+    
+    @import url('https://fonts.googleapis.com/css2?family=Niconne&display=swap');
+    .unique-font {
+        font-family: 'Srisakdi', cursive;
+    }
+
     .kop-surat {
         text-align: center;
         margin-bottom: 20px; 

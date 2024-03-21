@@ -31,7 +31,7 @@ class ReligionSeeder extends Seeder
             'name' => 'Budha'
         ]);
         Religion::create([
-            'name' => 'Konghucu'
+            'name' => 'Konghushu'
         ]);
     }
 }

@@ -85,10 +85,12 @@
     <h2 class="fw-bold mb-5">Riwayat Jumlah Pasien TBC</h2>
     <div class="row gap-4">
         @foreach ($regencies as $regency)
-        <div class="p-2 text-center col-md mx-auto" style="max-width: 200px;">
-            <h1>{{ $regency->patients_count }}</h1>
-            <p class="lead fw-bold">{{ $regency->name }}</p>
-        </div>
+            @if ($regency->name == 'KABUPATEN JEMBER')
+            <div class="p-2 text-center col-md mx-auto" style="max-width: 200px;">
+                <h1>{{ $regency->patients_count }}</h1>
+                <p class="lead fw-bold">{{ $regency->name }}</p>
+            </div>
+            @endif
         @endforeach
     </div>
 </section>

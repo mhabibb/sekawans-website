@@ -22,6 +22,7 @@
     <div class="container py-5">
         @if (isset($regencies) && count($regencies) > 0)
         @foreach ($regencies as $regency)
+        @if ($regency->name == 'KABUPATEN JEMBER')
         <div class="py-5 text-center border-bottom">
             <h2 class="fw-bold mb-5">{{ $regency->total }} PASIEN TB DI {{ $regency->name }}</h2>
             <div class="row gap-4 justify-content-center mb-3">
@@ -50,13 +51,14 @@
             <a href="{{ route('kasustbc.show', $regency) }}" class="btn btn-secondary">Lihat per Kecamatan</a>
             @endif
         </div>
+        @endif
         @endforeach
         @else
         <div class="py-5 text-center border-bottom">
             <p class="lead">Data tidak tersedia.</p>
         </div>
         @endif
-    </div>
+    </div>    
 </section>
 @endsection
 

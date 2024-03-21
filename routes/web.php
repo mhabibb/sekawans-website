@@ -114,3 +114,5 @@ Route::controller(ScreeningController::class)->group(function () {
     Route::post('/screening/store','store')->name('screening.store');
     Route::get('/screening/hasil','result')->name('screening.result');
 });
+
+Route::get('/download-surat-rekomendasi', [ScreeningController::class, 'downloadSuratRekomendasi'])->name('download.surat.rekomendasi');

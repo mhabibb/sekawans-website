@@ -18,7 +18,6 @@ class StaticElementSeeder extends Seeder
         StaticElement::create([
             'element' => 'profil',
             'contents' => "SEKAWAN’s TBC adalah lembaga sosial yang bergerak didalam memberikan dukungan pengobatan kepada pasien TBC Resisten Obat/Kebal Obat di wilayah Kabupaten Jember, Lumajang, Bondowoso, dan Situbondo. SEKAWAN’s TBC merupakan lembaga resmi yang berbadan hukum berdasarkan Surat Keputusan Menteri Hukum dan Hak Asasi Manusia Republik Indonesia Nomor: AHU-0016828.AH.01.07.TAHUN 2017 tentang Pengesahan Pendirian Badan Hukum Perkumpulan SEKAWAN’s TBC Jember.
-
 SEKAWANS’s TBC terbentuk sejak 14 Juli 2016, disebut sebagai sekumpulan pendidik sebaya yang terdiri dari para mantan penderita TBC Resisten Obat/Kebal Obat yang telah sembuh, praktisi, dan pemerhati TBC lainnya. Pendidik sebaya tersebut telah turut berperan serta dalam memotivasi pasien agar berobat sampai tuntas, dengan memberikan dukungan psikosoisal kepada pasien TB RO. Dengan cara melaksanakan kunjungan ke fasyankes dan kunjungan rumah. Adanya diskriminasi dan stigma terhadap pasien TB RO di masyarakat, juga akan memberikan dampak psikososial terhadap pasien yang menjalani pengobatan, sehingga adanya pendidik sebaya akan sangat membantu menguatkan pasien TB RO.",
         ]);
 

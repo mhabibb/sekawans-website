@@ -112,7 +112,6 @@
                     </tr>
                 </table>
             </div>
-            <!-- <iframe src="{{ asset('document/screening.pdf') }}" width="100%" height="650px"></iframe> -->
             @else
             <div class="d-flex justify-content-center">
                 <p class="fw-bold">Anda Tidak Positive TBC</p>

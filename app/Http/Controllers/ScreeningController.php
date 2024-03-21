@@ -117,7 +117,7 @@ class ScreeningController extends Controller
             $html = view('web.suratrekomendasi', ['screening' => $screening])->render();
 
             $pdf->loadHtml($html);
-            $pdf->setPaper('A4', 'portrait');
+            $pdf->setPaper('A4', 'landscape');
             $pdf->render();
 
             return $pdf->stream('Surat Rekomendasi TBC.pdf');

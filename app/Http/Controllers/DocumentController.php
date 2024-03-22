@@ -70,14 +70,25 @@ class DocumentController extends Controller
             ->with('success', 'Dokumen berhasil diperbarui.');
     }
 
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  \App\Models\Document  $document
+     * @return \Illuminate\Http\Response
+     */
     public function destroy(Document $document)
     {
-        Storage::delete($document->file_path);
+        LogBatch::startBatch();
         $document->delete();
-
-        return redirect()->route('admin.documents.index')
-                        ->with('success', 'Dokumen berhasil dihapus.');
+        if (request()->ajax()) {
+            return true;
+        };
+        LogBatch::endBatch();
+        return to_route('admin.documents.index');
     }
+
+
+}
 
 
 }

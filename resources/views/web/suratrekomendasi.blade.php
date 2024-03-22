@@ -11,14 +11,29 @@
         }
 
         .kop-surat {
-            text-align: center;
-            margin-bottom: 20px; 
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
         }
 
-        .kop-surat img {
-            display: block;
-            margin: 0 auto 10px; 
-            width: 80%;
+        .kop-surat .logo {
+            flex: 0 0 auto;
+            margin-right: 20px;
+        }
+
+        .kop-surat .logo img {
+            max-width: 100px;
+            height: auto;
+        }
+
+        .kop-surat .text {
+            flex: 1;
+            display: flex;
+            align-items: center;
+        }
+
+        .kop-surat .text div {
+            white-space: nowrap;
         }
 
         .card {
@@ -80,16 +95,16 @@
     <div class="rangkasurat">
         <table style="width: 100%;">
             <div class="kop-surat">
-                <div class="d-flex justify-content-between">
-                    <div style="width: 30%; margin-left: 100px;">
-                        <img src="{{ public_path('img/logo.png') }}" alt="Logo" width="100">
-                    </div>
-                    <div style="width: 100%;">
+                <div class="logo">
+                    <img src="data:image/png;base64, <?php echo base64_encode(file_get_contents('img/logo.png')); ?>" alt="Logo">
+                </div>
+                <div class="text">
+                    <div>
                         <h3><strong class="unique-font">SEKAWAN'S</strong> <strong class="unique-font" style="color: red;">TB</strong> <strong class="unique-font">JEMBER</strong></h3>
                         <h5><strong>SK.MENTERI HUKUM DAN HAK ASASI MANUSIA RI</strong></h5>
                         <h5><strong>NOMOR: AHU-0016828.AH.01.07.TAHUN 2017</strong></h5>
-                        <h6>Alamat: Jl.Udang Windu No.17, Mangli-Jember</h6>
-                        <h6>No.HP : 085732480822 Email : sekawansjember@gmail.com</h6>
+                        <p>Alamat: Jl.Udang Windu No.17, Mangli-Jember</p>
+                        <p>No.HP : 085732480822 Email : sekawansjember@gmail.com</p>
                     </div>
                 </div>
             </div>

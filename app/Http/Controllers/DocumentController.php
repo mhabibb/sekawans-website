@@ -4,7 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Document;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Storage;
+use Spatie\Activitylog\Facades\LogBatch;
+
 
 class DocumentController extends Controller
 {
@@ -34,13 +35,14 @@ class DocumentController extends Controller
         $file = $request->file('file');
         $fileName = time() . '_' . $file->getClientOriginalName();
         $filePath = $file->storeAs('documents', $fileName);
-
+        LogBatch::startBatch();
         Document::create([
             'judul' => $request->judul,
             'kategori' => $request->kategori,
             'deskripsi' => $request->deskripsi,
             'file_path' => $filePath,
         ]);
+        LogBatch::endBatch();
 
         return redirect()->route('admin.documents.index')
             ->with('success', 'Dokumen berhasil ditambahkan.');
@@ -86,9 +88,6 @@ class DocumentController extends Controller
         LogBatch::endBatch();
         return to_route('admin.documents.index');
     }
-
-
-}
 
 
 }

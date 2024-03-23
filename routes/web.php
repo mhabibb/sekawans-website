@@ -10,6 +10,7 @@ use App\Http\Controllers\WebController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\SatelliteWorkerController;
 use App\Http\Controllers\ScreeningController;
+use App\Http\Controllers\MemberController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 
@@ -47,8 +48,8 @@ Route::middleware('auth')->prefix('admin')->name('admin.')->group(function () {
         Route::get('/patient/{regencies}', 'regency')->name('patients.regency');
     });
 
-    Route::resource('/screening', ScreeningController::class)->only(['index']);
-
+    Route::resource('/screening', ScreeningController::class)->only(['index']);   
+    
     Route::controller(LogController::class)->group(function () {
         Route::get('/logs', 'index')->name('logs.index');
         Route::put('/logs/{activity}/restore', 'restore')->name('logs.restore');

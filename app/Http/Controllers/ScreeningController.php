@@ -44,6 +44,7 @@ class ScreeningController extends Controller
                 'contact3_name' => 'required|string',
                 'contact3_number' => 'required|string'
             ]);
+
             // Hitung hasil screening
             $cough = ['cough'];
             $gejala = ['breath','sweat','fever','weight_loss'];
@@ -57,19 +58,18 @@ class ScreeningController extends Controller
                                 $screening = Screening::create($validated);
                                 // Menyimpan data screening ke session
                                 session()->put('screening', $validated);
-                    
                                 return redirect()->route('screening.result')->with('success', 'Formulir berhasil disimpan!');
                             }
                         }
                     }
                 }
             }
+
             $validated['is_positive'] = false;
             // Simpan data ke dalam database
             $screening = Screening::create($validated);
             // Menyimpan data screening ke session
             session()->put('screening', $validated);
-
             return redirect()->route('screening.result')->with('success', 'Formulir berhasil disimpan!');
         } catch (Exception $e) {
             return back()->withInput()->withErrors(['error' => $e->getMessage()]);
@@ -126,23 +126,26 @@ class ScreeningController extends Controller
 
             return $pdf->stream('Surat Rekomendasi TBC.pdf');
         } else {
-            // Redirect jika data screening tidak tersedia
             return redirect()->route('screening')->with('error', 'Data screening tidak tersedia.');
         }
     }
 
     public function index()
     {
-        // Mendapatkan daftar skrining
         $screenings = Screening::all();
-
-        // Mendapatkan daftar kabupaten
-        $regencies = Regency::all(); // Ganti dengan cara sesuai pengambilan data daftar kabupaten
-
-        // Mendefinisikan judul halaman
         $title = "Daftar Skrining";
+        return view('admin.screening.index', compact('screenings', 'title'));
+    }
 
-        // Mengirim data ke view screening.index
-        return view('admin.screening.index', compact('screenings', 'regencies', 'title'));
+    public function destroy($id)
+    {
+        try {
+            $screening = Screening::findOrFail($id);
+            $screening->delete();
+
+            return response()->json(['message' => 'Data berhasil dihapus'], 200);
+        } catch (\Exception $e) {
+            return response()->json(['message' => 'Gagal menghapus data'], 500);
+        }
     }
 }

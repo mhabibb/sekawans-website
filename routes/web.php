@@ -48,7 +48,8 @@ Route::middleware('auth')->prefix('admin')->name('admin.')->group(function () {
         Route::get('/patient/{regencies}', 'regency')->name('patients.regency');
     });
 
-    Route::resource('/screening', ScreeningController::class)->only(['index']);   
+    Route::get('/screening', [ScreeningController::class, 'index'])->name('screening.index');
+    Route::delete('/screening/{id}', [ScreeningController::class, 'destroy'])->name('screening.destroy');
     
     Route::controller(LogController::class)->group(function () {
         Route::get('/logs', 'index')->name('logs.index');

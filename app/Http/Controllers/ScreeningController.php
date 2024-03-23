@@ -6,6 +6,7 @@ use App\Models\District;
 use App\Models\SatelliteHealthFacility;
 use Illuminate\Http\Request;
 use App\Models\Screening;
+use App\Models\Regency;
 use Exception;
 use Dompdf\Dompdf;
 use Dompdf\Options;
@@ -128,5 +129,20 @@ class ScreeningController extends Controller
             // Redirect jika data screening tidak tersedia
             return redirect()->route('screening')->with('error', 'Data screening tidak tersedia.');
         }
+    }
+
+    public function index()
+    {
+        // Mendapatkan daftar skrining
+        $screenings = Screening::all();
+
+        // Mendapatkan daftar kabupaten
+        $regencies = Regency::all(); // Ganti dengan cara sesuai pengambilan data daftar kabupaten
+
+        // Mendefinisikan judul halaman
+        $title = "Daftar Skrining";
+
+        // Mengirim data ke view screening.index
+        return view('admin.screening.index', compact('screenings', 'regencies', 'title'));
     }
 }

@@ -47,6 +47,8 @@ Route::middleware('auth')->prefix('admin')->name('admin.')->group(function () {
         Route::get('/patient/{regencies}', 'regency')->name('patients.regency');
     });
 
+    Route::resource('/screening', ScreeningController::class)->only(['index']);
+
     Route::controller(LogController::class)->group(function () {
         Route::get('/logs', 'index')->name('logs.index');
         Route::put('/logs/{activity}/restore', 'restore')->name('logs.restore');

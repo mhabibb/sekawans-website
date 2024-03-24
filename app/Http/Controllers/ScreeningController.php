@@ -18,31 +18,31 @@ class ScreeningController extends Controller
     {
         try {
             $validated = $request->validate([
-                'agreement' => 'required',
+                'agreement' => 'required|boolean',
                 'full_name' => 'required|string',
-                'contact' => 'required|string',
-                'gender' => 'required|in:male,female',
+                'contact' => 'nullable|string',
+                'gender' => 'required|string',
                 'age' => 'required|numeric',
                 'district' => 'required|string',
                 'screening_date' => 'required|date',
-                'home_contact' => 'required|in:1,0',
-                'cough' => 'required|in:1,0',
-                'breath' => 'required|in:1,0',
-                'sweat' => 'required|in:1,0',
-                'fever' => 'required|in:1,0',
-                'weight_loss' => 'required|in:1,0',
-                'pregnant' => 'required|in:1,0',
-                'elderly' => 'required|in:1,0',
-                'diabetes' => 'required|in:1,0',
-                'smoking' => 'required|in:1,0',
-                'close_contact' => 'required|in:1,0',
-                'ever_treatment' => 'required|in:1,0',
-                'contact1_name' => 'required|string',
-                'contact1_number' => 'required|string',
-                'contact2_name' => 'required|string',
-                'contact2_number' => 'required|string',
-                'contact3_name' => 'required|string',
-                'contact3_number' => 'required|string'
+                'home_contact' => 'required|boolean',
+                'cough' => 'required|boolean',
+                'breath' => 'required|boolean',
+                'sweat' => 'required|boolean',
+                'fever' => 'required|boolean',
+                'weight_loss' => 'required|boolean',
+                'pregnant' => 'required|boolean',
+                'elderly' => 'required|boolean',
+                'diabetes' => 'required|boolean',
+                'smoking' => 'required|boolean',
+                'close_contact' => 'required|boolean',
+                'ever_treatment' => 'required|boolean',
+                'contact1_name' => 'nullable|string',
+                'contact1_number' => 'nullable|string',
+                'contact2_name' => 'nullable|string',
+                'contact2_number' => 'nullable|string',
+                'contact3_name' => 'nullable|string',
+                'contact3_number' => 'nullable|string'
             ]);
 
             // Hitung hasil screening
@@ -83,6 +83,24 @@ class ScreeningController extends Controller
             $district = District::where('name', $screening['district'])->first();
             $faskes = $district->satelliteHealthFacility;
 
+            // Ambil nilai variabel dari array $screening
+            $screening_date = $screening['screening_date'];
+            $full_name = $screening['full_name'];
+            $age = $screening['age'];
+            $gender = $screening['gender'];
+            $home_contact = $screening['home_contact'];
+            $cough = $screening['cough'];
+            $breath = $screening['breath'];
+            $sweat = $screening['sweat'];
+            $fever = $screening['fever'];
+            $weight_loss = $screening['weight_loss'];
+            $pregnant = $screening['pregnant'];
+            $elderly = $screening['elderly'];
+            $diabetes = $screening['diabetes'];
+            $smoking = $screening['smoking'];
+            $close_contact = $screening['close_contact'];
+            $ever_treatment = $screening['ever_treatment'];
+
             return view('web.screening-result', compact(
                 'screening',
                 'district',
@@ -105,7 +123,7 @@ class ScreeningController extends Controller
                 'ever_treatment'
             ));
         }
-        return to_route('screening');
+        return redirect()->route('screening');
     }
 
     public function downloadSuratRekomendasi()

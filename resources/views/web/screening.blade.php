@@ -23,8 +23,8 @@
                     <li>Saya bersedia mengisi semua data formulir Screening dengan sebenar-benarnya sesuai kondisi yang sedang saya alami.</li>
                 </ol>
                 <div class="form-check">
-                    <input required class="form-check-input" type="checkbox" value="1" id="agreement" name="agreement">
-                    <label class="form-check-label" for="agreement" name="agreement" style="font-size: 16px;">Ya, saya menyetujui</label>
+                    <input class="form-check-input" type="checkbox" value="1" id="agreement" name="agreement" required>
+                    <label class="form-check-label" for="agreement" style="font-size: 16px;">Ya, saya menyetujui</label>
                 </div>
             </div>
         </div>
@@ -35,11 +35,11 @@
                 <h3 class="card-title">Identitas Diri</h3>
                     <div class="mb-3">
                         <label for="full Name" class="form-label" style="font-size: 16px;">Nama Lengkap:</label>
-                        <input type="text" class="form-control" id="fullName" name="full_name" required style="font-size: 16px;">
+                        <input type="text" class="form-control" id="fullName" name="full_name" style="font-size: 16px;">
                     </div>
                     <div class="mb-3">
                         <label for="contact" class="form-label" style="font-size: 16px;">Kontak:</label>
-                        <input type="text" class="form-control" id="contact" name="contact" required style="font-size: 16px;">
+                        <input type="text" class="form-control" id="contact" name="contact" style="font-size: 16px;">
                     </div>
                     <div class="mb-3">
                         <label for="gender" class="form-label" style="font-size: 16px;">Jenis Kelamin:</label>
@@ -51,7 +51,7 @@
                     </div>
                     <div class="mb-3">
                         <label for="age" class="form-label" style="font-size: 16px;">Umur:</label>
-                        <input type="number" class="form-control" id="age" name="age" required style="font-size: 16px;">
+                        <input type="number" class="form-control" id="age" name="age" style="font-size: 16px;">
                     </div>
                     <div class="mb-3">
                         <label for="district" class="form-label" style="font-size: 16px;">Domisili Kecamatan:</label>
@@ -64,9 +64,8 @@
                     </div>
                     <div class="mb-3">
                         <label for="screeningDate" class="form-label" style="font-size: 16px;">Tanggal Screening:</label>
-                        <input type="date" class="form-control" id="screeningDate" name="screening_date" required style="font-size: 16px;">
+                        <input type="date" class="form-control" id="screeningDate" name="screening_date" style="font-size: 16px;">
                     </div>
-                    
                     <script>
                         var today = new Date();
                 
@@ -78,7 +77,6 @@
                     
                         document.getElementById("screeningDate").value = formattedDate;
                     </script>
-                    
                     <div class="mb-3">
                         <label for="contactWithTB" style="font-size: 16px;">Apakah ada kontak satu rumah dengan pasien TBC?</label><br>
                         <input type="radio" id="contactYes" name="home_contact" value="1" required>
@@ -123,11 +121,11 @@
                     <label for="feverNo" style="font-size: 16px;">Tidak</label>
                 </div>
                 <div class="mb-3">
-                    <label for="fever" style="font-size: 16px;">Apakah anda mengalami penurunan berat badan drastis disertasi nafsu makan yang berkurang?</label><br>
-                    <input type="radio" id="feverYes" name="weight_loss" value="1" required>
-                    <label for="feverYes" style="font-size: 16px;">Ya</label>
-                    <input type="radio" id="feverNo" name="weight_loss" value="0">
-                    <label for="feverNo" style="font-size: 16px;">Tidak</label>
+                    <label for="weightLoss" style="font-size: 16px;">Apakah anda mengalami penurunan berat badan drastis disertasi nafsu makan yang berkurang?</label><br>
+                    <input type="radio" id="weightLossYes" name="weight_loss" value="1" required>
+                    <label for="weightLossYes" style="font-size: 16px;">Ya</label>
+                    <input type="radio" id="weightLossNo" name="weight_loss" value="0">
+                    <label for="weightLossNo" style="font-size: 16px;">Tidak</label>
                 </div>
 
                 <!-- Faktor Risiko -->
@@ -160,18 +158,18 @@
                     <label for="smokeNo" style="font-size: 16px;">Tidak</label>
                 </div>
                 <div class="mb-3">
-                        <label for="contactWithTB" style="font-size: 16px;">Apakah anda pernah melakukan kontak erat dengan penderita Tuberkulosis ? (teman kantor, dll)</label><br>
-                        <input type="radio" id="contactYes" name="close_contact" value="1" required>
-                        <label for="contactYes" style="font-size: 16px;">Ya</label>
-                        <input type="radio" id="contactNo" name="close_contact" value="0">
-                        <label for="contactNo" style="font-size: 16px;">Tidak</label>
-                    </div>
+                    <label for="closeContact" style="font-size: 16px;">Apakah anda pernah melakukan kontak erat dengan penderita Tuberkulosis ? (teman kantor, dll)</label><br>
+                    <input type="radio" id="closeContactYes" name="close_contact" value="1" required>
+                    <label for="closeContactYes" style="font-size: 16px;">Ya</label>
+                    <input type="radio" id="closeContactNo" name="close_contact" value="0">
+                    <label for="closeContactNo" style="font-size: 16px;">Tidak</label>
+                </div>
                 <div class="mb-3">
-                    <label for="smoke" style="font-size: 16px;">Apakah anda pernah melakukan pengobatan Tuberkulosis ?</label><br>
-                    <input type="radio" id="smokeYes" name="ever_treatment" value="1" required>
-                    <label for="smokeYes" style="font-size: 16px;">Ya</label>
-                    <input type="radio" id="smokeNo" name="ever_treatment" value="0">
-                    <label for="smokeNo" style="font-size: 16px;">Tidak</label>
+                    <label for="everTreatment" style="font-size: 16px;">Apakah anda pernah melakukan pengobatan Tuberkulosis ?</label><br>
+                    <input type="radio" id="everTreatmentYes" name="ever_treatment" value="1" required>
+                    <label for="everTreatmentYes" style="font-size: 16px;">Ya</label>
+                    <input type="radio" id="everTreatmentNo" name="ever_treatment" value="0">
+                    <label for="everTreatmentNo" style="font-size: 16px;">Tidak</label>
                 </div>
             </div>
         </div>
@@ -186,24 +184,25 @@
                 <div class="mb-3">
                     <label for="contact1Name" style="font-size: 16px;">Kontak 1</label><br>
                     <div class="d-flex">
-                        <input class="form-control me-2" type="text" id="contact1Name" name="contact1_name" placeholder="Nama" required style="font-size: 16px;">
-                        <input class="form-control" type="tel" id="contact1" name="contact1_number" placeholder="Nomor Kontak" required style="font-size: 16px;">
+                        <input class="form-control me-2" type="text"  id="contact1Name" name="contact1_name" placeholder="Nama" style="font-size: 16px;">
+                        <input class="form-control" type="tel" id="contact1" name="contact1_number" placeholder="Nomor Kontak" style="font-size: 16px;">
                     </div>
                 </div>
                 <div class="mb-3">
                     <label for="contact2Name" style="font-size: 16px;">Kontak 2</label><br>
                     <div class="d-flex">
-                        <input class="form-control me-2" type="text" id="contact2Name" name="contact2_name" placeholder="Nama" required style="font-size: 16px;">
-                        <input class="form-control" type="tel" id="contact2" name="contact2_number" placeholder="Nomor Kontak" required style="font-size: 16px;">
+                        <input class="form-control me-2" type="text" id="contact2Name" name="contact2_name" placeholder="Nama" style="font-size: 16px;">
+                        <input class="form-control" type="tel" id="contact2" name="contact2_number" placeholder="Nomor Kontak" style="font-size: 16px;">
                     </div>
                 </div>
                 <div class="mb-3">
                     <label for="contact3Name" style="font-size: 16px;">Kontak 3</label><br>
                     <div class="d-flex">
-                        <input class="form-control me-2" type="text" id="contact3Name" name="contact3_name" placeholder="Nama" required style="font-size: 16px;">
-                        <input class="form-control" type="tel" id="contact3" name="contact3_number" placeholder="Nomor Kontak" required style="font-size: 16px;">
+                        <input class="form-control me-2" type="text" id="contact3Name" name="contact3_name" placeholder="Nama" style="font-size: 16px;">
+                        <input class="form-control" type="tel" id="contact3" name="contact3_number" placeholder="Nomor Kontak" style="font-size: 16px;">
                     </div>
                 </div>
+                
             </div>
         </div>
 

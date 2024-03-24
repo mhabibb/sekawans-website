@@ -80,29 +80,30 @@ class ScreeningController extends Controller
     {
         $screening = session()->get('screening');
         if ($screening) {
-            $district = District::where('name',$screening['district'])->first();
+            $district = District::where('name', $screening['district'])->first();
             $faskes = $district->satelliteHealthFacility;
-            return view('web.screening-result',[
-                'screening' => $screening,
-                'district' => $district,
-                'faskes' => $faskes,
-                'screening_date' => $screening['screening_date'],
-                'full_name' => $screening['full_name'],
-                'age' => $screening['age'],
-                'gender' => $screening['gender'],
-                'home_contact' => $screening['home_contact'],
-                'cough' => $screening['cough'],
-                'breath' => $screening['breath'],
-                'sweat' => $screening['sweat'],
-                'fever' => $screening['fever'],
-                'weight_loss' => $screening['weight_loss'],
-                'pregnant' => $screening['pregnant'],
-                'elderly' => $screening['elderly'],
-                'diabetes' => $screening['diabetes'],
-                'smoking' => $screening['smoking'],
-                'close_contact' => $screening['close_contact'],
-                'ever_treatment' => $screening['ever_treatment'],
-            ]);        
+
+            return view('web.screening-result', compact(
+                'screening',
+                'district',
+                'faskes',
+                'screening_date',
+                'full_name',
+                'age',
+                'gender',
+                'home_contact',
+                'cough',
+                'breath',
+                'sweat',
+                'fever',
+                'weight_loss',
+                'pregnant',
+                'elderly',
+                'diabetes',
+                'smoking',
+                'close_contact',
+                'ever_treatment'
+            ));
         }
         return to_route('screening');
     }

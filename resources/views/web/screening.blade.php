@@ -39,7 +39,7 @@
                     </div>
                     <div class="mb-3">
                         <label for="contact" class="form-label" style="font-size: 16px;">Kontak:</label>
-                        <input type="text" class="form-control" id="contact" name="contact" style="font-size: 16px;">
+                        <input type="text" class="form-control" id="contact" name="contact" style="font-size: 16px;" required>
                     </div>
                     <div class="mb-3">
                         <label for="gender" class="form-label" style="font-size: 16px;">Jenis Kelamin:</label>

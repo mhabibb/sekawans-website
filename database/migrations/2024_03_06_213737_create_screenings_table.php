@@ -12,7 +12,7 @@ class CreateScreeningsTable extends Migration
             $table->id();
             $table->string('full_name');
             $table->boolean('agreement')->default(false);
-            $table->unsignedBigInteger('contact')->nullable(); 
+            $table->integer('contact'); 
             $table->string('gender', 10); 
             $table->unsignedSmallInteger('age'); 
             $table->string('district', 50); 

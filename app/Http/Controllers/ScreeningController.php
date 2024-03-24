@@ -20,7 +20,7 @@ class ScreeningController extends Controller
             $validated = $request->validate([
                 'agreement' => 'required|boolean',
                 'full_name' => 'required|string',
-                'contact' => 'nullable|string',
+                'contact' => 'required|string',
                 'gender' => 'required|string',
                 'age' => 'required|numeric',
                 'district' => 'required|string',

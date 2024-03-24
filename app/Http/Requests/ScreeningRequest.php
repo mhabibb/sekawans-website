@@ -16,7 +16,7 @@ class ScreeningRequest extends FormRequest
         return [
             'agreement' => 'required|boolean',
             'full_name' => 'required|string',
-            'contact' => 'nullable|string',
+            'contact' => 'required|string',
             'gender' => 'required|in:male,female',
             'age' => 'required|numeric',
             'district' => 'required|string',

@@ -148,4 +148,12 @@ class ScreeningController extends Controller
             return response()->json(['message' => 'Gagal menghapus data'], 500);
         }
     }
+
+    public function show($id)
+    {
+        $screening = Screening::findOrFail($id); 
+
+        return view('admin.screening.show', compact('screening'));
+    }
+
 }

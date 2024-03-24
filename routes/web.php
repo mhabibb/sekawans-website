@@ -49,6 +49,7 @@ Route::middleware('auth')->prefix('admin')->name('admin.')->group(function () {
     });
 
     Route::get('/screening', [ScreeningController::class, 'index'])->name('screening.index');
+    Route::get('/screenings/{id}', [ScreeningController::class, 'show'])->name('screening.show');
     Route::delete('/screening/{id}', [ScreeningController::class, 'destroy'])->name('screening.destroy');
     
     Route::controller(LogController::class)->group(function () {

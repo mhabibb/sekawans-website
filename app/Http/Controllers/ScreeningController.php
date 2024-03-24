@@ -144,7 +144,7 @@ class ScreeningController extends Controller
             $screening->delete();
 
             return response()->json(['message' => 'Data berhasil dihapus'], 200);
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             return response()->json(['message' => 'Gagal menghapus data'], 500);
         }
     }

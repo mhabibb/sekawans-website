@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Message;
+use App\Models\Message;
 use Illuminate\Http\Request;
 
 class MessageController extends Controller
@@ -10,12 +10,12 @@ class MessageController extends Controller
     public function index()
     {
         $messages = Message::all();
-        return view('messages.index', compact('messages'));
+        return view('admin.message.index', compact('messages'));
     }
 
     public function create()
     {
-        return view('messages.create');
+        return view('admin.message.create');
     }
 
     public function store(Request $request)
@@ -27,20 +27,20 @@ class MessageController extends Controller
 
         Message::create($request->all());
 
-        return redirect()->route('messages.index')
-            ->with('success', 'Message created successfully.');
+        return redirect()->route('admin.messages.index')
+            ->with('success', 'Kontak Berhasil Dibuat.');
     }
 
     public function show($id)
     {
         $message = Message::findOrFail($id);
-        return view('messages.show', compact('message'));
+        return view('admin.message.show', compact('message'));
     }
 
     public function edit($id)
     {
         $message = Message::findOrFail($id);
-        return view('messages.edit', compact('message'));
+        return view('admin.message.edit', compact('message'));
     }
 
     public function update(Request $request, $id)
@@ -53,8 +53,8 @@ class MessageController extends Controller
         $message = Message::findOrFail($id);
         $message->update($request->all());
 
-        return redirect()->route('messages.index')
-            ->with('success', 'Pesan berhasil di Update.');
+        return redirect()->route('admin.messages.index')
+            ->with('success', 'Kontak berhasil di Update.');
     }
 
     public function destroy($id)
@@ -62,7 +62,7 @@ class MessageController extends Controller
         $message = Message::findOrFail($id);
         $message->delete();
 
-        return redirect()->route('messages.index')
-            ->with('success', 'Pesan berhasil di Hapus.');
+        return redirect()->route('admin.messages.index')
+            ->with('success', 'Kontak berhasil di Hapus.');
     }
 }

@@ -10,7 +10,7 @@ use App\Http\Controllers\WebController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\SatelliteWorkerController;
 use App\Http\Controllers\ScreeningController;
-use App\Http\Controllers\MemberController;
+use App\Http\Controllers\MessageController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 
@@ -42,6 +42,10 @@ Route::middleware('auth')->prefix('admin')->name('admin.')->group(function () {
         Route::get('/sekawans', 'index')->name('sekawans.index');
         Route::post('admin/sekawans/{sekawan}', 'update')->name('sekawans.update');
     });
+
+    Route::resource('/messages', MessageController::class);
+    Route::get('/message/{id}', [MessageController::class, 'show'])->name('messages.show');
+    Route::get('/messages', [MessageController::class, 'index'])->name('messages.index');
 
     Route::resource('/patients', PatientController::class);
     Route::controller(PatientController::class)->group(function () {

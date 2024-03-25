@@ -27,7 +27,7 @@ class AdminNav extends Component
         $navLinks = array(
             'admin.dashboard' => ['Dashboard', 'fas fa-tachometer-alt'],
             'admin.sekawans' => ['Tentang', 'fas fa-users'],
-            
+            'admin.messages' => ['Pesan', 'fas fa-envelope'], 
             'admin.infotbc' => ['Informasi TBC', 'fas fa-circle-info'],
             'admin.patients' => ['Data Pasien TBC', 'fas fa-database'],
             'admin.screening' => ['Data Screening', 'fas fa-stethoscope'],

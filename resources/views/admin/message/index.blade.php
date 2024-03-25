@@ -15,6 +15,7 @@
                         <div class="card-body">
                             <div class="mb-3">
                                 <a href="{{ route('admin.messages.create') }}" class="btn btn-primary">Tambah Nomor</a>
+                                {{-- <a href="{{ route('admin.messages.compose') }}" class="btn btn-success">Kirim Pesan</a>  --}}
                             </div>
                             <div class="table-responsive">
                                 <table class="table table-head-fixed table-sm">

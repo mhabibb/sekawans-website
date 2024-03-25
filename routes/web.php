@@ -44,9 +44,8 @@ Route::middleware('auth')->prefix('admin')->name('admin.')->group(function () {
     });
 
     Route::resource('/messages', MessageController::class);
-    Route::get('/message/{id}', [MessageController::class, 'show'])->name('messages.show');
     Route::get('/messages', [MessageController::class, 'index'])->name('messages.index');
-
+    
     Route::resource('/patients', PatientController::class);
     Route::controller(PatientController::class)->group(function () {
         Route::get('/patient/{regencies}', 'regency')->name('patients.regency');

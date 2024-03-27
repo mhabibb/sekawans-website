@@ -45,6 +45,7 @@
                             <li><a class="dropdown-item" href="{{ route('screening') }}">Screening</a></li>
                             <li><a class="dropdown-item" href="{{ route('fasyankes') }}">Fasyankes</a></li>
                             <li><a class="dropdown-item" href="{{ route('dokumen') }}">Dokumen</a></li>
+                            <li><a class="dropdown-item" href="{{ route('pesan.create') }}">Hubungi Kami</a></li>
                         </ul>
                     </li>
                 </ul>

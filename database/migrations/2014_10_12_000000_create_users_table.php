@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('name', 64);
             $table->string('email', 32)->unique();
             $table->string('password', 64);
+            $table->string('number', 15)->nullable(); 
             $table->boolean('role')->default(false);
             $table->rememberToken();
             $table->timestamps();
@@ -34,3 +35,4 @@ return new class extends Migration
         Schema::dropIfExists('users');
     }
 };
+

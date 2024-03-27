@@ -24,8 +24,9 @@
                             <table id="userTable" class="table table-striped">
                                 <thead>
                                     <tr>
-                                        <th class="col-5">Nama</th>
-                                        <th class="col-5">Email</th>
+                                        <th class="col-4">Nama</th>
+                                        <th class="col-4">Email</th>
+                                        <th class="col-4">Nomor Whatsapp</th> 
                                         <th></th>
                                     </tr>
                                 </thead>
@@ -34,6 +35,7 @@
                                         <tr>
                                             <td>{{ $user->name }}</td>
                                             <td>{{ $user->email }}</td>
+                                            <td>{{ $user->number }}</td>
                                             <td>
                                                 <div class="d-flex">
                                                     <a role="button" id="bt{{ $user->id }}" class="badge badge-success"

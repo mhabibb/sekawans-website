@@ -10,44 +10,35 @@
     <section class="content">
         <div class="container-fluid">
             <div class="row">
-                <div class="col">
+                <div class="col-12">
                     <div class="card">
                         <div class="card-body">
-                            <div class="mb-3">
-                                <a href="{{ route('admin.messages.create') }}" class="btn btn-primary">Tambah Nomor</a>
-                                {{-- <a href="{{ route('admin.messages.compose') }}" class="btn btn-success">Kirim Pesan</a>  --}}
-                            </div>
-                            <div class="table-responsive">
-                                <table class="table table-head-fixed table-sm">
-                                    <thead>
-                                        <tr>
-                                            <th style="width: 40%">Nama</th>
-                                            <th style="width: 40%">No. WA</th>
-                                            <th style="width: 20%">Action</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        @forelse ($messages as $message)
-                                            <tr>
-                                                <td>{{ $message->nama }}</td>
-                                                <td>{{ $message->no_wa }}</td>
-                                                <td>
-                                                    <a href="{{ route('admin.messages.edit', $message->id) }}" class="badge badge-warning">Edit</a>
-                                                    <form action="{{ route('admin.messages.destroy', $message->id) }}" method="POST" class="delete-form" style="display: inline;">
-                                                        @csrf
-                                                        @method('DELETE')
-                                                        <button type="submit" class="badge badge-danger">Hapus</button>
-                                                    </form>
-                                                </td>
-                                            </tr>
-                                        @empty
-                                            <tr>
-                                                <td colspan="3">Data Kosong</td>
-                                            </tr>
-                                        @endforelse
-                                    </tbody>
-                                </table>
-                            </div>
+                            <table class="table table-bordered table-striped" id="messagesTable">
+                                <thead>
+                                    <tr>
+                                        <th>Nama</th>
+                                        <th>Nomor Telepon</th>
+                                        <th>Keperluan</th>
+                                        <th>File</th>
+                                        <th>Waktu Pengiriman</th>
+                                        <th>Aksi</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach($messages as $message)
+                                    <tr>
+                                        <td>{{ $message->nama }}</td>
+                                        <td>{{ $message->nomor }}</td>
+                                        <td>{{ $message->keperluan }}</td>
+                                        <td>{{ $message->file_path }}</td>
+                                        <td>{{ $message->created_at }}</td>
+                                        <td>
+                                            <button class="btn btn-danger btn-sm delete-btn" data-id="{{ $message->id }}">Hapus</button>
+                                        </td>
+                                    </tr>
+                                    @endforeach
+                                </tbody>
+                            </table>
                         </div>
                     </div>
                 </div>
@@ -58,75 +49,56 @@
 
 @section('js')
     <script>
-        $.ajaxSetup({
-            headers: {
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            }
-        });
-
-        async function update(elm, id) {
-            elm = $(elm).closest('tr').find('td');
-            const { value: data } = await Swal.fire({
-                title: `Update ${elm.eq(0).text().trim()}`, 
-                html: `<input id="swal-input1" class="swal2-input" value="${elm.eq(0).text().trim()}" placeholder="Nama Pesan" autofocus>
-                        <input id="swal-input2" class="swal2-input" value="${elm.eq(1).text().trim()}" placeholder="Nomor Whatsapp">`,
-                showCancelButton: true,
-                confirmButtonText: 'Update',
-                cancelButtonText: 'Batalkan',
-                allowOutsideClick: false,
-                preConfirm: () => {
-                    const name = Swal.getPopup().querySelector('#swal-input1').value;
-                    const no_wa = Swal.getPopup().querySelector('#swal-input2').value;
-                    if (!name || !no_wa) {
-                        Swal.showValidationMessage(`Nama dan Nomor Whatsapp harus diisi`);
-                    }
-                    return { name: name, no_wa: no_wa };
-                }
-            });
-
-            if (data) {
-                $.ajax({
-                    type: 'PUT',
-                    url: "{{ url('admin/message') }}" + '/' + id,
-                    data: data,
-                    success: function(response) {
-                        Swal.fire({
-                            title: 'Berhasil Diperbarui!',
-                            icon: 'success',
-                            showConfirmButton: false,
-                            timer: 1500
-                        });
-                        elm.eq(0).text(data.name);
-                        elm.eq(1).text(data.no_wa);
-                    },
-                    error: function(xhr) {
-                        Swal.fire({
-                            title: 'Terjadi Kesalahan!',
-                            icon: 'error',
-                            showConfirmButton: false,
-                            timer: 1500
+        $(document).ready(function() {
+            // Event listener untuk tombol delete
+            $('.delete-btn').click(function() {
+                var messageId = $(this).data('id');
+                Swal.fire({
+                    title: 'Apakah Anda yakin?',
+                    text: "Anda tidak akan dapat mengembalikan ini!",
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#d33',
+                    cancelButtonColor: '#3085d6',
+                    confirmButtonText: 'Ya, hapus!',
+                    cancelButtonText: 'Batal'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        // Kirim permintaan hapus dengan Ajax
+                        $.ajax({
+                            url: '/admin/messages/' + messageId,
+                            type: 'DELETE',
+                            data: {
+                                "_token": "{{ csrf_token() }}",
+                            },
+                            success: function(response) {
+                                if (response.status == 'success') {
+                                    // Hapus baris dari tabel
+                                    $('#messagesTable').DataTable().row($(this).parents('tr')).remove().draw();
+                                    Swal.fire(
+                                        'Terhapus!',
+                                        'Data pesan telah dihapus.',
+                                        'success'
+                                    );
+                                } else {
+                                    Swal.fire(
+                                        'Gagal!',
+                                        'Terjadi kesalahan saat menghapus data pesan.',
+                                        'error'
+                                    );
+                                }
+                            },
+                            error: function(xhr, status, error) {
+                                console.error(xhr.responseText);
+                                Swal.fire(
+                                    'Gagal!',
+                                    'Terjadi kesalahan saat menghapus data pesan.',
+                                    'error'
+                                );
+                            }
                         });
                     }
                 });
-            }
-        }
-
-        $('.delete-form').on('submit', function(e) {
-            e.preventDefault();
-            var form = this;
-            Swal.fire({
-                title: 'Yakin untuk hapus pesan ini?',
-                text: "Aksi ini tidak dapat dikembalikan!",
-                icon: 'warning',
-                showCancelButton: true,
-                confirmButtonColor: '#3085d6',
-                cancelButtonColor: '#d33',
-                confirmButtonText: 'Ya, hapus!',
-                cancelButtonText: 'Batalkan'
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    form.submit();
-                }
             });
         });
     </script>

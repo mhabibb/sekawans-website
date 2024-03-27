@@ -16,7 +16,11 @@ class CreateMessagesTable extends Migration
         Schema::create('messages', function (Blueprint $table) {
             $table->id();
             $table->string('nama');
-            $table->string('no_wa');
+            $table->string('alamat');
+            $table->string('instansi');
+            $table->string('nomor');
+            $table->text('keperluan');
+            $table->string('file_path')->nullable();
             $table->timestamps();
         });
     }

@@ -22,6 +22,12 @@
                         @else @if(old('email') ?? false) is-valid @endif @enderror"
                             value="{{ old('email', $user->email) }}" required>
                     </div>
+                    <div class="form-group">
+                        <label>Nomor Whatsapp</label>
+                        <input type="text" name="number" class="form-control @error('number') is-invalid
+                        @else @if(old('number') ?? false) is-valid @endif @enderror"
+                            value="{{ old('number', $user->number) }}">
+                    </div>
                     <div class="custom-control custom-checkbox mb-2">
                         <input type="checkbox" name="passBtn" class="custom-control-input" id="passBtn"
                             @checked(old('passBtn'))>

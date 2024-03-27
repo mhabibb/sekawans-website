@@ -18,7 +18,7 @@ class UserController extends Controller
     public function index()
     {
         $this->authorize('superAdmin');
-        $users = User::select('id', 'name', 'email')->where('role', 0)->get();
+        $users = User::select('id', 'name', 'email', 'number')->where('role', 0)->get();
         return view('admin.user.index', compact('users'));
     }
 

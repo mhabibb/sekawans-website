@@ -20,6 +20,10 @@
                         <label>Email</label>
                         <div class="form-control">{{ $user->email }}</div>
                     </div>
+                    <div class="col-12 form-group">
+                        <label>Nomor Whatsapp</label>
+                        <div class="form-control">{{ $user->number }}</div>
+                    </div>
                 </div>
                 <div class="row">
                     <div class="col-12 col-sm-6">

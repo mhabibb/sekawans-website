@@ -21,6 +21,11 @@
                         <input type="email" id="email" name="email" class="form-control @error('email') is-invalid
                         @else @if(old('email') ?? false) is-valid @endif @enderror">
                     </div>
+                    <div class="form-group"> 
+                        <label>Nomor Whatsapp</label>
+                        <input type="text" name="number" class="form-control @error('number') is-invalid
+                        @else @if(old('number') ?? false) is-valid @endif @enderror">
+                    </div>
                 </div>
                 <div class="modal-footer">
                     <button type="reset" class="btn btn-secondary" onclick="reset()"

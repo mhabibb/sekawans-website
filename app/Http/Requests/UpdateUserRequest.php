@@ -3,7 +3,6 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Support\Facades\Hash;
 
 class UpdateUserRequest extends FormRequest
 {
@@ -24,9 +23,7 @@ class UpdateUserRequest extends FormRequest
      */
     protected function prepareForValidation()
     {
-        // $this->email ?? $this->merge([
-        //     'email'  => auth()->user()->email
-        // ]);
+        
     }
 
     /**
@@ -38,10 +35,11 @@ class UpdateUserRequest extends FormRequest
     {
         $id = auth()->id();
         return [
-            'email'                     => "required|email|unique:users,email,{$id}",
-            'current_password'          => 'required|current_password',
-            'password'                  => 'nullable|exclude_if:password,null|confirmed|string|not_in:password|min:8',
-            'password_confirmation'     => 'required_with:password',
+            'email' => "required|email|unique:users,email,{$id}",
+            'current_password' => 'required|current_password',
+            'password' => 'nullable|exclude_if:password,null|confirmed|string|not_in:password|min:8',
+            'password_confirmation' => 'required_with:password',
+            'number' => 'nullable|string|max:15',
         ];
     }
 }

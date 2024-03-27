@@ -43,7 +43,7 @@
         </div>
 
         <div class="d-grid gap-2 d-md-flex justify-content-md-end mt-4">
-            <button type="submit" class="btn btn-primary me-md-2 mb-2 mb-md-0">Kirim Pesan</button>
+            <button type="submit" class="btn btn-danger me-md-2 mb-2 mb-md-0">Kirim Pesan</button>
         </div>
     </form>
 </div>

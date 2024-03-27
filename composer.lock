@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "d41a20950d538b04919aef88593291d3",
+    "content-hash": "60e2f7660d77b8493faebb41645fdfac",
     "packages": [
         {
             "name": "barryvdh/laravel-dompdf",
@@ -2201,6 +2201,68 @@
                 "source": "https://github.com/Masterminds/html5-php/tree/2.8.1"
             },
             "time": "2023-05-10T11:58:31+00:00"
+        },
+        {
+            "name": "missael-anda/laravel-whatsapp",
+            "version": "v0.8.4",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/MissaelAnda/laravel-whatsapp.git",
+                "reference": "cc0380090eaa6810fa0029bfa72787c5dbc78465"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/MissaelAnda/laravel-whatsapp/zipball/cc0380090eaa6810fa0029bfa72787c5dbc78465",
+                "reference": "cc0380090eaa6810fa0029bfa72787c5dbc78465",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/contracts": "^9.0 || ^10.0",
+                "illuminate/events": "^9.0 || ^10.0",
+                "illuminate/http": "^9.0 || ^10.0",
+                "illuminate/routing": "^9.0 || ^10.0",
+                "illuminate/support": "^9.0 || ^10.0",
+                "php": "^8.1"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "MissaelAnda\\Whatsapp\\WhatsappServiceProvider"
+                    ],
+                    "aliases": {
+                        "Whatsapp": "MissaelAnda\\Whatsapp\\Facade\\Whatsapp"
+                    }
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "MissaelAnda\\Whatsapp\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Missael H. Anda",
+                    "email": "missael.anda@gmail.com"
+                }
+            ],
+            "description": "A Whatsapp Business Cloud API wrapper for Laravel.",
+            "keywords": [
+                "api",
+                "facebook",
+                "laravel",
+                "sdk",
+                "whatsapp"
+            ],
+            "support": {
+                "issues": "https://github.com/MissaelAnda/laravel-whatsapp/issues",
+                "source": "https://github.com/MissaelAnda/laravel-whatsapp/tree/v0.8.4"
+            },
+            "time": "2024-03-05T18:43:58+00:00"
         },
         {
             "name": "monolog/monolog",

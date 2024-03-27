@@ -70,79 +70,79 @@
 
     <script>
         $(document).ready(function() {
-            var table = $('#screeningsData').DataTable({
-                "responsive": true,
-                "lengthChange": false,
-                "autoWidth": false,
-                "columnDefs": [{
-                    "targets": [5],
-                    "type": "date"
-                }],
-                dom: 'Bfrtip',
-                buttons: [{
-                        extend: "excel",
-                        title: "Data Skrining - Sekawan'S TB Jember",
-                        exportOptions: {
-                            columns: [0, 1, 2, 3, 4, 5, 6]
-                        }
-                    },
-                    {
-                        extend: "pdf",
-                        title: "Data Skrining - Sekawan'S TB Jember",
-                        exportOptions: {
-                            columns: [0, 1, 2, 3, 4, 5, 6]
-                        }
-                    },
-                    {
-                        extend: "print",
-                        title: "Data Skrining - Sekawan'S TB Jember",
-                        exportOptions: {
-                            columns: [0, 1, 2, 3, 4, 5, 6]
-                        }
+        var table = $('#screeningsData').DataTable({
+            "responsive": true,
+            "lengthChange": false,
+            "autoWidth": false,
+            "columnDefs": [{
+                "targets": [5],
+                "type": "date"
+            }],
+            dom: 'Bfrtip',
+            buttons: [{
+                    extend: "excel",
+                    title: "Data Skrining - Sekawan'S TB Jember",
+                    exportOptions: {
+                        columns: [0, 1, 2, 3, 4, 5, 6]
                     }
-                ],
-            }).buttons().container().appendTo('#screeningsData_wrapper .col-md-6:eq(0)');
+                },
+                {
+                    extend: "pdf",
+                    title: "Data Skrining - Sekawan'S TB Jember",
+                    exportOptions: {
+                        columns: [0, 1, 2, 3, 4, 5, 6]
+                    }
+                },
+                {
+                    extend: "print",
+                    title: "Data Skrining - Sekawan'S TB Jember",
+                    exportOptions: {
+                        columns: [0, 1, 2, 3, 4, 5, 6]
+                    }
+                }
+            ],
+        }).buttons().container().appendTo('#screeningsData_wrapper .col-md-6:eq(0)');
 
-            // Event listener untuk tombol delete
-            $('#screeningsData').on('click', '.btn-delete', function() {
-                var id = $(this).data('id');
-                Swal.fire({
-                    title: 'Konfirmasi',
-                    text: "Apakah Anda yakin ingin menghapus data ini?",
-                    icon: 'warning',
-                    showCancelButton: true,
-                    confirmButtonColor: '#d33',
-                    cancelButtonColor: '#3085d6',
-                    confirmButtonText: 'Ya, hapus!',
-                    cancelButtonText: 'Batal'
-                }).then((result) => {
-                    if (result.isConfirmed) {
-                        $.ajax({
-                            url: "{{ url('/admin/screening') }}/" + id,
-                            type: "DELETE",
-                            data: {
-                                _token: "{{ csrf_token() }}"
-                            },
-                            success: function(response) {
-                                Swal.fire(
-                                    'Terhapus!',
-                                    'Data telah dihapus.',
-                                    'success'
-                                ).then(() => {
-                                    table.ajax.reload(); 
-                                });
-                            },
-                            error: function(xhr) {
-                                Swal.fire(
-                                    'Gagal!',
-                                    'Gagal menghapus data. Silakan coba lagi.',
-                                    'error'
-                                );
-                            }
-                        });
-                    }
-                });
+        // Event listener untuk tombol delete
+        $('#screeningsData').on('click', '.btn-delete', function() {
+            var id = $(this).data('id');
+            Swal.fire({
+                title: 'Konfirmasi',
+                text: "Apakah Anda yakin ingin menghapus data ini?",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#d33',
+                cancelButtonColor: '#3085d6',
+                confirmButtonText: 'Ya, hapus!',
+                cancelButtonText: 'Batal'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    $.ajax({
+                        url: "{{ url('/admin/screening') }}/" + id,
+                        type: "DELETE",
+                        data: {
+                            _token: "{{ csrf_token() }}"
+                        },
+                        success: function(response) {
+                            Swal.fire(
+                                'Terhapus!',
+                                'Data telah dihapus.',
+                                'success'
+                            ).then(() => {
+                                window.location.reload(); 
+                            });
+                        },
+                        error: function(xhr) {
+                            Swal.fire(
+                                'Gagal!',
+                                'Gagal menghapus data. Silakan coba lagi.',
+                                'error'
+                            );
+                        }
+                    });
+                }
             });
         });
+    });
     </script>
 @endsection

@@ -16,11 +16,16 @@ class MessageController extends Controller
 
     public function store(MessageRequest $request)
     {
-        Message::create($request->validated());
+        $message = Message::create($request->validated());
+
+        if ($request->hasFile('file')) {
+            $message->saveFile($request->file('file'));
+        }
 
         return redirect()->route('pesan.create')
             ->with('success', 'Pesan berhasil dikirim.');
     }
+
 
     public function index()
     {
@@ -39,7 +44,9 @@ class MessageController extends Controller
         $message = Message::findOrFail($id);
         $message->delete();
 
-        return redirect()->route('messages.index')
-            ->with('success', 'Pesan berhasil dihapus.');
+        return response()->json([
+            'status' => 'success',
+            'message' => 'Pesan berhasil dihapus.'
+        ]);
     }
 }

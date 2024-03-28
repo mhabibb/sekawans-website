@@ -20,7 +20,7 @@
                                         <th>Nomor Telepon</th>
                                         <th>Keperluan</th>
                                         <th>File</th>
-                                        <th>Waktu Pengiriman</th>
+                                        <th>Waktu Pesan</th>
                                         <th>Aksi</th>
                                     </tr>
                                 </thead>
@@ -30,7 +30,13 @@
                                         <td>{{ $message->nama }}</td>
                                         <td>{{ $message->nomor }}</td>
                                         <td>{{ $message->keperluan }}</td>
-                                        <td>{{ $message->file_path }}</td>
+                                        <td>
+                                            @if ($message->file_path)
+                                                <a href="{{ asset('storage/' . $message->file_path) }}" target="_blank">Unduh File</a>
+                                            @else
+                                                Tidak Ada File
+                                            @endif
+                                        </td>
                                         <td>{{ $message->created_at }}</td>
                                         <td>
                                             <button class="btn btn-danger btn-sm delete-btn" data-id="{{ $message->id }}">Hapus</button>
@@ -48,11 +54,16 @@
 @endsection
 
 @section('js')
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
     <script>
         $(document).ready(function() {
-            // Event listener untuk tombol delete
+            var messagesTable = $('#messagesTable').DataTable();
+
             $('.delete-btn').click(function() {
+                var row = $(this).closest('tr');
                 var messageId = $(this).data('id');
+
                 Swal.fire({
                     title: 'Apakah Anda yakin?',
                     text: "Anda tidak akan dapat mengembalikan ini!",
@@ -64,29 +75,24 @@
                     cancelButtonText: 'Batal'
                 }).then((result) => {
                     if (result.isConfirmed) {
-                        // Kirim permintaan hapus dengan Ajax
                         $.ajax({
-                            url: '/admin/messages/' + messageId,
+                            url: '{{ route("admin.messages.destroy", ":id") }}'.replace(':id', messageId),
                             type: 'DELETE',
                             data: {
                                 "_token": "{{ csrf_token() }}",
                             },
                             success: function(response) {
-                                if (response.status == 'success') {
-                                    // Hapus baris dari tabel
-                                    $('#messagesTable').DataTable().row($(this).parents('tr')).remove().draw();
-                                    Swal.fire(
-                                        'Terhapus!',
-                                        'Data pesan telah dihapus.',
-                                        'success'
-                                    );
-                                } else {
-                                    Swal.fire(
-                                        'Gagal!',
-                                        'Terjadi kesalahan saat menghapus data pesan.',
-                                        'error'
-                                    );
-                                }
+                                row.remove();
+                                messagesTable.draw();
+                                Swal.fire(
+                                    'Terhapus!',
+                                    response.message,
+                                    'success'
+                                ).then((result) => {
+                                    if (result.isConfirmed) {
+                                        window.location.reload();
+                                    }
+                                });
                             },
                             error: function(xhr, status, error) {
                                 console.error(xhr.responseText);

@@ -51,16 +51,12 @@
                                                             </a>
                                                         </div>
                                                         <div class="btn-group" role="group">
-                                                            <form action="{{ route('admin.documents.destroy', $document->id) }}" method="POST" style="display: inline;">
-                                                                @csrf
-                                                                @method('DELETE')
-                                                                <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Apakah Anda yakin ingin menghapus dokumen ini?')">
-                                                                    <i class="fa-solid fa-trash"></i> Hapus
-                                                                </button>
-                                                            </form>
+                                                            <button class="btn btn-danger btn-sm delete-btn" data-id="{{ $document->id }}">
+                                                                <i class="fa-solid fa-trash"></i> Hapus
+                                                            </button>
                                                         </div>
                                                     </div>
-                                                </td>                                                                                                
+                                                </td>
                                             </tr>
                                         @endforeach
                                     </tbody>
@@ -73,4 +69,52 @@
 
         </div>
     </section>
+@endsection
+
+@section('js')
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <script>
+        $(document).ready(function() {
+            $('.delete-btn').click(function() {
+                var documentId = $(this).data('id');
+                Swal.fire({
+                    title: 'Konfirmasi',
+                    text: "Apakah Anda yakin ingin menghapus dokumen ini?",
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#d33',
+                    cancelButtonColor: '#3085d6',
+                    confirmButtonText: 'Ya, hapus!',
+                    cancelButtonText: 'Batal'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        $.ajax({
+                            url: "{{ url('/admin/documents') }}/" + documentId,
+                            type: "DELETE",
+                            data: {
+                                "_token": "{{ csrf_token() }}"
+                            },
+                            success: function(response) {
+                                Swal.fire(
+                                    'Terhapus!',
+                                    'Dokumen telah dihapus.',
+                                    'success'
+                                ).then(() => {
+                                    window.location.reload();
+                                });
+                            },
+                            error: function(xhr) {
+                                Swal.fire(
+                                    'Gagal!',
+                                    'Gagal menghapus dokumen. Silakan coba lagi.',
+                                    'error'
+                                );
+                            }
+                        });
+                    }
+                });
+            });
+        });
+    </script>
 @endsection

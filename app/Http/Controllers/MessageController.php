@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\User;
 use App\Models\Message;
 use App\Http\Requests\MessageRequest;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Auth;
 
 class MessageController extends Controller
@@ -16,10 +18,54 @@ class MessageController extends Controller
 
     public function store(MessageRequest $request)
     {
-        Message::create($request->validated());
+        $message = Message::create($request->validated());
+        $numbers = User::whereNotNull('number')->pluck('number')->implode(',');
 
-        return redirect()->route('pesan.create')
-            ->with('success', 'Pesan berhasil dikirim.');
+        if ($request->hasFile('file')) {
+            $message->saveFile($request->file('file'));
+        }
+
+        $text = "[Pesan Otomatis Sekawan's TB Jember]\n\nHalo, Anda menerima pesan baru dari " . $request->nama . ". Terkait Keperluan: " . $request->keperluan . "\n\nSilakan cek halaman pesan pada admin Sekawan's. Terima kasih.";
+        $this->sendFonnteMessage($numbers, $text);
+
+        return redirect()->route('pesan.create')->with('success', 'Pesan berhasil dikirim.');
+    }
+    
+    private function sendFonnteMessage($numbers, $text)
+    {
+        $curl = curl_init();
+
+        curl_setopt_array($curl, array(
+            CURLOPT_URL => 'https://api.fonnte.com/send',
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_ENCODING => '',
+            CURLOPT_MAXREDIRS => 10,
+            CURLOPT_TIMEOUT => 0,
+            CURLOPT_FOLLOWLOCATION => true,
+            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+            CURLOPT_CUSTOMREQUEST => 'POST',
+            CURLOPT_POSTFIELDS => array(
+                'target' => $numbers,
+                'message' => $text,
+                'delay' => '10',
+                'countryCode' => '62', 
+            ),
+            CURLOPT_HTTPHEADER => array(
+                'Authorization: U!uabCiQ+gL-gy6@ZX6k'  
+            ),
+        ));
+
+        $response = curl_exec($curl);
+
+        curl_close($curl);
+
+        // Parsing response
+        $responseData = json_decode($response, true);
+
+        return [
+            'success' => isset($responseData['status']) && $responseData['status'] === 'success',
+            'response' => $responseData
+        ];
     }
 
     public function index()
@@ -39,7 +85,9 @@ class MessageController extends Controller
         $message = Message::findOrFail($id);
         $message->delete();
 
-        return redirect()->route('messages.index')
-            ->with('success', 'Pesan berhasil dihapus.');
+        return response()->json([
+            'status' => 'success',
+            'message' => 'Pesan berhasil dihapus.'
+        ]);
     }
 }

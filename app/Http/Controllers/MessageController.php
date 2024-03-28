@@ -28,7 +28,16 @@ class MessageController extends Controller
             $fileLink = url('storage/' . $filePath);
         }
     
-        $text = "[Pesan Otomatis Sekawan's TB Jember]\n\nHalo, Anda menerima pesan baru dari " . $request->nama . ". Terkait Keperluan: " . $request->keperluan . "\n\nSilakan cek halaman pesan pada admin Sekawan's. Atau bisa klik link: \n" . $fileLink . " \n\nTerima kasih.";
+        $text = "[Pesan Otomatis Sekawan's TB Jember]\n\nHalo, Anda menerima pesan baru dari: \n\nNama: " . $request->nama . "\nNo Telepon: " . $request->nomor . "\nInstansi: " . $request->instansi . "\nKeperluan: " . $request->keperluan;
+
+        if (!empty($fileLink)) {
+            $text .= "\nFile Terlampir: " . $fileLink;
+        } else {
+            $text .= "\nFile Kosong";
+        }        
+
+        $text .= "\n\nSilakan cek halaman pesan pada admin Sekawan's www.sekawantb.com/admin/messages  \n\nTerima kasih.";
+
         $this->sendFonnteMessage($numbers, $text);
     
         return redirect()->route('pesan.create')->with('success', 'Pesan berhasil dikirim.');

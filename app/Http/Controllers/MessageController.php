@@ -36,7 +36,7 @@ class MessageController extends Controller
             $text .= "\nFile Kosong";
         }
 
-        $text .= "\n\nSilakan cek halaman pesan pada admin Sekawan's www.sekawantb.com/admin/messages  \n\nTerima kasih.";
+        $text .= "\n\nSilakan cek halaman pesan pada admin: www.sekawantb.com/admin/messages \n\nTerima kasih.";
 
         $this->sendFonnteMessage($numbers, $text);
     
@@ -63,7 +63,7 @@ class MessageController extends Controller
                 'countryCode' => '62', 
             ),
             CURLOPT_HTTPHEADER => array(
-                'Authorization: U!uabCiQ+gL-gy6@ZX6k'  
+                'Authorization: FQHuH6RsnbHdJ4Pqx4NE'  
             ),
         ));
 

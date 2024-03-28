@@ -20,17 +20,20 @@ class MessageController extends Controller
     {
         $message = Message::create($request->validated());
         $numbers = User::whereNotNull('number')->pluck('number')->implode(',');
-
+        $fileLink = '';
+    
         if ($request->hasFile('file')) {
             $message->saveFile($request->file('file'));
+            $filePath = $message->file_path;
+            $fileLink = url('storage/' . $filePath);
         }
-
-        $text = "[Pesan Otomatis Sekawan's TB Jember]\n\nHalo, Anda menerima pesan baru dari " . $request->nama . ". Terkait Keperluan: " . $request->keperluan . "\n\nSilakan cek halaman pesan pada admin Sekawan's. Terima kasih.";
+    
+        $text = "[Pesan Otomatis Sekawan's TB Jember]\n\nHalo, Anda menerima pesan baru dari " . $request->nama . ". Terkait Keperluan: " . $request->keperluan . "\n\nSilakan cek halaman pesan pada admin Sekawan's. Atau bisa klik link: \n" . $fileLink . " \n\nTerima kasih.";
         $this->sendFonnteMessage($numbers, $text);
-
+    
         return redirect()->route('pesan.create')->with('success', 'Pesan berhasil dikirim.');
     }
-    
+
     private function sendFonnteMessage($numbers, $text)
     {
         $curl = curl_init();

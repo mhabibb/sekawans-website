@@ -34,7 +34,7 @@ class MessageController extends Controller
             $text .= "\nFile Terlampir: " . $fileLink;
         } else {
             $text .= "\nFile Kosong";
-        }        
+        }
 
         $text .= "\n\nSilakan cek halaman pesan pada admin Sekawan's www.sekawantb.com/admin/messages  \n\nTerima kasih.";
 

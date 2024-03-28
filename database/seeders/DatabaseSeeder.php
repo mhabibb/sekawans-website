@@ -34,18 +34,18 @@ class DatabaseSeeder extends Seeder
         \App\Models\User::factory()->create([
             'name' => 'Sekawans',
             'email' => 'sekawanjember@gmail.com',
-            'number' => '6281553444245',
+            'number' => '81553444245',
             'role' => true,
         ]);
         \App\Models\User::factory()->create([
             'name' => 'Divisi Komunikasi',
             'email' => 'divkom.sekawan@gmail.com',
-            'number' => '6281553444245',
+            'number' => '81553444245',
         ]);
         \App\Models\User::factory()->create([
             'name' => 'Divisi IT Database',
             'email' => 'itdb.sekawan@gmail.com',
-            'number' => '6281553444245',
+            'number' => '81553444245',
         ]);
         
         // \App\Models\User::factory($this->user--)->create();

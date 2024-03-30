@@ -13,7 +13,13 @@
                 <div class="col-12">
                     <div class="card">
                         <div class="card-body">
-                            <table class="table table-bordered table-striped" id="messagesTable">
+                            <div id="loading" class="text-center mb-3" style="display: none;">
+                                <div class="spinner-border text-primary" role="status">
+                                    <span class="sr-only">Loading...</span>
+                                </div>
+                            </div>
+
+                            <table class="table table-bordered table-striped" id="messagesTable" style="display: none;">
                                 <thead>
                                     <tr>
                                         <th>Nama</th>
@@ -39,7 +45,11 @@
                                         </td>
                                         <td>{{ $message->created_at }}</td>
                                         <td>
-                                            <button class="btn btn-danger btn-sm delete-btn" data-id="{{ $message->id }}">Hapus</button>
+                                            @if ($message->trashed())
+                                                <button class="btn btn-success btn-sm restore-btn" data-id="{{ $message->id }}">Pulihkan</button>
+                                            @else
+                                                <button class="btn btn-danger btn-sm delete-btn" data-id="{{ $message->id }}">Hapus</button>
+                                            @endif
                                         </td>
                                     </tr>
                                     @endforeach
@@ -59,6 +69,9 @@
     <script>
         $(document).ready(function() {
             var messagesTable = $('#messagesTable').DataTable();
+
+            // Show loading
+            $('#loading').show();
 
             $('.delete-btn').click(function() {
                 var row = $(this).closest('tr');
@@ -88,17 +101,65 @@
                                     'Terhapus!',
                                     response.message,
                                     'success'
-                                ).then((result) => {
-                                    if (result.isConfirmed) {
-                                        window.location.reload();
-                                    }
-                                });
+                                );
                             },
                             error: function(xhr, status, error) {
                                 console.error(xhr.responseText);
                                 Swal.fire(
                                     'Gagal!',
                                     'Terjadi kesalahan saat menghapus data pesan.',
+                                    'error'
+                                );
+                            }
+                        });
+                    }
+                });
+            });
+
+            $('#loading').hide();
+            $('#messagesTable').show();
+
+            // Tambahkan event listener untuk tombol restore
+            $('#messagesTable tbody').on('click', '.restore-btn', function() {
+                var row = $(this).closest('tr');
+                var messageId = $(this).data('id');
+
+                Swal.fire({
+                    title: 'Apakah Anda yakin?',
+                    text: "Anda akan memulihkan pesan ini!",
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Ya, pulihkan!',
+                    cancelButtonText: 'Batal'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        $.ajax({
+                            url: '{{ route("admin.messages.restore", ":id") }}'.replace(':id', messageId),
+                            type: 'GET',
+                            success: function(response) {
+                                if (response.status === 'success') {
+                                    row.remove();
+                                    messagesTable.draw();
+                                    Swal.fire(
+                                        'Berhasil!',
+                                        response.message,
+                                        'success'
+                                    );
+                                } else {
+                                    Swal.fire(
+                                        'Gagal!',
+                                        response.message,
+                                        'error'
+                                    );
+                                }
+                            },
+                            error: function(xhr, status, error) {
+                                console.error(xhr.responseText);
+                                Swal.fire(
+                                    'Gagal!',
+                                    'Terjadi kesalahan saat memulihkan data pesan.',
                                     'error'
                                 );
                             }

@@ -95,11 +95,31 @@ class MessageController extends Controller
     public function destroy($id)
     {
         $message = Message::findOrFail($id);
-        $message->delete();
+        $message->delete(); 
 
         return response()->json([
             'status' => 'success',
             'message' => 'Pesan berhasil dihapus.'
         ]);
     }
+
+    public function restore($id)
+    {
+        $message = Message::withTrashed()->findOrFail($id);
+        
+        if ($message->trashed()) {
+            $message->restore();
+
+            return response()->json([
+                'status' => 'success',
+                'message' => 'Pesan berhasil direstore.'
+            ]);
+        } else {
+            return response()->json([
+                'status' => 'error',
+                'message' => 'Pesan tidak ditemukan atau tidak dihapus.'
+            ], 404);
+        }
+    }
+
 }

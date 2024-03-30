@@ -99,6 +99,7 @@ Route::middleware('auth')->prefix('admin')->name('admin.')->group(function () {
     Route::get('/messages', [MessageController::class, 'index'])->name('messages.index');
     Route::get('/messages/{id}', [MessageController::class, 'show'])->name('messages.show');
     Route::delete('/messages/{id}', [MessageController::class, 'destroy'])->name('messages.destroy');
+    Route::get('/messages/{id}/restore', [MessageController::class, 'restore'])->name('messages.restore');
 
 });
 

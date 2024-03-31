@@ -32,6 +32,7 @@ class AdminNav extends Component
             'admin.patients' => ['Data Pasien TBC', 'fas fa-database'],
             'admin.screening' => ['Data Screening', 'fas fa-stethoscope'],
             'admin.fasyankes' => ['Fasyankes', 'fas fa-notes-medical'],
+            'admin.messages' => ['Pesan', 'fas fa-envelope'],
             'admin.facilities' => ['Faskes', 'fas fa-hospital'],
             'admin.articles' => ['Artikel', 'fas fa-newspaper'],
             'admin.kegiatan' => ['Kegiatan', 'fas fa-square-person-confined'],

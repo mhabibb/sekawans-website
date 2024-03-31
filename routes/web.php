@@ -110,6 +110,12 @@ Route::middleware('auth')->prefix('admin')->name('admin.')->group(function () {
         Route::put('/documents/{document}', 'update')->name('documents.update');
         Route::delete('/documents/{document}', 'destroy')->name('documents.destroy');
     });
+
+    Route::get('/messages', [MessageController::class, 'index'])->name('messages.index');
+    Route::get('/messages/{id}', [MessageController::class, 'show'])->name('messages.show');
+    Route::delete('/messages/{id}', [MessageController::class, 'destroy'])->name('messages.destroy');
+    Route::get('/messages/{id}/restore', [MessageController::class, 'restore'])->name('messages.restore');
+
 });
 
 Route::controller(WebController::class)->group(function () {
@@ -136,3 +142,7 @@ Route::controller(ScreeningController::class)->group(function () {
 });
 
 Route::get('/download-surat-rekomendasi', [ScreeningController::class, 'downloadSuratRekomendasi'])->name('download.surat.rekomendasi');
+
+
+Route::get('/pesan', [MessageController::class, 'create'])->name('pesan.create');
+Route::post('/pesan', [MessageController::class, 'store'])->name('pesan.store');

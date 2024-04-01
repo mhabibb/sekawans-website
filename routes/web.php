@@ -11,6 +11,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\SatelliteWorkerController;
 use App\Http\Controllers\ScreeningController;
 use App\Http\Controllers\MessageController;
+use App\Http\Controllers\SatelliteHealthFacilityController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 
@@ -42,6 +43,9 @@ Route::middleware('auth')->prefix('admin')->name('admin.')->group(function () {
         Route::get('/sekawans', 'index')->name('sekawans.index');
         Route::post('admin/sekawans/{sekawan}', 'update')->name('sekawans.update');
     });
+
+    Route::resource('/messages', MessageController::class);
+    Route::get('/messages', [MessageController::class, 'index'])->name('messages.index');
     
     Route::resource('/patients', PatientController::class);
     Route::controller(PatientController::class)->group(function () {
@@ -62,6 +66,17 @@ Route::middleware('auth')->prefix('admin')->name('admin.')->group(function () {
         Route::get('/fasyankes/{table}/{name}', 'check')->name('fasyankes.check');
         Route::put('/fasyankes/{table}/{data}', 'update')->name('fasyankes.update');
         Route::delete('/fasyankes/{table}/{id}', 'destroy')->name('fasyankes.destroy');
+    });
+
+    Route::resource('/facilities', SatelliteHealthFacilityController::class);
+    Route::controller(SatelliteHealthFacilityController::class)->group(function () {
+        Route::get('/facilities', 'index')->name('facilities.index');
+        Route::get('/facilities/create', 'create')->name('facilities.create');
+        Route::post('/facilities', 'store')->name('facilities.store');
+        Route::get('/facilities/{faskes}', 'show')->name('facilities.show');
+        Route::get('/facilities/{faskes}/edit', 'edit')->name('facilities.edit');
+        Route::put('/facilities/{faskes}', 'update')->name('facilities.update');
+        Route::delete('/facilities/{faskes}', 'destroy')->name('facilities.destroy');
     });
 
     Route::resource('/articles', ArticleController::class);
@@ -95,10 +110,11 @@ Route::middleware('auth')->prefix('admin')->name('admin.')->group(function () {
         Route::put('/documents/{document}', 'update')->name('documents.update');
         Route::delete('/documents/{document}', 'destroy')->name('documents.destroy');
     });
-    
+
     Route::get('/messages', [MessageController::class, 'index'])->name('messages.index');
     Route::get('/messages/{id}', [MessageController::class, 'show'])->name('messages.show');
     Route::delete('/messages/{id}', [MessageController::class, 'destroy'])->name('messages.destroy');
+    Route::get('/messages/{id}/restore', [MessageController::class, 'restore'])->name('messages.restore');
 
 });
 
@@ -127,6 +143,6 @@ Route::controller(ScreeningController::class)->group(function () {
 
 Route::get('/download-surat-rekomendasi', [ScreeningController::class, 'downloadSuratRekomendasi'])->name('download.surat.rekomendasi');
 
+
 Route::get('/pesan', [MessageController::class, 'create'])->name('pesan.create');
 Route::post('/pesan', [MessageController::class, 'store'])->name('pesan.store');
-

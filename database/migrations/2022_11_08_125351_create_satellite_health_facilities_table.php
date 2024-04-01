@@ -18,7 +18,8 @@ return new class extends Migration
             $table->id();
             $table->foreignIdFor(District::class);
             $table->string('name', 64)->unique();
-        });
+            $table->string('url_map', 255)->nullable();
+        });        
     }
 
     /**

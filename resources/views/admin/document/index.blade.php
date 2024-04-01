@@ -32,7 +32,7 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @foreach($documents as $document)
+                                        @forelse($documents as $document)
                                             <tr>
                                                 <td>{{ $document->judul }}</td>
                                                 <td>{{ $document->kategori }}</td>
@@ -58,7 +58,11 @@
                                                     </div>
                                                 </td>
                                             </tr>
-                                        @endforeach
+                                        @empty
+                                            <tr>
+                                                <td colspan="5" class="text-center">No data available in table</td>
+                                            </tr>
+                                        @endforelse
                                     </tbody>
                                 </table>
                             </div>

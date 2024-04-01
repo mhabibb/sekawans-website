@@ -20,17 +20,29 @@ class MessageController extends Controller
     {
         $message = Message::create($request->validated());
         $numbers = User::whereNotNull('number')->pluck('number')->implode(',');
-
+        $fileLink = '';
+    
         if ($request->hasFile('file')) {
             $message->saveFile($request->file('file'));
+            $filePath = $message->file_path;
+            $fileLink = url('storage/' . $filePath);
+        }
+    
+        $text = "[Pesan Otomatis Sekawan's TB Jember]\n\nHalo, Anda menerima pesan baru dari: \n\nNama: " . $request->nama . "\nNo Telepon: " . $request->nomor . "\nInstansi: " . $request->instansi . "\nKeperluan: " . $request->keperluan;
+
+        if (!empty($fileLink)) {
+            $text .= "\nFile Terlampir: " . $fileLink;
+        } else {
+            $text .= "\nFile Kosong";
         }
 
-        $text = "[Pesan Otomatis Sekawan's TB Jember]\n\nHalo, Anda menerima pesan baru dari " . $request->nama . ". Terkait Keperluan: " . $request->keperluan . "\n\nSilakan cek halaman pesan pada admin Sekawan's. Terima kasih.";
-        $this->sendFonnteMessage($numbers, $text);
+        $text .= "\n\nSilakan cek halaman pesan pada admin: www.sekawantb.com/admin/messages \n\nTerima kasih.";
 
+        $this->sendFonnteMessage($numbers, $text);
+    
         return redirect()->route('pesan.create')->with('success', 'Pesan berhasil dikirim.');
     }
-    
+
     private function sendFonnteMessage($numbers, $text)
     {
         $curl = curl_init();
@@ -51,7 +63,7 @@ class MessageController extends Controller
                 'countryCode' => '62', 
             ),
             CURLOPT_HTTPHEADER => array(
-                'Authorization: U!uabCiQ+gL-gy6@ZX6k'  
+                'Authorization: FQHuH6RsnbHdJ4Pqx4NE'  
             ),
         ));
 
@@ -83,11 +95,31 @@ class MessageController extends Controller
     public function destroy($id)
     {
         $message = Message::findOrFail($id);
-        $message->delete();
+        $message->delete(); 
 
         return response()->json([
             'status' => 'success',
             'message' => 'Pesan berhasil dihapus.'
         ]);
     }
+
+    public function restore($id)
+    {
+        $message = Message::withTrashed()->findOrFail($id);
+        
+        if ($message->trashed()) {
+            $message->restore();
+
+            return response()->json([
+                'status' => 'success',
+                'message' => 'Pesan berhasil direstore.'
+            ]);
+        } else {
+            return response()->json([
+                'status' => 'error',
+                'message' => 'Pesan tidak ditemukan atau tidak dihapus.'
+            ], 404);
+        }
+    }
+
 }

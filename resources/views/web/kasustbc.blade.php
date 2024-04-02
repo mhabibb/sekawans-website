@@ -13,7 +13,8 @@
                     <h2 class="fw-bold mb-3">PASIEN TB DI JEMBER</h2>
                     <p class="lead">Berikut data jumlah pasien TBC yang diterima Sekawan's di Jember <br><br></p>
                     <p class="lead">Cek data penyakit TBC dari tahun ke tahun</p>
-                    <a href="" class="btn btn-secondary">Cek Data TBC</a>
+                    <a href="https://public.tableau.com/app/profile/alya.mirza/viz/Dashboardsekawanstbcjember1/Dashboard1" class="btn btn-secondary">Cek Data TBC</a>
+                    
                 </div>
             </div>
         </div>

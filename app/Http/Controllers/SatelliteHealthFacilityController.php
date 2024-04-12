@@ -27,7 +27,7 @@ class SatelliteHealthFacilityController extends Controller
         $validatedData = $request->validate([
             'name' => 'required|string|max:64',
             'district' => 'required|string|exists:districts,id',
-            'url_map' => 'nullable|string|max:255',
+            'url_map' => 'required|string|max:500',
         ]);
     
         SatelliteHealthFacility::create([
@@ -51,7 +51,7 @@ class SatelliteHealthFacilityController extends Controller
     {
         $request->validate([
             'name' => 'required|max:64|unique:satellite_health_facilities,name,' . $facility->id,
-            'url_map' => 'nullable|max:255',
+            'url_map' => 'required|max:500',
             'district_id' => 'required|exists:districts,id'
         ]);
 

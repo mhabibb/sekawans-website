@@ -19,17 +19,17 @@ class SatelliteHealthFacilitySeeder extends Seeder
             [
                 "district_id" => '3509010',
                 "name" => "Puskesmas Kencong",
-                "url_map" => "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3948.193534344065!2d113.37816097381425!3d-8.28352858328721!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2dd662aab2008b7b%3A0x5fec41b65d55be62!2sPuskesmas%20Kencong!5e0!3m2!1sid!2sid!4v1711599496759!5m2!1sid!2sid",
+                "url_map" => "3948.193534344065!2d113.37816097381425!3d-8.28352858328721!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2dd662aab2008b7b%3A0x5fec41b65d55be62!2sPuskesmas%20Kencong!5e0!3m2!1sid!2sid!4v1711599496759!5m2!1sid!2sid",
             ],
             [
                 "district_id" => '3509010',
                 "name" => "Puskesmas Cakru",
-                "url_map" => "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3948.168789366515!2d113.33603389999999!3d-8.2859947!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2dd662d535792d07%3A0xf2178a7c641333b0!2sPuskesmas%20Cakru!5e0!3m2!1sid!2sid!4v1711338845757!5m2!1sid!2sid",
+                "url_map" => "3948.168789366515!2d113.33603389999999!3d-8.2859947!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2dd662d535792d07%3A0xf2178a7c641333b0!2sPuskesmas%20Cakru!5e0!3m2!1sid!2sid!4v1711338845757!5m2!1sid!2sid",
             ],
             [
                 "district_id" => '3509020',
                 "name" => "Puskesmas Gumukmas",
-                "url_map" => "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3947.8466225871834!2d113.4167674!3d-8.318036!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2dd68587c398bcb7%3A0x9fab98b77c501c08!2sUPTD%20Puskesmas%20Gumukmas!5e0!3m2!1sid!2sid!4v1711337795506!5m2!1sid!2sid",
+                "url_map" => "3947.8466225871834!2d113.4167674!3d-8.318036!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2dd68587c398bcb7%3A0x9fab98b77c501c08!2sUPTD%20Puskesmas%20Gumukmas!5e0!3m2!1sid!2sid!4v1711337795506!5m2!1sid!2sid",
             ],
             [
                 "district_id" => '3509020',

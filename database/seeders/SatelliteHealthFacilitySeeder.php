@@ -89,112 +89,112 @@ class SatelliteHealthFacilitySeeder extends Seeder
             [
                 "district_id" => '3509010',
                 "name" => "Puskesmas Wuluhan",
-                "url" => "",
+                
             ],
             [
                 "district_id" => '3509010',
                 "name" => "Puskesmas Wuluhan",
-                "url" => "",
+                
             ],
             [
                 "district_id" => '3509010',
                 "name" => "Puskesmas Wuluhan",
-                "url" => "",
+                
             ],
             [
                 "district_id" => '3509010',
                 "name" => "Puskesmas Wuluhan",
-                "url" => "",
+                
             ],
             [
                 "district_id" => '3509010',
                 "name" => "Puskesmas Wuluhan",
-                "url" => "",
+                
             ],
             [
                 "district_id" => '3509010',
                 "name" => "Puskesmas Wuluhan",
-                "url" => "",
+                
             ],
             [
                 "district_id" => '3509010',
                 "name" => "Puskesmas Wuluhan",
-                "url" => "",
+                
             ],
             [
                 "district_id" => '3509010',
                 "name" => "Puskesmas Wuluhan",
-                "url" => "",
+                
             ],
             [
                 "district_id" => '3509010',
                 "name" => "Puskesmas Wuluhan",
-                "url" => "",
+                
             ],
             [
                 "district_id" => '3509010',
                 "name" => "Puskesmas Wuluhan",
-                "url" => "",
+                
             ],
             [
                 "district_id" => '3509010',
                 "name" => "Puskesmas Wuluhan",
-                "url" => "",
+                
             ],
             [
                 "district_id" => '3509010',
                 "name" => "Puskesmas Wuluhan",
-                "url" => "",
+                
             ],
             [
                 "district_id" => '3509010',
                 "name" => "Puskesmas Wuluhan",
-                "url" => "",
+                
             ],
             [
                 "district_id" => '3509010',
                 "name" => "Puskesmas Wuluhan",
-                "url" => "",
+                
             ],
             [
                 "district_id" => '3509010',
                 "name" => "Puskesmas Wuluhan",
-                "url" => "",
+                
             ],
             [
                 "district_id" => '3509010',
                 "name" => "Puskesmas Wuluhan",
-                "url" => "",
+                
             ],
             [
                 "district_id" => '3509010',
                 "name" => "Puskesmas Wuluhan",
-                "url" => "",
+                
             ],
             [
                 "district_id" => '3509010',
                 "name" => "Puskesmas Wuluhan",
-                "url" => "",
+                
             ],
             [
                 "district_id" => '3509010',
                 "name" => "Puskesmas Wuluhan",
-                "url" => "",
+                
             ],
             [
                 "district_id" => '3509010',
                 "name" => "Puskesmas Wuluhan",
-                "url" => "",
+                
             ],
             [
                 "district_id" => '3509010',
                 "name" => "Puskesmas Wuluhan",
-                "url" => "",
+                
             ],
             [
                 "district_id" => '3509010',
                 "name" => "Puskesmas Wuluhan",
-                "url" => "",
+                
             ],
             [
                 "district_id" => '3509010',
@@ -204,492 +204,492 @@ class SatelliteHealthFacilitySeeder extends Seeder
             [
                 "district_id" => '3509010',
                 "name" => "Puskesmas Wuluhan",
-                "url" => "",
+                
             ],
             [
                 "district_id" => '3509010',
                 "name" => "Puskesmas Wuluhan",
-                "url" => "",
+                
             ],
             [
                 "district_id" => '3509010',
                 "name" => "Puskesmas Wuluhan",
-                "url" => "",
+                
             ],
             [
                 "district_id" => '3509010',
                 "name" => "Puskesmas Wuluhan",
-                "url" => "",
+                
             ],
             [
                 "district_id" => '3509010',
                 "name" => "Puskesmas Wuluhan",
-                "url" => "",
+                
             ],
             [
                 "district_id" => '3509010',
                 "name" => "Puskesmas Wuluhan",
-                "url" => "",
+                
             ],
             [
                 "district_id" => '3509010',
                 "name" => "Puskesmas Wuluhan",
-                "url" => "",
+                
             ],
             [
                 "district_id" => '3509010',
                 "name" => "Puskesmas Wuluhan",
-                "url" => "",
+                
             ],
             [
                 "district_id" => '3509010',
                 "name" => "Puskesmas Wuluhan",
-                "url" => "",
+                
             ],
             [
                 "district_id" => '3509010',
                 "name" => "Puskesmas Wuluhan",
-                "url" => "",
+                
             ],
             [
                 "district_id" => '3509010',
                 "name" => "Puskesmas Wuluhan",
-                "url" => "",
+                
             ],
             [
                 "district_id" => '3509010',
                 "name" => "Puskesmas Wuluhan",
-                "url" => "",
+                
             ],
             [
                 "district_id" => '3509010',
                 "name" => "Puskesmas Wuluhan",
-                "url" => "",
+                
             ],
             [
                 "district_id" => '3509010',
                 "name" => "Puskesmas Wuluhan",
-                "url" => "",
+                
             ],
             [
                 "district_id" => '3509010',
                 "name" => "Puskesmas Wuluhan",
-                "url" => "",
+                
             ],
             [
                 "district_id" => '3509010',
                 "name" => "Puskesmas Wuluhan",
-                "url" => "",
+                
             ],
             [
                 "district_id" => '3509010',
                 "name" => "Puskesmas Wuluhan",
-                "url" => "",
+                
             ],
             [
                 "district_id" => '3509010',
                 "name" => "Puskesmas Wuluhan",
-                "url" => "",
+                
             ],
             [
                 "district_id" => '3509010',
                 "name" => "Puskesmas Wuluhan",
-                "url" => "",
+                
             ],
             [
                 "district_id" => '3509010',
                 "name" => "Puskesmas Wuluhan",
-                "url" => "",
+                
             ],
             [
                 "district_id" => '3509010',
                 "name" => "Puskesmas Wuluhan",
-                "url" => "",
+                
             ],
             [
                 "district_id" => '3509010',
                 "name" => "Puskesmas Wuluhan",
-                "url" => "",
+                
             ],
             [
                 "district_id" => '3509010',
                 "name" => "Puskesmas Wuluhan",
-                "url" => "",
+                
             ],
             [
                 "district_id" => '3509010',
                 "name" => "Puskesmas Wuluhan",
-                "url" => "",
+                
             ],
             [
                 "district_id" => '3509010',
                 "name" => "Puskesmas Wuluhan",
-                "url" => "",
+                
             ],
             [
                 "district_id" => '3509010',
                 "name" => "Puskesmas Wuluhan",
-                "url" => "",
+                
             ],
             [
                 "district_id" => '3509010',
                 "name" => "Puskesmas Wuluhan",
-                "url" => "",
+                
             ],
             [
                 "district_id" => '3509010',
                 "name" => "Puskesmas Wuluhan",
-                "url" => "",
+                
             ],
             [
                 "district_id" => '3509010',
                 "name" => "Puskesmas Wuluhan",
-                "url" => "",
+                
             ],
             [
                 "district_id" => '3509010',
                 "name" => "Puskesmas Wuluhan",
-                "url" => "",
+                
             ],
             [
                 "district_id" => '3509010',
                 "name" => "Puskesmas Wuluhan",
-                "url" => "",
+                
             ],
             [
                 "district_id" => '3509010',
                 "name" => "Puskesmas Wuluhan",
-                "url" => "",
+                
             ],
             [
                 "district_id" => '3509010',
                 "name" => "Puskesmas Wuluhan",
-                "url" => "",
+                
             ],
             [
                 "district_id" => '3509010',
                 "name" => "Puskesmas Wuluhan",
-                "url" => "",
+                
             ],
             [
                 "district_id" => '3509010',
                 "name" => "Puskesmas Wuluhan",
-                "url" => "",
+                
             ],
             [
                 "district_id" => '3509010',
                 "name" => "Puskesmas Wuluhan",
-                "url" => "",
+                
             ],
             [
                 "district_id" => '3509010',
                 "name" => "Puskesmas Wuluhan",
-                "url" => "",
+                
             ],
             [
                 "district_id" => '3509010',
                 "name" => "Puskesmas Wuluhan",
-                "url" => "",
+                
             ],
             [
                 "district_id" => '3509010',
                 "name" => "Puskesmas Wuluhan",
-                "url" => "",
+                
             ],
             [
                 "district_id" => '3509010',
                 "name" => "Puskesmas Wuluhan",
-                "url" => "",
+                
             ],
             [
                 "district_id" => '3509010',
                 "name" => "Puskesmas Wuluhan",
-                "url" => "",
+                
             ],
             [
                 "district_id" => '3509010',
                 "name" => "Puskesmas Wuluhan",
-                "url" => "",
+                
             ],
             [
                 "district_id" => '3509010',
                 "name" => "Puskesmas Wuluhan",
-                "url" => "",
+                
             ],
             [
                 "district_id" => '3509010',
                 "name" => "Puskesmas Wuluhan",
-                "url" => "",
+                
             ],
             [
                 "district_id" => '3509010',
                 "name" => "Puskesmas Wuluhan",
-                "url" => "",
+                
             ],
             [
                 "district_id" => '3509010',
                 "name" => "Puskesmas Wuluhan",
-                "url" => "",
+                
             ],
             [
                 "district_id" => '3509010',
                 "name" => "Puskesmas Wuluhan",
-                "url" => "",
+                
             ],
             [
                 "district_id" => '3509010',
                 "name" => "Puskesmas Wuluhan",
-                "url" => "",
+                
             ],
             [
                 "district_id" => '3509010',
                 "name" => "Puskesmas Wuluhan",
-                "url" => "",
+                
             ],
             [
                 "district_id" => '3509010',
                 "name" => "Puskesmas Wuluhan",
-                "url" => "",
+                
             ],
             [
                 "district_id" => '3509010',
                 "name" => "Puskesmas Wuluhan",
-                "url" => "",
+                
             ],
             [
                 "district_id" => '3509010',
                 "name" => "Puskesmas Wuluhan",
-                "url" => "",
+                
             ],
             [
                 "district_id" => '3509010',
                 "name" => "Puskesmas Wuluhan",
-                "url" => "",
+                
             ],
             [
                 "district_id" => '3509010',
                 "name" => "Puskesmas Wuluhan",
-                "url" => "",
+                
             ],
             [
                 "district_id" => '3509010',
                 "name" => "Puskesmas Wuluhan",
-                "url" => "",
+                
             ],
             [
                 "district_id" => '3509010',
                 "name" => "Puskesmas Wuluhan",
-                "url" => "",
+                
             ],
             [
                 "district_id" => '3509010',
                 "name" => "Puskesmas Wuluhan",
-                "url" => "",
+                
             ],
             [
                 "district_id" => '3509010',
                 "name" => "Puskesmas Wuluhan",
-                "url" => "",
+                
             ],
             [
                 "district_id" => '3509010',
                 "name" => "Puskesmas Wuluhan",
-                "url" => "",
+                
             ],
             [
                 "district_id" => '3509010',
                 "name" => "Puskesmas Wuluhan",
-                "url" => "",
+                
             ],
             [
                 "district_id" => '3509010',
                 "name" => "Puskesmas Wuluhan",
-                "url" => "",
+                
             ],
             [
                 "district_id" => '3509010',
                 "name" => "Puskesmas Wuluhan",
-                "url" => "",
+                
             ],
             [
                 "district_id" => '3509010',
                 "name" => "Puskesmas Wuluhan",
-                "url" => "",
+                
             ],
             [
                 "district_id" => '3509010',
                 "name" => "Puskesmas Wuluhan",
-                "url" => "",
+                
             ],
             [
                 "district_id" => '3509010',
                 "name" => "Puskesmas Wuluhan",
-                "url" => "",
+                
             ],
             [
                 "district_id" => '3509010',
                 "name" => "Puskesmas Wuluhan",
-                "url" => "",
+                
             ],
             [
                 "district_id" => '3509010',
                 "name" => "Puskesmas Wuluhan",
-                "url" => "",
+                
             ],
             [
                 "district_id" => '3509010',
                 "name" => "Puskesmas Wuluhan",
-                "url" => "",
+                
             ],
             [
                 "district_id" => '3509010',
                 "name" => "Puskesmas Wuluhan",
-                "url" => "",
+                
             ],
             [
                 "district_id" => '3509010',
                 "name" => "Puskesmas Wuluhan",
-                "url" => "",
+                
             ],
             [
                 "district_id" => '3509010',
                 "name" => "Puskesmas Wuluhan",
-                "url" => "",
+                
             ],
             [
                 "district_id" => '3509010',
                 "name" => "Puskesmas Wuluhan",
-                "url" => "",
+                
             ],
             [
                 "district_id" => '3509010',
                 "name" => "Puskesmas Wuluhan",
-                "url" => "",
+                
             ],
             [
                 "district_id" => '3509010',
                 "name" => "Puskesmas Wuluhan",
-                "url" => "",
+                
             ],
             [
                 "district_id" => '3509010',
                 "name" => "Puskesmas Wuluhan",
-                "url" => "",
+                
             ],
             [
                 "district_id" => '3509010',
                 "name" => "Puskesmas Wuluhan",
-                "url" => "",
+                
             ],
             [
                 "district_id" => '3509010',
                 "name" => "Puskesmas Wuluhan",
-                "url" => "",
+                
             ],
             [
                 "district_id" => '3509010',
                 "name" => "Puskesmas Wuluhan",
-                "url" => "",
+                
             ],
             [
                 "district_id" => '3509010',
                 "name" => "Puskesmas Wuluhan",
-                "url" => "",
+                
             ],
             [
                 "district_id" => '3509010',
                 "name" => "Puskesmas Wuluhan",
-                "url" => "",
+                
             ],
             [
                 "district_id" => '3509010',
                 "name" => "Puskesmas Wuluhan",
-                "url" => "",
+                
             ],
             [
                 "district_id" => '3509010',
                 "name" => "Puskesmas Wuluhan",
-                "url" => "",
+                
             ],
             [
                 "district_id" => '3509010',
                 "name" => "Puskesmas Wuluhan",
-                "url" => "",
+                
             ],
             [
                 "district_id" => '3509010',
                 "name" => "Puskesmas Wuluhan",
-                "url" => "",
+                
             ],
             [
                 "district_id" => '3509010',
                 "name" => "Puskesmas Wuluhan",
-                "url" => "",
+                
             ],
             [
                 "district_id" => '3509010',
                 "name" => "Puskesmas Wuluhan",
-                "url" => "",
+                
             ],
             [
                 "district_id" => '3509010',
                 "name" => "Puskesmas Wuluhan",
-                "url" => "",
+                
             ],
             [
                 "district_id" => '3509010',
                 "name" => "Puskesmas Wuluhan",
-                "url" => "",
+                
             ],
             [
                 "district_id" => '3509010',
                 "name" => "Puskesmas Wuluhan",
-                "url" => "",
+                
             ],
             [
                 "district_id" => '3509010',
                 "name" => "Puskesmas Wuluhan",
-                "url" => "",
+                
             ],
             [
                 "district_id" => '3509010',
                 "name" => "Puskesmas Wuluhan",
-                "url" => "",
+                
             ],
             [
                 "district_id" => '3509010',
                 "name" => "Puskesmas Wuluhan",
-                "url" => "",
+                
             ],
             [
                 "district_id" => '3509010',
                 "name" => "Puskesmas Wuluhan",
-                "url" => "",
+                
             ],
             [
                 "district_id" => '3509010',
                 "name" => "Puskesmas Wuluhan",
-                "url" => "",
+                
             ],
             [
                 "district_id" => '3509010',
                 "name" => "Puskesmas Wuluhan",
-                "url" => "",
+                
             ],
             [
                 "district_id" => '3509010',
                 "name" => "Puskesmas Wuluhan",
-                "url" => "",
+                
             ],
             [
                 "district_id" => '3509010',
                 "name" => "Puskesmas Wuluhan",
-                "url" => "",
+                
             ],
             [
                 "district_id" => '3509010',
                 "name" => "Puskesmas Wuluhan",
-                "url" => "",
+                
             ]         
         ];
 

@@ -18,10 +18,15 @@
                                     aria-expanded="true">
                                     <tr>
                                         <th>Fasyankes Satelit</th>
-                                        <th class="col-2 text-right"><i class="fas fa-angle-down"></th>
+                                        <th class="col-2 text-right"><i class="fas fa-angle-down"></i></th>
                                     </tr>
                                 </thead>
                                 <tbody class="collapse show" id="satelitList">
+                                    <tr>
+                                        <td colspan="2">
+                                            <button class="btn btn-primary" onclick="addNew('satellite')">Tambah Fasyankes Satelit</button>
+                                        </td>
+                                    </tr>
                                     @forelse ($satellites as $satellite)
                                         <tr>
                                             <td> {{ $satellite->name }} </td>
@@ -59,6 +64,11 @@
                                     </tr>
                                 </thead>
                                 <tbody class="collapse show" id="workerList">
+                                    <tr>
+                                        <td colspan="2">
+                                            <button class="btn btn-primary" onclick="addNew('worker')">Tambah Patient Supporter</button>
+                                        </td>
+                                    </tr>
                                     @forelse ($workers as $ps)
                                         <tr>
                                             <td> {{ $ps->name }} </td>
@@ -198,6 +208,30 @@
                         'error'
                     )
                 });
+        }
+
+        function addNew(type) {
+            Swal.fire({
+                title: `Tambah ${type == 'satellite' ? 'Fasyankes Satelit' : 'Patient Supporter'}`,
+                input: 'text',
+                showCancelButton: true,
+                confirmButtonText: 'Tambah',
+                cancelButtonText: 'Batal',
+                inputValidator: (value) => {
+                    if (!value) {
+                        return 'Nama tidak boleh kosong!'
+                    }
+                }
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    const newItemName = result.value;
+                    Swal.fire(
+                        'Berhasil!',
+                        `Anda telah menambah ${type == 'satellite' ? 'Fasyankes Satelit' : 'Patient Supporter'}, Nama : ${newItemName}`,
+                        'success'
+                    );
+                }
+            });
         }
     </script>
 @endsection

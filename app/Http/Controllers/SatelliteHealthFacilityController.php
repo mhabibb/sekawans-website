@@ -2,78 +2,29 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\District;
-use App\Models\SatelliteHealthFacility;
 use Illuminate\Http\Request;
+use App\Models\SatelliteHealthFacility;
 
 class SatelliteHealthFacilityController extends Controller
 {
-    public function index()
-    {
-        $facilities = SatelliteHealthFacility::with('district')->get();
-        $districts = District::all();
-        return view('admin.faskes.index', compact('facilities'));
-    }
+    // Existing methods...
 
-
-    public function create()
-    {
-        $districts = District::all();
-        return view('admin.faskes.create', compact('districts'));
-    }
-
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
     public function store(Request $request)
     {
-        $validatedData = $request->validate([
-            'name' => 'required|string|max:64',
-            'district' => 'required|string|exists:districts,id',
-            'url_map' => 'required|string|max:500',
-        ]);
-    
-        SatelliteHealthFacility::create([
-            'name' => $request->name,
-            'district' => $request->district,
-            'url_map' => $request->url_map,
-        ]);
-    
-        return redirect()->route('admin.facilities.index')
-            ->with('success', 'Faskes berhasil ditambahkan.');
-    }
-    
-
-    public function edit(SatelliteHealthFacility $facility)
-    {
-        $districts = District::all();
-        return view('admin.faskes.edit', compact('facility', 'districts'));
-    }
-
-    public function update(Request $request, SatelliteHealthFacility $facility)
-    {
         $request->validate([
-            'name' => 'required|max:64|unique:satellite_health_facilities,name,' . $facility->id,
-            'url_map' => 'required|max:500',
-            'district_id' => 'required|exists:districts,id'
+            'name' => 'required|unique:satellite_health_facilities|max:64',
         ]);
 
-        $facility->update($request->all());
+        $satellite = SatelliteHealthFacility::create([
+            'name' => $request->name,
+        ]);
 
-        return redirect()->route('admin.facilitites.index')
-            ->with('success', 'Facility updated successfully.');
+        return response()->json($satellite, 201);
     }
-
-    public function destroy(SatelliteHealthFacility $facility)
-    {
-        $facility = SatelliteHealthFacility::findOrFail($facility->id);
-        
-        $facility->delete();
-    
-        return redirect()->route('admin.facilities.index')
-            ->with('success', 'Facility deleted successfully.');
-    }
-
-    public function district()
-    {
-        return $this->belongsTo(District::class);
-    }
-
 }

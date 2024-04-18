@@ -59,9 +59,11 @@
                         <select class="form-select" id="district" name="district" required style="font-size: 16px;">
                             <option value="" selected disabled style="font-size: 16px;">Pilih Kecamatan di Jember</option>
                             @foreach ($district as $item)
-                            <option value="{{ $item->name }}" style="font-size: 16px;">{{ $item->name }}</option>
+                                @if ($item->regency_id == 3509)
+                                    <option value="{{ $item->name }}" style="font-size: 16px;">{{ $item->name }}</option>
+                                @endif
                             @endforeach
-                        </select>
+                        </select>                        
                     </div>
                     <div class="mb-3">
                         <label for="screeningDate" class="form-label" style="font-size: 16px;">Tanggal Screening:</label>

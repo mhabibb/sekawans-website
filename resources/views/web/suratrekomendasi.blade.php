@@ -92,25 +92,30 @@
     </style>
 </head>
 <body>
-    <div class="rangkasurat">
-        <table style="width: 100%;">
-            <div class="kop-surat">
-                <div class="logo">
-                    <img src="data:image/png;base64, <?php echo base64_encode(file_get_contents('img/logo.png')); ?>" alt="Logo">
-                </div>
-                <div class="text">
-                    <div>
+    <div class="rangkasurat" style="text-align: center;">
+        <table style="width: 100%; margin: 0 auto; text-align: center;">
+            <tr>
+                <td style="width: 20%;">
+                    <div class="logo">
+                        <img src="data:image/png;base64, <?php echo base64_encode(file_get_contents('img/logo.png')); ?>" alt="Logo" style="max-width: 150px; height: auto;">
+                    </div>
+                </td>
+                <td style="width: 80%; text-align: center;">
+                    <div class="text">
                         <h3><strong class="unique-font">SEKAWAN'S</strong> <strong class="unique-font" style="color: red;">TB</strong> <strong class="unique-font">JEMBER</strong></h3>
                         <h5><strong>SK.MENTERI HUKUM DAN HAK ASASI MANUSIA RI</strong></h5>
                         <h5><strong>NOMOR: AHU-0016828.AH.01.07.TAHUN 2017</strong></h5>
                         <p>Alamat: Jl.Udang Windu No.17, Mangli-Jember</p>
                         <p>No.HP : 085732480822 Email : sekawansjember@gmail.com</p>
                     </div>
-                </div>
-            </div>
-            <hr>
-            <td class="kiri">Jember, {{ \Carbon\Carbon::parse($screening['screening_date'])->isoFormat('LL') }} <br><br></td>
+                </td>
+            </tr>
+        </table>
+        <hr>
+        <table style="width: 100%; margin: 0 auto;">
             <tr>
+                <td colspan="2" class="kanan">Jember, {{ \Carbon\Carbon::parse($screening['screening_date'])->isoFormat('LL') }}</td>
+            </tr>
                 <td colspan="2">Perihal : Rekomendasi Pemeriksaan Lanjutan Suspek TBC</td>
             </tr>
             <tr>

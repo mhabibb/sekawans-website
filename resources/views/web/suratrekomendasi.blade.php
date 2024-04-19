@@ -89,6 +89,7 @@
         .pertanyaan th {
             background-color: #f2f2f2;
         }
+
     </style>
 </head>
 <body>
@@ -97,16 +98,16 @@
             <tr>
                 <td style="width: 20%;">
                     <div class="logo">
-                        <img src="data:image/png;base64, <?php echo base64_encode(file_get_contents('img/logo.png')); ?>" alt="Logo" style="max-width: 150px; height: auto;">
+                        <img src="data:image/png;base64, <?php echo base64_encode(file_get_contents('img/logo.png')); ?>" alt="Logo" style="max-width: 140px; height: auto;">
                     </div>
                 </td>
                 <td style="width: 80%; text-align: center;">
                     <div class="text">
-                        <h3><strong class="unique-font">SEKAWAN'S</strong> <strong class="unique-font" style="color: red;">TB</strong> <strong class="unique-font">JEMBER</strong></h3>
-                        <h5><strong>SK.MENTERI HUKUM DAN HAK ASASI MANUSIA RI</strong></h5>
-                        <h5><strong>NOMOR: AHU-0016828.AH.01.07.TAHUN 2017</strong></h5>
-                        <p>Alamat: Jl.Udang Windu No.17, Mangli-Jember</p>
-                        <p>No.HP : 085732480822 Email : sekawansjember@gmail.com</p>
+                        <h3 style="margin: 0;"><strong class="unique-font">SEKAWAN'S</strong> <strong class="unique-font" style="color: red;">TB</strong> <strong class="unique-font">JEMBER</strong></h3>
+                        <h5 style="margin: 5px 0;"><strong>SK.MENTERI HUKUM DAN HAK ASASI MANUSIA RI</strong></h5>
+                        <h5 style="margin: 5px 0;"><strong>NOMOR: AHU-0016828.AH.01.07.TAHUN 2017</strong></h5>
+                        <p style="margin: 5px 0;">Alamat: Jl.Udang Windu No.17, Mangli-Jember</p>
+                        <p style="margin: 5px 0;">No.HP : 085732480822 Email : sekawansjember@gmail.com</p>
                     </div>
                 </td>
             </tr>
@@ -188,7 +189,18 @@
                     </table>
                 </td>
             </tr>
+            <tr>
+                <td colspan="2" style="text-align: right;">
+                    <br><br>
+                    <div style="display: inline-block; text-align: center;">
+                        Hormat Kami,<br>
+                        <img src="data:image/png;base64, <?php echo base64_encode(file_get_contents('img/capsekawan.png')); ?>" alt="Tanda Tangan" style="max-width: 200px; height: auto;"><br>
+                        <span style="font-weight: bold; text-decoration: underline;">Achmad Zaini</span><br>
+                        Ketua Kelas
+                    </div>
+                </td>
+            </tr>                                                    
         </table>
-    </div>
+    </div>      
 </body>
 </html>

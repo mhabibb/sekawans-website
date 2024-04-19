@@ -79,14 +79,7 @@
                         var formattedDate = year + "-" + month + "-" + day;
                     
                         document.getElementById("screeningDate").value = formattedDate;
-                    </script>
-                    <div class="mb-3">
-                        <label for="contactWithTB" style="font-size: 16px;">Apakah ada kontak satu rumah dengan pasien TBC?</label><br>
-                        <input type="radio" id="contactYes" name="home_contact" value="1" required>
-                        <label for="contactYes" style="font-size: 16px;">Ya</label>
-                        <input type="radio" id="contactNo" name="home_contact" value="0">
-                        <label for="contactNo" style="font-size: 16px;">Tidak</label>
-                    </div>              
+                    </script>            
             </div>
         </div>
 
@@ -103,26 +96,55 @@
                     <label for="coughNo" style="font-size: 16px;">Tidak</label>
                 </div>   
                 <div class="mb-3">
-                    <label for="breath" style="font-size: 16px;">Apakah Anda pernah mengalami sesak nafas dalam 2 bulan terakhir?</label><br>
-                    <input type="radio" id="breathYes" name="breath" value="1" required>
-                    <label for="breathYes" style="font-size: 16px;">Ya</label>
-                    <input type="radio" id="breathNo" name="breath" value="0">
-                    <label for="breathNo" style="font-size: 16px;">Tidak</label>
-                </div>
-                <div class="mb-3">
                     <label for="sweat" style="font-size: 16px;">Apakah Anda pernah berkeringat saat malam hari tanpa berkegiatan?</label><br>
                     <input type="radio" id="sweatYes" name="sweat" value="1" required>
                     <label for="sweatYes" style="font-size: 16px;">Ya</label>
                     <input type="radio" id="sweatNo" name="sweat" value="0">
                     <label for="sweatNo" style="font-size: 16px;">Tidak</label>
                 </div>
+
+                <!-- Faktor Risiko -->
                 <div class="mb-3">
-                    <label for="fever" style="font-size: 16px;">Apakah Anda pernah mengalami demam meriang selama lebih dari 1 bulan?</label><br>
-                    <input type="radio" id="feverYes" name="fever" value="1" required>
-                    <label for="feverYes" style="font-size: 16px;">Ya</label>
-                    <input type="radio" id="feverNo" name="fever" value="0">
-                    <label for="feverNo" style="font-size: 16px;">Tidak</label>
+                    <label for="smoke" style="font-size: 16px;">Apakah Anda merokok?</label><br>
+                    <input type="radio" id="smokeYes" name="smoking" value="1" required>
+                    <label for="smokeYes" style="font-size: 16px;">Ya</label>
+                    <input type="radio" id="smokeNo" name="smoking" value="0">
+                    <label for="smokeNo" style="font-size: 16px;">Tidak</label>
                 </div>
+            </div>
+        </div>
+
+        <!-- Screening Awal -->
+        <div class="card mb-4">
+            <div class="card-body">
+                <h3 class="card-title" style="font-size: 16px;">Pertanyaan Screening</h3>
+                <h3 class="card-title">Skrining Awal</h3>
+
+                <div class="mb-3">
+                    <label for="contactWithTB" style="font-size: 16px;">Apakah ada kontak satu rumah dengan pasien Tuberkulosis (TBC)?</label><br>
+                    <input type="radio" id="contactYes" name="home_contact" value="1" required>
+                    <label for="contactYes" style="font-size: 16px;">Ya</label>
+                    <input type="radio" id="contactNo" name="home_contact" value="0">
+                    <label for="contactNo" style="font-size: 16px;">Tidak</label>
+                </div>  
+
+                <div class="mb-3">
+                    <label for="closeContact" style="font-size: 16px;">Apakah anda pernah melakukan kontak erat dengan penderita Tuberkulosis (TBC)?</label><br>
+                    <label for="closeContact" style="font-size: 16px;">(teman kerja/teman sekolah/tetangga/saudara, atau yang lainnya)</label><br>
+                    <input type="radio" id="closeContactYes" name="close_contact" value="1" required>
+                    <label for="closeContactYes" style="font-size: 16px;">Ya</label>
+                    <input type="radio" id="closeContactNo" name="close_contact" value="0">
+                    <label for="closeContactNo" style="font-size: 16px;">Tidak</label>
+                </div>
+
+            </div>
+        </div>
+
+         <!-- Gejala Lain -->
+         <div class="card mb-4">
+            <div class="card-body">
+                <h3 class="card-title">Gejala Lain</h3>
+
                 <div class="mb-3">
                     <label for="weightLoss" style="font-size: 16px;">Apakah anda mengalami penurunan berat badan drastis disertasi nafsu makan yang berkurang?</label><br>
                     <input type="radio" id="weightLossYes" name="weight_loss" value="1" required>
@@ -131,14 +153,46 @@
                     <label for="weightLossNo" style="font-size: 16px;">Tidak</label>
                 </div>
 
-                <!-- Faktor Risiko -->
                 <div class="mb-3">
-                    <label for="pregnant" style="font-size: 16px;">Apakah Anda ibu hamil?</label><br>
-                    <input type="radio" id="pregnantYes" name="pregnant" value="1" required>
-                    <label for="pregnantYes" style="font-size: 16px;">Ya</label>
-                    <input type="radio" id="pregnantNo" name="pregnant" value="0">
-                    <label for="pregnantNo" style="font-size: 16px;">Tidak</label>
+                    <label for="fever" style="font-size: 16px;">Apakah Anda pernah mengalami badan terasa lemas/lesu?</label><br>
+                    <input type="radio" id="feverYes" name="fever" value="1" required>
+                    <label for="feverYes" style="font-size: 16px;">Ya</label>
+                    <input type="radio" id="feverNo" name="fever" value="0">
+                    <label for="feverNo" style="font-size: 16px;">Tidak</label>
                 </div>
+
+                <div class="mb-3">
+                    <label for="breath" style="font-size: 16px;">Apakah Anda pernah mengalami sesak nafas tanpa nyeri dada?</label><br>
+                    <input type="radio" id="breathYes" name="breath" value="1" required>
+                    <label for="breathYes" style="font-size: 16px;">Ya</label>
+                    <input type="radio" id="breathNo" name="breath" value="0">
+                    <label for="breathNo" style="font-size: 16px;">Tidak</label>
+                </div>
+
+                <div class="mb-3">
+                    <label for="smoke" style="font-size: 16px;">Apakah Anda pernah mengalami pembesaran getah bening di leher atau di ketiak?</label><br>
+                    <input type="radio" id="smokeYes" name="smoking" value="1" required>
+                    <label for="smokeYes" style="font-size: 16px;">Ya</label>
+                    <input type="radio" id="smokeNo" name="smoking" value="0">
+                    <label for="smokeNo" style="font-size: 16px;">Tidak</label>
+                </div>
+
+            </div>
+        </div>
+
+         <!-- Faktor Risiko -->
+         <div class="card mb-4">
+            <div class="card-body">
+                <h3 class="card-title">Faktor Risiko</h3>
+
+                <div class="mb-3">
+                    <label for="everTreatment" style="font-size: 16px;">Apakah anda pernah melakukan pengobatan Tuberkulosis (TBC)?</label><br>
+                    <input type="radio" id="everTreatmentYes" name="ever_treatment" value="1" required>
+                    <label for="everTreatmentYes" style="font-size: 16px;">Ya</label>
+                    <input type="radio" id="everTreatmentNo" name="ever_treatment" value="0">
+                    <label for="everTreatmentNo" style="font-size: 16px;">Tidak</label>
+                </div>
+
                 <div class="mb-3">
                     <label for="elderly" style="font-size: 16px;">Apakah Anda adalah lansia lebih dari 60 tahun?</label><br>
                     <input type="radio" id="elderlyYes" name="elderly" value="1" required>
@@ -146,34 +200,23 @@
                     <input type="radio" id="elderlyNo" name="elderly" value="0">
                     <label for="elderlyNo" style="font-size: 16px;">Tidak</label>
                 </div>
+
                 <div class="mb-3">
-                    <label for="diabetes" style="font-size: 16px;">Apakah Anda menderita diabetes melitus?</label><br>
+                    <label for="pregnant" style="font-size: 16px;">Apakah Anda adalah ibu hamil?</label><br>
+                    <input type="radio" id="pregnantYes" name="pregnant" value="1" required>
+                    <label for="pregnantYes" style="font-size: 16px;">Ya</label>
+                    <input type="radio" id="pregnantNo" name="pregnant" value="0">
+                    <label for="pregnantNo" style="font-size: 16px;">Tidak</label>
+                </div>
+
+                <div class="mb-3">
+                    <label for="diabetes" style="font-size: 16px;">Apakah Anda memiliki riwayat penyakit Diabetes Melitus?</label><br>
                     <input type="radio" id="diabetesYes" name="diabetes" value="1" required>
                     <label for="diabetesYes" style="font-size: 16px;">Ya</label>
                     <input type="radio" id="diabetesNo" name="diabetes" value="0">
                     <label for="diabetesNo" style="font-size: 16px;">Tidak</label>
                 </div>
-                <div class="mb-3">
-                    <label for="smoke" style="font-size: 16px;">Apakah Anda merokok?</label><br>
-                    <input type="radio" id="smokeYes" name="smoking" value="1" required>
-                    <label for="smokeYes" style="font-size: 16px;">Ya</label>
-                    <input type="radio" id="smokeNo" name="smoking" value="0">
-                    <label for="smokeNo" style="font-size: 16px;">Tidak</label>
-                </div>
-                <div class="mb-3">
-                    <label for="closeContact" style="font-size: 16px;">Apakah anda pernah melakukan kontak erat dengan penderita Tuberkulosis ? (teman kantor, dll)</label><br>
-                    <input type="radio" id="closeContactYes" name="close_contact" value="1" required>
-                    <label for="closeContactYes" style="font-size: 16px;">Ya</label>
-                    <input type="radio" id="closeContactNo" name="close_contact" value="0">
-                    <label for="closeContactNo" style="font-size: 16px;">Tidak</label>
-                </div>
-                <div class="mb-3">
-                    <label for="everTreatment" style="font-size: 16px;">Apakah anda pernah melakukan pengobatan Tuberkulosis ?</label><br>
-                    <input type="radio" id="everTreatmentYes" name="ever_treatment" value="1" required>
-                    <label for="everTreatmentYes" style="font-size: 16px;">Ya</label>
-                    <input type="radio" id="everTreatmentNo" name="ever_treatment" value="0">
-                    <label for="everTreatmentNo" style="font-size: 16px;">Tidak</label>
-                </div>
+
             </div>
         </div>
 

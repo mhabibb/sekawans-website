@@ -14,25 +14,38 @@ class ScreeningRequest extends FormRequest
     public function rules()
     {
         return [
+            // Identitas Diri
             'agreement' => 'required|boolean',
             'full_name' => 'required|string',
+            'nik' => 'required|string',
             'contact' => 'required|string',
             'gender' => 'required|in:male,female',
             'age' => 'required|numeric',
+            'address' => 'required|string',
             'district' => 'required|string',
             'screening_date' => 'required|date',
-            'home_contact' => 'required|boolean',
+
+            // Screening Awal
             'cough' => 'required|boolean',
-            'breath' => 'required|boolean',
-            'sweat' => 'required|boolean',
-            'fever' => 'required|boolean',
-            'weight_loss' => 'required|boolean',
-            'pregnant' => 'required|boolean',
-            'elderly' => 'required|boolean',
-            'diabetes' => 'required|boolean',
-            'smoking' => 'required|boolean',
+            'tb_diagnosed' => 'required|in:a,b,c',
+            'home_contact' => 'required|boolean',
             'close_contact' => 'required|boolean',
+
+            // Gejala Lain
+            'weight_loss' => 'required|boolean',
+            'fever' => 'required|boolean',
+            'breath' => 'required|boolean',
+            'smoking' => 'required|boolean',
+            'sluggish' => 'required|boolean',
+            'sweat' => 'required|boolean',
+
+            // Faktor Risiko
             'ever_treatment' => 'required|boolean',
+            'elderly' => 'required|boolean',
+            'pregnant' => 'required|boolean',
+            'diabetes' => 'required|boolean',
+
+            // Kontak
             'contact1_name' => 'nullable|string',
             'contact1_number' => 'nullable|string',
             'contact2_name' => 'nullable|string',

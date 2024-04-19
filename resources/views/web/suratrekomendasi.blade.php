@@ -120,7 +120,7 @@
                 <td colspan="2">Perihal : Rekomendasi Pemeriksaan Lanjutan Suspek TBC</td>
             </tr>
             <tr>
-                <td colspan="2">Kepada : Yth. Penanggung Jawab Tuberkulosis di {{ $screening['district'] }}<br><br></td>
+                <td colspan="2">Kepada : Yth. Penanggung Jawab Tuberkulosis di Kecamatan {{ $screening['district'] }}<br><br></td>
             </tr>
             <tr>
                 <td colspan="2">Mohon pemeriksaan dan penanganan lebih lanjut pada suspek :<br><br></td>
@@ -128,7 +128,9 @@
             <tr>
                 <td colspan="2">
                     Nama : {{ $screening['full_name'] }}<br>
+                    NIK : {{ $screening['nik'] }}<br>
                     Umur : {{ $screening['age'] }} Tahun<br>
+                    Alamat : {{ $screening['address'] }}<br>
                     Jenis Kelamin : {{ $screening['gender'] === 'male' ? 'Laki-laki' : ($screening['gender'] === 'female' ? 'Perempuan' : 'Tidak Diketahui') }}
                     <br><br>
                     Diagnosis,
@@ -144,9 +146,24 @@
                         </tr>
 
                         <tr>
-                            <td>Apakah Anda mengalami batuk selama 2 minggu atau lebih?</td>
+                            <td>Apakah Anda mengalami batuk?</td>
                             <td>{{ $screening['cough'] ? 'Ya' : 'Tidak' }}</td>
                         </tr>
+
+                        <tr>
+                            <td>Apakah Anda pernah terdiagnosa TBC?</td>
+                            <td>
+                                @if($screening['tb_diagnosed'] == 'a')
+                                    Pernah terdiagnosa, dan sudah melakukan pengobatan sampai sembuh
+                                @elseif($screening['tb_diagnosed'] == 'b')
+                                    Pernah terdiagnosa, dan belum melakukan pengobatan sampai sembuh
+                                @elseif($screening['tb_diagnosed'] == 'c')
+                                    Tidak pernah
+                                @else
+                                    
+                                @endif
+                            </td>
+                        </tr>   
 
                         <tr>
                             <td>Apakah ada kontak satu rumah dengan pasien Tuberkulosis (TBC)?</td>
@@ -176,7 +193,7 @@
                         </tr>
 
                         <tr>
-                            <td>Apakah Anda pernah mengalami badan terasa lemas/lesu?</td>
+                            <td>Apakah Anda mengalami demam?</td>
                             <td>{{ $screening['fever'] ? 'Ya' : 'Tidak' }}</td>
                         </tr>
 
@@ -188,6 +205,16 @@
                         <tr>
                             <td>Apakah Anda pernah mengalami pembesaran getah bening di leher atau di ketiak?</td>
                             <td>{{ $screening['smoking'] ? 'Ya' : 'Tidak' }}</td>
+                        </tr>
+
+                        <tr>
+                            <td>Apakah Anda pernah mengalami badan terasa lemas/lesu?</td>
+                            <td>{{ $screening['sluggish'] ? 'Ya' : 'Tidak' }}</td>
+                        </tr>
+
+                        <tr>
+                            <td>Apakah Anda berkeringat di malam hari tanpa kegiatan?</td>
+                            <td>{{ $screening['sweat'] ? 'Ya' : 'Tidak' }}</td>
                         </tr>
                         
                     </table>
@@ -233,7 +260,7 @@
                         Hormat Kami,<br>
                         <img src="data:image/png;base64, <?php echo base64_encode(file_get_contents('img/capsekawan.png')); ?>" alt="Tanda Tangan" style="max-width: 200px; height: auto;"><br>
                         <span style="font-weight: bold; text-decoration: underline;">Achmad Zaini</span><br>
-                        Ketua Kelas
+                        Ketua Sekawan'S TB Jember
                     </div>
                 </td>
             </tr>                                                    

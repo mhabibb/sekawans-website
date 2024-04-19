@@ -32,7 +32,7 @@
                     </li>
                     @endforeach
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ route('login') }}">Login</a>
+                        <a class="nav-link" href="{{ route('screening') }}">Screening</a>
                     </li>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
@@ -42,7 +42,6 @@
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                             <li><a class="dropdown-item" href="{{ route('artikel') }}">Artikel</a></li>
                             <li><a class="dropdown-item" href="{{ route('kegiatan') }}">Kegiatan</a></li>
-                            <li><a class="dropdown-item" href="{{ route('screening') }}">Screening</a></li>
                             <li><a class="dropdown-item" href="{{ route('fasyankes') }}">Fasyankes</a></li>
                             <li><a class="dropdown-item" href="{{ route('dokumen') }}">Dokumen</a></li>
                             <li><a class="dropdown-item" href="{{ route('pesan.create') }}">Hubungi Kami</a></li>

@@ -34,33 +34,42 @@ Auth::routes([
 ]);
 
 Route::middleware('auth')->prefix('admin')->name('admin.')->group(function () {
+    // Admin dashboard route
     Route::get('/', [DashboardController::class, 'index'])->name('dashboard.index');
+    
+    // User resource route
     Route::resource('/users', UserController::class)->except('edit');
     Route::post('/users/first', [UserController::class, 'firstLogin'])->name('users.firstLogin');
     Route::post('/users/{user}/reset', [UserController::class, 'reset'])->name('users.reset');
 
+    // Static Element controller route
     Route::controller(StaticElementController::class)->group(function () {
         Route::get('/sekawans', 'index')->name('sekawans.index');
         Route::post('admin/sekawans/{sekawan}', 'update')->name('sekawans.update');
     });
 
+    // Message resource route
     Route::resource('/messages', MessageController::class);
     Route::get('/messages', [MessageController::class, 'index'])->name('messages.index');
     
+    // Patient resource route
     Route::resource('/patients', PatientController::class);
     Route::controller(PatientController::class)->group(function () {
         Route::get('/patient/{regencies}', 'regency')->name('patients.regency');
     });
 
+    // Screening controller route
     Route::get('/screening', [ScreeningController::class, 'index'])->name('screening.index');
     Route::get('/screenings/{id}', [ScreeningController::class, 'show'])->name('screening.show');
     Route::delete('/screening/{id}', [ScreeningController::class, 'destroy'])->name('screening.destroy');
     
+    // Log controller route
     Route::controller(LogController::class)->group(function () {
         Route::get('/logs', 'index')->name('logs.index');
         Route::put('/logs/{activity}/restore', 'restore')->name('logs.restore');
     })->middleware(['can:superAdmin']);
 
+    // Satellite Worker controller route
     Route::controller(SatelliteWorkerController::class)->group(function () {
         Route::get('/fasyankes', 'index')->name('fasyankes.index');
         Route::get('/fasyankes/{table}/{name}', 'check')->name('fasyankes.check');
@@ -68,6 +77,7 @@ Route::middleware('auth')->prefix('admin')->name('admin.')->group(function () {
         Route::delete('/fasyankes/{table}/{id}', 'destroy')->name('fasyankes.destroy');
     });
 
+    // Satellite Health Facility resource route
     Route::resource('/facilities', SatelliteHealthFacilityController::class);
     Route::controller(SatelliteHealthFacilityController::class)->group(function () {
         Route::get('/facilities', 'index')->name('facilities.index');
@@ -79,6 +89,7 @@ Route::middleware('auth')->prefix('admin')->name('admin.')->group(function () {
         Route::delete('/facilities/{faskes}', 'destroy')->name('facilities.destroy');
     });
 
+    // Article resource route
     Route::resource('/articles', ArticleController::class);
     Route::controller(ArticleController::class)->group(function () {
         Route::get('/infos', 'index')->name('infotbc.index');
@@ -100,6 +111,7 @@ Route::middleware('auth')->prefix('admin')->name('admin.')->group(function () {
         Route::delete('/force/{article}', 'forceDelete')->name('articles.forceDelete')->withTrashed();
     });
 
+    // Document resource route
     Route::resource('/documents', DocumentController::class);
     Route::controller(DocumentController::class)->group(function () {
         Route::get('/documents', 'index')->name('documents.index');
@@ -142,7 +154,6 @@ Route::controller(ScreeningController::class)->group(function () {
 });
 
 Route::get('/download-surat-rekomendasi', [ScreeningController::class, 'downloadSuratRekomendasi'])->name('download.surat.rekomendasi');
-
-
+Route::post('/fasyankes', [SatelliteHealthFacilityController::class, 'store'])->name('admin.fasyankes.store');
 Route::get('/pesan', [MessageController::class, 'create'])->name('pesan.create');
 Route::post('/pesan', [MessageController::class, 'store'])->name('pesan.store');

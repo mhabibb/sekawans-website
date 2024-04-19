@@ -9,8 +9,9 @@
 
     <section class="content">
         <div class="container-fluid">
-            <div class="row row-cols-1 row-cols-md-2">
-                <div class="col">
+            <div class="row">
+                <div class="col-md-6">
+                    <button class="btn btn-primary mb-3" onclick="addNew('satellite')">Tambah Fasyankes Satelit</button>
                     <div class="card">
                         <div class="card-body table-responsive p-0" style="max-height: 340px;">
                             <table class="table table-head-fixed">
@@ -22,24 +23,19 @@
                                     </tr>
                                 </thead>
                                 <tbody class="collapse show" id="satelitList">
-                                    <tr>
-                                        <td colspan="2">
-                                            <button class="btn btn-primary" onclick="addNew('satellite')">Tambah Fasyankes Satelit</button>
-                                        </td>
-                                    </tr>
                                     @forelse ($satellites as $satellite)
                                         <tr>
                                             <td> {{ $satellite->name }} </td>
-                                            <td class="d-flex">
+                                            <td class="d-flex justify-content-end">
                                                 <a href="#" class="badge badge-warning"
                                                     onclick="update(this, 'satellite', {{ $satellite->id }})">Edit</a>
-                                                <form class="form"
+                                                <form class="form ml-2"
                                                     action="{{ route('admin.fasyankes.destroy', ['table' => 'satellite', 'id' => $satellite->id]) }}"
                                                     method="post">
                                                     @csrf
                                                     @method('delete')
                                                     <button type="submit" id="bt{{ $satellite->id }}"
-                                                        class="badge badge-danger btn">Hapus</button>
+                                                        class="badge badge-danger">Hapus</button>
                                                 </form>
                                             </td>
                                         </tr>
@@ -53,7 +49,8 @@
                         </div>
                     </div>
                 </div>
-                <div class="col">
+                <div class="col-md-6">
+                    <button class="btn btn-primary mb-3" onclick="addNew('worker')">Tambah Patient Supporter</button>
                     <div class="card">
                         <div class="card-body table-responsive p-0" style="max-height: 340px;">
                             <table class="table table-head-fixed">
@@ -64,24 +61,19 @@
                                     </tr>
                                 </thead>
                                 <tbody class="collapse show" id="workerList">
-                                    <tr>
-                                        <td colspan="2">
-                                            <button class="btn btn-primary" onclick="addNew('worker')">Tambah Patient Supporter</button>
-                                        </td>
-                                    </tr>
                                     @forelse ($workers as $ps)
                                         <tr>
                                             <td> {{ $ps->name }} </td>
-                                            <td class="d-flex">
+                                            <td class="d-flex justify-content-end">
                                                 <a href="#" class="badge badge-warning"
                                                     onclick="update(this, 'worker', {{ $ps->id }})">Edit</a>
-                                                <form class="form"
+                                                <form class="form ml-2"
                                                     action="{{ route('admin.fasyankes.destroy', ['table' => 'workers', 'id' => $ps->id]) }}"
                                                     method="post">
                                                     @csrf
                                                     @method('delete')
                                                     <button id="bt{{ $ps->id }}" type="submit" 
-                                                        class="btn badge badge-danger">Hapus</button>
+                                                        class="badge badge-danger">Hapus</button>
                                                 </form>
                                             </td>
                                         </tr>
@@ -185,21 +177,23 @@
                     url: url,
                     data: datas,
                 })
-                .done(function(name) {
-                    // console.log(name);
-                    if (name != 0) {
+                .done(function(response) {
+                    if (response.success) {
                         Swal.fire({
-                            title: success,
+                            title: 'Berhasil!',
+                            text: response.message,
                             icon: 'success',
                             showConfirmButton: false,
                             timer: 2000
                         })
-                        type == 'put' ? elm.html(name.trim()) : elm.remove();
-                    } else Swal.fire(
-                        'Terjadi Kesalahan',
-                        '',
-                        'error'
-                    )
+                        location.reload();
+                    } else {
+                        Swal.fire(
+                            'Gagal!',
+                            'Terjadi kesalahan saat memproses data.',
+                            'error'
+                        );
+                    }
                 })
                 .fail(function() {
                     Swal.fire(
@@ -225,11 +219,29 @@
             }).then((result) => {
                 if (result.isConfirmed) {
                     const newItemName = result.value;
-                    Swal.fire(
-                        'Berhasil!',
-                        `Anda telah menambah ${type == 'satellite' ? 'Fasyankes Satelit' : 'Patient Supporter'}, Nama : ${newItemName}`,
-                        'success'
-                    );
+                    $.ajax({
+                        type: 'POST',
+                        url: '{{ route("admin.fasyankes.store") }}',
+                        data: {
+                            name: newItemName
+                        },
+                        success: function(response) {
+                            if (response.success) {
+                                Swal.fire(
+                                    'Berhasil!',
+                                    `Anda telah menambah ${type == 'satellite' ? 'Fasyankes Satelit' : 'Patient Supporter'}, Nama : ${newItemName}`,
+                                    'success'
+                                );
+                                location.reload();
+                            } else {
+                                Swal.fire(
+                                    'Gagal!',
+                                    'Terjadi kesalahan saat menambah data.',
+                                    'error'
+                                );
+                            }
+                        }
+                    });
                 }
             });
         }

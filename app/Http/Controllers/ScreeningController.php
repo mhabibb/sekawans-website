@@ -17,26 +17,36 @@ class ScreeningController extends Controller
     public function store(Request $request)
     {
         try {
+            // Validasi input dari request
             $validated = $request->validate([
                 'agreement' => 'required|boolean',
+
+                // Identitas Diri
                 'full_name' => 'required|string',
                 'contact' => 'required|string',
                 'gender' => 'required|string',
-                'age' => 'required|numeric',
+                'age' => 'required|numeric|min:0',
                 'district' => 'required|string',
                 'screening_date' => 'required|date',
-                'home_contact' => 'required|boolean',
+
+                // Screening Awal
                 'cough' => 'required|boolean',
-                'breath' => 'required|boolean',
-                'sweat' => 'required|boolean',
-                'fever' => 'required|boolean',
-                'weight_loss' => 'required|boolean',
-                'pregnant' => 'required|boolean',
-                'elderly' => 'required|boolean',
-                'diabetes' => 'required|boolean',
-                'smoking' => 'required|boolean',
+                'home_contact' => 'required|boolean',
                 'close_contact' => 'required|boolean',
+
+                // Gejala Lain
+                'weight_loss' => 'required|boolean',
+                'fever' => 'required|boolean',
+                'breath' => 'required|boolean',
+                'smoking' => 'required|boolean',
+
+                // Faktor Risiko
                 'ever_treatment' => 'required|boolean',
+                'elderly' => 'required|boolean',
+                'pregnant' => 'required|boolean',
+                'diabetes' => 'required|boolean',
+
+                // Kontak
                 'contact1_name' => 'nullable|string',
                 'contact1_number' => 'nullable|string',
                 'contact2_name' => 'nullable|string',
@@ -46,30 +56,31 @@ class ScreeningController extends Controller
             ]);
 
             // Hitung hasil screening
-            $cough = ['cough'];
-            $gejala = ['breath','sweat','fever','weight_loss'];
-            $resiko = ['pregnant','elderly','diabetes','smoking','close_contact','ever_treatment'];
-            if ($validated['cough'] == '1') {
-                foreach ($gejala as  $item) {
-                    if ($validated[$item] == '1') {
-                        foreach ($resiko as $item) {
-                            if ($validated[$item] == '1') {
-                                $validated['is_positive'] = true;
-                                $screening = Screening::create($validated);
-                                // Menyimpan data screening ke session
-                                session()->put('screening', $validated);
-                                return redirect()->route('screening.result')->with('success', 'Formulir berhasil disimpan!');
-                            }
-                        }
-                    }
-                }
+            $gejala = ['breath', 'fever', 'weight_loss'];
+            $resiko = ['pregnant', 'elderly', 'diabetes', 'smoking', 'close_contact', 'ever_treatment'];
+
+            // Logika untuk menentukan apakah positif atau tidak
+            $has_cough = $validated['cough'];
+            $has_gejala = collect($gejala)->filter(function ($item) use ($validated) {
+                return $validated[$item];
+            })->count() >= 1;
+
+            $has_resiko = collect($resiko)->filter(function ($item) use ($validated) {
+                return $validated[$item];
+            })->count() >= 1;
+
+            if ($has_cough || $has_gejala || $has_resiko) {
+                $validated['is_positive'] = true;
+            } else {
+                $validated['is_positive'] = false;
             }
 
-            $validated['is_positive'] = false;
             // Simpan data ke dalam database
             $screening = Screening::create($validated);
+
             // Menyimpan data screening ke session
             session()->put('screening', $validated);
+            
             return redirect()->route('screening.result')->with('success', 'Formulir berhasil disimpan!');
         } catch (Exception $e) {
             return back()->withInput()->withErrors(['error' => $e->getMessage()]);
@@ -84,43 +95,42 @@ class ScreeningController extends Controller
             $faskes = $district->satelliteHealthFacility;
 
             // Ambil nilai variabel dari array $screening
-            $screening_date = $screening['screening_date'];
             $full_name = $screening['full_name'];
-            $age = $screening['age'];
             $gender = $screening['gender'];
-            $home_contact = $screening['home_contact'];
+            $age = $screening['age'];
+            $screening_date = $screening['screening_date'];
             $cough = $screening['cough'];
-            $breath = $screening['breath'];
-            $sweat = $screening['sweat'];
-            $fever = $screening['fever'];
-            $weight_loss = $screening['weight_loss'];
-            $pregnant = $screening['pregnant'];
-            $elderly = $screening['elderly'];
-            $diabetes = $screening['diabetes'];
-            $smoking = $screening['smoking'];
+            $home_contact = $screening['home_contact'];
             $close_contact = $screening['close_contact'];
+            $weight_loss = $screening['weight_loss'];
+            $fever = $screening['fever'];
+            $breath = $screening['breath'];
+            $smoking = $screening['smoking'];
             $ever_treatment = $screening['ever_treatment'];
+            $elderly = $screening['elderly'];
+            $pregnant = $screening['pregnant'];
+            $diabetes = $screening['diabetes']; 
 
             return view('web.screening-result', compact(
                 'screening',
                 'district',
-                'faskes',
-                'screening_date',
+                'faskes',  
                 'full_name',
-                'age',
                 'gender',
-                'home_contact',
+                'age',
+                'screening_date',
                 'cough',
-                'breath',
-                'sweat',
-                'fever',
+                'home_contact',
+                'close_contact',
                 'weight_loss',
+                'fever',
+                'breath',
+                'smoking',
+                'ever_treatment',
                 'pregnant',
                 'elderly',
                 'diabetes',
-                'smoking',
-                'close_contact',
-                'ever_treatment'
+                
             ));
         }
         return redirect()->route('screening');

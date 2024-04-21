@@ -199,7 +199,6 @@ class SatelliteHealthFacilitySeeder extends Seeder
             [
                 "district_id" => '3509010',
                 "name" => "Puskesmas Wuluhan",
-                "url" => "asdfghjkl",
             ],
             [
                 "district_id" => '3509010',

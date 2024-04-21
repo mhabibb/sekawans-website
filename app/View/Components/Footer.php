@@ -29,11 +29,11 @@ class Footer extends Component
             'tentang' => 'Tentang',
             'infotbc' => 'Info TBC',
             'kasustbc' => 'Kasus TBC',
+            'screening' => 'Screening',
             'artikel' => 'Artikel',
             'kegiatan' => 'Kegiatan',
-            'screening' => 'Screening',
+            'fasyankes' => 'Fasyankes',
             'dokumen' => 'Dokumen',
-            'fasyankes' => 'Fasyankes'
         );
 
         $socials = StaticElement::where('id', '>', 3)->get();

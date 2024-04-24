@@ -190,6 +190,10 @@
             <div class="d-flex justify-content-center">
                 <p class="fw-bold">Anda Tidak Positive TBC</p>
             </div>
+            
+            <div class="d-flex justify-content-center">
+                <a href="{{ route('infotbc') }}"><br><br>Informasi Tentang TBC -></a>
+            </div>
             @endif
         </div>
     </div>

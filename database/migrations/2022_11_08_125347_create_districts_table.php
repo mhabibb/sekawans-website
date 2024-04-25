@@ -20,6 +20,8 @@ return new class extends Migration
                 ->onUpdate('cascade')
                 ->onDelete('cascade');
             $table->string('name', 32);
+            $table->string('latitude')->nullable();
+            $table->string('longitude')->nullable();
         });
     }
 

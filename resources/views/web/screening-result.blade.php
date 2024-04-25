@@ -17,9 +17,9 @@
             <div class="d-flex justify-content-center">
                 <div>
                     <div class="text-center">
-                        <blockquote style="margin: 0; padding: 0 20px; background-color: #f9f9f9; border-left: 5px solid #333; border-right: 5px solid #333">
-                            <p style="color: #333;">Tenang saja, TB dapat diobati dengan melakukan pengobatan</p>
-                            <p style="color: #333;">Segera pastikan status Anda dengan melakukan tes ke dokter</p>
+                        <blockquote style="margin: 0; padding: 0 20px; background-color: #f9f9f9;>
+                            <p style="color: #333;">" Tenang saja, TB dapat diobati dengan melakukan pengobatan, </p>
+                            <p style="color: #333;">Segera pastikan status Anda dengan melakukan tes ke dokter "</p>
                         </blockquote>
                     </div>                                                                                                   
                 </div>

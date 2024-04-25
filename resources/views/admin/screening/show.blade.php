@@ -51,12 +51,38 @@
                             <label for="screening_date">Tanggal Skrining</label>
                             <div class="form-control">{{ \Carbon\Carbon::parse($screening->screening_date)->format('d/m/Y') }}</div>
                         </div>
-                        <div class="col-sm-6 form-group">
-                            <label for="is_positive">Hasil Skrining</label>
-                            <div class="form-control">{{ $screening->is_positive ? 'Positif' : 'Negatif' }}</div>
-                        </div>
-                    </div>
 
+                        {{-- Kontak 1 --}}
+                        <div class="col-sm-6 form-group">
+                            <label for="is_positive">Nama Kontak 1</label>
+                            <div class="form-control">{{ $screening->contact1_name }}</div>
+                        </div>
+                        <div class="col-sm-6 form-group">
+                            <label for="is_positive">No. Kontak 1</label>
+                            <div class="form-control">{{ $screening->contact1_number }}</div>
+                        </div>
+                        
+                        {{-- Kontak 2 --}}
+                        <div class="col-sm-6 form-group">
+                            <label for="is_positive">Nama Kontak 2</label>
+                            <div class="form-control">{{ $screening->contact2_name }}</div>
+                        </div>
+                        <div class="col-sm-6 form-group">
+                            <label for="is_positive">No. Kontak 2</label>
+                            <div class="form-control">{{ $screening->contact2_number }}</div>
+                        </div>
+
+                        {{-- Kontak 3 --}}
+                        <div class="col-sm-6 form-group">
+                            <label for="is_positive">Nama Kontak 3</label>
+                            <div class="form-control">{{ $screening->contact3_name }}</div>
+                        </div>
+                        <div class="col-sm-6 form-group">
+                            <label for="is_positive">No. Kontak 3</label>
+                            <div class="form-control">{{ $screening->contact3_number }}</div>
+                        </div>
+                        
+                    {{-- List Pertanyaan Screening --}}
                     <div class="row mb-4 pb-2 border-bottom">
                         <div class="col-12 card-title">
                             <h5>Pertanyaan Jawaban Pasien Screening</h5>

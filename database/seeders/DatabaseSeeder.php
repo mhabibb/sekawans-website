@@ -31,17 +31,22 @@ class DatabaseSeeder extends Seeder
             SatelliteHealthFacilitySeeder::class,
         ]);
 
+        // Sekawan's TB Jember
         \App\Models\User::factory()->create([
             'name' => 'Sekawans',
             'email' => 'sekawanjember@gmail.com',
             'number' => '81553444245',
             'role' => true,
         ]);
+
+        // Divisi Komunikasi
         \App\Models\User::factory()->create([
             'name' => 'Divisi Komunikasi',
             'email' => 'divkom.sekawan@gmail.com',
             'number' => '81553444245',
         ]);
+
+        // Divisi IT Database
         \App\Models\User::factory()->create([
             'name' => 'Divisi IT Database',
             'email' => 'itdb.sekawan@gmail.com',

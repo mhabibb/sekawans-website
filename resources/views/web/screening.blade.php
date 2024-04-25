@@ -66,10 +66,8 @@
                         <label for="district" class="form-label" style="font-size: 16px;">Domisili Kecamatan</label>
                         <select class="form-select" id="district" name="district" required style="font-size: 16px;">
                             <option value="" selected disabled style="font-size: 16px;">Pilih Kecamatan di Jember</option>
-                            @foreach ($district as $item)
-                                @if ($item->regency_id == 3509)
-                                    <option value="{{ $item->name }}" style="font-size: 16px;">{{ $item->name }}</option>
-                                @endif
+                            @foreach ($district->where('regency_id', 3509)->sortBy('name') as $item)
+                                <option value="{{ $item->name }}" style="font-size: 16px;">{{ $item->name }}</option>
                             @endforeach
                         </select>                        
                     </div>

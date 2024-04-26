@@ -11,7 +11,9 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-md-6">
-                    <button class="btn btn-primary mb-3" onclick="addNew('satellite')">Tambah Fasyankes Satelit</button>
+                <div class="card-header">
+                        <a href="{{ route('admin.fasyankes.create') }}" class="mb-2 mr-2 btn btn-primary">Input Fasyankes Baru</a>
+                    </div>
                     <div class="card">
                         <div class="card-body table-responsive p-0" style="max-height: 340px;">
                             <table class="table table-head-fixed">
@@ -23,27 +25,19 @@
                                     </tr>
                                 </thead>
                                 <tbody class="collapse show" id="satelitList">
-                                    @forelse ($satellites as $satellite)
-                                        <tr>
-                                            <td> {{ $satellite->name }} </td>
-                                            <td class="d-flex justify-content-end">
-                                                <a href="#" class="badge badge-warning"
-                                                    onclick="update(this, 'satellite', {{ $satellite->id }})">Edit</a>
-                                                <form class="form ml-2"
-                                                    action="{{ route('admin.fasyankes.destroy', ['table' => 'satellite', 'id' => $satellite->id]) }}"
-                                                    method="post">
-                                                    @csrf
-                                                    @method('delete')
-                                                    <button type="submit" id="bt{{ $satellite->id }}"
-                                                        class="badge badge-danger">Hapus</button>
-                                                </form>
-                                            </td>
-                                        </tr>
-                                    @empty
-                                        <tr>
-                                            <td>Data Kosong</td>
-                                        </tr>
-                                    @endforelse
+                                @forelse ($satellites as $satellite)
+                                <tr>
+                                    <td><a href="{{ route('admin.fasyankes.show', $satellite->id) }}">{{ $satellite->name }}</a></td>
+                                    <td class="d-flex justify-content-end">
+                                        
+                                    </td>
+                                </tr>
+                            @empty
+                                <tr>
+                                    <td>Data Kosong</td>
+                                </tr>
+                            @endforelse
+
                                 </tbody>
                             </table>
                         </div>
@@ -101,48 +95,47 @@
         });
 
         async function update(elm, table, id) {
-            elm = $(elm).parent().siblings();
-            const {
-                value: data
-            } = await Swal.fire({
-                title: `Update ${elm.html().trim()}`,
-                input: 'text',
-                inputValue: elm.html().trim(),
-                showCancelButton: true,
-                confirmButtonText: 'Update',
-                cancelButtonText: 'Batalkan',
-                allowOutsideClick: false,
-                preConfirm: (value) => {
-                    return fetch(`fasyankes/${table}/${value}`)
-                        .then(response => {
-                            if (!response.ok) {
-                                throw new Error(response.statusText)
-                            }
-                            return response.json()
-                        })
-                        .catch(error => {
-                            Swal.showValidationMessage(
-                                `Gagal: Nama ${value} sudah digunakan`
-                            )
-                        })
-                },
-                inputValidator: (value) => {
-                    if (!value) {
-                        return 'Tidak boleh kosong!'
-                    }
+        elm = $(elm).parent().siblings();
+        const { value: data } = await Swal.fire({
+            title: `Update ${elm.html().trim()}`,
+            input: 'text',
+            inputValue: elm.html().trim(),
+            showCancelButton: true,
+            confirmButtonText: 'Update',
+            cancelButtonText: 'Batalkan',
+            allowOutsideClick: false,
+            preConfirm: (value) => {
+                return fetch(`/fasyankes/${table}/${value}`) // Perubahan di sini
+                    .then(response => {
+                        if (!response.ok) {
+                            throw new Error(response.statusText)
+                        }
+                        return response.json()
+                    })
+                    .catch(error => {
+                        Swal.showValidationMessage(
+                            `Gagal: Nama ${value} sudah digunakan`
+                        )
+                    })
+            },
+            inputValidator: (value) => {
+                if (!value) {
+                    return 'Tidak boleh kosong!'
                 }
-            })
-            if (data) {
-                url = "{{ route('admin.fasyankes.update', ['table', 'id']) }}"
-                url = url.replace('table', table).replace('id', id)
-                type = 'put'
-                success = 'Berhasil Diperbarui!'
-                datas = {
-                    name: data
-                }
-                ajax(elm)
             }
+        });
+        if (data) {
+            url = "{{ route('admin.fasyankes.update', ['table', 'id']) }}";
+            url = url.replace('table', table).replace('id', id);
+            type = 'put';
+            success = 'Berhasil Diperbarui!';
+            datas = {
+                name: data
+            };
+            ajax(elm);
         }
+    }
+
 
         $('.form').each(function() {
             $(this).submit(function(e) {

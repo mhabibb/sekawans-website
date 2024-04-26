@@ -13,7 +13,7 @@ class StoreSatelliteHealthFacilityRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true; // Ubah menjadi true agar request diotorisasi
     }
 
     /**
@@ -24,9 +24,10 @@ class StoreSatelliteHealthFacilityRequest extends FormRequest
     public function rules()
     {
         return [
-            'name'      => 'required|string',
-            'district' => 'required|string',
-            'url_map' => 'required|string',
+            'name' => 'required|string',
+            'district_id' => 'required|exists:districts,id',
+            'url_map' => 'nullable|string|max:255',
         ];
     }
+    
 }

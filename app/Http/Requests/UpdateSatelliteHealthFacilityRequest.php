@@ -2,11 +2,10 @@
 
 namespace App\Http\Requests;
 
+use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Str;
 
-// use Illuminate\Foundation\Http\FormRequest;
-
-class UpdateSatelliteHealthFacilityRequest extends UpdateSatelliteWorkerRequest
+class UpdateSatelliteHealthFacilityRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -25,9 +24,9 @@ class UpdateSatelliteHealthFacilityRequest extends UpdateSatelliteWorkerRequest
      */
     protected function prepareForValidation()
     {
-        $this->merge(
-            ["name"  => Str::upper($this->name)]
-        );
+        $this->merge([
+            "name"  => Str::upper($this->name)
+        ]);
     }
 
     /**
@@ -38,7 +37,9 @@ class UpdateSatelliteHealthFacilityRequest extends UpdateSatelliteWorkerRequest
     public function rules()
     {
         return [
-            'name'      => "required|string|unique:satellite_health_facilities|max:64",
+            'name' => 'required|string|unique:satellite_health_facilities|max:64',
+            'district_id' => 'required|string|exists:districts,id',
+            'url_map' => 'nullable|string|max:255',
         ];
     }
 }

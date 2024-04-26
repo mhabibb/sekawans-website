@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 use Spatie\Activitylog\Traits\LogsActivity;
 use Spatie\Activitylog\LogOptions;
 
+
 class SatelliteHealthFacility extends Model
 {
     use HasFactory, LogsActivity;
@@ -28,5 +29,10 @@ class SatelliteHealthFacility extends Model
     public function patientDetails()
     {
         $this->hasMany(PatientDetail::class);
+    }
+
+    public function district()
+    {
+        return $this->belongsTo(District::class);
     }
 }

@@ -75,12 +75,19 @@ Route::middleware('auth')->prefix('admin')->name('admin.')->group(function () {
         Route::get('/fasyankes/{table}/{name}', 'check')->name('fasyankes.check');
         Route::put('/fasyankes/{table}/{data}', 'update')->name('fasyankes.update');
         Route::delete('/fasyankes/{table}/{id}', 'destroy')->name('fasyankes.destroy');
+    });
+
+    // Satellite Worker controller route
+    Route::controller(SatelliteWorkerController::class)->group(function () {
+        Route::get('/fasyankes', 'index')->name('fasyankes.index');
+        Route::get('/fasyankes/{table}/{name}', 'check')->name('fasyankes.check');
+        Route::put('/fasyankes/{table}/{data}', 'update')->name('fasyankes.update');
+        Route::delete('/fasyankes/{table}/{id}', 'destroy')->name('fasyankes.destroy');
         Route::get('/fasyankes/create', 'create')->name('fasyankes.create');
         Route::post('/fasyankes', 'store')->name('fasyankes.store');
-        // Route::get('/fasyankes', 'show')->name('fasyankes.show');
-        Route::get('/fasyankes/edit', 'edit')->name('fasyankes.edit');
-        Route::put('/fasyankes', 'update')->name('fasyankes.update');
-        Route::get('/fasyankes/{facility}', 'show')->name('fasyankes.show');
+        Route::get('/fasyankes/{facility}/edit', 'edit')->name('fasyankes.edit'); 
+        Route::put('/fasyankes/{facility}', 'update')->name('fasyankes.update'); 
+        Route::get('/fasyankes/{facility}', 'show')->name('fasyankes.show'); 
         Route::delete('/fasyankes', 'destroy')->name('fasyankes.destroy');
     });
 

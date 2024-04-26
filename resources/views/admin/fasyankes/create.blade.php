@@ -1,63 +1,91 @@
 @extends('layouts.admin')
 
 @section('admin-content')
-<!-- Content Header (Page header) -->
-<section class="content-header">
-  <div class="container-fluid">
-    <h1>Buat Faskes Baru</h1>
-  </div>
-</section>
-
-<!-- Main content -->
-<section class="content">
-  <div class="container-fluid pb-5">
-    <div class="card">
-      <div class="card-body">
-        <div class="row mb-4 pb-2 border-bottom">
-          <div class="col-12 card-title">
-            <h5>Detail Facility</h5>
-          </div>
-          <form action="{{ route('admin.fasyankes.store') }}" method="POST" enctype="multipart/form-data">
-            @csrf
-            <!-- Ubah metode menjadi POST untuk pembuatan baru -->
-            @method('POST')
-            <div class="col-sm-6 form-group">
-              <label>Nama Fasyankes</label>
-              <input type="text" name="name" class="form-control @error('name') is-invalid @enderror" id="name" placeholder="Masukkan nama faskes">
-              @error('name')
-              <span class="invalid-feedback">{{ $message }}</span>
-              @enderror
-            </div>
-
-            <div class="col-sm-6 form-group">
-                <label>Kecamatan</label>
-                <select class="form-select" id="district_id" name="district_id" required>
-                    <option value="" selected disabled>Pilih Kecamatan di Jember</option>
-                    @foreach ($districts as $district)
-                        <option value="{{ $district->id }}">{{ $district->name }}</option>
-                    @endforeach
-                </select>
-            </div>
-
-
-            <div class="col-sm-6 form-group">
-              <label>URL Map</label>
-              <textarea name="url_map" id="url_map" class="form-control @error('url_map') is-invalid @enderror" placeholder="Masukkan url map"></textarea>
-              @error('url_map')
-              <span class="invalid-feedback">{{ $message }}</span>
-              @enderror
-            </div>
-            <div class="row">
-              <div class="col-12">
-                <button type="reset" onclick="history.back()" class="btn btn-secondary">Batalkan</button>
-                <button type="submit" class="btn btn-primary">Submit</button>
-              </div>
-            </div>
-          </form>
+    <section class="content-header">
+        <div class="container-fluid">
+            <h1>Tambah Fasyankes Satelit</h1>
         </div>
-      </div>
-    </div>
+    </section>
 
-  </div>
-</section>
+    <section class="content">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="card">
+                        <div class="card-body">
+                            <form action="{{ route('admin.fasyankes.store') }}" method="POST" id="createForm">
+                                @csrf
+                                <div class="form-group">
+                                    <label for="name">Nama</label>
+                                    <input type="text" name="name" id="name" class="form-control" placeholder="Nama Fasyankes" required>
+                                    <span class="text-danger" id="errorName"></span>
+                                </div>
+                                <div class="form-group">
+                                    <label for="district">Distrik</label>
+                                    <select name="district" id="district" class="form-control" required>
+                                        <option value="">Pilih Distrik</option>
+                                        @foreach (\App\Models\District::orderBy('name', 'asc')->get() as $district)
+                                            <option value="{{ $district->id }}">{{ $district->name }}</option>
+                                        @endforeach
+                                    </select>
+                                    <span class="text-danger" id="errorDistrict"></span>
+                                </div>
+                                <div class="form-group">
+                                    <label for="url_map">URL Peta (opsional)</label>
+                                    <input type="text" name="url_map" id="url_map" class="form-control" placeholder="URL Peta">
+                                    <span class="text-danger" id="errorUrlMap"></span>
+                                </div>
+                                <button type="submit" class="btn btn-primary">Simpan</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+@endsection
+
+@section('js')
+    <script>
+        $(document).ready(function () {
+            $('#createForm').submit(function (e) {
+                e.preventDefault();
+
+                $.ajax({
+                    type: 'POST',
+                    url: $(this).attr('action'),
+                    data: $(this).serialize(),
+                    success: function (response) {
+                        if (response.success) {
+                            Swal.fire({
+                                title: 'Berhasil!',
+                                text: response.message,
+                                icon: 'success',
+                                showConfirmButton: false,
+                                timer: 2000
+                            }).then(function() {
+                                location.reload();
+                            });
+                        } else {
+                            Swal.fire({
+                                title: 'Gagal!',
+                                text: response.message,
+                                icon: 'error',
+                                showConfirmButton: false,
+                                timer: 2000
+                            });
+                        }
+                    },
+                    error: function (xhr) {
+                        if (xhr.status == 422) {
+                            var errors = xhr.responseJSON.errors;
+                            $.each(errors, function (key, value) {
+                                $('#error' + key.charAt(0).toUpperCase() + key.slice(1)).html(value);
+                            });
+                        }
+                    }
+                });
+            });
+        });
+    </script>
 @endsection

@@ -16,7 +16,7 @@
             <div class="card-body">
                 
                 <div class="mb-3">
-                    <label for="nama" class="form-label">Nama</label>
+                    <label for="nama" class="form-label">Nama Lengkap</label>
                     <input type="text" class="form-control" id="nama" name="nama" required>
                 </div>
                 <div class="mb-3">
@@ -24,7 +24,7 @@
                     <input type="text" class="form-control" id="alamat" name="alamat" required>
                 </div>
                 <div class="mb-3">
-                    <label for="instansi" class="form-label">Instansi</label>
+                    <label for="instansi" class="form-label">Asal Instansi</label>
                     <input type="text" class="form-control" id="instansi" name="instansi" required>
                 </div>
                 <div class="mb-3">
@@ -36,8 +36,8 @@
                     <textarea class="form-control" id="keperluan" name="keperluan" rows="3" required></textarea>
                 </div>
                 <div class="mb-3">
-                    <label for="file" class="form-label">Upload File (opsional doc/pdf)</label>
-                    <input type="file" class="form-control" id="file" name="file">
+                    <label for="file" class="form-label">Upload File (berupa doc/pdf)</label>
+                    <input type="file" class="form-control" id="file" name="file" required>
                 </div>
             </div>
         </div>

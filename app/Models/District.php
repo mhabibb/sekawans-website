@@ -14,6 +14,7 @@ class District extends Model
     public $timestamps = false;
 
     protected $with = ['regency'];
+    protected $fillable = ['latitude', 'longitude'];
 
     public function regency()
     {

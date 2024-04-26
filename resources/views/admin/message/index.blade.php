@@ -22,7 +22,7 @@
                             <table class="table table-bordered table-striped" id="messagesTable" style="display: none;">
                                 <thead>
                                     <tr>
-                                        <th>Nama</th>
+                                        <th>Nama Lengkap</th>
                                         <th>Nomor Telepon</th>
                                         <th>Keperluan</th>
                                         <th>File</th>

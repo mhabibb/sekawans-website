@@ -10,6 +10,23 @@
         .dataTables_wrapper .dt-buttons {
             float: left;
         }
+
+        .btn-tambah {
+            background-color: #007bff;
+            border-color: #007bff;
+            padding: 5px 10px;
+            font-size: 14px;
+        }
+
+        .btn-tambah:hover {
+            background-color: #0056b3;
+            border-color: #0056b3;
+        }
+
+        .btn-hapus {
+            padding: 5px 10px;
+            font-size: 14px;
+        }
     </style>
 @endsection
 
@@ -50,7 +67,8 @@
                                         <td>{{ \Carbon\Carbon::parse($screening->screening_date)->format('d/m/Y') }}</td>
                                         <td>{{ $screening->is_positive ? 'Positif' : 'Negatif' }}</td>
                                         <td>
-                                            <button class="btn btn-danger btn-delete" data-id="{{ $screening->id }}">Delete</button>
+                                            <a href="{{ route('admin.patients.create') }}" class="btn btn-primary btn-tambah">Tambah</a>
+                                            <button class="btn btn-danger btn-hapus btn-delete" data-id="{{ $screening->id }}">Delete</button>
                                         </td>
                                     </tr>
                                 @endforeach

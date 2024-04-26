@@ -14,6 +14,17 @@
             <div class="d-flex justify-content-center">
                 <p class="fw-bold fs-4">Anda diduga Positive TBC <br><br></p>
             </div>
+            <div class="d-flex justify-content-center">
+                <div>
+                    <div class="text-center">
+                        <blockquote style="margin: 0; padding: 0 20px; background-color: #f9f9f9;>
+                            <p style="color: #333;">" Tenang saja, TB dapat diobati dengan melakukan pengobatan, </p>
+                            <p style="color: #333;">Segera pastikan status Anda dengan melakukan tes ke dokter "</p>
+                        </blockquote>
+                    </div>                                                                                                   
+                </div>
+            </div>      
+            <br><br>      
             <a href="{{ route('download.surat.rekomendasi') }}" class="btn btn-secondary" style="display: block; width: fit-content; margin: 0 auto;">Download Surat Rekomendasi</a>
             <br><br>
             <p style="font-size: 16px;">Berikut adalah beberapa fasilitas kesehatan yang tersedia di kecamatan Anda:</p>
@@ -189,6 +200,10 @@
             @else
             <div class="d-flex justify-content-center">
                 <p class="fw-bold">Anda Tidak Positive TBC</p>
+            </div>
+            
+            <div class="d-flex justify-content-center">
+                <a href="{{ route('infotbc') }}"><br><br>Informasi Tentang TBC -></a>
             </div>
             @endif
         </div>

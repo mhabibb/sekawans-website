@@ -77,18 +77,16 @@ Route::middleware('auth')->prefix('admin')->name('admin.')->group(function () {
         Route::delete('/fasyankes/{table}/{id}', 'destroy')->name('fasyankes.destroy');
     });
 
-    // Satellite Worker controller route
-    Route::controller(SatelliteWorkerController::class)->group(function () {
-        Route::get('/fasyankes', 'index')->name('fasyankes.index');
-        Route::get('/fasyankes/{table}/{name}', 'check')->name('fasyankes.check');
-        Route::put('/fasyankes/{table}/{data}', 'update')->name('fasyankes.update');
-        Route::delete('/fasyankes/{table}/{id}', 'destroy')->name('fasyankes.destroy');
-        Route::get('/fasyankes/create', 'create')->name('fasyankes.create');
-        Route::post('/fasyankes', 'store')->name('fasyankes.store');
-        Route::get('/fasyankes/{facility}/edit', 'edit')->name('fasyankes.edit'); 
-        Route::put('/fasyankes/{facility}', 'update')->name('fasyankes.update'); 
-        Route::get('/fasyankes/{facility}', 'show')->name('fasyankes.show'); 
-        Route::delete('/fasyankes', 'destroy')->name('fasyankes.destroy');
+    // Satellite Health Facility resource route
+    Route::resource('/facilities', SatelliteHealthFacilityController::class);
+    Route::controller(SatelliteHealthFacilityController::class)->group(function () {
+        Route::get('/facilities', 'index')->name('facilities.index');
+        Route::get('/facilities/create', 'create')->name('facilities.create');
+        Route::post('/facilities', 'store')->name('facilities.store');
+        Route::get('/facilities/{faskes}', 'show')->name('facilities.show');
+        Route::get('/facilities/{faskes}/edit', 'edit')->name('facilities.edit');
+        Route::put('/facilities/{faskes}', 'update')->name('facilities.update');
+        Route::delete('/facilities/{faskes}', 'destroy')->name('facilities.destroy');
     });
 
     // Article resource route

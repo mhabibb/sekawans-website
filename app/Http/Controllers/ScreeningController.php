@@ -151,9 +151,10 @@ class ScreeningController extends Controller
         return redirect()->route('screening');
     }
 
-    public function downloadSuratRekomendasi()
+    public function downloadSuratRekomendasi(Request $request)
     {
         $screening = session()->get('screening');
+        $selectedFaskes = $request->input('selectedFaskes');
 
         if ($screening) {
             $options = new Options();
@@ -162,7 +163,7 @@ class ScreeningController extends Controller
 
             $pdf = new Dompdf($options);
 
-            $html = view('web.suratrekomendasi', ['screening' => $screening])->render();
+            $html = view('web.suratrekomendasi', ['screening' => $screening, 'selectedFaskes' => $selectedFaskes])->render();
 
             $pdf->loadHtml($html);
             $pdf->setPaper('A4', 'portrait');

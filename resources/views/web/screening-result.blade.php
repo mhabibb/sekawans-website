@@ -24,15 +24,32 @@
                     </div>                                                                                                   
                 </div>
             </div>      
+
+            {{-- Download Surat Rekomendasi Screening --}}
             <br><br>      
+            @php
+                $selectedFaskes = session('selectedFaskes');
+            @endphp
+
+            <input type="hidden" name="selectedFaskes" value="{{ $selectedFaskes }}">
+
             <a href="{{ route('download.surat.rekomendasi') }}" class="btn btn-secondary" style="display: block; width: fit-content; margin: 0 auto;">Download Surat Rekomendasi</a>
             <br><br>
+
             <p style="font-size: 16px;">Berikut adalah beberapa fasilitas kesehatan yang tersedia di kecamatan Anda:</p>
-            <ol style="font-size: 16px;">
-                @foreach ($faskes as $item)
-                <li>{{ $item->name }}</li>
-                @endforeach
-            </ol>
+
+            <!-- Fasilitas Kesehatan -->
+            <div class="form-group">
+                <label for="faskes-select">Pilih Fasilitas Kesehatan:</label>
+                <select id="faskes-select" class="form-control">
+                    <option value="">Pilih Fasilitas Kesehatan</option>
+                    @foreach ($faskes as $item)
+                        <option value="{{ $item->name }}">{{ $item->name }}</option>
+                    @endforeach
+                </select>
+            </div>
+            
+            <br><br>
             <p style="font-size: 16px;">Anda bisa menunjukkan hasil skrining awal ini ke fasilitas kesehatan terdekat diatas. Terima kasih!</p>
             <br>
             <p style="font-size: 16px;">Formulir TBC:</p>
@@ -55,14 +72,11 @@
                     </div>                                                                      
                   <hr>    
                   <td class="kiri">Jember, {{ \Carbon\Carbon::parse($screening['screening_date'])->isoFormat('LL') }} <br><br></td>
-
-
-
                     <tr>
                         <td colspan="2">Perihal : Rekomendasi Pemeriksaan Lanjutan Suspek TBC</td>
                     </tr>
                     <tr>
-                      <td colspan="2">Kepada : Yth. Penanggung Jawab Tuberkulosis di {{ $screening['district'] }}<br><br></td>
+                        <td colspan="2">Kepada: Yth. Penanggung Jawab Tuberkulosis <span id="selected-faskes-info"></span><br><br></td>
                   </tr>
                   <tr>
                       <td colspan="2">Mohon pemeriksaan dan penanganan lebih lanjut pada suspek :<br><br></td>
@@ -295,3 +309,23 @@
         }
     }
 </style>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        var faskesSelect = document.getElementById('faskes-select');
+
+        faskesSelect.addEventListener('change', function() {
+            var selectedFaskes = faskesSelect.value;
+
+            document.getElementById('selected-faskes-info').textContent = selectedFaskes;
+
+            var xhr = new XMLHttpRequest();
+            xhr.open('GET', '{{ route("download.surat.rekomendasi") }}?selectedFaskes=' + selectedFaskes, true);
+            xhr.onreadystatechange = function() {
+                if (xhr.readyState == 4 && xhr.status == 200) {
+                   
+                }
+            };
+            xhr.send();
+        });
+    });
+</script>

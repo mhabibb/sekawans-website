@@ -50,16 +50,16 @@
     <script>
         $(document).ready(function () {
     $('#editForm').submit(function (e) {
-        e.preventDefault(); // Prevent default form submission behavior
+        e.preventDefault(); 
 
-        var formData = $(this).serialize(); // Serialize form data
-        var url = $(this).attr('action'); // Get form action URL
-        var method = $(this).attr('method'); // Get form method
+        var formData = $(this).serialize(); 
+        var url = $(this).attr('action'); 
+        var method = $(this).attr('method'); /
 
         $.ajax({
-            type: method, // Use form method (PUT in this case)
-            url: url, // Use form action URL
-            data: formData, // Use serialized form data
+            type: method, 
+            url: url, 
+            data: formData, 
             success: function (response) {
                 if (response.success) {
                     Swal.fire({
@@ -69,7 +69,7 @@
                         showConfirmButton: false,
                         timer: 2000
                     }).then(function () {
-                        // Redirect to index page after successful update
+                        // balek ke index
                         location.href = "{{ route('admin.fasyankes.index') }}";
                     });
                 } else {

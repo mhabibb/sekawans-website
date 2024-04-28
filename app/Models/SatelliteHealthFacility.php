@@ -30,10 +30,10 @@ class SatelliteHealthFacility extends Model
     {
         return $this->hasMany(PatientDetail::class);
     }
-    
-
+       
     public function district()
     {
-        return $this->belongsTo(District::class, 'district_id');
-    }    
+        return $this->belongsTo(District::class, 'district_id'); 
+    }
+
 }

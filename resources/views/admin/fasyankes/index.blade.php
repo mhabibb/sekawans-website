@@ -30,7 +30,7 @@
                                     <tbody>
                                         @forelse ($satellites as $satellite)
                                             <tr>
-                                                <td>{{ $satellite->name }}</td>
+                                                <td><a href="{{ route('admin.facilities.show', $satellite->id) }}">{{ $satellite->name }}</a></td>
                                                 <td>{{ optional($satellite->district)->name }}</td> 
                                                 <td>
                                                     <form class="form" action="{{ route('admin.facilities.destroy', $satellite->id) }}" method="post">

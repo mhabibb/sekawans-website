@@ -77,6 +77,8 @@ Route::middleware('auth')->prefix('admin')->name('admin.')->group(function () {
         Route::delete('/fasyankes/{table}/{id}', 'destroy')->name('fasyankes.destroy');
     });
 
+    Route::resource('supporters', SatelliteWorkerController::class);
+
     // Route resource for Satellite Health Facility
     Route::resource('facilities', SatelliteHealthFacilityController::class);
 

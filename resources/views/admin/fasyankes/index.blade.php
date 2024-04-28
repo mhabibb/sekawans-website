@@ -31,7 +31,7 @@
                                         @forelse ($satellites as $satellite)
                                             <tr>
                                                 <td>{{ $satellite->name }}</td>
-                                                <td>{{ optional($satellite->district)->name }}</td>
+                                                <td>{{ optional($satellite->district)->name }}</td> 
                                                 <td>
                                                     <form class="form" action="{{ route('admin.facilities.destroy', $satellite->id) }}" method="post">
                                                         @csrf
@@ -58,6 +58,7 @@
 @endsection
 
 @section('js')
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script>
         $('.delete-button').click(function(e) {
             e.preventDefault();

@@ -16,7 +16,8 @@ class SatelliteHealthFacilityController extends Controller
     public function index()
     {
         $satellites = SatelliteHealthFacility::all();
-        return view('admin.fasyankes.index', compact('satellites'));
+        $districts = District::orderBy('name', 'asc')->get(); 
+        return view('admin.fasyankes.index', compact('satellites', 'districts'));
     }
 
     /**
@@ -96,11 +97,13 @@ class SatelliteHealthFacilityController extends Controller
      */
     public function update(Request $request, $id)
     {
-        // Validasi input data
         $request->validate([
             'name' => 'required|string|max:64',
             'district_id' => 'required|exists:districts,id',
             'url_map' => 'nullable|string|max:1080',
+        ], [
+            'district_id.required' => 'Distrik harus dipilih.',
+            'district_id.exists' => 'Distrik yang dipilih tidak valid.',
         ]);
 
         $facility = SatelliteHealthFacility::findOrFail($id);

@@ -16,14 +16,14 @@
                             <form action="{{ route('admin.fasyankes.store') }}" method="POST" id="createForm">
                                 @csrf
                                 <div class="form-group">
-                                    <label for="name">Nama</label>
+                                    <label for="name">Nama Fasyankes Satelit</label>
                                     <input type="text" name="name" id="name" class="form-control" placeholder="Nama Fasyankes" required>
                                     <span class="text-danger" id="errorName"></span>
                                 </div>
                                 <div class="form-group">
-                                    <label for="district">Distrik</label>
+                                    <label for="district">Kecamatan</label>
                                     <select name="district" id="district" class="form-control" required>
-                                        <option value="">Pilih Distrik</option>
+                                        <option value="">Pilih Kecamatan</option>
                                         @foreach (\App\Models\District::orderBy('name', 'asc')->get() as $district)
                                             <option value="{{ $district->id }}">{{ $district->name }}</option>
                                         @endforeach
@@ -31,7 +31,7 @@
                                     <span class="text-danger" id="errorDistrict"></span>
                                 </div>
                                 <div class="form-group">
-                                    <label for="url_map">URL Peta (opsional)</label>
+                                    <label for="url_map">URL Peta Fasyankes</label>
                                     <input type="text" name="url_map" id="url_map" class="form-control" placeholder="URL Peta">
                                     <span class="text-danger" id="errorUrlMap"></span>
                                 </div>
@@ -64,7 +64,8 @@
                                 showConfirmButton: false,
                                 timer: 2000
                             }).then(function() {
-                                location.reload();
+                                // Redirect balek ke menu
+                                window.location.href = "{{ route('admin.fasyankes.index') }}";
                             });
                         } else {
                             Swal.fire({

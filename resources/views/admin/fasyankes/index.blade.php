@@ -3,87 +3,52 @@
 @section('admin-content')
     <section class="content-header">
         <div class="container-fluid">
-            <h1>Data Fasyankes dan PS</h1>
+            <h1>Data Fasyankes Satelit</h1>
         </div>
     </section>
 
     <section class="content">
         <div class="container-fluid">
             <div class="row">
-                <div class="col-md-6">
-                    <a href="{{ route('admin.fasyankes.create') }}" class="btn btn-primary mb-3">Tambah Fasyankes Satelit</a>
+                <div class="col-md-12">
                     <div class="card">
-                        <div class="card-body table-responsive p-0" style="max-height: 340px;">
-                            <table class="table table-head-fixed">
-                                <thead data-toggle="collapse" role="button" data-target="#satelitList"
-                                    aria-expanded="true">
-                                    <tr>
-                                        <th>Fasyankes Satelit</th>
-                                        <th class="col-2 text-right"><i class="fas fa-angle-down"></i></th>
-                                    </tr>
-                                </thead>
-                                <tbody class="collapse show" id="satelitList">
-                                    @forelse ($satellites as $satellite)
-                                        <tr>
-                                            <td> {{ $satellite->name }} </td>
-                                            <td class="d-flex justify-content-end">
-                                                <a href="#" class="badge badge-warning"
-                                                    onclick="update(this, 'satellite', {{ $satellite->id }})">Edit</a>
-                                                <form class="form ml-2"
-                                                    action="{{ route('admin.fasyankes.destroy', ['table' => 'satellite', 'id' => $satellite->id]) }}"
-                                                    method="post">
-                                                    @csrf
-                                                    @method('delete')
-                                                    <button type="submit" id="bt{{ $satellite->id }}"
-                                                        class="badge badge-danger">Hapus</button>
-                                                </form>
-                                            </td>
-                                        </tr>
-                                    @empty
-                                        <tr>
-                                            <td>Data Kosong</td>
-                                        </tr>
-                                    @endforelse
-                                </tbody>
-                            </table>
+                        <div class="card-header">
+                            <div class="card-tools">
+                                <a href="{{ route('admin.facilities.create') }}" class="btn btn-primary">Tambah Fasyankes Satelit</a>
+                            </div>
                         </div>
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <button class="btn btn-primary mb-3" onclick="addNew('worker')">Tambah Patient Supporter</button>
-                    <div class="card">
-                        <div class="card-body table-responsive p-0" style="max-height: 340px;">
-                            <table class="table table-head-fixed">
-                                <thead data-toggle="collapse" role="button" data-target="#workerList" aria-expanded="true">
-                                    <tr>
-                                        <th>Patient Supporter</th>
-                                        <th class="col-2 text-right"><i class="fas fa-angle-down"></i></th>
-                                    </tr>
-                                </thead>
-                                <tbody class="collapse show" id="workerList">
-                                    @forelse ($workers as $ps)
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table class="table table-striped">
+                                    <thead>
                                         <tr>
-                                            <td> {{ $ps->name }} </td>
-                                            <td class="d-flex justify-content-end">
-                                                <a href="#" class="badge badge-warning"
-                                                    onclick="update(this, 'worker', {{ $ps->id }})">Edit</a>
-                                                <form class="form ml-2"
-                                                    action="{{ route('admin.fasyankes.destroy', ['table' => 'workers', 'id' => $ps->id]) }}"
-                                                    method="post">
-                                                    @csrf
-                                                    @method('delete')
-                                                    <button id="bt{{ $ps->id }}" type="submit" 
-                                                        class="badge badge-danger">Hapus</button>
-                                                </form>
-                                            </td>
+                                            <th style="width: 40%;">Nama Fasyankes Satelit</th>
+                                            <th style="width: 40%;">Kecamatan</th>
+                                            <th style="width: 20%;">Aksi</th>
                                         </tr>
-                                    @empty
-                                        <tr>
-                                            <td>Data Kosong</td>
-                                        </tr>
-                                    @endforelse
-                                </tbody>
-                            </table>
+                                    </thead>
+                                    <tbody>
+                                        @forelse ($satellites as $satellite)
+                                            <tr>
+                                                <td>{{ $satellite->name }}</td>
+                                                <td>{{ optional($satellite->district)->name }}</td>
+                                                <td>
+                                                    <form class="form" action="{{ route('admin.facilities.destroy', $satellite->id) }}" method="post">
+                                                        @csrf
+                                                        @method('delete')
+                                                        <a href="{{ route('admin.facilities.edit', $satellite->id) }}" class="btn btn-sm btn-warning">Edit</a>
+                                                        <button class="btn btn-sm btn-danger delete-button" data-id="{{ $satellite->id }}" data-nama="{{ $satellite->name }}">Hapus</button>
+                                                    </form>
+                                                </td>
+                                            </tr>
+                                        @empty
+                                            <tr>
+                                                <td colspan="3" class="text-center">Data Kosong</td>
+                                            </tr>
+                                        @endforelse
+                                    </tbody>                                
+                                </table>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -94,156 +59,55 @@
 
 @section('js')
     <script>
-        $.ajaxSetup({
-            headers: {
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            }
-        });
-
-        async function update(elm, table, id) {
-            elm = $(elm).parent().siblings();
-            const {
-                value: data
-            } = await Swal.fire({
-                title: `Update ${elm.html().trim()}`,
-                input: 'text',
-                inputValue: elm.html().trim(),
-                showCancelButton: true,
-                confirmButtonText: 'Update',
-                cancelButtonText: 'Batalkan',
-                allowOutsideClick: false,
-                preConfirm: (value) => {
-                    return fetch(`fasyankes/${table}/${value}`)
-                        .then(response => {
-                            if (!response.ok) {
-                                throw new Error(response.statusText)
-                            }
-                            return response.json()
-                        })
-                        .catch(error => {
-                            Swal.showValidationMessage(
-                                `Gagal: Nama ${value} sudah digunakan`
-                            )
-                        })
-                },
-                inputValidator: (value) => {
-                    if (!value) {
-                        return 'Tidak boleh kosong!'
-                    }
-                }
-            })
-            if (data) {
-                url = "{{ route('admin.fasyankes.update', ['table', 'id']) }}"
-                url = url.replace('table', table).replace('id', id)
-                type = 'put'
-                success = 'Berhasil Diperbarui!'
-                datas = {
-                    name: data
-                }
-                ajax(elm)
-            }
-        }
-
-        $('.form').each(function() {
-            $(this).submit(function(e) {
-                e.preventDefault()
-                url = this.action
-                type = 'delete'
-                datas = ''
-                success = 'Berhasil Hapus!'
-                elm = $(this).parents('tr')
-                id = $(url.split('/')).last()[0]
-                name = $('#bt' + id).parents('tr').find('td').html()
-                Swal.fire({
-                    title: "Yakin untuk hapus " + name + "?",
-                    icon: 'warning',
-                    showCancelButton: true,
-                    confirmButtonColor: '#3085d6',
-                    cancelButtonColor: '#d33',
-                    confirmButtonText: 'Yakin',
-                    cancelButtonText: 'Batalkan',
-                }).then((result) => {
-                    if (result.isConfirmed) {
-                        ajax(elm)
-                    }
-                })
-                // console.log(elm);
-            })
-        })
-
-        function ajax(elm) {
-            $.ajax({
-                    type: type,
-                    url: url,
-                    data: datas,
-                })
-                .done(function(response) {
-                    if (response.success) {
-                        Swal.fire({
-                            title: 'Berhasil!',
-                            text: response.message,
-                            icon: 'success',
-                            showConfirmButton: false,
-                            timer: 2000
-                        })
-                        location.reload();
-                    } else {
-                        Swal.fire(
-                            'Gagal!',
-                            'Terjadi kesalahan saat memproses data.',
-                            'error'
-                        );
-                    }
-                })
-                .fail(function() {
-                    Swal.fire(
-                        'Terjadi Kesalahan',
-                        '',
-                        'error'
-                    )
-                });
-        }
-
-        function addNew(type) {
+        $('.delete-button').click(function(e) {
+            e.preventDefault();
+            var id = $(this).data('id');
+            var namaFasyankes = $(this).data('nama');
             Swal.fire({
-                title: `Tambah ${type == 'satellite' ? 'Fasyankes Satelit' : 'Patient Supporter'}`,
-                input: 'text',
+                title: 'Anda yakin ingin menghapus ' + namaFasyankes + ' ?',
+                text: "Anda tidak akan bisa mengembalikan data ini!",
+                icon: 'warning',
                 showCancelButton: true,
-                confirmButtonText: 'Tambah',
-                cancelButtonText: 'Batal',
-                inputValidator: (value) => {
-                    if (!value) {
-                        return 'Nama tidak boleh kosong!'
-                    }
-                }
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Ya, hapus!',
+                cancelButtonText: 'Batal'
             }).then((result) => {
                 if (result.isConfirmed) {
-                    const newItemName = result.value;
                     $.ajax({
-                        type: 'POST',
-                        url: '{{ route("admin.fasyankes.store") }}',
+                        type: 'DELETE',
+                        url: "{{ url('admin/facilities') }}" + '/' + id,
                         data: {
-                            name: newItemName
+                            "_token": "{{ csrf_token() }}"
                         },
                         success: function(response) {
                             if (response.success) {
-                                Swal.fire(
-                                    'Berhasil!',
-                                    `Anda telah menambah ${type == 'satellite' ? 'Fasyankes Satelit' : 'Patient Supporter'}, Nama : ${newItemName}`,
-                                    'success'
-                                );
+                                Swal.fire({
+                                    title: 'Berhasil!',
+                                    text: response.message,
+                                    icon: 'success',
+                                    showConfirmButton: false,
+                                    timer: 2000
+                                });
                                 location.reload();
                             } else {
                                 Swal.fire(
                                     'Gagal!',
-                                    'Terjadi kesalahan saat menambah data.',
+                                    'Terjadi kesalahan saat memproses data.',
                                     'error'
                                 );
                             }
+                        },
+                        error: function() {
+                            Swal.fire(
+                                'Terjadi Kesalahan',
+                                '',
+                                'error'
+                            );
                         }
                     });
                 }
             });
-        }
+        });
     </script>
 @endsection

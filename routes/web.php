@@ -77,17 +77,8 @@ Route::middleware('auth')->prefix('admin')->name('admin.')->group(function () {
         Route::delete('/fasyankes/{table}/{id}', 'destroy')->name('fasyankes.destroy');
     });
 
-    // Satellite Health Facility resource route
-    Route::resource('/facilities', SatelliteHealthFacilityController::class);
-    Route::controller(SatelliteHealthFacilityController::class)->group(function () {
-        Route::get('/facilities', 'index')->name('facilities.index');
-        Route::get('/facilities/create', 'create')->name('facilities.create');
-        Route::post('/facilities', 'store')->name('facilities.store');
-        Route::get('/facilities/{faskes}', 'show')->name('facilities.show');
-        Route::get('/facilities/{faskes}/edit', 'edit')->name('facilities.edit');
-        Route::put('/facilities/{faskes}', 'update')->name('facilities.update');
-        Route::delete('/facilities/{faskes}', 'destroy')->name('facilities.destroy');
-    });
+    // Route resource for Satellite Health Facility
+    Route::resource('facilities', SatelliteHealthFacilityController::class);
 
     // Article resource route
     Route::resource('/articles', ArticleController::class);

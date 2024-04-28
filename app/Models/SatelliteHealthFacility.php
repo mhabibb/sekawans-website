@@ -28,8 +28,9 @@ class SatelliteHealthFacility extends Model
 
     public function patientDetails()
     {
-        $this->hasMany(PatientDetail::class);
+        return $this->hasMany(PatientDetail::class);
     }
+    
 
     public function district()
     {

@@ -17,10 +17,10 @@
                                 @csrf
                                 <div class="form-group">
                                     <label for="name">Nama Patient Supporter</label>
-                                    <input type="text" name="name" id="name" class="form-control" placeholder="Nama Fasyankes" required>
+                                    <input type="text" name="name" id="name" class="form-control" placeholder="Nama Patient Supporter" required>
                                     <span class="text-danger" id="errorName"></span>
                                 </div>
-                                <button type="submit" class="btn btn-primary">Simpan</button>
+                                <button type="submit" class="btn btn-primary" id="submitBtn">Simpan</button>
                             </form>
                         </div>
                     </div>
@@ -31,10 +31,13 @@
 @endsection
 
 @section('js')
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script>
         $(document).ready(function () {
             $('#createForm').submit(function (e) {
                 e.preventDefault();
+
+                $('#errorName').text('');
 
                 $.ajax({
                     type: 'POST',
@@ -49,8 +52,7 @@
                                 showConfirmButton: false,
                                 timer: 2000
                             }).then(function() {
-                                // Redirect balek ke menu
-                                window.location.href = "{{ route('admin.fasyankes.index') }}";
+                                window.location.href = "{{ route('admin.supporters.index') }}";
                             });
                         } else {
                             Swal.fire({
@@ -66,7 +68,7 @@
                         if (xhr.status == 422) {
                             var errors = xhr.responseJSON.errors;
                             $.each(errors, function (key, value) {
-                                $('#error' + key.charAt(0).toUpperCase() + key.slice(1)).html(value);
+                                $('#error' + key.charAt(0).toUpperCase() + key.slice(1)).text(value);
                             });
                         }
                     }

@@ -57,8 +57,8 @@
                                 showConfirmButton: false,
                                 timer: 2000
                             }).then(function () {
-                                // Redirect balek ke index bro
-                                location.href = "{{ route('admin.fasyankes.index') }}";
+                                // Redirect kembali ke index bro
+                                location.href = "{{ route('admin.supporters.index') }}";
                             });
                         } else {
                             Swal.fire({

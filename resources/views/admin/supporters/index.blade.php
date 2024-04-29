@@ -14,7 +14,7 @@
                     <div class="card">
                         <div class="card-header">
                             <div class="card-tools">
-                                <a href="{{ route('admin.facilities.create') }}" class="btn btn-primary">Tambah Fasyankes Satelit</a>
+                                <a href="{{ route('admin.supporters.create') }}" class="btn btn-primary">Tambah Patient Supporter</a>
                             </div>
                         </div>
                         <div class="card-body">
@@ -27,15 +27,15 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @forelse ($satellites as $satellite)
+                                        @forelse ($workers as $worker)
                                             <tr>
-                                                <td>{{ optional($satellite->district)->name }}</td> 
+                                                <td>{{ $worker->name }}</td>
                                                 <td>
-                                                    <form class="form" action="{{ route('admin.supporters.destroy', $satellite->id) }}" method="post">
+                                                    <form class="form" action="{{ route('admin.supporters.destroy', ['worker', $worker->id]) }}" method="post">
                                                         @csrf
                                                         @method('delete')
-                                                        <a href="{{ route('admin.supporters.edit', $satellite->id) }}" class="btn btn-sm btn-warning">Edit</a>
-                                                        <button class="btn btn-sm btn-danger delete-button" data-id="{{ $satellite->id }}" data-nama="{{ $satellite->name }}">Hapus</button>
+                                                        <a href="{{ route('admin.supporters.edit', ['worker', $worker->id]) }}" class="btn btn-sm btn-warning">Edit</a>
+                                                        <button class="btn btn-sm btn-danger delete-button" data-id="{{ $worker->id }}" data-nama="{{ $worker->name }}">Hapus</button>
                                                     </form>
                                                 </td>
                                             </tr>
@@ -75,7 +75,7 @@
                 if (result.isConfirmed) {
                     $.ajax({
                         type: 'DELETE',
-                        url: "{{ url('admin/facilities') }}" + '/' + id,
+                        url: "{{ url('admin/supporters') }}" + '/' + id,
                         data: {
                             "_token": "{{ csrf_token() }}"
                         },

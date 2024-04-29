@@ -13,8 +13,22 @@ class Worker extends Model
 
     protected $guarded = ['id'];
 
-    public $timestamps = false;
+    public $timestamps = true;
 
+    public function patientDetails()
+    {
+        return $this->hasMany(PatientDetail::class);
+    }
+
+    // validasi untuk model bro
+    public static function rules($id = null)
+    {
+        return [
+            'name' => 'required|string|max:64|unique:workers,name,' . $id,
+        ];
+    }
+
+    // Atur aktivitas logging
     public function getActivitylogOptions(): LogOptions
     {
         $user = auth()->user()->name ?? 'System';
@@ -23,15 +37,5 @@ class Worker extends Model
             ->logAll()
             ->useLogName('patient supporter')
             ->setDescriptionForEvent(fn (string $eventName) => "{$user} {$eventName} PS {$name}");
-    }
-
-    // public function scopeActive($query)
-    // {
-    //     return  $query->where('is_active', 1);
-    // }
-
-    public function patientDetails()
-    {
-        return $this->hasMany(PatientDetail::class);
     }
 }

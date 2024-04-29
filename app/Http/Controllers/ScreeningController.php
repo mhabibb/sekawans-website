@@ -177,6 +177,7 @@ class ScreeningController extends Controller
 
     public function index()
     {
+        
         $screenings = Screening::all();
         $title = "Daftar Skrining";
         return view('admin.screening.index', compact('screenings', 'title'));

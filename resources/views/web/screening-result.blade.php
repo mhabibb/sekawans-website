@@ -48,6 +48,17 @@
                     @endforeach
                 </select>
             </div>
+
+            {{-- <!-- untuk menampilkan peta -->
+            <div id="map-container" style="margin-top: 20px; position: relative;">
+                <!-- Placeholder untuk loading -->
+                <div id="map-loading" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(255, 255, 255, 0.7); z-index: 999; display: none;">
+                    <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);">
+                        Loading...
+                    </div>
+                </div>
+                <div id="map" style="width: 100%; height: 400px;"></div>
+            </div> --}}
             
             <br><br>
             <p style="font-size: 16px;">Anda bisa menunjukkan hasil skrining awal ini ke fasilitas kesehatan terdekat diatas. Terima kasih!</p>
@@ -309,6 +320,7 @@
         }
     }
 </style>
+
 <script>
     document.addEventListener('DOMContentLoaded', function() {
         var faskesSelect = document.getElementById('faskes-select');

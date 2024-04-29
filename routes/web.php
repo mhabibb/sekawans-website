@@ -70,13 +70,21 @@ Route::middleware('auth')->prefix('admin')->name('admin.')->group(function () {
     })->middleware(['can:superAdmin']);
 
     // Satellite Worker controller route
-    Route::controller(SatelliteWorkerController::class)->group(function () {
+    Route::controller(SatelliteHealthFacilityController::class)->group(function () {
         Route::get('/fasyankes', 'index')->name('fasyankes.index');
         Route::get('/fasyankes/{table}/{name}', 'check')->name('fasyankes.check');
         Route::put('/fasyankes/{table}/{data}', 'update')->name('fasyankes.update');
         Route::delete('/fasyankes/{table}/{id}', 'destroy')->name('fasyankes.destroy');
     });
 
+    Route::controller(SatelliteWorkerController::class)->group(function () {
+        Route::get('/supporters', 'index')->name('fasyankes.index');
+        Route::get('/supporters/{table}/{name}', 'check')->name('fasyankes.check');
+        Route::put('/supporters/{table}/{data}', 'update')->name('fasyankes.update');
+        Route::delete('/supporters/{table}/{id}', 'destroy')->name('fasyankes.destroy');
+    });
+
+    // Ruoute Supporters
     Route::resource('supporters', SatelliteWorkerController::class);
 
     // Route resource for Satellite Health Facility

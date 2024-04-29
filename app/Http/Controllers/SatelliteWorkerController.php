@@ -31,7 +31,7 @@ class SatelliteWorkerController extends Controller
         $fasyankes = collect(["RS PARU JEMBER", "RSD DR. SOEBANDI JEMBER"]);
         $satellites = SatelliteHealthFacility::orderBy('name', 'asc')->get();
         $workers = Worker::orderBy('name', 'asc')->get();
-        return view('admin.fasyankes.index', compact('fasyankes', 'satellites', 'workers'));
+        return view('admin.supporters.index', compact('fasyankes', 'satellites', 'workers'));
     }
 
     /**

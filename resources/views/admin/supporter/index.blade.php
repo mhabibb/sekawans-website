@@ -14,7 +14,7 @@
                     <div class="card">
                         <div class="card-header">
                             <div class="card-tools">
-                                <a href="{{ route('admin.supporters.create') }}" class="btn btn-primary">Tambah Patient Supporter</a>
+                                <a href="{{ route('admin.supporters.create') }}" class="btn btn-primary">Tambah Patient supporters</a>
                             </div>
                         </div>
                         <div class="card-body">
@@ -22,7 +22,7 @@
                                 <table class="table table-striped">
                                     <thead>
                                         <tr>
-                                            <th style="width: 40%;">Nama Patient Supporter</th>
+                                            <th style="width: 40%;">Nama Patient supporters</th>
                                             <th style="width: 20%;">Aksi</th>
                                         </tr>
                                     </thead>
@@ -34,7 +34,7 @@
                                                     <form class="form" action="{{ route('admin.supporters.destroy', ['worker', $worker->id]) }}" method="post">
                                                         @csrf
                                                         @method('delete')
-                                                        <a href="{{ route('admin.supporters.edit', ['worker', $worker->id]) }}" class="btn btn-sm btn-warning">Edit</a>
+                                                        <a href="{{ route('admin.supporters.edit', $worker->id) }}" class="btn btn-sm btn-warning">Edit</a>
                                                         <button class="btn btn-sm btn-danger delete-button" data-id="{{ $worker->id }}" data-nama="{{ $worker->name }}">Hapus</button>
                                                     </form>
                                                 </td>

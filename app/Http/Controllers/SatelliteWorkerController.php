@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use App\Models\Worker;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Validator;
 
 class SatelliteWorkerController extends Controller
 {
@@ -27,7 +27,7 @@ class SatelliteWorkerController extends Controller
     public function index()
     {
         $workers = Worker::orderBy('name', 'asc')->get();
-        return view('admin.supporters.index', compact('workers'));
+        return view('admin.supporter.index', compact('workers'));
     }
 
     /**
@@ -37,7 +37,7 @@ class SatelliteWorkerController extends Controller
      */
     public function create()
     {
-        return view('admin.supporters.create');
+        return view('admin.supporter.create');
     }
 
     /**
@@ -48,14 +48,30 @@ class SatelliteWorkerController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
+        $validator = Validator::make($request->only('name'), [
             'name' => 'required|string|max:64|unique:workers',
         ]);
 
-        Worker::create($request->all());
+        if ($validator->fails()) {
+            return response()->json([
+                'success' => false,
+                'errors' => $validator->errors()->all()
+            ], 422);
+        }
 
-        return redirect()->route('admin.supporters.index')
-            ->with('success', 'Patient Supporter created successfully.');
+        $worker = Worker::create(['name' => $request->name]);
+
+        if ($worker) {
+            return response()->json([
+                'success' => true,
+                'message' => 'Patient Supporter berhasil dibuat'
+            ]);
+        } else {
+            return response()->json([
+                'success' => false,
+                'message' => 'Gagal menambahkan Patient Supporter.'
+            ], 500);
+        }
     }
 
     /**
@@ -67,7 +83,7 @@ class SatelliteWorkerController extends Controller
     public function edit($id)
     {
         $worker = Worker::findOrFail($id);
-        return view('admin.supporters.edit', compact('worker'));
+        return view('admin.supporter.edit', compact('worker'));
     }
 
     /**
@@ -79,15 +95,32 @@ class SatelliteWorkerController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $request->validate([
-            'name' => 'required|string|max:64|unique:workers,name,' . $id,
+        $worker = Worker::findOrFail($id);
+
+        $validator = Validator::make($request->only('name'), [
+            'name' => 'required|string|max:64|unique:workers,name,' . $id . ',' . $worker->id,
         ]);
 
-        $worker = Worker::findOrFail($id);
-        $worker->update($request->all());
+        if ($validator->fails()) {
+            return response()->json([
+                'success' => false,
+                'errors' => $validator->errors()->all()
+            ], 422);
+        }
 
-        return redirect()->route('supporters.index')
-            ->with('success', 'Patient Supporter updated successfully.');
+        $updated = $worker->update(['name' => $request->name]);
+
+        if ($updated) {
+            return response()->json([
+                'success' => true,
+                'message' => 'Patient Supporter berhasil di update'
+            ]);
+        } else {
+            return response()->json([
+                'success' => false,
+                'message' => 'Gagal mengupdate Patient Supporter.'
+            ], 500);
+        }
     }
 
     /**
@@ -98,17 +131,19 @@ class SatelliteWorkerController extends Controller
      */
     public function destroy($id)
     {
-        DB::beginTransaction();
+        $worker = Worker::findOrFail($id);
+        $deleted = $worker->delete();
 
-        try {
-            $worker = Worker::findOrFail($id);
-            $worker->delete();
-
-            DB::commit();
-            return response()->json(['success' => true, 'message' => 'Patient Supporter berhasil dihapus']);
-        } catch (\Exception $e) {
-            DB::rollBack();
-            return response()->json(['success' => false, 'message' => 'Gagal menghapus Patient Supporter'], 500);
+        if ($deleted) {
+            return response()->json([
+                'success' => true,
+                'message' => 'Patient Supporter berhasil dihapus'
+            ]);
+        } else {
+            return response()->json([
+                'success' => false,
+                'message' => 'Terjadi kesalahan saat menghapus Patient Supporter.'
+            ], 500);
         }
     }
 }

@@ -16,8 +16,8 @@
                             <form action="{{ route('admin.supporters.store') }}" method="POST" id="createForm">
                                 @csrf
                                 <div class="form-group">
-                                    <label for="name">Nama Patient Supporter</label>
-                                    <input type="text" name="name" id="name" class="form-control" placeholder="Nama Patient Supporter" required>
+                                    <label for="name">Nama Patient supporters</label>
+                                    <input type="text" name="name" id="name" class="form-control" placeholder="Nama Patient supporters" required>
                                     <span class="text-danger" id="errorName"></span>
                                 </div>
                                 <button type="submit" class="btn btn-primary" id="submitBtn">Simpan</button>
@@ -33,17 +33,15 @@
 @section('js')
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script>
-        $(document).ready(function () {
-            $('#createForm').submit(function (e) {
+        $(document).ready(function() {
+            $('#createForm').submit(function(e) {
                 e.preventDefault();
-
-                $('#errorName').text('');
-
+                var formData = $(this).serialize();
                 $.ajax({
                     type: 'POST',
                     url: $(this).attr('action'),
-                    data: $(this).serialize(),
-                    success: function (response) {
+                    data: formData,
+                    success: function(response) {
                         if (response.success) {
                             Swal.fire({
                                 title: 'Berhasil!',
@@ -55,22 +53,27 @@
                                 window.location.href = "{{ route('admin.supporters.index') }}";
                             });
                         } else {
+                            var errorMessage = '';
+                            if (response.errors) {
+                                errorMessage = response.errors.join('<br>');
+                            } else {
+                                errorMessage = response.message;
+                            }
                             Swal.fire({
                                 title: 'Gagal!',
-                                text: response.message,
+                                html: errorMessage,
                                 icon: 'error',
-                                showConfirmButton: false,
-                                timer: 2000
+                                showConfirmButton: true
                             });
                         }
                     },
-                    error: function (xhr) {
-                        if (xhr.status == 422) {
-                            var errors = xhr.responseJSON.errors;
-                            $.each(errors, function (key, value) {
-                                $('#error' + key.charAt(0).toUpperCase() + key.slice(1)).text(value);
-                            });
-                        }
+                    error: function(xhr) {
+                        Swal.fire(
+                            'Terjadi Kesalahan',
+                            'Periksa konsol untuk melihat detail kesalahan.',
+                            'error'
+                        );
+                        console.error(xhr.responseText);
                     }
                 });
             });

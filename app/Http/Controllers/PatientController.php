@@ -60,11 +60,11 @@ class PatientController extends Controller
     {
         $fasyankes = collect(["RS PARU JEMBER", "RSD DR. SOEBANDI JEMBER"]);
         $satellites = SatelliteHealthFacility::all();
-        $workers = Worker::all();
+        // $workers = Worker::all();
         $religions = Religion::all();
         $educations = Education::all();
         $regencies = Regency::withWhereHas('districts', fn ($query) => $query->without('regency'))->get();
-        return view('admin.patient.create', compact('fasyankes', 'religions', 'regencies', 'educations', 'satellites', 'workers'));
+        return view('admin.patient.create', compact('fasyankes', 'religions', 'regencies', 'educations', 'satellites')); //'workers'
     }
 
     /**
@@ -103,7 +103,7 @@ class PatientController extends Controller
                         $meetings[] = $temp;
                     }
                     foreach ($meetings as $key => $value) {
-                        Meeting::create($value);
+                        // Meeting::create($value);
                     }
                 }
             }
@@ -138,7 +138,7 @@ class PatientController extends Controller
     {
         $fasyankes = collect(["RS PARU JEMBER", "RSD DR. SOEBANDI JEMBER"]);
         $satellites = SatelliteHealthFacility::all();
-        $workers = Worker::all();
+        // $workers = Worker::all();
         $statuses = PatientStatus::get();
         $religions = Religion::all();
         $educations = Education::all();

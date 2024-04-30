@@ -70,10 +70,10 @@
             @error('worker_id') is-invalid @else @if (old('worker_id') ?? false) is-valid @endif @enderror"
                                 name="worker.id" style="width: 100%;">
                                 <option disabled selected>Pilih Pendamping/Patient Supporter (PS)</option>
-                                @foreach ($workers as $worker)
+                                {{-- @foreach ($workers as $worker)
                                     <option value="{{ $worker->id }}" @selected(old('worker_id') == $worker->id)>{{ $worker->name }}
                                     </option>
-                                @endforeach
+                                @endforeach --}}
                             </select>
                         </div>
                     </div>

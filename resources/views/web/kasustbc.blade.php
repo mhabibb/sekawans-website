@@ -13,7 +13,7 @@
                     <h2 class="fw-bold mb-3">PASIEN TB DI JEMBER</h2>
                     <p class="lead">Berikut data jumlah pasien TBC yang diterima Sekawan's di Jember <br><br></p>
                     <p class="lead">Cek data penyakit TBC dari tahun ke tahun</p>
-                    <a href="https://public.tableau.com/app/profile/alya.mirza/viz/dashboardtbcnew/Dashboard1" class="btn btn-secondary">Cek Data TBC</a>
+                    <a href="https://public.tableau.com/app/profile/alya.mirza/viz/DashboardSekawansTBCJember_/Dashboard1?publish=yes" class="btn btn-secondary">Cek Data TBC</a>
                     
                 </div>
             </div>
@@ -24,7 +24,7 @@
         @if (isset($regencies) && count($regencies) > 0)
         @foreach ($regencies as $regency)
         @if ($regency->name == 'KABUPATEN JEMBER')
-        <div class="py-5 text-center border-bottom">
+        <div class="py-5 text-center border-bottom">`
             <h2 class="fw-bold mb-5">{{ $regency->total }} PASIEN TB DI {{ $regency->name }}</h2>
             <div class="row gap-4 justify-content-center mb-3">
                 <div class="col-12 col-sm-4 col-md-2 text-center" style="width: 150px;">

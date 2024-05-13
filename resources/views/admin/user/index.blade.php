@@ -11,17 +11,16 @@
     <!-- Main content -->
     <section class="content">
         <div class="container-fluid">
-            <!-- /.row -->
+            <!-- Tabel untuk Admin -->
             <div class="row">
                 <div class="col-12">
                     <div class="card">
                         <div class="card-header">
-                            <a href="#" class="btn btn-primary" data-toggle="modal" data-target="#createAdmin">Buat Akun
-                                Baru</a>
+                            <h3 class="card-title">Admin Divisi</h3>
                         </div>
                         <!-- /.card-header -->
                         <div class="card-body">
-                            <table id="userTable" class="table table-striped">
+                            <table id="adminUserTable" class="table table-striped">
                                 <thead>
                                     <tr>
                                         <th class="col-4">Nama</th>
@@ -31,18 +30,61 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach ($users as $user)
+                                    @foreach ($adminUsers as $user)
                                         <tr>
                                             <td>{{ $user->name }}</td>
                                             <td>{{ $user->email }}</td>
                                             <td>{{ $user->number }}</td>
                                             <td>
                                                 <div class="d-flex">
-                                                    <a role="button" id="bt{{ $user->id }}" class="badge badge-success"
-                                                        onclick="resetUser({{ $user->id }})">
+                                                    <a role="button" id="bt{{ $user->id }}" class="badge badge-success" onclick="resetUser({{ $user->id }})">
                                                         <i class="fa-solid fa-rotate-left"></i> Reset</a>
-                                                    <a role="button" id="bt{{ $user->id }}" class="badge badge-danger"
-                                                        onclick="deleteUser({{ $user->id }})">
+                                                    <a role="button" id="bt{{ $user->id }}" class="badge badge-danger" onclick="deleteUser({{ $user->id }})">
+                                                        <i class="fa-solid fa-trash-can"></i> Hapus</a>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    @endforeach
+                                </tbody>
+                            </table>
+                        </div>
+                        <!-- /.card-body -->
+                    </div>
+                    <!-- /.card -->
+                </div>
+            </div>
+            <!-- /.row -->
+
+            <!-- Tabel untuk AdminPS -->
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <h3 class="card-title">Patient Supporter</h3>
+                        </div>
+                        <!-- /.card-header -->
+                        <div class="card-body">
+                            <table id="adminPSTable" class="table table-striped">
+                                <thead>
+                                    <tr>
+                                        <th class="col-4">Nama</th>
+                                        <th class="col-4">Email</th>
+                                        <th class="col-4">Nomor Whatsapp</th> 
+                                        <th></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach ($adminPSUsers as $user)
+                                        <tr>
+                                            <td>{{ $user->name }}</td>
+                                            <td>{{ $user->email }}</td>
+                                            <td>{{ $user->number }}</td>
+                                            <td>
+                                                <!-- Tambahkan tombol aksi sesuai kebutuhan -->
+                                                <div class="d-flex">
+                                                    <a role="button" id="bt{{ $user->id }}" class="badge badge-success" onclick="resetUser({{ $user->id }})">
+                                                        <i class="fa-solid fa-rotate-left"></i> Reset</a>
+                                                    <a role="button" id="bt{{ $user->id }}" class="badge badge-danger" onclick="deleteUser({{ $user->id }})">
                                                         <i class="fa-solid fa-trash-can"></i> Hapus</a>
                                                 </div>
                                             </td>
@@ -135,11 +177,9 @@
             }
             name = $('#bt' + id).parents('tr').find('td').html();
             swal = {
-                text: "Autentikasi akun " + name + " akan direset",
+                text: "Autentikasi akun " + name + " akan dihapus",
                 title: 'Yakin Hapus Akun?'
             }
-            name = $('#bt' + id).parent().parent().find('td').html();
-
             swalFn()
         }
 

@@ -5,7 +5,7 @@ namespace Database\Factories;
 use App\Models\Patient;
 use App\Models\PatientStatus;
 use App\Models\SatelliteHealthFacility;
-use App\Models\User; // Mengganti Worker menjadi User
+use App\Models\User; 
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**

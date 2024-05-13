@@ -15,13 +15,20 @@ class UserController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    
     public function index()
     {
         $this->authorize('superAdmin');
-        $users = User::select('id', 'name', 'email', 'number')
-                    ->where('role', 'adminps') 
-                    ->get();
-        return view('admin.user.index', compact('users'));
+
+        $adminUsers = User::select('id', 'name', 'email', 'number')
+                        ->where('role', 'admin') 
+                        ->get();
+
+        $adminPSUsers = User::select('id', 'name', 'email', 'number')
+                            ->where('role', 'adminps') 
+                            ->get();
+
+        return view('admin.user.index', compact('adminUsers', 'adminPSUsers'));
     }
 
     /**

@@ -13,7 +13,7 @@
                 <div class="col-md-12">
                     <div class="card">
                         <div class="card-header">
-                            <div class="card-tools">
+                            <div class="d-flex justify-content-end">
                                 <a href="{{ route('admin.facilities.create') }}" class="btn btn-primary">Tambah Fasyankes Satelit</a>
                             </div>
                         </div>
@@ -36,8 +36,8 @@
                                                     <form class="form" action="{{ route('admin.facilities.destroy', $satellite->id) }}" method="post">
                                                         @csrf
                                                         @method('delete')
-                                                        <a href="{{ route('admin.facilities.edit', $satellite->id) }}" class="btn btn-sm btn-warning">Edit</a>
-                                                        <button class="btn btn-sm btn-danger delete-button" data-id="{{ $satellite->id }}" data-nama="{{ $satellite->name }}">Hapus</button>
+                                                        <a href="{{ route('admin.facilities.edit', $satellite->id) }}" class="btn btn-warning btn-sm mr-2">Edit</a>
+                                                        <button class="btn btn-danger btn-sm delete-button" data-id="{{ $satellite->id }}" data-nama="{{ $satellite->name }}">Hapus</button>
                                                     </form>
                                                 </td>
                                             </tr>
@@ -60,54 +60,56 @@
 @section('js')
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script>
-        $('.delete-button').click(function(e) {
-            e.preventDefault();
-            var id = $(this).data('id');
-            var namaFasyankes = $(this).data('nama');
-            Swal.fire({
-                title: 'Anda yakin ingin menghapus ' + namaFasyankes + ' ?',
-                text: "Anda tidak akan bisa mengembalikan data ini!",
-                icon: 'warning',
-                showCancelButton: true,
-                confirmButtonColor: '#3085d6',
-                cancelButtonColor: '#d33',
-                confirmButtonText: 'Ya, hapus!',
-                cancelButtonText: 'Batal'
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    $.ajax({
-                        type: 'DELETE',
-                        url: "{{ url('admin/facilities') }}" + '/' + id,
-                        data: {
-                            "_token": "{{ csrf_token() }}"
-                        },
-                        success: function(response) {
-                            if (response.success) {
-                                Swal.fire({
-                                    title: 'Berhasil!',
-                                    text: response.message,
-                                    icon: 'success',
-                                    showConfirmButton: false,
-                                    timer: 2000
-                                });
-                                location.reload();
-                            } else {
+        $(document).ready(function() {
+            $('.delete-button').click(function(e) {
+                e.preventDefault();
+                var id = $(this).data('id');
+                var namaFasyankes = $(this).data('nama');
+                Swal.fire({
+                    title: 'Anda yakin ingin menghapus ' + namaFasyankes + ' ?',
+                    text: "Anda tidak akan bisa mengembalikan data ini!",
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Ya, hapus!',
+                    cancelButtonText: 'Batal'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        $.ajax({
+                            type: 'DELETE',
+                            url: "{{ url('admin/facilities') }}" + '/' + id,
+                            data: {
+                                "_token": "{{ csrf_token() }}"
+                            },
+                            success: function(response) {
+                                if (response.success) {
+                                    Swal.fire({
+                                        title: 'Berhasil!',
+                                        text: response.message,
+                                        icon: 'success',
+                                        showConfirmButton: false,
+                                        timer: 2000
+                                    });
+                                    location.reload();
+                                } else {
+                                    Swal.fire(
+                                        'Gagal!',
+                                        'Terjadi kesalahan saat memproses data.',
+                                        'error'
+                                    );
+                                }
+                            },
+                            error: function() {
                                 Swal.fire(
-                                    'Gagal!',
-                                    'Terjadi kesalahan saat memproses data.',
+                                    'Terjadi Kesalahan',
+                                    '',
                                     'error'
                                 );
                             }
-                        },
-                        error: function() {
-                            Swal.fire(
-                                'Terjadi Kesalahan',
-                                '',
-                                'error'
-                            );
-                        }
-                    });
-                }
+                        });
+                    }
+                });
             });
         });
     </script>

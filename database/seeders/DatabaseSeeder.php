@@ -2,16 +2,14 @@
 
 namespace Database\Seeders;
 
-// use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
 {
-    // private $user = 10;
     private $article = 50;
     private $worker = 50;
     private $satellite = 100;
-    private $patient = 200;
+    private $patient = 1;
 
     /**
      * Seed the application's database.
@@ -36,7 +34,7 @@ class DatabaseSeeder extends Seeder
             'name' => 'Sekawans',
             'email' => 'sekawanjember@gmail.com',
             'number' => '81553444245',
-            'role' => true,
+            'role' => 'superadmin',
         ]);
 
         // Divisi Komunikasi
@@ -44,6 +42,7 @@ class DatabaseSeeder extends Seeder
             'name' => 'Divisi Komunikasi',
             'email' => 'divkom.sekawan@gmail.com',
             'number' => '81553444245',
+            'role' => 'admin',
         ]);
 
         // Divisi IT Database
@@ -51,14 +50,20 @@ class DatabaseSeeder extends Seeder
             'name' => 'Divisi IT Database',
             'email' => 'itdb.sekawan@gmail.com',
             'number' => '81553444245',
+            'role' => 'admin',
         ]);
-        
-        // \App\Models\User::factory($this->user--)->create();
+
+        // Admin PS
+        \App\Models\User::factory()->create([
+            'name' => 'Pak Zaini',
+            'email' => 'pakzaini@gmail.com',
+            'number' => '8123456789',
+            'role' => 'adminps',
+        ]);
+
         \App\Models\Article::factory($this->article)->createQuietly();
         \App\Models\EmergencyContact::factory($this->patient)->create();
         \App\Models\Patient::factory($this->patient)->create();
-        \App\Models\Worker::factory($this->worker)->create();
-        // \App\Models\SatelliteHealthFacility::factory($this->satellite)->create();
         \App\Models\PatientDetail::factory($this->patient)->create();
     }
 }

@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 use App\Models\SatelliteHealthFacility;
-use App\Models\Worker;
+use App\Models\User;
 use Illuminate\Support\Str;
 
 class StorePatientRequest extends FormRequest
@@ -33,9 +33,9 @@ class StorePatientRequest extends FormRequest
                 ["name"  => Str::upper($this->satellite_health_facility_id)]
             )->id : false,
 
-            'worker_id'  => $this->worker_id ? Worker::firstOrCreate(
-                ["id"    => $this->worker_id],
-                ["name"  => $this->nameCase($this->worker_id)]
+            'user_id'  => $this->user_id ? User::firstOrCreate(
+                ["id"    => $this->user_id],
+                ["name"  => $this->nameCase($this->user_id)]
             )->id : false,
 
             "name"              => $this->nameCase($this->name),
@@ -68,7 +68,8 @@ class StorePatientRequest extends FormRequest
             'satellite_health_facility_id'  => 'required|integer',
             'start_treatment'               => 'required|date|before_or_equal:today',
             'no_regis'                      => 'required|numeric|max_digits:10',
-            'worker_id'                     => 'required|integer',
+            // 'worker_id'                     => 'required|integer',
+            'user_id'                       => 'required|integer',
             'name'                          => 'required|string|max:50',
             'id_number'                     => 'required|integer|digits:16',
             'sex'                           => 'required|string|in:laki-laki,perempuan',

@@ -26,7 +26,6 @@ class DocumentController extends Controller
     {
         $request->validate([
             'judul' => 'required',
-            'kategori' => 'required',
             'deskripsi' => 'required',
             'file' => 'required|mimes:pdf,doc,docx,xlsx,xls,ppt,pptx|max:10240',
 
@@ -38,7 +37,6 @@ class DocumentController extends Controller
         LogBatch::startBatch();
         Document::create([
             'judul' => $request->judul,
-            'kategori' => $request->kategori,
             'deskripsi' => $request->deskripsi,
             'file_path' => $filePath,
         ]);
@@ -62,7 +60,6 @@ class DocumentController extends Controller
     {
         $request->validate([
             'judul' => 'required',
-            'kategori' => 'required',
             'deskripsi' => 'required',
         ]);
 

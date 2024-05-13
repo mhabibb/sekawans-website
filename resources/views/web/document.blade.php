@@ -18,7 +18,7 @@
           <div class="module line-clamp">
             <h5><strong><b>{{ $document->judul }}</b></strong></h5>
           </div>        
-          <p><i class="fas fa-folder"></i> {{ $document->kategori }}</p>
+          {{-- <p><i class="fas fa-folder"></i> {{ $document->kategori }}</p> --}}
           <span style="font-size: smaller;">Deskripsi:</span>
           <p>{{ $document->deskripsi }}</p>
           <a href="{{ asset('storage/'.$document->file_path) }}" class="link-primary text-underline">Lihat Dokumen</a>

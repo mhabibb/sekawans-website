@@ -38,11 +38,14 @@
                             <label for="regNum">No. Registrasi Pasien</label>
                             <div class="form-control">{{ $patientDetail->no_regis }}</div>
                         </div>
-                        <div class="col-sm-6 form-group">
+                        {{-- <div class="col-sm-6 form-group">
                             <label>Pendamping/Patient Supporter (PS)</label>
                             <div class="form-control">{{ $patientDetail->worker->name ?? 'Deleted Worker' }}</div>
-                        </div>
-
+                        </div> --}}
+                        <div class="col-sm-6 form-group">
+                            <label>Pendamping/Patient Supporter (PS)</label>
+                            <div class="form-control">{{ $patientDetail->user->name ?? 'Deleted User' }}</div>
+                        </div>                        
                         <div class="col-sm-6 form-group">
                             <label>Status Pasien</label>
                             <div class="form-control">{{ $patientDetail->patientStatus->status }}</div>

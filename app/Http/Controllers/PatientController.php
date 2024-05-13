@@ -13,7 +13,7 @@ use App\Models\PatientStatus;
 use App\Models\Regency;
 use App\Models\Religion;
 use App\Models\SatelliteHealthFacility;
-use App\Models\Worker;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Spatie\Activitylog\Facades\LogBatch;
@@ -60,11 +60,11 @@ class PatientController extends Controller
     {
         $fasyankes = collect(["RS PARU JEMBER", "RSD DR. SOEBANDI JEMBER"]);
         $satellites = SatelliteHealthFacility::all();
-        // $workers = Worker::all();
+        $users = User::all();
         $religions = Religion::all();
         $educations = Education::all();
         $regencies = Regency::withWhereHas('districts', fn ($query) => $query->without('regency'))->get();
-        return view('admin.patient.create', compact('fasyankes', 'religions', 'regencies', 'educations', 'satellites')); //'workers'
+        return view('admin.patient.create', compact('fasyankes', 'religions', 'users', 'regencies', 'educations', 'satellites')); 
     }
 
     /**
@@ -138,13 +138,13 @@ class PatientController extends Controller
     {
         $fasyankes = collect(["RS PARU JEMBER", "RSD DR. SOEBANDI JEMBER"]);
         $satellites = SatelliteHealthFacility::all();
-        // $workers = Worker::all();
+        $users = User::all();
         $statuses = PatientStatus::get();
         $religions = Religion::all();
         $educations = Education::all();
         $regencies = Regency::withWhereHas('districts', fn ($query) => $query->without('regency'))->get();
         $detail = $patient;
-        return view('admin.patient.edit', compact('detail', 'fasyankes', 'satellites', 'workers', 'religions', 'regencies', 'educations', 'statuses'));
+        return view('admin.patient.edit', compact('detail', 'fasyankes', 'satellites', 'religions', 'regencies', 'users', 'educations', 'statuses')); 
     }
 
     /**

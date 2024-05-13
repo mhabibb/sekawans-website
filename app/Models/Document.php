@@ -11,7 +11,7 @@ class Document extends Model
 {
     use HasFactory, LogsActivity;
     protected $fillable = [
-        'judul', 'kategori', 'deskripsi', 'file_path'
+        'judul', 'deskripsi', 'file_path'
     ];
     public function getActivitylogOptions(): LogOptions
     {

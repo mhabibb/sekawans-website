@@ -25,7 +25,7 @@
                                     <thead>
                                         <tr>
                                             <th class="text-nowrap">Nama Dokumen</th>
-                                            <th class="text-nowrap">Kategori Dokumen</th>
+                                            {{-- <th class="text-nowrap">Kategori Dokumen</th> --}}
                                             <th class="text-nowrap">Deskripsi</th>
                                             <th class="text-nowrap">Waktu Update</th>
                                             <th></th>
@@ -35,7 +35,7 @@
                                         @forelse($documents as $document)
                                             <tr>
                                                 <td>{{ $document->judul }}</td>
-                                                <td>{{ $document->kategori }}</td>
+                                                {{-- <td>{{ $document->kategori }}</td> --}}
                                                 <td>{{ $document->deskripsi }}</td>
                                                 <td>{{ $document->updated_at->format('d M Y, H:i:s') }}</td>
                                                 <td>

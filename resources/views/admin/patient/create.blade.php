@@ -65,15 +65,15 @@
                         </div>
                         <div class="col-sm-6 form-group">
                             <label>Pendamping/Patient Supporter (PS)</label>
-                            <select id="worker"
+                            <select id="user"
                                 class="form-control tags 
-            @error('worker_id') is-invalid @else @if (old('worker_id') ?? false) is-valid @endif @enderror"
-                                name="worker.id" style="width: 100%;">
+            @error('user_id') is-invalid @else @if (old('user_id') ?? false) is-valid @endif @enderror"
+                                name="user.id" style="width: 100%;">
                                 <option disabled selected>Pilih Pendamping/Patient Supporter (PS)</option>
-                                {{-- @foreach ($workers as $worker)
-                                    <option value="{{ $worker->id }}" @selected(old('worker_id') == $worker->id)>{{ $worker->name }}
+                                @foreach ($users as $user)
+                                    <option value="{{ $user->id }}" @selected(old('user_id') == $user->id)>{{ $user->name }}
                                     </option>
-                                @endforeach --}}
+                                @endforeach
                             </select>
                         </div>
                     </div>
@@ -442,7 +442,7 @@
                 tags: true
             });
 
-            var select2Id = ['#satellite', '#worker'];
+            var select2Id = ['#satellite', '#user'];
             select2Id.map((id) => {
                 $(id).on('select2:open', () => {
                     var find = $(id).select2('data');

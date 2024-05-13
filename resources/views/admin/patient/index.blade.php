@@ -96,7 +96,7 @@
                     .done(function(result) {
                         bodi.html('');
                         $(result).each(function(key, patient) {
-                            patient.worker = patient.worker ?? 'Deleted Worker'
+                            patient.user = patient.user ?? 'Deleted User'
                             bodi.append(`
                                     <tr>
                                         <td></td>
@@ -104,7 +104,7 @@
                                         <td>` + patient.no_regis + `</td>
                                         <td>` + patient.patient.district.name + `</td>
                                         <td>` + moment(patient.patient.start_treatment).format('D MMMM YYYY') + `</td>
-                                        <td>` + (patient.worker.name ?? 'Deleted Worker') + `</td>
+                                        <td>` + (patient.user.name ?? 'Deleted User') + `</td>
                                         <td>` + patient.patient_status.status + `</td>
                                     </tr>`)
                         })

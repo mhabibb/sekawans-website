@@ -30,8 +30,5 @@ class PatientStatusSeeder extends Seeder
         PatientStatus::create([
             'status' => 'Meninggal'
         ]);
-        PatientStatus::create([
-            'status' => 'Selesai'
-        ]);
     }
 }

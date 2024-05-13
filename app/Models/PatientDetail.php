@@ -11,11 +11,10 @@ class PatientDetail extends Model
 {
     use HasFactory, LogsActivity;
 
-    // public $timestamps = false;
-
+    
     protected $guarded = ['id'];
 
-    protected $with = ['patientStatus', 'patient', 'satelliteHealthFacility', 'worker'];
+    protected $with = ['patientStatus', 'patient', 'user', 'satelliteHealthFacility']; 
 
     public function getActivitylogOptions(): LogOptions
     {
@@ -42,13 +41,13 @@ class PatientDetail extends Model
         return $this->belongsTo(Patient::class);
     }
 
-    public function worker()
+    public function user()
     {
-        return $this->belongsTo(Worker::class);
+        return $this->belongsTo(User::class); 
     }
 
     public function satelliteHealthFacility()
     {
         return $this->belongsTo(SatelliteHealthFacility::class);
     }
-}
+};

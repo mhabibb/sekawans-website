@@ -10,7 +10,6 @@ class CreateDocumentsTable extends Migration
         Schema::create('documents', function (Blueprint $table) {
             $table->id();
             $table->string('judul');
-            $table->string('kategori');
             $table->text('deskripsi');
             $table->string('file_path'); 
             $table->timestamps();

@@ -65,7 +65,7 @@
               class="form-control @error('no_regis') is-invalid @else @if(old('no_regis') ?? false) is-valid @endif @enderror"
               value="{{ old('no_regis', $detail->no_regis) }}">
           </div>
-          <div class="col-sm-6 form-group">
+          {{-- <div class="col-sm-6 form-group">
             <label>Pendamping/Patient Supporter (PS)</label>
             <select
               class="form-control tags @error('worker_id') is-invalid @else @if(old('worker_id') ?? false) is-valid @endif @enderror"
@@ -74,6 +74,18 @@
               @foreach ($workers as $worker)
               <option value="{{ $worker->id }}" @selected(old('worker_id', $detail->worker_id)==$worker->id)>{{
                 $worker->name }}</option>
+              @endforeach
+            </select>
+          </div> --}}
+          <div class="col-sm-6 form-group">
+            <label>Pendamping/Patient Supporter (PS)</label>
+            <select
+              class="form-control tags @error('user_id') is-invalid @else @if(old('user_id') ?? false) is-valid @endif @enderror"
+              id="user" name="user.id" style="width: 100%;">
+              <option disabled selected>Pilih Pendamping/Patient Supporter (PS)</option>
+              @foreach ($users as $user)
+              <option value="{{ $user->id }}" @selected(old('user_id', $detail->user_id)==$user->id)>{{
+                $user->name }}</option>
               @endforeach
             </select>
           </div>
@@ -440,7 +452,7 @@
         tags: true
     });
 
-    var select2Id = ['#satellite', '#worker'];
+    var select2Id = ['#satellite', '#user'];
     select2Id.map((id) => {
       $(id).on('select2:open', () => {
         var find = $(id).select2('data');

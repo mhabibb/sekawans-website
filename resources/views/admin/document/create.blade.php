@@ -20,13 +20,13 @@
           <span class="text-danger">{{ $message }}</span>
         @enderror
       </div>
-      <div class="form-group mb-3 col-md-6">
+      {{-- <div class="form-group mb-3 col-md-6">
         <label for="kategori" class="form-label">Kategori Dokumen</label>
         <input type="text" name="kategori" class="form-control @error('kategori') is-invalid @enderror" id="kategori" placeholder="Masukkan Kategori Dokumen" value="{{ old('kategori') }}">
         @error('kategori')
           <span class="text-danger">{{ $message }}</span>
         @enderror
-      </div>
+      </div> --}}
       <div class="form-group mb-3 col-12">
         <label for="deskripsi" class="form-label">Deskripsi</label>
         <textarea name="deskripsi" id="deskripsi" class="form-control @error('deskripsi') is-invalid @enderror" rows="5" placeholder="Deskripsi">{{ old('deskripsi') }}</textarea>

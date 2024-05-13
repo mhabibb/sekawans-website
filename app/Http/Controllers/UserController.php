@@ -18,7 +18,9 @@ class UserController extends Controller
     public function index()
     {
         $this->authorize('superAdmin');
-        $users = User::select('id', 'name', 'email', 'number')->where('role', 0)->get();
+        $users = User::select('id', 'name', 'email', 'number')
+                    ->where('role', 'adminps') 
+                    ->get();
         return view('admin.user.index', compact('users'));
     }
 
@@ -38,13 +40,17 @@ class UserController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
+
     public function store(StoreUserRequest $request)
     {
         $this->authorize('superAdmin');
-        $request = $request->validated();
-        User::create($request);
-        return to_route('admin.users.index')->withSuccess("Admin Berhasil Dibuat!");
+        $validatedData = $request->validated();
+        $validatedData['role'] = 'adminps';
+        User::create($validatedData);
+
+        return redirect()->route('admin.users.index')->withSuccess("Admin Berhasil Dibuat!");
     }
+
 
     /**
      * Display the specified resource.

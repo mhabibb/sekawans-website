@@ -25,9 +25,9 @@ return new class extends Migration
                 ->nullable()
                 ->constrained()
                 ->nullOnDelete();
-            $table->foreignId('worker_id')
+            $table->foreignId('user_id') 
                 ->nullable()
-                ->constrained()
+                ->constrained() 
                 ->nullOnDelete();
             $table->string('no_regis', 16)->unique();
             $table->foreignId('patient_status_id')

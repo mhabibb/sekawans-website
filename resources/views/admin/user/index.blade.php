@@ -4,7 +4,10 @@
     <!-- Content Header (Page header) -->
     <section class="content-header">
         <div class="container-fluid">
-            <h1>Data User</h1>
+            <h1>Data User</h1><br>
+            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#createAdmin">
+                <i class="fa fa-plus"></i> Tambah Patient Supporter
+            </button>
         </div>
     </section>
 

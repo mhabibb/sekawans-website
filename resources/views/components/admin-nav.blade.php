@@ -66,26 +66,26 @@ use Illuminate\Support\Facades\Auth;
         @endforeach
 
         @can('superAdmin')
-        <li class="nav-header">SUPER ADMIN</li>
-        <li class="nav-item">
-          <a href="{{route('admin.users.index')}}"
+      <li class="nav-header">SUPER ADMIN</li>
+      <li class="nav-item">
+          <a href="{{ route('admin.users.index') }}"
             class="nav-link {{ request()->routeIs('admin.users.index*') ? ' active' : '' }}">
-            <i class="nav-icon fas fa-lock"></i>
-            <p>
-              Kelola Akun
-            </p>
+              <i class="nav-icon fas fa-lock"></i>
+              <p>
+                  Kelola Akun
+              </p>
           </a>
-        </li>
-        <li class="nav-item">
+      </li>
+      <li class="nav-item">
           <a href="{{ route('admin.logs.index') }}"
             class="nav-link {{ request()->routeIs('admin.logs.index*') ? ' active' : '' }}">
-            <i class="nav-icon fas fa-file-waveform"></i>
-            <p>
-              Log Aktivitas
-            </p>
+              <i class="nav-icon fas fa-file-waveform"></i>
+              <p>
+                  Log Aktivitas
+              </p>
           </a>
-        </li>
-        @endcan
+      </li>
+      @endcan
 
       </ul>
     </nav>

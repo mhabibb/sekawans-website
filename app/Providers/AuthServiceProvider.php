@@ -4,6 +4,7 @@ namespace App\Providers;
 
 use App\Models\Article;
 use App\Models\User;
+use App\Policies\AccessControlPolicy;
 use App\Policies\ArticlePolicy;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
@@ -29,8 +30,6 @@ class AuthServiceProvider extends ServiceProvider
     {
         $this->registerPolicies();
 
-        Gate::define('superAdmin', function (User $user) {
-            return ($user->role ?? redirect()->route('admin'));
-        });
+        Gate::define('superAdmin', [AccessControlPolicy::class, 'superAdmin']);
     }
 }

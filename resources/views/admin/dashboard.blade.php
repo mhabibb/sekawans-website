@@ -1,3 +1,7 @@
+<?php
+use Illuminate\Support\Facades\Auth;
+?>
+
 @extends('layouts.admin')
 
 @section('admin-content')
@@ -14,50 +18,66 @@
         <div class="container-fluid">
             <!-- Small boxes -->
             <div class="row row-cols-2 row-cols-md-4">
-                <div class="col">
-                    <!-- small box -->
-                    <div class="small-box bg-light">
-                        <div class="inner">
-                            <h3>{{ $info }}</h3>
-                            <h5>Info TBC</h5>
+                @if(Auth::user()->role == 'adminps')
+                    <!-- Bagian untuk adminps -->
+                    <div class="col">
+                        <!-- small box -->
+                        <div class="small-box bg-light">
+                            <div class="inner">
+                                <h3>{{ $pasien }}</h3>
+                                <h5>Dalam Pengobatan</h5>
+                            </div>
+                            <a href="{{ route('admin.patients.index') }}" class="small-box-footer">Selengkapnya <i
+                                    class="fas fa-arrow-circle-right"></i></a>
                         </div>
-                        <a href="{{ route('admin.infotbc.index') }}" class="small-box-footer">Selengkapnya <i
-                                class="fas fa-arrow-circle-right"></i></a>
                     </div>
-                </div>
-                <div class="col">
-                    <!-- small box -->
-                    <div class="small-box bg-light">
-                        <div class="inner">
-                            <h3>{{ $artikel }}</h3>
-                            <h5>Artikel</h5>
+                @else
+                    <!-- Bagian untuk admin dan superadmin -->
+                    <div class="col">
+                        <!-- small box -->
+                        <div class="small-box bg-light">
+                            <div class="inner">
+                                <h3>{{ $info }}</h3>
+                                <h5>Info TBC</h5>
+                            </div>
+                            <a href="{{ route('admin.infotbc.index') }}" class="small-box-footer">Selengkapnya <i
+                                    class="fas fa-arrow-circle-right"></i></a>
                         </div>
-                        <a href="{{ route('admin.articles.index') }}" class="small-box-footer">Selengkapnya <i
-                                class="fas fa-arrow-circle-right"></i></a>
                     </div>
-                </div>
-                <div class="col">
-                    <!-- small box -->
-                    <div class="small-box bg-light">
-                        <div class="inner">
-                            <h3>{{ $kegiatan }}</h3>
-                            <h5>Kegiatan</h5>
+                    <div class="col">
+                        <!-- small box -->
+                        <div class="small-box bg-light">
+                            <div class="inner">
+                                <h3>{{ $artikel }}</h3>
+                                <h5>Artikel</h5>
+                            </div>
+                            <a href="{{ route('admin.articles.index') }}" class="small-box-footer">Selengkapnya <i
+                                    class="fas fa-arrow-circle-right"></i></a>
                         </div>
-                        <a href="{{ route('admin.kegiatan.index') }}" class="small-box-footer">Selengkapnya <i
-                                class="fas fa-arrow-circle-right"></i></a>
                     </div>
-                </div>
-                <div class="col">
-                    <!-- small box -->
-                    <div class="small-box bg-light">
-                        <div class="inner">
-                            <h3>{{ $pasien }}</h3>
-                            <h5>Dalam Pengobatan</h5>
+                    <div class="col">
+                        <!-- small box -->
+                        <div class="small-box bg-light">
+                            <div class="inner">
+                                <h3>{{ $kegiatan }}</h3>
+                                <h5>Kegiatan</h5>
+                            </div>
+                            <a href="{{ route('admin.kegiatan.index') }}" class="small-box-footer">Selengkapnya <i
+                                    class="fas fa-arrow-circle-right"></i></a>
                         </div>
-                        <a href="{{ route('admin.patients.index') }}" class="small-box-footer">Selengkapnya <i
-                                class="fas fa-arrow-circle-right"></i></a>
                     </div>
-                </div>
+                    <div class="col">
+                        <!-- small box -->
+                        <div class="small-box bg-light">
+                            <div class="inner">
+                                <h3>{{ $pasien }}</h3>
+                                <h5>Dalam Pengobatan</h5>
+                            </div>
+                            <a href="{{ route('admin.patients.index') }}" class="small-box-footer">Selengkapnya <i
+                                    class="fas fa-arrow-circle-right"></i></a>
+                        </div>
+                    </div>
+                @endif
             </div>
             <!-- /.row -->
             <!-- Main row -->
@@ -77,7 +97,6 @@
                                 <canvas id="pieChart{{ $kab->id }}"
                                     style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%;"></canvas>
                             </div>
-
                             <div class="card-footer">
                                 <h5 class="card-title">TOTAL PASIEN : <strong>{{ $kab->total }}</strong></h5>
                             </div><!-- /.card -->

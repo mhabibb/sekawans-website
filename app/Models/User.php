@@ -9,6 +9,7 @@ use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 use Spatie\Activitylog\Traits\LogsActivity;
 use Spatie\Activitylog\LogOptions;
+use App\Policies\AccessControlPolicy;
 
 class User extends Authenticatable
 {
@@ -19,6 +20,11 @@ class User extends Authenticatable
      *
      * @var array<int, string>
      */
+
+     protected $policies = [
+        AccessControlPolicy::class,
+    ];
+
     protected $fillable = [
         'name',
         'email',

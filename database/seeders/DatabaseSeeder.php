@@ -3,12 +3,11 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
+use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
 class DatabaseSeeder extends Seeder
 {
-    private $article = 50;
-    private $worker = 50;
-    private $satellite = 100;
+    private $article = 10;
     private $patient = 1;
 
     /**
@@ -33,7 +32,7 @@ class DatabaseSeeder extends Seeder
         \App\Models\User::factory()->create([
             'name' => 'Sekawans',
             'email' => 'sekawanjember@gmail.com',
-            'number' => '81553444245',
+            'number' => '081553444245',
             'role' => 'superadmin',
         ]);
 
@@ -41,7 +40,7 @@ class DatabaseSeeder extends Seeder
         \App\Models\User::factory()->create([
             'name' => 'Divisi Komunikasi',
             'email' => 'divkom.sekawan@gmail.com',
-            'number' => '81553444245',
+            'number' => '081553444245',
             'role' => 'admin',
         ]);
 
@@ -49,15 +48,15 @@ class DatabaseSeeder extends Seeder
         \App\Models\User::factory()->create([
             'name' => 'Divisi IT Database',
             'email' => 'itdb.sekawan@gmail.com',
-            'number' => '81553444245',
+            'number' => '081553444245',
             'role' => 'admin',
         ]);
 
         // Admin PS
         \App\Models\User::factory()->create([
             'name' => 'Pak Zaini',
-            'email' => 'pakzaini@gmail.com',
-            'number' => '8123456789',
+            'email' => 'zaini.sekawan@gmail.com',
+            'number' => '081553444245',
             'role' => 'adminps',
         ]);
 

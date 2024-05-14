@@ -38,17 +38,17 @@ SEKAWANS’s TBC terbentuk sejak 14 Juli 2016, disebut sebagai sekumpulan pendid
 
         StaticElement::create([
             'element' => 'instagram',
-            'contents' => 'https://www.instagram.com/sekawanstbc_jember/',
+            'contents' => 'https://www.instagram.com/sekawanstbc_jember?igsh=ejl6d2dzbGJybTc2',
         ]);
 
         StaticElement::create([
             'element' => 'tiktok',
-            'contents' => 'https://www.tiktok.com/@sekawanstbc_jember',
+            'contents' => 'https://www.tiktok.com/@sekawanstbc_jember?_t=8mLNIY9xR4b&_r=1',
         ]);
 
         StaticElement::create([
             'element' => 'youtube',
-            'contents' => 'https://www.youtube.com/@sekawanstb5619',
+            'contents' => 'https://youtube.com/@sekawanstb5619?si=hkK643-fxsbTqY7v',
         ]);
     }
 }

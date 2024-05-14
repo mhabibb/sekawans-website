@@ -45,6 +45,9 @@ class MessageController extends Controller
 
     private function sendFonnteMessage($numbers, $text)
     {
+        // Menghapus angka 0 di awal nomor
+        $numbers = ltrim($numbers, '0');
+
         $curl = curl_init();
 
         curl_setopt_array($curl, array(
@@ -66,6 +69,7 @@ class MessageController extends Controller
                 'Authorization: FQHuH6RsnbHdJ4Pqx4NE'  
             ),
         ));
+    
 
         $response = curl_exec($curl);
 

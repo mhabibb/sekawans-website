@@ -25,7 +25,7 @@ class EducationSeeder extends Seeder
             'education' => 'SMA'
         ]);
         Education::create([
-            'education' => 'Perguruan Tinggi'
+            'education' => 'Sarjana'
         ]);
         Education::create([
             'education' => 'Lainnya'

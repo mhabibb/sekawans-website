@@ -13,6 +13,7 @@ class ReligionSeeder extends Seeder
      *
      * @return void
      */
+
     public function run()
     {
         Religion::create([

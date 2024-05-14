@@ -20,8 +20,8 @@ use Illuminate\Support\Facades\Auth;
 | Web Routes
 |--------------------------------------------------------------------------
 |
-| Here is where you can register web routes for your application.
-| These routes are loaded by the RouteServiceProvider within a group which
+| Here is where you can register web routes for your application. These
+| routes are loaded by the RouteServiceProvider within a group which
 | contains the "web" middleware group. Now create something great!
 |
 */
@@ -37,10 +37,18 @@ Route::middleware('auth')->prefix('admin')->name('admin.')->group(function () {
     // Admin dashboard route
     Route::get('/', [DashboardController::class, 'index'])->name('dashboard.index');
     
-    // User resource route
-    Route::resource('/users', UserController::class)->except('edit');
-    Route::post('/users/first', [UserController::class, 'firstLogin'])->name('users.firstLogin');
-    Route::post('/users/{user}/reset', [UserController::class, 'reset'])->name('users.reset');
+    // User resource route - only for superadmin
+    Route::middleware('superadmin')->group(function () {
+        Route::resource('/users', UserController::class)->except('edit');
+        Route::post('/users/first', [UserController::class, 'firstLogin'])->name('users.firstLogin');
+        Route::post('/users/{user}/reset', [UserController::class, 'reset'])->name('users.reset');
+
+        // Log controller route - only for superadmin
+        Route::controller(LogController::class)->group(function () {
+            Route::get('/logs', 'index')->name('logs.index');
+            Route::put('/logs/{activity}/restore', 'restore')->name('logs.restore');
+        });
+    });
 
     // Static Element controller route
     Route::controller(StaticElementController::class)->group(function () {
@@ -63,12 +71,6 @@ Route::middleware('auth')->prefix('admin')->name('admin.')->group(function () {
     Route::get('/screenings/{id}', [ScreeningController::class, 'show'])->name('screening.show');
     Route::delete('/screening/{id}', [ScreeningController::class, 'destroy'])->name('screening.destroy');
     
-    // Log controller route
-    Route::controller(LogController::class)->group(function () {
-        Route::get('/logs', 'index')->name('logs.index');
-        Route::put('/logs/{activity}/restore', 'restore')->name('logs.restore');
-    })->middleware(['can:superAdmin']);
-
     // Satellite Health
     Route::controller(SatelliteHealthFacilityController::class)->group(function () {
         Route::get('/fasyankes', 'index')->name('fasyankes.index');

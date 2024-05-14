@@ -13,6 +13,7 @@ class Screening extends Model
         'id'
     ];
     
+    // Pake Guarded saja
     // protected $fillable = [
     //     'full_name',
     //     'contact',

@@ -7,7 +7,8 @@ use App\Models\EmergencyContact;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Patient>
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory
+ * <\App\Models\Patient>
  */
 class PatientFactory extends Factory
 {

@@ -20,10 +20,12 @@ class UserController extends Controller
     {
         $this->authorize('superAdmin');
 
+        // Index role: admin
         $adminUsers = User::select('id', 'name', 'email', 'number')
                         ->where('role', 'admin') 
                         ->get();
 
+        // Index role: adminps
         $adminPSUsers = User::select('id', 'name', 'email', 'number')
                             ->where('role', 'adminps') 
                             ->get();

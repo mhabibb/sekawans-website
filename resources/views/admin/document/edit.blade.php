@@ -21,6 +21,8 @@
         <span class="text-danger">{{ $message }}</span>
         @enderror
       </div>
+
+      {{-- Kategori jika dibutuhkan --}}
       {{-- <div class="form-group mb-3 col-md-6">
         <label for="kategori">Kategori</label>
         <input type="text" name="kategori" class="form-control @error('kategori') is-invalid @enderror" id="kategori" placeholder="Masukkan kategori dokumen" value="{{ old('kategori', $document->kategori) }}">
@@ -28,6 +30,7 @@
         <span class="text-danger">{{ $message }}</span>
         @enderror
       </div> --}}
+
       <div class="form-group mb-3 col-md-6">
         <label for="deskripsi">Deskripsi</label>
         <textarea name="deskripsi" id="deskripsi" class="form-control @error('deskripsi') is-invalid @enderror" placeholder="Masukkan deskripsi dokumen">{{ old('deskripsi', $document->deskripsi) }}</textarea>
@@ -53,7 +56,6 @@
 @endsection
 
 @section('js')
-<!-- Script untuk preview gambar -->
 <script>
   function previewImg() {
     const image = document.querySelector('#file');

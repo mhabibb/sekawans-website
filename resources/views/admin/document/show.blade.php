@@ -27,7 +27,10 @@
   </div>
   <article class="d-flex flex-column align-items-center justify-content-center border-top pt-4">
     <div class="body">
+      
+      {{-- Kategori Dokumen --}}
       {{-- <p><strong>Kategori:</strong> {{ $document->kategori }}</p> --}}
+      
       <p><strong>Deskripsi:</strong> {{ $document->deskripsi }}</p>
       <p><strong>File:</strong> <a href="{{ asset('storage/'.$document->file_path) }}" target="_blank">Lihat/Dowload</a></p>
     </div>

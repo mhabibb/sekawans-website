@@ -55,6 +55,8 @@ class WebController extends Controller
                 $view = view('web.kegiatan', ['actions' => $actions])
             ]
         };
+        
+        //dd($actions);
         return $view;
     }
 

@@ -14,6 +14,8 @@ use App\Http\Controllers\MessageController;
 use App\Http\Controllers\SatelliteHealthFacilityController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Artisan;
+
 
 /*
 |--------------------------------------------------------------------------

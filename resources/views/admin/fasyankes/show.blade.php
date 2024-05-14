@@ -14,6 +14,8 @@
                     <div class="card">
                         <div class="card-body">
                             <h3>Data Pasien TB</h3>
+
+                            {{-- Show seluruh data pasien di fasilitas kesehatan --}}
                             {{-- <div class="table-responsive">
                                 <table class="table table-striped">
                                     <thead>
@@ -54,6 +56,7 @@
                             </div>
                         </div>
                     </div> --}}
+                    
                 </div>
             </div>
         </div>

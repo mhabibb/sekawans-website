@@ -45,7 +45,7 @@ class MessageController extends Controller
 
     private function sendFonnteMessage($numbers, $text)
     {
-        // Menghapus angka 0 di awal nomor
+        // Menghapus angka 0 di awal nomor 
         $numbers = ltrim($numbers, '0');
 
         $curl = curl_init();
@@ -65,6 +65,8 @@ class MessageController extends Controller
                 'delay' => '10',
                 'countryCode' => '62', 
             ),
+
+            // Token Fonnte masukkan disini
             CURLOPT_HTTPHEADER => array(
                 'Authorization: FQHuH6RsnbHdJ4Pqx4NE'  
             ),
@@ -75,7 +77,7 @@ class MessageController extends Controller
 
         curl_close($curl);
 
-        // Parsing response
+        // Parsing json response
         $responseData = json_decode($response, true);
 
         return [

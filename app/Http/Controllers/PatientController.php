@@ -7,7 +7,6 @@ use App\Http\Requests\StorePatientRequest;
 use App\Http\Requests\UpdatePatientRequest;
 use App\Models\Education;
 use App\Models\EmergencyContact;
-use App\Models\Meeting;
 use App\Models\PatientDetail;
 use App\Models\PatientStatus;
 use App\Models\Regency;

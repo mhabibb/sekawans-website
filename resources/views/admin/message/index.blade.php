@@ -119,7 +119,6 @@
             $('#loading').hide();
             $('#messagesTable').show();
 
-            // Tambahkan event listener untuk tombol restore
             $('#messagesTable tbody').on('click', '.restore-btn', function() {
                 var row = $(this).closest('tr');
                 var messageId = $(this).data('id');

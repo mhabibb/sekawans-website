@@ -20,7 +20,6 @@ return new class extends Migration
             $table->string('password', 64);
             $table->string('number', 15)->nullable(); 
             $table->enum('role', ['superadmin', 'admin', 'adminps'])->default('admin');
-            //$table->boolean('role')->default(false);
             $table->rememberToken();
             $table->timestamps();
         });

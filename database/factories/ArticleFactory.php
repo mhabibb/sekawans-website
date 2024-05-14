@@ -6,7 +6,8 @@ use Illuminate\Database\Eloquent\Factories\Factory;
 use Ramsey\Uuid\Type\Integer;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Article>
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory
+ * <\App\Models\Article>
  */
 class ArticleFactory extends Factory
 {

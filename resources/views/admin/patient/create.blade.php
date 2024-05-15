@@ -63,19 +63,24 @@
                                 class="input-number form-control @error('no_regis') is-invalid @else @if (old('no_regis') ?? false) is-valid @endif @enderror"
                                 value="{{ old('no_regis') }}">
                         </div>
-                        <div class="col-sm-6 form-group">
-                            <label>Pendamping/Patient Supporter (PS)</label>
-                            <select id="user"
-                                class="form-control tags 
-            @error('user_id') is-invalid @else @if (old('user_id') ?? false) is-valid @endif @enderror"
-                                name="user.id" style="width: 100%;">
-                                <option disabled selected>Pilih Pendamping/Patient Supporter (PS)</option>
-                                @foreach ($users as $user)
-                                    <option value="{{ $user->id }}" @selected(old('user_id') == $user->id)>{{ $user->name }}
-                                    </option>
-                                @endforeach
-                            </select>
-                        </div>
+
+                        @can('superAdmin')
+                            <div class="col-sm-6 form-group">
+                                <label for="user">Pendamping/Patient Supporter (PS)</label>
+                                <select id="user" class="form-control tags @error('user_id') is-invalid @else @if (old('user_id') ?? false) is-valid @endif @enderror" name="user_id" style="width: 100%;">
+                                    <option disabled selected>Pilih Pendamping/Patient Supporter (PS)</option>
+                                    @foreach($users as $user)
+                                        <option value="{{ $user->id }}" @selected(old('user_id') == $user->id)>{{ $user->name }}</option>
+                                    @endforeach
+                                </select>
+                                @error('user_id')
+                                    <div class="invalid-feedback">{{ $message }}</div>
+                                @enderror
+                            </div>
+                        @else
+                            <input type="hidden" name="user_id" value="{{ $currentUser->id }}">
+                        @endcan
+
                     </div>
 
                     <div class="row mb-4">

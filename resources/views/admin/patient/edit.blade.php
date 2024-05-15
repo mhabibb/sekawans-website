@@ -65,30 +65,25 @@
               class="form-control @error('no_regis') is-invalid @else @if(old('no_regis') ?? false) is-valid @endif @enderror"
               value="{{ old('no_regis', $detail->no_regis) }}">
           </div>
-          {{-- <div class="col-sm-6 form-group">
-            <label>Pendamping/Patient Supporter (PS)</label>
-            <select
-              class="form-control tags @error('worker_id') is-invalid @else @if(old('worker_id') ?? false) is-valid @endif @enderror"
-              id="worker" name="worker.id" style="width: 100%;">
-              <option disabled selected>Pilih Pendamping/Patient Supporter (PS)</option>
-              @foreach ($workers as $worker)
-              <option value="{{ $worker->id }}" @selected(old('worker_id', $detail->worker_id)==$worker->id)>{{
-                $worker->name }}</option>
-              @endforeach
-            </select>
-          </div> --}}
-          <div class="col-sm-6 form-group">
-            <label>Pendamping/Patient Supporter (PS)</label>
-            <select
-              class="form-control tags @error('user_id') is-invalid @else @if(old('user_id') ?? false) is-valid @endif @enderror"
-              id="user" name="user.id" style="width: 100%;">
-              <option disabled selected>Pilih Pendamping/Patient Supporter (PS)</option>
-              @foreach ($users as $user)
-              <option value="{{ $user->id }}" @selected(old('user_id', $detail->user_id)==$user->id)>{{
-                $user->name }}</option>
-              @endforeach
-            </select>
-          </div>
+
+          @can('superAdmin')
+            <div class="col-sm-6 form-group">
+                <label for="user">Pendamping/Patient Supporter (PS)</label>
+                <select id="user" class="form-control tags @error('user_id') is-invalid @else @if(old('user_id') ?? false) is-valid @endif @enderror" name="user_id" style="width: 100%;">
+                    <option disabled selected>Pilih Pendamping/Patient Supporter (PS)</option>
+                    @foreach($users as $user)
+                        <option value="{{ $user->id }}" @selected(old('user_id') == $user->id)>{{ $user->name }}</option>
+                    @endforeach
+                </select>
+                @error('user_id')
+                    <div class="invalid-feedback">{{ $message }}</div>
+                @enderror
+            </div>
+        @else
+            <input type="hidden" name="user_id" value="{{ $currentUser->id }}">
+        @endcan
+
+
           <div class="col-sm-6 form-group">
             <label>Status Pasien</label>
             @error('patient_status_id')

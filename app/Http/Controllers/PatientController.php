@@ -7,6 +7,7 @@ use App\Http\Requests\StorePatientRequest;
 use App\Http\Requests\UpdatePatientRequest;
 use App\Models\Education;
 use App\Models\EmergencyContact;
+use App\Models\Meeting;
 use App\Models\PatientDetail;
 use App\Models\PatientStatus;
 use App\Models\Regency;
@@ -59,18 +60,24 @@ class PatientController extends Controller
     {
         $fasyankes = collect(["RS PARU JEMBER", "RSD DR. SOEBANDI JEMBER"]);
         $satellites = SatelliteHealthFacility::all();
-        $users = User::all();
         $religions = Religion::all();
         $educations = Education::all();
         $regencies = Regency::withWhereHas('districts', fn ($query) => $query->without('regency'))->get();
-        return view('admin.patient.create', compact('fasyankes', 'religions', 'users', 'regencies', 'educations', 'satellites')); 
+        $currentUser = auth()->user();
+        $isSuperAdmin = $currentUser->can('superAdmin');
+    
+        // Jika user adalah superAdmin, sediakan daftar user
+        $users = $isSuperAdmin ? User::all() : collect([$currentUser]);
+    
+        return view('admin.patient.create', compact('fasyankes', 'religions', 'currentUser', 'regencies', 'educations', 'satellites', 'users', 'isSuperAdmin'));
     }
+    
 
     /**
      * Store a newly created resource in storage.
      *
      * @param  \App\Http\Requests\StorePatientRequest  $request
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\Response 
      */
     public function store(StorePatientRequest $request)
     {
@@ -137,14 +144,20 @@ class PatientController extends Controller
     {
         $fasyankes = collect(["RS PARU JEMBER", "RSD DR. SOEBANDI JEMBER"]);
         $satellites = SatelliteHealthFacility::all();
-        $users = User::all();
         $statuses = PatientStatus::get();
         $religions = Religion::all();
         $educations = Education::all();
         $regencies = Regency::withWhereHas('districts', fn ($query) => $query->without('regency'))->get();
         $detail = $patient;
-        return view('admin.patient.edit', compact('detail', 'fasyankes', 'satellites', 'religions', 'regencies', 'users', 'educations', 'statuses')); 
+        $currentUser = auth()->user();
+        $isSuperAdmin = $currentUser->can('superAdmin');
+    
+        // Jika user adalah superAdmin, sediakan daftar user
+        $users = $isSuperAdmin ? User::all() : collect([$currentUser]);
+    
+        return view('admin.patient.edit', compact('detail', 'fasyankes', 'satellites', 'religions', 'regencies', 'currentUser', 'educations', 'statuses', 'users', 'isSuperAdmin'));
     }
+    
 
     /**
      * Update the specified resource in storage.

@@ -46,9 +46,13 @@
                                         <td>{{ $message->created_at }}</td>
                                         <td>
                                             @if ($message->trashed())
-                                                <button class="btn btn-success btn-sm restore-btn" data-id="{{ $message->id }}">Pulihkan</button>
+                                                <button class="btn btn-success btn-sm mr-2 restore-btn" data-id="{{ $message->id }}">
+                                                    <i class="fa-solid fa-rotate-left"></i> Pulihkan
+                                                </button>
                                             @else
-                                                <button class="btn btn-danger btn-sm delete-btn" data-id="{{ $message->id }}">Hapus</button>
+                                                <button class="btn btn-danger btn-sm mr-2 delete-btn" data-id="{{ $message->id }}">
+                                                    <i class="fa-solid fa-trash-can"></i> Hapus
+                                                </button>
                                             @endif
                                         </td>
                                     </tr>
@@ -69,8 +73,7 @@
     <script>
         $(document).ready(function() {
             var messagesTable = $('#messagesTable').DataTable();
-
-            // Show loading
+            
             $('#loading').show();
 
             $('.delete-btn').click(function() {
@@ -102,6 +105,7 @@
                                     response.message,
                                     'success'
                                 );
+                                location.reload(); 
                             },
                             error: function(xhr, status, error) {
                                 console.error(xhr.responseText);

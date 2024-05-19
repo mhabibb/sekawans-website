@@ -120,7 +120,7 @@
                 <td colspan="2">Perihal : Rekomendasi Pemeriksaan Lanjutan Suspek TBC</td>
             </tr>
             <tr>
-                <td colspan="2">Kepada: Yth. Penanggung Jawab Tuberkulosis <span id="selected-faskes-info">{{ $selectedFaskes }}</span><br><br></td>
+                <td colspan="2">Kepada: Yth. Penanggung Jawab Tuberkulosis di Tempat<span id="selected-faskes-info">{{ $selectedFaskes }}</span><br><br></td>
             </tr>
             <tr>
                 <td colspan="2">Mohon pemeriksaan dan penanganan lebih lanjut pada suspek :<br><br></td>

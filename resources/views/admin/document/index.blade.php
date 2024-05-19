@@ -16,7 +16,7 @@
                 <div class="col-12">
                     <div class="card">
                         <div class="card-header">
-                            <a href="{{ route('admin.documents.create') }}" class="mb-2 mr-2 btn btn-primary">Input Dokumen Baru</a>
+                            <a href="{{ route('admin.documents.create') }}" class="mb-2 mr-2 btn btn-primary">Buat Dokumen Baru</a>
                         </div>
 
                         <div class="card-body">
@@ -25,48 +25,34 @@
                                     <thead>
                                         <tr>
                                             <th class="text-nowrap">Nama Dokumen</th>
-                                            
-                                            {{-- Kategori Dokumen --}}
-                                            {{-- <th class="text-nowrap">Kategori Dokumen</th> --}}
-                                            
-                                            <th class="text-nowrap">Deskripsi</th>
+                                            <th class="text-nowrap" style="width: 35%;">Deskripsi</th>
                                             <th class="text-nowrap">Waktu Update</th>
-                                            <th></th>
+                                            <th style="width: 20%;"></th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         @forelse($documents as $document)
                                             <tr>
                                                 <td>{{ $document->judul }}</td>
-                                                
-                                                {{-- Kategori Dokumen --}}
-                                                {{-- <td>{{ $document->kategori }}</td> --}}
-                                                
                                                 <td>{{ $document->deskripsi }}</td>
                                                 <td>{{ $document->updated_at->format('d M Y, H:i:s') }}</td>
                                                 <td>
-                                                    <div class="btn-toolbar" role="toolbar">
-                                                        <div class="btn-group mr-2" role="group">
-                                                            <a href="{{ route('admin.documents.show', $document->id) }}" class="btn btn-primary btn-sm">
-                                                                <i class="fa-solid fa-eye"></i> Lihat
-                                                            </a>
-                                                        </div>
-                                                        <div class="btn-group mr-2" role="group">
-                                                            <a href="{{ route('admin.documents.edit', $document->id) }}" class="btn btn-warning btn-sm">
-                                                                <i class="fa-solid fa-pencil"></i> Ubah
-                                                            </a>
-                                                        </div>
-                                                        <div class="btn-group" role="group">
-                                                            <button class="btn btn-danger btn-sm delete-btn" data-id="{{ $document->id }}">
-                                                                <i class="fa-solid fa-trash"></i> Hapus
-                                                            </button>
-                                                        </div>
+                                                    <div class="d-flex justify-content-start">
+                                                        <a role="button" onclick="action('show', {{ $document->id }})" class="badge badge-primary mr-2">
+                                                            <i class="fa-solid fa-eye"></i> Lihat
+                                                        </a>
+                                                        <a role="button" onclick="action('edit', {{ $document->id }})" class="badge badge-warning mr-2">
+                                                            <i class="fa-solid fa-pen-to-square"></i> Ubah
+                                                        </a>
+                                                        <a role="button" onclick="action('delete', {{ $document->id }})" class="badge badge-danger">
+                                                            <i class="fa-solid fa-trash-can"></i> Hapus
+                                                        </a>
                                                     </div>
                                                 </td>
                                             </tr>
                                         @empty
                                             <tr>
-                                                <td colspan="5" class="text-center">No data available in table</td>
+                                                <td colspan="4" class="text-center">No data available in table</td>
                                             </tr>
                                         @endforelse
                                     </tbody>
@@ -82,49 +68,81 @@
 @endsection
 
 @section('js')
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-
     <script>
-        $(document).ready(function() {
-            $('.delete-btn').click(function() {
-                var documentId = $(this).data('id');
+        function action(action, id) {
+            switch (action) {
+                case 'show':
+                    url = "{{ route('admin.documents.show', ':id') }}";
+                    url = url.replace(':id', id);
+                    location.href = url;
+                    break;
+                case 'edit':
+                    url = "{{ route('admin.documents.edit', ':id') }}";
+                    url = url.replace(':id', id);
+                    location.href = url;
+                    break;
+                case 'delete':
+                    url = "{{ route('admin.documents.destroy', ':id') }}";
+                    url = url.replace(':id', id);
+                    text = {
+                        title: 'Yakin Untuk Menghapus?',
+                        text: 'Data akan dibuang ke sampah',
+                        success: {
+                            title: 'Terhapus',
+                            text: 'Data telah dibuang ke sampah'
+                        }
+                    };
+                    btnAjax('DELETE');
+                    break;
+                default:
+                    break;
+            }
+
+            function btnAjax(type) {
+                $.ajaxSetup({
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    }
+                });
+
                 Swal.fire({
-                    title: 'Konfirmasi',
-                    text: "Apakah Anda yakin ingin menghapus dokumen ini?",
+                    title: text.title,
+                    text: text.text,
                     icon: 'warning',
                     showCancelButton: true,
-                    confirmButtonColor: '#d33',
-                    cancelButtonColor: '#3085d6',
-                    confirmButtonText: 'Ya, hapus!',
-                    cancelButtonText: 'Batal'
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Yakin',
+                    cancelButtonText: 'Batalkan',
                 }).then((result) => {
                     if (result.isConfirmed) {
                         $.ajax({
-                            url: "{{ url('/admin/documents') }}/" + documentId,
-                            type: "DELETE",
-                            data: {
-                                "_token": "{{ csrf_token() }}"
-                            },
-                            success: function(response) {
-                                Swal.fire(
-                                    'Terhapus!',
-                                    'Dokumen telah dihapus.',
-                                    'success'
-                                ).then(() => {
-                                    window.location.reload();
-                                });
-                            },
-                            error: function(xhr) {
-                                Swal.fire(
-                                    'Gagal!',
-                                    'Gagal menghapus dokumen. Silakan coba lagi.',
-                                    'error'
-                                );
-                            }
+                            type: type,
+                            url: url,
+                            data: { id: id },
+                        })
+                        .done(function(status) {
+                            Swal.fire({
+                                title: text.success.title,
+                                text: text.success.text,
+                                icon: 'success',
+                                showConfirmButton: false,
+                                timer: 2000
+                            });
+                            setTimeout(function() {
+                                location.reload();
+                            }, 2000);
+                        })
+                        .fail(function() {
+                            Swal.fire(
+                                'Terjadi Kesalahan',
+                                '',
+                                'error'
+                            );
                         });
                     }
                 });
-            });
-        });
+            }
+        }
     </script>
 @endsection

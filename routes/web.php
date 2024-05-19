@@ -46,7 +46,7 @@ Route::middleware('auth')->prefix('admin')->name('admin.')->group(function () {
 
     // User profile route for admin, adminps
     Route::get('/users/{user}', [UserController::class, 'show'])->name('users.show')->middleware('role:superadmin,admin,adminps');
-    Route::put('/users/{user}', [UserController::class, 'update'])->name('users.update')->middleware('role:superadmin,admin,adminps');
+    Route::put('/users/{user}', [UserController::class, 'update'])->name('admin.users.update')->middleware('role:superadmin,admin,adminps');
     
     // Logs - superadmin only
     Route::get('/logs', [LogController::class, 'index'])->name('logs.index')->middleware('role:superadmin');
@@ -61,8 +61,8 @@ Route::middleware('auth')->prefix('admin')->name('admin.')->group(function () {
     // Message resource route
     Route::resource('/messages', MessageController::class)->middleware('role:superadmin,admin');
     Route::get('/messages', [MessageController::class, 'index'])->name('messages.index')->middleware('role:superadmin,admin');
-    Route::get('/messages/{id}', [MessageController::class, 'show'])->name('messages.show')->middleware('role:superadmin,admin');
-    Route::delete('/messages/{id}', [MessageController::class, 'destroy'])->name('messages.destroy')->middleware('role:superadmin,admin');
+    Route::get('/messages/{id}', [MessageController::class, 'show'])->name('admin.message.detail')->middleware('role:superadmin,admin');
+    Route::delete('/messages/{id}', [MessageController::class, 'destroy'])->name('admin.messages.destroy')->middleware('role:superadmin,admin');
     Route::get('/messages/{id}/restore', [MessageController::class, 'restore'])->name('messages.restore')->middleware('role:superadmin,admin');
 
     // Patient resource route
@@ -85,7 +85,7 @@ Route::middleware('auth')->prefix('admin')->name('admin.')->group(function () {
     });
 
     // Route resource for Satellite Health Facility
-    Route::resource('facilities', SatelliteHealthFacilityController::class)->middleware('role:superadmin,admin');
+    Route::resource('facilities', SatelliteHealthFacilityController::class)->middleware('role:superadmin,admin,adminps');
 
     // Article resource route
     Route::resource('/articles', ArticleController::class)->middleware('role:superadmin,admin');
@@ -117,7 +117,7 @@ Route::middleware('auth')->prefix('admin')->name('admin.')->group(function () {
         Route::post('/documents', 'store')->name('documents.store')->middleware('role:superadmin,admin');
         Route::get('/documents/{document}', 'show')->name('documents.show')->middleware('role:superadmin,admin');
         Route::get('/documents/{document}/edit', 'edit')->name('documents.edit')->middleware('role:superadmin,admin');
-        Route::put('/documents/{document}', 'update')->name('documents.update')->middleware('role:superadmin,admin');
+        Route::put('/documents/{document}', 'update')->name('admin.documents.update')->middleware('role:superadmin,admin');
         Route::delete('/documents/{document}', 'destroy')->name('documents.destroy')->middleware('role:superadmin,admin');
     });
 });

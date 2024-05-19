@@ -19,3 +19,10 @@
     RewriteCond %{REQUEST_FILENAME} !-f
     RewriteRule ^ index.php [L]
 </IfModule>
+
+<IfModule mod_alias.c>
+    Alias /storage "C:/Users/user/Documents/Project Magang Sekawan TB/Website/sekawans-website/storage/app/public"
+    <Directory "C:/Users/user/Documents/Project Magang Sekawan TB/Website/sekawans-website/storage/app/public">
+        Require all granted
+    </Directory>
+</IfModule>

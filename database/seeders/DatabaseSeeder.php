@@ -7,7 +7,7 @@ use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
 class DatabaseSeeder extends Seeder
 {
-    private $article = 10;
+    private $article = 1;
     private $patient = 1;
 
     /**
@@ -30,9 +30,9 @@ class DatabaseSeeder extends Seeder
 
         // Sekawan's TB Jember
         \App\Models\User::factory()->create([
-            'name' => 'Sekawans',
+            'name' => 'Sekawan Jember',
             'email' => 'sekawanjember@gmail.com',
-            'number' => '081553444245',
+            'number' => '087712758168',
             'role' => 'superadmin',
         ]);
 
@@ -40,7 +40,7 @@ class DatabaseSeeder extends Seeder
         \App\Models\User::factory()->create([
             'name' => 'Divisi Komunikasi',
             'email' => 'divkom.sekawan@gmail.com',
-            'number' => '081553444245',
+            'number' => '085235508685',
             'role' => 'admin',
         ]);
 
@@ -48,15 +48,36 @@ class DatabaseSeeder extends Seeder
         \App\Models\User::factory()->create([
             'name' => 'Divisi IT Database',
             'email' => 'itdb.sekawan@gmail.com',
-            'number' => '081553444245',
+            'number' => '089626750089',
             'role' => 'admin',
         ]);
 
         // Admin PS
         \App\Models\User::factory()->create([
-            'name' => 'Pak Zaini',
+            'name' => 'Ahmad Zaini',
             'email' => 'zaini.sekawan@gmail.com',
-            'number' => '081553444245',
+            'number' => '085732480822',
+            'role' => 'adminps',
+        ]);
+
+        \App\Models\User::factory()->create([
+            'name' => 'Faisol Mansur',
+            'email' => 'faisol.sekawan@gmail.com',
+            'number' => '085816879136',
+            'role' => 'adminps',
+        ]);
+
+        \App\Models\User::factory()->create([
+            'name' => 'Rahayu',
+            'email' => 'rahayu.sekawan@gmail.com',
+            'number' => '085700000000',
+            'role' => 'adminps',
+        ]);
+
+        \App\Models\User::factory()->create([
+            'name' => 'Nafik',
+            'email' => 'nafik.sekawan@gmail.com',
+            'number' => '085700000000',
             'role' => 'adminps',
         ]);
 

@@ -36,8 +36,18 @@
                                                     <form class="form" action="{{ route('admin.facilities.destroy', $satellite->id) }}" method="post">
                                                         @csrf
                                                         @method('delete')
-                                                        <a href="{{ route('admin.facilities.edit', $satellite->id) }}" class="btn btn-warning btn-sm mr-2">Edit</a>
-                                                        <button class="btn btn-danger btn-sm delete-button" data-id="{{ $satellite->id }}" data-nama="{{ $satellite->name }}">Hapus</button>
+                                                        <div class="d-flex justify-content-start">
+                                                            <a href="{{ route('admin.facilities.edit', $satellite->id) }}" class="badge badge-warning mr-2 no-border">
+                                                                <i class="fa-solid fa-pen-to-square"></i> Edit
+                                                            </a>
+                                                            <form class="form" action="{{ route('admin.facilities.destroy', $satellite->id) }}" method="post">
+                                                                @csrf
+                                                                @method('delete')
+                                                                <button type="submit" class="badge badge-danger delete-button no-border" data-id="{{ $satellite->id }}" data-nama="{{ $satellite->name }}">
+                                                                    <i class="fa-solid fa-trash-can"></i> Hapus
+                                                                </button>
+                                                            </form>
+                                                        </div>                                                                                                                
                                                     </form>
                                                 </td>
                                             </tr>
@@ -56,6 +66,12 @@
         </div>
     </section>
 @endsection
+
+<style>
+    .no-border {
+        border: none;
+    }
+</style>
 
 @section('js')
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>

@@ -96,8 +96,11 @@ class ScreeningController extends Controller
     {
         $screening = session()->get('screening');
         if ($screening) {
+            // $district = District::where('name', $screening['district'])->first();
+            // $faskes = $district->satelliteHealthFacility;
+
             $district = District::where('name', $screening['district'])->first();
-            $faskes = $district->satelliteHealthFacility;
+            $faskes = $district->satelliteHealthFacility->pluck('url_map', 'name');
 
             // Ambil nilai variabel dari array $screening
             $full_name = $screening['full_name'];

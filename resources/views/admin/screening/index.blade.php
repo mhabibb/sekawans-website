@@ -53,7 +53,7 @@
                                         <th>Kecamatan</th>
                                         <th>Tanggal Skrining</th>
                                         <th>Hasil Skrining</th>
-                                        <th>Aksi</th>
+                                        <th style="width: 120px;">Aksi</th>
                                     </tr>
                                 </thead>
                                 <tbody>

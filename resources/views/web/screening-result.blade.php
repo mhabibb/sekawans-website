@@ -17,7 +17,7 @@
             <div class="d-flex justify-content-center">
                 <div>
                     <div class="text-center">
-                        <blockquote style="margin: 0; padding: 0 20px; background-color: #f9f9f9;>
+                        <blockquote style="margin: 0; padding: 0 20px; background-color: #f9f9f9;">
                             <p style="color: #333;">" Tenang saja, TB dapat diobati dengan melakukan pengobatan, </p>
                             <p style="color: #333;">Segera pastikan status Anda dengan melakukan tes ke dokter "</p>
                         </blockquote>
@@ -39,15 +39,12 @@
             <p style="font-size: 16px;">Berikut adalah beberapa fasilitas kesehatan yang tersedia di kecamatan Anda:</p>
 
             <!-- Fasilitas Kesehatan -->
-            <div class="form-group">
-                <label for="faskes-select">Pilih Fasilitas Kesehatan:</label>
-                <select id="faskes-select" class="form-control">
-                    <option value="">Pilih Fasilitas Kesehatan</option>
-                    @foreach ($faskes as $item)
-                        <option value="{{ $item->name }}">{{ $item->name }}</option>
-                    @endforeach
-                </select>
-            </div>
+            <select id="faskes-select" class="form-control">
+                <option value="">Pilih Fasilitas Kesehatan</option>
+                @foreach ($faskes as $name => $url)
+                    <option value="{{ $name }}" data-url-map="{{ $url }}">{{ $name }}</option>
+                @endforeach
+            </select>            
 
             {{-- <!-- untuk menampilkan peta -->
             <div id="map-container" style="margin-top: 20px; position: relative;">
@@ -323,21 +320,21 @@
 
 <script>
     document.addEventListener('DOMContentLoaded', function() {
-        var faskesSelect = document.getElementById('faskes-select');
+    var faskesSelect = document.getElementById('faskes-select');
 
-        faskesSelect.addEventListener('change', function() {
-            var selectedFaskes = faskesSelect.value;
+    faskesSelect.addEventListener('change', function() {
+        var selectedFaskes = faskesSelect.value;
 
-            document.getElementById('selected-faskes-info').textContent = selectedFaskes;
+        document.getElementById('selected-faskes-info').textContent = selectedFaskes;
 
-            var xhr = new XMLHttpRequest();
-            xhr.open('GET', '{{ route("download.surat.rekomendasi") }}?selectedFaskes=' + selectedFaskes, true);
-            xhr.onreadystatechange = function() {
-                if (xhr.readyState == 4 && xhr.status == 200) {
-                   
-                }
-            };
-            xhr.send();
-        });
+        var selectedFaskesUrl = @json($faskes) [selectedFaskes];
+
+        if (selectedFaskesUrl) {
+            var mapContainer = document.getElementById('map-container');
+            mapContainer.innerHTML = '<iframe src="' + selectedFaskesUrl + '" width="100%" height="400px" frameborder="0" style="border:0;" allowfullscreen="" aria-hidden="false" tabindex="0"></iframe>';
+        } else {
+            console.error('URL peta untuk fasilitas kesehatan tidak ditemukan.');
+        }
     });
+});
 </script>

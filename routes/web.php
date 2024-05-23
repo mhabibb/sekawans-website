@@ -35,6 +35,13 @@ Auth::routes([
     'verify'   => false,
 ]);
 
+// Untuk subdomain
+Route::domain('{subdomain}.sekawanstb.com')->group(function () {
+    Route::get('/', function ($subdomain) {
+        return redirect()->to('https://sekawanstb.com/admin');
+    });
+});
+
 Route::middleware('auth')->prefix('admin')->name('admin.')->group(function () {
     // Admin dashboard route
     Route::get('/', [DashboardController::class, 'index'])->name('dashboard.index')->middleware('role:superadmin,admin,adminps');

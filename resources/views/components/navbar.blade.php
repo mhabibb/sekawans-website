@@ -41,10 +41,12 @@
                         </a>
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                             <li><a class="dropdown-item" href="{{ route('artikel') }}">Artikel</a></li>
-                            <li><a class="dropdown-item" href="{{ route('kegiatan') }}">Kegiatan</a></li>
+                            {{-- <li><a class="dropdown-item" href="{{ route('kegiatan') }}">Kegiatan</a></li> --}}
                             <li><a class="dropdown-item" href="{{ route('dokumen') }}">Dokumen</a></li>
                             <li><a class="dropdown-item" href="{{ route('fasyankes') }}">Fasyankes</a></li>
+                            <li><a class="dropdown-item" href="{{ route('kasustbc') }}">Kasus TBC</a></li>
                             <li><a class="dropdown-item" href="{{ route('pesan.create') }}">Hubungi Kami</a></li>
+                            <li><a class="dropdown-item" href="/admin">Login Admin</a></li>
                         </ul>
                     </li>
                 </ul>

@@ -15,16 +15,21 @@
                 <p class="fw-bold fs-4">Anda diduga Positive TBC <br><br></p>
             </div>
             <div class="d-flex justify-content-center">
-                <div>
-                    <div class="text-center">
-                        <blockquote style="margin: 0; padding: 0 20px; background-color: #f9f9f9;">
-                            <p style="color: #333;">" Tenang saja, TB dapat diobati dengan melakukan pengobatan, </p>
-                            <p style="color: #333;">Segera pastikan status Anda dengan melakukan tes ke dokter "</p>
-                        </blockquote>
-                    </div>                                                                                                   
+                <div style="background-color: #f9f9f9; padding: 20px; text-align: center; border-radius: 10px;">
+                    <blockquote style="margin: 0; color: #333;">
+                        <p>"Tenang saja, TB dapat diobati dengan melakukan pengobatan,</p>
+                        <p>Segera pastikan status Anda dengan melakukan tes ke dokter"</p>
+                    </blockquote>
+                    <br>
+                    <p style="font-size: 16px;">
+                        📲 Ingin informasi lebih lanjut tentang TBC?
+                        <br>
+                        Temukan edukasi lengkap melalui
+                        <a href="https://wa.me/+6285141059171" target="_blank" style="text-decoration: none; color: #007bff;">WhatsApp Bot</a> kami!
+                    </p>
                 </div>
-            </div>      
-
+            </div>            
+            
             {{-- Download Surat Rekomendasi Screening --}}
             <br><br>      
             @php
@@ -59,7 +64,6 @@
             
             <br><br>
             <p style="font-size: 16px;">Anda bisa menunjukkan hasil skrining awal ini ke fasilitas kesehatan terdekat diatas. Terima kasih!</p>
-            <br>
             <p style="font-size: 16px;">Formulir TBC:</p>
             <hr>
             <div class="rangkasurat">
@@ -94,7 +98,8 @@
                           Nama : {{ $screening['full_name'] }}<br>
                           NIK : {{ $screening['nik'] }}<br>
                           Umur : {{ $screening['age'] }} Tahun<br>
-                          Alamat : {{ $screening['address'] }}<br>
+                          Alamat Lengkap : {{ $screening['address'] }}<br>
+                          Alamat Domisi KTP : {{ $screening['domicile_address'] }}<br>
                           Jenis Kelamin : {{ $screening['gender'] === 'male' ? 'Laki-laki' : ($screening['gender'] === 'female' ? 'Perempuan' : 'Tidak Diketahui') }}
                           <br><br>
                           Diagnosis,  
@@ -227,6 +232,12 @@
             <div class="d-flex justify-content-center">
                 <a href="{{ route('infotbc') }}"><br><br>Informasi Tentang TBC -></a>
             </div>
+            <p style="font-size: 16px; text-align: center;">
+                <br> <!-- tambahkan jarak -->
+                📲 Ingin informasi lebih lanjut tentang TBC?<br>
+                Temukan edukasi lengkap melalui <a href="https://wa.me/+6285141059171" target="_blank" style="text-decoration: none; color: #007bff;">WhatsApp Bot</a> kami!
+            </p>
+            
             @endif
         </div>
     </div>
@@ -338,3 +349,5 @@
     });
 });
 </script>
+
+@endsection

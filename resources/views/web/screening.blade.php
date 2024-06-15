@@ -61,6 +61,10 @@
                     <div class="mb-3">
                         <label for="address" class="form-label" style="font-size: 16px;">Alamat Lengkap</label>
                         <input type="text" class="form-control" id="address" name="address" style="font-size: 16px;" maxlength="100" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="domicile_address" class="form-label" style="font-size: 16px;">Alamat Domisili KTP</label>
+                        <input type="text" class="form-control" id="domicile_address" name="domicile_address" style="font-size: 16px;" maxlength="100" required>
                     </div>                    
                     <div class="mb-3">
                         <label for="district" class="form-label" style="font-size: 16px;">Domisili Kecamatan</label>

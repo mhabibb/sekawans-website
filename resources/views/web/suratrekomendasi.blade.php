@@ -130,7 +130,8 @@
                     Nama : {{ $screening['full_name'] }}<br>
                     NIK : {{ $screening['nik'] }}<br>
                     Umur : {{ $screening['age'] }} Tahun<br>
-                    Alamat : {{ $screening['address'] }}<br>
+                    Alamat Lengkap : {{ $screening['address'] }}<br>
+                    Alamat Domisili KTP : {{ $screening['domicile_address'] }}<br>
                     Jenis Kelamin : {{ $screening['gender'] === 'male' ? 'Laki-laki' : ($screening['gender'] === 'female' ? 'Perempuan' : 'Tidak Diketahui') }}
                     <br><br>
                     Diagnosis,

@@ -19,6 +19,7 @@ class CreateScreeningsTable extends Migration
             $table->string('gender', 10); 
             $table->unsignedSmallInteger('age'); 
             $table->string('address', 100);
+            $table->string('domicile_address', 100);
             $table->string('district', 50); 
             $table->date('screening_date');
 

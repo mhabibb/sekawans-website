@@ -28,6 +28,7 @@ class ScreeningController extends Controller
                 'gender' => 'required|string',
                 'age' => 'required|numeric|min:0',
                 'address' => 'required|string',
+                'domicile_address' => 'required|string',
                 'district' => 'required|string',
                 'screening_date' => 'required|date',
 
@@ -65,7 +66,8 @@ class ScreeningController extends Controller
             $resiko = ['pregnant', 'elderly', 'diabetes', 'ever_treatment'];
 
             // Logika untuk menentukan apakah positif atau tidak
-            $has_cough = $validated['cough'];
+            $has_screening_awal = $validated['cough'] || $validated['tb_diagnosed'] == 'a' || $validated['tb_diagnosed'] == 'b' || $validated['tb_diagnosed'] == 'c' || $validated['home_contact'] || $validated['close_contact'];
+
             $has_gejala = collect($gejala)->filter(function ($item) use ($validated) {
                 return $validated[$item];
             })->count() >= 1;
@@ -74,7 +76,7 @@ class ScreeningController extends Controller
                 return $validated[$item];
             })->count() >= 1;
 
-            if ($has_cough || $has_gejala || $has_resiko) {
+            if ($has_screening_awal && $has_gejala && $has_resiko) {
                 $validated['is_positive'] = true;
             } else {
                 $validated['is_positive'] = false;
@@ -108,6 +110,7 @@ class ScreeningController extends Controller
             $gender = $screening['gender'];
             $age = $screening['age'];
             $address = $screening['address'];
+            $domicile_address = $screening['domicile_address'];
             $screening_date = $screening['screening_date'];
             $cough = $screening['cough'];
             $tb_diagnosed = $screening['tb_diagnosed'];
@@ -133,6 +136,7 @@ class ScreeningController extends Controller
                 'gender',
                 'age',
                 'address',
+                'domicile_address',
                 'screening_date',
                 'cough',
                 'tb_diagnosed',
@@ -148,12 +152,12 @@ class ScreeningController extends Controller
                 'pregnant',
                 'elderly',
                 'diabetes',
-                
             ));
         }
         return redirect()->route('screening');
     }
 
+    
     public function downloadSuratRekomendasi(Request $request)
     {
         $screening = session()->get('screening');

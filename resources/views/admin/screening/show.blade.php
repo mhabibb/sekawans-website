@@ -44,6 +44,10 @@
                             <div class="form-control">{{ $screening->address }}</div>
                         </div>
                         <div class="col-sm-6 form-group">
+                            <label for="age">Alamat Domisili KTP</label>
+                            <div class="form-control">{{ $screening->domicile_address }}</div>
+                        </div>
+                        <div class="col-sm-6 form-group">
                             <label for="district">Domisili Kecamatan</label>
                             <div class="form-control">{{ $screening->district }}</div>
                         </div>

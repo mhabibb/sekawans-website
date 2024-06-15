@@ -22,6 +22,7 @@ class ScreeningRequest extends FormRequest
             'gender' => 'required|in:male,female',
             'age' => 'required|numeric',
             'address' => 'required|string',
+            'domicile_address' => 'required|string',
             'district' => 'required|string',
             'screening_date' => 'required|date',
 

@@ -26,8 +26,8 @@
                             <img src="{{ asset('img/slide-2.png') }}" width="600" height="400" loading="lazy"
                                 class="d-block img-fluid mx-auto video-slide" alt="">
                         </div>
-                        <div class="carousel-item active"><a href="https://drive.google.com/file/d/1aVpZadgj3-wL0YTus_WHWr4SBDnEcrd-/view" target="blank">
-                            <img src="{{ asset('img/slide-3.png') }}" width="600" height="400" loading="lazy"
+                        <div class="carousel-item active"><a href="https://drive.google.com/file/d/12idzFCltPIxaqSjGNxo5cTHVQsRosPcz/view?usp=sharing" target="blank">
+                            <img src="{{ asset('img/saku-tbc.jpg') }}" width="600" height="400" loading="lazy"
                                 class="d-block img-fluid mx-auto" alt="">
                         </a></div>
                     </div>

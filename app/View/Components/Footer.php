@@ -27,13 +27,14 @@ class Footer extends Component
         $navLinks = array(
             'beranda' => 'Beranda',
             'tentang' => 'Tentang',
-            'infotbc' => 'Info TBC',
-            'kasustbc' => 'Kasus TBC',
-            'screening' => 'Screening',
             'artikel' => 'Artikel',
             'kegiatan' => 'Kegiatan',
-            'fasyankes' => 'Fasyankes',
+            'screening' => 'Screening',
+            'infotbc' => 'Info TBC',
             'dokumen' => 'Dokumen',
+            // 'kasustbc' => 'Kasus TBC',
+            'fasyankes' => 'Fasyankes',
+            'pesan.create' => 'Hubungi Kami',
         );
 
         $socials = StaticElement::where('id', '>', 3)->get();

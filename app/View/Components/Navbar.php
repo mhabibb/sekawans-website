@@ -27,7 +27,7 @@ class Navbar extends Component
         $navLinks = array(
             'beranda' => 'Beranda',
             'tentang' => 'Tentang',
-            'infotbc' => 'Info TBC',
+            'artikel' => 'Artikel',
             'kegiatan' => 'Kegiatan',
         );
         return view('components.navbar', compact('navLinks'));

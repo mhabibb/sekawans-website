@@ -6,7 +6,7 @@
         <div style="color: green;">{{ session('success') }}</div>
     @endif
     <h2 class="fw-bold mb-4 text-center text-primary">Hasil Screening</h2>
-    
+
     <div class="card mb-4">
         <div class="card-body">
             <p class="d-flex justify-content-center">{{ $screening['full_name'] }}</p>
@@ -28,10 +28,10 @@
                         <a href="https://wa.me/+6285141059171" target="_blank" style="text-decoration: none; color: #007bff;">WhatsApp Bot</a> kami!
                     </p>
                 </div>
-            </div>            
-            
+            </div>
+
             {{-- Download Surat Rekomendasi Screening --}}
-            <br><br>      
+            <br><br>
             @php
                 $selectedFaskes = session('selectedFaskes');
             @endphp
@@ -49,7 +49,7 @@
                 @foreach ($faskes as $name => $url)
                     <option value="{{ $name }}" data-url-map="{{ $url }}">{{ $name }}</option>
                 @endforeach
-            </select>            
+            </select>
 
             <!-- untuk menampilkan peta -->
             <div id="map-container" style="margin-top: 20px; position: relative;">
@@ -61,7 +61,7 @@
                 </div>
                 <div id="map" style="width: 100%; height: 400px;"></div>
             </div>
-            
+
             <br><br>
             <p style="font-size: 16px;">Anda bisa menunjukkan hasil skrining awal ini ke fasilitas kesehatan terdekat diatas. Terima kasih!</p>
             <p style="font-size: 16px;">Formulir TBC:</p>
@@ -81,8 +81,8 @@
                                 <h6>No.HP : 085732480822 Email : sekawansjember@gmail.com</h6>
                             </div>
                         </div>
-                    </div>                                                                      
-                  <hr>    
+                    </div>
+                  <hr>
                   <td class="kiri">Jember, {{ \Carbon\Carbon::parse($screening['screening_date'])->isoFormat('LL') }} <br><br></td>
                     <tr>
                         <td colspan="2">Perihal : Rekomendasi Pemeriksaan Lanjutan Suspek TBC</td>
@@ -92,7 +92,7 @@
                   </tr>
                   <tr>
                       <td colspan="2">Mohon pemeriksaan dan penanganan lebih lanjut pada suspek :<br><br></td>
-                  </tr>                  
+                  </tr>
                     <tr>
                       <td colspan="2">
                           Nama : {{ $screening['full_name'] }}<br>
@@ -102,48 +102,22 @@
                           Alamat Domisi KTP : {{ $screening['domicile_address'] }}<br>
                           Jenis Kelamin : {{ $screening['gender'] === 'male' ? 'Laki-laki' : ($screening['gender'] === 'female' ? 'Perempuan' : 'Tidak Diketahui') }}
                           <br><br>
-                          Diagnosis,  
+                          Diagnosis,
                           Suspek TBC dengan hasil skrining kesehatan yakni : <br>
                       </td>
-                  </tr>                  
+                  </tr>
                     <tr>
                         <td colspan="2">
                             <table class="pertanyaan" style="width: 100%;">
                                 <tr>
-                                    <th style="width: 80%;">Skrining Awal</th>
+                                    <th style="width: 80%;">Skoring Batuk</th>
                                     <th style="width: 20%;">Jawaban</th>
                                 </tr>
 
                                 <tr>
-                                    <td>Apakah Anda mengalami batuk?</td>
-                                    <td>{{ $screening['cough'] ? 'Ya' : 'Tidak' }}</td>
+                                    <td>Apakah anda mengalami batuk selama 2 minggu atau lebih?</td>
+                                    <td>{{ $screening['cough_two_weeks'] ? 'Ya' : 'Tidak' }}</td>
                                 </tr>
-
-                                <tr>
-                                    <td>Apakah Anda pernah terdiagnosa TBC?</td>
-                                    <td>
-                                        @if($screening['tb_diagnosed'] == 'a')
-                                            Pernah terdiagnosa, dan sudah melakukan pengobatan sampai sembuh
-                                        @elseif($screening['tb_diagnosed'] == 'b')
-                                            Pernah terdiagnosa, dan belum melakukan pengobatan sampai sembuh
-                                        @elseif($screening['tb_diagnosed'] == 'c')
-                                            Tidak pernah
-                                        @else
-                                            
-                                        @endif
-                                    </td>
-                                </tr>                                
-
-                                <tr>
-                                    <td>Apakah ada kontak satu rumah dengan pasien Tuberkulosis (TBC)?</td>
-                                    <td>{{ $screening['home_contact'] ? 'Ya' : 'Tidak' }}</td>
-                                </tr>
-
-                                <tr>
-                                    <td>Apakah anda pernah melakukan kontak erat dengan penderita Tuberkulosis (TBC)?</td>
-                                    <td>{{ $screening['close_contact'] ? 'Ya' : 'Tidak' }}</td>
-                                </tr>
-                                
                             </table>
                         </td>
                     </tr>
@@ -152,40 +126,24 @@
                         <td colspan="2">
                             <table class="pertanyaan" style="width: 100%;">
                                 <tr>
-                                    <th style="width: 80%;">Gejala Lain</th>
+                                    <th style="width: 80%;">Skoring Gejala Lain</th>
                                     <th style="width: 20%;">Jawaban</th>
                                 </tr>
 
                                 <tr>
-                                    <td>Apakah anda mengalami penurunan berat badan drastis disertasi nafsu makan yang berkurang?</td>
-                                    <td>{{ $screening['weight_loss'] ? 'Ya' : 'Tidak' }}</td>
+                                    <td>Apakah anda pernah mengalami sesak nafas dalam 2 bulan terakhir?</td>
+                                    <td>{{ $screening['shortness_breath'] ? 'Ya' : 'Tidak' }}</td>
                                 </tr>
 
                                 <tr>
-                                    <td>Apakah Anda mengalami demam?</td>
-                                    <td>{{ $screening['fever'] ? 'Ya' : 'Tidak' }}</td>
+                                    <td>Apakah anda pernah berkeringat saat malam hari tanpa berkegiatan?</td>
+                                    <td>{{ $screening['night_sweats'] ? 'Ya' : 'Tidak' }}</td>
                                 </tr>
 
                                 <tr>
-                                    <td>Apakah Anda pernah mengalami sesak nafas tanpa nyeri dada?</td>
-                                    <td>{{ $screening['breath'] ? 'Ya' : 'Tidak' }}</td>
+                                    <td>Apakah anda pernah mengalami demam meriang selama lebih dari 1 bulan?</td>
+                                    <td>{{ $screening['fever_one_month'] ? 'Ya' : 'Tidak' }}</td>
                                 </tr>
-
-                                <tr>
-                                    <td>Apakah Anda pernah mengalami pembesaran getah bening di leher atau di ketiak?</td>
-                                    <td>{{ $screening['smoking'] ? 'Ya' : 'Tidak' }}</td>
-                                </tr>
-
-                                <tr>
-                                    <td>Apakah Anda pernah mengalami badan terasa lemas/lesu?</td>
-                                    <td>{{ $screening['sluggish'] ? 'Ya' : 'Tidak' }}</td>
-                                </tr>
-
-                                <tr>
-                                    <td>Apakah Anda berkeringat di malam hari tanpa kegiatan?</td>
-                                    <td>{{ $screening['sweat'] ? 'Ya' : 'Tidak' }}</td>
-                                </tr>
-                                
                             </table>
                         </td>
                     </tr>
@@ -194,30 +152,34 @@
                         <td colspan="2">
                             <table class="pertanyaan" style="width: 100%;">
                                 <tr>
-                                    <th style="width: 80%;">Faktor Risiko</th>
+                                    <th style="width: 80%;">Skoring Faktor Risiko</th>
                                     <th style="width: 20%;">Jawaban</th>
                                 </tr>
 
                                 <tr>
-                                    <td>Apakah anda pernah melakukan pengobatan Tuberkulosis (TBC)?</td>
-                                    <td>{{ $screening['ever_treatment'] ? 'Ya' : 'Tidak' }}</td>
-                                </tr>
-
-                                <tr>
-                                    <td>Apakah Anda adalah lansia lebih dari 60 tahun?</td>
-                                    <td>{{ $screening['elderly'] ? 'Ya' : 'Tidak' }}</td>
-                                </tr>
-
-                                <tr>
-                                    <td>Apakah Anda adalah ibu hamil?</td>
+                                    <td>Apakah anda ibu hamil?</td>
                                     <td>{{ $screening['pregnant'] ? 'Ya' : 'Tidak' }}</td>
                                 </tr>
 
                                 <tr>
-                                    <td>Apakah Anda memiliki riwayat penyakit Diabetes Melitus?</td>
+                                    <td>Apakah anda adalah lansia lebih dari 60 tahun?</td>
+                                    <td>{{ $screening['elderly'] ? 'Ya' : 'Tidak' }}</td>
+                                </tr>
+
+                                <tr>
+                                    <td>Apakah anda menderita diabetes melitus?</td>
                                     <td>{{ $screening['diabetes'] ? 'Ya' : 'Tidak' }}</td>
                                 </tr>
-                                
+
+                                <tr>
+                                    <td>Apakah anda merokok?</td>
+                                    <td>{{ $screening['smoking'] ? 'Ya' : 'Tidak' }}</td>
+                                </tr>
+
+                                <tr>
+                                    <td>Apakah anda pernah berobat TBC dan tidak tuntas?</td>
+                                    <td>{{ $screening['incomplete_tb_treatment'] ? 'Ya' : 'Tidak' }}</td>
+                                </tr>
                             </table>
                         </td>
                     </tr>
@@ -228,7 +190,7 @@
             <div class="d-flex justify-content-center">
                 <p class="fw-bold">Anda Tidak Positive TBC</p>
             </div>
-            
+
             <div class="d-flex justify-content-center">
                 <a href="{{ route('infotbc') }}"><br><br>Informasi Tentang TBC -></a>
             </div>
@@ -237,7 +199,7 @@
                 📲 Ingin informasi lebih lanjut tentang TBC?<br>
                 Temukan edukasi lengkap melalui <a href="https://wa.me/+6285141059171" target="_blank" style="text-decoration: none; color: #007bff;">WhatsApp Bot</a> kami!
             </p>
-            
+
             @endif
         </div>
     </div>
@@ -246,7 +208,7 @@
 
 @section('custom_css')
 <style>
-    
+
     @import url('https://fonts.googleapis.com/css2?family=Niconne&display=swap');
     .unique-font {
         font-family: 'Srisakdi', cursive;
@@ -254,12 +216,12 @@
 
     .kop-surat {
         text-align: center;
-        margin-bottom: 20px; 
+        margin-bottom: 20px;
     }
 
     .kop-surat img {
         display: block;
-        margin: 0 auto 10px; 
+        margin: 0 auto 10px;
     }
 
     .card {

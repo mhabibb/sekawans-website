@@ -197,6 +197,7 @@ return [
          * DomPDF Service Provider
          */
         Barryvdh\DomPDF\ServiceProvider::class,
+        App\Providers\WhatsAppServiceProvider::class,
     ],
 
     /*

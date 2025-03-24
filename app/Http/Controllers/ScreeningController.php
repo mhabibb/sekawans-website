@@ -10,18 +10,17 @@ use App\Models\Regency;
 use Exception;
 use Dompdf\Dompdf;
 use Dompdf\Options;
+use App\Jobs\SendWhatsAppMessage;
+use Illuminate\Support\Facades\Log;
 
 class ScreeningController extends Controller
 {
-
     public function store(Request $request)
     {
         try {
-            // Validasi input dari request
             $validated = $request->validate([
                 'agreement' => 'required|boolean',
 
-                // Identitas Diri
                 'full_name' => 'required|string',
                 'nik' => 'required|string',
                 'contact' => 'required|string',
@@ -32,27 +31,18 @@ class ScreeningController extends Controller
                 'district' => 'required|string',
                 'screening_date' => 'required|date',
 
-                // Screening Awal
-                'cough' => 'required|boolean',
-                'tb_diagnosed' => 'required|in:a,b,c',
-                'home_contact' => 'required|boolean',
-                'close_contact' => 'required|boolean',
+                'cough_two_weeks' => 'required|boolean',
 
-                // Gejala Lain
-                'weight_loss' => 'required|boolean',
-                'fever' => 'required|boolean',
-                'breath' => 'required|boolean',
-                'smoking' => 'required|boolean',
-                'sluggish' => 'required|boolean',
-                'sweat' => 'required|boolean',
+                'shortness_breath' => 'required|boolean',
+                'night_sweats' => 'required|boolean',
+                'fever_one_month' => 'required|boolean',
 
-                // Faktor Risiko
-                'ever_treatment' => 'required|boolean',
-                'elderly' => 'required|boolean',
                 'pregnant' => 'required|boolean',
+                'elderly' => 'required|boolean',
                 'diabetes' => 'required|boolean',
+                'smoking' => 'required|boolean',
+                'incomplete_tb_treatment' => 'required|boolean',
 
-                // Kontak
                 'contact1_name' => 'required|string',
                 'contact1_number' => 'required|string',
                 'contact2_name' => 'required|string',
@@ -61,36 +51,65 @@ class ScreeningController extends Controller
                 'contact3_number' => 'required|string'
             ]);
 
-            // Hitung hasil screening
-            $gejala = ['breath', 'fever', 'weight_loss', 'smoking', 'sluggish', 'sweat'];
-            $resiko = ['pregnant', 'elderly', 'diabetes', 'ever_treatment'];
+            $has_cough = $validated['cough_two_weeks'];
 
-            // Logika untuk menentukan apakah positif atau tidak
-            $has_screening_awal = $validated['cough'] || $validated['tb_diagnosed'] == 'a' || $validated['tb_diagnosed'] == 'b' || $validated['tb_diagnosed'] == 'c' || $validated['home_contact'] || $validated['close_contact'];
-
+            $gejala = ['shortness_breath', 'night_sweats', 'fever_one_month'];
             $has_gejala = collect($gejala)->filter(function ($item) use ($validated) {
                 return $validated[$item];
             })->count() >= 1;
 
+            $resiko = ['pregnant', 'elderly', 'diabetes', 'smoking', 'incomplete_tb_treatment'];
             $has_resiko = collect($resiko)->filter(function ($item) use ($validated) {
                 return $validated[$item];
             })->count() >= 1;
 
-            if ($has_screening_awal && $has_gejala && $has_resiko) {
+            if ($has_cough && $has_gejala && $has_resiko) {
                 $validated['is_positive'] = true;
             } else {
                 $validated['is_positive'] = false;
             }
 
-            // Simpan data ke dalam database
             $screening = Screening::create($validated);
 
-            // Menyimpan data screening ke session
             session()->put('screening', $validated);
-            
+
+            $this->sendContactMessages($validated);
+
             return redirect()->route('screening.result')->with('success', 'Formulir berhasil disimpan!');
         } catch (Exception $e) {
+            Log::error('Error in screening submission: ' . $e->getMessage());
             return back()->withInput()->withErrors(['error' => $e->getMessage()]);
+        }
+    }
+
+    protected function sendContactMessages($screeningData)
+    {
+        try {
+            if (!empty($screeningData['contact1_number']) && !empty($screeningData['contact1_name'])) {
+                SendWhatsAppMessage::dispatch(
+                    $screeningData['contact1_number'],
+                    $screeningData['contact1_name']
+                );
+                Log::info('WhatsApp message queued for contact 1: ' . $screeningData['contact1_name']);
+            }
+
+            if (!empty($screeningData['contact2_number']) && !empty($screeningData['contact2_name'])) {
+                SendWhatsAppMessage::dispatch(
+                    $screeningData['contact2_number'],
+                    $screeningData['contact2_name']
+                );
+                Log::info('WhatsApp message queued for contact 2: ' . $screeningData['contact2_name']);
+            }
+
+            if (!empty($screeningData['contact3_number']) && !empty($screeningData['contact3_name'])) {
+                SendWhatsAppMessage::dispatch(
+                    $screeningData['contact3_number'],
+                    $screeningData['contact3_name']
+                );
+                Log::info('WhatsApp message queued for contact 3: ' . $screeningData['contact3_name']);
+            }
+        } catch (Exception $e) {
+            Log::error('Error queuing WhatsApp messages: ' . $e->getMessage());
         }
     }
 
@@ -98,13 +117,8 @@ class ScreeningController extends Controller
     {
         $screening = session()->get('screening');
         if ($screening) {
-            // $district = District::where('name', $screening['district'])->first();
-            // $faskes = $district->satelliteHealthFacility;
-
             $district = District::where('name', $screening['district'])->first();
             $faskes = $district->satelliteHealthFacility->pluck('url_map', 'name');
-
-            // Ambil nilai variabel dari array $screening
             $full_name = $screening['full_name'];
             $nik = $screening['nik'];
             $gender = $screening['gender'];
@@ -112,25 +126,20 @@ class ScreeningController extends Controller
             $address = $screening['address'];
             $domicile_address = $screening['domicile_address'];
             $screening_date = $screening['screening_date'];
-            $cough = $screening['cough'];
-            $tb_diagnosed = $screening['tb_diagnosed'];
-            $home_contact = $screening['home_contact'];
-            $close_contact = $screening['close_contact'];
-            $weight_loss = $screening['weight_loss'];
-            $fever = $screening['fever'];
-            $breath = $screening['breath'];
-            $smoking = $screening['smoking'];
-            $sluggish = $screening['sluggish'];
-            $sweat = $screening['sweat'];
-            $ever_treatment = $screening['ever_treatment'];
-            $elderly = $screening['elderly'];
+            $cough_two_weeks = $screening['cough_two_weeks'];
+            $shortness_breath = $screening['shortness_breath'];
+            $night_sweats = $screening['night_sweats'];
+            $fever_one_month = $screening['fever_one_month'];
             $pregnant = $screening['pregnant'];
-            $diabetes = $screening['diabetes']; 
+            $elderly = $screening['elderly'];
+            $diabetes = $screening['diabetes'];
+            $smoking = $screening['smoking'];
+            $incomplete_tb_treatment = $screening['incomplete_tb_treatment'];
 
             return view('web.screening-result', compact(
                 'screening',
                 'district',
-                'faskes',  
+                'faskes',
                 'full_name',
                 'nik',
                 'gender',
@@ -138,26 +147,20 @@ class ScreeningController extends Controller
                 'address',
                 'domicile_address',
                 'screening_date',
-                'cough',
-                'tb_diagnosed',
-                'home_contact',
-                'close_contact',
-                'weight_loss',
-                'fever',
-                'breath',
-                'smoking',
-                'sluggish',
-                'sweat',
-                'ever_treatment',
+                'cough_two_weeks',
+                'shortness_breath',
+                'night_sweats',
+                'fever_one_month',
                 'pregnant',
                 'elderly',
                 'diabetes',
+                'smoking',
+                'incomplete_tb_treatment'
             ));
         }
         return redirect()->route('screening');
     }
 
-    
     public function downloadSuratRekomendasi(Request $request)
     {
         $screening = session()->get('screening');
@@ -184,7 +187,6 @@ class ScreeningController extends Controller
 
     public function index()
     {
-        
         $screenings = Screening::all();
         $title = "Daftar Skrining";
         return view('admin.screening.index', compact('screenings', 'title'));
@@ -204,9 +206,8 @@ class ScreeningController extends Controller
 
     public function show($id)
     {
-        $screening = Screening::findOrFail($id); 
+        $screening = Screening::findOrFail($id);
 
         return view('admin.screening.show', compact('screening'));
     }
-
 }

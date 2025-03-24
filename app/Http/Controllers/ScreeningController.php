@@ -10,18 +10,17 @@ use App\Models\Regency;
 use Exception;
 use Dompdf\Dompdf;
 use Dompdf\Options;
+use App\Jobs\SendWhatsAppMessage;
+use Illuminate\Support\Facades\Log;
 
 class ScreeningController extends Controller
 {
-
     public function store(Request $request)
     {
         try {
-            // Validasi input dari request
             $validated = $request->validate([
                 'agreement' => 'required|boolean',
 
-                // Identitas Diri
                 'full_name' => 'required|string',
                 'nik' => 'required|string',
                 'contact' => 'required|string',
@@ -32,22 +31,18 @@ class ScreeningController extends Controller
                 'district' => 'required|string',
                 'screening_date' => 'required|date',
 
-                // Skoring Batuk
                 'cough_two_weeks' => 'required|boolean',
 
-                // Skoring Gejala Lain
                 'shortness_breath' => 'required|boolean',
                 'night_sweats' => 'required|boolean',
                 'fever_one_month' => 'required|boolean',
 
-                // Skoring Faktor Risiko
                 'pregnant' => 'required|boolean',
                 'elderly' => 'required|boolean',
                 'diabetes' => 'required|boolean',
                 'smoking' => 'required|boolean',
                 'incomplete_tb_treatment' => 'required|boolean',
 
-                // Kontak
                 'contact1_name' => 'required|string',
                 'contact1_number' => 'required|string',
                 'contact2_name' => 'required|string',
@@ -78,9 +73,43 @@ class ScreeningController extends Controller
 
             session()->put('screening', $validated);
 
+            $this->sendContactMessages($validated);
+
             return redirect()->route('screening.result')->with('success', 'Formulir berhasil disimpan!');
         } catch (Exception $e) {
+            Log::error('Error in screening submission: ' . $e->getMessage());
             return back()->withInput()->withErrors(['error' => $e->getMessage()]);
+        }
+    }
+
+    protected function sendContactMessages($screeningData)
+    {
+        try {
+            if (!empty($screeningData['contact1_number']) && !empty($screeningData['contact1_name'])) {
+                SendWhatsAppMessage::dispatch(
+                    $screeningData['contact1_number'],
+                    $screeningData['contact1_name']
+                );
+                Log::info('WhatsApp message queued for contact 1: ' . $screeningData['contact1_name']);
+            }
+
+            if (!empty($screeningData['contact2_number']) && !empty($screeningData['contact2_name'])) {
+                SendWhatsAppMessage::dispatch(
+                    $screeningData['contact2_number'],
+                    $screeningData['contact2_name']
+                );
+                Log::info('WhatsApp message queued for contact 2: ' . $screeningData['contact2_name']);
+            }
+
+            if (!empty($screeningData['contact3_number']) && !empty($screeningData['contact3_name'])) {
+                SendWhatsAppMessage::dispatch(
+                    $screeningData['contact3_number'],
+                    $screeningData['contact3_name']
+                );
+                Log::info('WhatsApp message queued for contact 3: ' . $screeningData['contact3_name']);
+            }
+        } catch (Exception $e) {
+            Log::error('Error queuing WhatsApp messages: ' . $e->getMessage());
         }
     }
 
@@ -90,7 +119,6 @@ class ScreeningController extends Controller
         if ($screening) {
             $district = District::where('name', $screening['district'])->first();
             $faskes = $district->satelliteHealthFacility->pluck('url_map', 'name');
-
             $full_name = $screening['full_name'];
             $nik = $screening['nik'];
             $gender = $screening['gender'];

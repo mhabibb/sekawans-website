@@ -11,6 +11,7 @@ use Exception;
 use Dompdf\Dompdf;
 use Dompdf\Options;
 use App\Jobs\SendWhatsAppMessage;
+use App\Models\Article;
 use Illuminate\Support\Facades\Log;
 
 class ScreeningController extends Controller
@@ -136,6 +137,8 @@ class ScreeningController extends Controller
             $smoking = $screening['smoking'];
             $incomplete_tb_treatment = $screening['incomplete_tb_treatment'];
 
+            $articles = Article::latest()->category(2)->take(3)->get();
+
             return view('web.screening-result', compact(
                 'screening',
                 'district',
@@ -155,7 +158,8 @@ class ScreeningController extends Controller
                 'elderly',
                 'diabetes',
                 'smoking',
-                'incomplete_tb_treatment'
+                'incomplete_tb_treatment',
+                'articles'
             ));
         }
         return redirect()->route('screening');

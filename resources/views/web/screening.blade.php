@@ -3,10 +3,16 @@
 @section('content')
     <div class="container py-5">
         @if (session('success'))
-            <div style="color: green;">{{ session('success') }}</div>
+            <div class="alert alert-success">{{ session('success') }}</div>
         @endif
         @if ($errors->any())
-            {{ implode('', $errors->all('<div>:message</div>')) }}
+            <div class="alert alert-danger">
+                <ul class="mb-0">
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
         @endif
         <form method="POST" action="{{ route('screening.store') }}">
             @csrf
@@ -37,17 +43,27 @@
                     <h3 class="card-title">Identitas Diri</h3>
                     <div class="mb-3">
                         <label for="full Name" class="form-label" style="font-size: 16px;">Nama Lengkap</label>
-                        <input type="text" class="form-control" id="fullName" name="full_name" style="font-size: 16px;">
+                        <input type="text" class="form-control @error('full_name') is-invalid @enderror" id="fullName" name="full_name" style="font-size: 16px;" value="{{ old('full_name') }}">
+                        @error('full_name')
+                            <div class="invalid-feedback">{{ $message }}</div>
+                        @enderror
                     </div>
                     <div class="mb-3">
                         <label for="nik" class="form-label" style="font-size: 16px;">NIK KTP (16 Angka)</label>
-                        <input type="text" class="form-control" id="nik" name="nik" maxlength="16"
-                            style="font-size: 16px;" required>
+                        <input type="text" class="form-control @error('nik') is-invalid @enderror" id="nik" name="nik" maxlength="16"
+                            style="font-size: 16px;" required value="{{ old('nik') }}">
+                        @error('nik')
+                            <div class="invalid-feedback">{{ $message }}</div>
+                        @enderror
                     </div>
                     <div class="mb-3">
                         <label for="contact" class="form-label" style="font-size: 16px;">Nomor Telepon</label>
-                        <input type="text" class="form-control" id="contact" name="contact" style="font-size: 16px;"
-                            required>
+                        <input type="text" class="form-control @error('contact') is-invalid @enderror" id="contact" name="contact" style="font-size: 16px;"
+                            required value="{{ old('contact') }}">
+                        <small class="text-muted">Masukkan 10-13 digit nomor telepon</small>
+                        @error('contact')
+                            <div class="invalid-feedback">{{ $message }}</div>
+                        @enderror
                     </div>
                     <div class="mb-3">
                         <label for="gender" class="form-label" style="font-size: 16px;">Jenis Kelamin</label>
@@ -87,17 +103,6 @@
                         <input type="date" class="form-control" id="screeningDate" name="screening_date"
                             style="font-size: 16px;">
                     </div>
-                    <script>
-                        var today = new Date();
-
-                        var year = today.getFullYear();
-                        var month = ("0" + (today.getMonth() + 1)).slice(-2);
-                        var day = ("0" + today.getDate()).slice(-2);
-
-                        var formattedDate = year + "-" + month + "-" + day;
-
-                        document.getElementById("screeningDate").value = formattedDate;
-                    </script>
                 </div>
             </div>
 
@@ -156,7 +161,7 @@
                 <div class="card-body">
                     <h3 class="card-title">Skoring Faktor Risiko</h3>
 
-                    <div class="mb-3">
+                    <div class="mb-3" id="pregnantQuestion">
                         <label for="pregnant" style="font-size: 16px;">Apakah anda ibu hamil?</label><br>
                         <input type="radio" id="pregnantYes" name="pregnant" value="1" required>
                         <label for="pregnantYes" style="font-size: 16px;">Ya</label>
@@ -164,7 +169,7 @@
                         <label for="pregnantNo" style="font-size: 16px;">Tidak</label>
                     </div>
 
-                    <div class="mb-3">
+                    <div class="mb-3" id="elderlyQuestion">
                         <label for="elderly" style="font-size: 16px;">Apakah anda adalah lansia lebih dari 60
                             tahun?</label><br>
                         <input type="radio" id="elderlyYes" name="elderly" value="1" required>
@@ -207,32 +212,58 @@
                     <div class="mb-3" style="font-size: 16px;">
                         Berikan informasi Screening ini kepada kontak erat terdekat anda
                     </div>
+                    <div class="alert alert-info mb-3" style="font-size: 16px;">
+                        <i class="fas fa-info-circle me-2"></i>
+                        <strong>Mengapa ini penting?</strong> TB adalah penyakit menular yang dapat menyebar melalui udara. Orang yang sering berinteraksi dengan Anda memiliki risiko lebih tinggi tertular jika Anda positif TB. Dengan mengundang mereka untuk skrining, kita dapat mendeteksi TB lebih awal dan mencegah penyebaran.
+                        <p class="mt-2 mb-0">Silakan masukkan kontak orang terdekat anda yang sering anda temui saat beraktivitas sehari-hari untuk mendapatkan ajakan skrining juga.</p>
+                    </div>
                     <div class="mb-3">
                         <label for="contact1Name" style="font-size: 16px;">Kontak 1</label><br>
                         <div class="d-flex">
-                            <input class="form-control me-2" type="text" id="contact1Name" name="contact1_name"
-                                placeholder="Nama" style="font-size: 16px;">
-                            <input class="form-control" type="tel" id="contact1" name="contact1_number"
-                                placeholder="Nomor Kontak" style="font-size: 16px;">
+                            <input class="form-control me-2 @error('contact1_name') is-invalid @enderror" type="text" id="contact1Name" name="contact1_name"
+                                placeholder="Nama" style="font-size: 16px;" value="{{ old('contact1_name') }}">
+                            <input class="form-control @error('contact1_number') is-invalid @enderror" type="tel" id="contact1" name="contact1_number"
+                                placeholder="Nomor Kontak" style="font-size: 16px;" value="{{ old('contact1_number') }}">
                         </div>
+                        <small class="text-muted">Masukkan 10-13 digit nomor telepon</small>
+                        @error('contact1_name')
+                            <div class="invalid-feedback d-block">{{ $message }}</div>
+                        @enderror
+                        @error('contact1_number')
+                            <div class="invalid-feedback d-block">{{ $message }}</div>
+                        @enderror
                     </div>
                     <div class="mb-3">
                         <label for="contact2Name" style="font-size: 16px;">Kontak 2</label><br>
                         <div class="d-flex">
-                            <input class="form-control me-2" type="text" id="contact2Name" name="contact2_name"
-                                placeholder="Nama" style="font-size: 16px;">
-                            <input class="form-control" type="tel" id="contact2" name="contact2_number"
-                                placeholder="Nomor Kontak" style="font-size: 16px;">
+                            <input class="form-control me-2 @error('contact2_name') is-invalid @enderror" type="text" id="contact2Name" name="contact2_name"
+                                placeholder="Nama" style="font-size: 16px;" value="{{ old('contact2_name') }}">
+                            <input class="form-control @error('contact2_number') is-invalid @enderror" type="tel" id="contact2" name="contact2_number"
+                                placeholder="Nomor Kontak" style="font-size: 16px;" value="{{ old('contact2_number') }}">
                         </div>
+                        <small class="text-muted">Masukkan 10-13 digit nomor telepon</small>
+                        @error('contact2_name')
+                            <div class="invalid-feedback d-block">{{ $message }}</div>
+                        @enderror
+                        @error('contact2_number')
+                            <div class="invalid-feedback d-block">{{ $message }}</div>
+                        @enderror
                     </div>
                     <div class="mb-3">
                         <label for="contact3Name" style="font-size: 16px;">Kontak 3</label><br>
                         <div class="d-flex">
-                            <input class="form-control me-2" type="text" id="contact3Name" name="contact3_name"
-                                placeholder="Nama" style="font-size: 16px;">
-                            <input class="form-control" type="tel" id="contact3" name="contact3_number"
-                                placeholder="Nomor Kontak" style="font-size: 16px;">
+                            <input class="form-control me-2 @error('contact3_name') is-invalid @enderror" type="text" id="contact3Name" name="contact3_name"
+                                placeholder="Nama" style="font-size: 16px;" value="{{ old('contact3_name') }}">
+                            <input class="form-control @error('contact3_number') is-invalid @enderror" type="tel" id="contact3" name="contact3_number"
+                                placeholder="Nomor Kontak" style="font-size: 16px;" value="{{ old('contact3_number') }}">
                         </div>
+                        <small class="text-muted">Masukkan 10-13 digit nomor telepon</small>
+                        @error('contact3_name')
+                            <div class="invalid-feedback d-block">{{ $message }}</div>
+                        @enderror
+                        @error('contact3_number')
+                            <div class="invalid-feedback d-block">{{ $message }}</div>
+                        @enderror
                     </div>
                 </div>
             </div>
@@ -271,4 +302,96 @@
         background-color: #dc3545;
         border-color: #dc3545;
     }
+
+    .is-invalid {
+        border-color: #dc3545;
+    }
+
+    .invalid-feedback {
+        color: #dc3545;
+        font-size: 14px;
+        margin-top: 5px;
+    }
+
+    .alert {
+        border-radius: 10px;
+        margin-bottom: 20px;
+        padding: 15px;
+    }
+
+    .alert-danger {
+        background-color: #f8d7da;
+        border-color: #f5c6cb;
+        color: #721c24;
+    }
+
+    .alert-success {
+        background-color: #d4edda;
+        border-color: #c3e6cb;
+        color: #155724;
+    }
+
+    .text-muted {
+        font-size: 14px;
+        margin-top: 5px;
+    }
 </style>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Set today's date for the screening date field
+        var today = new Date();
+        var year = today.getFullYear();
+        var month = ("0" + (today.getMonth() + 1)).slice(-2);
+        var day = ("0" + today.getDate()).slice(-2);
+        var formattedDate = year + "-" + month + "-" + day;
+        document.getElementById("screeningDate").value = formattedDate;
+
+        // Get all necessary elements
+        const genderSelect = document.getElementById('gender');
+        const ageInput = document.getElementById('age');
+        const pregnantQuestion = document.getElementById('pregnantQuestion');
+        const pregnantYes = document.getElementById('pregnantYes');
+        const pregnantNo = document.getElementById('pregnantNo');
+        const elderlyQuestion = document.getElementById('elderlyQuestion');
+        const elderlyYes = document.getElementById('elderlyYes');
+        const elderlyNo = document.getElementById('elderlyNo');
+
+        // Hide/show and set pregnancy question based on gender
+        function updatePregnancyQuestion() {
+            console.log("Gender changed to:", genderSelect.value);
+            if (genderSelect.value === 'male') {
+                pregnantQuestion.style.display = 'none';
+                pregnantNo.checked = true;
+            } else {
+                pregnantQuestion.style.display = 'block';
+            }
+        }
+
+        // Hide/show and set elderly question based on age
+        function updateElderlyQuestion() {
+            const age = parseInt(ageInput.value);
+            console.log("Age changed to:", age);
+
+            if (!isNaN(age)) {
+                if (age >= 60) {
+                    elderlyQuestion.style.display = 'none';
+                    elderlyYes.checked = true;
+                } else {
+                    elderlyQuestion.style.display = 'none';
+                    elderlyNo.checked = true;
+                }
+            } else {
+                elderlyQuestion.style.display = 'block';
+            }
+        }
+
+        // Add event listeners
+        genderSelect.addEventListener('change', updatePregnancyQuestion);
+        ageInput.addEventListener('input', updateElderlyQuestion);
+
+        // Initialize states based on any pre-filled values
+        updatePregnancyQuestion();
+        updateElderlyQuestion();
+    });
+</script>

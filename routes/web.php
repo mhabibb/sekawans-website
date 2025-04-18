@@ -48,13 +48,13 @@ Route::middleware('auth')->prefix('admin')->name('admin.')->group(function () {
 
     // User resource route - superadmin only
     Route::resource('/users', UserController::class)->except('edit')->middleware('role:superadmin');
-    Route::post('/users/first', [UserController::class, 'firstLogin'])->name('users.firstLogin'); 
+    Route::post('/users/first', [UserController::class, 'firstLogin'])->name('users.firstLogin');
     Route::post('/users/{user}/reset', [UserController::class, 'reset'])->name('users.reset')->middleware('role:superadmin');
 
     // User profile route for admin, adminps
     Route::get('/users/{user}', [UserController::class, 'show'])->name('users.show')->middleware('role:superadmin,admin,adminps');
     Route::put('/users/{user}', [UserController::class, 'update'])->name('admin.users.update')->middleware('role:superadmin,admin,adminps');
-    
+
     // Logs - superadmin only
     Route::get('/logs', [LogController::class, 'index'])->name('logs.index')->middleware('role:superadmin');
     Route::put('/logs/{activity}/restore', [LogController::class, 'restore'])->name('logs.restore')->middleware('role:superadmin');

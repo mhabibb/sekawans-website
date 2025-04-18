@@ -11,7 +11,9 @@ use Exception;
 use Dompdf\Dompdf;
 use Dompdf\Options;
 use App\Jobs\SendWhatsAppMessage;
+use App\Models\Article;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Validator;
 
 class ScreeningController extends Controller
 {
@@ -23,7 +25,7 @@ class ScreeningController extends Controller
 
                 'full_name' => 'required|string',
                 'nik' => 'required|string',
-                'contact' => 'required|string',
+                'contact' => 'required|string|regex:/^\d{10,13}$/',
                 'gender' => 'required|string',
                 'age' => 'required|numeric|min:0',
                 'address' => 'required|string',
@@ -44,12 +46,30 @@ class ScreeningController extends Controller
                 'incomplete_tb_treatment' => 'required|boolean',
 
                 'contact1_name' => 'required|string',
-                'contact1_number' => 'required|string',
+                'contact1_number' => 'required|string|regex:/^\d{10,13}$/',
                 'contact2_name' => 'required|string',
-                'contact2_number' => 'required|string',
+                'contact2_number' => 'required|string|regex:/^\d{10,13}$/',
                 'contact3_name' => 'required|string',
-                'contact3_number' => 'required|string'
+                'contact3_number' => 'required|string|regex:/^\d{10,13}$/'
+            ], [
+                'contact.regex' => 'Nomor telepon harus berisi 10-13 digit angka.',
+                'contact1_number.regex' => 'Nomor kontak 1 harus berisi 10-13 digit angka.',
+                'contact2_number.regex' => 'Nomor kontak 2 harus berisi 10-13 digit angka.',
+                'contact3_number.regex' => 'Nomor kontak 3 harus berisi 10-13 digit angka.',
             ]);
+
+            // Validate unique contact numbers
+            $contactNumbers = [
+                $request->input('contact1_number'),
+                $request->input('contact2_number'),
+                $request->input('contact3_number')
+            ];
+
+            if (count(array_unique($contactNumbers)) < count($contactNumbers)) {
+                return back()->withInput()->withErrors([
+                    'contact_duplicates' => 'Nomor kontak 1, 2, dan 3 tidak boleh sama.'
+                ]);
+            }
 
             $has_cough = $validated['cough_two_weeks'];
 
@@ -136,6 +156,8 @@ class ScreeningController extends Controller
             $smoking = $screening['smoking'];
             $incomplete_tb_treatment = $screening['incomplete_tb_treatment'];
 
+            $articles = Article::latest()->category(2)->take(3)->get();
+
             return view('web.screening-result', compact(
                 'screening',
                 'district',
@@ -155,7 +177,8 @@ class ScreeningController extends Controller
                 'elderly',
                 'diabetes',
                 'smoking',
-                'incomplete_tb_treatment'
+                'incomplete_tb_treatment',
+                'articles'
             ));
         }
         return redirect()->route('screening');

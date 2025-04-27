@@ -338,19 +338,16 @@
 
 <script>
     document.addEventListener('DOMContentLoaded', function() {
-        // Set today's date for the screening date field
         var today = new Date();
         var year = today.getFullYear();
         var month = ("0" + (today.getMonth() + 1)).slice(-2);
         var day = ("0" + today.getDate()).slice(-2);
         var formattedDate = year + "-" + month + "-" + day;
 
-        // Only set the date if there's no old value
         if (!document.getElementById("screeningDate").value) {
             document.getElementById("screeningDate").value = formattedDate;
         }
 
-        // Get all necessary elements
         const genderSelect = document.getElementById('gender');
         const ageInput = document.getElementById('age');
         const pregnantQuestion = document.getElementById('pregnantQuestion');
@@ -360,7 +357,6 @@
         const elderlyYes = document.getElementById('elderlyYes');
         const elderlyNo = document.getElementById('elderlyNo');
 
-        // Hide/show and set pregnancy question based on gender
         function updatePregnancyQuestion() {
             console.log("Gender changed to:", genderSelect.value);
             if (genderSelect.value === 'male') {
@@ -371,7 +367,6 @@
             }
         }
 
-        // Hide/show and set elderly question based on age
         function updateElderlyQuestion() {
             const age = parseInt(ageInput.value);
             console.log("Age changed to:", age);
@@ -389,11 +384,26 @@
             }
         }
 
-        // Add event listeners
+        const phoneInputs = [
+            document.getElementById('contact'),
+            document.getElementById('contact1'),
+            document.getElementById('contact2'),
+            document.getElementById('contact3')
+        ];
+
+        phoneInputs.forEach(input => {
+            if (input) {
+                input.addEventListener('input', function(e) {
+                    if (this.value.length > 13) {
+                        this.value = this.value.slice(0, 13);
+                    }
+                });
+            }
+        });
+
         genderSelect.addEventListener('change', updatePregnancyQuestion);
         ageInput.addEventListener('input', updateElderlyQuestion);
 
-        // Initialize states based on any pre-filled values
         updatePregnancyQuestion();
         updateElderlyQuestion();
     });

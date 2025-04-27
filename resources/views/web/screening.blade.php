@@ -19,7 +19,7 @@
             <h2 class="fw-bold mb-4 text-center text-primary">Screening TBC</h2>
             <div class="card mb-4">
                 <div class="card-body">
-                    <h3 class="card-title">Persetujuan Skrining</h3>
+                    <h3 class="card-title">A. Persetujuan Skrining</h3>
 
                     <ol style="font-size: 16px;">
                         <li>Screening ini digunakan untuk mendeteksi dini penyakit TB.</li>
@@ -31,7 +31,7 @@
                     </ol>
                     <div class="form-check">
                         <input class="form-check-input" type="checkbox" value="1" id="agreement" name="agreement"
-                            required>
+                            {{ old('agreement') ? 'checked' : '' }} required>
                         <label class="form-check-label" for="agreement" style="font-size: 16px;">Ya, saya menyetujui</label>
                     </div>
                 </div>
@@ -40,16 +40,16 @@
             <!-- Identitas Diri -->
             <div class="card mb-4">
                 <div class="card-body">
-                    <h3 class="card-title">Identitas Diri</h3>
+                    <h3 class="card-title">B. Identitas Diri</h3>
                     <div class="mb-3">
-                        <label for="full Name" class="form-label" style="font-size: 16px;">Nama Lengkap</label>
+                        <label for="full Name" class="form-label" style="font-size: 16px;">1. Nama Lengkap</label>
                         <input type="text" class="form-control @error('full_name') is-invalid @enderror" id="fullName" name="full_name" style="font-size: 16px;" value="{{ old('full_name') }}">
                         @error('full_name')
                             <div class="invalid-feedback">{{ $message }}</div>
                         @enderror
                     </div>
                     <div class="mb-3">
-                        <label for="nik" class="form-label" style="font-size: 16px;">NIK KTP (16 Angka)</label>
+                        <label for="nik" class="form-label" style="font-size: 16px;">2. NIK KTP (16 Angka)</label>
                         <input type="text" class="form-control @error('nik') is-invalid @enderror" id="nik" name="nik" maxlength="16"
                             style="font-size: 16px;" required value="{{ old('nik') }}">
                         @error('nik')
@@ -57,7 +57,7 @@
                         @enderror
                     </div>
                     <div class="mb-3">
-                        <label for="contact" class="form-label" style="font-size: 16px;">Nomor Telepon</label>
+                        <label for="contact" class="form-label" style="font-size: 16px;">3. Nomor Telepon</label>
                         <input type="text" class="form-control @error('contact') is-invalid @enderror" id="contact" name="contact" style="font-size: 16px;"
                             required value="{{ old('contact') }}">
                         <small class="text-muted">Masukkan 10-13 digit nomor telepon</small>
@@ -66,40 +66,39 @@
                         @enderror
                     </div>
                     <div class="mb-3">
-                        <label for="gender" class="form-label" style="font-size: 16px;">Jenis Kelamin</label>
+                        <label for="gender" class="form-label" style="font-size: 16px;">4. Jenis Kelamin</label>
                         <select class="form-select" id="gender" name="gender" required style="font-size: 16px;">
-                            <option value="" selected disabled style="font-size: 16px;">Pilih Jenis Kelamin</option>
-                            <option value="male" style="font-size: 16px;">Laki-laki</option>
-                            <option value="female" style="font-size: 16px;">Perempuan</option>
+                            <option value="" disabled {{ old('gender') ? '' : 'selected' }}>Pilih Jenis Kelamin</option>
+                            <option value="male" {{ old('gender') == 'male' ? 'selected' : '' }}>Laki-laki</option>
+                            <option value="female" {{ old('gender') == 'female' ? 'selected' : '' }}>Perempuan</option>
                         </select>
                     </div>
                     <div class="mb-3">
-                        <label for="age" class="form-label" style="font-size: 16px;">Usia (Tahun)</label>
-                        <input type="number" class="form-control" id="age" name="age" style="font-size: 16px;">
+                        <label for="age" class="form-label" style="font-size: 16px;">5. Usia (Tahun)</label>
+                        <input type="number" class="form-control" id="age" name="age" style="font-size: 16px;" value="{{ old('age') }}">
                     </div>
                     <div class="mb-3">
-                        <label for="address" class="form-label" style="font-size: 16px;">Alamat Lengkap</label>
+                        <label for="address" class="form-label" style="font-size: 16px;">6. Alamat Lengkap</label>
                         <input type="text" class="form-control" id="address" name="address" style="font-size: 16px;"
-                            maxlength="100" required>
+                            maxlength="100" required value="{{ old('address') }}">
                     </div>
                     <div class="mb-3">
-                        <label for="domicile_address" class="form-label" style="font-size: 16px;">Alamat Domisili
+                        <label for="domicile_address" class="form-label" style="font-size: 16px;">7. Alamat Domisili
                             KTP</label>
                         <input type="text" class="form-control" id="domicile_address" name="domicile_address"
-                            style="font-size: 16px;" maxlength="100" required>
+                            style="font-size: 16px;" maxlength="100" required value="{{ old('domicile_address') }}">
                     </div>
                     <div class="mb-3">
-                        <label for="district" class="form-label" style="font-size: 16px;">Domisili Kecamatan</label>
+                        <label for="district" class="form-label" style="font-size: 16px;">8. Domisili Kecamatan</label>
                         <select class="form-select" id="district" name="district" required style="font-size: 16px;">
-                            <option value="" selected disabled style="font-size: 16px;">Pilih Kecamatan di Jember
-                            </option>
+                            <option value="" disabled {{ old('district') ? '' : 'selected' }}>Pilih Kecamatan di Jember</option>
                             @foreach ($district->where('regency_id', 3509)->sortBy('name') as $item)
-                                <option value="{{ $item->name }}" style="font-size: 16px;">{{ $item->name }}</option>
+                                <option value="{{ $item->name }}" {{ old('district') == $item->name ? 'selected' : '' }}>{{ $item->name }}</option>
                             @endforeach
                         </select>
                     </div>
                     <div class="mb-3">
-                        <label for="screeningDate" class="form-label" style="font-size: 16px;">Tanggal Screening</label>
+                        <label for="screeningDate" class="form-label" style="font-size: 16px;">9. Tanggal Screening</label>
                         <input type="date" class="form-control" id="screeningDate" name="screening_date"
                             style="font-size: 16px;">
                     </div>
@@ -109,14 +108,14 @@
             <!-- Skoring Batuk -->
             <div class="card mb-4">
                 <div class="card-body">
-                    <h3 class="card-title">Skoring Batuk</h3>
+                    <h3 class="card-title">C. Skoring Batuk</h3>
 
                     <div class="mb-3">
-                        <label for="cough_two_weeks" style="font-size: 16px;">Apakah anda mengalami batuk selama 2 minggu
+                        <label for="cough_two_weeks" style="font-size: 16px;">1. Apakah anda mengalami batuk selama 2 minggu
                             atau lebih?</label><br>
-                        <input type="radio" id="coughYes" name="cough_two_weeks" value="1" required>
+                        <input type="radio" id="coughYes" name="cough_two_weeks" value="1" {{ old('cough_two_weeks') == '1' ? 'checked' : '' }} required>
                         <label for="coughYes" style="font-size: 16px;">Ya</label>
-                        <input type="radio" id="coughNo" name="cough_two_weeks" value="0">
+                        <input type="radio" id="coughNo" name="cough_two_weeks" value="0" {{ old('cough_two_weeks') == '0' ? 'checked' : '' }}>
                         <label for="coughNo" style="font-size: 16px;">Tidak</label>
                     </div>
                 </div>
@@ -125,32 +124,32 @@
             <!-- Skoring Gejala Lain -->
             <div class="card mb-4">
                 <div class="card-body">
-                    <h3 class="card-title">Skoring Gejala Lain</h3>
+                    <h3 class="card-title">D. Skoring Gejala Lain</h3>
 
                     <div class="mb-3">
-                        <label for="shortness_breath" style="font-size: 16px;">Apakah anda pernah mengalami sesak nafas
+                        <label for="shortness_breath" style="font-size: 16px;">1. Apakah anda pernah mengalami sesak nafas
                             dalam 2 bulan terakhir?</label><br>
-                        <input type="radio" id="breathYes" name="shortness_breath" value="1" required>
+                        <input type="radio" id="breathYes" name="shortness_breath" value="1" {{ old('shortness_breath') == '1' ? 'checked' : '' }} required>
                         <label for="breathYes" style="font-size: 16px;">Ya</label>
-                        <input type="radio" id="breathNo" name="shortness_breath" value="0">
+                        <input type="radio" id="breathNo" name="shortness_breath" value="0" {{ old('shortness_breath') == '0' ? 'checked' : '' }}>
                         <label for="breathNo" style="font-size: 16px;">Tidak</label>
                     </div>
 
                     <div class="mb-3">
-                        <label for="night_sweats" style="font-size: 16px;">Apakah anda pernah berkeringat saat malam hari
+                        <label for="night_sweats" style="font-size: 16px;">2. Apakah anda pernah berkeringat saat malam hari
                             tanpa berkegiatan?</label><br>
-                        <input type="radio" id="sweatYes" name="night_sweats" value="1" required>
+                        <input type="radio" id="sweatYes" name="night_sweats" value="1" {{ old('night_sweats') == '1' ? 'checked' : '' }} required>
                         <label for="sweatYes" style="font-size: 16px;">Ya</label>
-                        <input type="radio" id="sweatNo" name="night_sweats" value="0">
+                        <input type="radio" id="sweatNo" name="night_sweats" value="0" {{ old('night_sweats') == '0' ? 'checked' : '' }}>
                         <label for="sweatNo" style="font-size: 16px;">Tidak</label>
                     </div>
 
                     <div class="mb-3">
-                        <label for="fever_one_month" style="font-size: 16px;">Apakah anda pernah mengalami demam meriang
+                        <label for="fever_one_month" style="font-size: 16px;">3. Apakah anda pernah mengalami demam meriang
                             selama lebih dari 1 bulan?</label><br>
-                        <input type="radio" id="feverYes" name="fever_one_month" value="1" required>
+                        <input type="radio" id="feverYes" name="fever_one_month" value="1" {{ old('fever_one_month') == '1' ? 'checked' : '' }} required>
                         <label for="feverYes" style="font-size: 16px;">Ya</label>
-                        <input type="radio" id="feverNo" name="fever_one_month" value="0">
+                        <input type="radio" id="feverNo" name="fever_one_month" value="0" {{ old('fever_one_month') == '0' ? 'checked' : '' }}>
                         <label for="feverNo" style="font-size: 16px;">Tidak</label>
                     </div>
                 </div>
@@ -159,47 +158,47 @@
             <!-- Skoring Faktor Risiko -->
             <div class="card mb-4">
                 <div class="card-body">
-                    <h3 class="card-title">Skoring Faktor Risiko</h3>
+                    <h3 class="card-title">E. Skoring Faktor Risiko</h3>
 
                     <div class="mb-3" id="pregnantQuestion">
-                        <label for="pregnant" style="font-size: 16px;">Apakah anda ibu hamil?</label><br>
-                        <input type="radio" id="pregnantYes" name="pregnant" value="1" required>
+                        <label for="pregnant" style="font-size: 16px;">1. Apakah anda ibu hamil?</label><br>
+                        <input type="radio" id="pregnantYes" name="pregnant" value="1" {{ old('pregnant') == '1' ? 'checked' : '' }} required>
                         <label for="pregnantYes" style="font-size: 16px;">Ya</label>
-                        <input type="radio" id="pregnantNo" name="pregnant" value="0">
+                        <input type="radio" id="pregnantNo" name="pregnant" value="0" {{ old('pregnant') == '0' ? 'checked' : '' }}>
                         <label for="pregnantNo" style="font-size: 16px;">Tidak</label>
                     </div>
 
                     <div class="mb-3" id="elderlyQuestion">
-                        <label for="elderly" style="font-size: 16px;">Apakah anda adalah lansia lebih dari 60
+                        <label for="elderly" style="font-size: 16px;">2. Apakah anda adalah lansia lebih dari 60
                             tahun?</label><br>
-                        <input type="radio" id="elderlyYes" name="elderly" value="1" required>
+                        <input type="radio" id="elderlyYes" name="elderly" value="1" {{ old('elderly') == '1' ? 'checked' : '' }} required>
                         <label for="elderlyYes" style="font-size: 16px;">Ya</label>
-                        <input type="radio" id="elderlyNo" name="elderly" value="0">
+                        <input type="radio" id="elderlyNo" name="elderly" value="0" {{ old('elderly') == '0' ? 'checked' : '' }}>
                         <label for="elderlyNo" style="font-size: 16px;">Tidak</label>
                     </div>
 
                     <div class="mb-3">
-                        <label for="diabetes" style="font-size: 16px;">Apakah anda menderita diabetes melitus?</label><br>
-                        <input type="radio" id="diabetesYes" name="diabetes" value="1" required>
+                        <label for="diabetes" style="font-size: 16px;">3. Apakah anda menderita diabetes melitus?</label><br>
+                        <input type="radio" id="diabetesYes" name="diabetes" value="1" {{ old('diabetes') == '1' ? 'checked' : '' }} required>
                         <label for="diabetesYes" style="font-size: 16px;">Ya</label>
-                        <input type="radio" id="diabetesNo" name="diabetes" value="0">
+                        <input type="radio" id="diabetesNo" name="diabetes" value="0" {{ old('diabetes') == '0' ? 'checked' : '' }}>
                         <label for="diabetesNo" style="font-size: 16px;">Tidak</label>
                     </div>
 
                     <div class="mb-3">
-                        <label for="smoking" style="font-size: 16px;">Apakah anda merokok?</label><br>
-                        <input type="radio" id="smokingYes" name="smoking" value="1" required>
+                        <label for="smoking" style="font-size: 16px;">4. Apakah anda merokok?</label><br>
+                        <input type="radio" id="smokingYes" name="smoking" value="1" {{ old('smoking') == '1' ? 'checked' : '' }} required>
                         <label for="smokingYes" style="font-size: 16px;">Ya</label>
-                        <input type="radio" id="smokingNo" name="smoking" value="0">
+                        <input type="radio" id="smokingNo" name="smoking" value="0" {{ old('smoking') == '0' ? 'checked' : '' }}>
                         <label for="smokingNo" style="font-size: 16px;">Tidak</label>
                     </div>
 
                     <div class="mb-3">
-                        <label for="incomplete_tb_treatment" style="font-size: 16px;">Apakah anda pernah berobat TBC dan
+                        <label for="incomplete_tb_treatment" style="font-size: 16px;">5. Apakah anda pernah berobat TBC dan
                             tidak tuntas?</label><br>
-                        <input type="radio" id="treatmentYes" name="incomplete_tb_treatment" value="1" required>
+                        <input type="radio" id="treatmentYes" name="incomplete_tb_treatment" value="1" {{ old('incomplete_tb_treatment') == '1' ? 'checked' : '' }} required>
                         <label for="treatmentYes" style="font-size: 16px;">Ya</label>
-                        <input type="radio" id="treatmentNo" name="incomplete_tb_treatment" value="0">
+                        <input type="radio" id="treatmentNo" name="incomplete_tb_treatment" value="0" {{ old('incomplete_tb_treatment') == '0' ? 'checked' : '' }}>
                         <label for="treatmentNo" style="font-size: 16px;">Tidak</label>
                     </div>
                 </div>
@@ -208,7 +207,7 @@
             <!-- Kontak -->
             <div class="card mb-4">
                 <div class="card-body">
-                    <h3 class="card-title">Kontak</h3>
+                    <h3 class="card-title">F. Kontak</h3>
                     <div class="mb-3" style="font-size: 16px;">
                         Berikan informasi Screening ini kepada kontak erat terdekat anda
                     </div>
@@ -218,7 +217,7 @@
                         <p class="mt-2 mb-0">Silakan masukkan kontak orang terdekat anda yang sering anda temui saat beraktivitas sehari-hari untuk mendapatkan ajakan skrining juga.</p>
                     </div>
                     <div class="mb-3">
-                        <label for="contact1Name" style="font-size: 16px;">Kontak 1</label><br>
+                        <label for="contact1Name" style="font-size: 16px;">1. Kontak Pertama</label><br>
                         <div class="d-flex">
                             <input class="form-control me-2 @error('contact1_name') is-invalid @enderror" type="text" id="contact1Name" name="contact1_name"
                                 placeholder="Nama" style="font-size: 16px;" value="{{ old('contact1_name') }}">
@@ -234,7 +233,7 @@
                         @enderror
                     </div>
                     <div class="mb-3">
-                        <label for="contact2Name" style="font-size: 16px;">Kontak 2</label><br>
+                        <label for="contact2Name" style="font-size: 16px;">2. Kontak Kedua</label><br>
                         <div class="d-flex">
                             <input class="form-control me-2 @error('contact2_name') is-invalid @enderror" type="text" id="contact2Name" name="contact2_name"
                                 placeholder="Nama" style="font-size: 16px;" value="{{ old('contact2_name') }}">
@@ -250,7 +249,7 @@
                         @enderror
                     </div>
                     <div class="mb-3">
-                        <label for="contact3Name" style="font-size: 16px;">Kontak 3</label><br>
+                        <label for="contact3Name" style="font-size: 16px;">3. Kontak Ketiga</label><br>
                         <div class="d-flex">
                             <input class="form-control me-2 @error('contact3_name') is-invalid @enderror" type="text" id="contact3Name" name="contact3_name"
                                 placeholder="Nama" style="font-size: 16px;" value="{{ old('contact3_name') }}">
@@ -345,7 +344,11 @@
         var month = ("0" + (today.getMonth() + 1)).slice(-2);
         var day = ("0" + today.getDate()).slice(-2);
         var formattedDate = year + "-" + month + "-" + day;
-        document.getElementById("screeningDate").value = formattedDate;
+
+        // Only set the date if there's no old value
+        if (!document.getElementById("screeningDate").value) {
+            document.getElementById("screeningDate").value = formattedDate;
+        }
 
         // Get all necessary elements
         const genderSelect = document.getElementById('gender');

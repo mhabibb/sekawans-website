@@ -58,7 +58,6 @@ class ScreeningController extends Controller
                 'contact3_number.regex' => 'Nomor kontak 3 harus berisi 10-13 digit angka.',
             ]);
 
-            // Validate unique contact numbers
             $contactNumbers = [
                 $request->input('contact1_number'),
                 $request->input('contact2_number'),

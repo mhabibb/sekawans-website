@@ -22,7 +22,7 @@
                         @if ($screening['is_positive'] == true)
                             <div class="text-center mb-4">
                                 <div class="alert alert-danger py-3 mb-4">
-                                    <h3 class="fw-bold mb-0">Anda diduga Positive TBC</h3>
+                                    <h3 class="fw-bold mb-0">Anda diduga positif TBC</h3>
                                 </div>
 
                                 <div class="bg-light p-4 rounded-4 mb-4">
@@ -457,7 +457,7 @@
                                         <i class="bi bi-check-circle"></i>
                                     </span>
                                 </div>
-                                <h3 class="fw-bold mb-4">Anda Tidak Positive TBC</h3>
+                                <h3 class="fw-bold mb-4">Anda diduga negatif TBC</h3>
 
                                 <div class="card bg-light p-4 rounded-4 mb-4 mx-auto" style="max-width: 500px;">
                                     <a href="{{ route('infotbc') }}" class="btn btn-outline-primary btn-lg mb-4">
